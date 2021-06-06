@@ -1,0 +1,1202 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_AdogaLayout.cshtml";
+}
+
+@section topCSS{
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.css" />
+    <link rel="stylesheet" href="~/Asset/CSS/HomePage.css" />
+}
+
+<div class="scroll-nav">
+    <nav class="search-bar">
+
+    </nav>
+</div>
+
+<div class="island d-flex flex-column  align-items-center">
+    <h3 class="text-white fw-bold"
+        style="font-size: 24px; line-height: 31.2px; margin-top: 50px; font-family: mallory,Helvetica Neue,Helvetica,Arial,sans-serif;">
+        訂飯店、住度假村、睡青年旅館
+    </h3>
+    <p class="text-white" style="font-size: 21px; line-height: 26px;">
+        包山包海超過200萬間國內外各類優惠住宿
+    </p>
+
+</div>
+
+<div class="container  " id="container" style="border-radius: 16px;">
+    <div class="input-group mb-3">
+        <select class="form-select" id="inputGroupSelect02" style="color: #666;">
+
+            <option selected> &#xf002; 台北市</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class=" bd-content">
+                    <div class="container " id="container1" style="display:flex;">
+                        <div id="datetime">
+                            <!-- <input id="date" type="date" value="2017-06-01"> -->
+                            <input name="daterange" type="text" class="calendar-minus 	calendar-plus"
+                                   value="  &#xf272; 2021年6月1日 &#xf271; 2021年6月2日"
+                                   style="width: 514px; border: 1px solid #ced4da;">
+
+                        </div>
+
+
+
+                        <div class="input-group mb-3 ">
+                            <select class="form-select " id="inputGroupSelect03" style="width: 500px;">
+                                <option selected> &#xf007; 兩位大人</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-check border d-flex " id="sale-absolute">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                   style="margin-left: -10px;">
+            <label class="form-check-label" for="flexCheckDefault" style="width: 514px; margin-left: 10px;">
+                享達25%的訂房折扣
+            </label>
+            <div id="sale" class="d-flex justify-content-center bg-danger align-items-center">
+                <h4 class="text-white ">住宿</h4>
+            </div>
+        </div>
+
+
+    </div>
+    <button type="button" class="btn btn-primary  btn-lg" id="search"
+            style="width:480px;height: 64px; background-color: rgb(83, 146, 249);">
+        搜出好價
+    </button>
+
+</div>
+
+<div id="carouselExampleControls" class="carousel slide" data-interval="false" style="margin-top: 100px;">
+    <div class=" d-flex justify-content-center" style="margin-bottom: 50px;">
+        <h1 class="fs-4">台灣熱門城市</h1>
+    </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="container row ">
+                    <div class="d-flex   align-items-center">
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/4951/1_4951_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                台北市
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">2,976間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/12080/1_12080_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                台中市
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">1,592間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/756/1_756_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                高雄市
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">957間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/18347/1_18347_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                台南市
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">1,420間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/88773/1_88773_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                宜蘭縣
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">1,843間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/23127/1_23127_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                花蓮縣
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">2,003間宿舍</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="carousel-item ">
+            <div class="container">
+                <div class="container row">
+                    <div class="d-flex   align-items-center">
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/4740/1_4740_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                台東縣
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">1,138間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/18343/1_18343_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">墾丁</h2>
+                            <p style="font-size: 12px; line-height:16px;">1,196間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/11977/1_11977_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                嘉義縣
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">353間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/18346/1_18346_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                南投縣
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">1,019間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/8453/1_8453_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                桃園市
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">352間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/23127/1_23127_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                新竹縣
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">244間宿舍</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <a class="carousel-control-prev carousel-dark" href="#carouselExampleControls" role="button"
+       data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next carousel-dark" href="#carouselExampleControls" role="button"
+       data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
+
+
+<!--
+<div class="container d-flex justify-content-center flex-column   " style="margin-top: 100px;">
+    <div class=" d-flex justify-content-center" style="margin-bottom: 50px;">
+        <h1 class="fs-4">台灣熱門城市</h1>
+    </div>
+
+    <div class="row">
+        <div class="d-flex   align-items-center">
+            <i class="fas fa-angle-left"></i>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/4951/1_4951_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">台北市</h2>
+                <p style="font-size: 12px; line-height:16px;">2,976間宿舍</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/12080/1_12080_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">台中市</h2>
+                <p style="font-size: 12px; line-height:16px;">1,592間宿舍</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle" src="https://pix6.agoda.net/geo/city/756/1_756_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">高雄市</h2>
+                <p style="font-size: 12px; line-height:16px;">957間宿舍</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/18347/1_18347_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">台南市</h2>
+                <p style="font-size: 12px; line-height:16px;">1,420間宿舍</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/88773/1_88773_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">宜蘭縣</h2>
+                <p style="font-size: 12px; line-height:16px;">1,843間宿舍</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/23127/1_23127_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">花蓮縣</h2>
+                <p style="font-size: 12px; line-height:16px;">2,003間宿舍</p>
+            </div>
+            <i class="fas fa-angle-right"></i>
+        </div>
+    </div>
+</div> -->
+
+<div class="container d-flex justify-content-center align-items-center flex-column" style="margin-top: 50px;">
+    <h1 style=" font-size: 23px; line-height:32px; margin-bottom: 20px;">推薦您下一趟旅行去處！</h1>
+    <div class="row" id="motal">
+        <div class="d-flex  align-items-center " id="box" style="margin-left: -100px;">
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="carouselExampleControls2" class="carousel slide" data-interval="false"
+     style="margin-top: 100px; margin-bottom: 100px;">
+    <div class=" d-flex justify-content-center" style="margin-bottom: 50px;">
+        <h1 class="fs-4">台灣境外的熱門城市</h1>
+    </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="container row ">
+                    <div class="d-flex   align-items-center">
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/16808/1_16808_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">香港</h2>
+                            <p style="font-size: 12px; line-height:16px;">1,792間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/13170/1_13170_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                胡志明市
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">10,146間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/21397/1_21397_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">澳門</h2>
+                            <p style="font-size: 12px; line-height:16px;">144間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/2758/1_2758_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">河內</h2>
+                            <p style="font-size: 12px; line-height:16px;">6,699間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/14524/1_14524_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                吉隆坡
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">11,303間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/9395/1_9395_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                曼谷
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">10,409間宿舍</p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="carousel-item ">
+            <div class="container">
+                <div class="container row">
+                    <div class="d-flex   align-items-center">
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/5085/1_5085_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                東京
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">11,333間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/115678/1_115678_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">平陽</h2>
+                            <p style="font-size: 12px; line-height:16px;">125間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/10372/1_10372_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                墨爾本
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">3,374間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/4064/1_4064_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                                新加坡
+                            </h2>
+                            <p style="font-size: 12px; line-height:16px;">1,085間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/17190/1_17190_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">頭頓</h2>
+                            <p style="font-size: 12px; line-height:16px;">3,071間宿舍</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                            <img class="rounded-circle"
+                                 src="https://pix6.agoda.net/geo/city/1808/1_1808_02.jpg?s=124x124&ar=1x1">
+                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">新山</h2>
+                            <p style="font-size: 12px; line-height:16px;">3,662間宿舍</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <a class="carousel-control-prev carousel-dark" href="#carouselExampleControls2" role="button"
+       data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next carousel-dark" href="#carouselExampleControls2" role="button"
+       data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
+
+<!--
+
+<div class="container d-flex justify-content-center flex-column   " style="margin-top: 50px;">
+    <div class=" d-flex justify-content-center">
+        <h1 class="fs-4" style="margin-bottom: 50px; ">台灣境外的熱門城市</h1>
+    </div>
+
+    <div class="row" style="margin-bottom: 50px;">
+        <div class="d-flex   align-items-center">
+            <i class="fas fa-angle-left"></i>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/16808/1_16808_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">香港</h2>
+                <p style="font-size: 12px; line-height:16px;">1,792間宿舍</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/13170/1_13170_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">胡志明市</h2>
+                <p style="font-size: 12px; line-height:16px;">10,146間宿舍</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/21397/1_21397_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">澳門</h2>
+                <p style="font-size: 12px; line-height:16px;">144間宿舍</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/2758/1_2758_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">河內</h2>
+                <p style="font-size: 12px; line-height:16px;">6,699間宿舍</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/14524/1_14524_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">吉隆坡</h2>
+                <p style="font-size: 12px; line-height:16px;">11,303間宿舍</p>
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                <img class="rounded-circle"
+                    src="https://pix6.agoda.net/geo/city/9395/1_9395_02.jpg?s=124x124&ar=1x1">
+                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">曼谷</h2>
+                <p style="font-size: 12px; line-height:16px;">10,409間宿舍</p>
+            </div>
+            <i class="fas fa-angle-right"></i>
+
+        </div>
+    </div>
+
+</div> -->
+
+@*<div id="Customer-Service">
+        <div class="container   row">
+            <div class="d-flex  justify-content-center" style="margin-top: 50px; margin-left: 100px;">
+                <div class="col-2">
+                    <h3 class="fw-bolder" style=" font-size: 14px; line-height:15.4px; margin-bottom: 10px;">
+                        客服中心
+                    </h3>
+                    <p style=" font-size: 13px; line-height:18px;">
+                        服務中心 <br>
+                        常見問題 <br>
+                        隱私權政策 <br>
+                        Cookie政策 <br>
+                        服務條款
+                    </p>
+                </div>
+
+                <div class="col-2">
+                    <h3 class="fw-bolder" style=" font-size: 14px; line-height:15.4px; margin-bottom: 10px;">
+                        關於我們
+                    </h3>
+                    <p style=" font-size: 13px; line-height:18px;">
+                        PointsMax <br>
+                        職缺情報 <br>
+                        新聞報導 <br>
+                        旅遊部落格
+
+                    </p>
+                </div>
+                <div class="col-2">
+                    <h3 class="fw-bolder" style=" font-size: 14px; line-height:15.4px; margin-bottom: 10px;">
+                        目的地
+                    </h3>
+                    <p style=" font-size: 13px; line-height:18px;">
+                        國家/地區 <br>
+                        城市
+                    </p>
+                </div>
+                <div class="col-2">
+                    <h3 class="fw-bolder" style=" font-size: 14px; line-height:15.4px; margin-bottom: 10px;">
+                        成為合作夥伴
+                    </h3>
+                    <p style=" font-size: 13px; line-height:18px;">
+                        YCS夥伴平台 <br>
+                        Partner Hub<br>
+                        供應商招募<br>
+                        行銷夥伴 <br>
+                        Connectivity平台
+                    </p>
+                </div>
+                <div class="col-2">
+                    <h3 class="fw-bolder" style=" font-size: 14px; line-height:15.4px; margin-bottom: 10px;">
+                        行動訂房神器
+                    </h3>
+                    <p style=" font-size: 13px; line-height:18px;">
+                        iOS免費下載 <br>
+                        Android 免費下載 <br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+@section HomePageCountryArea{
+
+
+    <div class="container" style="width:1132px; margin-top: 50px; margin-bottom: 50px;">
+        <div class="d-flex">
+            <div style="width: 156.8px;   list-style:none; ">
+                <span class="fw-normal" style="width: 65px; line-height: 60px; font-size: 16px;">
+                    目的地城市
+                </span>
+                <li style=" line-height: 30px; font-size: 16px;">
+                    <span>
+                        亞洲
+                    </span>
+
+                </li>
+                <ul>
+
+                    <li><a href="">峇里島飯店 </a></li>
+                    <li>
+                        <a href="">
+                            萬隆飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            曼谷飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            長灘島飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            釜山飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            宿霧飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            清邁飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            峴港飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            福岡飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            河內飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            合艾飯店
+                        </a>
+                    </li>
+                    <li><a href="">胡志明市飯店</a></li>
+                    <li>
+                        <a href="">
+                            會安飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            香港飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            華欣飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            花蓮飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            怡保飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            雅加達飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            濟州島飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            新山飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            高雄飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            亞庇飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            喀比飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            吉隆坡飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            關丹飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            京都飯店
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div style="width: 156.8px; list-style:none; ">
+
+                <ul>
+                    <li> <a href="">澳門飯店 </a></li>
+                    <li> <a href="">馬六甲飯店</a></li>
+                    <li> <a href="">馬尼拉飯店</a></li>
+                    <li> <a href="">名古屋飯店</a></li>
+                    <li>
+                        <a href="">
+                            芽莊飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            沖繩飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            大阪飯店
+                        </a>
+                    </li>
+                    <li> <a href="">芭達雅飯店</a></li>
+                    <li>
+                        <a href="">
+                            檳城飯店
+                        </a>
+                    </li>
+                    <li> <a href="">普吉島飯店</a></li>
+                    <li>
+                        <a href="">
+                            札幌飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            首爾飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            上海飯店
+                        </a>
+                    </li>
+                    <li> <a href="">新加坡飯店</a></li>
+                    <li>
+                        <a href="">
+                            泗水飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            台中飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            台南飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            台北飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            東京飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            宜蘭飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            日惹飯店
+                        </a>
+                    </li>
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>歐洲</span>
+                    </li>
+                    <li>
+                        <a href="">
+                            倫敦飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            巴黎飯店
+                        </a>
+                    </li>
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>中東</span>
+                    </li>
+                    <li>
+                        <a href="">
+                            杜拜飯店
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div style="width: 156.8px; list-style:none; ">
+                <ul>
+                    <li style="line-height: 60px; font-size: 16px;">
+                        <span>
+                            國家和地區
+                        </span>
+                    </li>
+
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>非洲</span>
+                    </li>
+                    <li>
+                        <a href="">
+                            摩洛哥飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            南非飯店
+                        </a>
+                    </li>
+
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>美洲</span>
+                    </li>
+                    <li>
+                        <a href="">
+                            阿根廷飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            巴西飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            加拿大飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            墨西哥飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            美國飯店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            委內瑞拉飯店
+                        </a>
+                    </li>
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>亞洲</span>
+                    </li>
+                    <li><a href="">柬埔寨飯店</a></li>
+                    <li><a href="">中國飯店</a></li>
+                    <li><a href="">印度飯店</a></li>
+                    <li><a href="">印尼飯店</a></li>
+                    <li><a href="">日本飯店</a></li>
+                    <li><a href="">寮國飯店</a></li>
+                    <li><a href="">馬來西亞飯店</a></li>
+                    <li><a href="">緬甸飯店</a></li>
+                    <li><a href="">尼泊爾飯店</a></li>
+                    <li><a href="">菲律賓飯店</a></li>
+                    <li><a href="">南韓飯店</a></li>
+                    <li><a href="">斯里蘭卡飯店</a></li>
+                    <li><a href="">台灣飯店</a></li>
+                    <li><a href="">泰國飯店</a></li>
+                    <li><a href="">越南飯店</a></li>
+
+                </ul>
+            </div>
+
+
+
+            <div style="width: 156.8px; list-style:none; ">
+
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>歐洲</span>
+                    </li>
+
+                    <li><a href="">奧地利飯店</a></li>
+                    <li><a href="">捷克飯店</a></li>
+                    <li><a href="">丹麥飯店</a></li>
+                    <li><a href="">芬蘭飯店</a></li>
+                    <li><a href="">法國飯店</a></li>
+                    <li><a href="">德國飯店</a></li>
+                    <li><a href="">希臘飯店</a></li>
+                    <li><a href="">匈牙利飯店</a></li>
+                    <li><a href="">愛爾蘭飯店</a></li>
+                    <li><a href="">義大利飯店</a></li>
+                    <li><a href="">荷蘭飯店</a></li>
+                    <li><a href="">俄羅斯飯店</a></li>
+                    <li><a href="">西班牙飯店</a></li>
+                    <li><a href="">瑞典飯店</a></li>
+                    <li><a href="">瑞士飯店</a></li>
+                    <li><a href="">英國飯店</a></li>
+                </ul>
+
+
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>中東</span>
+                    </li>
+                    <li><a href="">巴林飯店</a></li>
+                    <li><a href="">埃及飯店</a></li>
+                    <li><a href="">以色列飯店</a></li>
+                    <li><a href="">阿拉伯聯合大公國飯店</a></li>
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>太平洋</span>
+                    </li>
+                    <li><a href="">澳洲飯店</a></li>
+                    <li><a href="">紐西蘭飯店</a></li>
+                </ul>
+
+
+            </div>
+
+
+            <div style="width: 156.8px; list-style:none; ">
+                <li style=" line-height: 40px; font-size: 16px; ">
+                    <span>目的地指南</span>
+                </li>
+                <li><a href="">目的地指南首頁</a></li>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>亞洲</span>
+                    </li>
+                    <li><a href="">峇里島指南</a></li>
+                    <li><a href="">曼谷指南</a></li>
+                    <li><a href="">香港指南</a></li>
+                    <li><a href="">雅加達指南</a></li>
+                    <li><a href="">濟州島指南</a></li>
+                    <li><a href="">吉隆坡指南</a></li>
+                    <li><a href="">京都指南</a></li>
+                    <li><a href="">九州指南</a></li>
+                    <li><a href="">馬六甲指南</a></li>
+                    <li><a href="">馬尼拉指南</a></li>
+                    <li><a href="">奈良指南</a></li>
+                    <li><a href="">大阪指南</a></li>
+                    <li><a href="">普吉島指南</a></li>
+                    <li><a href="">札幌指南</a></li>
+                    <li><a href="">首爾指南</a></li>
+                    <li><a href="">新加坡指南</a></li>
+                    <li><a href="">台中指南</a></li>
+                    <li><a href="">台北指南</a></li>
+                    <li><a href="">東京指南</a></li>
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>歐洲</span>
+                    </li>
+                    <li><a href="">巴黎指南</a></li>
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>中東</span>
+                    </li>
+                    <li><a href="">杜拜指南</a></li>
+                    <li><a href="">吉達指南</a></li>
+                    <li><a href="">沙烏地阿拉伯指南</a></li>
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>太平洋洲</span>
+                    </li>
+                    <li><a href="">布里斯本指南</a></li>
+                    <li><a href="">墨爾本指南</a></li>
+                    <li><a href="">雪梨指南</a></li>
+                </ul>
+            </div>
+            <div style="width: 156.8px; list-style:none; ">
+                <li style=" line-height: 40px; font-size: 16px; ">
+                    <span>Agoda Homes</span>
+                </li>
+                <ul>
+
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>亞洲公寓</span>
+                    </li>
+                    <li><a href="">曼谷公寓</a></li>
+                    <li><a href="">吉隆坡公寓</a></li>
+                    <li><a href="">馬尼拉公寓</a></li>
+                    <li><a href="">大阪公寓</a></li>
+                    <li><a href="">芭達雅公寓</a></li>
+                    <li><a href="">東京公寓</a></li>
+
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>亞洲小屋</span>
+                    </li>
+                    <li><a href="">峇里島小屋</a></li>
+                    <li><a href="">庫德島小屋</a></li>
+                    <li><a href="">蘭塔島小屋</a></li>
+                    <li><a href="">帕岸島小屋</a></li>
+                    <li><a href="">沙美島小屋</a></li>
+                    <li><a href="">富國島小屋</a></li>
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>亞洲別墅</span>
+                    </li>
+                    <li><a href="">峇里島別墅</a></li>
+                    <li><a href="">普吉島別墅</a></li>
+                    <li><a href="">芭達雅別墅</a></li>
+                    <li><a href="">華欣/七岩別墅</a></li>
+                    <li><a href="">首爾別墅</a></li>
+                    <li><a href="">波德申別墅</a></li>
+                </ul>
+                <ul>
+                    <li style=" line-height: 40px; font-size: 16px; ">
+                        <span>亞洲度假住宿</span>
+                    </li>
+                    <li><a href="">濟州島度假住宿</a></li>
+                    <li><a href="">沖繩本島度假住宿</a></li>
+                    <li><a href="">東京度假住宿</a></li>
+                    <li><a href="">曼谷度假住宿</a></li>
+                    <li><a href="">吉隆坡度假住宿</a></li>
+                    <li><a href="">馬六甲度假住宿</a></li>
+
+                </ul>
+            </div>
+            <div style="width: 156.8px; list-style:none; ">
+                <li style=" line-height: 40px; font-size: 16px; ">
+                    <span>探索</span>
+                </li>
+                <li><a href="">長住方案</a></li>
+            </div>
+        </div>
+
+
+    </div>
+}
+
+@section endJS{
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.24.0/locale/zh-cn.jss"></script>
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
+
+    <script>
+        var hotel = {
+            Kaohsiung: {
+                back: [{ "name": '台北W酒店', "area": '信義區', "Evaluation": '  <i class="fas fa-star text-warning"></i>  <i class="fas fa-star text-warning"></i>', "picture": 'https://pix6.agoda.net/hotelImages/335/335043/335043_16121920250049783861.jpg', ground: "https://pix6.agoda.net/hotelImages/335/335043/335043_16121920250049783861.jpg", sale: '2.5折扣', Originalprice: 'NT$11,024', saleprice: 'NT$5,500', "fraction": '9.3', "comment": '超棒', "Quantity": '1198篇評鑑' },
+                { name: '飛行家青年旅館', area: '苓雅區', Evaluation: '  <i class="fas fa-star text-warning"></i>  <i class="fas fa-star text-warning"></i>', picture: 'https://pix6.agoda.net/hotelImages/5059720/0/feb524ebbcc31042755392d15d8cef3b.jpg', ground: "https://pix6.agoda.net/hotelImages/5059720/0/feb524ebbcc31042755392d15d8cef3b.jpg", sale: '2.2折扣', Originalprice: 'NT$2,370', saleprice: 'NT$595', fraction: '8.8', comment: '很讚', Quantity: '1198篇評鑑' },
+                { name: '鈞怡大飯店', area: '高雄市', Evaluation: '   <i class="fas fa-star text-warning"></i> <i class="fas fa-star text-warning"></i>  <i class="fas fa-star text-warning"></i>', picture: 'https://pix6.agoda.net/hotelImages/335/335043/335043_16121920250049783861.jpg', ground: "https://pix6.agoda.net/hotelImages/4612444/-1/a9f27a564ebc9951ddc5cfc12970dfaa.jpg?s=450x450", sale: '1.9折扣', Originalprice: 'NT$6,234', saleprice: 'NT$1,234', fraction: '8.9', comment: '很讚', Quantity: '1198篇評鑑' },
+                { name: '塩‧泊思行旅', area: '高雄市', Evaluation: '  <i class="fas fa-star text-warning"></i>  <i class="fas fa-star text-warning"></i>', picture: 'https://pix6.agoda.net/hotelImages/21874089/-1/8a6235eaf9b5c0ae0a9484b253996530.jpg?s=450x450', ground: "https://pix6.agoda.net/hotelImages/21874089/-1/8a6235eaf9b5c0ae0a9484b253996530.jpg?s=450x450", sale: '2折扣', Originalprice: 'NT$3,611', saleprice: 'NT$764', fraction: '8.4', comment: '很讚', Quantity: '1198篇評鑑' }
+                ]
+
+            }
+        };
+        let box = document.querySelector("#box");
+        hotel.Kaohsiung.back.forEach((item, index) => {
+            let div = document.createElement("div");
+            div.classList.add('col-3');
+            div.classList.add('border');
+            div.style.margin = '20px 20px 20px 30px ';
+            div.style.height = '373.6px ';
+            box.appendChild(div);
+            let div2 = document.createElement("div");
+            div2.classList.add('d-flex');
+            div2.style.width = '263.65px';
+            div2.style.marginTop = '-10px';
+            div2.style.height = '150px';
+            div2.style.background = `no-repeat center/100% url(${item.ground})`;
+            div.appendChild(div2);
+            let div3 = document.createElement("div");
+            div3.style.width = '124px';
+            div3.style.height = '49.2px';
+            div3.style.backgroundColor = 'white';
+            div3.style.borderRadius = '2px';
+            div3.style.margin = '10px 0px 0px 130px';
+            div2.appendChild(div3);
+            let div4 = document.createElement("div");
+            div4.classList.add('d-flex');
+            div4.classList.add('justify-content-end');
+            div4.classList.add('align-items-center');
+
+            div3.appendChild(div4);
+            let div5 = document.createElement("div");
+            div5.classList.add('row');
+            div5.style.width = '85.8375pxpx';
+            div5.style.marginRight = '5px';
+            div4.appendChild(div5);
+            let span = document.createElement("span");
+            span.classList.add('fw-bold');
+            span.style.textAlign = 'end';
+            span.style.fontSize = '16px';
+            span.style.lineHeight = '22px';
+            span.innerText = `${item.comment}`;
+            div5.appendChild(span);
+            let p1 = document.createElement("p");
+            p1.style.fontSize = '12px';
+            p1.style.lineHeight = '13.2px';
+            p1.style.textAlign = 'end';
+            p1.innerText = `${item.Quantity}`;
+            div5.appendChild(p1);
+            let div6 = document.createElement("div");
+            // div6.innerHTML = '<i class="fas fa-comment-alt fa-2x" style = "width: 34px; height: 44px; color: #5392f9; margin-top: 10px; margin-right: 5px;" ><span class="text-white"style="font-weight: 600; line-height: 44px; font-size: 16px; "id="fraction"></span></i > ';
+
+            div4.appendChild(div6);
+            let i = document.createElement("i");
+            i.classList.add('fas');
+            i.classList.add('fa-comment-alt');
+            i.classList.add('fa-2x');
+            i.style.width = '34px';
+            i.style.height = '44px';
+            i.style.color = '#5392f9';
+            i.style.marginTop = '10px';
+            i.style.marginRight = '5px';
+            i.style.position = 'relative';
+            div6.appendChild(i);
+            let span2 = document.createElement("span");
+            span2.classList.add('text-white');
+            span2.style.fontWeight = '600';
+            span2.style.lineHeight = '44px';
+            span2.style.fontSize = '16px';
+            span2.style.position = ' absolute';
+            span2.style.right = '8px';
+            span2.style.bottom = '10px';
+            span2.innerText = `${item.fraction}`;
+            i.appendChild(span2);
+            let div7 = document.createElement("div");
+            div7.style.margin = '10px';
+            div.appendChild(div7);
+            let h3 = document.createElement("h3");
+            h3.classList.add('fw-bold');
+            h3.style.fontSize = '16px';
+            h3.style.lineHeight = '22px';
+            h3.innerText = `${item.name}`;
+            div7.appendChild(h3);
+            let p = document.createElement("p");
+            p.style.lineHeight = '20px';
+            p.style.fontSize = '12px';
+            p.innerText = `${item.area}`;
+            div7.appendChild(p);
+            let div8 = document.createElement("div");
+            div8.innerHTML = `${item.Evaluation}`
+            div7.appendChild(div8);
+            let div9 = document.createElement("div");
+            div9.classList.add('d-flex');
+            div9.classList.add('justify-content-end');
+            div9.classList.add('flex-column');
+            div9.classList.add('align-items-end');
+            div9.style.Height = '144px';
+            div9.style.marginTop = '110px';
+            div.appendChild(div9);
+            let div10 = document.createElement("div");
+            div10.classList.add('d-flex');
+            div10.classList.add('justify-content-center');
+            div10.classList.add('bg-danger');
+            div10.classList.add('align-items-center');
+            div9.appendChild(div10);
+            let h4 = document.createElement("h4");
+            h4.classList.add('text-white');
+            h4.innerText = `${item.sale}`;
+            div10.appendChild(h4);
+            let span3 = document.createElement("span");
+            span3.style.textDecoration = 'line-through';
+            span3.style.color = '#90949c';
+            span3.style.fontFamily = ' Comic Sans MS';
+            span3.style.fontSize = '14px';
+            span3.style.lineHeight = '20px';
+            span3.style.fontWeight = '400';
+            span3.innerText = `${item.Originalprice}`;
+            div9.appendChild(span3);
+            let p2 = document.createElement("p");
+            p2.classList.add('text-danger');
+            p2.style.lineHeight = '20px';
+            p2.style.fontSize = '12px';
+            p2.style.fontWeight = '300';
+            p2.style.fontFamily = ' Comic Sans MS';
+            p2.innerText = `${item.saleprice}`;
+            div9.appendChild(p2);
+        });
+        console.log("`${'no-repeat center/100% url'((item.ground))}`");
+    </script>
+
+    <script>
+        $(function () {
+            $('input[name="daterange"]').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                },
+                opens: 'left'
+            }, function (start, end, label) {
+                console.log("选择了一个新的日期: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            });
+        });
+        // var dateControl = document.querySelector('input[name="daterange"]');
+        // dateControl.value = `<i class="far fa-calendar"></i>`;
+    </script>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            let html = document.getElementsByTagName('html')[0];
+            let scrollNav = document.querySelector('.scroll-nav')
+
+            if (html.scrollTop > 60) {
+                scrollNav.classList.add('fix-nav');
+                scrollNav.style.display = 'block';
+            }
+            else {
+                scrollNav.classList.remove('fix-nav');
+                scrollNav.style.display = 'none';
+            }
+        })
+    </script>
+}
+
+

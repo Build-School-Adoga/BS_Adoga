@@ -1,0 +1,545 @@
+﻿
+@{
+    ViewBag.Title = "MemberLogin";
+    Layout = "~/Views/Shared/_AdogaLayout.cshtml";
+}
+
+@section topCSS{
+    <link rel="stylesheet" href="~/Asset/CSS/MemberLogin.css" />
+}
+
+<!-- Bear加：，頁面中間用來登入的區塊-->
+<!-- Bear：這個區塊是複製signinModal的區塊，然後把裡面所有id有關的名稱後面加上 “-card”，避免跟SigninModal裡面的id重複，導致出錯。 -->
+<div class="card sigin-card w-500 mx-auto my-5">
+    <div class="card-body">
+        <div class="ps-3 pt-3">
+            <h5 class="modal-title fw-bold fz-24" id="exampleModalLabel-card">
+                A咖登入
+            </h5>
+            <p id="emailHelp-card" class="form-text fw-normal fz-16">
+                為了保障你的個資安全，請先登入才能查看個人資訊
+            </p>
+        </div>
+
+        <!-- modal內部控制 -->
+        <div class="modal-body signin_modal">
+            <ul class="nav nav-tabs" id="myTab-card" role="tablist">
+                <!-- 手機與電子郵件的切換 -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab-card" data-bs-toggle="tab" data-bs-target="#emailgo-card"
+                            type="button" role="tab" aria-controls="home" aria-selected="true">
+                        電子郵件登入
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab-card" data-bs-toggle="tab" data-bs-target="#phonego-card"
+                            type="button" role="tab" aria-controls="profile" aria-selected="false">
+                        手機號碼登入
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent-card">
+                <div class="tab-pane fade show active" id="emailgo-card" role="tabpanel" aria-labelledby="home-tab-card">
+                    <!-- 電子郵件登入區塊 -->
+
+                    <form>
+                        <div class="mb-3">
+                            <label for="LoginEmail" class="form-label">電子信箱</label>
+                            <input type="email" class="form-control" id="LoginEmail-card" aria-describedby="emailHelp-card"
+                                   placeholder="email" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="LoginPassword" class="form-label">密碼</label>
+                            <input type="password" class="form-control" id="LoginPassword-card" placeholder="Password" />
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary my-2 py-2 login-btn">
+                                @Html.ActionLink("登入", "HomePage", "Home")
+                                登入
+                            </button>
+                        </div>
+                        <div class="register">
+                            <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
+                               id="EmailLogintoRegister">我是新朋友</a>
+                            <a href="#modal" data-bs-toggle="modal" data-bs-target="#ForgetPasswordModal"
+                               id="EmailLogintoForgetPassword"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="tab-pane fade" id="phonego-card" role="tabpanel" aria-labelledby="profile-tab-card">
+                    <form>
+                        <!-- phone登入區塊 -->
+                        <div class="mb-3 inputphone">
+                            <label for="PhoneLogin" class="form-label">手機號碼</label>
+                            <input type="tel" class="form-control" id="PhoneLogin-card" aria-describedby="emailHelp-card"
+                                   placeholder="Enter Phone">
+                        </div>
+                        <div class="mb-3 phone-password">
+                            <label for="PhonePassword" class="form-label">密碼</label>
+                            <input type="password" class="form-control" id="PhonePassword-card" aria-describedby="emailHelp-card"
+                                   placeholder="Enter Password">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary my-2 py-2 login-btn" type="button">
+                                @Html.ActionLink("登入", "HomePage", "Home")
+                                登入
+                            </button>
+                        </div>
+                        <div class="register">
+                            <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
+                               id="PhoneLogintoRegister-card">我是新朋友</a>
+                            <a href="#modal" data-bs-toggle="modal" data-bs-target="#ForgetPasswordModal"
+                               id="PhoneLogintoForgetPassword-card"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="otherlogin">
+                <p>使用其他登入方式</p>
+            </div>
+
+            <div class="d-grid gap-2 otherlogin-btn-group">
+                <button class="otherlogin-btn" type="button">
+                    <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
+                </button>
+                <div class="loginbuttonwithfa">
+                    <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-card">
+                        <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
+                        Facebook
+                    </button>
+                    <button type="button" class="otherlogin-btn" id="Phoneapplelogin-card">
+                        <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt="">
+                        Apple
+                    </button>
+                </div>
+            </div>
+
+            <div class="youshouldknow">
+                <p>
+                    </a>點擊登錄即代表我同意Agoda的 <a href="">服務條款</a> 和 <a href="">隱私權政策</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- -------------------------------------------------------------------------------------------------------------- -->
+<!-- 第一個Modal -->
+<!-- 忘記密碼 -->
+<div class="modal fade" id="ForgetPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <strong> 忘記密碼?</strong><br />
+                    <div id="ForgetPasswordLabel" class="form-text">
+                        <p>記不住你的Agoda密碼？改用Facebook登入，從此少記一組密碼！</p>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary" type="button">
+                            使用FaceBook登入
+                        </button>
+                    </div>
+                </h5>
+            </div>
+            <div class="modal-body">
+                <!-- 忘記密碼內容 -->
+                <div class="mb-3" id="aaa">
+                    <label for="ForgetPassword" class="form-label">電子信箱</label>
+                    <input type="email" class="form-control" id="ForgetPassword" aria-describedby="emailHelp"
+                           placeholder="電子信箱">
+                    <p>請於上方欄位輸入您的電子信箱 協助您找回密碼的操作說明將會寄至您的電子信箱。</p>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="button">
+                        重設密碼
+                    </button>
+                </div>
+                <div class="ForgetPasswordtoLogin">
+                    <a href="#model" data-bs-toggle="modal" data-bs-target="#SigninModal" id="ForgetPasswordtoLogin">登入這邊請</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- -------------------------------------------------------------------------------------------------------------- -->
+<!-- 第二個Modal -->
+<!-- 登入 -->
+<div class="modal fade" id="SigninModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content mx-3">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold fz-24" id="exampleModalLabel">
+                    A咖登入
+                </h5>
+                <p id="emailHelp" class="form-text fw-normal fz-16">
+                    為了保障你的個資安全，請先登入才能查看個人資訊
+                </p>
+                <!-- <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button> -->
+            </div>
+
+            <!-- modal內部控制 -->
+            <div class="modal-body signin_modal mx-2">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <!-- 手機與電子郵件的切換 -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#emailgo" type="button"
+                                role="tab" aria-controls="home" aria-selected="true">
+                            電子郵件登入
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#phonego" type="button"
+                                role="tab" aria-controls="profile" aria-selected="false">
+                            手機號碼登入
+                        </button>
+                    </li>
+                </ul>
+                <div class="social_login"></div>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="emailgo" role="tabpanel" aria-labelledby="home-tab">
+                        <!-- 電子郵件登入區塊 -->
+
+                        <form>
+                            <div class="mb-3">
+                                <label for="LoginEmail" class="form-label">電子信箱</label>
+                                <input type="email" class="form-control" id="LoginEmail" aria-describedby="emailHelp"
+                                       placeholder="email" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="LoginPassword" class="form-label">密碼</label>
+                                <input type="password" class="form-control" id="LoginPassword" placeholder="Password" />
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary my-2 py-2 login-btn">
+                                    @Html.ActionLink("登入", "HomePage", "Home")
+                                    登入
+                                </button>
+                            </div>
+                            <div class="register">
+                                <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
+                                   id="EmailLogintoRegister">我是新朋友</a>
+                                <a href="#modal" data-bs-toggle="modal" data-bs-target="#ForgetPasswordModal"
+                                   id="EmailLogintoForgetPassword"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="phonego" role="tabpanel" aria-labelledby="profile-tab">
+                        <!-- phone登入區塊 -->
+                        <form>
+                            <div class="mb-3 inputphone">
+                                <label for="PhoneLogin" class="form-label">電話號碼</label>
+                                <input type="tel" class="form-control" id="PhoneLogin" aria-describedby="emailHelp"
+                                       placeholder="Enter Phone">
+                            </div>
+                            <div class="mb-3 phone-password">
+                                <label for="PhonePassword" class="form-label">密碼</label>
+                                <input type="password" class="form-control" id="PhonePassword" aria-describedby="emailHelp"
+                                       placeholder="Enter Password">
+                            </div>
+                            <!-- <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="PhoneLoginCheck">
+                              <label class="form-check-label" for="PhoneLoginCheck">我想要收到特惠情報</label>
+                            </div> -->
+                            <!-- <div class="robot">
+
+                              </div> -->
+                            <div class="phonelogin">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary my-2 py-2 login-btn" type="button">
+                                        @Html.ActionLink("登入", "HomePage", "Home")
+                                        登入
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="register">
+                                <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
+                                   id="PhoneLogintoRegister">我是新朋友</a>
+                                <a href="#modal" data-bs-toggle="modal" data-bs-target="#ForgetPasswordModal"
+                                   id="PhoneLogintoForgetPassword"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="otherlogin">
+                    <p>使用其他登入方式</p>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="otherlogin-btn" type="button">
+                        <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
+                    </button>
+                    <div class="loginbuttonwithfa">
+                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin">
+                            <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
+                            Facebook
+                        </button>
+                        <button type="button" class="otherlogin-btn" id="Phoneapplelogin">
+                            <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt=""> Apple
+                        </button>
+                    </div>
+                </div>
+                <div class="youshouldknow">
+                    <p>
+                        </a>點擊登錄即代表我同意Agoda的 <a href="">服務條款</a> 和 <a href="">隱私權政策</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -------------------------------------------------------------------------------------------------------------- -->
+<!-- 第三個Modal2 -->
+<!-- 註冊 -->
+<div class="modal fade" id="RegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">免費入會</h5>
+                <!-- <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button> -->
+            </div>
+            <!-- modal內部控制 -->
+            <div class="modal-body signin_modal">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button"
+                                qwq role="tab" aria-controls="home" aria-selected="true">
+                            電子信箱
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="-card" data-bs-toggle="tab" data-bs-target="#signin" type="button" role="tab"
+                                aria-controls="profile" aria-selected="false">
+                            手機號碼
+                        </button>
+                    </li>
+                </ul>
+                <div class="social_login"></div>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="signup" role="tabpanel" aria-labelledby="home-tab">
+                        <!-- 註冊電子信箱內部 -->
+                        <form>
+                            <div class="mb-3 form-group">
+                                <label for="EnglishFirstName">英文護照名</label>
+                                <input type="text" class="form-control" id="EnglishFirstName" aria-describedby="emailHelp"
+                                       placeholder="Enter First Name">
+                            </div>
+                            <div class="mb-3 form-group">
+                                <label for="EnglishLastName">英文護照姓</label>
+                                <input type="text" class="form-control" id="EnglishLastName" placeholder="Enter Last Name">
+                            </div>
+                            <div class="mb-3 form-group">
+                                <label for="RegisterEmail">電子信箱</label>
+                                <input type="email" class="form-control" id="RegisterEmail" aria-describedby="emailHelp"
+                                       placeholder="Enter E-Mail">
+                            </div>
+                            <div class="mb-3 form-group">
+                                <label for="RegisterEmailPassword">密碼</label>
+                                <input type="password" class="form-control" id="RegisterEmailPassword" aria-describedby="emailHelp"
+                                       placeholder="Enter Password">
+                            </div>
+                            <div class="mb-3 form-group">
+                                <label for="DoubleCheck">確認密碼</label>
+                                <input type="password" class="form-control" id="DoubleCheck" aria-describedby="emailHelp"
+                                       placeholder="Check Password">
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="EmailRegisterCheck">
+                                <label class="form-check-label"
+                                       for="EmailRegisterCheck">我想要收到Adoga的獨家促銷情報，同時根據隱私權政策，我保留隨時取消訂閱的權利</label>
+                            </div>
+                            <div class="robot">
+
+                                <div class="g-recaptcha" da ta-sitekey="6LeBRdgaAAAAANViv2aNUZR_CbTY0rKNav5zdCLA"></div>
+                            </div>
+                            <div class="checkcodeline">
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">加入會員</button>
+                                </div>
+                            </div>
+                            <div class="otherlogin">
+                                <p>使用其他登入方式</p>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary" type="button">
+                                    使用GOOGLE登入
+                                </button>
+                                <div class="loginbuttonwithfa">
+                                    <button type="button" class="btn btn-outline-primary"
+                                            id="EmailfacebookRegister">
+                                        使用facebook登入
+                                    </button>
+                                    <button type="button" class="btn btn-outline-primary" id="EmailappleRegister">使用APPLE登入</button>
+                                </div>
+                            </div>
+                            <div class="line">
+                            </div>
+                            <div class="tologin">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary" id="SignintoPhone" type="button">
+                                        已經是會員?登入
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="youshouldknow">
+                                <p>
+                                    </a>點擊登錄即代表我同意Agoda的 <a href="">服務條款</a> 和 <a href="">隱私權政策</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="signin" role="tabpanel" aria-labelledby="-card">
+                        <!-- 註冊電話號碼片段 -->
+                        <div class="Phone_container">
+                            <form id="login" onsubmit="process(event)">
+                                <p>請輸入手機號碼:</p>
+                                <input id="phone" type="tel" name="phone" />
+
+                                <div class="mb-3 phone-password">
+                                    <label for="PhoneRegisterpassword">密碼</label>
+                                    <input type="password" class="form-control" id="PhoneRegisterpassword" aria-describedby="emailHelp"
+                                           placeholder="Enter Password">
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="PhoneRegisterCheck">
+                                    <label class="form-check-label" for="PhoneRegisterCheck">我想要收到特惠情報</label>
+                                </div>
+                                <div class="robot">
+
+                                    <div class="g-recaptcha" data-sitekey="6LeBRdgaAAAAANViv2aNUZR_CbTY0rKNav5zdCLA"></div>
+                                </div>
+                                <div class="checkcodeline">
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-primary" type="button">
+                                            發送認證碼
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="otherlogin">
+                                    <p>使用其他登入方式</p>
+                                </div>
+                                recapta
+                                <div class="d-grid gap-2 otherlogin-btn-group">
+                                    <button class="btn btn-outline-primary" type="button">
+                                        使用GOOGLE登入
+                                    </button>
+                                    <div class="loginbuttonwithfa">
+                                        <button type="button" class="btn btn-outline-primary"
+                                                id="PhonefacebookRegister">
+                                            使用facebook登入
+                                        </button>
+                                        <button type="button" class="btn btn-outline-primary" id="PhoneappleRegister">使用APPLE登入</button>
+                                    </div>
+                                </div>
+
+                                <div class="line">
+                                </div>
+                                <div class="tologin">
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-outline-primary" id="RegisterPhonetoLogin" type="button">
+                                            已經是會員?登入
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="youshouldknow">
+                                    <p>
+                                        </a>點擊登錄即代表我同意Agoda的 <a href="">服務條款</a> 和 <a href="">隱私權政策</a>
+                                    </p>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section endJS{
+    <script>
+        //程式碼區域
+        //國際電話script
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            utilsScript:
+                "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+    </script>
+    <!-- //google我不是機器人 -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <!--電子郵件登入到忘記密碼 -->
+    <script>
+        let EmailLogintoForgetPassword = document.getElementById('EmailLogintoForgetPassword')
+        EmailLogintoForgetPassword.addEventListener('click', function () {
+            $('#SigninModal').modal('hide');
+
+        })
+    </script>
+    <!-- 電話登入到忘記密碼 -->
+    <script>
+        let PhoneLogintoForgetPassword = document.getElementById('PhoneLogintoForgetPassword')
+        PhoneLogintoForgetPassword.addEventListener('click', function () {
+            $('#SigninModal').modal('hide');
+
+        })
+    </script>
+    <!-- 忘記密碼的超連結到註冊 -->
+    <script>
+        let ForgetPasswordtoLogin = document.getElementById('ForgetPasswordtoLogin')
+        ForgetPasswordtoLogin.addEventListener('click', function () {
+            $('#ForgetPasswordModal').modal('hide');
+
+        })
+    </script>
+    <!-- 電子郵件登入到註冊 -->
+    <script>
+        let EmailLogintoRegister = document.getElementById('EmailLogintoRegister')
+        EmailLogintoRegister.addEventListener('click', function () {
+            $('#SigninModal').modal('hide');
+
+        })
+    </script>
+    <!-- 電話號碼登入到註冊 -->
+    <script>
+
+        let PhoneLogintoRegister = document.getElementById('PhoneLogintoRegister')
+        PhoneLogintoRegister.addEventListener('click', function () {
+            $('#SigninModal').modal('hide');
+
+        })
+    </script>
+    <!-- 電話註冊到登入按鈕 -->
+    <script>
+        let RegisterPhonetoLogin = document.getElementById('RegisterPhonetoLogin')
+        RegisterPhonetoLogin.addEventListener('click', function () {
+            $('#RegisterModal').modal('hide');
+            $('#SigninModal').modal('show');
+        })
+    </script>
+    <!-- 電子郵件註冊到登入 -->
+    <script>
+        let SignintoPhone = document.getElementById('SignintoPhone')
+        SignintoPhone.addEventListener('click', function () {
+            $('#RegisterModal').modal('hide');
+            $('#SigninModal').modal('show');
+        })
+    </script>
+}
+
