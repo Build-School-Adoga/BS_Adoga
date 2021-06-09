@@ -4,16 +4,16 @@
 }
 
 @section topCSS{
+    <link rel="stylesheet" href="~/Asset/CSS/HotelDetailShare.css" />
     <link rel="stylesheet" href="~/Asset/CSS/HotelDetail.css" />
+    <link rel="stylesheet" href="~/Asset/CSS/SearchFilterPartial.css" />
 }
 
 @section scrollNav{
     <div class="scroll-nav">
-        <nav class="search-bar">
-
-        </nav>
+        @Html.Partial("~/Views/Search/_SearchFilterPartial.cshtml")
         <nav class="hotel-nav bg-white">
-            <div class="wrap-1200 d-flex justify-content-between">
+            <div class="wrap-1100 d-flex justify-content-between">
                 <div class="hotel-nav-wrap d-flex align-items-center">
                     <a href="#" class="hotel-nav-item ">房型</a>
                     <a href="#" class="hotel-nav-item ">設施與服務</a>
@@ -31,14 +31,14 @@
 }
 
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb wrap-1200">
+    <ol class="breadcrumb wrap-1100">
         <li class="breadcrumb-item"><a href="#">首頁</a></li>
         <li class="breadcrumb-item"><a href="#">台灣住宿</a><span>&nbsp;(17,283)</span></li>
         <li class="breadcrumb-item"><a href="#">台中市住宿</a><span>&nbsp;(1,597)</span></li>
         <li class="breadcrumb-item active" aria-current="page">預定台中商旅 (Hung's Mansion)</li>
     </ol>
 </nav>
-<div class="wrap-1200 row mb-3">
+<div class="wrap-1100 row mb-3">
     <div class="main-content col-9">
         <div class="media-group row d-flex ">
             <div class="hotel-video col-7 gx-2">
@@ -155,7 +155,7 @@
         </div>-->
     </div>
 </div>
-<div class="choose-room wrap-1200 mb-5">
+<div class="choose-room wrap-1100 mb-5">
     <div class="title d-flex justify-content-between mb-3">
         <h3>客房選擇</h3>
         <div>
@@ -163,7 +163,7 @@
             <span>本站價格保證！</span>
         </div>
     </div>
-    <div class="popular-area row wrap-1200 mb-4">
+    <div class="popular-area row wrap-1100 mb-4">
         <div class="popular-service col-9 gx-0">
             <h4>人氣設施與服務</h4>
             <div class="d-flex">
@@ -251,13 +251,13 @@
             <p>我們現有10種房型，共26個訂房專案：</p>
             <span>價格不包含稅金和附加費用</span>
         </div>
-        <div class="wrap-1200">
+        <div class="wrap-1100">
             <div class="room-type">
                 <div class="room-type-title">
                     <h5>豪華房(兩床) (Deluxe Twin)</h5>
                     <!-- <p class="fw-bold fz-12 color-red ">6小時前剛被預訂</p> -->
                 </div>
-                <div class="container wrap-1200">
+                <div class="container wrap-1100">
                     <div class="row">
                         <div class="col-3 d-flex flex-column">
                             <p>房型摘要</p>
@@ -435,9 +435,9 @@
         </div>
     </div>
 </div>
-<section class="introduce-area card wrap-1200 mb-5">
+<section class="introduce-area card wrap-1100 mb-5">
     <div class="card-body d-flex">
-        <div class="img-wrap col-7">
+        <div class="img-wrap col-7 me-2">
             <img src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768"
                  alt="關於台中商旅">
             <div class="title">
@@ -460,8 +460,8 @@
         </p>
     </div>
 </section>
-<section class="equim-serv-area wrap-1200 mb-5">
-    <div class="usual-serv wrap-1200 row pb-4">
+<section class="equim-serv-area wrap-1100 mb-5">
+    <div class="usual-serv wrap-1100 row pb-4">
         <div class="col-3 border-t-gray ">
             <h3 class="fz-20 color-dark-gray mt-3">服務設施</h3>
         </div>
@@ -641,7 +641,7 @@
             </a>
         </div>
     </div>
-    <div class="stay-rule wrap-1200 row pb-4">
+    <div class="stay-rule wrap-1100 row pb-4">
         <div class="col-3 border-t-gray">
             <h3 class="fz-20 color-dark-gray mt-3">住宿規定</h3>
         </div>
@@ -689,7 +689,7 @@
             </a>
         </div>
     </div>
-    <div class="useful-infm wrap-1200 row pb-4 border-b-gray">
+    <div class="useful-infm wrap-1100 row pb-4 border-b-gray">
         <div class="col-3 border-t-gray">
             <h3 class="fz-20 color-dark-gray mt-3">實用入住資訊</h3>
         </div>
@@ -714,7 +714,7 @@
     </div>
 
 </section>
-<div id="comment-area" class="comment-area wrap-1200 mt-3">
+<div id="comment-area" class="comment-area wrap-1100 mt-3">
     <div class="title d-flex justify-content-between mb-3">
         <h3>來自<span>台中商旅</span>實際住客的評鑑</h3>
     </div>
@@ -778,7 +778,7 @@
         </ul>
     </nav>
     <div class="comment-group">
-        <div class="comment-item wrap-1200 row pt-3 pb-5">
+        <div class="comment-item wrap-1100 row pt-3 pb-5">
             <div class="rate-item col-3 fz-14 pt-3">
                 <!-- <span class="rate-num color-blue">10.0</span> -->
                 <div class="mb-1">
@@ -800,7 +800,7 @@
                 <p class="fz-14 color-gray ps-2">評鑑日期：<span>2019年3月3日 星期日</span></p>
             </div>
         </div>
-        <div class="comment-item wrap-1200 row pt-3 pb-5">
+        <div class="comment-item wrap-1100 row pt-3 pb-5">
             <div class="rate-item col-3 fz-14 pt-3">
                 <!-- <span class="rate-num color-blue">9.6</span> -->
                 <div class="mb-1">
@@ -842,6 +842,7 @@
 </div>
 
 @section endJS{
+    <script type="text/javascript" src="~/Asset/js/Search.js"></script>
     <script>
         window.addEventListener('scroll', function () {
             let html = document.getElementsByTagName('html')[0];

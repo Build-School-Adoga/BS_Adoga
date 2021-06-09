@@ -66,10 +66,10 @@
 
 /* <!-- search-bar 和 麵包屑 --> */
 
-.search-bar {
+/*.search-bar {
     height: 80px;
     background-color: rgb(18, 18, 61);
-}
+}*/
 
 nav[aria-label='breadcrumb'] {
     margin: 15px 0 35px 0;
@@ -118,8 +118,8 @@ nav[aria-label='breadcrumb'] {
 }
 
 .two-pic img {
-    width: 180.5px;
-    height: 141px;
+    width: 165px;
+    height: 128px;
 }
 
     .two-pic img:last-child {
@@ -337,8 +337,8 @@ nav[aria-label='breadcrumb'] {
 }
 
 
-/* <!--~~~~~~~~~~~~~~1200px大區塊~~~~~~~~~~~~~~~--> */
-/* <!-- 客房選擇 --> */
+/* <!--~~~~~~~~~~~~~~1100px大區塊~~~~~~~~~~~~~~~--> */
+/* <!--------- 客房選擇 --------------> */
 
 /* <!-- 標題 --> */
 
@@ -649,13 +649,12 @@ p.room-case-price {
 .introduce-area .img-wrap {
     position: relative;
     margin: auto;
-    width: 618px;
-    height: 370px;
     overflow: hidden;
 }
 
 .introduce-area img {
-    width: 100%;
+    width: 718px;
+    height: 420px;
 }
 
 .introduce-area .title {

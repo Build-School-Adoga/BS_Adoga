@@ -26,8 +26,7 @@ namespace BS_Adoga
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Asset/CSS/Base_css").Include(
-                "~/Asset/CSS/Reset.css",
-                "~/Asset/CSS/Shared.css"));
+                "~/Asset/CSS/Reset.css"));
         }
     }
 }
