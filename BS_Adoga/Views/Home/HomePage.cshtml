@@ -275,6 +275,11 @@
     <div class="row" id="motal">
         <div class="d-flex  align-items-center " id="box" style="margin-left: -100px;">
 
+            @model IEnumerable<Card>
+            @foreach (var man in Model)
+            {
+@Html.Partial("_SimpleCardPartial", man);
+}
 
         </div>
     </div>
@@ -462,7 +467,6 @@
     </div>
 
 </div> -->
-
 @*<div id="Customer-Service">
         <div class="container   row">
             <div class="d-flex  justify-content-center" style="margin-top: 50px; margin-left: 100px;">
@@ -1028,7 +1032,7 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.24.0/locale/zh-cn.jss"></script>
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
 
-    <script>
+    @*<script>
         var hotel = {
             Kaohsiung: {
                 back: [{ "name": '台北W酒店', "area": '信義區', "Evaluation": '  <i class="fas fa-star text-warning"></i>  <i class="fas fa-star text-warning"></i>', "picture": 'https://pix6.agoda.net/hotelImages/335/335043/335043_16121920250049783861.jpg', ground: "https://pix6.agoda.net/hotelImages/335/335043/335043_16121920250049783861.jpg", sale: '2.5折扣', Originalprice: 'NT$11,024', saleprice: 'NT$5,500', "fraction": '9.3', "comment": '超棒', "Quantity": '1198篇評鑑' },
@@ -1164,7 +1168,7 @@
             div9.appendChild(p2);
         });
         console.log("`${'no-repeat center/100% url'((item.ground))}`");
-    </script>
+    </script>*@
 
     <script>
         $(function () {
