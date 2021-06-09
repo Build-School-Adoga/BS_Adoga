@@ -46,11 +46,11 @@
                         <div class="mb-3">
                             <label for="LoginEmail" class="form-label">電子信箱</label>
                             <input type="email" class="form-control" id="LoginEmail-card" aria-describedby="emailHelp-card"
-                                   placeholder="email" />
+                                   placeholder="電子信箱" />
                         </div>
                         <div class="mb-3">
                             <label for="LoginPassword" class="form-label">密碼</label>
-                            <input type="password" class="form-control" id="LoginPassword-card" placeholder="Password" />
+                            <input type="password" class="form-control" id="LoginPassword-card" placeholder="密碼" />
                         </div>
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary my-2 py-2 login-btn">
@@ -74,12 +74,12 @@
                         <div class="mb-3 inputphone">
                             <label for="PhoneLogin" class="form-label">手機號碼</label>
                             <input type="tel" class="form-control" id="PhoneLogin-card" aria-describedby="emailHelp-card"
-                                   placeholder="Enter Phone">
+                                   placeholder="手機號碼">
                         </div>
                         <div class="mb-3 phone-password">
                             <label for="PhonePassword" class="form-label">密碼</label>
                             <input type="password" class="form-control" id="PhonePassword-card" aria-describedby="emailHelp-card"
-                                   placeholder="Enter Password">
+                                   placeholder="密碼">
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary my-2 py-2 login-btn" type="button">
@@ -132,19 +132,23 @@
 <div class="modal fade" id="ForgetPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
+            <div class="modal-header "style="border:0;">
+                <h5 class="modal-title" id="exampleModalLabel" >
                     <strong> 忘記密碼?</strong><br />
-                    <div id="ForgetPasswordLabel" class="form-text">
+                    <div id="ForgetPasswordLabel" class="form-text"style="font-size: 15.5px">
                         <p>記不住你的Agoda密碼？改用Facebook登入，從此少記一組密碼！</p>
                     </div>
                     <div class="d-grid gap-2">
-                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin">
+                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-cardforget">
                             <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
                             Facebook
                         </button>
                     </div>
                 </h5>
+
+            </div>
+            <div class="otherloginor">
+                <p>或</p>
             </div>
             <div class="modal-body">
                 <!-- 忘記密碼內容 -->
@@ -214,16 +218,15 @@
                             <div class="mb-3">
                                 <label for="LoginEmail" class="form-label">電子信箱</label>
                                 <input type="email" class="form-control" id="LoginEmail" aria-describedby="emailHelp"
-                                       placeholder="email" />
+                                       placeholder="電子信箱" />
                             </div>
                             <div class="mb-3">
                                 <label for="LoginPassword" class="form-label">密碼</label>
-                                <input type="password" class="form-control" id="LoginPassword" placeholder="Password" />
+                                <input type="password" class="form-control" id="LoginPassword" placeholder="密碼" />
                             </div>
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary my-2 py-2 login-btn">
                                     @Html.ActionLink("登入", "HomePage", "Home")
-                                    登入
                                 </button>
                             </div>
                             <div class="register">
@@ -239,14 +242,14 @@
                         <!-- phone登入區塊 -->
                         <form>
                             <div class="mb-3 inputphone">
-                                <label for="PhoneLogin" class="form-label">電話號碼</label>
+                                <label for="PhoneLogin" class="form-label">手機號碼</label>
                                 <input type="tel" class="form-control" id="PhoneLogin" aria-describedby="emailHelp"
-                                       placeholder="Enter Phone">
+                                       placeholder="手機號碼">
                             </div>
                             <div class="mb-3 phone-password">
                                 <label for="PhonePassword" class="form-label">密碼</label>
                                 <input type="password" class="form-control" id="PhonePassword" aria-describedby="emailHelp"
-                                       placeholder="Enter Password">
+                                       placeholder="密碼">
                             </div>
                             <!-- <div class="form-check">
                               <input type="checkbox" class="form-check-input" id="PhoneLoginCheck">
@@ -259,7 +262,7 @@
                                 <div class="d-grid gap-2">
                                     <button class="btn btn-primary my-2 py-2 login-btn" type="button">
                                         @Html.ActionLink("登入", "HomePage", "Home")
-                                        登入
+                                       
                                     </button>
                                 </div>
                             </div>
@@ -306,8 +309,8 @@
 <div class="modal fade" id="RegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">免費入會</h5>
+            <div class="modal-header" style="border:0; margin-top: 20px;">
+                <h5 class="modal-title fw-bold fz-24" id="exampleModalLabel">免費入會</h5>
                 <!-- <button
                   type="button"
                   class="btn-close"
@@ -339,26 +342,26 @@
                             <div class="mb-3 form-group">
                                 <label for="EnglishFirstName">英文護照名</label>
                                 <input type="text" class="form-control" id="EnglishFirstName" aria-describedby="emailHelp"
-                                       placeholder="Enter First Name">
+                                       placeholder="英文護照名">
                             </div>
                             <div class="mb-3 form-group">
                                 <label for="EnglishLastName">英文護照姓</label>
-                                <input type="text" class="form-control" id="EnglishLastName" placeholder="Enter Last Name">
+                                <input type="text" class="form-control" id="EnglishLastName" placeholder="英文護照姓">
                             </div>
                             <div class="mb-3 form-group">
                                 <label for="RegisterEmail">電子信箱</label>
                                 <input type="email" class="form-control" id="RegisterEmail" aria-describedby="emailHelp"
-                                       placeholder="Enter E-Mail">
+                                       placeholder="電子信箱">
                             </div>
                             <div class="mb-3 form-group">
                                 <label for="RegisterEmailPassword">密碼</label>
                                 <input type="password" class="form-control" id="RegisterEmailPassword" aria-describedby="emailHelp"
-                                       placeholder="Enter Password">
+                                       placeholder="密碼">
                             </div>
                             <div class="mb-3 form-group">
                                 <label for="DoubleCheck">確認密碼</label>
                                 <input type="password" class="form-control" id="DoubleCheck" aria-describedby="emailHelp"
-                                       placeholder="Check Password">
+                                       placeholder="確認密碼">
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="EmailRegisterCheck">
@@ -418,7 +421,7 @@
                                 <div class="mb-3 phone-password">
                                     <label for="PhoneRegisterpassword">密碼</label>
                                     <input type="password" class="form-control" id="PhoneRegisterpassword" aria-describedby="emailHelp"
-                                           placeholder="Enter Password">
+                                           placeholder="密碼">
                                 </div>
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="PhoneRegisterCheck">
