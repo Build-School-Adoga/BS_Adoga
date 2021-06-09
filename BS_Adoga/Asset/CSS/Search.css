@@ -1,4 +1,8 @@
-﻿nav {
+﻿/*body{
+    overflow-x:hidden;
+}*/
+
+nav {
     background-color: #1F264C;
     color: grey;
     font-size: 16px;
@@ -22,7 +26,7 @@ nav .search-bar,
 .nav-item,
 .filter-container {
     /* 控制整体维持60vw在中间 */
-    width: 60vw;
+    width: 1100px;
     margin: auto;
 }
 
@@ -140,15 +144,7 @@ li.dropdown-item.input-request ul {
             color: #5392F9;
             font-size: 22px;
         }
-/* .dropright-box{
-    position: absolute;
-    top: 0;
-    left: 298px;
-    visibility: hidden;
-    background-color: red;
-    width: 300px;
-    height: 300px;
-} */
+
 
 /* -----Filter的部分------ */
 .filter {
@@ -227,7 +223,7 @@ i.fas.fa-star {
 
 /*---点击Filter出现的侧边栏---*/
 #filter-equipment {
-    height: 937px;
+    height:fit-content();
     width: 100%;
     display: flex;
     position: fixed;
@@ -311,7 +307,7 @@ i.fas.fa-star {
                     }
 
     #filter-equipment div.closeFilter {
-        height: 100%;
+        height: fit-content();
         width: 30vw;
         background-color: rgba(0, 0, 0, 0.7);
     }
@@ -425,7 +421,8 @@ i.fas.fa-star {
     .infomation .card .rank .offer p {
         background-color: #E12D2D;
         color: white;
-        width: fit-content;
+        width: max-content;
+        /*width: fit-content;*/
         padding: 3px 6px;
         margin-top: 3px;
     }
@@ -491,7 +488,8 @@ i.fas.fa-star {
 } */
 .infomation .card .include-list {
     font-size: 14px;
-    width: fit-content;
+    /*width: fit-content;*/
+    width: max-content;
     padding: 2px 4px;
     border: 1px solid #28871C;
     color: #28871C;

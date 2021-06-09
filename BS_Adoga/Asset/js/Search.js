@@ -52,7 +52,10 @@ openFilter.addEventListener('click', function () {
     if (filter.style.visibility == "visible") {
         filter.style.visibility = "hidden";
     }
-    else { filter.style.visibility = "visible"; }
+    else {
+        filter.style.visibility = "visible";
+        document.getElementsByTagName("body").preventDefault();
+    }
 })
 
 function closeFilter() {
@@ -81,3 +84,5 @@ dropdownItem.forEach(item => item.addEventListener('click', function (e) {
     // e.stopPropagation();
 
 }))
+
+
