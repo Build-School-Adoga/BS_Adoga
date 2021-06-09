@@ -53,10 +53,11 @@
                             <input type="password" class="form-control" id="LoginPassword-card" placeholder="密碼" />
                         </div>
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary my-2 py-2 login-btn">
-                                @Html.ActionLink("登入", "HomePage", "Home")
+                            <!--bear : 0610新增-->
+                            @Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "submit", @class = "btn btn-primary my-2 py-2 login-btn" })
+                            @*<button type="submit" class="btn btn-primary my-2 py-2 login-btn">
                                 登入
-                            </button>
+                            </button>*@
                         </div>
                         <div class="register">
                             <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
@@ -82,10 +83,11 @@
                                    placeholder="密碼">
                         </div>
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary my-2 py-2 login-btn" type="button">
-                                @Html.ActionLink("登入", "HomePage", "Home")
+                            <!--bear : 0610新增-->
+                            @Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "button", @class = "btn btn-primary my-2 py-2 login-btn" })
+                            @*<button class="btn btn-primary my-2 py-2 login-btn" type="button">
                                 登入
-                            </button>
+                            </button>*@
                         </div>
                         <div class="register">
                             <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
@@ -309,7 +311,7 @@
 <div class="modal fade" id="RegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="border:0; margin-top: 20px;">
+            <div class="modal-header" style="border:0; ">
                 <h5 class="modal-title fw-bold fz-24" id="exampleModalLabel">免費入會</h5>
                 <!-- <button
                   type="button"
@@ -416,7 +418,7 @@
                         <div class="Phone_container">
                             <form id="login" onsubmit="process(event)">
                                 <p>請輸入手機號碼:</p>
-                                <input id="phone" type="tel" name="phone" />
+                                <input id="phone" type="tel" name="phone" placeholder="手機號碼"/>
 
                                 <div class="mb-3 phone-password">
                                     <label for="PhoneRegisterpassword">密碼</label>

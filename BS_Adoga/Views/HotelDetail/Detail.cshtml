@@ -42,20 +42,32 @@
     <div class="main-content col-9">
         <div class="media-group row d-flex ">
             <div class="hotel-video col-7 gx-2">
-                <img src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768"
-                     alt="">
+                <div class="img-wrap">
+                    <img alt="" src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768">
+                    <div class="show-shadow"></div>
+                </div>
                 <!-- <img src="https://picsum.photos/505/366/?random=1" alt=""> -->
             </div>
             <div class="pic-group col-5 gx-0">
-                <img class="medium-pic"
-                     src="http://pix6.agoda.net/hotelImages/234438/-1/473caa63348a75f0a87e7ea2c7868e81.jpg?s=1024x768">
+                <div class="img-wrap">
+                    <img class="medium-pic" src="http://pix6.agoda.net/hotelImages/234438/-1/473caa63348a75f0a87e7ea2c7868e81.jpg?s=1024x768">
+                    <div class="show-shadow"></div>
+                    <a class="add-fav-button"><i class="fas fa-heart"></i></a>
+                </div>
                 <!-- <img class="medium-pic" src="https://picsum.photos/360/226/?random=2"> -->
                 <div class="two-pic d-flex mt-1">
-                    <img class="me-1"
-                         src="https://pix6.agoda.net/hotelImages/234/234438/234438_16020314120039601807.jpg?s=1024x768">
+                    <div class="img-wrap me-1">
+                        <img class="" src="https://pix6.agoda.net/hotelImages/234/234438/234438_16020314120039601807.jpg?s=1024x768">
+                        <div class="show-shadow"></div>
+                    </div>
                     <!-- <img class="me-1" src="https://picsum.photos/180/131/?random=3"> -->
-                    <img class=""
-                         src="https://pix6.agoda.net/hotelImages/234438/-1/14b6f310d6c82575411bdc92ebd9a421.jpg?s=1024x768">
+                    <div class="img-wrap">
+                        <img class="" src="https://pix6.agoda.net/hotelImages/234438/-1/14b6f310d6c82575411bdc92ebd9a421.jpg?s=1024x768">
+                        <div class="show-shadow">
+                        @*@Html.ActionLink("【完整相簿】共12張", "DetailAlbum", null,new { @class= "album-link fz-14" })*@
+                            <a href="#" class="album-link fz-14">【完整相簿】共12張</a>
+                        </div>
+                    </div>
                     <!-- <img class="" src="https://picsum.photos/180/131/?random=4"> -->
                 </div>
             </div>
@@ -367,7 +379,8 @@
                                     </select>
                                 </div>
                                 <div class="col-3 pt-2 text-end">
-                                    <button class="keep-btn btn fz-14 py-2 mb-2">保留</button>
+                                    @Html.ActionLink("保留","Index","CheckOut",null,new {@class= "keep-btn btn fz-14 py-2 mb-2" })
+                                    @*<button class="keep-btn btn fz-14 py-2 mb-2">保留</button>*@
                                     <button class="cart-btn btn fz-14 py-2 mb-5">加入購物車</button>
                                     <!-- <p class="green">一次訂兩間更划算</p>
                                     <p class="hurry2min">訂房只需2分鐘</p> -->
@@ -421,10 +434,11 @@
                                     </select>
                                 </div>
                                 <div class="col-3 pt-2 text-end">
-                                    <button class="keep-btn btn fz-14 py-2 mb-2">保留</button>
+                                    @Html.ActionLink("保留", "Index", "CheckOut", null, new { @class = "keep-btn btn fz-14 py-2 mb-2" })
+                                    @*<button class="keep-btn btn fz-14 py-2 mb-2">保留</button>*@
                                     <button class="cart-btn btn fz-14 py-2 mb-5">加入購物車</button>
                                     <!-- <p class="green">一次訂兩間更划算</p>
-                                    <p class="hurry2min">訂房只需2分鐘</p> -->
+    <p class="hurry2min">訂房只需2分鐘</p> -->
                                     <p class="remain fw-bold fz-14 color-red mb-4">本站剩4間！</p>
                                 </div>
                             </div>
@@ -838,7 +852,7 @@
     </nav>
 </div>
 <div class="extend">
-
+    @Html.Partial("~/Views/HotelDetail/_AlbumPartial.cshtml")
 </div>
 
 @section endJS{
@@ -865,6 +879,19 @@
             data: {
                 hover: false,
             },
+        })
+
+        let openAlbum = document.querySelector('.album-link');
+        let album = document.querySelector('.album-back');
+        openAlbum.addEventListener('click', function () {
+            console.log('ssss');
+            album.style.display = 'block';
+        })
+
+        let closeAlbum = document.getElementById('close-icon');
+        closeAlbum.addEventListener('click', function () {
+            console.log('close');
+            album.style.display = 'none';
         })
     </script>
 }
