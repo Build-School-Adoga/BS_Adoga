@@ -120,13 +120,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CheckOutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelDetailController.cs" />
     <Compile Include="Controllers\MemberLoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Card.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +136,6 @@
     <Content Include="Asset\CSS\MemberLogin.css" />
     <Content Include="Asset\CSS\Reset.css" />
     <Content Include="Asset\CSS\Shared.css" />
-    <Content Include="Asset\CSS\StepBar.css" />
     <Content Include="Asset\images\adoga-logo-v2.png" />
     <Content Include="Asset\images\img1.png" />
     <Content Include="Asset\images\img2.png" />
@@ -225,12 +224,10 @@
     <Content Include="Views\Shared\_AdogaLayout.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
     <Content Include="Views\Shared\ExampleView.cshtml" />
-    <Content Include="Views\CheckOut\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutCheckout.cshtml" />
+    <Content Include="Views\Shared\_SimpleCardPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
