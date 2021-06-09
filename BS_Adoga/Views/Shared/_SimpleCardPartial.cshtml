@@ -1,0 +1,64 @@
+﻿
+@model Card
+
+
+<div class="col-3  border" style="margin: 20px;">
+    <div id="img" class="d-flex"
+         style="background:  no-repeat center/100% url(@Model.ground);">
+
+        <div id="comment"
+             style="width: 124px;height: 49.2px; background-color: white; border-radius: 2px; margin-left: 130px;margin-top: 10px;">
+            <div class="d-flex justify-content-end  align-items-center">
+                <div class="row" style="width:85.8375px;    margin-right: 5px;">
+                    <span class="fw-bold  " style="text-align:end; font-size: 16px; line-height:22px;"
+                          id="comment1">@Model.comment</span>
+                        <p style="font-size: 12px;line-height: 13.2px; text-align:end;" id="Quantity">
+                            @Model.Quantity
+                        </p>
+                    </div>
+                    <div>
+                        <i class="fas fa-comment-alt fa-2x" id="comment-box"
+                           style="width: 34px; height: 44px; color: #5392f9; margin-top: 10px; margin-right: 5px;">
+                            <span class="text-white"
+                                  style="font-weight: 600; line-height: 44px; font-size: 16px; "
+                                  id="fraction">@Model.fraction</span>
+                            </i>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <!--
+            <img src="https://pix6.agoda.net/hotelImages/335/335043/335043_16121920250049783861.jpg"> -->
+            <div>
+                <div style="margin: 10px;">
+                    <h3 class="fw-bold" style="font-size: 16px; line-height:22px;">@Model.name</h3>
+                    <p style="font-size:12px; line-height: 20px;">@Model.area</p>
+                    @for (int i = 0; i < @Model.Evaluation; i++)
+                    {
+                        <i class="fas fa-star text-warning"></i>
+                    }
+
+
+
+                </div>
+                <div class="d-flex justify-content-end  flex-column  align-items-end" style="height: 144px;">
+                    <div id="sale" class="d-flex justify-content-center bg-danger align-items-center">
+                        <h4 class="text-white ">@Model.sale</h4>
+                    </div>
+                    <span style="text-decoration:line-through; color: #90949c; font-family: Comic Sans MS;font-size: 14px;line-height: 20px;font-weight: 400;">
+                        @Model.Originalprice
+                    </span>
+                    <p class="text-danger"
+                       style="font-size: 12px;font-weight: 300;line-height: 20px; font-family: Comic Sans MS;">
+                        @Model.saleprice
+                    </p>
+                </div>
+            </div>
+
+        </div>
