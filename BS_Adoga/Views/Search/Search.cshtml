@@ -641,15 +641,15 @@
             </div>
             <div class="rank">
                 <!-- <div class="point">
-                    <div class="comment">
-                        <p>很讚</p>
-                        <p><span>10,237</span> 份評鑑</p>
-                        <p>地點 <span>9.0</span></p>
-                    </div>
-                    <div class="icon">
-                        <p>8.5</p>
-                    </div>
-                </div> -->
+        <div class="comment">
+            <p>很讚</p>
+            <p><span>10,237</span> 份評鑑</p>
+            <p>地點 <span>9.0</span></p>
+        </div>
+        <div class="icon">
+            <p>8.5</p>
+        </div>
+    </div> -->
                 <div class="offer">
                     <p>只剩<span>1</span>間房可享<span>34</span>％優惠</p>
                 </div>
@@ -658,10 +658,12 @@
                     <del>1,918</del>
                     <ins>NT$<span>1,267</span></ins>
                 </div>
-                <button class="btn btn-primary">
+                <!--bear : 0610新增-->
+                @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", null, new { @class = "btn btn-primary", })
+                @*<button class="btn btn-primary">
                     查看空房情況
                     <i class="fas fa-chevron-right"></i>
-                </button>
+                </button>*@
             </div>
         </div>
     </div>
