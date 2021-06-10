@@ -13,5 +13,10 @@ namespace BS_Adoga.Controllers
         {
             return View();
         }
+
+        //public ActionResult DetailAlbum()
+        //{
+        //    return View();
+        //}
     }
 }

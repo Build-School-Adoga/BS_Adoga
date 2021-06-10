@@ -8,6 +8,12 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.css" />
     <link rel="stylesheet" href="~/Asset/CSS/HomePage.css" />
+    <!-- bear：0610 新增-->
+    <style>
+        .head-nav-item.red, .head-nav-item.blue {
+            padding: 13px 10px;
+        }
+    </style>
 }
 
 <div class="scroll-nav">
@@ -81,10 +87,18 @@
 
 
     </div>
-    <button type="button" class="btn btn-primary  btn-lg" id="search"
+    <!--bear : 0610新增-->
+    @Html.ActionLink("搜出好價", "Search", "Search", null, new
+    {
+        @type = "button",
+       @class = "btn btn-primary  btn-lg",
+        @id = "search",
+       @style = "width:480px;height: 64px; background-color: rgb(83, 146, 249);",
+    })
+    @*<button type="button" class="btn btn-primary  btn-lg" id="search"
             style="width:480px;height: 64px; background-color: rgb(83, 146, 249);">
         搜出好價
-    </button>
+    </button>*@
 
 </div>
 

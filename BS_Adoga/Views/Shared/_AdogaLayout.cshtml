@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Search</title>
+    <title>@ViewBag.Title - ADOGA</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Asset/CSS/Base_css")
@@ -35,7 +35,7 @@
             <a href="#" class="head-nav-item blue" data-bs-toggle="modal" data-bs-target="#RegisterModal">我是新朋友</a>
         </div>
     </nav>
-
+    @RenderSection("scrollNav", false);
     @RenderBody()
     @RenderSection("scrollNav", false)
 

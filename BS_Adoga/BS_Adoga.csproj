@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelDetailController.cs" />
@@ -132,14 +133,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asset\CSS\AccountBookings.css" />
     <Content Include="Asset\CSS\Search.css" />
+    <Content Include="Asset\CSS\SearchFilterPartial.css" />
     <Content Include="Asset\CSS\StepBar.css" />
     <Content Include="Asset\CSS\HomePage.css" />
     <Content Include="Asset\CSS\HotelDetail.css" />
     <Content Include="Asset\CSS\Layout.css" />
     <Content Include="Asset\CSS\MemberLogin.css" />
     <Content Include="Asset\CSS\Reset.css" />
-    <Content Include="Asset\CSS\Shared.css" />
+    <Content Include="Asset\CSS\HotelDetailShare.css" />
     <Content Include="Asset\images\adoga-logo-v2.png" />
     <Content Include="Asset\images\img1.png" />
     <Content Include="Asset\images\img2.png" />
@@ -234,6 +237,8 @@
     <Content Include="Views\Shared\_LayoutCheckout.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Search\_SearchFilterPartial.cshtml" />
+    <Content Include="Views\HotelDetail\_AlbumPartial.cshtml" />
+    <Content Include="Views\Account\AccountBookings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
