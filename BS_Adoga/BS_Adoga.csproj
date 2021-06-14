@@ -124,6 +124,7 @@
     <Compile Include="Controllers\CheckOutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelDetailController.cs" />
+    <Compile Include="Controllers\HotelLoginController.cs" />
     <Compile Include="Controllers\MemberLoginController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
@@ -134,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Asset\CSS\AccountBookings.css" />
+    <Content Include="Asset\CSS\HotelLogin.css" />
     <Content Include="Asset\CSS\Search.css" />
     <Content Include="Asset\CSS\SearchFilterPartial.css" />
     <Content Include="Asset\CSS\StepBar.css" />
@@ -239,6 +241,7 @@
     <Content Include="Views\Search\_SearchFilterPartial.cshtml" />
     <Content Include="Views\HotelDetail\_AlbumPartial.cshtml" />
     <Content Include="Views\Account\AccountBookings.cshtml" />
+    <Content Include="Views\HotelLogin\HotelLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
