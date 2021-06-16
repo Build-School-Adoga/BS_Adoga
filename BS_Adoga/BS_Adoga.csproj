@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -131,6 +139,19 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\DBContext\AdogaContext.cs" />
+    <Compile Include="Models\DBContext\BathroomType.cs" />
+    <Compile Include="Models\DBContext\BedType.cs" />
+    <Compile Include="Models\DBContext\Customer.cs" />
+    <Compile Include="Models\DBContext\Facility.cs" />
+    <Compile Include="Models\DBContext\Hotel.cs" />
+    <Compile Include="Models\DBContext\HotelEmployee.cs" />
+    <Compile Include="Models\DBContext\HotelImage.cs" />
+    <Compile Include="Models\DBContext\MessageBoard.cs" />
+    <Compile Include="Models\DBContext\Order.cs" />
+    <Compile Include="Models\DBContext\Room.cs" />
+    <Compile Include="Models\DBContext\RoomImage.cs" />
+    <Compile Include="Models\DBContext\RoomsDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
