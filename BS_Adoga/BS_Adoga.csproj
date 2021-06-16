@@ -138,7 +138,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Card.cs" />
+    <Compile Include="ViewModels\homeViewModels\demoshopViewModels.cs" />
+    <Compile Include="ViewModels\homeViewModels\Card.cs" />
     <Compile Include="Models\DBContext\AdogaContext.cs" />
     <Compile Include="Models\DBContext\BathroomType.cs" />
     <Compile Include="Models\DBContext\BedType.cs" />
@@ -263,6 +264,11 @@
     <Content Include="Views\HotelDetail\_AlbumPartial.cshtml" />
     <Content Include="Views\Account\AccountBookings.cshtml" />
     <Content Include="Views\HotelLogin\HotelLogin.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\ProductList.cshtml" />
+    <Content Include="Views\Home\SearchProduct.cshtml" />
+    <Content Include="Views\Shared\_option.cshtml" />
+    <Content Include="Views\Home\option.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -271,6 +277,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
