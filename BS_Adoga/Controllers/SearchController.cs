@@ -8,9 +8,11 @@ namespace BS_Adoga.Controllers
 {
     public class SearchController : Controller
     {
+        //private 
         // GET: Search
         public ActionResult Search()
         {
+
             return View();
         }
     }

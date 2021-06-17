@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Hotel>
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
@@ -601,71 +601,10 @@
     </div>
 
     <div class="infomation">
-        <div class="card">
-            <div class="img">
-                <img src="//pix6.agoda.net/hotelImages/1158270/-1/e11b2751b3be0ee28417b1b61904cf22.jpg?s=450x450" alt="">
-                <div class="small-img">
-                    <img src="https://picsum.photos/id/685/50/33" alt="">
-                    <img src="https://picsum.photos/id/685/50/33" alt="">
-                    <img src="https://picsum.photos/id/685/50/33" alt="">
-                    <img src="https://picsum.photos/id/685/50/33" alt="">
-                    <div class="see-more">
-                        <p>查看更多</p>
-                    </div>
-                </div>
-            </div>
-            <div class="detail">
-                <a href="#">東寧文旅(DongNing Atlas Hotel)</a>
-                <div class="small-rank">
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="address">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>台南市, 台南市 - 位於市中心</p>
-                    </div>
-                </div>
-                <div class="include-list">
-                    <p class="Breakfast">早餐</p>
-                </div>
-                <div class="tag-list">
-                    <i class="fas fa-money-bill-alt"></i>
-                    <p>價格比同區域其他住宿低</p>
-                </div>
-                <div class="advantage">
-                    <i class="far fa-credit-card"></i>
-                    <p>免信用卡訂房</p>
-                </div>
-            </div>
-            <div class="rank">
-                <!-- <div class="point">
-        <div class="comment">
-            <p>很讚</p>
-            <p><span>10,237</span> 份評鑑</p>
-            <p>地點 <span>9.0</span></p>
-        </div>
-        <div class="icon">
-            <p>8.5</p>
-        </div>
-    </div> -->
-                <div class="offer">
-                    <p>只剩<span>1</span>間房可享<span>34</span>％優惠</p>
-                </div>
-                <div class="price">
-                    <p>每晚含稅價</p>
-                    <del>1,918</del>
-                    <ins>NT$<span>1,267</span></ins>
-                </div>
-                <!--bear : 0610新增-->
-                @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", null, new { @class = "btn btn-primary", })
-                @*<button class="btn btn-primary">
-                    查看空房情況
-                    <i class="fas fa-chevron-right"></i>
-                </button>*@
-            </div>
-        </div>
+        @foreach(var card in Model)
+        {
+            @Html.Partial("_SearchCardPartial", card);
+        }
     </div>
 </div>
 
