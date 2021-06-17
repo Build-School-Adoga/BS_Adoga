@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -132,15 +132,28 @@
     <Compile Include="Controllers\CheckOutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelDetailController.cs" />
-      <Compile Include="Controllers\HotelLoginController.cs" />  
+    <Compile Include="Controllers\HotelLoginController.cs" />
     <Compile Include="Controllers\MemberLoginController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Card.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\homeViewModels\demoshopViewModels.cs" />
+    <Compile Include="ViewModels\homeViewModels\Card.cs" />
+    <Compile Include="Models\DBContext\AdogaContext.cs" />
+    <Compile Include="Models\DBContext\BathroomType.cs" />
+    <Compile Include="Models\DBContext\BedType.cs" />
+    <Compile Include="Models\DBContext\Customer.cs" />
+    <Compile Include="Models\DBContext\Facility.cs" />
+    <Compile Include="Models\DBContext\Hotel.cs" />
+    <Compile Include="Models\DBContext\HotelEmployee.cs" />
+    <Compile Include="Models\DBContext\HotelImage.cs" />
+    <Compile Include="Models\DBContext\MessageBoard.cs" />
+    <Compile Include="Models\DBContext\Order.cs" />
+    <Compile Include="Models\DBContext\Room.cs" />
+    <Compile Include="Models\DBContext\RoomImage.cs" />
+    <Compile Include="Models\DBContext\RoomsDetail.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Asset\CSS\AccountBookings.css" />
@@ -250,12 +263,12 @@
     <Content Include="Views\Search\_SearchFilterPartial.cshtml" />
     <Content Include="Views\HotelDetail\_AlbumPartial.cshtml" />
     <Content Include="Views\Account\AccountBookings.cshtml" />
+    <Content Include="Views\HotelLogin\HotelLogin.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\ProductList.cshtml" />
     <Content Include="Views\Home\SearchProduct.cshtml" />
     <Content Include="Views\Shared\_option.cshtml" />
     <Content Include="Views\Home\option.cshtml" />
-    <Content Include="Views\HotelLogin\HotelLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
