@@ -138,8 +138,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\homeViewModels\demoshopViewModels.cs" />
-    <Compile Include="ViewModels\homeViewModels\Card.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\demoshopViewModels.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
     <Compile Include="Models\DBContext\AdogaContext.cs" />
     <Compile Include="Models\DBContext\BathroomType.cs" />
     <Compile Include="Models\DBContext\BedType.cs" />
@@ -154,6 +154,7 @@
     <Compile Include="Models\DBContext\RoomImage.cs" />
     <Compile Include="Models\DBContext\RoomsDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\ViewModels\HotelDetail\HotelDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Asset\CSS\AccountBookings.css" />
@@ -271,7 +272,34 @@
     <Content Include="Views\Home\option.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="APIController\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Asset\images\Account\" />
+    <Folder Include="Asset\images\CheckOut\" />
+    <Folder Include="Asset\images\Home\" />
+    <Folder Include="Asset\images\HotelDetail\" />
+    <Folder Include="Asset\images\HotelLogin\" />
+    <Folder Include="Asset\images\MemberLogin\" />
+    <Folder Include="Asset\images\Search\" />
+    <Folder Include="Models\ViewModels\Account\" />
+    <Folder Include="Models\ViewModels\CheckOut\" />
+    <Folder Include="Models\ViewModels\HotelLogin\" />
+    <Folder Include="Models\ViewModels\MemberLogin\" />
+    <Folder Include="Models\ViewModels\Search\" />
+    <Folder Include="Repository\Account\" />
+    <Folder Include="Repository\CheckOut\" />
+    <Folder Include="Repository\Home\" />
+    <Folder Include="Repository\HotelDetail\" />
+    <Folder Include="Repository\HotelLogin\" />
+    <Folder Include="Repository\MemberLogin\" />
+    <Folder Include="Repository\Search\" />
+    <Folder Include="Service\Account\" />
+    <Folder Include="Service\CheckOut\" />
+    <Folder Include="Service\Home\" />
+    <Folder Include="Service\HotelDetail\" />
+    <Folder Include="Service\HotelLogin\" />
+    <Folder Include="Service\MemberLogin\" />
+    <Folder Include="Service\Search\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

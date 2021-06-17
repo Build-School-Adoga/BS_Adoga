@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BS_Adoga.Models
+namespace BS_Adoga.Models.ViewModels.homeViewModels
 {
     public class Card
     {

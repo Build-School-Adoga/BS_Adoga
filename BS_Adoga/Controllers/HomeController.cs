@@ -1,24 +1,22 @@
 ﻿
 using BS_Adoga.Models;
-using BS_Adoga.Models.DBContext;
-using BS_Adoga.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BS_Adoga.Models.DBContext;
+using BS_Adoga.Models.ViewModels.homeViewModels;
 
 namespace BS_Adoga.Controllers
 {
     public class HomeController : Controller
     {
         private AdogaContext _context;
-       public HomeController()
+        public HomeController()
         {
-            _context  = new AdogaContext();
+            _context = new AdogaContext();
         }
-        
-
 
 
 
