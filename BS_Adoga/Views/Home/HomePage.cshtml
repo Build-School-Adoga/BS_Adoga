@@ -37,34 +37,37 @@
     <div class="input-group mb-3">
 
 
-        <input list="browsers" name="myBrowser" id="inputGroupSelect02" style="color: #666;" type="text" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱">
+        <input list="browsers" name="myBrowser" id="inputGroupSelect02" style="        color: #666;
+        width: 1300px;
+        border: 1px solid #ced4da;
+" type="text" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱">
 
 
-        @model BS_Adoga.ViewModels.demoshopViewModels
+        @model BS_Adoga.Models.ViewModels.homeViewModels.demoshopViewModels
         @*@model IEnumerable<BS_Adoga.Hotel>*@
 
-    <datalist id="browsers">
-        @foreach (var item in Model.Hotels)
-        {
-
-
-            @Html.Partial("_option", item);
-
-
-        }
-    </datalist>
-            @*<option value="Chrome">
-            <option value="Firefox">
-            <option value="Internet Explorer">
-            <option value="Opera">
-            <option value="Safari">*@
-
-
-            @*@model IEnumerable<BS_Adoga.Hotel>
-            @foreach (var item in Model)
+        <datalist id="browsers" name="ServiceCity">
+            @foreach (var item in Model.Hotels)
             {
-                @Html.Partial("SearchProduct", item)
-            }*@
+
+
+                @Html.Partial("_option", item);
+
+
+            }
+        </datalist>
+        @*<option value="Chrome">
+        <option value="Firefox">
+        <option value="Internet Explorer">
+        <option value="Opera">
+        <option value="Safari">*@
+
+
+        @*@model IEnumerable<BS_Adoga.Hotel>
+        @foreach (var item in Model)
+        {
+            @Html.Partial("SearchProduct", item)
+        }*@
 
 
 
@@ -72,48 +75,48 @@
 
 
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div class=" bd-content">
-                        <div class="container " id="container1" style="display:flex;">
-                            <div id="datetime">
-                                <!-- <input id="date" type="date" value="2017-06-01"> -->
-                                <input name="daterange" type="text" class="calendar-minus 	calendar-plus"
-                                       value="  &#xf272; 2021年6月1日 &#xf271; 2021年6月2日"
-                                       style="width: 514px; border: 1px solid #ced4da;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class=" bd-content">
+                    <div class="container " id="container1" style="display:flex;">
+                        <div id="datetime">
+                            <!-- <input id="date" type="date" value="2017-06-01"> -->
+                            <input name="daterange" type="text" class="calendar-minus 	calendar-plus"
+                                   value="  &#xf272; 2021年6月1日 &#xf271; 2021年6月2日"
+                                   style="width: 514px; border: 1px solid #ced4da;">
 
-                            </div>
-
-
-
-                            <div class="input-group mb-3 ">
-                                <select class="form-select " id="inputGroupSelect03" style="width: 500px;">
-                                    <option selected> &#xf007; 兩位大人</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                        </div>
 
 
 
-                            </div>
+                        <div class="input-group mb-3 ">
+                            <select class="form-select " id="inputGroupSelect03" style="width: 500px;">
+                                <option selected> &#xf007; 兩位大人</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="form-check border d-flex " id="sale-absolute">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                       style="margin-left: -10px;">
-                <label class="form-check-label" for="flexCheckDefault" style="width: 514px; margin-left: 10px;">
-                    享達25%的訂房折扣
-                </label>
-                <div id="sale" class="d-flex justify-content-center bg-danger align-items-center">
-                    <h4 class="text-white ">住宿</h4>
-                </div>
-            </div>
-
-
         </div>
+        <div class="form-check border d-flex " id="sale-absolute">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                   style="margin-left: -10px;">
+            <label class="form-check-label" for="flexCheckDefault" style="width: 514px; margin-left: 10px;">
+                享達25%的訂房折扣
+            </label>
+            <div id="sale" class="d-flex justify-content-center bg-danger align-items-center">
+                <h4 class="text-white ">住宿</h4>
+            </div>
+        </div>
+
+
+    </div>
     <!--bear : 0610新增-->
     @Html.ActionLink("搜出好價", "Search", "Search", null, new
     {
