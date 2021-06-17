@@ -1,4 +1,4 @@
-﻿@model  BS_Adoga.Models.ViewModels.HotelDetail.HotelDetail
+﻿@model  BS_Adoga.Models.ViewModels.HotelDetail.HotelViewModel
 
 @{
     ViewBag.Title = "HotelDetail";
@@ -37,7 +37,7 @@
     <ol class="breadcrumb wrap-1100">
         <li class="breadcrumb-item"><a href="#">首頁</a></li>
         <li class="breadcrumb-item"><a href="#">台灣住宿</a><span>&nbsp;(17,283)</span></li>
-        <li class="breadcrumb-item"><a href="#">台中市住宿</a><span>&nbsp;(1,597)</span></li>
+        <li class="breadcrumb-item"><a href="#">@Model.HotelCity 住宿</a><span>&nbsp;(1,597)</span></li>
         <li class="breadcrumb-item active" aria-current="page">預定 @Model.HotelName</li>@*台中商旅 (Hung's Mansion)*@
     </ol>
 </nav>
@@ -79,7 +79,7 @@
             <div class="card-body">
                 <span>免費Wi-Fi</span>
                 <h2>
-                    @Model.HotelName @*<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>*@
+                    @Model.HotelName @Model.HotelEngName @*<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>*@
                     @for (int i = 1; i <= Model.Star; i++)
                     {
                         <i class="fas fa-star"></i>
