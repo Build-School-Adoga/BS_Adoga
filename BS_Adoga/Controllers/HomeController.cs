@@ -12,7 +12,12 @@ namespace BS_Adoga.Controllers
 {
     public class HomeController : Controller
     {
-        private AdogaContext _context = new AdogaContext();
+        private AdogaContext _context;
+       public HomeController()
+        {
+            _context  = new AdogaContext();
+        }
+        
 
 
 

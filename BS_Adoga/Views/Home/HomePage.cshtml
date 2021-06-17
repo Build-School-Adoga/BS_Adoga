@@ -37,13 +37,16 @@
     <div class="input-group mb-3">
 
 
-        <input list="browsers" name="myBrowser" id="inputGroupSelect02" style="color: #666;" type="text" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱">
+        <input list="browsers" name="myBrowser" id="inputGroupSelect02" style="        color: #666;
+        width: 1300px;
+        border: 1px solid #ced4da;
+" type="text" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱">
 
 
         @model BS_Adoga.ViewModels.demoshopViewModels
         @*@model IEnumerable<BS_Adoga.Hotel>*@
 
-    <datalist id="browsers">
+    <datalist id="browsers"  name="ServiceCity">
         @foreach (var item in Model.Hotels)
         {
 
