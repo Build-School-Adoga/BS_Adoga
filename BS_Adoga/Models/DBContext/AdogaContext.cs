@@ -22,6 +22,7 @@ namespace BS_Adoga.Models.DBContext
         public virtual DbSet<MessageBoard> MessageBoards { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<RoomBed> RoomBeds { get; set; }
         public virtual DbSet<RoomImage> RoomImages { get; set; }
         public virtual DbSet<RoomsDetail> RoomsDetails { get; set; }
 
@@ -33,7 +34,7 @@ namespace BS_Adoga.Models.DBContext
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<BedType>()
-                .HasMany(e => e.Rooms)
+                .HasMany(e => e.RoomBeds)
                 .WithRequired(e => e.BedType)
                 .WillCascadeOnDelete(false);
 
@@ -41,6 +42,10 @@ namespace BS_Adoga.Models.DBContext
                 .HasMany(e => e.Orders)
                 .WithRequired(e => e.Customer)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Hotel>()
+                .Property(e => e.HotelEngName)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Hotel>()
                 .Property(e => e.Longitude)
@@ -79,6 +84,11 @@ namespace BS_Adoga.Models.DBContext
 
             modelBuilder.Entity<Room>()
                 .HasMany(e => e.Orders)
+                .WithRequired(e => e.Room)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Room>()
+                .HasMany(e => e.RoomBeds)
                 .WithRequired(e => e.Room)
                 .WillCascadeOnDelete(false);
 
