@@ -23,5 +23,8 @@ namespace BS_Adoga.Models.DBContext
         [Required]
         [StringLength(50)]
         public string Password { get; set; }
+
+        [Column(TypeName = "datetime2")]
+        public DateTime RegisterDatetime { get; set; }
     }
 }
