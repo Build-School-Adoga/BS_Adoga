@@ -1,5 +1,6 @@
 ﻿
 using BS_Adoga.Models;
+using BS_Adoga.Models.DBContext;
 using BS_Adoga.ViewModels;
 using System;
 using System.Collections.Generic;
