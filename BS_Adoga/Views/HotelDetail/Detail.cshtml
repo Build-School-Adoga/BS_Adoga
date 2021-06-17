@@ -1,8 +1,9 @@
-﻿@*@model BS_Adoga.Models.ViewModels.HotelDetail.HotelDetail*@
+﻿@model  BS_Adoga.Models.ViewModels.HotelDetail.HotelDetail
 
 @{
     ViewBag.Title = "HotelDetail";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
+
 }
 
 @section topCSS{
@@ -37,7 +38,7 @@
         <li class="breadcrumb-item"><a href="#">首頁</a></li>
         <li class="breadcrumb-item"><a href="#">台灣住宿</a><span>&nbsp;(17,283)</span></li>
         <li class="breadcrumb-item"><a href="#">台中市住宿</a><span>&nbsp;(1,597)</span></li>
-        <li class="breadcrumb-item active" aria-current="page">預定台中商旅 (Hung's Mansion)   </li>@*台中商旅 (Hung's Mansion)*@
+        <li class="breadcrumb-item active" aria-current="page">預定 @Model.HotelName </li>@*台中商旅 (Hung's Mansion)*@
     </ol>
 </nav>
 <div class="wrap-1100 row mb-3">
