@@ -366,6 +366,17 @@ i.fas.fa-star {
     }
 
 /* --- 主体 --- */
+.main-body #orderCard{
+    margin: 5px auto;
+    padding: 10px 15px;
+}
+.main-body #orderCard p,
+#orderCard a {
+    font-size: 20px;
+    color: black;
+}
+
+
 .main-body .infomation .card {
     display: flex;
     flex-direction: row;

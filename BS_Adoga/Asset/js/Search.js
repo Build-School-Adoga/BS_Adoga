@@ -75,14 +75,14 @@ function dropright() {
 
 }
 
-var dropdownItem = document.querySelectorAll('.dropdown-item');
-dropdownItem.forEach(item => item.getElementsByClassName("fas fa-minus").addEventListener('click', function () {
-    debugger;
-    alert("Minus");
-}))
-dropdownItem.forEach(item => item.addEventListener('click', function (e) {
-    // e.stopPropagation();
+//var dropdownItem = document.querySelectorAll('.dropdown-item');
+//dropdownItem.forEach(item => item.getElementsByClassName("fas fa-minus").addEventListener('click', function () {
+//    debugger;
+//    alert("Minus");
+//}))
+//dropdownItem.forEach(item => item.addEventListener('click', function (e) {
+//    // e.stopPropagation();
 
-}))
+//}))
 
 

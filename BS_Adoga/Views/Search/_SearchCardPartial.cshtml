@@ -1,6 +1,4 @@
-﻿
-
-
+﻿@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
 <div class="card">
     <div class="img">
         <img src="//pix6.agoda.net/hotelImages/1158270/-1/e11b2751b3be0ee28417b1b61904cf22.jpg?s=450x450" alt="">
@@ -18,9 +16,10 @@
         <a href="#">@Model.HotelName</a>
         <div class="small-rank">
             <div class="star">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
+                @for (int i = 1; i <= Model.Star; i++)
+                {
+                    <i class="fas fa-star"></i>
+                }
             </div>
             <div class="address">
                 <i class="fas fa-map-marker-alt"></i>

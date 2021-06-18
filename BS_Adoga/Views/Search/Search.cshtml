@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Hotel>
+﻿@model IQueryable<BS_Adoga.Models.ViewModels.Search.SearchCardViewModel>
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
@@ -481,10 +481,25 @@
     </div>
 
     <div class="infomation">
-        @foreach(var card in Model)
-        {
-            @Html.Partial("_SearchCardPartial", card);
-        }
+        <nav id="orderCard" class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <p>排序</p>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#" type="button">最低價優先</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#" type="button">優良評價優先</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+            @foreach (var card in Model)
+            {
+                @Html.Partial("_SearchCardPartial", card);
+            }
     </div>
 </div>
 
