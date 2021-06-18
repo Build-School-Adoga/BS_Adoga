@@ -89,18 +89,18 @@ i.head-nav-item {
     padding: 13px 10px;
 }
 
-    .member-btn .member-img {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        line-height: 30px;
-        color: #fff;
-        background-color: rgb(159, 82, 221);
-        border-radius: 50%;
-    }
+.member-btn .member-img {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    background-color: rgb(159, 82, 221);
+    border-radius: 50%;
+}
 
 /*0618 Bear新增：會員中心member-menu--------------------*/
 .member-menu {
@@ -143,10 +143,10 @@ i.head-nav-item {
     font-size: 14px;
 }
 
-    .member-menu li:hover {
-        background-color: rgb(248, 248, 248);
-        color: rgb(99, 155, 238);
-    }
+.member-menu li:hover {
+    background-color: rgb(248, 248, 248);
+    color: rgb(99, 155, 238);
+}
 
 .logout-btn {
     width: 100%;
@@ -164,9 +164,9 @@ i.head-nav-item {
     display: none;
 }
 
-    #member-menu-chkbox:checked + .member-menu {
-        display: block;
-    }
+#member-menu-chkbox:checked + .member-menu {
+    display: block;
+}
 
 
 /*footer區塊-------------------------------------------*/
