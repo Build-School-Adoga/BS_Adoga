@@ -124,20 +124,23 @@ section.menu-component ul .profile a {
         border-bottom: #dddfe2 2px solid;
     }
 
-        .filter-container_based-on-time_or_cancel span.filter-option-Upcoming {
+        .filter-container_based-on-time_or_cancel span.filter-option-Upcoming:hover {
+            cursor: pointer;
             color: black;
             border-bottom: #75a8f9 2px solid;
         }
 
-/* .filter-container_based-on-time_or_cancel span.filter-option-Past {
-    color: #5392f9;
-    border-bottom: #dddfe2 2px solid;
-}
+        .filter-container_based-on-time_or_cancel span.filter-option-Past:hover {
+            cursor: pointer;
+            color: #5392f9;
+            border-bottom: #dddfe2 2px solid;
+        }
 
-.filter-container_based-on-time_or_cancel span.filter-option-Cancelled {
-    color: #5392f9;
-    border-bottom: #dddfe2 2px solid;
-} */
+        .filter-container_based-on-time_or_cancel span.filter-option-Cancelled {
+            cursor: pointer;
+            color: #5392f9;
+            border-bottom: #dddfe2 2px solid;
+        }
 
 .block-switch_based-on-self-definition_or_pre-order-date_or_check-in-date {
     border: darkgray 1px solid;
@@ -153,7 +156,13 @@ section.menu-component ul .profile a {
         padding: 10px;
     }
 
-        .block-switch_based-on-self-definition_or_pre-order-date_or_check-in-date div.check-in-date {
+        .block-switch_based-on-self-definition_or_pre-order-date_or_check-in-date div.pre-order-date:hover {
+            cursor: pointer;
+            color: #5392f9;
+        }
+
+        .block-switch_based-on-self-definition_or_pre-order-date_or_check-in-date div.check-in-date:hover {
+            cursor: pointer;
             background-color: #e9ebee;
         }
 

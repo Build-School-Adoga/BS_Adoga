@@ -25,7 +25,7 @@ namespace BS_Adoga.Controllers
                         where h.HotelName == "台中商旅 (Hung's Mansion)"
                         select new HotelDetail { HotelID = h.HotelID,HotelName = h.HotelName,HotelAddress=h.HotelAddress,Star=h.Star };
 
-            return View(hotel);
+            return View(hotel.FirstOrDefault());
         }
 
         //public ActionResult DetailAlbum()
