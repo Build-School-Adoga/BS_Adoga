@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Asset\CSS\AccountBookings.css" />
+    <Content Include="Asset\CSS\AdogaLayout.css" />
     <Content Include="Asset\CSS\HotelLogin.css" />
     <Content Include="Asset\CSS\Search.css" />
     <Content Include="Asset\CSS\SearchFilterPartial.css" />
