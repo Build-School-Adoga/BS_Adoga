@@ -24,6 +24,17 @@ namespace BS_Adoga.Models.DBContext
         [StringLength(50)]
         public string HotelName { get; set; }
 
+        [StringLength(50)]
+        public string HotelEngName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string HotelCity { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string HotelDistrict { get; set; }
+
         [Required]
         [StringLength(100)]
         public string HotelAddress { get; set; }
