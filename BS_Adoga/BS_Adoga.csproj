@@ -169,6 +169,10 @@
     <Content Include="Asset\CSS\Reset.css" />
     <Content Include="Asset\CSS\HotelDetailShare.css" />
     <Content Include="Asset\images\adoga-logo-v2.png" />
+    <Content Include="Asset\images\Home\台北w酒店.jpg" />
+    <Content Include="Asset\images\Home\塩‧泊思行旅.jpg" />
+    <Content Include="Asset\images\Home\鈞怡大飯店.jpg" />
+    <Content Include="Asset\images\Home\飛行家青年旅館.jpg" />
     <Content Include="Asset\images\img1.png" />
     <Content Include="Asset\images\img2.png" />
     <Content Include="Asset\images\img3.png" />
@@ -276,7 +280,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
-    <Folder Include="Asset\images\Home\" />
     <Folder Include="Asset\images\HotelDetail\" />
     <Folder Include="Asset\images\HotelLogin\" />
     <Folder Include="Asset\images\MemberLogin\" />
