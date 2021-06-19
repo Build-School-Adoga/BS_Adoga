@@ -15,11 +15,24 @@ namespace BS_Adoga.Controllers
         {
             s = new SearchCardService();
         }
-        // GET: Search
+        
+        [HttpGet]
         public ActionResult Search()
         {
-            
-            var hotels = s.GetHotel();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Search(string Name)
+        {
+            var hotels = s.GetHotel(Name);
+
+            //防呆
+            if (hotels == null)
+            {
+                //这里的Search是会回去找Get的那个Search
+                return RedirectToAction("Search");
+            }
 
             return View(hotels);
         }

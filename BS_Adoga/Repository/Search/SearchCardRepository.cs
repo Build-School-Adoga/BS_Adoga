@@ -16,9 +16,12 @@ namespace BS_Adoga.Repository.Search
             _context = new AdogaContext();
         }
 
-        public IQueryable<Hotel> GetHotel()
+        public IQueryable<Hotel> GetHotel(string Name)
         {
+            string name = '%'+Name+'%';
+
             var hotel = from h in _context.Hotels
+                        where h.HotelName.Contains(Name)
                         select h;
 
             return hotel;
