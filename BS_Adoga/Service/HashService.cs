@@ -5,7 +5,10 @@ using System.Web;
 using System.Security.Cryptography;
 using System.Text;
 
+
+
 namespace BS_Adoga.Service
+
 {
     public class HashService
     {
