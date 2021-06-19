@@ -481,19 +481,15 @@
     </div>
 
     <div class="infomation">
-        <nav id="orderCard" class="navbar navbar-light bg-light">
+        <nav class="navbar ">
             <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <p>排序</p>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#" type="button">最低價優先</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#" type="button">優良評價優先</a>
-                        </li>
-                    </ul>
-                </div>
+                <span class="navbar-brand mb-0 h1 navbar-light bg-light">排序</span>
+                <button>
+                    <p>最低價優先</p>
+                </button>
+                <button>
+                    <p>優良評價優先</p>
+                </button>
             </div>
         </nav>
             @foreach (var card in Model)

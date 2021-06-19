@@ -365,6 +365,62 @@ i.fas.fa-star {
         text-decoration: none;
     }
 
+/* --- 排序 --- */
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.infomation > *{
+    margin-bottom: .75rem;
+}
+
+.infomation nav {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 5px 0;
+    background-color: transparent;
+    border: 1px solid #E5E7E9;
+    border-radius: 5px;
+    font-size: 1.25rem;
+    margin-bottom: 1rem; 
+}
+
+    .infomation nav div span {
+        border-right: 1.5px solid #E5E7E9;
+        padding: 0.5rem 1.5rem;
+        margin-right: 0;
+        background-color: #F8F7F9;
+    }
+
+    .infomation nav button {
+        border: none;
+        background-color: white;
+        flex-grow: 1;
+        color: #808090;
+        padding: .5rem 0;
+    }
+
+        .infomation nav button p {
+            height: 100%;
+        }
+
+        .infomation nav div span,
+        .infomation nav button:first-of-type {
+            border-right: 1.5px solid #E5E7E9;
+        }
+
+        .infomation nav button:hover {
+            color: #5392F9;
+        }
+
+        .infomation nav button:active {
+            background-color: #5392F9;
+            color: whitesmoke;
+        }
+
+
 /* --- 主体 --- */
 .main-body #orderCard{
     margin: 5px auto;
