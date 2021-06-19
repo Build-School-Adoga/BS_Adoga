@@ -72,7 +72,7 @@ namespace BS_Adoga.Controllers
                     LastName = lastname,
                     Email = email,
                     MD5HashPassword = HashService.MD5Hash(password),
-                    Logging = "建立" + "," + email + "," + DateTime.Now.ToString(),
+                    Logging = "建立" + "," + firstname+lastname + "," + DateTime.Now.ToString(),
                     RegisterDatetime = DateTime.Now
                 };
                 //EF
