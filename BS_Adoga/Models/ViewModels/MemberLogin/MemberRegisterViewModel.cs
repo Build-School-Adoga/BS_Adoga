@@ -51,7 +51,6 @@ namespace BS_Adoga.Models.ViewModels.MemberLogin
         [Required]
         [Display(Name = "確認密碼")]
         [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "密碼的長度需再6~20個字元內！")]
         [Compare("Password", ErrorMessage = "兩次輸入的密碼必須相符！")]
         public string ConfirmPassword { get; set; }
 
