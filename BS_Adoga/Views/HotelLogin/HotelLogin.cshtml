@@ -1,4 +1,4 @@
-﻿
+﻿@model BS_Adoga.Models.ViewModels.HotelLogin.RegisterViewModel
 @{
     ViewBag.Title = "HotelLogin";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
@@ -101,39 +101,82 @@
             <div class="modal-body signin_modal">
                 <div class="social_login"></div>
                 <div>
-                    <!-- 註冊電子信箱內部 -->
-                    <form>
-                        <div class="mb-3 form-group">
-                            <label for="EnglishFirstNameLastName">英文姓名</label>
-                            <input type="text" class="form-control" id="EnglishFirstNameLastName" placeholder="例如:Tom Hsu">
-                        </div>
-                        <div class="mb-3 form-group">
-                            <label for="RegisterEmail">電子信箱</label>
-                            <input type="email" class="form-control" id="RegisterEmail" aria-describedby="emailHelp"
-                                   placeholder="電子信箱">
-                        </div>
-                        <div class="mb-3 form-group">
-                            <label for="RegisterEmailPassword">密碼</label>
-                            <input type="password" class="form-control" id="RegisterEmailPassword" aria-describedby="emailHelp"
-                                   placeholder="密碼">
-                        </div>
-                        <div class="mb-3 form-group">
-                            <label for="DoubleCheck">確認密碼</label>
-                            <input type="password" class="form-control" id="DoubleCheck" aria-describedby="emailHelp"
-                                   placeholder="確認密碼">
-                        </div>
-                        <div class="robot">
-
-                            <div class="g-recaptcha"
-                                 data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
-                        </div>
-                        <div class="checkcodeline">
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-danger hotellogin-btn">註冊</button>
+                    @*方法一(未驗證欄位)*@
+                    <div>
+                    @*方法一(未驗證欄位)*@
+                    @*@using (Html.BeginForm())
+                     {
+                         //註冊電子信箱內部
+                        <form>
+                            <div class="mb-3 form-group">
+                                <label for="EnglishFirstNameLastName">英文姓名</label>
+                                <input type="text" class="form-control" id="EnglishFirstNameLastName" name="Name" placeholder="例如:Tom Hsu">
                             </div>
-                        </div>
+                            <div class="mb-3 form-group">
+                                <label for="RegisterEmail">電子信箱</label>
+                                <input type="email" class="form-control" id="RegisterEmail" name="Email" aria-describedby="emailHelp"
+                                       placeholder="電子信箱">
+                            </div>
+                            <div class="mb-3 form-group">
+                                <label for="RegisterEmailPassword">密碼</label>
+                                <input type="password" class="form-control" id="RegisterEmailPassword" name="Password1" aria-describedby="emailHelp"
+                                       placeholder="密碼">
+                            </div>
+                            <div class="mb-3 form-group">
+                                <label for="DoubleCheck">確認密碼</label>
+                                <input type="password" class="form-control" id="DoubleCheck" name="Password2" aria-describedby="emailHelp"
+                                       placeholder="確認密碼">
+                            </div>
+                            <div class="robot">
 
-                    </form>
+                                    <div class="g-recaptcha"
+                                         data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
+                                </div>
+                            <div class="checkcodeline">
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-danger hotellogin-btn">註冊</button>
+                                </div>
+                            </div>
+
+                        </form>
+                     }*@
+                    </div>
+
+                    @*方法二(有驗證欄位)*@
+                    @using (Html.BeginForm())
+                     {
+                         @Html.AntiForgeryToken()
+                         //註冊電子信箱內部
+                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        <form>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(model => model.Name)                      
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "EnglishFirstNameLastName" }, { "placeholder", "例如:Tom Hsu" } } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(model => model.Email)
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(model => model.Password)
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmailPassword" }, { "aria-describedby", "emailHelp" }, { "placeholder", "密碼" } } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(model => model.ConfirmPassword)
+                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "DoubleCheck" }, { "aria-describedby", "emailHelp" }, { "placeholder", "確認密碼" } } })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="checkcodeline">
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-danger hotellogin-btn">註冊</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                     }
                 </div>
             </div>
         </div>
@@ -163,5 +206,9 @@
         })
     </script>
 
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
