@@ -13,6 +13,7 @@ namespace BS_Adoga.Models.DBContext
         public Room()
         {
             Orders = new HashSet<Order>();
+            RoomBeds = new HashSet<RoomBed>();
             RoomImages = new HashSet<RoomImage>();
         }
 
@@ -34,11 +35,9 @@ namespace BS_Adoga.Models.DBContext
         [Column(TypeName = "money")]
         public decimal RoomPrice { get; set; }
 
-        public int TypesOfBedsID { get; set; }
+        public int TypesOfBathroomID { get; set; }
 
         public bool NoSmoking { get; set; }
-
-        public int TypesOfBathroomID { get; set; }
 
         public bool Breakfast { get; set; }
 
@@ -51,12 +50,13 @@ namespace BS_Adoga.Models.DBContext
 
         public virtual BathroomType BathroomType { get; set; }
 
-        public virtual BedType BedType { get; set; }
-
         public virtual Hotel Hotel { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RoomBed> RoomBeds { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoomImage> RoomImages { get; set; }

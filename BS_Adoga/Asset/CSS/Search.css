@@ -1,4 +1,8 @@
-﻿nav {
+﻿/*body{
+    overflow-x:hidden;
+}*/
+
+nav {
     background-color: #1F264C;
     color: grey;
     font-size: 16px;
@@ -22,7 +26,7 @@ nav .search-bar,
 .nav-item,
 .filter-container {
     /* 控制整体维持60vw在中间 */
-    width: 60vw;
+    width: 1100px;
     margin: auto;
 }
 
@@ -140,15 +144,7 @@ li.dropdown-item.input-request ul {
             color: #5392F9;
             font-size: 22px;
         }
-/* .dropright-box{
-    position: absolute;
-    top: 0;
-    left: 298px;
-    visibility: hidden;
-    background-color: red;
-    width: 300px;
-    height: 300px;
-} */
+
 
 /* -----Filter的部分------ */
 .filter {
@@ -227,7 +223,7 @@ i.fas.fa-star {
 
 /*---点击Filter出现的侧边栏---*/
 #filter-equipment {
-    height: 937px;
+    height:fit-content();
     width: 100%;
     display: flex;
     position: fixed;
@@ -311,7 +307,7 @@ i.fas.fa-star {
                     }
 
     #filter-equipment div.closeFilter {
-        height: 100%;
+        height: fit-content();
         width: 30vw;
         background-color: rgba(0, 0, 0, 0.7);
     }
@@ -369,7 +365,74 @@ i.fas.fa-star {
         text-decoration: none;
     }
 
+/* --- 排序 --- */
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.infomation > *{
+    margin-bottom: .75rem;
+}
+
+.infomation nav {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 5px 0;
+    background-color: transparent;
+    border: 1px solid #E5E7E9;
+    border-radius: 5px;
+    font-size: 1.25rem;
+    margin-bottom: 1rem; 
+}
+
+    .infomation nav div span {
+        border-right: 1.5px solid #E5E7E9;
+        padding: 0.5rem 1.5rem;
+        margin-right: 0;
+        background-color: #F8F7F9;
+    }
+
+    .infomation nav button {
+        border: none;
+        background-color: white;
+        flex-grow: 1;
+        color: #808090;
+        padding: .5rem 0;
+    }
+
+        .infomation nav button p {
+            height: 100%;
+        }
+
+        .infomation nav div span,
+        .infomation nav button:first-of-type {
+            border-right: 1.5px solid #E5E7E9;
+        }
+
+        .infomation nav button:hover {
+            color: #5392F9;
+        }
+
+        .infomation nav button:active {
+            background-color: #5392F9;
+            color: whitesmoke;
+        }
+
+
 /* --- 主体 --- */
+.main-body #orderCard{
+    margin: 5px auto;
+    padding: 10px 15px;
+}
+.main-body #orderCard p,
+#orderCard a {
+    font-size: 20px;
+    color: black;
+}
+
+
 .main-body .infomation .card {
     display: flex;
     flex-direction: row;
@@ -425,7 +488,8 @@ i.fas.fa-star {
     .infomation .card .rank .offer p {
         background-color: #E12D2D;
         color: white;
-        width: fit-content;
+        /*width: max-content;*/
+        width: fit-content();
         padding: 3px 6px;
         margin-top: 3px;
     }
@@ -463,7 +527,7 @@ i.fas.fa-star {
 
 /* 卡片详细内容 */
 .infomation .card .detail {
-    flex-grow: 1;
+    width: 66.6667%;
     padding: 5px 10px 10px;
 }
 
@@ -491,7 +555,8 @@ i.fas.fa-star {
 } */
 .infomation .card .include-list {
     font-size: 14px;
-    width: fit-content;
+    /*width: fit-content;*/
+    width: max-content;
     padding: 2px 4px;
     border: 1px solid #28871C;
     color: #28871C;

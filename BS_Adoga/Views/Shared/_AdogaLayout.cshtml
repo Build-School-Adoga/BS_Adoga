@@ -8,7 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Asset/CSS/Base_css")
-    <link rel="stylesheet" href="~/Asset/CSS/Layout.css" />
+    <link rel="stylesheet" href="~/Asset/CSS/AdogaLayout.css" />
     @RenderSection("topCSS", false)
 </head>
 <body>
@@ -25,19 +25,39 @@
             <i class="head-nav-item fas fa-ellipsis-h"></i>
         </div>
         <div class="head-nav-wrap d-flex align-items-center">
-            @Html.ActionLink("刊登家中空房", "HotelLogin", "HotelLogin", null, new { @class = "head-nav-item red" })
+            @Html.ActionLink("刊登飯店空房", "HotelLogin", "HotelLogin", null, new { @class = "head-nav-item red" })
             @*<a href="#" class="head-nav-item red">刊登家中空房</a>*@
             <div class="head-nav-item">
                 <img src="~/Asset/images/tw.svg.png" alt="" class="flag-icon">
             </div>
             <a href="#" class="head-nav-item currency">NT$</a>
+            <div class="member-btn">
+                <label type="button" for="member-menu-chkbox">
+                    <span class="member-img">A</span>
+                    <span class="member-firstname">ALICE.</span>
+                </label>
+                <input type="checkbox" id="member-menu-chkbox">
+                <div class="member-menu">
+                    <h6>我的帳戶</h6>
+                    <ul>
+                        <li><i class="far fa-calendar-check me-2"></i>@Html.ActionLink("管理訂單", "AccountBookings", "Account")</li>
+                        @*<li><i class="far fa-calendar-check me-2"></i>管理訂單</li>*@
+                        <li><i class="fas fa-inbox me-2"></i> 收件匣</li>
+                        <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
+                        <li><i class="far fa-star me-2"></i> 住宿評鑒</li>
+                        <li><i class="far fa-user me-2"></i> 個人資料</li>
+                        <li type="button" class="logout-btn btn py-2">登出</li>
+                    </ul>
+                </div>
+            </div>
             @Html.ActionLink("A咖登入", "MemberLogin", "MemberLogin", null, new { @class = "head-nav-item blue" })
             @*<a href="#" class="head-nav-item blue" data-bs-toggle="modal" data-bs-target="#SigninModal">A咖登入</a>*@
             <a href="#" class="head-nav-item blue" data-bs-toggle="modal" data-bs-target="#RegisterModal">我是新朋友</a>
         </div>
     </nav>
-    @RenderSection("scrollNav", false)
+    @RenderSection("scrollNav", false);
     @RenderBody()
+    @RenderSection("scrollNav", false)
 
     <!-- Bear加：我把首頁的footer區塊搬過來-------------------------------------------------------------------------------------------------------------- -->
     <div id="Customer-Service">

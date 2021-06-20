@@ -1,4 +1,6 @@
-﻿
+﻿@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC");
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
 /* <!-- 最頂端的Agoda nav --> */
 
 .head-nav {
@@ -81,6 +83,100 @@ i.head-nav-item {
     height: 22.5px;
     text-align: center;
 }
+
+/*0618 Bear新增：會員頭像-------------------------------------------*/
+.member-btn {
+    position: relative;
+    margin-left: 20px;
+    padding: 13px 10px;
+}
+
+.member-btn .member-img {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family:Montserrat,serif;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    background-color: rgb(159, 82, 221);
+    border-radius: 50%;
+}
+
+.member-firstname{
+    font-size:12px;
+    font-weight:bold;
+    font-family:Montserrat,serif;
+}
+
+/*0618 Bear新增：會員中心member-menu--------------------*/
+.member-menu {
+    display: none;
+    width: 200px;
+    background-color: #fff;
+    position: absolute;
+    top: 102%;
+    right: 0;
+    z-index: 2;
+    border: 1px solid rgb(218, 218, 218);
+    box-shadow: 0px 2px 3px 2px rgba(128, 128, 128, 0.253);
+}
+
+.member-menu::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 50px;
+    /* border-top: 10px solid green; */
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid rgb(241, 241, 241);
+}
+
+.member-menu h6 {
+    padding: 15px 30px;
+    font-size: 12px;
+    color: rgb(73, 73, 73);
+    background-color: rgb(245, 245, 245);
+}
+
+.member-menu ul {
+    padding: 10px 20px;
+}
+
+.member-menu li {
+    list-style: none;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.member-menu li:hover {
+    background-color: rgb(248, 248, 248);
+    color: rgb(99, 155, 238);
+}
+
+.logout-btn {
+    width: 100%;
+    margin-top: 15px;
+    color: rgb(99, 155, 238);
+    border: 1px solid rgb(99, 155, 238);
+}
+
+.member-menu .logout-btn:hover {
+    color: #fff;
+    background-color: rgb(99, 155, 238);
+}
+
+#member-menu-chkbox {
+    display: none;
+}
+
+#member-menu-chkbox:checked + .member-menu {
+    display: block;
+}
+
 
 /*footer區塊-------------------------------------------*/
 #Customer-Service {
