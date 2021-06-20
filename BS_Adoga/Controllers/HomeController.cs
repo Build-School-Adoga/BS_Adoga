@@ -9,6 +9,7 @@ using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.homeViewModels;
 using BS_Adoga.Service.Home;
 using Microsoft.Ajax.Utilities;
+using System.Security.Cryptography;
 
 namespace BS_Adoga.Controllers
 {
@@ -52,9 +53,9 @@ namespace BS_Adoga.Controllers
         [HttpPost]
         public ActionResult HomePage(demoshopViewModels productss)
         {
-            string name = Request.Form["label"];
+            //string name = Request.Form["label"];
 
-            ViewData["w"] = "name";
+            //ViewData["w"] = "name";
             return View();
 
 
@@ -122,9 +123,13 @@ namespace BS_Adoga.Controllers
         [HttpPost]
         public ActionResult Search(string search)
         {
+          
+                  var xxx = from p in _homeService._homeRepository._context.Hotels
+                            where p.HotelName == search
+                  select p.HotelID;
 
 
-            TempData["search"] = search;
+             TempData["search"] = xxx.FirstOrDefault();
             return RedirectToAction("Detail", "HotelDetail", search);
         }
     }

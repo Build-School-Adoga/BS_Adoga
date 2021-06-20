@@ -22,10 +22,15 @@ namespace BS_Adoga.Controllers
         {
             HotelDetailService service = new HotelDetailService();
 
+            string search = "hotel04";
+
+            if (TempData["search"] != null)
+                search = TempData["search"].ToString();
+
             DetailVM hotelDetail = new DetailVM()
             {
-                hotelVM = service.GetHotel(hotelId),
-                roomTypeVM = service.GetRoomType(hotelId)
+                hotelVM = service.GetHotel(search),
+                roomTypeVM = service.GetRoomType(search)
             };
 
             return View(hotelDetail);

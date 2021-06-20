@@ -44,11 +44,11 @@ namespace BS_Adoga.Service.HotelDetail
             if (hotelId == null) hotelId = "hotel04";
 
             var result = _repository.GetRoomType(hotelId);
-            foreach(var item in result)
+            foreach (var item in result)
             {
-                item.RoomDiscount = Math.Round(item.RoomDiscount * 10, 1);
-
-                var a = item.RoomBed;
+                //item.RoomDiscount = Math.Round(item.RoomDiscount * 10, 1,MidpointRounding.AwayFromZero);
+                //item.RoomPrice = Math.Round(item.RoomPrice, 0, MidpointRounding.AwayFromZero);
+                //item.RoomNowPrice = Math.Round(item.RoomNowPrice, 0, MidpointRounding.AwayFromZero);
 
                 foreach (var bed in item.RoomBed)
                 {
@@ -57,29 +57,33 @@ namespace BS_Adoga.Service.HotelDetail
                         case "雙人床":
                         case "加大雙人床":
                         case "單人床(兩床)":
-                            item.Adult += (2 * bed.Amount);
-                            item.Child += (1 * bed.Amount);
+                            item.Adult = item.Adult + (2 * bed.Amount);
+                            item.Child = item.Child + (1 * bed.Amount);
                             break;
 
                         case "特大雙人床":
-                            item.Adult += (2 * bed.Amount);
-                            item.Child += (2 * bed.Amount);
+                            item.Adult = item.Adult + (2 * bed.Amount);
+                            item.Child = item.Child + (2 * bed.Amount);
                             break;
 
                         case "上下舖":
-                            item.Adult += (2 * bed.Amount);
-                            item.Child += 0;
+                            item.Adult = item.Adult + (2 * bed.Amount);
+                            item.Child = item.Child + 0;
                             break;
 
                         default:
                             break;
                     }
                 }
-
-                var ad = item.Adult;
-                var c = item.Child;
             }
-            
+
+            //foreach (var item2 in result)
+            //{
+            //    var ad = item2.Adult;
+            //    var c = item2.Child;
+            //    var w = 0;
+            //}
+
             return result;
         }
     }
