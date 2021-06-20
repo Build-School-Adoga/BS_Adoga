@@ -32,7 +32,7 @@ namespace BS_Adoga.Models.DBContext
 
         [Required]
         [StringLength(50)]
-        public string Password { get; set; }
+        public string MD5HashPassword { get; set; }
 
         [StringLength(50)]
         public string PhoneNumber { get; set; }
@@ -45,5 +45,10 @@ namespace BS_Adoga.Models.DBContext
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+
+        internal bool CheckUserData(string email, string password1)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
