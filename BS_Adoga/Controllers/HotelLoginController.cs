@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;  //FormsAuthentication
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels;
 using BS_Adoga.Models.ViewModels.HotelLogin;
@@ -51,15 +52,16 @@ namespace BS_Adoga.Controllers
 
         #region HotelLogin方法二(驗證欄位)
         [HttpPost]
+        [MultiButton("register")]
         [ValidateAntiForgeryToken]
-        public ActionResult HotelLogin(RegisterViewModel registerVM)
+        public ActionResult Register(MixHotelLoginViewModel registerVM)
         {
             if (ModelState.IsValid)
             {
                 //1.View Model(RegisterViewModel) --> Data Model (HotelEmployee)
-                string name = HttpUtility.HtmlEncode(registerVM.Name);
-                string email = HttpUtility.HtmlEncode(registerVM.Email);
-                string password = HttpUtility.HtmlEncode(registerVM.Password);
+                string name = HttpUtility.HtmlEncode(registerVM.RegisterViewModel.Name);
+                string email = HttpUtility.HtmlEncode(registerVM.RegisterViewModel.Email);
+                string password = HttpUtility.HtmlEncode(registerVM.RegisterViewModel.Password);
 
                 HotelEmployee emp = new HotelEmployee()
                 {
@@ -86,6 +88,67 @@ namespace BS_Adoga.Controllers
             }
 
             return View(registerVM);
+        }
+        #endregion
+
+        #region Login(登入)
+        [HttpPost]
+        [MultiButton("login")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(MixHotelLoginViewModel loginVM)
+        {
+            //一.未通過Model驗證
+            if (!ModelState.IsValid)
+            {
+                return View(loginVM);
+            }
+
+            //二.通過Model驗證
+            string email = HttpUtility.HtmlEncode(loginVM.HotelLoginView.Email);
+            string password = HashService.MD5Hash(HttpUtility.HtmlEncode(loginVM.HotelLoginView.Password));
+
+            //三.EF比對資料庫帳密
+            //以Name及Password查詢比對Account資料表記錄
+
+            HotelEmployee user = _context.HotelEmployees.Where(x => x.Email == email && x.MD5HashPassword == password).FirstOrDefault();
+
+            //找不到則彈回Login頁
+            if (user == null)
+            {
+                ModelState.AddModelError("NotFound", "無效的帳號或密碼!");
+
+                return View(loginVM);
+            }
+
+
+            //四.FormsAuthentication Class -- https://docs.microsoft.com/zh-tw/dotnet/api/system.web.security.formsauthentication?view=netframework-4.8
+
+            //FormsAuthenticationTicket Class
+            //https://docs.microsoft.com/zh-tw/dotnet/api/system.web.security.formsauthenticationticket?view=netframework-4.8
+
+
+            //1.Create FormsAuthenticationTicket
+            var ticket = new FormsAuthenticationTicket(
+            version: 1,
+            name: user.Name.ToString(), //可以放使用者Id
+            issueDate: DateTime.UtcNow,//現在UTC時間
+            expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
+            isPersistent: loginVM.HotelLoginView.Remember,// 是否要記住我 true or false
+            userData: "", //可以放使用者角色名稱
+            cookiePath: FormsAuthentication.FormsCookiePath);
+
+            //2.Encrypt the Ticket
+            var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+            //3.Create the cookie.
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            Response.Cookies.Add(cookie);
+
+            //4.Redirect back to original URL.
+            var url = FormsAuthentication.GetRedirectUrl(email, true);
+
+            //5.Response.Redirect
+            return RedirectToAction("HomePage", "Home");
         }
         #endregion
     }
