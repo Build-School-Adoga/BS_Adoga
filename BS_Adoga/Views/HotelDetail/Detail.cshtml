@@ -467,14 +467,15 @@
     <div class="card-body d-flex">
         <div class="img-wrap col-7 me-2">
             <img src="~/Asset/images/HotelDetail/Hotel/hotel01.jpg"
-                 alt="關於台中商旅">
+                 alt="關於 @hotel.HotelName">
             <div class="title">
-                <h3 class="d-flex flex-column">關於<span>台中商旅</span></h3>
+                <h3 class="d-flex flex-column">關於<span>@hotel.HotelName</span></h3>
             </div>
             <a href="#filter-room">查看空房房型</a>
         </div>
         <p class="col-5 mt-2">
-            位於台中市有名的餐飲, 夜生活, 購物區內的<strong>台中商旅</strong>提供優質的住宿，是商務和休閒旅行的熱門之選。
+            @hotel.HotelAbout
+            @*位於台中市有名的餐飲, 夜生活, 購物區內的<strong>台中商旅</strong>提供優質的住宿，是商務和休閒旅行的熱門之選。
             因為離市中心僅的路程，離機場也只有的路程，這間4星級飯店每年都會接待大量的旅客。 對於喜歡冒險的旅客來說，Zann Kitchen Cooking Class, 秋紅谷景觀生態公園, 威秀影城 -
             台中老虎城再合適不過了。
             <br><br>
@@ -484,7 +485,7 @@
             <br><br>
             在這裡，您能真切的感受最極致的舒適住宿體驗，部分客房提供平面電視, WiFi, 免費WiFi, 按摩浴缸, 禁菸房，給住客更完整的服務。
             不管您是健身愛好者還是只想在疲憊的一天後放鬆一下自己，住宿的頂級娛樂設施都是不二選擇，例如：健身房, 按摩服務, 花園。
-            一流的設施與得天獨厚的地理位置都讓<strong>台中商旅</strong>成為台中市旅遊時的最佳住宿選擇。
+            一流的設施與得天獨厚的地理位置都讓<strong>台中商旅</strong>成為台中市旅遊時的最佳住宿選擇。*@
         </p>
     </div>
 </section>
@@ -744,7 +745,7 @@
 </section>
 <div id="comment-area" class="comment-area wrap-1100 mt-3">
     <div class="title d-flex justify-content-between mb-3">
-        <h3>來自<span>台中商旅</span>實際住客的評鑑</h3>
+        <h3>來自<span>@hotel.HotelName</span>實際住客的評鑑</h3>
     </div>
     <div class="filter-comment d-flex pt-3 mb-3">
         <div class="people-filter d-flex align-items-center">
