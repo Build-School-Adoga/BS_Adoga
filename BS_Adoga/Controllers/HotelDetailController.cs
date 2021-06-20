@@ -18,22 +18,20 @@ namespace BS_Adoga.Controllers
         }
 
         // GET: HotelDetail
-        public ActionResult Detail(string hotelName)
+        public ActionResult Detail(string hotelId)
         {
-            //var hotel = from h in _context.Hotels
-            //            join r in _context.Rooms
-            //            on h.HotelID equals r.HotelID
-            //            where h.HotelName == "台中商旅 (Hung's Mansion)"
-            //            select new HotelViewModel { HotelID = h.HotelID,HotelName = h.HotelName,HotelAddress=h.HotelAddress,Star=h.Star };
-
-            //return View(hotel.FirstOrDefault());
-
             HotelDetailService service = new HotelDetailService();
 
-            var hotel = service.GetHotel(hotelName);
+            DetailVM hotelDetail = new DetailVM()
+            {
+                hotelVM = service.GetHotel(hotelId),
+                roomTypeVM = service.GetRoomType(hotelId)
+            };
 
-            return View(hotel);
+            return View(hotelDetail);
         }
+
+
 
         //public ActionResult DetailAlbum()
         //{
