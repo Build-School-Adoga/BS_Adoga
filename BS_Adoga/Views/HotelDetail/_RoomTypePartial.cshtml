@@ -119,14 +119,14 @@
                         </p>
                     </div>
                     <div class="col-2 pt-2 text-end ps-0">
-                        <p class="text-start mb-3"><span class="room-case-discount">今日 @room.RoomDiscount 折！</span></p>
+                        <p class="text-start mb-3"><span class="room-case-discount">今日 @Math.Round(room.RoomDiscount * 10, 1) 折！</span></p>
                         <del class="room-case-price fz-16 color-gray fw-bold">
                             <span class="fz-16">NT$</span>
-                            @room.RoomPrice
+                            @Math.Round(room.RoomPrice, 0, MidpointRounding.AwayFromZero)
                         </del>
                         <p class="room-case-price">
                             <span class="fz-16">NT$</span>
-                            @room.RoomNowPrice
+                            @Math.Round(room.RoomNowPrice, 0, MidpointRounding.AwayFromZero)
                         </p>
                         <p class="color-gray fz-12">每晚低至</p>
                     </div>
@@ -145,62 +145,6 @@
                         <!-- <p class="green">一次訂兩間更划算</p>
                         <p class="hurry2min">訂房只需2分鐘</p> -->
                         <p class="remain fw-bold fz-14 color-red mb-4">本站剩 @room.RoomLeft 間！</p>
-                    </div>
-                </div>
-                <div class="row room-case pe-3 mb-3">
-                    <div class="col-4 pt-2">
-                        <p class="fz-12 fw-bold mb-2">優惠專案</p>
-                        <p class="fz-14 mb-2">
-                            <i class="fas fa-check color-green fz-14 me-2"></i>
-                            到店付款
-                        </p>
-                        <p class="fz-14 mb-2">
-                            <i class="fas fa-check color-green fz-14 me-2"></i>
-                            免費Wi-Fi
-                        </p>
-                        <p class="fz-14 mb-2">
-                            <i class="fas fa-check color-green fz-14 me-2"></i>
-                            【促銷價】點此查看取消條款
-                        </p>
-                    </div>
-                    <div class="col-2 pt-2 color-gray text-center">
-                        <div>
-                            <span class="fz-14">4 x </span>
-                            <i class="fas fa-male fz-20"></i>
-                        </div>
-                        <div>
-                            <span class="fz-14">2 x </span>
-                            <i class="fas fa-child fz-16"></i>
-                        </div>
-                        <p class="fz-12">2位未滿3歲兒童可<span class="color-green fw-bold">免費</span>同住</p>
-                    </div>
-                    <div class="col-2 pt-2 text-end ps-0">
-                        <p class="text-start mb-3"><span class="room-case-discount">今日3.4折！</span></p>
-                        <del class="room-case-price fz-16 color-gray fw-bold">
-                            <span class="fz-16">NT$</span>
-                            4,519
-                        </del>
-                        <p class="room-case-price">
-                            <span class="fz-16">NT$</span>
-                            2,771
-                        </p>
-                        <p class="color-gray fz-12">每晚低至</p>
-                    </div>
-                    <div class="col-1 pt-2 text-center">
-                        <select name="" id="">
-                            <option value="0" selected>0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </div>
-                    <div class="col-3 pt-2 text-end">
-                        @Html.ActionLink("保留", "Index", "CheckOut", null, new { @class = "keep-btn btn fz-14 py-2 mb-2" })
-                        @*<button class="keep-btn btn fz-14 py-2 mb-2">保留</button>*@
-                        <button class="cart-btn btn fz-14 py-2 mb-5">加入購物車</button>
-                        <!-- <p class="green">一次訂兩間更划算</p>
-                        <p class="hurry2min">訂房只需2分鐘</p> -->
-                        <p class="remain fw-bold fz-14 color-red mb-4">本站剩4間！</p>
                     </div>
                 </div>
             </div>
