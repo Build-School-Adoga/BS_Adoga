@@ -37,16 +37,21 @@
 
 <div class="container  " id="container" style="border-radius: 16px;">
     <div class="input-group mb-3">
-        <div id="app">
+        <div id="app" >
             <template>
-                <el-select style="color: #666;"id="inputGroupSelect02" v-model="value" filterable placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱">
-                    <el-option v-for="item in options"
-                               :key="item.value"
-                               :label="item.label"
-                               :value="item.value"
-                               >
-                    </el-option>
-                </el-select>
+               
+                    <el-select style="color: #666;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
+    :filter-method="handleFilter" >
+
+                        <el-option v-for="item in options"
+                                   :key="item.value"
+                                   :label="item.label "
+                                   :value="item.value">
+                            <span style="float: left">{{ item.label }}</span>
+                            <span style="float: right; color: #8492a6; font-size: 13px"> {{ item.price }}</span>
+                        </el-option>
+                    </el-select>
+              
             </template>
         </div>
         @*<input list="browsers" name="myBrowser" id="inputGroupSelect02" style="        color: #666;
@@ -1267,9 +1272,8 @@
             var Main = {
                 data() {
                     return {
-                        options: [
-                            
-             @foreach (var item in Model.Hotels)
+                        originList: [
+                            @foreach (var item in Model.Hotels)
                 {
 
 
@@ -1277,34 +1281,56 @@
 
 
                 }
-                            
+                        ],
+                        options: [
 
-                                
 
-                        //    {
-                        //    value: '选项1',
-                        //    label: '黄金糕'
-                        //}, {
-                        //    value: '选项2',
-                        //    label: '双皮奶'
-                        //}, {
-                        //    value: '选项3',
-                        //    label: '蚵仔煎'
-                        //}, {
-                        //    value: '选项4',
-                        //    label: '龙须面'
-                        //}, {
-                        //    value: '选项5',
-                        //        label: '北京烤鸭'
-                        //    }
+
+
+
+
+                            //    {
+                            //    value: '选项1',
+                            //    label: '黄金糕'
+                            //}, {
+                            //    value: '选项2',
+                            //    label: '双皮奶'
+                            //}, {
+                            //    value: '选项3',
+                            //    label: '蚵仔煎'
+                            //}, {
+                            //    value: '选项4',
+                            //    label: '龙须面'
+                            //}, {
+                            //    value: '选项5',
+                            //        label: '北京烤鸭'
+                            //    }
                         ],
                         value: ''
+                    };
+                },
+                methods: {
+                    handleFilter(letter) {
+                        if (!letter) {
+                            this.options = this.originList
+                            return
+                        }
+                        this.options = this.originList.filter(v => {
+                            return v.label.includes(letter) || v.price.includes(letter)
+                        })
                     }
+                },
+                mounted() {
+                    this.options = this.originList
                 }
-            }
+
+            };
             var Ctor = Vue.extend(Main)
             new Ctor().$mount('#app')
+
+
         </script>
+   
 }
 
 

@@ -283,6 +283,7 @@
     <Content Include="Views\Home\SearchProduct.cshtml" />
     <Content Include="Views\Shared\_option.cshtml" />
     <Content Include="Views\Home\option.cshtml" />
+    <Content Include="Views\Shared\_option2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIController\Account\" />
