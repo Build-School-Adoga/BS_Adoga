@@ -1,9 +1,11 @@
-﻿@model  BS_Adoga.Models.ViewModels.HotelDetail.HotelDetail
+﻿@model  DetailVM
 
 @{
     ViewBag.Title = "HotelDetail";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
 
+    HotelVM hotel = Model.hotelVM;
+    IQueryable<RoomTypeVM> rooms = Model.roomTypeVM;    
 }
 
 @section topCSS{
@@ -37,8 +39,8 @@
     <ol class="breadcrumb wrap-1100">
         <li class="breadcrumb-item"><a href="#">首頁</a></li>
         <li class="breadcrumb-item"><a href="#">台灣住宿</a><span>&nbsp;(17,283)</span></li>
-        <li class="breadcrumb-item"><a href="#">台中市住宿</a><span>&nbsp;(1,597)</span></li>
-        <li class="breadcrumb-item active" aria-current="page">預定 @Model.HotelName </li>@*台中商旅 (Hung's Mansion)*@
+        <li class="breadcrumb-item"><a href="#">@hotel.HotelCity 住宿</a><span>&nbsp;(1,597)</span></li>
+        <li class="breadcrumb-item active" aria-current="page">預定 @hotel.HotelName ( @hotel.HotelEngName )</li>@*台中商旅 (Hung's Mansion)*@
     </ol>
 </nav>
 <div class="wrap-1100 row mb-3">
@@ -46,26 +48,26 @@
         <div class="media-group row d-flex ">
             <div class="hotel-video col-7 gx-2">
                 <div class="img-wrap">
-                    <img alt="" src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768">
+                    <img alt="" src="~/Asset/images/HotelDetail/Hotel/hotel01.jpg">
                     <div class="show-shadow"></div>
                 </div>
                 <!-- <img src="https://picsum.photos/505/366/?random=1" alt=""> -->
             </div>
             <div class="pic-group col-5 gx-0">
                 <div class="img-wrap">
-                    <img class="medium-pic" src="http://pix6.agoda.net/hotelImages/234438/-1/473caa63348a75f0a87e7ea2c7868e81.jpg?s=1024x768">
+                    <img class="medium-pic" src="~/Asset/images/HotelDetail/Room/room01.jpg">
                     <div class="show-shadow"></div>
                     <a class="add-fav-button"><i class="fas fa-heart"></i></a>
                 </div>
                 <!-- <img class="medium-pic" src="https://picsum.photos/360/226/?random=2"> -->
                 <div class="two-pic d-flex mt-1">
                     <div class="img-wrap me-1">
-                        <img class="" src="https://pix6.agoda.net/hotelImages/234/234438/234438_16020314120039601807.jpg?s=1024x768">
+                        <img class="" src="~/Asset/images/HotelDetail/Hotel/hotel02.jpg">
                         <div class="show-shadow"></div>
                     </div>
                     <!-- <img class="me-1" src="https://picsum.photos/180/131/?random=3"> -->
                     <div class="img-wrap">
-                        <img class="" src="https://pix6.agoda.net/hotelImages/234438/-1/14b6f310d6c82575411bdc92ebd9a421.jpg?s=1024x768">
+                        <img class="" src="~/Asset/images/HotelDetail/Room/room02.jpg">
                         <div class="show-shadow">
                         @*@Html.ActionLink("【完整相簿】共12張", "DetailAlbum", null,new { @class= "album-link fz-14" })*@
                             <a href="#" class="album-link fz-14">【完整相簿】共12張</a>
@@ -79,9 +81,13 @@
             <div class="card-body">
                 <span>免費Wi-Fi</span>
                 <h2>
-                    @Model.HotelName <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </h2>
-                <address class="mb-0">@Model.HotelAddress</address>
+                    @hotel.HotelName ( @hotel.HotelEngName )@*<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>*@
+                    @for (int i = 1; i <= hotel.Star; i++)
+                    {
+                        <i class="fas fa-star"></i>
+                    }
+                    </h2>
+                <address class="mb-0">@hotel.HotelAddress</address>@*臺灣大道三段593號, 西屯區, 台中市, 台灣, 40757*@
             </div>
         </div>
         <!-- <div class="today-order-count mb-3 card">
@@ -267,7 +273,7 @@
             <span>價格不包含稅金和附加費用</span>
         </div>
         <div class="wrap-1100">
-            <div class="room-type">
+            <div class="room-type mb-4">
                 <div class="room-type-title">
                     <h5>豪華房(兩床) (Deluxe Twin)</h5>
                     <!-- <p class="fw-bold fz-12 color-red ">6小時前剛被預訂</p> -->
@@ -276,7 +282,7 @@
                     <div class="row">
                         <div class="col-3 d-flex flex-column">
                             <p>房型摘要</p>
-                            <img src="https://pix6.agoda.net/hotelImages/234/234438/234438_16042712590041850273.jpg?s=208x117&ar=16x9">
+                            <img src="~/Asset/images/HotelDetail/Room/room03.jpg">
                             <a href="" class="fz-14 mt-1">查看房間照片&設施</a>
                             <div class="service-group mt-4">
                                 <div class="d-flex align-items-center mb-2 color-green">
@@ -287,10 +293,10 @@
                                     <i class="fas fa-bed me-3"></i>
                                     <span class="fz-14">2張雙人床</span>
                                 </div>
-                                <div class="d-flex align-items-center mb-2">
+                                <!--<div class="d-flex align-items-center mb-2">
                                     <i class="fas fa-ruler-horizontal me-3"></i>
                                     <span class="fz-14">客房面積：<span> 52平方公尺/560平方英尺</span></span>
-                                </div>
+                                </div>-->
                                 <!-- <div class="d-flex align-items-center mb-2"><i class="fas fa-city me-3"></i><span class="fz-14">景觀：市景
                                     </span>
                                 </div> -->
@@ -362,7 +368,8 @@
                                         2位未滿3歲兒童可<span class="color-green fw-bold">免費</span>同住
                                     </p>
                                 </div>
-                                <div class="col-2 pt-2 text-end">
+                                <div class="col-2 pt-2 text-end ps-0">
+                                    <p class="text-start mb-3"><span class="room-case-discount">今日3.4折！</span></p>
                                     <del class="room-case-price fz-16 color-gray fw-bold">
                                         <span class="fz-16">NT$</span>
                                         4,519
@@ -417,7 +424,8 @@
                                     </div>
                                     <p class="fz-12">2位未滿3歲兒童可<span class="color-green fw-bold">免費</span>同住</p>
                                 </div>
-                                <div class="col-2 pt-2 text-end">
+                                <div class="col-2 pt-2 text-end ps-0">
+                                    <p class="text-start mb-3"><span class="room-case-discount">今日3.4折！</span></p>
                                     <del class="room-case-price fz-16 color-gray fw-bold">
                                         <span class="fz-16">NT$</span>
                                         4,519
@@ -450,12 +458,15 @@
                 </div>
             </div>
         </div>
+        @foreach(RoomTypeVM room in rooms) {             
+            @Html.Partial("~/Views/HotelDetail/_RoomTypePartial.cshtml",room)
+        }
     </div>
 </div>
 <section class="introduce-area card wrap-1100 mb-5">
     <div class="card-body d-flex">
         <div class="img-wrap col-7 me-2">
-            <img src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768"
+            <img src="~/Asset/images/HotelDetail/Hotel/hotel01.jpg"
                  alt="關於台中商旅">
             <div class="title">
                 <h3 class="d-flex flex-column">關於<span>台中商旅</span></h3>

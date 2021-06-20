@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
+using BS_Adoga.Service.HotelDetail;
 
 namespace BS_Adoga.Controllers
 {
@@ -17,17 +18,20 @@ namespace BS_Adoga.Controllers
         }
 
         // GET: HotelDetail
-        public ActionResult Detail()
+        public ActionResult Detail(string hotelId)
         {
-            var s = TempData["search"];
-            var hotel = from h in _context.Hotels
-                        join r in _context.Rooms
-                        on h.HotelID equals r.HotelID
-                        where h.HotelName == s
-                        select new HotelDetail { HotelID = h.HotelID,HotelName = h.HotelName,HotelAddress=h.HotelAddress,Star=h.Star };
+            HotelDetailService service = new HotelDetailService();
 
-            return View(hotel.FirstOrDefault());
+            DetailVM hotelDetail = new DetailVM()
+            {
+                hotelVM = service.GetHotel(hotelId),
+                roomTypeVM = service.GetRoomType(hotelId)
+            };
+
+            return View(hotelDetail);
         }
+
+
 
         //public ActionResult DetailAlbum()
         //{
