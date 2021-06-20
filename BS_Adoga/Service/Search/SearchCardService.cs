@@ -17,11 +17,24 @@ namespace BS_Adoga.Service.Search
             _r = new SearchCardRepository();
         }
 
-        public IQueryable<SearchCardViewModel> GetHotel(string Name)
+        public IQueryable<SearchCardViewModel> ALLHotel()
         {
-            var list = _r.GetHotel(Name);
+            var list = _r.ALLHotel();
 
+            var result = list.Select(h => new SearchCardViewModel
+            {
+                HotelID = h.HotelID,
+                HotelName = h.HotelName,
+                HotelEngName = h.HotelEngName,
+                HotelAddress = h.HotelAddress,
+                Star = h.Star
+            });
 
+            return result;
+        }
+        public IQueryable<SearchCardViewModel> GetHotels(string Name)
+        {
+            var list = _r.ALLHotel();
 
             var result = list.Select(h => new SearchCardViewModel
             {

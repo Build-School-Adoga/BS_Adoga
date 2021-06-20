@@ -16,16 +16,23 @@ namespace BS_Adoga.Controllers
             s = new SearchCardService();
         }
         
-        [HttpGet]
+        
         public ActionResult Search()
+        {
+            var hotels = s.ALLHotel();
+
+            return View(hotels);
+        }
+
+
+        public ActionResult SearchHotel()
         {
             return View();
         }
-
         [HttpPost]
-        public ActionResult Search(string Name)
+        public ActionResult SearchHotel(string Name)
         {
-            var hotels = s.GetHotel(Name);
+            var hotels = s.GetHotels(Name);
 
             //防呆
             if (hotels == null)
@@ -34,7 +41,7 @@ namespace BS_Adoga.Controllers
                 return RedirectToAction("Search");
             }
 
-            return View(hotels);
+            return View();
         }
     }
 }
