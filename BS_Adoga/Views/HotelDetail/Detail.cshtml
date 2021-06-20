@@ -1,9 +1,11 @@
-﻿@model  BS_Adoga.Models.ViewModels.HotelDetail.HotelViewModel
+﻿@model  DetailVM
 
 @{
     ViewBag.Title = "HotelDetail";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
 
+    HotelVM hotel = Model.hotelVM;
+    IQueryable<RoomTypeVM> rooms = Model.roomTypeVM;    
 }
 
 @section topCSS{
@@ -37,8 +39,8 @@
     <ol class="breadcrumb wrap-1100">
         <li class="breadcrumb-item"><a href="#">首頁</a></li>
         <li class="breadcrumb-item"><a href="#">台灣住宿</a><span>&nbsp;(17,283)</span></li>
-        <li class="breadcrumb-item"><a href="#">@Model.HotelCity 住宿</a><span>&nbsp;(1,597)</span></li>
-        <li class="breadcrumb-item active" aria-current="page">預定 @Model.HotelName</li>@*台中商旅 (Hung's Mansion)*@
+        <li class="breadcrumb-item"><a href="#">@hotel.HotelCity 住宿</a><span>&nbsp;(1,597)</span></li>
+        <li class="breadcrumb-item active" aria-current="page">預定 @hotel.HotelName ( @hotel.HotelEngName )</li>@*台中商旅 (Hung's Mansion)*@
     </ol>
 </nav>
 <div class="wrap-1100 row mb-3">
@@ -79,13 +81,13 @@
             <div class="card-body">
                 <span>免費Wi-Fi</span>
                 <h2>
-                    @Model.HotelName @Model.HotelEngName @*<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>*@
-                    @for (int i = 1; i <= Model.Star; i++)
+                    @hotel.HotelName ( @hotel.HotelEngName )@*<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>*@
+                    @for (int i = 1; i <= hotel.Star; i++)
                     {
                         <i class="fas fa-star"></i>
                     }
                     </h2>
-                <address class="mb-0">@Model.HotelAddress</address>@*臺灣大道三段593號, 西屯區, 台中市, 台灣, 40757*@
+                <address class="mb-0">@hotel.HotelAddress</address>@*臺灣大道三段593號, 西屯區, 台中市, 台灣, 40757*@
             </div>
         </div>
         <!-- <div class="today-order-count mb-3 card">
@@ -271,7 +273,7 @@
             <span>價格不包含稅金和附加費用</span>
         </div>
         <div class="wrap-1100">
-            <div class="room-type">
+            <div class="room-type mb-4">
                 <div class="room-type-title">
                     <h5>豪華房(兩床) (Deluxe Twin)</h5>
                     <!-- <p class="fw-bold fz-12 color-red ">6小時前剛被預訂</p> -->
@@ -456,6 +458,9 @@
                 </div>
             </div>
         </div>
+        @foreach(RoomTypeVM room in rooms) {             
+            @Html.Partial("~/Views/HotelDetail/_RoomTypePartial.cshtml",room)
+        }
     </div>
 </div>
 <section class="introduce-area card wrap-1100 mb-5">

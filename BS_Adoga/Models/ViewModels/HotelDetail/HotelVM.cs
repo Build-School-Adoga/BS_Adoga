@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BS_Adoga.Models.ViewModels.HotelDetail
 {
-    public class HotelViewModel
+    public class HotelVM
     {
         public string HotelID { get; set; }
 
@@ -24,13 +24,5 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
         public decimal? Latitude { get; set; }
 
         public int Star { get; set; }
-
-        //public string RoomName { get; set; }
-
-        //public int NumberOfPeople { get; set; }
-
-        //public int RoomCount { get; set; }
-
-        //public decimal RoomPrice { get; set; }
     }
 }
