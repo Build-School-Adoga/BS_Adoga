@@ -1,4 +1,4 @@
-﻿@model  BS_Adoga.Models.ViewModels.MemberLogin.MemberRegisterViewModel
+﻿@model  BS_Adoga.Models.ViewModels.MemberLogin.MixMemberLoginViewModel
 @{
     ViewBag.Title = "MemberLogin";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
@@ -56,8 +56,8 @@
                             <!--bear : 0610新增-->
                             @Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "submit", @class = "btn btn-primary my-2 py-2 login-btn" })
                             @*<button type="submit" class="btn btn-primary my-2 py-2 login-btn">
-                                登入
-                            </button>*@
+                                    登入
+                                </button>*@
                         </div>
                         <div class="register">
                             <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
@@ -86,8 +86,8 @@
                             <!--bear : 0610新增-->
                             @Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "button", @class = "btn btn-primary my-2 py-2 login-btn" })
                             @*<button class="btn btn-primary my-2 py-2 login-btn" type="button">
-                                登入
-                            </button>*@
+                                    登入
+                                </button>*@
                         </div>
                         <div class="register">
                             <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
@@ -134,10 +134,10 @@
 <div class="modal fade" id="ForgetPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header "style="border:0;">
-                <h5 class="modal-title" id="exampleModalLabel" >
+            <div class="modal-header " style="border:0;">
+                <h5 class="modal-title" id="exampleModalLabel">
                     <strong> 忘記密碼?</strong><br />
-                    <div id="ForgetPasswordLabel" class="form-text"style="font-size: 15.5px">
+                    <div id="ForgetPasswordLabel" class="form-text" style="font-size: 15.5px">
                         <p>記不住你的Agoda密碼？改用Facebook登入，從此少記一組密碼！</p>
                     </div>
                     <div class="d-grid gap-2">
@@ -215,29 +215,46 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="emailgo" role="tabpanel" aria-labelledby="home-tab">
                         <!-- 電子郵件登入區塊 -->
-
-                        <form>
-                            <div class="mb-3">
-                                <label for="LoginEmail" class="form-label">電子信箱</label>
-                                <input type="email" class="form-control" id="LoginEmail" aria-describedby="emailHelp"
-                                       placeholder="電子信箱" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="LoginPassword" class="form-label">密碼</label>
-                                <input type="password" class="form-control" id="LoginPassword" placeholder="密碼" />
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary my-2 py-2 login-btn">
-                                    @Html.ActionLink("登入", "HomePage", "Home")
-                                </button>
-                            </div>
-                            <div class="register">
-                                <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
-                                   id="EmailLogintoRegister">我是新朋友</a>
-                                <a href="#modal" data-bs-toggle="modal" data-bs-target="#ForgetPasswordModal"
-                                   id="EmailLogintoForgetPassword"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
-                            </div>
-                        </form>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            <form>
+                                @*<div class="mb-3">
+                                        <label for="LoginEmail" class="form-label">電子信箱</label>
+                                        <input type="email" class="form-control" id="LoginEmail" aria-describedby="emailHelp"
+                                               placeholder="電子信箱" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="LoginPassword" class="form-label">密碼</label>
+                                        <input type="password" class="form-control" id="LoginPassword" placeholder="密碼" />
+                                    </div>*@
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(model => model.MemberLoginViewModel.Email)
+                                    @Html.EditorFor(model => model.MemberLoginViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
+                                    @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(model => model.MemberLoginViewModel.Password)
+                                    @Html.EditorFor(model => model.MemberLoginViewModel.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmailPassword" }, { "aria-describedby", "emailHelp" }, { "placeholder", "密碼" } } })
+                                    @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(model => model.MemberLoginViewModel.Remember)
+                                    @Html.EditorFor(model => model.MemberLoginViewModel.Remember)
+                                    @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Remember, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-danger my-2 py-2 hotellogin-btn" name="login">登入</button>
+                                </div>
+                                <div class="register">
+                                    <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
+                                       id="EmailLogintoRegister">我是新朋友</a>
+                                    <a href="#modal" data-bs-toggle="modal" data-bs-target="#ForgetPasswordModal"
+                                       id="EmailLogintoForgetPassword"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
+                                </div>
+                            </form>
+                        }
                     </div>
 
                     <div class="tab-pane fade" id="phonego" role="tabpanel" aria-labelledby="profile-tab">
@@ -264,7 +281,7 @@
                                 <div class="d-grid gap-2">
                                     <button class="btn btn-primary my-2 py-2 login-btn" type="button">
                                         @Html.ActionLink("登入", "HomePage", "Home")
-                                       
+
                                     </button>
                                 </div>
                             </div>
@@ -344,80 +361,82 @@
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(false, "", new { @class="text-danger"})
-                        <form>
-                            <div class="mb-3 form-group">
-                                @Html.LabelFor(model => model.FirstName)
-                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "EnglishFirstName" }, { "placeholder", "英文護照名" } } })
-                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="mb-3 form-group">
-                                @Html.LabelFor(model => model.LastName)
-                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "EnglishLastName" }, { "placeholder", "英文護照姓" } } })
-                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="mb-3 form-group">
-                                @Html.LabelFor(model => model.Email)
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="mb-3 form-group">
-                                @Html.LabelFor(model => model.Password)
-                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmailPassword" }, { "aria-describedby", "emailHelp" }, { "placeholder", "密碼" } } })
-                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="mb-3 form-group">
-                                @Html.LabelFor(model => model.ConfirmPassword)
-                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "DoubleCheck" }, { "aria-describedby", "emailHelp" }, { "placeholder", "確認密碼" } } })
-                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="EmailRegisterCheck">
-                                <label class="form-check-label"
-                                       for="EmailRegisterCheck">我想要收到Adoga的獨家促銷情報，同時根據隱私權政策，我保留隨時取消訂閱的權利</label>
-                            </div>
-                            <div class="robot">
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            <form>
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(model => model.MemberRegisterViewModel.FirstName)
+                                    @Html.EditorFor(model => model.MemberRegisterViewModel.FirstName, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "EnglishFirstName" }, { "placeholder", "英文護照名" } } })
+                                    @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.FirstName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(model => model.MemberRegisterViewModel.LastName)
+                                    @Html.EditorFor(model => model.MemberRegisterViewModel.LastName, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "EnglishLastName" }, { "placeholder", "英文護照姓" } } })
+                                    @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.LastName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(model => model.MemberRegisterViewModel.Email)
+                                    @Html.EditorFor(model => model.MemberRegisterViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
+                                    @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(model => model.MemberRegisterViewModel.Password)
+                                    @Html.EditorFor(model => model.MemberRegisterViewModel.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmailPassword" }, { "aria-describedby", "emailHelp" }, { "placeholder", "密碼" } } })
+                                    @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(model => model.MemberRegisterViewModel.ConfirmPassword)
+                                    @Html.EditorFor(model => model.MemberRegisterViewModel.ConfirmPassword, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "DoubleCheck" }, { "aria-describedby", "emailHelp" }, { "placeholder", "確認密碼" } } })
+                                    @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="EmailRegisterCheck">
+                                    <label class="form-check-label"
+                                           for="EmailRegisterCheck">我想要收到Adoga的獨家促銷情報，同時根據隱私權政策，我保留隨時取消訂閱的權利</label>
+                                </div>
+                                <div class="robot">
 
-                                <div class="g-recaptcha"
-                                     data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
-                            </div>
-                            <div class="checkcodeline">
+                                    <div class="g-recaptcha"
+                                         data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
+                                </div>
+                                <div class="checkcodeline">
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary" name="register">加入會員</button>
+                                    </div>
+                                </div>
+                                <div class="otherlogin">
+                                    <p>使用其他登入方式</p>
+                                </div>
                                 <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-primary">加入會員</button>
-                                </div>
-                            </div>
-                            <div class="otherlogin">
-                                <p>使用其他登入方式</p>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="otherlogin-btn" type="button">
-                                    <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
-                                </button>
-                                <div class="loginbuttonwithfa">
-                                    <button type="button" class="otherlogin-btn" id="Phonefacebooklogin">
-                                        <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
-                                        Facebook
+                                    <button class="otherlogin-btn" type="button">
+                                        <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
                                     </button>
-                                    <button type="button" class="otherlogin-btn" id="Phoneapplelogin">
-                                        <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt=""> Apple
-                                    </button>
+                                    <div class="loginbuttonwithfa">
+                                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin">
+                                            <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
+                                            Facebook
+                                        </button>
+                                        <button type="button" class="otherlogin-btn" id="Phoneapplelogin">
+                                            <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt=""> Apple
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="line">
-                            </div>
-                            <div class="tologin">
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-outline-primary" id="SignintoPhone" type="button">
-                                        已經是會員?登入
-                                    </button>
+                                <div class="line">
                                 </div>
-                            </div>
-                            <div class="youshouldknow">
-                                <p>
-                                    點擊登錄即代表我同意Agoda的 <a href="">服務條款</a> 和 <a href="">隱私權政策</a>
-                                </p>
-                            </div>
-                        </form>
+                                <div class="tologin">
+                                    <div class="d-grid gap-2">
+                                        @Html.ActionLink("已經是會員?登入", "MemberLogin", "MemberLogin", null, new { @type = "submit", @class = "btn btn-outline-primary" })
+                                        @*原始程式碼*@
+                                        @*<button class="btn btn-outline-primary" id="SignintoPhone" type="button">
+                                          已經是會員?登入
+                                        </button>*@
+                                    </div>
+                                </div>
+                                <div class="youshouldknow">
+                                    <p>
+                                        點擊登錄即代表我同意Agoda的 <a href="">服務條款</a> 和 <a href="">隱私權政策</a>
+                                    </p>
+                                </div>
+                            </form>
                         }
 
                     </div>
@@ -426,7 +445,7 @@
                         <div class="Phone_container">
                             <form id="login" onsubmit="process(event)">
                                 <p>請輸入手機號碼:</p>
-                                <input id="phone" type="tel" name="phone" placeholder="手機號碼"/>
+                                <input id="phone" type="tel" name="phone" placeholder="手機號碼" />
 
                                 <div class="mb-3 phone-password">
                                     <label for="PhoneRegisterpassword">密碼</label>
@@ -581,5 +600,5 @@
 }
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
-    }
+}
 
