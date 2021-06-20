@@ -9,7 +9,7 @@ namespace BS_Adoga.Service.Home
 {
     public class HomeService
     {
-        private HomeRepository _homeRepository;
+        public HomeRepository _homeRepository;
         public HomeService() 
         {
             _homeRepository = new HomeRepository();

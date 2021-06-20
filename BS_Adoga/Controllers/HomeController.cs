@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.homeViewModels;
 using BS_Adoga.Service.Home;
+using Microsoft.Ajax.Utilities;
 
 namespace BS_Adoga.Controllers
 {
@@ -39,13 +40,23 @@ namespace BS_Adoga.Controllers
 
             return View();
         }
-      
 
+        [HttpGet]
         public ActionResult HomePage()
         {
-           
-            var productss = _homeService.GetHomeByFilter();
-            return View(productss);
+            var products = _homeService.GetHomeByFilter();
+
+            return View(products);
+
+        }
+        [HttpPost]
+        public ActionResult HomePage(demoshopViewModels productss)
+        {
+            string name = Request.Form["label"];
+
+            ViewData["w"] = "name";
+            return View();
+
 
             //List<Card> cards = new List<Card>
             //{
@@ -108,5 +119,14 @@ namespace BS_Adoga.Controllers
         //    var productss = _context.Hotels.ToList();
         //    return View(productss);
         //}
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+
+
+            TempData["search"] = search;
+            return RedirectToAction("Detail", "HotelDetail", search);
+        }
     }
+
 }

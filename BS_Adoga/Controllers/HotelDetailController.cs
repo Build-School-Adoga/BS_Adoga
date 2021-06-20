@@ -19,10 +19,11 @@ namespace BS_Adoga.Controllers
         // GET: HotelDetail
         public ActionResult Detail()
         {
+            var s = TempData["search"];
             var hotel = from h in _context.Hotels
                         join r in _context.Rooms
                         on h.HotelID equals r.HotelID
-                        where h.HotelName == "台中商旅 (Hung's Mansion)"
+                        where h.HotelName == s
                         select new HotelDetail { HotelID = h.HotelID,HotelName = h.HotelName,HotelAddress=h.HotelAddress,Star=h.Star };
 
             return View(hotel.FirstOrDefault());
