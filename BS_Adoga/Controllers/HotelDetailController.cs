@@ -21,11 +21,12 @@ namespace BS_Adoga.Controllers
         public ActionResult Detail(string hotelId)
         {
             HotelDetailService service = new HotelDetailService();
-
+            string search = TempData["search"].ToString();
             DetailVM hotelDetail = new DetailVM()
             {
-                hotelVM = service.GetHotel(hotelId),
-                roomTypeVM = service.GetRoomType(hotelId)
+
+                hotelVM = service.GetHotel(search),
+                roomTypeVM = service.GetRoomType(search)
             };
 
             return View(hotelDetail);

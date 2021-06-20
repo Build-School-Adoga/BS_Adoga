@@ -9,7 +9,7 @@ namespace BS_Adoga.Repository.Home
 {
     public class HomeRepository
     {
-        private AdogaContext _context;
+        public AdogaContext _context;
         public HomeRepository()
         {
             _context = new AdogaContext();
