@@ -9,6 +9,7 @@ namespace BS_Adoga.Controllers
     public class SearchController : Controller
     {
         // GET: Search
+        //[Authorize]
         public ActionResult Search()
         {
             return View();

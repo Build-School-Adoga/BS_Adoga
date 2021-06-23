@@ -22,6 +22,12 @@ namespace BS_Adoga.Controllers
         {
             return View();
         }
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut(); //登出
+
+            return RedirectToAction("MemberLogin", "MemberLogin");
+        }
         #region memberlogin方法一未驗證欄位
         //[HttpPost]
         //public ActionResult MemberLogin(Customer log, String FirstName,String LastName,String Email,String Password1,String Password2)

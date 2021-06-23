@@ -45,7 +45,7 @@
                         <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
                         <li><i class="far fa-star me-2"></i> 住宿評鑒</li>
                         <li><i class="far fa-user me-2"></i> 個人資料</li>
-                        <li type="button" class="logout-btn btn py-2">登出</li>
+                        @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2" })
                     </ul>
                 </div>
             </div>
