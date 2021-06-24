@@ -56,6 +56,14 @@ namespace BS_Adoga.Models.DBContext
 
         [Required]
         [StringLength(50)]
+        public string SmokingPreference { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string BedPreference { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string ArrivingTime { get; set; }
 
         [Required]

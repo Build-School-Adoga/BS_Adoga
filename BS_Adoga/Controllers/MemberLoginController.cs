@@ -22,6 +22,12 @@ namespace BS_Adoga.Controllers
         {
             return View();
         }
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut(); //登出
+
+            return RedirectToAction("MemberLogin", "MemberLogin");
+        }
         #region memberlogin方法一未驗證欄位
         //[HttpPost]
         //public ActionResult MemberLogin(Customer log, String FirstName,String LastName,String Email,String Password1,String Password2)
@@ -104,6 +110,7 @@ namespace BS_Adoga.Controllers
             //一.未通過Model驗證
             if (!ModelState.IsValid)
             {
+              
                 return View(loginVM);
             }
 
@@ -114,7 +121,7 @@ namespace BS_Adoga.Controllers
             //三.EF比對資料庫帳密
             //以Name及Password查詢比對Account資料表記錄
 
-            HotelEmployee user = _context.HotelEmployees.Where(x => x.Email == email && x.MD5HashPassword == password).FirstOrDefault();
+            Customer user = _context.Customers.Where(x => x.Email == email && x.MD5HashPassword == password).FirstOrDefault();
 
             //找不到則彈回Login頁
             if (user == null)
@@ -134,7 +141,7 @@ namespace BS_Adoga.Controllers
             //1.Create FormsAuthenticationTicket
             var ticket = new FormsAuthenticationTicket(
             version: 1,
-            name: user.Name.ToString(), //可以放使用者Id
+            name: user.FirstName+user.LastName.ToString(), //可以放使用者Id
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: loginVM.MemberLoginViewModel.Remember,// 是否要記住我 true or false

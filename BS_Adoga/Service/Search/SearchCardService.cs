@@ -22,6 +22,24 @@ namespace BS_Adoga.Service.Search
             var list = _r.ALLHotel();
             return list;
         }
+        public IQueryable<SearchCardViewModel> GetHotels(string Name)
+        {
+            var list = _r.ALLHotel();
 
+            var xxx = from p in _r._context.Hotels
+                      where p.HotelCity == Name
+                      select p;
+
+            var result = xxx.Select(h => new SearchCardViewModel
+            {
+                HotelID = h.HotelID,
+                HotelName = h.HotelName,
+                HotelEngName = h.HotelEngName,
+                HotelAddress = h.HotelAddress,
+                Star = h.Star
+            });
+
+            return result;
+        }
     }
 }
