@@ -53,8 +53,8 @@ namespace BS_Adoga.Repository.HotelDetail
                                    Adult = 0,
                                    Child = 0,
                                    RoomPrice = r.RoomPrice,
-                                   RoomDiscount = r_detail.RoomDiscount,
-                                   RoomNowPrice = (r.RoomPrice * r_detail.RoomDiscount),
+                                   RoomDiscount = 1-r_detail.RoomDiscount,
+                                   RoomNowPrice = (r.RoomPrice * (1-r_detail.RoomDiscount)),
                                    RoomLeft = (r_detail.RoomCount - r_detail.RoomOrder)
                                };
             return roomTypeData;
