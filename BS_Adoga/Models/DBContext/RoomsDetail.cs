@@ -11,6 +11,10 @@ namespace BS_Adoga.Models.DBContext
     {
         [Key]
         [StringLength(50)]
+        public string RDID { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string RoomID { get; set; }
 
         [Column(TypeName = "datetime2")]

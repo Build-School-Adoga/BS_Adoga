@@ -1,0 +1,98 @@
+﻿
+@section topCSS{
+    <link href="~/Asset/CSS/SearchFilterPartial.css" rel="stylesheet" />
+}
+
+@section endJS{
+    <script src="~/Asset/js/Search.js"></script>
+}
+<nav id="nav" class="search-filter-nav">
+    <div class="nav-item "style="margin-left:700px;">
+        <div id="person-info" class="choose-bar" type="button" data-bs-toggle="dropdown" aria-expanded="true"style="display:flex;">
+            <i class="fas fa-user-friends"></i>
+            <div class="choose-info">
+                <p>2位大人</p>
+                <p>1间房间</p>
+            </div>
+            <i class="fas fa-angle-down"></i>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="person-info">
+            <li class="dropdown-item">
+                <button type="button">
+                    <p>單人旅遊</p>
+                    <p>1間客房, 1位大人</p>
+                </button>
+            </li>
+            <li class="dropdown-item">
+                <button type="button">
+                    <p>雙人旅遊</p>
+                    <p>1間客房, 2位大人</p>
+                </button>
+            </li>
+            <li class="dropdown-item input-request" data-stopPropagation="true">
+                <button type="button">
+                    <p>家庭旅遊</p>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </button>
+                <ul>
+                    <li class="dropdown-item room">
+                        <i class="fas fa-minus"></i>
+                        <p><span>1</span>間房間</p>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                    <li class="dropdown-item adult">
+                        <i class="fas fa-minus"></i>
+                        <p><span>1</span>位大人</p>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                    <li class="dropdown-item kid">
+                        <i class="fas fa-minus"></i>
+                        <p><span>1</span>位兒童</p>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown-item input-request" data-stopPropagation="true">
+                <button type="button">
+                    <p>團體旅遊</p>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </button>
+                <ul>
+                    <li class="dropdown-item room">
+                        <i class="fas fa-minus"></i>
+                        <p><span>1</span>間房間</p>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                    <li class="dropdown-item adult">
+                        <i class="fas fa-minus"></i>
+                        <p><span>1</span>位大人</p>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                    <li class="dropdown-item kid">
+                        <i class="fas fa-minus"></i>
+                        <p><span>1</span>位兒童</p>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown-item input-request">
+                <button type="button">
+                    <p>商務旅遊</p>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </button>
+                <ul>
+                    <li class="dropdown-item room" data-stopPropagation="true">
+                        <i class="fas fa-minus"></i>
+                        <p><span>1</span>間房間</p>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                    <li class="dropdown-item adult" data-stopPropagation="true">
+                        <i class="fas fa-minus"></i>
+                        <p><span>1</span>位大人</p>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </nav>

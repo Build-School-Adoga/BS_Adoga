@@ -92,7 +92,7 @@ table {
 }
 
 #inputGroupSelect02 {
-    width: 1300px;
+    width: 1100px;
     height: 66px;
     font-size: 25px;
     margin-top: 50px;
@@ -249,12 +249,24 @@ select {
     font-family: FontAwesome;
 }
 
-input[name="service-city"] {
-    border: 2px solid orange;
-    border-radius: 10px 10px 10px 10px;
-    font-size: 18px;
-    padding: 5px;
-    height: 35px;
-    width: 350px;
-    background-color:red;
+datalist {
+    position: absolute;
+    max-height: 30em;
+    border: 0 none;
+    overflow-x:hidden;
+    overflow-y: auto;
 }
+
+    datalist option {
+        font-size: 0.8em;
+        padding: 0.3em 1em;
+        background-color: white;
+        cursor: pointer;
+    }
+
+        /* active option styling */
+        datalist option:hover, datalist option:focus {
+            color: #fff;
+            background-color: blueviolet;
+            outline: 0 none;
+        }
