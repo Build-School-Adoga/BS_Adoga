@@ -12,7 +12,7 @@ namespace BS_Adoga.Models.ViewModels.Search
         public string HotelEngName { get; set; }
         public string HotelAddress { get; set; }
         public int Star { get; set; }
-        public List<RoomDetailViewModel> RoomDetailVM { get; set; }
-        public List<RoomViewModel> RoomVM { get; set; }
+        public RoomViewModel RoomVM { get; set; }
+        public RoomDetailViewModel RoomDetailVM { get; set; }
     }
 }
