@@ -19,7 +19,13 @@ namespace BS_Adoga.Controllers
         
         public ActionResult Search()
         {
-            var hotels = s.ALLHotel();
+            //var hotels = s.ALLHotel();
+
+            //return View(hotels);
+            string search = TempData["search"].ToString();
+            var hotels = s.GetHotels(search);
+
+
 
             return View(hotels);
         }
