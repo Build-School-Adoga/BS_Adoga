@@ -24,24 +24,5 @@ namespace BS_Adoga.Controllers
             return View(hotels);
         }
 
-
-        //public ActionResult SearchHotel()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public ActionResult SearchHotel(string Name)
-        //{
-        //    var hotels = s.GetHotels(Name);
-
-        //    //防呆
-        //    if (hotels == null)
-        //    {
-        //        //这里的Search是会回去找Get的那个Search
-        //        return RedirectToAction("Search");
-        //    }
-
-        //    return View();
-        //}
     }
 }
