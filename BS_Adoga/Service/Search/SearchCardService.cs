@@ -22,6 +22,7 @@ namespace BS_Adoga.Service.Search
             var list = _r.ALLHotel();
             return list;
         }
+
         public IQueryable<SearchCardViewModel> GetHotels(string Name)
         {         
             var result = _r.GetHotel(Name);

@@ -12,9 +12,15 @@ namespace BS_Adoga.Models.ViewModels.Search
         public string HotelName { get; set; }
         public string HotelEngName { get; set; }
         public string HotelAddress { get; set; }
+        public string HotelCity { get; set; }
+        public string HotelDistrict { get; set; }
         public int Star { get; set; }
         public RoomViewModel I_RoomVM { get; set; }
         public RoomDetailViewModel I_RoomDetailVM { get; set; }
+
+        /// <summary>
+        /// faker Tom
+        /// </summary>
         public List<RoomDetailViewModel> RoomDetailVM { get; set; }
         public List<RoomViewModel> RoomVM { get; set; }
         public virtual IEnumerable<Hotel> Hotels { get; set; }

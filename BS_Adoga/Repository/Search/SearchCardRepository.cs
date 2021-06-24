@@ -29,6 +29,8 @@ namespace BS_Adoga.Repository.Search
                             HotelEngName = H.HotelEngName,
                             HotelAddress = H.HotelAddress,
                             Star = H.Star,
+                            HotelCity = H.HotelCity,
+                            HotelDistrict = H.HotelDistrict,
                             I_RoomVM = new RoomViewModel
                             {
                                 HotelID = H.HotelID,
@@ -45,16 +47,15 @@ namespace BS_Adoga.Repository.Search
                                 RoomDiscount = D.RoomDiscount
                             }
                         };
-            var list = hotel;
-
-            return list;
+            return hotel;
         }
+
         public IQueryable<SearchCardViewModel> GetHotel(string Name)
         {
             var hotel = from H in _context.Hotels
                         join R in _context.Rooms on H.HotelID equals R.HotelID
                         join D in _context.RoomsDetails on R.RoomID equals D.RoomID
-                        where H.HotelCity == Name
+                        where H.HotelCity.Contains(Name)
                         select new SearchCardViewModel
                         {
                             HotelID = H.HotelID,
@@ -62,6 +63,8 @@ namespace BS_Adoga.Repository.Search
                             HotelEngName = H.HotelEngName,
                             HotelAddress = H.HotelAddress,
                             Star = H.Star,
+                            HotelCity = H.HotelCity,
+                            HotelDistrict = H.HotelDistrict,
                             I_RoomVM = new RoomViewModel
                             {
                                 HotelID = H.HotelID,
@@ -78,9 +81,8 @@ namespace BS_Adoga.Repository.Search
                                 RoomDiscount = D.RoomDiscount
                             }
                         };
-            var list = hotel;
 
-            return list;
+            return hotel;
         }
 
     }
