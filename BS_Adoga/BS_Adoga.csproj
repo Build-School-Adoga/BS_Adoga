@@ -182,7 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Asset\CSS\AccountBookings.css" />
-    <Content Include="Asset\CSS\AdogaLayout.css" />
     <Content Include="Asset\CSS\HotelLogin.css" />
     <Content Include="Asset\CSS\Search.css" />
     <Content Include="Asset\CSS\SearchFilterPartial.css" />
@@ -326,30 +325,18 @@
     <Folder Include="App_Data\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
-    <Folder Include="Asset\images\Home\" />
-    <Folder Include="Asset\images\HotelDetail\" />
     <Folder Include="Asset\images\HotelLogin\" />
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Models\ViewModels\Account\" />
-    <Folder Include="Models\ViewModels\CheckOut\" />
-    <Folder Include="Models\ViewModels\HotelLogin\" />
-    <Folder Include="Models\ViewModels\MemberLogin\" />
-    <Folder Include="Models\ViewModels\Search\" />
     <Folder Include="Repository\Account\" />
     <Folder Include="Repository\CheckOut\" />
-    <Folder Include="Repository\Home\" />
-    <Folder Include="Repository\HotelDetail\" />
     <Folder Include="Repository\HotelLogin\" />
     <Folder Include="Repository\MemberLogin\" />
-    <Folder Include="Repository\Search\" />
     <Folder Include="Service\Account\" />
     <Folder Include="Service\CheckOut\" />
-    <Folder Include="Service\Home\" />
-    <Folder Include="Service\HotelDetail\" />
     <Folder Include="Service\HotelLogin\" />
     <Folder Include="Service\MemberLogin\" />
-    <Folder Include="Service\Search\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

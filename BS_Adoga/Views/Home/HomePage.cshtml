@@ -1276,27 +1276,18 @@
         })
     </script>
     <script>
-             @model BS_Adoga.Models.ViewModels.homeViewModels.demoshopViewModels
+        @model BS_Adoga.Models.ViewModels.homeViewModels.demoshopViewModels
+         //city = Model.Hotels.GroupBy(x => x.HotelCity).Select(x => new { CityName = x.Key, HotelID = x.Key, HotelCity = x.Key })
             var Main = {
                 data() {
                     return {
                         originList: [
                             @foreach (var item in Model.Hotels)
                             {
-
-
-                    @Html.Partial("_option", item);
-
-
+                                @Html.Partial("_option", item);
                             }
                         ],
                         options: [
-
-
-
-
-
-
                             //    {
                             //    value: '选项1',
                             //    label: '黄金糕'
