@@ -29,13 +29,46 @@ namespace BS_Adoga.Repository.Search
                             HotelEngName = H.HotelEngName,
                             HotelAddress = H.HotelAddress,
                             Star = H.Star,
-                            RoomVM = new RoomViewModel
+                            I_RoomVM = new RoomViewModel
                             {
                                 HotelID = H.HotelID,
                                 RoomID = R.RoomID,
                                 RoomPrice = R.RoomPrice
                             },
-                            RoomDetailVM = new RoomDetailViewModel
+                            I_RoomDetailVM = new RoomDetailViewModel
+                            {
+                                RoomID = R.RoomID,
+                                CheckInDate = D.CheckInDate,
+                                CheckOutDate = D.CheckOutDate,
+                                RoomCount = D.RoomCount,
+                                RoomOrder = D.RoomOrder,
+                                RoomDiscount = D.RoomDiscount
+                            }
+                        };
+            var list = hotel;
+
+            return list;
+        }
+        public IQueryable<SearchCardViewModel> GetHotel(string Name)
+        {
+            var hotel = from H in _context.Hotels
+                        join R in _context.Rooms on H.HotelID equals R.HotelID
+                        join D in _context.RoomsDetails on R.RoomID equals D.RoomID
+                        where H.HotelCity == Name
+                        select new SearchCardViewModel
+                        {
+                            HotelID = H.HotelID,
+                            HotelName = H.HotelName,
+                            HotelEngName = H.HotelEngName,
+                            HotelAddress = H.HotelAddress,
+                            Star = H.Star,
+                            I_RoomVM = new RoomViewModel
+                            {
+                                HotelID = H.HotelID,
+                                RoomID = R.RoomID,
+                                RoomPrice = R.RoomPrice
+                            },
+                            I_RoomDetailVM = new RoomDetailViewModel
                             {
                                 RoomID = R.RoomID,
                                 CheckInDate = D.CheckInDate,

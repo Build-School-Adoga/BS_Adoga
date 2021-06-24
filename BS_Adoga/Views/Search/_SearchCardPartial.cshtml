@@ -2,8 +2,8 @@
 @model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
 @{
     string HotelFullName;
-    RoomDetailViewModel rd = Model.RoomDetailVM;
-    RoomViewModel r = Model.RoomVM;
+    RoomDetailViewModel rd = Model.I_RoomDetailVM;
+    RoomViewModel r = Model.I_RoomVM;
 
     var leftroom = rd.RoomCount - rd.RoomOrder;
     var newPrice = (int)(r.RoomPrice * (1 - rd.RoomDiscount));
