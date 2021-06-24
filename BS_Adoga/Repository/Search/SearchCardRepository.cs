@@ -9,7 +9,7 @@ namespace BS_Adoga.Repository.Search
 {
     public class SearchCardRepository
     {
-        private AdogaContext _context;
+        public AdogaContext _context;
 
         public SearchCardRepository()
         {
