@@ -134,7 +134,7 @@ namespace BS_Adoga.Controllers
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: loginVM.HotelLoginView.Remember,// 是否要記住我 true or false
-            userData: "", //可以放使用者角色名稱
+            userData: "後台人員", //可以放使用者角色名稱
             cookiePath: FormsAuthentication.FormsCookiePath);
 
             //2.Encrypt the Ticket
@@ -148,8 +148,16 @@ namespace BS_Adoga.Controllers
             var url = FormsAuthentication.GetRedirectUrl(email, true);
 
             //5.Response.Redirect
-            return RedirectToAction("HomePage", "Home");
+            return RedirectToAction("Index", "Function");
         }
         #endregion
+
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut(); //登出
+
+            return RedirectToAction("HomePage", "Home");
+        }
+
     }
 }

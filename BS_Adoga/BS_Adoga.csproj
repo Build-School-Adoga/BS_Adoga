@@ -177,6 +177,7 @@
     <Compile Include="Repository\HotelDetail\HotelDetailRepository.cs" />
     <Compile Include="Repository\Search\SearchCardRepository.cs" />
     <Compile Include="Service\HotelDetail\HotelDetailService.cs" />
+    <Compile Include="Service\HotelLoginAuthorizeAttribute.cs" />
     <Compile Include="Service\Search\SearchCardService.cs" />
     <Compile Include="Service\HashService.cs" />
     <Compile Include="Service\MultiButtonAttribute.cs" />

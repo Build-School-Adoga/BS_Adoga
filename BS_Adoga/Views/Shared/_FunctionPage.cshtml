@@ -24,6 +24,20 @@
             <li>@Html.ActionLink("房間展開", "DateRoom", "Function")</li>
             <li>@Html.ActionLink("訂單查詢", "Orders", "Function")</li>
         </ul>
+        <footer>
+            <ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p class="text-warning">[@User.Identity.Name]</p>
+                    <li>@Html.ActionLink("登出", "SignOut", "HotelLogin")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("登入", "HotelLogin", "HotelLogin")</li>
+                    <li>@Html.ActionLink("註冊", "HotelLogin", "HotelLogin")</li>
+                }
+            </ul>
+        </footer>
         @*@Html.Partial("_LoginPartial")*@
     </div>
     <div class="content">
