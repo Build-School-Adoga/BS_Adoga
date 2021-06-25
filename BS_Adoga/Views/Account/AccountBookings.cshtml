@@ -5,7 +5,8 @@
 }
 
 @section topCSS{
-    <link rel="stylesheet" href="~/Asset/CSS/AccountBookings.css" />
+    <link rel="stylesheet" href="~/Asset/CSS/MemberAccount/MemberBookings.css" />
+    <link rel="stylesheet" href="~/Asset/CSS/MemberAccount/MemberDetail.css" />
 }
 
 <div class="page-fullpage">
@@ -17,9 +18,9 @@
             <div class="shadow-lg p-3 mb-5 bg-white rounded">
                 <section class="menu-component">
                     <ul>
-                        <li class="bookings">
+                        <li class="bookings"id="member-order">
                             <i class="far fa-calendar-check">
-                                <a href="">
+                                <a href="" >
                                     管理訂單
                                 </a>
                             </i>
@@ -38,9 +39,9 @@
                                 </a>
                             </i>
                         </li>
-                        <li class="profile">
+                        <li class="profile"id="member-detail">
                             <i class="far fa-user">
-                                <a href="">
+                                <a href="" >
                                     個人資料
                                 </a>
                             </i>
@@ -49,83 +50,63 @@
                 </section>
             </div>
         </div>
-
-
-        <div class="page">
-            <div id="booking-page">
-                <!-- <div class="AgodaVIPBanner_Container">
-                    <figure class="AgodaVipBanner_Image"></figure>
-                    <div class="AgodaVipBanner_Badge">
-                        <span class="AgodaVipBadge gold">
-                            <span class="AgodaVipBadge_Text">AgodaVIP</span>
-                        </span>
-                        <div class="AgodaVipBadge_FlashLine">
-                            <div class="AgodaVipBadge_FlashLine--1"></div>
-                            <div class="AgodaVipBadge_FlashLine--2"></div>
-                            <div class="AgodaVipBadge_FlashLine--3"></div>
-                        </div>
-                    </div>
-
-                    <div class="AgodaVipBanner_Text">
-                        <p class="AgodaVipBanner_Text--title">子傑，想升級成為VIP會員嗎?</p>
-                        <p class="AgodaVipBanner_Text--description">再完成5筆訂單即符合VIP資格，可獲得專屬折扣和福利</p>
-                    </div>
-
-                    <div class="AgodaVipBanner_Button">
-                        <button class="btn">瞭解更多</button>
-                    </div>
-                </div> -->
-
-                <div class="my-bookings-filter">
-                    <div class="filter-container_based-on-time_or_cancel">
-                        <span class="filter-option-Upcoming">未來式</span>
-                        <span class="filter-option-Past">過去式</span>
-                        <span class="filter-option-Cancelled">已取消</span>
-                    </div>
-
-                    <div class="block-switch_based-on-self-definition_or_pre-order-date_or_check-in-date">
-                        <div class="self-definition">自訂排序</div>
-                        <div class="pre-order-date">預定日期</div>
-                        <div class="check-in-date">入住日期</div>
-                    </div>
-
-                    <div class="order-id-container">
-                        <div class="order-id_left-pane">
-                            <label for="input_order-id">
-                                <span class="order-id">訂單編號</span>
-                            </label>
-
-                            <input id="input_order-id" placeholder="訂單編號"></input>
-                        </div>
-
-                        <div class="search-button_or_clear-button">
-                            <button id="search" type="button" class="btn btn-secondary">搜尋</button>
-                            <button id="clear-button" type="button" class="btn btn-light">清除</button>
-                        </div>
-                    </div>
-
-                    <div class="no-booking-panel">
-                        <img id="no-booking_img"
-                             src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
-
-                        <div class="no-booking-content">
-                            <h4>目前沒有任何未入住的預訂</h4>
-                            <p>
-                                想要查看
-                                <a href="" id="checked_out">已退房</a>
-                                或
-                                <a href="" id="cancelled">已取消</a>
-                                的訂單嗎?
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Partial("~/Views/Account/_MemberBookingPartial.cshtml")
+        @Html.Partial("~/Views/Account/_MemberDetailPartial.cshtml")
     </div>
-
 </div>
 
 @section endJS{
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+        let bookingPage = document.getElementById("booking-page")
+        let detailPage = document.getElementById("detail-page")
 
+        detailPage.style.display = 'none';
+
+        let memberOrder = document.getElementById("member-order")
+        memberOrder.addEventListener('click', () => {
+            bookingPage.style.display = "block";
+            detailPage.style.display = "none";
+        })
+
+        let memberDetail = document.getElementById("member-detail")
+        memberDetail.addEventListener('click', () => {
+            detailPage.style.display = "block";
+            bookingPage.style.display = "none";
+        })
+    </script>
+    <script>
+        function ControlHideShow(enter, cancel, save, firstSelector, secondSelector, firstDisplayType, secondDisplayType, saveAction) {
+            let enterPageBtn = document.getElementById(enter);
+            let cancelBtn = document.getElementById(cancel);
+            let saveBtn = document.getElementById(save);
+            enterPageBtn.addEventListener('click', () => {
+                HideShowComponent(firstSelector, secondSelector, secondDisplayType)
+            })
+
+            cancelBtn.addEventListener('click', () => {
+                HideShowComponent(secondSelector, firstSelector, firstDisplayType)
+            })
+
+            if (saveAction) {
+                saveBtn.addEventListener('click', () => {
+                    HideShowComponent(secondSelector, firstSelector, firstDisplayType)
+                })
+            }
+        }
+
+        function HideShowComponent(hideSelector, showSelector, displayType) {
+            let hideDOM = document.querySelector(hideSelector);
+            let showDOM = document.querySelector(showSelector);
+            hideDOM.style.display = 'none';
+            showDOM.style.display = displayType;
+        }
+
+        ControlHideShow("name-edit", "cancel-name-edit-btn", "save-name-edit-btn", "div.name-component", "div.name-edit-component", "flex", "block", true);
+        ControlHideShow("verify-email", "cancel-verify-email-btn", "sent-verify-email-btn", "div.email-component", "div.verify-email-component", "block", "block", true);
+
+        ControlHideShow("phone-edit", "cancel-phone-btn", "save-phone-btn", "div.phone-component", "div.phone-edit-component", "flex", "block", true);
+        ControlHideShow("password-edit", "cancel-password-btn", "save-password-btn", "div.password-component", "div.password-edit-component", "flex", "block", true);
+
+    </script>
 }

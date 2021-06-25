@@ -1,0 +1,265 @@
+﻿
+<div class="page" id="detail-page">
+    <section class="user_details mb-5">
+        <h3 class="gray-header ms-3">用戶詳細資料</h3>
+
+        <section class="name-component m-3">
+            <div class="name-component component-wrap">
+                <div class="name-component-display-icon">
+                    <span class="member-first-letter">A</span>
+                </div>
+
+                <div class="name-component-display-name">
+                    <h4 class="gray-bold-text">英文姓名</h4>
+                    <p class="display-name-value">JASON LIN</p>
+                </div>
+
+                <div class="name-component-display-edit">
+                    <span class="display-edit gray-bold-text" data-bs-toggle="modal" data-bs-target="#aaa"
+                          id="name-edit">編輯</span>
+                </div>
+            </div>
+
+            <div class="name-edit-component component-wrap">
+                <div class="mb-3">
+                    <label for="passport-english-first_name" class="form-label">護照英文名</label>
+                    <input type="text" class="form-control" id="passport-english-first_name" placeholder="FirstName"
+                           value="JASON" />
+                </div>
+                <div class="mb-3">
+                    <label for="passport-english-last_name" class="form-label">護照英文姓</label>
+                    <input type="text" class="form-control" id="passport-english-last_name" placeholder="LastName"
+                           value="LIN" />
+                </div>
+                <div>
+                    <button id="cancel-name-edit-btn" type="button" class="btn cancel-edit-btn" data-bs-dismiss="modal">
+                        取消
+                    </button>
+                    <button id="save-name-edit-btn" type="submit" class="btn save-edit-btn">
+                        儲存
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="email-component m-3">
+            <div class="email-component component-wrap">
+                <div class="email-component-display-email">
+                    <h4 class="gray-bold-text">電子郵件</h4>
+                    <div class="email-not-verify-component">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>你的電子信箱尚未完成驗證。</span>
+                        <span id="verify-email">點此驗證電子信箱</span>
+                    </div>
+                    <p class="display-email-value">
+                        st1034332@ms.tsh.ttu.edu.tw
+                        <span class="badge bg-info text-dark">已通過驗證</span>
+                    </p>
+                </div>
+            </div>
+            <!-- <div class="email-component-verify">
+                <span class="badge bg-info text-dark">已通過驗證</span>
+              </div> -->
+            <div class="verify-email-component component-wrap">
+                <div class="robot-error mb-4">
+                    <p class="mb-0"> 請完成「我不是機器人」驗證程序</p>
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="mb-4">
+                    <p class="verify-explain">我們會發送驗證郵件至<strong> st1034332@ms.tsh.ttu.edu.tw </strong>，請依說明完成相關程序。</p>
+                </div>
+                <div class="robot mb-4">
+                    <div class="g-recaptcha" data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
+                </div>
+                <div>
+                    <button id="cancel-verify-email-btn" type="button" class="btn cancel-edit-btn" data-bs-dismiss="modal">
+                        取消
+                    </button>
+                    <button id="sent-verify-email-btn" type="submit" class="btn save-edit-btn">
+                        發送驗證郵件
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="phone-component m-3">
+            <div class="phone-component component-wrap">
+                <div class="phone-component-display-phone">
+                    <h4 class="gray-bold-text">電話號碼</h4>
+                    <p class="phone-number mb-0"><span>+886 </span><span> 09888888888</span></p>
+                </div>
+                <div class="phone-component-display-add">
+                    <span class="display-edit blue-bold-text" data-bs-toggle="modal" data-bs-target="#bbb"
+                          id="phone-edit">新增</span>
+                </div>
+            </div>
+
+            <div class="phone-edit-component component-wrap">
+                <div class="mb-3">
+                    <label for="phone-number-by-country" class="form-label">國家/地區代碼</label>
+                    <select id="phone-number-by-country" class="form-select" aria-label="country-number-select">
+                        <option selected>請選擇國家/地區電話代碼（例如：台灣+886)</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="telphonenumber" class="form-label">電話號碼</label>
+                    <input type="tel" class="form-control" id="telphonenumber" placeholder="電話號碼" value="09888888888"/>
+                </div>
+
+                <div>
+                    <button id="cancel-phone-btn" type="button" class="btn cancel-edit-btn" data-bs-dismiss="modal">
+                        取消
+                    </button>
+                    <button id="save-phone-btn" type="submit" class="btn save-edit-btn">
+                        儲存
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="password-component m-3 ">
+            <div class="password-component component-wrap">
+                <div class="password-component-display-password">
+                    <h4 class="gray-bold-text">密碼</h4>
+                    <p>●●●●●●●●●●</p>
+                </div>
+
+                <div class="password-component-display-add">
+                    <span id="password-edit" class="display-add blue-bold-text" data-bs-toggle="modal"
+                          data-bs-toggle="modal" data-bs-target="#ccc">編輯</span>
+                </div>
+            </div>
+            <div class="password-edit-component component-wrap">
+                <form>
+                    <div class="mb-3">
+                        <label for="current-password" class="form-label">目前密碼</label>
+                        <input type="password" class="form-control" id="current_password" placeholder="目前密碼" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="new-password" class="form-label">新密碼</label>
+                        <input type="password" class="form-control" id="new_password" placeholder="新密碼" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirm-new-password" class="form-label">確認新密碼</label>
+                        <input type="password" class="form-control" id="confirm-new-password" placeholder="確認新密碼" />
+                    </div>
+
+                    <div>
+                        <button id="cancel-password-btn" type="button" class="btn cancel-edit-btn" data-bs-dismiss="modal">
+                            取消
+                        </button>
+                        <button id="save-password-btn" type="submit" class="btn save-edit-btn">
+                            儲存
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </section>
+
+    <section class="social_networks-link m-3 mb-5">
+        <h3 class="gray-header">社群網路連結</h3>
+        <section class="facebook-component">
+            <div class="facebook-component component-wrap">
+                <div class="facebook-component-display">
+                    <h4 class="gray-bold-text">Facebook</h4>
+                    <p class="display-facebook-value">將Facebook帳號與本站連結，就可共用FB密碼快速登入！</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section class="payment-methods m-3">
+        <h3 class="gray-header">付款方式</h3>
+        <div class="payment-component component-wrap">
+            <div class="payment-component-add">+</div>
+            <div class="payment-component-add-method">新增付款方式</div>
+        </div>
+    </section>
+
+    <section class="save-creditcard-info m-3 mb-5">
+        <div class="save-credit-component component-wrap">
+            <p class="gray-bold-text mb-0">幫我儲存信用卡的資料 <i class="fas fa-info-circle blue-bold-text"></i></p>
+
+            <!-- <div class="creditcard-icon-information">
+                                    將信用卡資料儲存在Agoda安全的伺服器上可以簡化<br>
+                                    您預定的程序，使訂房更便捷!儲存後若改變心意，<br>
+                                    也可以隨時更改設定。請注意，如果你選擇「不要」，<br>
+                                    之前所有已儲存的信用卡資料也會一同被刪除喔!
+                                </div> -->
+
+            <div class="check_and_radios-button_on-or-button_off">
+                <!-- <div class="button_off">
+                                          <div class="form-check form-switch">
+                                              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                              <label class="form-check-label" for="flexSwitchCheckDefault">不要</label>
+                                          </div>
+                                      </div> -->
+
+                <div class="button_on">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked />
+                        <label class="form-check-label gray-text" for="flexSwitchCheckChecked">好</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="check-status">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div class="check-status-label">已儲存</div>
+                                </div> -->
+        </div>
+    </section>
+
+    <section class="email_subscriptions-link m-3 mb-5">
+        <h3 class="gray-header">訂閱電子郵件</h3>
+        <div class="reminders-component component-wrap mb-3">
+            <p class="gray-bold-text mb-0">我希望預訂小幫手能提醒我重要消息</p>
+
+            <div class="check_and_radios-button_on-or-button_off">
+                <!-- <div class="mt-2 button_off">
+                                          <div class="form-check form-switch">
+                                              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                              <label class="form-check-label" for="flexSwitchCheckDefault">不要</label>
+                                          </div>
+                                      </div> -->
+
+                <div class="button_on">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked />
+                        <label class="form-check-label gray-text" for="flexSwitchCheckChecked">好</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="check-status">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div class="check-status-label">已儲存</div>
+                                </div> -->
+        </div>
+        <div class="promotions-component component-wrap mb-3">
+            <p class="gray-bold-text mb-0">我想要收到Agoda的促銷情報</p>
+
+            <div class="check_and_radios-button_on-or-button_off">
+                <!-- <div class="mt-2 button_off">
+                                          <div class="form-check form-switch">
+                                              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                              <label class="form-check-label" for="flexSwitchCheckDefault">不要</label>
+                                          </div>
+                                      </div> -->
+
+                <div class="button_on">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked />
+                        <label class="form-check-label gray-text" for="flexSwitchCheckChecked">好</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="check-status">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div class="check-status-label">已儲存</div>
+                                </div> -->
+        </div>
+    </section>
+</div>
