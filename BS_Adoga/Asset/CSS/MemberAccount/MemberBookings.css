@@ -1,59 +1,4 @@
-﻿* {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    text-decoration: none;
-    color: #000;
-}
-
-.page-fullpage .container-agoda {
-    display: flex;
-    clear: both; /*不允許有浮動物件*/
-    margin: 0 auto 0 auto; /*順序: 上右下左*/
-}
-
-    .page-fullpage .container-agoda .left-pane {
-        display: table-cell; /*垂直置中*/
-        vertical-align: top;
-        width: 218px;
-        margin-left: 50px;
-        margin-right: 70px;
-        /* background-color: #777; */
-    }
-
-        .page-fullpage .container-agoda .left-pane section.menu-component {
-            /* min-width: 255px; */
-            /* margin-top: 21px; */
-            font-size: 20px;
-            font-weight: 700; /*字體的粗細程度*/
-            line-height: 4;
-        }
-
-section.menu-component ul {
-    /* background-color: #c00; */
-    padding-left: 0;
-}
-
-    section.menu-component ul li a {
-        text-decoration: none;
-    }
-
-    section.menu-component ul li:hover {
-        cursor: pointer;
-        display: block;
-        background-color: #5392f9;
-    }
-
-        section.menu-component ul li:hover a {
-            cursor: pointer;
-            /* background-color: transparent; 背景顏色為透明 */
-            color: white;
-        }
-
-section.menu-component ul ul a {
-    font-size: 16px;
-}
-
+﻿
 /* section.menu-component ul .inbox:hover {
     display: block;
     background-color: #5392f9;
@@ -109,6 +54,10 @@ section.menu-component ul .profile a {
     cursor: pointer;
     background-color: transparent;
 } */
+
+#booking-page{
+    min-height:500px;
+}
 
 .filter-container_based-on-time_or_cancel {
     /* background-color: #0f0; */
@@ -223,8 +172,3 @@ section.menu-component ul .profile a {
         text-decoration: none;
     }
 
-/*bear:0610新增*/
-.page-fullpage {
-    padding: 40px 0;
-    background-color: #f8f8f8;
-}

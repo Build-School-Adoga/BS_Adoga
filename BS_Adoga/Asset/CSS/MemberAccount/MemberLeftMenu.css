@@ -1,0 +1,73 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    color: #000;
+}
+
+.page-fullpage {
+    display: flex;
+    background-color: rgba(235, 235, 235, 0.315);
+    margin: auto;
+}
+
+/* 左側menu大區塊 */
+aside{
+    background-color:#fff;
+}
+
+.left-menu-component {
+    min-width: 200px;
+    background-color: #fff;
+    padding-left: 10vw;
+    box-shadow: 5px 3px 6px rgba(66, 66, 66, 0.137);
+}
+
+    .left-menu-component ul {
+        padding-left: 0;
+    }
+
+.left-menu-component a {
+    display: block;
+    padding: 12px 130px 12px 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(93, 143, 236);
+}
+
+    .left-menu-component a > i {
+        display: inline-block;
+        width: 40px;
+        font-size: 22px;
+        text-align: center;
+        color: rgb(93, 143, 236);
+    }
+
+    .left-menu-component a.currentPage {
+        color: rgb(85, 85, 85);
+        background-color: rgb(248, 248, 248);
+        border-right: 4px rgb(103, 149, 233) solid;
+    }
+
+        .left-menu-component a.currentPage > i {
+            color: rgb(85, 85, 85);
+        }
+
+    .left-menu-component a:hover {
+        color: #fff;
+        background-color: rgb(93, 143, 236);
+        border-right-color: rgb(93, 143, 236);
+    }
+
+        .left-menu-component a:hover > i {
+            color: #fff;
+        }
+
+    .left-menu-component .profile-list a {
+        padding-left: 25px;
+    }
+
+    .left-menu-component .profile-list i {
+        font-size: 14px;
+    }
