@@ -27,6 +27,10 @@ namespace BS_Adoga.Controllers
             //string member = User.Identity.Name;
             //var data = _service.GetMember(member);
             ViewBag.MemberCurrentPage = "profile";
+
+
+
+
             return View();
         }
     }
