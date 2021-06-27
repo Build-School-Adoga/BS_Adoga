@@ -9,6 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Asset/CSS/Base_css")
     <link rel="stylesheet" href="~/Asset/CSS/Layout.css" />
+    <link href="~/Asset/CSS/MemberAccount/MemberLeftMenu.css" rel="stylesheet" />
     @RenderSection("topCSS", false)
 </head>
 <body>
@@ -48,14 +49,14 @@
                         <ul>
                             <li>
                                 <i class="far fa-calendar-check me-2"></i>
-                                @Html.ActionLink("管理訂單","MemberBooking","Account")
+                                @Html.ActionLink("管理訂單", "MemberBooking", "Account")
                             </li>
                             <li><i class="fas fa-inbox me-2"></i> 收件匣</li>
                             <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
                             <li><i class="far fa-star me-2"></i> 住宿評鑒</li>
                             <li>
                                 <i class="far fa-user me-2"></i>
-                                @Html.ActionLink("個人資料","MemberProfile","Account")
+                                @Html.ActionLink("個人資料", "MemberProfile", "Account")
                             </li>
                             @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2" })
                         </ul>
@@ -72,9 +73,49 @@
             }
         </div>
     </nav>
-    @RenderSection("scrollNav", false)
-    @RenderBody()
+    <div class="page-fullpage">
+        <aside class="left-menu-component pt-4">
+            <ul>
+                <li>
 
+                    <a id="booking" href="/Account/MemberBooking" class="booking "><i class="far fa-calendar-check"></i>管理訂單</a>
+                </li>
+                <li>
+                    <a href="" class="inbox"><i class="fas fa-inbox"></i>收件匣</a>
+                </li>
+                <li>
+                    <a href="" class="reviews"><i class="far fa-star"></i>住宿評鑑</a>
+                </li>
+                <li>
+                    <a id="profile" href="/Account/MemberProfile" class="profile">
+                        <i class="far fa-user"></i>個人資料
+                        @if (ViewBag.MemberCurrentPage == "profile")
+                        {
+                            <i class="fas fa-sort-down"></i>
+                        }
+                    </a>
+                    @if (ViewBag.MemberCurrentPage == "profile")
+                    {
+                        <ul class="profile-list">
+                            <li class="">
+                                <a href="#user_details"><i class="fas fa-info-circle"></i>用戶詳細資料</a>
+                            </li>
+                            <li class="">
+                                <a href="#social_networks-link"><i class="fab fa-facebook"></i>社群網路連結</a>
+                            </li>
+                            <li class="">
+                                <a href="#payment-methods"><i class="far fa-credit-card"></i>付款方式</a>
+                            </li>
+                            <li class="">
+                                <a href="#email_subscriptions-link"><i class="fas fa-envelope-open-text"></i>訂閱電子郵件</a>
+                            </li>
+                        </ul>
+                    }
+                </li>
+            </ul>
+        </aside>
+        @RenderBody()
+    </div>
     <!-- Bear加：我把首頁的footer區塊搬過來-------------------------------------------------------------------------------------------------------------- -->
     <div id="Customer-Service">
         <div class="container   row">
@@ -137,7 +178,6 @@
             </div>
         </div>
     </div>
-    @RenderSection("HomePageCountryArea", false)
     <footer class="d-flex  flex-column   justify-content-center  align-items-center">
         <p class="text-white-50" style="margin-top: 70px; text-align:center">
             本網站內容由© 2005–2021 Adoga Company Pte. Ltd.保留所有權利 <br>
@@ -186,6 +226,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
     <!-- mine -->
+    <script>
+        let linkCurrent = @ViewBag.MemberCurrentPage;//不知道為什麼，明明viewBag裡面我只放字串，可是linkCurrent就是抓到id=字串的物件。
+        linkCurrent.classList.add("currentPage");
+    </script>
     @RenderSection("endJS", false)
 
 </body>
