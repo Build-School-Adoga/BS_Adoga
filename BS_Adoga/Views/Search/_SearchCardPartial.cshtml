@@ -2,15 +2,14 @@
 @model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
 @{
     string HotelFullName;
-    List<RoomDetailViewModel> RoomDetailVM = Model.RoomDetailVM;
-    List<RoomViewModel> RoomVM = Model.RoomVM;
+    RoomDetailViewModel rd = Model.I_RoomDetailVM;
+    RoomViewModel r = Model.I_RoomVM;
 
-    //var hID = Model.HotelID;
-    //var rID = RoomVM.Where(x => x.HotelID == hID).Select(x => x.RoomID);
-    //var leftroom = RoomDetailVM.Where(x => x.RoomID = rID).Select(x => x.RoomCount - x.RoomOrder);
-    //var discount = RoomDetailVM.Select(x => x.RoomDiscount * 100);
-    //var lowestPrice = RoomDetailVM.Select(x=>)
-    //var originalPrice = RoomVM.Where(x=>x.RoomID == ).Select(x => x.RoomPrice);
+    var leftroom = rd.RoomCount - rd.RoomOrder;
+    var newPrice = (int)(r.RoomPrice * (1 - rd.RoomDiscount));
+    var roomdiscount = (int)(rd.RoomDiscount * 100);
+    var roomprice = (int)r.RoomPrice;
+    var hotelAddress = Model.HotelCity + ", " + Model.HotelDistrict;
 }
 
 @if (Model.HotelEngName != null)
@@ -43,7 +42,7 @@ else { HotelFullName = Model.HotelName; }
             </div>
             <div class="address">
                 <i class="fas fa-map-marker-alt"></i>
-                <p>@Model.HotelAddress</p>
+                <p>@hotelAddress</p>
             </div>
         </div>
         <div class="include-list">
@@ -60,25 +59,24 @@ else { HotelFullName = Model.HotelName; }
     </div>
     <div class="rank">
         <!-- 目前不用 <div class="point">
-            <div class="comment">
-                <p>很讚</p>
-                <p><span>10,237</span> 份評鑑</p>
-                <p>地點 <span>9.0</span></p>
-            </div>
-            <div class="icon">
-                <p>8.5</p>
-            </div>
-        </div> -->
+        <div class="comment">
+            <p>很讚</p>
+            <p><span>10,237</span> 份評鑑</p>
+            <p>地點 <span>9.0</span></p>
+        </div>
+        <div class="icon">
+            <p>8.5</p>
+        </div>
+    </div> -->
         <div class="offer">
-            <p>只剩<span>1</span>間房可享<span>34</span>％優惠</p>
+            <p>只剩<span>@leftroom</span>間房可享<span>@roomdiscount</span>％優惠</p>
         </div>
         <div class="price">
             <p>每晚含稅價</p>
-            <del>1,918</del>
-            <ins>NT$<span>1,234</span></ins>
+            <del>@roomprice</del>
+            <ins>NT$<span>@newPrice</span></ins>
         </div>
-        <!--bear : 0610新增-->
-        @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", null, new { @class = "btn btn-primary", })
-
+        
+        @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = Model.HotelID }, new { @class = "btn btn-primary", })
     </div>
 </div>

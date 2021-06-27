@@ -50,6 +50,10 @@ section.menu-component ul {
             color: white;
         }
 
+section.menu-component ul ul a {
+    font-size: 16px;
+}
+
 /* section.menu-component ul .inbox:hover {
     display: block;
     background-color: #5392f9;

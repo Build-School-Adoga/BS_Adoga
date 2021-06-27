@@ -16,7 +16,7 @@
         <div class="head-nav-wrap d-flex align-items-center">
             <h2>
                 Agoda-Navbar
-                <a href="#head-nav">
+                <a href="http://adoga.azurewebsites.net/">
                     <img src="~/Asset/images/adoga-logo-v2.png" alt="Adoga-Logo" title="Adoga-Logo-Homepage">
                 </a>
             </h2>
@@ -42,19 +42,26 @@
                         <span class="member-firstname ff-mont fz-12 fw-bold">@User.Identity.Name</span>
                     </label>
                     <input type="checkbox" id="member-menu-chkbox">
+                    @*已登入時的顯示*@
                     <div class="member-menu">
                         <h6>我的帳戶</h6>
                         <ul>
-                            <li><i class="far fa-calendar-check me-2"></i>@Html.ActionLink("管理訂單", "AccountBookings", "Account")</li>
-                            <li><i class="far fa-calendar-check me-2"></i>管理訂單</li>
+                            <li>
+                                <i class="far fa-calendar-check me-2"></i>
+                                @Html.ActionLink("管理訂單", "MemberBooking", "Account")
+                            </li>
                             <li><i class="fas fa-inbox me-2"></i> 收件匣</li>
                             <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
                             <li><i class="far fa-star me-2"></i> 住宿評鑒</li>
-                            <li><i class="far fa-user me-2"></i> 個人資料</li>
+                            <li>
+                                <i class="far fa-user me-2"></i>
+                                @Html.ActionLink("個人資料", "MemberProfile", "Account")
+                            </li>
                             @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2" })
                         </ul>
                     </div>
                 </div>
+
             }
             else
             {

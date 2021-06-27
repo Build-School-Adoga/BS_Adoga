@@ -44,7 +44,10 @@
         display: flex;
         justify-content: space-between;
     }
-
+    /*.filter-container .array-list{*/
+        /*没有作用*/
+        /*padding-bottom: 100px;
+    }*/
         .nav-item .choose-info,
         .nav-item .search-date,
         .main-body .infomation {

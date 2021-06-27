@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BS_Adoga.Models.DBContext;
+using BS_Adoga.Models.ViewModels.Search;
 using System.ComponentModel.DataAnnotations;
 
 namespace BS_Adoga.Repository.Search
@@ -16,45 +17,73 @@ namespace BS_Adoga.Repository.Search
             _context = new AdogaContext();
         }
 
-        //public IQueryable<Hotel> Hotel()
-        //{
-        //    var hotel = from h in _context.Hotels
-        //                select h;
-
-        //    return hotel;
-        //}
-        //public IQueryable<Room> Room()
-        //{
-        //    IQueryable<Hotel> h = Hotel();
-        //    var room = from r in _context.Rooms
-        //               //where r.HotelID == h.
-        //               select r;
-
-        //    return room;
-        //}
-        //public IQueryable<RoomsDetail> RoomDetail()
-        //{
-        //    var hotel = from h in _context.Hotels
-        //                select h;
-
-        //    return hotel;
-        //}
-        public IQueryable<Hotel> ALLHotel()
+        public IQueryable<SearchCardViewModel> ALLHotel()
         {
-            
-            var hotel = from h in _context.Hotels
-                        select h;
+            var hotel = from H in _context.Hotels
+                        join R in _context.Rooms on H.HotelID equals R.HotelID
+                        join D in _context.RoomsDetails on R.RoomID equals D.RoomID
+                        select new SearchCardViewModel
+                        {
+                            HotelID = H.HotelID,
+                            HotelName = H.HotelName,
+                            HotelEngName = H.HotelEngName,
+                            HotelAddress = H.HotelAddress,
+                            Star = H.Star,
+                            HotelCity = H.HotelCity,
+                            HotelDistrict = H.HotelDistrict,
+                            I_RoomVM = new RoomViewModel
+                            {
+                                HotelID = H.HotelID,
+                                RoomID = R.RoomID,
+                                RoomPrice = R.RoomPrice
+                            },
+                            I_RoomDetailVM = new RoomDetailViewModel
+                            {
+                                RoomID = R.RoomID,
+                                CheckInDate = D.CheckInDate,
+                                CheckOutDate = D.CheckOutDate,
+                                RoomCount = D.RoomCount,
+                                RoomOrder = D.RoomOrder,
+                                RoomDiscount = D.RoomDiscount
+                            }
+                        };
+            return hotel;
+        }
+
+        public IQueryable<SearchCardViewModel> GetHotel(string Name)
+        {
+            var hotel = from H in _context.Hotels
+                        join R in _context.Rooms on H.HotelID equals R.HotelID
+                        join D in _context.RoomsDetails on R.RoomID equals D.RoomID
+                        where H.HotelCity.Contains(Name)
+                        select new SearchCardViewModel
+                        {
+                            HotelID = H.HotelID,
+                            HotelName = H.HotelName,
+                            HotelEngName = H.HotelEngName,
+                            HotelAddress = H.HotelAddress,
+                            Star = H.Star,
+                            HotelCity = H.HotelCity,
+                            HotelDistrict = H.HotelDistrict,
+                            I_RoomVM = new RoomViewModel
+                            {
+                                HotelID = H.HotelID,
+                                RoomID = R.RoomID,
+                                RoomPrice = R.RoomPrice
+                            },
+                            I_RoomDetailVM = new RoomDetailViewModel
+                            {
+                                RoomID = R.RoomID,
+                                CheckInDate = D.CheckInDate,
+                                CheckOutDate = D.CheckOutDate,
+                                RoomCount = D.RoomCount,
+                                RoomOrder = D.RoomOrder,
+                                RoomDiscount = D.RoomDiscount
+                            }
+                        };
 
             return hotel;
         }
 
-        public IQueryable<Hotel> GetHotels(string Name)
-        {
-            var hotel = from h in _context.Hotels
-                        where h.HotelName.Contains(Name)
-                        select h;
-
-            return hotel;
-        }
     }
 }

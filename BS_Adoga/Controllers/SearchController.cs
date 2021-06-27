@@ -19,35 +19,20 @@ namespace BS_Adoga.Controllers
         
         public ActionResult Search()
         {
-            //var hotels = s.ALLHotel();
+            //string search = TempData["search"].ToString();
 
-            //return View(hotels);
-            string search = TempData["search"].ToString();
-            var hotels = s.GetHotels(search);
-
-
-
-            return View(hotels);
-        }
-
-
-        public ActionResult SearchHotel()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult SearchHotel(string Name)
-        {
-            var hotels = s.GetHotels(Name);
-
-            //防呆
-            if (hotels == null)
+            if(TempData["search"] == null)
             {
-                //这里的Search是会回去找Get的那个Search
-                return RedirectToAction("Search");
+                var hotels = s.ALLHotel();
+                return View(hotels);
+            }
+            else
+            {
+                var hotels = s.GetHotels(TempData["search"].ToString());
+                return View(hotels);
             }
 
-            return View();
         }
+
     }
 }
