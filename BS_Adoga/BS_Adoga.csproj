@@ -215,6 +215,7 @@
     <Content Include="Asset\JS\formStep.js" />
     <Content Include="Asset\JS\navbar.js" />
     <Content Include="Asset\JS\Search.js" />
+    <Content Include="Asset\JS\_SearchFilterPartial.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />

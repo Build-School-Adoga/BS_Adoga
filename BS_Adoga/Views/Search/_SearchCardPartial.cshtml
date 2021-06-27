@@ -6,9 +6,9 @@
     RoomViewModel r = Model.I_RoomVM;
 
     var leftroom = rd.RoomCount - rd.RoomOrder;
-    var newPrice = (int)(r.RoomPrice * (1 - rd.RoomDiscount));
+    var newPrice = r.RoomPrice * (1 - rd.RoomDiscount);
     var roomdiscount = (int)(rd.RoomDiscount * 100);
-    var roomprice = (int)r.RoomPrice;
+    var roomprice = (int)Math.Round(r.RoomPrice);
     var hotelAddress = Model.HotelCity + ", " + Model.HotelDistrict;
 }
 
@@ -74,7 +74,7 @@ else { HotelFullName = Model.HotelName; }
         <div class="price">
             <p>每晚含稅價</p>
             <del>@roomprice</del>
-            <ins>NT$<span>@newPrice</span></ins>
+            <ins>NT$<span>@Math.Round(newPrice, 0, MidpointRounding.AwayFromZero)</span></ins>
         </div>
         
         @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = Model.HotelID }, new { @class = "btn btn-primary", })

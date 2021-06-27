@@ -8,6 +8,12 @@
 
 @section topCSS{
     <link href="~/Asset/CSS/Search.css" rel="stylesheet" />
+    <link href="~/Asset/CSS/SearchFilterPartial.css" rel="stylesheet" />
+}
+
+@section endJS{
+    <script src="~/Asset/js/Search.js"></script>
+    <script src="~/Asset/js/_SearchFilterPartial.js"></script>
 }
 
 @Html.Partial("_SearchFilterPartial")
@@ -101,9 +107,9 @@
                 </div>
             </div>
             @*<form>
-                <button><i class="fas fa-search"></i></button>
-                <input type="search" placeholder="想搜什麼就搜什麼">
-            </form>*@
+                    <button><i class="fas fa-search"></i></button>
+                    <input type="search" placeholder="想搜什麼就搜什麼">
+                </form>*@
         </div>
     </div>
 </div>
@@ -494,13 +500,11 @@
                 </button>
             </div>
         </nav>
-            @foreach (var card in Model)
-            {
-                @Html.Partial("_SearchCardPartial", card);
-            }
+        @foreach (var card in Model)
+        {
+            @Html.Partial("_SearchCardPartial", card);
+        }
     </div>
 </div>
 
-@section endJS{
-    <script src="~/Asset/js/Search.js"></script>
-}
+
