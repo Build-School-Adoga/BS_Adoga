@@ -43,19 +43,26 @@
                         <span class="member-firstname ff-mont fz-12 fw-bold">@User.Identity.Name</span>
                     </label>
                     <input type="checkbox" id="member-menu-chkbox">
+                    @*已登入時的顯示*@
+                    <div class="member-menu">
+                        <h6>我的帳戶</h6>
+                        <ul>
+                            <li>
+                                <i class="far fa-calendar-check me-2"></i>
+                                @Html.ActionLink("管理訂單", "MemberBooking", "Account")
+                            </li>
+                            <li><i class="fas fa-inbox me-2"></i> 收件匣</li>
+                            <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
+                            <li><i class="far fa-star me-2"></i> 住宿評鑒</li>
+                            <li>
+                                <i class="far fa-user me-2"></i>
+                                @Html.ActionLink("個人資料", "MemberProfile", "Account")
+                            </li>
+                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2" })
+                        </ul>
+                    </div>
                 </div>
-                //已登入時的顯示
-                <div class="member-menu">
-                    <h6>我的帳戶</h6>
-                    <ul>
-                        <li><i class="far fa-calendar-check me-2"></i> 管理訂單</li>
-                        <li><i class="fas fa-inbox me-2"></i> 收件匣</li>
-                        <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
-                        <li><i class="far fa-star me-2"></i> 住宿評鑒</li>
-                        <li><i class="far fa-user me-2"></i> 個人資料</li>
-                        @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2" })
-                    </ul>
-                </div>
+
             }
             else
             {
@@ -70,7 +77,7 @@
         <aside class="left-menu-component pt-4">
             <ul>
                 <li>
-                    
+
                     <a id="booking" href="/Account/MemberBooking" class="booking "><i class="far fa-calendar-check"></i>管理訂單</a>
                 </li>
                 <li>
@@ -89,20 +96,20 @@
                     </a>
                     @if (ViewBag.MemberCurrentPage == "profile")
                     {
-                    <ul class="profile-list">
-                        <li class="">
-                            <a href="#user_details"><i class="fas fa-info-circle"></i>用戶詳細資料</a>
-                        </li>
-                        <li class="">
-                            <a href="#social_networks-link"><i class="fab fa-facebook"></i>社群網路連結</a>
-                        </li>
-                        <li class="">
-                            <a href="#payment-methods"><i class="far fa-credit-card"></i>付款方式</a>
-                        </li>
-                        <li class="">
-                            <a href="#email_subscriptions-link"><i class="fas fa-envelope-open-text"></i>訂閱電子郵件</a>
-                        </li>
-                    </ul>
+                        <ul class="profile-list">
+                            <li class="">
+                                <a href="#user_details"><i class="fas fa-info-circle"></i>用戶詳細資料</a>
+                            </li>
+                            <li class="">
+                                <a href="#social_networks-link"><i class="fab fa-facebook"></i>社群網路連結</a>
+                            </li>
+                            <li class="">
+                                <a href="#payment-methods"><i class="far fa-credit-card"></i>付款方式</a>
+                            </li>
+                            <li class="">
+                                <a href="#email_subscriptions-link"><i class="fas fa-envelope-open-text"></i>訂閱電子郵件</a>
+                            </li>
+                        </ul>
                     }
                 </li>
             </ul>

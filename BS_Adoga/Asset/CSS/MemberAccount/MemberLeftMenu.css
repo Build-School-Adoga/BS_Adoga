@@ -19,6 +19,7 @@ aside{
 
 .left-menu-component {
     min-width: 200px;
+    box-sizing:border-box;
     background-color: #fff;
     padding-left: 10vw;
     box-shadow: 5px 3px 6px rgba(66, 66, 66, 0.137);
@@ -30,7 +31,8 @@ aside{
 
 .left-menu-component a {
     display: block;
-    padding: 12px 130px 12px 10px;
+    width:250px;
+    padding: 12px 0px 12px 10px;
     font-weight: bold;
     text-decoration: none;
     color: rgb(93, 143, 236);
@@ -71,3 +73,35 @@ aside{
     .left-menu-component .profile-list i {
         font-size: 14px;
     }
+@media screen and (max-width:1400px) {
+    .left-menu-component {
+        padding-left: 3vw;
+    }
+
+        .left-menu-component a {
+            width: 250px;
+        }
+}
+
+@media screen and (max-width:1200px) {
+    .left-menu-component {
+        padding-left: 0vw;
+    }
+
+        .left-menu-component a {
+            width:210px;
+            padding: 12px 20px 12px 10px;
+        }
+}
+
+@media screen and (max-width:1150px) {
+    .left-menu-component {
+        padding-left: 0vw;
+    }
+
+        .left-menu-component a {
+            width:unset;
+            padding: 12px 10px 12px 0px;
+        }
+}
+
