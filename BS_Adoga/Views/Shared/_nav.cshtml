@@ -1,98 +1,53 @@
 ﻿
 @section topCSS{
-    <link href="~/Asset/CSS/SearchFilterPartial.css" rel="stylesheet" />
+    <link href="~/Asset/CSS/HomePage.css" rel="stylesheet" />
 }
 
 @section endJS{
-    <script src="~/Asset/js/Search.js"></script>
+    
+
+    <script src="~/Asset/js/home.js"></script>
 }
-<nav id="nav" class="search-filter-nav">
-    <div class="nav-item "style="margin-left:700px;">
-        <div id="person-info" class="choose-bar" type="button" data-bs-toggle="dropdown" aria-expanded="true"style="display:flex;">
-            <i class="fas fa-user-friends"></i>
-            <div class="choose-info">
-                <p>2位大人</p>
-                <p>1间房间</p>
-            </div>
-            <i class="fas fa-angle-down"></i>
+<div class="btn-group" id="inputGroupSelect03">
+
+    <button type="button" class="btn  d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" style=" border-color: #dddfe2; font-size:16px;line-height:22.8571px;">
+
+        <i class="fas fa-user-friends" style="background-color:#FFFFFF;color:#555555;margin-right:10px;"></i>
+        <div class="d-flex flex-column align-items-start" style="width:200px; ">
+            <p>1位大人,1位兒童</p>
+
+            <p style="color:#999">1間房間</p>
         </div>
-        <ul class="dropdown-menu" aria-labelledby="person-info">
-            <li class="dropdown-item">
-                <button type="button">
-                    <p>單人旅遊</p>
-                    <p>1間客房, 1位大人</p>
-                </button>
-            </li>
-            <li class="dropdown-item">
-                <button type="button">
-                    <p>雙人旅遊</p>
-                    <p>1間客房, 2位大人</p>
-                </button>
-            </li>
-            <li class="dropdown-item input-request" data-stopPropagation="true">
-                <button type="button">
-                    <p>家庭旅遊</p>
-                    <div><i class="fas fa-chevron-right"></i></div>
-                </button>
-                <ul>
-                    <li class="dropdown-item room">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>間房間</p>
-                        <i class="fas fa-plus"></i>
-                    </li>
-                    <li class="dropdown-item adult">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>位大人</p>
-                        <i class="fas fa-plus"></i>
-                    </li>
-                    <li class="dropdown-item kid">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>位兒童</p>
-                        <i class="fas fa-plus"></i>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown-item input-request" data-stopPropagation="true">
-                <button type="button">
-                    <p>團體旅遊</p>
-                    <div><i class="fas fa-chevron-right"></i></div>
-                </button>
-                <ul>
-                    <li class="dropdown-item room">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>間房間</p>
-                        <i class="fas fa-plus"></i>
-                    </li>
-                    <li class="dropdown-item adult">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>位大人</p>
-                        <i class="fas fa-plus"></i>
-                    </li>
-                    <li class="dropdown-item kid">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>位兒童</p>
-                        <i class="fas fa-plus"></i>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown-item input-request">
-                <button type="button">
-                    <p>商務旅遊</p>
-                    <div><i class="fas fa-chevron-right"></i></div>
-                </button>
-                <ul>
-                    <li class="dropdown-item room" data-stopPropagation="true">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>間房間</p>
-                        <i class="fas fa-plus"></i>
-                    </li>
-                    <li class="dropdown-item adult" data-stopPropagation="true">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>位大人</p>
-                        <i class="fas fa-plus"></i>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    </nav>
+
+        <i class="fas fa-angle-down" style="margin-left:200px"></i>
+
+    </button>
+
+    <ul class="dropdown-menu " role="menu" aria- labelledby="dLabel">
+
+        <li class="dropdown-item   input-request"data-stopPropagation="true">
+            <button type="button" class="dropdown-item d-flex" >
+                <div>
+                    <span style="font-size:14px;line-height:20px;">單人旅遊</span>   <div class="d-flex justify-content-center bg-danger align-items-center">
+                        <h4 class="text-white " style="font-size: 12px; line-height: 17px;font-weight:700">訂房最多可省12%</h4>
+                    </div>
+                </div>
+                <p style="font-size: 12px; line-height: 17px;">一間客房,1位大人</p>
+
+            </button>
+            <ul class="dropdown-item">
+                <li>Item 1-1</li>
+                <li>Item 1-2</li>
+            </ul>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item d-flex" href="#"> <span style="font-size:14px;line-height:20px;margin-right:40px">雙人旅遊</span>  <p style="font-size: 12px; line-height: 17px;">一間客房,2位大人</p></a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#"> <span style="font-size:14px;line-height:20px;">家庭旅遊</span></a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#"><span style="font-size:14px;line-height:20px;">團體旅遊</span></a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#"><span style="font-size:14px;line-height:20px;">商務旅客</span></a></li>
+
+    </ul>
+</div>
