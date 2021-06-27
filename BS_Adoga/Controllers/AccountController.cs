@@ -4,9 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BS_Adoga.Service.Account;
+using System.Web.Security;
+using BS_Adoga.Service.Account;
 
 namespace BS_Adoga.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private MemberAccountService _service;
@@ -29,7 +32,7 @@ namespace BS_Adoga.Controllers
             ViewBag.MemberCurrentPage = "profile";
 
 
-
+            string id = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
 
             return View();
         }
