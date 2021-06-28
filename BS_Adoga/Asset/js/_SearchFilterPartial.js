@@ -45,3 +45,5 @@ function close_filter() {
     kid_num.style.visibility = "hidden";
 
 }
+
+//Vue

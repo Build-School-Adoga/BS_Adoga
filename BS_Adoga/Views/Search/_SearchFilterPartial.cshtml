@@ -1,5 +1,5 @@
 ﻿
-<nav id="nav " class="search-filter-nav">
+<nav id="nav" class="search-filter-nav">
     <div class="search-bar">
         <div class="nav-item">
             <i class="fas fa-search"></i>
@@ -61,19 +61,19 @@
                 </div>
                 <div id="count-person">
                     <div class="count-box" id="room-num">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>間房間</p>
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-minus" v-on:click="minus('room')"></i>
+                        <p><span>{{room}}</span>間房間</p>
+                        <i class="fas fa-plus" v-on:click="plus('room')"></i>
                     </div>
                     <div class="count-box" id="adult-num">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>位大人</p>
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-minus" v-on:click="minus('adult')"></i>
+                        <p><span>{{adult}}</span>位大人</p>
+                        <i class="fas fa-plus" v-on:click="plus('adult')"></i>
                     </div>
                     <div class="count-box" id="kids-num">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>位兒童</p>
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-minus" v-on:click="minus('kids')"></i>
+                        <p><span>{{kids}}</span>位兒童</p>
+                        <i class="fas fa-plus" v-on:click="plus('kids')"></i>
                     </div>
                     <button id="done-counting">
                         完成
@@ -84,3 +84,67 @@
         <button type="button" class="btn btn-primary btn-search">搜出好價</button>
     </div>
 </nav>
+
+<!-- VueJS -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    var filter = new Vue({
+        el: '#nav',
+        data: {
+            room: 1,
+            adult: 1,
+            kids: 0,
+        },
+        methods: {
+            minus: function (e) {
+                switch (e) {
+                    case 'room':
+                        if (this.room > 1) {
+                            this.room -= 1;
+                        }
+                        else {
+                            alert("數量不可為0！");
+                        }
+                        break
+                    case "adult":
+                        if (this.adult > 1) {
+                            this.adlut -= 1
+                        }
+                        else { alert("數量不可為0！"); }
+                        break
+                    default://小孩
+                        if (this.kids > 0) {
+                            this.kids -= 1
+                        }
+                        else { alert("數量不可少於0！"); }
+                        break
+                }
+            },
+            plus: function (e) {
+                switch (e) {
+                    case 'room':
+                        if (this.room < 9) {
+                            this.room += 1;
+                        }
+                        else {
+                            alert("數量最多為9！");
+                        }
+                        break
+                    case "adult":
+                        if (this.adult < 9) {
+                            this.adlut += 1
+                        }
+                        else { alert("數量最多為9！"); }
+                        break
+                    default://小孩
+                        if (this.kids < 9) {
+                            this.kids += 1
+                        }
+                        else { alert("數量最多為9！"); }
+    break
+                }
+            }
+        }
+    })
+</script>
