@@ -142,6 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
+    <Compile Include="Controllers\FunctionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelDetailController.cs" />
     <Compile Include="Controllers\HotelLoginController.cs" />
@@ -188,14 +189,16 @@
     <Compile Include="Repository\HotelDetail\HotelDetailRepository.cs" />
     <Compile Include="Repository\Search\SearchCardRepository.cs" />
     <Compile Include="Service\HotelDetail\HotelDetailService.cs" />
+    <Compile Include="Service\HotelLoginAuthorizeAttribute.cs" />
     <Compile Include="Service\Search\SearchCardService.cs" />
     <Compile Include="Service\HashService.cs" />
     <Compile Include="Service\MultiButtonAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Asset\CSS\AccountBookings.css" />
-    <Content Include="Asset\CSS\AdogaLayout.css" />
+    <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
+    <Content Include="Asset\CSS\FunctionPage.css" />
     <Content Include="Asset\CSS\HotelLogin.css" />
+    <Content Include="Asset\CSS\MemberAccount\MemberDetail.css" />
     <Content Include="Asset\CSS\Search.css" />
     <Content Include="Asset\CSS\SearchFilterPartial.css" />
     <Content Include="Asset\CSS\StepBar.css" />
@@ -326,24 +329,49 @@
     <Content Include="Views\Search\SearchHotel.cshtml" />
     <Content Include="Views\HotelDetail\_RoomTypePartial.cshtml" />
     <Content Include="Views\Shared\_option2.cshtml" />
+    <Content Include="Views\Function\Index.cshtml" />
+    <Content Include="Views\Shared\_FunctionPage.cshtml" />
+    <Content Include="Views\Function\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_nav.cshtml" />
+    <Content Include="Views\Account\_MemberDetailPartial.cshtml" />
+    <Content Include="Views\Account\_MemberBookingPartial.cshtml" />
     <Content Include="Views\CheckOut\PayAPI.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="APIController\Account\" />
+    <Folder Include="APIController\CheckOut\" />
+    <Folder Include="APIController\Home\" />
+    <Folder Include="APIController\HotelDetail\" />
+    <Folder Include="APIController\HotelLogin\" />
+    <Folder Include="APIController\MemberLogin\" />
+    <Folder Include="APIController\Search\" />
     <Folder Include="App_Data\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
+    <Folder Include="Asset\images\Home\" />
+    <Folder Include="Asset\images\HotelDetail\" />
     <Folder Include="Asset\images\HotelLogin\" />
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Models\ViewModels\Account\" />
+    <Folder Include="Models\ViewModels\CheckOut\" />
+    <Folder Include="Models\ViewModels\HotelLogin\" />
+    <Folder Include="Models\ViewModels\MemberLogin\" />
+    <Folder Include="Models\ViewModels\Search\" />
     <Folder Include="Repository\Account\" />
     <Folder Include="Repository\CheckOut\" />
+    <Folder Include="Repository\Home\" />
+    <Folder Include="Repository\HotelDetail\" />
     <Folder Include="Repository\HotelLogin\" />
     <Folder Include="Repository\MemberLogin\" />
+    <Folder Include="Repository\Search\" />
     <Folder Include="Service\Account\" />
     <Folder Include="Service\CheckOut\" />
+    <Folder Include="Service\Home\" />
+    <Folder Include="Service\HotelDetail\" />
     <Folder Include="Service\HotelLogin\" />
     <Folder Include="Service\MemberLogin\" />
+    <Folder Include="Service\Search\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

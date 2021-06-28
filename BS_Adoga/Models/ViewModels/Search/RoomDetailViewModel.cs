@@ -13,6 +13,6 @@ namespace BS_Adoga.Models.ViewModels.Search
         public int RoomCount { get; set; }
         public int RoomOrder { get; set; }
         public decimal RoomDiscount { get; set; }
-        public bool OprenRoom { get; set; }
+        //public bool OpenRoom { get; set; }
     }
 }

@@ -17,6 +17,16 @@ namespace BS_Adoga.Service.HotelDetail
             _repository = new HotelDetailRepository();
         }
 
+        public DetailVM GetDetailVM (string hotelId)
+        {
+            DetailVM hotelDetail = new DetailVM()
+            {
+                hotelVM = GetHotel(hotelId),
+                roomTypeVM = GetRoomType(hotelId)
+            };
+            return hotelDetail;
+        }
+
         public HotelVM GetHotel(string hotelId)
         {
             if (hotelId == null) hotelId = "hotel04";
@@ -29,7 +39,7 @@ namespace BS_Adoga.Service.HotelDetail
                 HotelName = s.HotelName,
                 HotelEngName = s.HotelEngName,
                 HotelCity = s.HotelCity,
-                HotelAddress = s.HotelCity + "," + s.HotelDistrict + "," + s.HotelAddress,
+                HotelAddress =  s.HotelAddress,/*s.HotelCity + "," + s.HotelDistrict + "," +*/
                 HotelAbout = s.HotelAbout,
                 Longitude = s.Longitude,
                 Latitude = s.Latitude,

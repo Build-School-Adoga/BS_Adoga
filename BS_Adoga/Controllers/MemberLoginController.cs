@@ -22,6 +22,12 @@ namespace BS_Adoga.Controllers
         {
             return View();
         }
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut(); //登出
+
+            return RedirectToAction("MemberLogin", "MemberLogin");
+        }
         #region memberlogin方法一未驗證欄位
         //[HttpPost]
         //public ActionResult MemberLogin(Customer log, String FirstName,String LastName,String Email,String Password1,String Password2)
@@ -139,7 +145,7 @@ namespace BS_Adoga.Controllers
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: loginVM.MemberLoginViewModel.Remember,// 是否要記住我 true or false
-            userData: "", //可以放使用者角色名稱
+            userData: loginVM.MemberLoginViewModel.Email, //可以放使用者角色名稱
             cookiePath: FormsAuthentication.FormsCookiePath);
 
             //2.Encrypt the Ticket

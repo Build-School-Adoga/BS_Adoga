@@ -441,7 +441,7 @@ i.fas.fa-star {
 
 /* 卡片照片*/
 .infomation .card .img {
-    width: 33.3333%;
+    width: 40%;
     font-size: 0; /*图片之间的空隙*/
 }
 
@@ -479,7 +479,7 @@ i.fas.fa-star {
 
 /* 卡片(右边) 价钱栏 */
 .infomation .card .rank {
-    width: 25%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -527,7 +527,7 @@ i.fas.fa-star {
 
 /* 卡片详细内容 */
 .infomation .card .detail {
-    width: 66.6667%;
+    width: 60%;
     padding: 5px 10px 10px;
 }
 

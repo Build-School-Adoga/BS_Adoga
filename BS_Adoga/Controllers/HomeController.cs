@@ -123,15 +123,27 @@ namespace BS_Adoga.Controllers
         [HttpPost]
         public ActionResult Search(string search)
         {
-          
-                  var xxx = from p in _homeService._homeRepository._context.Hotels
-                            where p.HotelName == search
-                  select p.HotelID;
+            if (search.Length ==3)
+            {
+                TempData["search"] = search;
+
+                return RedirectToAction("Search", "Search", search);
+            }
+            else {
+                var xxx = from p in _homeService._homeRepository._context.Hotels
+                          where p.HotelName == search
+                          select p.HotelID;
 
 
-             TempData["search"] = xxx.FirstOrDefault();
-            return RedirectToAction("Detail", "HotelDetail", search);
+                TempData["search"] = xxx.FirstOrDefault();
+
+                return RedirectToAction("Detail", "HotelDetail", search);
+            }
+
+
         }
+       
+     
     }
 
 }
