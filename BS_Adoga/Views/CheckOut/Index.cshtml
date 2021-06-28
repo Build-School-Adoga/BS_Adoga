@@ -65,7 +65,7 @@
                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                     <div class="border border-3 bg-white p-3 m-1">
 
-                        <form class="row g-3">
+                        <form class="row g-3" action="" method="post">
                             <p class="fw-bold h5">請填寫以下資訊</p>
                             <!--FirstName-->
                             <div class="col-md-6">
@@ -110,14 +110,25 @@
                             <!--Country-->
                             <div class="col-md-6">
                                 <label for="country" class="form-label">居住地</label>
-                                <select id="country" class="form-select">
+                                @*<select id="country" class="form-select">
                                     <option selected>台灣</option>
                                     <option>日本</option>
                                     <option>韓國</option>
                                     <option>美國</option>
                                     <option>中國</option>
                                     <option>澳洲</option>
-                                </select>
+                                </select>*@
+                                @{
+                                    List<SelectListItem> country = new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Text = "台灣", Value = "台灣", Selected = true},
+                                        new SelectListItem { Text = "日本", Value = "日本" },
+                                        new SelectListItem { Text = "韓國", Value = "韓國" },
+                                        new SelectListItem { Text = "美國", Value = "美國" },
+                                        new SelectListItem { Text = "澳洲", Value = "澳洲" }
+                                    };
+                                }
+                                @Html.DropDownListFor(x => x.countries, country, new { @class = "form-select" })
                             </div>
                             <!--
     <div class="col-12">
@@ -163,27 +174,19 @@
                                     <div class="row m-auto g-2">
                                         <span class="p-2">吸菸需求（需視現場狀況安排）</span>
                                         <div class="form-check col-md-6">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions1"
-                                                   id="nonSmoking">
-                                            <label class="form-check-label" for="nonSmoking">禁菸房</label>
+                                            @Html.RadioButtonFor(model => model.SmokingPreference, "禁菸房", new { @id = "non-smok", @class = "form-check-input" }) 禁菸房
                                         </div>
                                         <div class="form-check col-md-6">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions1"
-                                                   id="smoking">
-                                            <label class="form-check-label" for="smoking">吸菸房</label>
+                                            @Html.RadioButtonFor(model => model.SmokingPreference, "吸菸房", new { @id = "smok", @class = "form-check-input" }) 吸菸房
                                         </div>
                                     </div>
                                     <div class="row m-auto g-2">
                                         <span class="p-2">床型需求（需視現場狀況安排）</span>
                                         <div class="form-check col-md-6">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                                   id="BigBed">
-                                            <label class="form-check-label" for="BigBed">大床</label>
+                                            @Html.RadioButtonFor(model => model.BedPreference, "大床", new { @id = "bidbed", @class = "form-check-input" }) 大床
                                         </div>
                                         <div class="form-check col-md-6">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                                   id="twoBeds">
-                                            <label class="form-check-label" for="twoBeds">兩床</label>
+                                            @Html.RadioButtonFor(model => model.BedPreference, "兩床", new { @id = "twobed", @class = "form-check-input" }) 兩床
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +226,7 @@
                             <div class="col-12 col-md-6">
                                 <p class="fw-bold">預計何時能抵達住宿？</p>
                                 <span>請選擇預計抵達的時間，我們會幫你通知住宿或房東。</span>
-                                <select class="form-select" aria-label="Default select example">
+                                @*<select class="form-select" aria-label="Default select example">
                                     <option selected>還不確定</option>
                                     <option value="1">00:00 - 01:00</option>
                                     <option value="2">01:00 - 02:00</option>
@@ -251,7 +254,16 @@
                                     <option value="3">23:00 - 24:00</option>
                                     <option value="3">00:00 - 01:00(隔天)</option>
                                     <option value="3">01:00 - 02:00(隔天)</option>
-                                </select>
+                                </select>*@
+                                @{
+                                    List<SelectListItem> arrivingTime = new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Text = "還不確定", Value = "還不確定", Selected = true},
+                                        new SelectListItem { Text = "00:00 - 01:00", Value = "00:00 - 01:00" },
+                                        new SelectListItem { Text = "01:00 - 02:00", Value = "01:00 - 02:00" }
+                                    };
+                                }
+                                @Html.DropDownListFor(m => m.ArrivingTime, arrivingTime, new { @class = "form-select" })
                             </div>
                             <div class="border border-3 bg-white p-3 m-1">
                                 <p>
@@ -263,6 +275,7 @@
                                 </p>
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end next action-button">
                                     <button type="submit" class="btn btn-primary me-md-2">繼續</button>
+                                    @*<button class="btn btn-primary me-md-2">繼續</button>*@
                                 </div>
                             </div>
                         </form>
@@ -281,13 +294,13 @@
                         </div>
                     </div>
                     -->
-                    
+                    @Html.Raw(ViewBag.CreditPay)
                 }
             </fieldset>
 
             <!--付款資訊-->
             <fieldset>
-                <div class="card">
+                @*<div class="card">
                     <h5 class="card-header" style="font-size: 14px;">
                         安全付款
                         所有卡片資訊均經過加密，確保安全無虞！
@@ -342,7 +355,8 @@
                     <div class="card-footer">
                         您的訂房入住憑證將會寄送至：XXXXXXXXXXXX@gmail.com
                     </div>
-                </div>
+                </div>*@
+                
             </fieldset>
 
             <!--收據資訊-->
@@ -421,40 +435,6 @@
             </div>
         </div>
     </div>
-    <!--
-    <div class="row">
-        <div class="col-md-4 d-none d-xl-block">
-            <div class="card border-0 align-items-center">
-                <img src="https://cdn6.agoda.net/images/new-bf/15-mil-reviews-light.png" class="card-img-top w-25"
-                     alt="...">
-                <div class="card-body text-center">
-                    <div class="card-title fw-bold" style="color:#8660c7">超過1億3百萬篇已驗證評鑑</div>
-                    <div class="card-text" style="font-size: 10px;">訂房前先看住客真心話評鑑，絕對不踩雷！</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 d-none d-xl-block">
-            <div class="card border-0 align-items-center">
-                <img src="https://cdn6.agoda.net/images/new-bf/price-guarantee.png" class="card-img-top w-25"
-                     alt="...">
-                <div class="card-body text-center">
-                    <div class="card-title fw-bold" style="color:#8660c7">價格保證</div>
-                    <div class="card-text" style="font-size: 10px;">我們致力提供最好的價格，保證便宜，訂貴退差價！</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 d-none d-xl-block">
-            <div class="card border-0 align-items-center">
-                <img src="https://cdn6.agoda.net/images/new-bf/customer-support.png" class="card-img-top w-25"
-                     alt="...">
-                <div class="card-body text-center">
-                    <div class="card-title fw-bold" style="color:#8660c7">24小時客戶服務中心</div>
-                    <div class="card-text" style="font-size: 10px;">提供17種主要語言，全天候待命為您服務！</div>
-                </div>
-            </div>
-        </div>
-    </div>
-     -->
 </div>
 
 @section endJS{

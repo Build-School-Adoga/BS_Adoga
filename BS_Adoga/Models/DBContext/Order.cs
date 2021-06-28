@@ -66,6 +66,8 @@ namespace BS_Adoga.Models.DBContext
         [StringLength(50)]
         public string ArrivingTime { get; set; }
 
+        public bool PaymentStatus { get; set; }
+
         [Required]
         public string Logging { get; set; }
 
