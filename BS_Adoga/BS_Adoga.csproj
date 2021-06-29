@@ -201,6 +201,8 @@
     <Content Include="Asset\CSS\FunctionPage.css" />
     <Content Include="Asset\CSS\HotelLogin.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberDetail.css" />
+    <Content Include="Asset\CSS\MemberAccount\MemberProfile.css" />
+    <Content Include="Asset\CSS\MemberAccount\MemberLeftMenu.css" />
     <Content Include="Asset\CSS\Search.css" />
     <Content Include="Asset\CSS\SearchFilterPartial.css" />
     <Content Include="Asset\CSS\StepBar.css" />
