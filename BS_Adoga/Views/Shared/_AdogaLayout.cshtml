@@ -48,14 +48,14 @@
                         <ul>
                             <li>
                                 <i class="far fa-calendar-check me-2"></i>
-                                @Html.ActionLink("管理訂單","MemberBooking","Account")
+                                @Html.ActionLink("管理訂單", "MemberBooking", "Account")
                             </li>
                             <li><i class="fas fa-inbox me-2"></i> 收件匣</li>
                             <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
                             <li><i class="far fa-star me-2"></i> 住宿評鑒</li>
                             <li>
                                 <i class="far fa-user me-2"></i>
-                                @Html.ActionLink("個人資料","MemberProfile","Account")
+                                @Html.ActionLink("個人資料", "MemberProfile", "Account")
                             </li>
                             @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2" })
                         </ul>
@@ -70,7 +70,10 @@
                 @*<a href="#" class="head-nav-item blue" data-bs-toggle="modal" data-bs-target="#SigninModal">A咖登入</a>*@
                 <a href="#" class="head-nav-item blue" data-bs-toggle="modal" data-bs-target="#RegisterModal">我是新朋友</a>
             }
+
         </div>
+
+           
     </nav>
     @RenderSection("scrollNav", false)
     @RenderBody()

@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ECPay.Payment.Integration">
+      <HintPath>..\..\ECPayAIO_Net-1.191231\ECPay.Payment.Integration.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -55,6 +58,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -63,6 +69,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -188,8 +200,7 @@
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
     <Content Include="Asset\CSS\HotelLogin.css" />
-    <Content Include="Asset\CSS\MemberAccount\MemberProfile.css" />
-    <Content Include="Asset\CSS\MemberAccount\MemberLeftMenu.css" />
+    <Content Include="Asset\CSS\MemberAccount\MemberDetail.css" />
     <Content Include="Asset\CSS\Search.css" />
     <Content Include="Asset\CSS\SearchFilterPartial.css" />
     <Content Include="Asset\CSS\StepBar.css" />
@@ -240,6 +251,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Library\ECPay.Payment.Integration.dll" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -327,6 +339,9 @@
     <Content Include="Views\Shared\_nav.cshtml" />
     <Content Include="Views\Account\_LayoutMember.cshtml" />
     <Content Include="Views\Account\MemberBooking.cshtml" />
+    <Content Include="Views\Account\_MemberDetailPartial.cshtml" />
+    <Content Include="Views\Account\_MemberBookingPartial.cshtml" />
+    <Content Include="Views\CheckOut\PayAPI.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIController\Account\" />
@@ -343,9 +358,11 @@
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Models\ViewModels\Account\" />
+    <Folder Include="Repository\Account\" />
     <Folder Include="Repository\CheckOut\" />
     <Folder Include="Repository\HotelLogin\" />
     <Folder Include="Repository\MemberLogin\" />
+    <Folder Include="Service\Account\" />
     <Folder Include="Service\CheckOut\" />
     <Folder Include="Service\HotelLogin\" />
     <Folder Include="Service\MemberLogin\" />
@@ -357,6 +374,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
