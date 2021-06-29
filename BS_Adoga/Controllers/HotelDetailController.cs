@@ -60,7 +60,9 @@ namespace BS_Adoga.Controllers
                 }
             };
 
-            TempData["orderData"] = orderData;            
+            TempData["orderData"] = orderData;
+
+            
 
             return RedirectToAction("Index", "CheckOut");
         }

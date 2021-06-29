@@ -5,6 +5,8 @@
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_LayoutCheckout.cshtml";
 
+    TempData.Peek("orderData");
+
     var hotelAndRoom = Model.roomCheckOutViewModel;
     var checkOut = Model.checkOutListViewModel;
 }
