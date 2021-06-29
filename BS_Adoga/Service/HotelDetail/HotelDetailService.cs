@@ -96,5 +96,35 @@ namespace BS_Adoga.Service.HotelDetail
 
             return result;
         }
+
+        public RoomCheckOutData GetCheckOutData(string hotelId,string roomId)
+        {
+            var hotel = _repository.GetHotel(hotelId);
+            var allRoomType = GetRoomType(roomId);
+            var selectedRoomType = from rt in allRoomType
+                                   where rt.RoomID == roomId
+                                   select rt;
+
+            var checkOutData = from h in hotel
+                               join rt in selectedRoomType on h.HotelID equals rt.HotelID
+                               select new RoomCheckOutData
+                               {
+                                   HotelID = h.HotelID,
+                                   HotelFullName = h.HotelName + " (" + h.HotelEngName + ")",
+                                   HotelAddress = h.HotelAddress,
+                                   RoomID = rt.RoomID,
+                                   RoomName = rt.RoomName,
+                                   BedType = "雙人床",
+                                   Breakfast = rt.Breakfast,
+                                   NoSmoking = rt.NoSmoking,
+                                   RoomPrice = rt.RoomPrice,
+                                   RoomDiscount = rt.RoomDiscount,
+                                   RoomNowPrice = rt.RoomNowPrice,
+                                   Adult = rt.Adult,
+                                   Child = rt.Child
+                               };
+            var B = checkOutData.FirstOrDefault();
+            return checkOutData.FirstOrDefault();
+        }
     }
 }

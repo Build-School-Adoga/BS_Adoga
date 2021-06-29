@@ -36,6 +36,7 @@ namespace BS_Adoga.Repository.HotelDetail
                                where h.HotelID == hotelId && r_detail.RoomCount - r_detail.RoomOrder >= 1
                                select new RoomTypeVM
                                {
+                                   HotelID = h.HotelID,
                                    RoomID = r.RoomID,
                                    RoomName = r.RoomName,
                                    WiFi = r.WiFi,
@@ -60,5 +61,6 @@ namespace BS_Adoga.Repository.HotelDetail
             return roomTypeData;
         }
 
+        
     }
 }

@@ -5,9 +5,13 @@ using System.Web;
 
 namespace BS_Adoga.Models.ViewModels.HotelDetail
 {
-    public class RoomTypeVM
+    public class RoomCheckOutData
     {
         public string HotelID { get; set; }
+
+        public string HotelFullName { get; set; }
+
+        public string HotelAddress { get; set; }
 
         public string RoomID { get; set; }
 
@@ -17,11 +21,8 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
 
         public bool Breakfast { get; set; }
 
-        public bool WiFi { get; set; }
-
-        public string BathroomName { get; set; }
-
-        public IQueryable<RoomBedVM> RoomBed { get; set; }
+        public string BedType { get; set; }
+        //public IQueryable<RoomBedVM> RoomBed { get; set; }
 
         public int Adult { get; set; }
 
@@ -32,7 +33,5 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
         public decimal RoomDiscount { get; set; }
 
         public decimal RoomNowPrice { get; set; }
-
-        public int RoomLeft { get; set; }
     }
 }
