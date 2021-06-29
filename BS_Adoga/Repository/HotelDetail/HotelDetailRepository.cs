@@ -29,6 +29,17 @@ namespace BS_Adoga.Repository.HotelDetail
 
         public IQueryable<RoomTypeVM> GetRoomType(string hotelId)
         {
+            int countDay = 3;
+            string[] pickDate = new string[]{"2021-06-20", "2021-06-21", "2021-06-22"};
+            int countPerson = 10;
+
+            //var testData = from h in _context.Hotels
+            //               join r in _context.Rooms on h.HotelID equals r.HotelID
+            //               join bath in _context.BathroomTypes on r.TypesOfBathroomID equals bath.TypesOfBathroomID
+            //               join r_detail in _context.RoomsDetails on r.RoomID equals r_detail.RoomID
+            //               join pick in pickDate on  pickDate.Contains(r_detail.CheckInDate.ToShortDateString())
+            //               where h.HotelID == hotelId
+
             var roomTypeData = from h in _context.Hotels
                                join r in _context.Rooms on h.HotelID equals r.HotelID
                                join bath in _context.BathroomTypes on r.TypesOfBathroomID equals bath.TypesOfBathroomID

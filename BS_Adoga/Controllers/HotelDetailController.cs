@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
+using BS_Adoga.Models.ViewModels.CheckOut;
 using BS_Adoga.Service.HotelDetail;
 
 namespace BS_Adoga.Controllers
@@ -40,24 +41,27 @@ namespace BS_Adoga.Controllers
             //var a = _service.GetCheckOutData(hotelId, roomId);
             //TempData["Order"] = _service.GetCheckOutData(hotelId,roomId);
             var hotel = _service.GetHotel(hotelId);
-            TempData["Order"] = new
-            {
-                HotelId= hotel.HotelID,
-                HotelFullName = hotel.HotelName + " (" + hotel.HotelEngName + ")",
-                Address = hotel.HotelAddress,
-                RoomId = roomId,
-                RoomName = roomName,
-                Breakfast = breakfast,
-                BedType = bedType,
-                Adult = adult,
-                Child = child,
-                RoomOrder = roomOrder,
-                RoomPrice = roomPrice,
-                Discount = roomDiscount,
-                TotalPrice = roomNowPrice
+            OrderVM orderData = new OrderVM(){
+                roomCheckOutViewModel = new RoomCheckOutData
+                {
+                    HotelID = hotel.HotelID,
+                    HotelFullName = hotel.HotelName + " (" + hotel.HotelEngName + ")",
+                    Address = hotel.HotelAddress,
+                    RoomID = roomId,
+                    RoomName = roomName,
+                    Breakfast = breakfast,
+                    BedType = bedType,
+                    Adult = adult,
+                    Child = child,
+                    RoomOrder = roomOrder,
+                    RoomPrice = roomPrice,
+                    Discount = roomDiscount,
+                    TotalPrice = roomNowPrice
+                }
             };
+            
 
-            return RedirectToAction("Index", "CheckOut");
+            return RedirectToAction("Index", "CheckOut",new { data = orderData});
         }
 
         //public ActionResult DetailAlbum()
