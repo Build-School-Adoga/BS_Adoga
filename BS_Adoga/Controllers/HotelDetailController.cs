@@ -59,9 +59,10 @@ namespace BS_Adoga.Controllers
                     TotalPrice = roomNowPrice
                 }
             };
-            
 
-            return RedirectToAction("Index", "CheckOut",new { data = orderData});
+            TempData["orderData"] = orderData;            
+
+            return RedirectToAction("Index", "CheckOut");
         }
 
         //public ActionResult DetailAlbum()
