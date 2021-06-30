@@ -83,7 +83,7 @@
                     <div class="col-3">
                     </div>
                 </div>
-                <div class="row room-case pe-3 mb-3">
+                <div class="row room-case one-case pe-3 mb-3">
                     <div class="col-4 pt-2">
                         <p class="fz-12 fw-bold mb-2">優惠專案</p>
                         @if (room.Breakfast)
@@ -149,9 +149,9 @@
                             roomName = room.RoomName,
                             breakfast = room.Breakfast,
                             bedType = "雙人床",
-                            adult = 2,
-                            child = 1,
-                            roomOrder = 1,
+                            adult = room.Adult,
+                            child = room.Child,
+                            roomOrder = 2,
                             roomPrice = roomPrice,
                             roomDiscount = discount,
                             roomNowPrice = roomNowPrice

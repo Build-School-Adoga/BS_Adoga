@@ -49,17 +49,14 @@ namespace BS_Adoga.Service.HotelDetail
             return result;
         }
 
-        public IQueryable<RoomTypeVM> GetRoomType(string hotelId)
+        //public IQueryable<RoomTypeVM> GetRoomType(string hotelId)
+        public IEnumerable<RoomTypeVM> GetRoomType(string hotelId)
         {
             if (hotelId == null) hotelId = "hotel04";
 
             var result = _repository.GetRoomType(hotelId);
             foreach (var item in result)
             {
-                //item.RoomDiscount = Math.Round(item.RoomDiscount * 10, 1,MidpointRounding.AwayFromZero);
-                //item.RoomPrice = Math.Round(item.RoomPrice, 0, MidpointRounding.AwayFromZero);
-                //item.RoomNowPrice = Math.Round(item.RoomNowPrice, 0, MidpointRounding.AwayFromZero);
-
                 foreach (var bed in item.RoomBed)
                 {
                     switch (bed.Name)
