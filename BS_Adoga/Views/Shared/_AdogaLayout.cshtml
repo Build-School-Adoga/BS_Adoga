@@ -1,4 +1,6 @@
 ﻿@using System.Web.Configuration
+@using Newtonsoft.Json;
+@using BS_Adoga.Models.ViewModels.MemberLogin;
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,11 +41,23 @@
             {
                 <div class="member-btn">
                     <label type="button" for="member-menu-chkbox">
-                        @if(TempData.Peek("Picture").ToString() != string.Empty)
-                        {
-                            <img style="width:30px; height:30px;" src="@Html.Raw(TempData.Peek("Picture").ToString())">
+                        @{
+                            if (((FormsIdentity)(HttpContext.Current.User.Identity)).Ticket.UserData != null)
+                            {
+                                //取得存在Ticket的UserData JSON資料
+                                string UserCookiedataJS = ((FormsIdentity)(HttpContext.Current.User.Identity)).Ticket.UserData;
+                                //反序列化為UserCookieViewModel物件，其名為UserCookie
+                                UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+                                if (@UserCookie.PictureUrl != string.Empty)
+                                {
+                                    <img style="width:30px; height:30px; vertical-align:middle;" src="@Html.Raw(@UserCookie.PictureUrl)">
+                                }
+                                else
+                                {
+                                    <span class="member-img">@User.Identity.Name.Substring(0, 1)</span>
+                                }
+                            }
                         }
-                        <span class="member-img">@User.Identity.Name.Substring(0, 1)</span>
                         <span class="member-firstname ff-mont fz-12 fw-bold">@User.Identity.Name</span>
                     </label>
                     <input type="checkbox" id="member-menu-chkbox">
@@ -62,7 +76,7 @@
                                 <i class="far fa-user me-2"></i>
                                 @Html.ActionLink("個人資料", "MemberProfile", "Account")
                             </li>
-                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2" , @id = "btnDisconnect"})
+                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2", @id = "btnDisconnect" })
                         </ul>
                     </div>
                 </div>
@@ -194,20 +208,19 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
     <!--Google引用內容開始   Google登入使用的引用JS -->
-        <!-- 引用jQuery-->
-        @*<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>*@
-        <!--從 Web.config檔 抓取Googl App Client ID-->
-        <script type="text/javascript">
+    <!-- 引用jQuery-->
+    @*<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>*@
+    <!--從 Web.config檔 抓取Googl App Client ID-->
+    <script type="text/javascript">
            let GoolgeApp_Cient_Id = "@WebConfigurationManager.AppSettings["373077817054-6c6eaqcq6nun968jq67q8epn6pbdl9bo.apps.googleusercontent.com"]";
            let id_token_to_userIDUrl = "@Url.Action("GoogleLoginAPI","MemberLogin")";
-        </script>
-        <!--引用Google Sign-in必須的.js，callback function(GoogleSigninInit)名稱自訂 -->
-        <script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>
+    </script>
+    <!--引用Google Sign-in必須的.js，callback function(GoogleSigninInit)名稱自訂 -->
+    <script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>
 
-        <!--以下請放置到*.js檔-->
-        <script src="~/Asset/js/GoogleLogin.js"></script>
+    <!--以下請放置到*.js檔-->
+    <script src="~/Asset/js/GoogleLogin.js"></script>
     <!--Google引用內容結束   Google登入使用的引用JS -->
-
     <!-- mine -->
     @RenderSection("endJS", false)
 

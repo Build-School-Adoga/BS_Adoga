@@ -23,7 +23,6 @@ namespace BS_Adoga.Controllers
         // GET: MemberLogin
         public ActionResult MemberLogin()
         {
-            TempData["Picture"] = string.Empty;
             return View();
         }
         public ActionResult SignOut()
@@ -67,7 +66,6 @@ namespace BS_Adoga.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(MixMemberLoginViewModel registerVM)
         {
-            TempData["Picture"] = string.Empty;
             Customer customer = new Customer();
 
             if (ModelState.IsValid)
@@ -110,7 +108,6 @@ namespace BS_Adoga.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(MixMemberLoginViewModel loginVM)
         {
-            TempData["Picture"] = string.Empty;
             //一.未通過Model驗證
             if (!ModelState.IsValid)
             {
@@ -149,7 +146,7 @@ namespace BS_Adoga.Controllers
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: loginVM.MemberLoginViewModel.Remember,// 是否要記住我 true or false
-            userData: loginVM.MemberLoginViewModel.Email, //可以放使用者角色名稱
+            userData: JsonConvert.SerializeObject(new UserCookieViewModel { Id = email, PictureUrl = string.Empty }), //可以放使用者角色名稱 new UserCookieViewModel { Id = email,PictureUrl = null }
             cookiePath: FormsAuthentication.FormsCookiePath);
 
             //2.Encrypt the Ticket
@@ -241,7 +238,6 @@ namespace BS_Adoga.Controllers
                             //3.Create the cookie.
                             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                             Response.Cookies.Add(cookie);
-                            TempData["Picture"] = GooglePicture;
                             transaction.Commit();
                         }
                         catch (Exception ex)
@@ -271,7 +267,6 @@ namespace BS_Adoga.Controllers
                     //3.Create the cookie.
                     var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     Response.Cookies.Add(cookie);
-                    TempData["Picture"] = GooglePicture;
                 }
 
 
