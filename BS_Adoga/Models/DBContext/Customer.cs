@@ -18,11 +18,9 @@ namespace BS_Adoga.Models.DBContext
         [StringLength(50)]
         public string CustomerID { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string FirstName { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string LastName { get; set; }
 
@@ -30,7 +28,6 @@ namespace BS_Adoga.Models.DBContext
         [StringLength(50)]
         public string Email { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string MD5HashPassword { get; set; }
 

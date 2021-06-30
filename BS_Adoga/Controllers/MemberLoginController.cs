@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using BS_Adoga.Models.ViewModels.MemberLogin;
 using BS_Adoga.Service;
 using System.Web.Security;
+using System.Threading.Tasks;
+using Google.Apis.Auth;
 
 namespace BS_Adoga.Controllers
 {
@@ -26,7 +28,7 @@ namespace BS_Adoga.Controllers
         {
             FormsAuthentication.SignOut(); //登出
 
-            return RedirectToAction("MemberLogin", "MemberLogin");
+            return RedirectToAction("HomePage", "Home");
         }
         #region memberlogin方法一未驗證欄位
         //[HttpPost]
@@ -64,6 +66,7 @@ namespace BS_Adoga.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(MixMemberLoginViewModel registerVM)
         {
+            TempData["Picture"] = string.Empty;
             Customer customer = new Customer();
 
             if (ModelState.IsValid)
@@ -107,6 +110,7 @@ namespace BS_Adoga.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(MixMemberLoginViewModel loginVM)
         {
+            TempData["Picture"] = string.Empty;
             //一.未通過Model驗證
             if (!ModelState.IsValid)
             {
@@ -160,6 +164,118 @@ namespace BS_Adoga.Controllers
 
             //5.Response.Redirect
             return RedirectToAction("HomePage", "Home");
+        }
+        #endregion
+
+        #region GoogleLogin(Google登入)
+        [HttpPost]
+        public async Task<ActionResult> GoogleLoginAPI(string id_token)
+        {
+            string msg = "ok";
+            GoogleJsonWebSignature.Payload payload = null;
+
+            try
+            {
+                payload = await GoogleJsonWebSignature.ValidateAsync(id_token, new GoogleJsonWebSignature.ValidationSettings()
+                {
+                    Audience = new List<string>() { "373077817054-6c6eaqcq6nun968jq67q8epn6pbdl9bo.apps.googleusercontent.com" }//要驗證的client id，把自己申請的Client ID填進去
+                });
+                //測試
+            }
+            catch (Google.Apis.Auth.InvalidJwtException ex)
+            {
+                msg = ex.Message;
+            }
+            catch (Newtonsoft.Json.JsonReaderException ex)
+            {
+                msg = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+
+            if (msg == "ok" && payload != null)
+            {//都成功
+                string GoogleMail = payload.Email;
+                string GoogleFirstName = payload.GivenName;
+                string GoogleLastName = payload.FamilyName;
+                string GooglePicture = payload.Picture;
+                if(_context.Customers.Where(x => x.Email == GoogleMail).FirstOrDefault() == null)
+                {
+                    using (var transaction = _context.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            Customer cust = new Customer()
+                            {
+                                CustomerID = GoogleMail,
+                                FirstName = GoogleFirstName,
+                                LastName = GoogleLastName,
+                                Email = GoogleMail,
+                                MD5HashPassword = string.Empty,
+                                Logging = "建立" + ","  + GoogleFirstName + GoogleLastName + "," + DateTime.Now.ToString(),
+                                RegisterDatetime = DateTime.Now
+                            };
+                            _context.Customers.Add(cust);
+                            _context.SaveChanges();
+
+                            //1.Create FormsAuthenticationTicket
+                            var ticket = new FormsAuthenticationTicket(
+                            version: 1,
+                            name: cust.FirstName + cust.LastName, //可以放使用者Id
+                            issueDate: DateTime.UtcNow,//現在UTC時間
+                            expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
+                            isPersistent: false,// 是否要記住我 true or false
+                            userData: cust.Email, //可以放使用者角色名稱
+                            cookiePath: FormsAuthentication.FormsCookiePath);
+
+                            //2.Encrypt the Ticket
+                            var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+                            //3.Create the cookie.
+                            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                            Response.Cookies.Add(cookie);
+                            TempData["Picture"] = GooglePicture;
+                            transaction.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            //result.IsSuccessful = false;
+                            //result.Exception = ex;
+                            transaction.Rollback();
+                        }
+                    }
+                }
+
+                else 
+                {
+                    //1.Create FormsAuthenticationTicket
+                    var ticket = new FormsAuthenticationTicket(
+                    version: 1,
+                    name: GoogleFirstName + GoogleLastName, //可以放使用者Id
+                    issueDate: DateTime.UtcNow,//現在UTC時間
+                    expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
+                    isPersistent: false,// 是否要記住我 true or false
+                    userData: GoogleMail, //可以放使用者角色名稱
+                    cookiePath: FormsAuthentication.FormsCookiePath);
+
+                    //2.Encrypt the Ticket
+                    var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+                    //3.Create the cookie.
+                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    Response.Cookies.Add(cookie);
+                    TempData["Picture"] = GooglePicture;
+                }
+
+
+
+                //string user_id = payload.Subject;//取得user_id
+                //msg = $@"您的 user_id :{user_id}";
+            }
+
+            return Content("OK");
         }
         #endregion
 
