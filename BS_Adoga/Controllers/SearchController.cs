@@ -16,7 +16,7 @@ namespace BS_Adoga.Controllers
             s = new SearchCardService();
         }
         
-        
+
         public ActionResult Search()
         {
             //string search = TempData["search"].ToString();

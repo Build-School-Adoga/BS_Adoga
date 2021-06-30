@@ -4,6 +4,10 @@ var count_person = document.getElementById("count-person");
 var travel = document.querySelectorAll('.travel');
 var kid_num = document.getElementById("kids-num");
 
+var chooseInfo = document.getElementsByClassName('choose-info');
+var showPerson = document.getElementById('final-person');
+var showRoom = document.getElementById('final-room');
+
 //debugger;
 person_info.addEventListener('click', function () {
     if (choosing_box.style.visibility == "visible") {
@@ -20,16 +24,44 @@ travel.forEach(item => item.addEventListener('click', function () {
         e.classList.remove("onUse");
     })
     on_Use(item);
+    debugger;
     if (item.classList.contains("single") || item.classList.contains("couple")) {
+        if (item.classList.contains("single")) {
+            showPerson.innerHTML = "1位大人";
+            showRoom.innerHTML = "1間客房";
+        }
+        else {
+            showPerson.innerHTML = "2位大人";
+            showRoom.innerHTML = "1間客房";
+        }
         close_filter();
-}
+    }
     else {
         open_filter();
         if(item.classList.contains("bussiness")){
-    kid_num.style.visibility = "hidden";
-}
+        kid_num.style.visibility = "hidden";
+        }
     }
 }))
+
+var btnDone = document.getElementById('done-counting');
+btnDone.addEventListener('click', function () {
+    var active = document.getElementById('choosing-box').getElementsByClassName('travel onUse');
+    var r = document.getElementById('room-num').getElementsByTagName('span');
+    var a = document.getElementById('adult-num').getElementsByTagName('span');
+    var k = document.getElementById('kids-num').getElementsByTagName('span');
+
+    showRoom.innerHTML = r[0].innerText + "间房间";
+    debugger;
+    showPerson.innerHTML= a[0].innerText + "位大人";
+    if (parseInt(k[0].innerText) > 0) {
+        showPerson.innerHTML += "," + k[0].innerText + "位兒童";
+    }
+    close_filter();
+});
+
+
+
 
 function on_Use(el) {
     el.classList.add("onUse");
@@ -46,4 +78,3 @@ function close_filter() {
 
 }
 
-//Vue
