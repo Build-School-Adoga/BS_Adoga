@@ -121,11 +121,12 @@ namespace BS_Adoga.Controllers
         //    return View(productss);
         //}
         [HttpPost]
-        public ActionResult Search(string search)
+        public ActionResult Search(string search,string time)
         {
             if (search.Length ==3)
             {
                 TempData["search"] = search;
+                
 
                 return RedirectToAction("Search", "Search", search);
             }
@@ -140,7 +141,7 @@ namespace BS_Adoga.Controllers
                 return RedirectToAction("Detail", "HotelDetail", search);
             }
 
-
+           
         }
        
      

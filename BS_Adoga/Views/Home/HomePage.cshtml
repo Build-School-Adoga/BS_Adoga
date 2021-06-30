@@ -20,14 +20,9 @@
     </style>
 }
 
-@using (Html.BeginForm("Search","Home"))
+@using (Html.BeginForm("Search", "Home"))
 {
 
-    <div class="scroll-nav">
-        <nav class="search-bar">
-
-        </nav>
-    </div>
 
     <div class="island d-flex flex-column  align-items-center">
         <h3 class="text-white fw-bold"
@@ -44,26 +39,25 @@
     <div class="container  " id="container" style="border-radius: 16px;">
         <div class="input-group mb-3">
             <div id="app">
-              
+                
 
-                    <el-select style="color: #666;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
-                               name="search">
-                        <el-option-group v-for="group in options2"
-                                         :key="group.label"
-                                         :label="group.label"
-                                         >
-                            <el-option v-for="item in group.options"
-                                       :key="item.value"
-                                       :label="item.label "
-                                       :value="item.value">
-                                <span style="float: left">{{ item.label }}</span>
+                <el-select   style="color: #666;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
+                           name="search" clearable >
+                    <el-option-group v-for="group in options2"
+                                     :key="group.label"
+                                     :label="group.label" >
+                        <el-option v-for="item in group.options"
+                                   :key="item.value"
+                                   :label="item.label "
+                                   :value="item.value"class="asd">
+                            <span style="float: left">{{ item.label }}</span>
 
-                                <span style="float: right; color: #8492a6; font-size: 13px"> {{ item.price }}</span>
-                            </el-option>
-                        </el-option-group>
-                    </el-select>
+                            <span style="float: right; color: #8492a6; font-size: 13px"> {{ item.price }}</span>
+                        </el-option>
+                    </el-option-group>
+                </el-select>
 
-               
+
             </div>
             @*<input list="browsers" name="myBrowser" id="inputGroupSelect02" style="        color: #666;
                         width: 1300px;
@@ -99,32 +93,56 @@
                 {
                     @Html.Partial("SearchProduct", item)
                 }*@
-       
+
             <div class="container-fluid">
                 <div class="row">
                     <div class=" bd-content">
-                        <div class="container " id="container1" >
-                           
+                        <div class="container " id="container1">
+
                             <div id="datetime">
                                 <!-- <input id="date" type="date" value="2017-06-01"> -->
-                                <input name="daterange" type="text" class="calendar-minus 	calendar-plus"
-                                       value="  &#xf272; 2021年6月1日 &#xf271; 2021年6月2日"
-                                       style="width: 514px; border: 1px solid #ced4da;">
+                                @*<input name="daterange" type="text" class="calendar-minus 	calendar-plus"
+                                    value="  &#xf272; 2021年6月1日 &#xf271; 2021年6月2日"
+                                    style="width: 514px; border: 1px solid #ced4da;">*@
+                                <div class="timebox d-flex justify-content-center  align-items-center">
+                                    <div class="col-6 d-flex">
+                                        <i class="far fa-calendar fa-2x" style="margin:0 20px 0 20px;width:30.6px;height:44px"></i>
+                                        <div>
+
+                                            <input type="text" id="range_start" name="start" value="" style=" width: 150px; border-style: none; " />
+
+                                            <input type="text" id="week_start" value="" style="      width: 150px;
+                                       border-style: none;color: gray; " />
+                                        </div>
+
+                                    </div>
+                                    <div class="line">
+
+                                    </div>
+                                    <div class="col-6 d-flex">
+                                        <i class="fas fa-calendar fa-2x" style="margin:0 20px 0 0px;width:30.6px;height:44px"></i>
+                                        <div>
+                                            <input type="text" id="range_end" name="end" value="" style="  width: 150px; border-style: none;" />
+                                            <input type="text" id="week_end" value="" style=" width: 150px; border-style: none;    color: grey;" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" class="calendar-minus 	calendar-plus from-control" id="demo" style="width: 514px; border: 1px solid #ced4da;" name="date_range" />
 
                             </div>
 
 
 
-                                @*<select class="form-select " id="inputGroupSelect03" style="width: 500px;">
+                            @*<select class="form-select " id="inputGroupSelect03" style="width: 500px;">
                                     <option selected> &#xf007; 兩位大人</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
                                 </select>*@
 
-                                @Html.Partial("_nav")
+                            @Html.Partial("_nav")
 
-                        
+
                         </div>
                     </div>
                 </div>
@@ -1104,7 +1122,8 @@
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-
+    <script src="~/Asset/js/home.js"></script>
+    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     @*<script>
             var hotel = {
                 Kaohsiung: {
@@ -1244,36 +1263,83 @@
         </script>*@
 
     <script>
-        $(function () {
-            $('input[name="daterange"]').daterangepicker({
-                autoUpdateInput: false,
-                locale: {
-                    cancelLabel: 'Clear'
+        moment().format();
+    </script>
+    <script>
+       
+       
+
+            $('#demo').daterangepicker({
+                "autoApply": true,
+                "locale": {
+                    "format": "MM/DD/YYYY",
+                    "separator": " - ",
+                    "applyLabel": "確認",
+                    "cancelLabel": "取消",
+                    "fromLabel": "從",
+                    "toLabel": "到",
+                    "customRangeLabel": "Custom Range",
+                    "weekLabel": "W",
+                    "daysOfWeek": [
+                        "日", "一", "二", "三", "四", "五", "六"
+                    ],
+                    "monthNames": [
+                        "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
+                    ],
+                    "firstDay": 1
                 },
-                opens: 'left'
-            }, function (start, end, label) {
-                console.log("选择了一个新的日期: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+
+
+                "startDate": moment(),
+                "endDate": moment().add('days', 1)
+            }).on('change', function () {
+                var date_range = $('#demo').val();
+                var dates = date_range.split(" - ");
+
+                var start1 = moment(dates[0]).format('YYYY年MM月DD日');
+                var end1 = moment(dates[1]).format('YYYY年MM月DD日');
+                $('#range_start').val(start1);
+                $('#range_end').val(end1);
+                moment.locale('zh-tw');
+                var start1 = moment(dates[0]).format('dddd');
+
+                $('#week_start').val(start1);
+
+                var end1 = moment(dates[1]).format('dddd');
+
+                $('#week_end').val(end1);
+                $('#person-info').trigger("click");
             });
-        });
+      
+            var date_range = $('#demo').val();
+            var dates = date_range.split(" - ");
+          
+            var start = moment(dates[0]).format('YYYY年MM月DD日');
+            var end = moment(dates[1]).format('YYYY年MM月DD日');
+            $('#range_start').val(start);
+            $('#range_end').val(end);
+            moment.locale('zh-tw'); 
+            var start = moment(dates[0]).format('dddd');
+
+            $('#week_start').val(start);
+            var end = moment(dates[1]).format('dddd');
+
+            $('#week_end').val(end);
+             var start = moment(dates[0], 'YYYY MM DD');
+            var  end = moment(dates[1], 'YYYY MM DD');
+
+
+   
+     
+
+        //var range = $('#demo').daterangepicker("getRange");
+        //$("#range_start").val(range['start']);
+        //$("#range_end").val(range['end']);
+        /*$('.datepicker').datepicker('setStartDate', new Date($(obj).val()));*/
         // var dateControl = document.querySelector('input[name="daterange"]');
         // dateControl.value = `<i class="far fa-calendar"></i>`;
     </script>
-
-    <script>
-        window.addEventListener('scroll', function () {
-            let html = document.getElementsByTagName('html')[0];
-            let scrollNav = document.querySelector('.scroll-nav')
-
-            if (html.scrollTop > 60) {
-                scrollNav.classList.add('fix-nav');
-                scrollNav.style.display = 'block';
-            }
-            else {
-                scrollNav.classList.remove('fix-nav');
-                scrollNav.style.display = 'none';
-            }
-        })
-    </script>
+  
     <script>
              @model BS_Adoga.Models.ViewModels.homeViewModels.demoshopViewModels
             var Main = {
@@ -1352,8 +1418,8 @@
                             })
                         }
 
-                 
-                          
+
+
 
 
                     }
@@ -1361,7 +1427,7 @@
 
                 },
                 mounted() {
-                   
+
                     this.options2 = this.options3
 
                 }
@@ -1373,7 +1439,26 @@
 
 
     </script>
-
+    <script>
+        $(".asd").click(function () {
+            $('#demo').trigger("click");
+        });
+        
+       
+        //$('#inputGroupSelect02').click(function () {
+        //    $('#demo').trigger("click");
+        //});
+    </script>
+    @*<script>
+            let box = document.getElementsByClassName('left drp-calender');
+            box.style.width = ' 1000px';
+            let text = document.createElement("div");
+            text.innerHTML = "請確認訂房日期以查詢價格 ";
+            text.style.width =' 1000px';
+            text.style.height = ' 50px';
+            box.classList.add('p-3');
+            box.appendChild(text);
+        </script>*@
 }
 
 
