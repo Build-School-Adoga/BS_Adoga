@@ -8,6 +8,7 @@ using BS_Adoga.Models.ViewModels.CheckOut;
 using ECPay.Payment.Integration;
 using System.Collections;
 using System.Web.Security;
+using System.Data.Entity;
 
 namespace BS_Adoga.Controllers
 {
@@ -267,6 +268,11 @@ namespace BS_Adoga.Controllers
             }
             finally
             {
+                string odpayId = (string)htFeedback["MerchantTradeNo"];
+                var payStatus = _context.Orders.Where(x => x.OrderID == odpayId).FirstOrDefault();
+                payStatus.PaymentStatus = true;
+                _context.Entry(payStatus).State = EntityState.Modified;
+                _context.SaveChanges();
                 this.Response.Clear();
                 // 回覆成功訊息。
                 if (enErrors.Count() == 0)
