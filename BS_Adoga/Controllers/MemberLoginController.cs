@@ -9,6 +9,7 @@ using BS_Adoga.Service;
 using System.Web.Security;
 using System.Threading.Tasks;
 using Google.Apis.Auth;
+using Newtonsoft.Json;
 
 namespace BS_Adoga.Controllers
 {
@@ -22,6 +23,7 @@ namespace BS_Adoga.Controllers
         // GET: MemberLogin
         public ActionResult MemberLogin()
         {
+            TempData["Picture"] = string.Empty;
             return View();
         }
         public ActionResult SignOut()
@@ -58,7 +60,6 @@ namespace BS_Adoga.Controllers
 
             }*/
         #endregion
-
 
         #region 方法二  欄位驗證
         [HttpPost]
@@ -100,9 +101,8 @@ namespace BS_Adoga.Controllers
             }
 
             return View(registerVM);
-            #endregion
         }
-
+        #endregion
 
         #region Login(登入)
         [HttpPost]
@@ -201,6 +201,11 @@ namespace BS_Adoga.Controllers
                 string GoogleFirstName = payload.GivenName;
                 string GoogleLastName = payload.FamilyName;
                 string GooglePicture = payload.Picture;
+                UserCookieViewModel UserData = new UserCookieViewModel()
+                {
+                    Id = GoogleMail,
+                    PictureUrl = GooglePicture
+                };
                 if(_context.Customers.Where(x => x.Email == GoogleMail).FirstOrDefault() == null)
                 {
                     using (var transaction = _context.Database.BeginTransaction())
@@ -227,7 +232,7 @@ namespace BS_Adoga.Controllers
                             issueDate: DateTime.UtcNow,//現在UTC時間
                             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
                             isPersistent: false,// 是否要記住我 true or false
-                            userData: cust.Email, //可以放使用者角色名稱
+                            userData: JsonConvert.SerializeObject(UserData), //可以放使用者角色名稱
                             cookiePath: FormsAuthentication.FormsCookiePath);
 
                             //2.Encrypt the Ticket
@@ -257,7 +262,7 @@ namespace BS_Adoga.Controllers
                     issueDate: DateTime.UtcNow,//現在UTC時間
                     expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
                     isPersistent: false,// 是否要記住我 true or false
-                    userData: GoogleMail, //可以放使用者角色名稱
+                    userData: JsonConvert.SerializeObject(UserData), //可以放使用者角色名稱
                     cookiePath: FormsAuthentication.FormsCookiePath);
 
                     //2.Encrypt the Ticket
