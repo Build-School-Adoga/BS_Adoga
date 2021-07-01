@@ -57,7 +57,7 @@
                                 <i class="far fa-user me-2"></i>
                                 @Html.ActionLink("個人資料", "MemberProfile", "Account")
                             </li>
-                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2" })
+                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2",onclick= "FacebookLogout()" })
                         </ul>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
 
         </div>
 
-           
+
     </nav>
     @RenderSection("scrollNav", false)
     @RenderBody()
@@ -140,7 +140,7 @@
             </div>
         </div>
     </div>
-    @RenderSection("HomePageCountryArea",false)
+    @RenderSection("HomePageCountryArea", false)
     <footer class="d-flex  flex-column   justify-content-center  align-items-center">
         <p class="text-white-50" style="margin-top: 70px; text-align:center">
             本網站內容由© 2005–2021 Adoga Company Pte. Ltd.保留所有權利 <br>
@@ -188,6 +188,33 @@
     <!-- vueJS 開發developer版 引用 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
+    <!--FB登出使用-->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '287554039737731',
+                cookie: true,
+                xfbml: true,
+                version: 'v11.0'
+            });
+
+            FB.AppEvents.logPageView();
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function FacebookLogout() {
+            FB.logout(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+    </script>
     <!-- mine -->
     @RenderSection("endJS", false)
 

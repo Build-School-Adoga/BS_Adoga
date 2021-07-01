@@ -48,14 +48,14 @@
                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         <form>
                             @*<div class="mb-3">
-                    <label for="LoginEmail" class="form-label">電子信箱</label>
-                    <input type="email" class="form-control" id="LoginEmail" aria-describedby="emailHelp"
-                           placeholder="電子信箱" />
-                </div>
-                <div class="mb-3">
-                    <label for="LoginPassword" class="form-label">密碼</label>
-                    <input type="password" class="form-control" id="LoginPassword" placeholder="密碼" />
-                </div>*@
+                                    <label for="LoginEmail" class="form-label">電子信箱</label>
+                                    <input type="email" class="form-control" id="LoginEmail" aria-describedby="emailHelp"
+                                           placeholder="電子信箱" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="LoginPassword" class="form-label">密碼</label>
+                                    <input type="password" class="form-control" id="LoginPassword" placeholder="密碼" />
+                                </div>*@
                             <div class="mb-3 form-group">
                                 @Html.LabelFor(model => model.MemberLoginViewModel.Email)
                                 @Html.EditorFor(model => model.MemberLoginViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
@@ -83,30 +83,30 @@
                         </form>
                     }
                     <!--<form>
-        <div class="mb-3">
-            <label for="LoginEmail" class="form-label">電子信箱</label>
-            <input type="email" class="form-control" id="LoginEmail-card" aria-describedby="emailHelp-card"
-                   placeholder="電子信箱" />
-        </div>
-        <div class="mb-3">
-            <label for="LoginPassword" class="form-label">密碼</label>
-            <input type="password" class="form-control" id="LoginPassword-card" placeholder="密碼" />
-        </div>
-        <div class="d-grid gap-2">
-            <!--bear : 0610新增-->
+                    <div class="mb-3">
+                        <label for="LoginEmail" class="form-label">電子信箱</label>
+                        <input type="email" class="form-control" id="LoginEmail-card" aria-describedby="emailHelp-card"
+                               placeholder="電子信箱" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="LoginPassword" class="form-label">密碼</label>
+                        <input type="password" class="form-control" id="LoginPassword-card" placeholder="密碼" />
+                    </div>
+                    <div class="d-grid gap-2">
+                        <!--bear : 0610新增-->
                     <!--@Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "submit", @class = "btn btn-primary my-2 py-2 login-btn" })-->
                     @*<button type="submit" class="btn btn-primary my-2 py-2 login-btn">
-            登入
-        </button>*@
+                            登入
+                        </button>*@
                     @*</div>
-            <div class="register">
-                <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
-                   id="EmailLogintoRegister-card">我是新朋友</a>
-                <a href="#modal" data-bs-toggle="modal" data-bs-target="#ForgetPasswordModal"
-                   id="EmailLogintoForgetPassword-card"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
-            </div>
+                            <div class="register">
+                                <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
+                                   id="EmailLogintoRegister-card">我是新朋友</a>
+                                <a href="#modal" data-bs-toggle="modal" data-bs-target="#ForgetPasswordModal"
+                                   id="EmailLogintoForgetPassword-card"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
+                            </div>
 
-        </form>-->*@
+                        </form>-->*@
                 </div>
 
                 <div class="tab-pane fade" id="phonego-card" role="tabpanel" aria-labelledby="profile-tab-card">
@@ -146,14 +146,23 @@
                 <button class="otherlogin-btn" type="button">
                     <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
                 </button>
+                @*0629新增登入測試區塊*@
                 <div class="loginbuttonwithfa">
-                    <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-card">
+                    @*fb內建的button*@
+                    @*<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" autologoutlink="true">
+                        </fb:login-button>*@
+
+                    <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-card" onclick="FBLoginReal();">
                         <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
                         Facebook
                     </button>
                     <button type="button" class="otherlogin-btn" id="Phoneapplelogin-card">
                         <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt="">
                         Apple
+                    </button>
+                    <button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="FacebookLogout();">
+                        <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt="">
+                        logout
                     </button>
                 </div>
             </div>
@@ -467,8 +476,8 @@
                                         @Html.ActionLink("已經是會員?登入", "MemberLogin", "MemberLogin", null, new { @type = "submit", @class = "btn btn-outline-primary" })
                                         @*原始程式碼*@
                                         @*<button class="btn btn-outline-primary" id="SignintoPhone" type="button">
-                                          已經是會員?登入
-                                        </button>*@
+                                              已經是會員?登入
+                                            </button>*@
                                     </div>
                                 </div>
                                 <div class="youshouldknow">
@@ -637,6 +646,91 @@
             $('#SigninModal').modal('show');
         })
     </script>
+
+    <script>
+        //官方script
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '287554039737731',
+                cookie: true,
+                xfbml: true,
+                version: 'v11.0'
+            });
+
+            FB.AppEvents.logPageView();
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        //確認登入狀態
+        //function checkLoginState() {
+        //    FB.getLoginStatus(function (response) {
+        //        console.log(response);
+        //        //如果已連線
+        //        if (response.status === "connected") {
+        //            FB.api('/me', {
+        //                'fields': 'id,name,email,picture'
+        //            }, function (response) {
+        //                console.log(response);
+
+        //            });
+        //        }
+        //    }, {
+        //        scope: 'email',
+        //        auth_type: 'rerequest'
+        //    });
+        //}
+        /*登出紐*/
+        function FacebookLogout() {
+            FB.logout(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+        //自製fb登入按鈕
+        function FBLoginReal() {
+            FB.login(
+                function (response) {
+                    //debug用
+                    console.log(response);
+                    if (response.status === "connected") {
+
+                        //user已登入FB
+                        //抓userID
+
+                        FB.api('/me', {
+                            'fields': 'id,name,email,picture'
+                        }, function (response) {
+                            console.log(response.name);
+                                console.log(response.email);
+                                console.log(response.picture);
+                            console.log(response);
+                                $.ajax({
+                                    url: "https://ec5dfbe2a53b.ngrok.io/MemberLogin/FacebookLoginAPI",
+                                    method: "post",
+                                    data: { Id: response.email, Name: response.name, Email: response.email, Picture: response.picture },
+                                    
+                                    success: function (msg) {
+                                        console.log(msg);
+                                        document.location.href = "https://localhost:44352/";
+                                    }
+                                });
+                             /*   window.loction.href = "https://localhost:44352/";*/
+                        });
+                    } else {
+                        // user FB取消授權
+                        alert("Facebook帳號無法登入");
+                    }
+                },
+                { scope: "public_profile,email" }
+            );
+        }
+    </script>
+    @*<script type="text/javascript" src="~/Asset/js/fblogin.js"></script>*@
 }
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
