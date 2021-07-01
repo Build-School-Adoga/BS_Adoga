@@ -19,7 +19,7 @@
         }
     </style>
 }
-
+<div class="bg"></div>
 @using (Html.BeginForm("Search", "Home"))
 {
 
@@ -39,17 +39,17 @@
     <div class="container  " id="container" style="border-radius: 16px;">
         <div class="input-group mb-3">
             <div id="app">
-                
 
-                <el-select   style="color: #666;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
-                           name="search" clearable >
+
+                <el-select style="color: #666;z-index: 3;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
+                           name="search" clearable>
                     <el-option-group v-for="group in options2"
                                      :key="group.label"
-                                     :label="group.label" >
+                                     :label="group.label">
                         <el-option v-for="item in group.options"
                                    :key="item.value"
                                    :label="item.label "
-                                   :value="item.value"class="asd">
+                                   :value="item.value" class="asd">
                             <span style="float: left">{{ item.label }}</span>
 
                             <span style="float: right; color: #8492a6; font-size: 13px"> {{ item.price }}</span>
@@ -147,9 +147,9 @@
                     </div>
                 </div>
             </div>
-            <div class="form-check border d-flex " id="sale-absolute">
+            <div class="form-check border d-flex " id="sale-absolute"style="z-index: 3">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                       style="margin-left: -10px;">
+                       style=" margin-left: -10px;">
                 <label class="form-check-label" for="flexCheckDefault" style="width: 514px; margin-left: 10px;">
                     享達25%的訂房折扣
                 </label>
@@ -1124,222 +1124,76 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="~/Asset/js/home.js"></script>
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-    @*<script>
-            var hotel = {
-                Kaohsiung: {
-                    back: [{ "name": '台北W酒店', "area": '信義區', "Evaluation": '  <i class="fas fa-star text-warning"></i>  <i class="fas fa-star text-warning"></i>', "picture": 'https://pix6.agoda.net/hotelImages/335/335043/335043_16121920250049783861.jpg', ground: "https://pix6.agoda.net/hotelImages/335/335043/335043_16121920250049783861.jpg", sale: '2.5折扣', Originalprice: 'NT$11,024', saleprice: 'NT$5,500', "fraction": '9.3', "comment": '超棒', "Quantity": '1198篇評鑑' },
-                    { name: '飛行家青年旅館', area: '苓雅區', Evaluation: '  <i class="fas fa-star text-warning"></i>  <i class="fas fa-star text-warning"></i>', picture: 'https://pix6.agoda.net/hotelImages/5059720/0/feb524ebbcc31042755392d15d8cef3b.jpg', ground: "https://pix6.agoda.net/hotelImages/5059720/0/feb524ebbcc31042755392d15d8cef3b.jpg", sale: '2.2折扣', Originalprice: 'NT$2,370', saleprice: 'NT$595', fraction: '8.8', comment: '很讚', Quantity: '1198篇評鑑' },
-                    { name: '鈞怡大飯店', area: '高雄市', Evaluation: '   <i class="fas fa-star text-warning"></i> <i class="fas fa-star text-warning"></i>  <i class="fas fa-star text-warning"></i>', picture: 'https://pix6.agoda.net/hotelImages/335/335043/335043_16121920250049783861.jpg', ground: "https://pix6.agoda.net/hotelImages/4612444/-1/a9f27a564ebc9951ddc5cfc12970dfaa.jpg?s=450x450", sale: '1.9折扣', Originalprice: 'NT$6,234', saleprice: 'NT$1,234', fraction: '8.9', comment: '很讚', Quantity: '1198篇評鑑' },
-                    { name: '塩‧泊思行旅', area: '高雄市', Evaluation: '  <i class="fas fa-star text-warning"></i>  <i class="fas fa-star text-warning"></i>', picture: 'https://pix6.agoda.net/hotelImages/21874089/-1/8a6235eaf9b5c0ae0a9484b253996530.jpg?s=450x450', ground: "https://pix6.agoda.net/hotelImages/21874089/-1/8a6235eaf9b5c0ae0a9484b253996530.jpg?s=450x450", sale: '2折扣', Originalprice: 'NT$3,611', saleprice: 'NT$764', fraction: '8.4', comment: '很讚', Quantity: '1198篇評鑑' }
-                    ]
-
-                }
-            };
-            let box = document.querySelector("#box");
-            hotel.Kaohsiung.back.forEach((item, index) => {
-                let div = document.createElement("div");
-                div.classList.add('col-3');
-                div.classList.add('border');
-                div.style.margin = '20px 20px 20px 30px ';
-                div.style.height = '373.6px ';
-                box.appendChild(div);
-                let div2 = document.createElement("div");
-                div2.classList.add('d-flex');
-                div2.style.width = '263.65px';
-                div2.style.marginTop = '-10px';
-                div2.style.height = '150px';
-                div2.style.background = `no-repeat center/100% url(${item.ground})`;
-                div.appendChild(div2);
-                let div3 = document.createElement("div");
-                div3.style.width = '124px';
-                div3.style.height = '49.2px';
-                div3.style.backgroundColor = 'white';
-                div3.style.borderRadius = '2px';
-                div3.style.margin = '10px 0px 0px 130px';
-                div2.appendChild(div3);
-                let div4 = document.createElement("div");
-                div4.classList.add('d-flex');
-                div4.classList.add('justify-content-end');
-                div4.classList.add('align-items-center');
-
-                div3.appendChild(div4);
-                let div5 = document.createElement("div");
-                div5.classList.add('row');
-                div5.style.width = '85.8375pxpx';
-                div5.style.marginRight = '5px';
-                div4.appendChild(div5);
-                let span = document.createElement("span");
-                span.classList.add('fw-bold');
-                span.style.textAlign = 'end';
-                span.style.fontSize = '16px';
-                span.style.lineHeight = '22px';
-                span.innerText = `${item.comment}`;
-                div5.appendChild(span);
-                let p1 = document.createElement("p");
-                p1.style.fontSize = '12px';
-                p1.style.lineHeight = '13.2px';
-                p1.style.textAlign = 'end';
-                p1.innerText = `${item.Quantity}`;
-                div5.appendChild(p1);
-                let div6 = document.createElement("div");
-                // div6.innerHTML = '<i class="fas fa-comment-alt fa-2x" style = "width: 34px; height: 44px; color: #5392f9; margin-top: 10px; margin-right: 5px;" ><span class="text-white"style="font-weight: 600; line-height: 44px; font-size: 16px; "id="fraction"></span></i > ';
-
-                div4.appendChild(div6);
-                let i = document.createElement("i");
-                i.classList.add('fas');
-                i.classList.add('fa-comment-alt');
-                i.classList.add('fa-2x');
-                i.style.width = '34px';
-                i.style.height = '44px';
-                i.style.color = '#5392f9';
-                i.style.marginTop = '10px';
-                i.style.marginRight = '5px';
-                i.style.position = 'relative';
-                div6.appendChild(i);
-                let span2 = document.createElement("span");
-                span2.classList.add('text-white');
-                span2.style.fontWeight = '600';
-                span2.style.lineHeight = '44px';
-                span2.style.fontSize = '16px';
-                span2.style.position = ' absolute';
-                span2.style.right = '8px';
-                span2.style.bottom = '10px';
-                span2.innerText = `${item.fraction}`;
-                i.appendChild(span2);
-                let div7 = document.createElement("div");
-                div7.style.margin = '10px';
-                div.appendChild(div7);
-                let h3 = document.createElement("h3");
-                h3.classList.add('fw-bold');
-                h3.style.fontSize = '16px';
-                h3.style.lineHeight = '22px';
-                h3.innerText = `${item.name}`;
-                div7.appendChild(h3);
-                let p = document.createElement("p");
-                p.style.lineHeight = '20px';
-                p.style.fontSize = '12px';
-                p.innerText = `${item.area}`;
-                div7.appendChild(p);
-                let div8 = document.createElement("div");
-                div8.innerHTML = `${item.Evaluation}`
-                div7.appendChild(div8);
-                let div9 = document.createElement("div");
-                div9.classList.add('d-flex');
-                div9.classList.add('justify-content-end');
-                div9.classList.add('flex-column');
-                div9.classList.add('align-items-end');
-                div9.style.Height = '144px';
-                div9.style.marginTop = '110px';
-                div.appendChild(div9);
-                let div10 = document.createElement("div");
-                div10.classList.add('d-flex');
-                div10.classList.add('justify-content-center');
-                div10.classList.add('bg-danger');
-                div10.classList.add('align-items-center');
-                div9.appendChild(div10);
-                let h4 = document.createElement("h4");
-                h4.classList.add('text-white');
-                h4.innerText = `${item.sale}`;
-                div10.appendChild(h4);
-                let span3 = document.createElement("span");
-                span3.style.textDecoration = 'line-through';
-                span3.style.color = '#90949c';
-                span3.style.fontFamily = ' Comic Sans MS';
-                span3.style.fontSize = '14px';
-                span3.style.lineHeight = '20px';
-                span3.style.fontWeight = '400';
-                span3.innerText = `${item.Originalprice}`;
-                div9.appendChild(span3);
-                let p2 = document.createElement("p");
-                p2.classList.add('text-danger');
-                p2.style.lineHeight = '20px';
-                p2.style.fontSize = '12px';
-                p2.style.fontWeight = '300';
-                p2.style.fontFamily = ' Comic Sans MS';
-                p2.innerText = `${item.saleprice}`;
-                div9.appendChild(p2);
-            });
-            console.log("`${'no-repeat center/100% url'((item.ground))}`");
-        </script>*@
+   
 
     <script>
         moment().format();
     </script>
     <script>
-       
-       
-
-            $('#demo').daterangepicker({
-                "autoApply": true,
-                "locale": {
-                    "format": "MM/DD/YYYY",
-                    "separator": " - ",
-                    "applyLabel": "確認",
-                    "cancelLabel": "取消",
-                    "fromLabel": "從",
-                    "toLabel": "到",
-                    "customRangeLabel": "Custom Range",
-                    "weekLabel": "W",
-                    "daysOfWeek": [
-                        "日", "一", "二", "三", "四", "五", "六"
-                    ],
-                    "monthNames": [
-                        "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
-                    ],
-                    "firstDay": 1
-                },
 
 
-                "startDate": moment(),
-                "endDate": moment().add('days', 1)
-            }).on('change', function () {
-                var date_range = $('#demo').val();
-                var dates = date_range.split(" - ");
 
-                var start1 = moment(dates[0]).format('YYYY年MM月DD日');
-                var end1 = moment(dates[1]).format('YYYY年MM月DD日');
-                $('#range_start').val(start1);
-                $('#range_end').val(end1);
-                moment.locale('zh-tw');
-                var start1 = moment(dates[0]).format('dddd');
+        $('#demo').daterangepicker({
+            "autoApply": true,
+            "locale": {
+                "format": "MM/DD/YYYY",
+                "separator": " - ",
+                "applyLabel": "確認",
+                "cancelLabel": "取消",
+                "fromLabel": "從",
+                "toLabel": "到",
+                "customRangeLabel": "Custom Range",
+                "weekLabel": "W",
+                "daysOfWeek": [
+                    "日", "一", "二", "三", "四", "五", "六"
+                ],
+                "monthNames": [
+                    "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
+                ],
+                "firstDay": 1
+            },
 
-                $('#week_start').val(start1);
 
-                var end1 = moment(dates[1]).format('dddd');
-
-                $('#week_end').val(end1);
-                $('#person-info').trigger("click");
-            });
-      
+            "startDate": moment(),
+            "endDate": moment().add('days', 1)
+        }).on('change', function () {
             var date_range = $('#demo').val();
             var dates = date_range.split(" - ");
-          
-            var start = moment(dates[0]).format('YYYY年MM月DD日');
-            var end = moment(dates[1]).format('YYYY年MM月DD日');
-            $('#range_start').val(start);
-            $('#range_end').val(end);
-            moment.locale('zh-tw'); 
-            var start = moment(dates[0]).format('dddd');
 
-            $('#week_start').val(start);
-            var end = moment(dates[1]).format('dddd');
+            var start1 = moment(dates[0]).format('YYYY年MM月DD日');
+            var end1 = moment(dates[1]).format('YYYY年MM月DD日');
+            $('#range_start').val(start1);
+            $('#range_end').val(end1);
+            moment.locale('zh-tw');
+            var start1 = moment(dates[0]).format('dddd');
 
-            $('#week_end').val(end);
-             var start = moment(dates[0], 'YYYY MM DD');
-            var  end = moment(dates[1], 'YYYY MM DD');
+            $('#week_start').val(start1);
 
+            var end1 = moment(dates[1]).format('dddd');
 
-   
-     
+            $('#week_end').val(end1);
+            $('#person-info').trigger("click");
+        });
 
-        //var range = $('#demo').daterangepicker("getRange");
-        //$("#range_start").val(range['start']);
-        //$("#range_end").val(range['end']);
-        /*$('.datepicker').datepicker('setStartDate', new Date($(obj).val()));*/
-        // var dateControl = document.querySelector('input[name="daterange"]');
-        // dateControl.value = `<i class="far fa-calendar"></i>`;
+        var date_range = $('#demo').val();
+        var dates = date_range.split(" - ");
+
+        var start = moment(dates[0]).format('YYYY年MM月DD日');
+        var end = moment(dates[1]).format('YYYY年MM月DD日');
+        $('#range_start').val(start);
+        $('#range_end').val(end);
+        moment.locale('zh-tw');
+        var start = moment(dates[0]).format('dddd');
+
+        $('#week_start').val(start);
+        var end = moment(dates[1]).format('dddd');
+
+        $('#week_end').val(end);
+        var start = moment(dates[0], 'YYYY MM DD');
+        var end = moment(dates[1], 'YYYY MM DD');
+    
     </script>
-  
+
     <script>
              @model BS_Adoga.Models.ViewModels.homeViewModels.demoshopViewModels
             var Main = {
@@ -1372,28 +1226,7 @@
                         options2: [
                         ],
 
-                       @*originList: [
-                            @foreach (var item in Model.Hotels)
-                            {
-
-
-                    @Html.Partial("_option", item);
-
-
-                            }
-                        ],
-                          originList2: [
-                            @foreach (var item in Model.Hotels)
-                            {
-
-
-                    @Html.Partial("_option2", item);
-
-
-                            }
-                        ],
-                        options: [
-                        ],*@
+                    
                         value: ''
                     };
 
@@ -1443,22 +1276,11 @@
         $(".asd").click(function () {
             $('#demo').trigger("click");
         });
-        
-       
-        //$('#inputGroupSelect02').click(function () {
-        //    $('#demo').trigger("click");
-        //});
+
+
     </script>
-    @*<script>
-            let box = document.getElementsByClassName('left drp-calender');
-            box.style.width = ' 1000px';
-            let text = document.createElement("div");
-            text.innerHTML = "請確認訂房日期以查詢價格 ";
-            text.style.width =' 1000px';
-            text.style.height = ' 50px';
-            box.classList.add('p-3');
-            box.appendChild(text);
-        </script>*@
+
+  
 }
 
 

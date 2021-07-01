@@ -1,4 +1,5 @@
-﻿var person_info = document.getElementById("person-info");
+﻿////人數選單
+var person_info = document.getElementById("person-info");
 var choosing_box = document.getElementById("choosing-box");
 var count_person = document.getElementById("count-person");
 var travel = document.querySelectorAll('.travel');
@@ -68,6 +69,36 @@ function requestJSON13() {
 function requestJSON14() {
     container.innerHTML = '<p>' + '兩位大人' + '</p>' + '<p>' + '一間客房' + '</p>';
 }
-
+/*遮罩*/
+$(function () {
+    $('#inputGroupSelect02').click(function () {
+        $('.bg').css({ 'display': 'block' });
+        $('#inputGroupSelect02').css({ 'display': 'block' });
+    });
+    $('.bg').click(function () {
+        $('.bg').css({ 'display': 'none' });
+        $('#inputGroupSelect02').css({  });
+    });
+});
+$(function () {
+    $('#demo').click(function () {
+        $('.bg').css({ 'display': 'block' });
+        $('#datetime').css({ 'display': 'block' });
+    });
+    $('.bg').click(function () {
+        $('.bg').css({ 'display': 'none' });
+        $('#datetime').css({});
+    });
+});
+$(function () {
+    $('#person-info').click(function () {
+        $('.bg').css({ 'display': 'block' });
+        $('.nav-item').css({ 'display': 'block' });
+    });
+    $('.bg').click(function () {
+        $('.bg').css({ 'display': 'none' });
+        $('.nav-item').css({});
+    });
+});
 
 
