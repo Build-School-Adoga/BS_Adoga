@@ -232,6 +232,7 @@
     <Content Include="Asset\images\img6.png" />
     <Content Include="Asset\images\tw.svg.png" />
     <Content Include="Asset\JS\formStep.js" />
+    <Content Include="Asset\JS\home.js" />
     <Content Include="Asset\JS\MemberAccount\MemberProfile.js" />
     <Content Include="Asset\JS\navbar.js" />
     <Content Include="Asset\JS\Search.js" />
@@ -362,9 +363,11 @@
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Models\ViewModels\Account\" />
+    <Folder Include="Repository\Account\" />
     <Folder Include="Repository\CheckOut\" />
     <Folder Include="Repository\HotelLogin\" />
     <Folder Include="Repository\MemberLogin\" />
+    <Folder Include="Service\Account\" />
     <Folder Include="Service\CheckOut\" />
     <Folder Include="Service\HotelLogin\" />
     <Folder Include="Service\MemberLogin\" />
