@@ -12,11 +12,11 @@ namespace BS_Adoga.Controllers
 {
     public class HotelDetailController : Controller
     {
-        private AdogaContext _context;
+        //private AdogaContext _context;
         private HotelDetailService _service;
         public HotelDetailController()
         {
-            _context = new AdogaContext();
+            //_context = new AdogaContext();
             _service = new HotelDetailService();
         }
 
@@ -30,7 +30,7 @@ namespace BS_Adoga.Controllers
             else if (TempData["search"] != null)
                 hotelDetail = _service.GetDetailVM(TempData["search"].ToString());
             else
-                hotelDetail = _service.GetDetailVM("hotel04");
+                hotelDetail = _service.GetDetailVM("hotel04"); //應該做報錯
 
             return View(hotelDetail);
         }
@@ -40,7 +40,7 @@ namespace BS_Adoga.Controllers
         {
             //var a = _service.GetCheckOutData(hotelId, roomId);
             //TempData["Order"] = _service.GetCheckOutData(hotelId,roomId);
-            var hotel = _service.GetHotel(hotelId);
+            var hotel = _service.GetHotelById(hotelId);
             OrderVM orderData = new OrderVM(){
                 roomCheckOutViewModel = new RoomCheckOutData
                 {

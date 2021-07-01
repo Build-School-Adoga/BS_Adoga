@@ -21,18 +21,20 @@ namespace BS_Adoga.Service.HotelDetail
         {
             DetailVM hotelDetail = new DetailVM()
             {
-                hotelVM = GetHotel(hotelId),
-                roomTypeVM = GetRoomType(hotelId)
+                hotelVM = GetHotelById(hotelId),
+                roomTypeVM = GetRoomTypeByFilter(hotelId)
             };
             return hotelDetail;
         }
 
-        public HotelVM GetHotel(string hotelId)
+        public HotelVM GetHotelById(string hotelId)
         {
-            if (hotelId == null) hotelId = "hotel04";
+            //if (hotelId == null) hotelId = "hotel04"; //controller已處理，這裡不用再寫
 
-            var source = _repository.GetHotel(hotelId);
+            var source = _repository.GetHotelById(hotelId);
 
+            //先first 再轉 view model
+            //如果用 first or default要處理default 否則用 first就好
             var result = source.Select(s => new HotelVM
             {
                 HotelID = s.HotelID,
@@ -50,11 +52,11 @@ namespace BS_Adoga.Service.HotelDetail
         }
 
         //public IQueryable<RoomTypeVM> GetRoomType(string hotelId)
-        public IEnumerable<RoomTypeVM> GetRoomType(string hotelId)
+        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId)
         {
             if (hotelId == null) hotelId = "hotel04";
 
-            var result = _repository.GetRoomType(hotelId);
+            var result = _repository.GetRoomTypeByFilter(hotelId);
             foreach (var item in result)
             {
                 foreach (var bed in item.RoomBed)

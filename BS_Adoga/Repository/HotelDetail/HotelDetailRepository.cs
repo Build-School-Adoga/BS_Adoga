@@ -19,7 +19,8 @@ namespace BS_Adoga.Repository.HotelDetail
             _context = new AdogaContext();
         }
 
-        public IQueryable<Hotel> GetHotel(string hotelId)
+        //func名稱:GetHotelById
+        public IQueryable<Hotel> GetHotelById(string hotelId)
         {
             var hotel = from h in _context.Hotels
                         where h.HotelID == hotelId
@@ -29,7 +30,7 @@ namespace BS_Adoga.Repository.HotelDetail
 
         }
 
-        public IEnumerable<RoomTypeVM> GetRoomType(string hotelId)
+        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId)
         {
             int orderDay = 3;
             string[] pickDate = new string[] { "2021-06-20", "2021-06-21", "2021-06-22" };
