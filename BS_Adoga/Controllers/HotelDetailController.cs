@@ -5,33 +5,67 @@ using System.Web;
 using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
+using BS_Adoga.Models.ViewModels.CheckOut;
 using BS_Adoga.Service.HotelDetail;
 
 namespace BS_Adoga.Controllers
 {
     public class HotelDetailController : Controller
     {
-        private AdogaContext _context;
+        //private AdogaContext _context;
+        private HotelDetailService _service;
         public HotelDetailController()
         {
-            _context = new AdogaContext();
+            //_context = new AdogaContext();
+            _service = new HotelDetailService();
         }
 
         // GET: HotelDetail
         public ActionResult Detail(string hotelId)
         {
-            HotelDetailService service = new HotelDetailService();
-
             DetailVM hotelDetail;
 
             if (hotelId != null)
-                hotelDetail = service.GetDetailVM(hotelId);
+                hotelDetail = _service.GetDetailVM(hotelId);
             else if (TempData["search"] != null)
-                hotelDetail = service.GetDetailVM(TempData["search"].ToString());
+                hotelDetail = _service.GetDetailVM(TempData["search"].ToString());
             else
-                hotelDetail = service.GetDetailVM("hotel04");
+                hotelDetail = _service.GetDetailVM("hotel04"); //應該做報錯
 
             return View(hotelDetail);
+        }
+
+        public ActionResult SetCheckOutData(string hotelId,string roomId, string roomName,bool breakfast, string bedType , int adult,int child,
+                                            int roomOrder ,decimal roomPrice,decimal roomDiscount , decimal roomNowPrice)
+        {
+            //var a = _service.GetCheckOutData(hotelId, roomId);
+            //TempData["Order"] = _service.GetCheckOutData(hotelId,roomId);
+            var hotel = _service.GetHotelById(hotelId);
+            OrderVM orderData = new OrderVM(){
+                roomCheckOutViewModel = new RoomCheckOutData
+                {
+                    HotelID = hotel.HotelID,
+                    HotelFullName = hotel.HotelName + " (" + hotel.HotelEngName + ")",
+                    Address = hotel.HotelAddress,
+                    RoomID = roomId,
+                    RoomName = roomName,
+                    Breakfast = breakfast,
+                    BedType = bedType,
+                    Adult = 12,
+                    Child = 2,
+                    CountNight = 2,
+                    RoomOrder = roomOrder,
+                    RoomPrice = roomPrice,
+                    Discount = roomDiscount,
+                    TotalPrice = roomNowPrice
+                }
+            };
+
+            TempData["orderData"] = orderData;
+
+            
+
+            return RedirectToAction("Index", "CheckOut");
         }
 
         //public ActionResult DetailAlbum()

@@ -9,6 +9,7 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
     {
         public HotelVM hotelVM{ get; set; }
 
-        public IQueryable<RoomTypeVM> roomTypeVM { get; set; }
+        //public IQueryable<RoomTypeVM> roomTypeVM { get; set; }
+        public IEnumerable<RoomTypeVM> roomTypeVM { get; set; }
     }
 }

@@ -22,8 +22,10 @@ namespace BS_Adoga.Controllers
         }
 
         // GET: CheckOut
-        public ActionResult Index()
+        public ActionResult Index(OrderVM data)
         {
+            OrderVM orderData = (OrderVM)TempData.Peek("orderData");
+            //OrderVM orderData = (OrderVM)TempData["orderData"];
 
             //List<SelectListItem> selectCountry = new List<SelectListItem>() {
             //    new SelectListItem { Text = "台灣", Value = "台灣" },
@@ -42,13 +44,15 @@ namespace BS_Adoga.Controllers
             //items.Add(new SelectListItem { Text = "Yao", Value = "24" });
             //ViewBag.list = items;
 
-            return View();
+            return View(orderData);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(CheckOutListViewModel orderVM)
         {
+            OrderVM orderData = (OrderVM)TempData["orderData"];
+            var a = orderData.roomCheckOutViewModel.RoomID;
 
             if (ModelState.IsValid)
             {

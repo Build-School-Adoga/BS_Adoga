@@ -161,7 +161,16 @@ div.email-not-verify-component {
     font-size: 16px;
     color: rgb(104, 104, 104);
 }
-
+.email-verify-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    margin-left: 20px;
+    line-height: 16px;
+    font-size: 12px;
+    background-color: rgb(36, 186, 206);
+    color: #fff;
+    border-radius: 3px;
+}
 div.verify-email-component {
     display: none;
 }
