@@ -8,6 +8,7 @@ using BS_Adoga.Models.ViewModels.CheckOut;
 using ECPay.Payment.Integration;
 using System.Collections;
 using System.Web.Security;
+using System.Data.Entity;
 
 namespace BS_Adoga.Controllers
 {
@@ -116,12 +117,12 @@ namespace BS_Adoga.Controllers
                     oPayment.ServiceURL = "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5";//要呼叫介接服務的網址
                     oPayment.HashKey = "5294y06JbISpM5x9";//ECPay提供的Hash Key
                     oPayment.HashIV = "v77hoKGq4kWxNNIS";//ECPay提供的Hash IV
-                    oPayment.MerchantID = "2000132";//ECPay提供的特店編號
+                    oPayment.MerchantID = "2000214";//ECPay提供的特店編號 2000132
 
                     /* 基本參數 */
-                    oPayment.Send.ReturnURL = "http://localhost:44352/CheckOut/PayFeedback";//付款完成通知回傳的網址
+                    oPayment.Send.ReturnURL = "https://localhost:44352/CheckOut/PayFeedback";//付款完成通知回傳的網址
                     oPayment.Send.ClientBackURL = "http://adoga.azurewebsites.net/";//瀏覽器端返回的廠商網址
-                    oPayment.Send.OrderResultURL = "";//瀏覽器端回傳付款結果網址
+                    oPayment.Send.OrderResultURL = "https://localhost:44352/CheckOut/PayFeedback";//瀏覽器端回傳付款結果網址
                     oPayment.Send.MerchantTradeNo = orderId;//廠商的交易編號
                     oPayment.Send.MerchantTradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");//廠商的交易時間
                     oPayment.Send.TotalAmount = Decimal.Parse("4042");//交易總金額
@@ -208,6 +209,7 @@ namespace BS_Adoga.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult PayFeedback()
         {
 
@@ -270,6 +272,11 @@ namespace BS_Adoga.Controllers
             }
             finally
             {
+                string odpayId = (string)htFeedback["MerchantTradeNo"];
+                var payStatus = _context.Orders.Where(x => x.OrderID == odpayId).FirstOrDefault();
+                payStatus.PaymentStatus = true;
+                _context.Entry(payStatus).State = EntityState.Modified;
+                _context.SaveChanges();
                 this.Response.Clear();
                 // 回覆成功訊息。
                 if (enErrors.Count() == 0)
