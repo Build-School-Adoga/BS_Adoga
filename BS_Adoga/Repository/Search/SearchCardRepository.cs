@@ -5,9 +5,11 @@ using System.Web;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.Search;
 using System.ComponentModel.DataAnnotations;
+using BS_Adoga.Models.ViewModels.homeViewModels;
 
 namespace BS_Adoga.Repository.Search
 {
+    //資料庫帶資料
     public class SearchCardRepository
     {
         public AdogaContext _context;
@@ -48,6 +50,15 @@ namespace BS_Adoga.Repository.Search
                             }
                         };
             return hotel;
+        }
+        public SearchCardViewModel GetHotelForFilter()
+        {
+            SearchCardViewModel productss = new SearchCardViewModel()
+            {
+                Hotels = _context.Hotels.ToList()
+            };
+
+            return productss;
         }
 
         public IQueryable<SearchCardViewModel> GetHotel(string Name)

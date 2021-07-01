@@ -24,7 +24,6 @@ travel.forEach(item => item.addEventListener('click', function () {
         e.classList.remove("onUse");
     })
     on_Use(item);
-    debugger;
     if (item.classList.contains("single") || item.classList.contains("couple")) {
         if (item.classList.contains("single")) {
             showPerson.innerHTML = "1位大人";
@@ -52,7 +51,6 @@ btnDone.addEventListener('click', function () {
     var k = document.getElementById('kids-num').getElementsByTagName('span');
 
     showRoom.innerHTML = r[0].innerText + "间房间";
-    debugger;
     showPerson.innerHTML= a[0].innerText + "位大人";
     if (parseInt(k[0].innerText) > 0) {
         showPerson.innerHTML += "," + k[0].innerText + "位兒童";
