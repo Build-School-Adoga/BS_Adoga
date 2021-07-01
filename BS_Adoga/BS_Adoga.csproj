@@ -202,7 +202,6 @@
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
     <Content Include="Asset\CSS\HotelLogin.css" />
-    <Content Include="Asset\CSS\MemberAccount\MemberDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberProfile.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberLeftMenu.css" />
     <Content Include="Asset\CSS\Search.css" />
@@ -363,11 +362,9 @@
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Models\ViewModels\Account\" />
-    <Folder Include="Repository\Account\" />
     <Folder Include="Repository\CheckOut\" />
     <Folder Include="Repository\HotelLogin\" />
     <Folder Include="Repository\MemberLogin\" />
-    <Folder Include="Service\Account\" />
     <Folder Include="Service\CheckOut\" />
     <Folder Include="Service\HotelLogin\" />
     <Folder Include="Service\MemberLogin\" />
