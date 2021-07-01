@@ -86,12 +86,6 @@ namespace BS_Adoga.Service.HotelDetail
                 }
             }
 
-            //foreach (var item2 in result)
-            //{
-            //    var ad = item2.Adult;
-            //    var c = item2.Child;
-            //    var w = 0;
-            //}
 
             return result;
         }

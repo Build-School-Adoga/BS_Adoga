@@ -22,6 +22,8 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
         public string BedType { get; set; }
         //public IQueryable<RoomBedVM> RoomBed { get; set; }
 
+        public int CountNight { get; set; }
+
         public int RoomOrder { get; set; }
 
         public int Adult { get; set; }

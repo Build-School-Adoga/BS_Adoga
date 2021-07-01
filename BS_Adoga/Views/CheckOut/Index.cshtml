@@ -405,12 +405,11 @@
                             @*<h5 class="card-title">板橋凱撒大飯店 (Caesar Park Hotel Banqiao)</h5>*@
                             <p class="card-text">⭐⭐⭐⭐⭐</p>
                             <p class="card-text">
-                                <small class="text-muted">
-                                    新北市板橋區縣民大道2段8號, 板橋區, 台北市, 台北市, 台灣,
-                                    22065
-                                </small>
+                                <address class="text-muted">
+                                    @hotelAndRoom.Address
+                                </address>
                             </p>
-                            <p> 地點超優 - 週邊景點</p>
+                            @*<p> 地點超優 - 週邊景點</p>*@
                         </div>
                     </div>
                 </div>
@@ -418,26 +417,26 @@
             <!--房型資訊-->
             <div class="col border border-2 bg-white mb-3">
                 <div class="m-2 d-flex justify-content-between">
-                    <div>YYYY-MM-DD ~ YYYY-MM-DD </div>
-                    <div>N晚</div>
+                    <div>2021-06-20 ~ 2021-06-22 </div>
+                    <div>@hotelAndRoom.CountNight 晚</div>
                 </div>
                 <div class="line"></div>
                 <div class="m-2">
-                    N間房，N位大人
-                    <div class="col-12">N位大人</div>
+                    @hotelAndRoom.RoomOrder 間房，@hotelAndRoom.Adult 位大人
+                    <div class="col-12">@hotelAndRoom.Adult 位大人</div>
                 </div>
             </div>
             <!--金額資訊-->
             <div class="col border border-2 mb-3">
                 <div class="m-2 d-flex justify-content-between">
                     <div>總金額</div>
-                    <div>NT$3,600.00</div>
+                    <div>NT$ @hotelAndRoom.TotalPrice</div>
                 </div>
                 <div class="line"></div>
-                <div class="m-2 d-flex justify-content-between">
+                @*<div class="m-2 d-flex justify-content-between">
                     <div>含稅總價</div>
                     <div>NT$4,158.00</div>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>

@@ -135,10 +135,10 @@
                     </div>
                     <div class="col-1 pt-2 text-center">
                         <select name="" id="">
-                            <option value="0" selected>0</option>
-                            <option value="1">1</option>
+                            <option value="2" selected>2</option>
+                            @*<option value="1">1</option>
                             <option value="2">2</option>
-                            <option value="3">3</option>
+                            <option value="3">3</option>*@
                         </select>
                     </div>
                     <div class="col-3 pt-2 text-end">
@@ -154,8 +154,8 @@
                             roomOrder = 2,
                             roomPrice = roomPrice,
                             roomDiscount = discount,
-                            roomNowPrice = roomNowPrice
-                        }, new { @class = "keep-btn btn fz-14 py-2 mb-2" })
+                            roomNowPrice = Math.Round(room.RoomNowPrice *2, 0, MidpointRounding.AwayFromZero)                                
+                         }, new { @class = "keep-btn btn fz-14 py-2 mb-2" })
                         @*<button class="keep-btn btn fz-14 py-2 mb-2">保留</button>*@
                         <button class="cart-btn btn fz-14 py-2 mb-5">加入購物車</button>
                         <!-- <p class="green">一次訂兩間更划算</p>
