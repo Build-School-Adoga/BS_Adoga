@@ -268,15 +268,18 @@ namespace BS_Adoga.Controllers
             }
             finally
             {
-                string odpayId = (string)htFeedback["MerchantTradeNo"];
-                var payStatus = _context.Orders.Where(x => x.OrderID == odpayId).FirstOrDefault();
-                payStatus.PaymentStatus = true;
-                _context.Entry(payStatus).State = EntityState.Modified;
-                _context.SaveChanges();
-                this.Response.Clear();
+                
                 // 回覆成功訊息。
                 if (enErrors.Count() == 0)
+                {
+                    string odpayId = (string)htFeedback["MerchantTradeNo"];
+                    var payStatus = _context.Orders.Where(x => x.OrderID == odpayId).First();
+                    payStatus.PaymentStatus = true;
+                    _context.Entry(payStatus).State = EntityState.Modified;
+                    _context.SaveChanges();
+                    this.Response.Clear();
                     this.Response.Write("1|OK");
+                }                   
                 // 回覆錯誤訊息。
                 else
                     this.Response.Write(String.Format("0|{0}", String.Join("\\r\\n", enErrors)));
