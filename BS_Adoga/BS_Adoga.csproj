@@ -343,7 +343,6 @@
     <Content Include="Views\Shared\_nav.cshtml" />
     <Content Include="Views\Account\_LayoutMember.cshtml" />
     <Content Include="Views\Account\MemberBooking.cshtml" />
-    <Content Include="Views\Account\_MemberDetailPartial.cshtml" />
     <Content Include="Views\Account\_MemberBookingPartial.cshtml" />
     <Content Include="Views\CheckOut\PayAPI.cshtml" />
   </ItemGroup>
