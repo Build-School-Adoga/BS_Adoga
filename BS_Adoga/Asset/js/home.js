@@ -12,10 +12,13 @@ var showRoom = document.getElementById('final-room');
 person_info.addEventListener('click', function () {
     if (choosing_box.style.visibility == "visible") {
         choosing_box.style.visibility = "hidden";
+        choosing_box.style.display = "flex";
+        count_person.style.display = "flex";
         close_filter();
     }
     else {
         choosing_box.style.visibility = "visible";
+        choosing_box.style.display = "flex";
     }
 })
 travel.forEach(item => item.addEventListener('click', function () {
@@ -24,7 +27,7 @@ travel.forEach(item => item.addEventListener('click', function () {
         e.classList.remove("onUse");
     })
     on_Use(item);
-    debugger;
+   
     if (item.classList.contains("single") || item.classList.contains("couple")) {
         if (item.classList.contains("single")) {
             showPerson.innerHTML = "1位大人";
@@ -44,8 +47,10 @@ travel.forEach(item => item.addEventListener('click', function () {
     }
 }))
 
-var btnDone = document.getElementById('done-counting');
-btnDone.addEventListener('click', function () {
+
+$(document).click(function (e) {
+    e.stopPropagation();
+    var container = $(".search-filter-nav");
     var active = document.getElementById('choosing-box').getElementsByClassName('travel onUse');
     var r = document.getElementById('room-num').getElementsByTagName('span');
     var a = document.getElementById('adult-num').getElementsByTagName('span');
@@ -53,41 +58,37 @@ btnDone.addEventListener('click', function () {
 
 
     showRoom.innerHTML = r[0].innerText + "间房间";
-    debugger;
+
     showPerson.innerHTML = a[0].innerText + "位大人";
     if (parseInt(k[0].innerText) > 0) {
         showPerson.innerHTML += "," + k[0].innerText + "位兒童";
     }
-    close_filter();
+    //check if the clicked area is dropDown or not
+    if (container.has(e.target).length === 0) {
+        close_filter();
+    }
+})
 
-
-
-});
 
 function on_Use(el) {
     el.classList.add("onUse");
 }
 function open_filter() {
     count_person.style.visibility = "visible";
+    count_person.style.display = "flex";
+    choosing_box.style.display = "flex";
     kid_num.style.visibility = "visible";
 
 }
 function close_filter() {
     choosing_box.style.visibility = "hidden";
     count_person.style.visibility = "hidden";
+    choosing_box.style.display = "none";
+    count_person.style.display = "none";
     kid_num.style.visibility = "hidden";
 
 }
 
-$(document).click(function (e) {
-    e.stopPropagation();
-    var container = $(".search-filter-nav");
-
-    //check if the clicked area is dropDown or not
-    if (container.has(e.target).length === 0) {
-        close_filter();
-    }
-})
 
 
 /*遮罩*/

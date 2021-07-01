@@ -1195,7 +1195,28 @@
     </script>
 
     <script>
-             @model BS_Adoga.Models.ViewModels.homeViewModels.demoshopViewModels
+        @model BS_Adoga.Models.ViewModels.homeViewModels.demoshopViewModels
+
+
+
+        function dedup(arr) {
+            var hashTable = {};
+
+            return arr.filter(function (el) {
+                var key = JSON.stringify(el);
+                var match = Boolean(hashTable[key]);
+
+                return (match ? false : hashTable[key] = true);
+            });
+        }
+        var deduped = dedup([   @foreach (var item in Model.Hotels)
+                            {
+
+
+                    @Html.Partial("_option2", item);
+
+
+                            }]);
             var Main = {
                 data() {
                     return {
@@ -1204,14 +1225,7 @@
 
                         options3: [{
                             label: '熱門城市',
-                            options: [   @foreach (var item in Model.Hotels)
-                            {
-
-
-                    @Html.Partial("_option2", item);
-
-
-                            }]
+                            options: deduped
                         }, {
                             label: '飯店名',
                             options: [    @foreach (var item in Model.Hotels)
@@ -1240,6 +1254,9 @@
                             return
 
                         }
+                        this.options2 = this.options.filter(function (el, i, arr) {
+                            return arr.indexOf(el) === i;
+                        });
                         if (letter.lenght === 3) {
                             this.options2 = this.options.filter(v => {
                                 return v.label.includes(letter)
@@ -1280,64 +1297,7 @@
 
     </script>
 
-    <script>
-        var filter = new Vue({
-            el: '#nav1',
-            data: {
-                room: 1,
-                adult: 1,
-                kids: 0,
-            },
-            methods: {
-                minus: function (e) {
-                    switch (e) {
-                        case 'room':
-                            if (this.room > 1) {
-                                this.room -= 1;
-                            }
-                            else { alert("數量不可為0！"); }
-                            break;
-                        case "adult":
-                            if (this.adult > 1) {
-                                this.adult -= 1
-                            }
-                            else { alert("數量不可為0！"); }
-                            break;
-                        default://小孩
-                            if (this.kids > 0) {
-                                this.kids -= 1
-                            }
-                            else { alert("數量不可少於0！"); }
-                            break;
-                    }
-                },
-                plus: function (e) {
-                    switch (e) {
-                        case 'room':
-                            if (this.room < 9) {
-                                this.room += 1;
-                            }
-                            else { alert("數量最多為9！"); }
-                            break;
-                        case "adult":
-                            debugger;
-                            if (this.adult < 9) {
-                                this.adult += 1
-                            }
-                            else { alert("數量最多為9！"); }
-                            break;
-                        default://小孩
-                            if (this.kids < 9) {
-                                this.kids += 1
-                            }
-                            else { alert("數量最多為9！"); }
-                            break;
-                    }
-                }
-            }
-        })
-    </script>
-
+   
 
 }
 
