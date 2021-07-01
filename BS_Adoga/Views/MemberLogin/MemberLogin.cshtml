@@ -58,12 +58,12 @@
                                 </div>*@
                             <div class="mb-3 form-group">
                                 @Html.LabelFor(model => model.MemberLoginViewModel.Email)
-                                @Html.EditorFor(model => model.MemberLoginViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
+                                @Html.EditorFor(model => model.MemberLoginViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail-card" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
                                 @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Email, "", new { @class = "text-danger" })
                             </div>
                             <div class="mb-3 form-group">
                                 @Html.LabelFor(model => model.MemberLoginViewModel.Password)
-                                @Html.EditorFor(model => model.MemberLoginViewModel.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmailPassword" }, { "aria-describedby", "emailHelp" }, { "placeholder", "密碼" } } })
+                                @Html.EditorFor(model => model.MemberLoginViewModel.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmailPassword-card" }, { "aria-describedby", "emailHelp" }, { "placeholder", "密碼" } } })
                                 @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Password, "", new { @class = "text-danger" })
                             </div>
                             <div class="mb-3 form-group">
@@ -160,10 +160,10 @@
                         <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt="">
                         Apple
                     </button>
-                    <button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="FacebookLogout();">
+                    @*<button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="FacebookLogout();">
                         <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt="">
                         logout
-                    </button>
+                    </button>*@
                 </div>
             </div>
 
@@ -280,12 +280,12 @@
                                     </div>*@
                                 <div class="mb-3 form-group">
                                     @Html.LabelFor(model => model.MemberLoginViewModel.Email)
-                                    @Html.EditorFor(model => model.MemberLoginViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
+                                    @Html.EditorFor(model => model.MemberLoginViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmailLogin" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
                                     @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Email, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="mb-3 form-group">
                                     @Html.LabelFor(model => model.MemberLoginViewModel.Password)
-                                    @Html.EditorFor(model => model.MemberLoginViewModel.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmailPassword" }, { "aria-describedby", "emailHelp" }, { "placeholder", "密碼" } } })
+                                    @Html.EditorFor(model => model.MemberLoginViewModel.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "LoginEmailPassword" }, { "aria-describedby", "emailHelp" }, { "placeholder", "密碼" } } })
                                     @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Password, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="mb-3 form-group">
@@ -460,11 +460,11 @@
                                         <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
                                     </button>
                                     <div class="loginbuttonwithfa">
-                                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin">
+                                        <button type="button" class="otherlogin-btn" id="Emailfacebooklogin">
                                             <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
                                             Facebook
                                         </button>
-                                        <button type="button" class="otherlogin-btn" id="Phoneapplelogin">
+                                        <button type="button" class="otherlogin-btn" id="Emailapplelogin">
                                             <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt=""> Apple
                                         </button>
                                     </div>
@@ -564,30 +564,30 @@
     <script>
         //程式碼區域
         //國際電話script
-        const phoneInputField = document.querySelector("#phone");
-        const phoneInput = window.intlTelInput(phoneInputField, {
-            utilsScript:
-                "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-        });
+        //const phoneInputField = document.querySelector("#phone");
+        //const phoneInput = window.intlTelInput(phoneInputField, {
+        //    utilsScript:
+        //        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        //});
     </script>
     <!-- //google我不是機器人 -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <!--bear新增的主畫面大登入表單 -->
-    <script>
+    @*<script>
         let EmailLogintoForgetPasswordcard = document.getElementById('EmailLogintoForgetPassword-card')
         EmailLogintoForgetPasswordcard.addEventListener('click', function () {
             $('#SigninModal').modal('hide');
 
         })
-    </script>
+    </script>*@
     <!-- bear電子郵件登入到註冊 -->
-    <script>
+    @*<script>
         let EmailLogintoRegistercard = document.getElementById('EmailLogintoRegister-card')
         EmailLogintoRegistercard.addEventListener('click', function () {
             $('#SigninModal').modal('hide');
 
         })
-    </script>
+    </script>*@
     PhoneLogintoForgetPassword-card
     <!--電子郵件登入到忘記密碼 -->
     <script>
@@ -639,13 +639,13 @@
         })
     </script>
     <!-- 電子郵件註冊到登入 -->
-    <script>
+    @*<script>
         let SignintoPhone = document.getElementById('SignintoPhone')
         SignintoPhone.addEventListener('click', function () {
             $('#RegisterModal').modal('hide');
             $('#SigninModal').modal('show');
         })
-    </script>
+    </script>*@
 
     <script>
         //官方script
@@ -716,7 +716,7 @@
                                     
                                     success: function (msg) {
                                         console.log(msg);
-                                        document.location.href = "https://localhost:44352/";
+                                        document.location.href = "https://ec5dfbe2a53b.ngrok.io";
                                     }
                                 });
                              /*   window.loction.href = "https://localhost:44352/";*/
