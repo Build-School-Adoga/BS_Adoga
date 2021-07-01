@@ -22,7 +22,7 @@ namespace BS_Adoga.Controllers
         }
 
         // GET: CheckOut
-        public ActionResult Index(OrderVM data)
+        public ActionResult Index()
         {
             OrderVM orderData = (OrderVM)TempData.Peek("orderData");
             //OrderVM orderData = (OrderVM)TempData["orderData"];
@@ -49,39 +49,39 @@ namespace BS_Adoga.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(CheckOutListViewModel orderVM)
+        public ActionResult Index(OrderVM orderVM)
         {
-            OrderVM orderData = (OrderVM)TempData["orderData"];
-            var a = orderData.roomCheckOutViewModel.RoomID;
+            OrderVM orderData = (OrderVM)TempData.Peek("orderData");
+
 
             if (ModelState.IsValid)
             {
                 //1.View Model(RegisterViewModel) --> Data Model (HotelEmployee)
-                string firstname = HttpUtility.HtmlEncode(orderVM.FirstName);
-                string lastname = HttpUtility.HtmlEncode(orderVM.LastName);
-                string email = HttpUtility.HtmlEncode(orderVM.Email);
-                string ConfirmEmail = HttpUtility.HtmlEncode(orderVM.ConfirmEmail);
-                string phonenumber = HttpUtility.HtmlEncode(orderVM.PhoneNumber);
+                string firstname = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.FirstName);
+                string lastname = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.LastName);
+                string email = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.Email);
+                string ConfirmEmail = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.ConfirmEmail);
+                string phonenumber = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.PhoneNumber);
                 string customerId = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
 
                 Order od = new Order()
                 {
                     OrderID = "Adoga" + DateTime.Now.ToString("yyyyMMddHHmmss") + new Random().Next(0, 10).ToString(),
                     CustomerID = customerId,
-                    RoomID = "room01",
+                    RoomID = orderData.roomCheckOutViewModel.RoomID,
                     OrderDate = DateTime.Now,
                     CheckInDate = DateTime.Now,
                     CheckOutDate = DateTime.Now,
-                    RoomCount = 1,
-                    RoomPriceTotal = 3000,
+                    RoomCount = orderData.roomCheckOutViewModel.RoomOrder,
+                    RoomPriceTotal = orderData.roomCheckOutViewModel.TotalPrice,
                     FirstName = firstname,
                     LastName = lastname,
                     Email = email,
                     PhoneNumber = phonenumber,
-                    Country = orderVM.countries,
-                    SmokingPreference = orderVM.SmokingPreference,
-                    BedPreference = orderVM.BedPreference,
-                    ArrivingTime = orderVM.ArrivingTime,
+                    Country = orderVM.checkOutListViewModel.countries,
+                    SmokingPreference = orderVM.checkOutListViewModel.SmokingPreference,
+                    BedPreference = orderVM.checkOutListViewModel.BedPreference,
+                    ArrivingTime = orderVM.checkOutListViewModel.ArrivingTime,
                     PaymentStatus = false,
                     Logging = "建立" + "," + firstname + lastname + "," + DateTime.Now.ToString(),
                 };
