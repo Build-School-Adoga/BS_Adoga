@@ -147,7 +147,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-check border d-flex " id="sale-absolute"style="z-index: 3;width:514px;margin-left:1px">
+            <div class="form-check border d-flex " id="sale-absolute" style="z-index: 3;width:514px;margin-left:1px">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                        style=" margin-left: -10px;">
                 <label class="form-check-label" for="flexCheckDefault" style="width: 514px; margin-left: 10px;">
@@ -1124,7 +1124,7 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="~/Asset/js/home.js"></script>
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-   
+    
 
     <script>
         moment().format();
@@ -1191,7 +1191,7 @@
         $('#week_end').val(end);
         var start = moment(dates[0], 'YYYY MM DD');
         var end = moment(dates[1], 'YYYY MM DD');
-    
+
     </script>
 
     <script>
@@ -1226,7 +1226,7 @@
                         options2: [
                         ],
 
-                    
+
                         value: ''
                     };
 
@@ -1280,7 +1280,65 @@
 
     </script>
 
-  
+    <script>
+        var filter = new Vue({
+            el: '#nav1',
+            data: {
+                room: 1,
+                adult: 1,
+                kids: 0,
+            },
+            methods: {
+                minus: function (e) {
+                    switch (e) {
+                        case 'room':
+                            if (this.room > 1) {
+                                this.room -= 1;
+                            }
+                            else { alert("數量不可為0！"); }
+                            break;
+                        case "adult":
+                            if (this.adult > 1) {
+                                this.adult -= 1
+                            }
+                            else { alert("數量不可為0！"); }
+                            break;
+                        default://小孩
+                            if (this.kids > 0) {
+                                this.kids -= 1
+                            }
+                            else { alert("數量不可少於0！"); }
+                            break;
+                    }
+                },
+                plus: function (e) {
+                    switch (e) {
+                        case 'room':
+                            if (this.room < 9) {
+                                this.room += 1;
+                            }
+                            else { alert("數量最多為9！"); }
+                            break;
+                        case "adult":
+                            debugger;
+                            if (this.adult < 9) {
+                                this.adult += 1
+                            }
+                            else { alert("數量最多為9！"); }
+                            break;
+                        default://小孩
+                            if (this.kids < 9) {
+                                this.kids += 1
+                            }
+                            else { alert("數量最多為9！"); }
+                            break;
+                    }
+                }
+            }
+        })
+    </script>
+
+
 }
 
 
