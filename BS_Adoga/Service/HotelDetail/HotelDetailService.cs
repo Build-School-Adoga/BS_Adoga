@@ -21,18 +21,20 @@ namespace BS_Adoga.Service.HotelDetail
         {
             DetailVM hotelDetail = new DetailVM()
             {
-                hotelVM = GetHotel(hotelId),
-                roomTypeVM = GetRoomType(hotelId)
+                hotelVM = GetHotelById(hotelId),
+                roomTypeVM = GetRoomTypeByFilter(hotelId)
             };
             return hotelDetail;
         }
 
-        public HotelVM GetHotel(string hotelId)
+        public HotelVM GetHotelById(string hotelId)
         {
-            if (hotelId == null) hotelId = "hotel04";
+            //if (hotelId == null) hotelId = "hotel04"; //controller已處理，這裡不用再寫
 
-            var source = _repository.GetHotel(hotelId);
+            var source = _repository.GetHotelById(hotelId);
 
+            //先first 再轉 view model
+            //如果用 first or default要處理default 否則用 first就好
             var result = source.Select(s => new HotelVM
             {
                 HotelID = s.HotelID,
@@ -49,17 +51,14 @@ namespace BS_Adoga.Service.HotelDetail
             return result;
         }
 
-        public IQueryable<RoomTypeVM> GetRoomType(string hotelId)
+        //public IQueryable<RoomTypeVM> GetRoomType(string hotelId)
+        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId)
         {
             if (hotelId == null) hotelId = "hotel04";
 
-            var result = _repository.GetRoomType(hotelId);
+            var result = _repository.GetRoomTypeByFilter(hotelId);
             foreach (var item in result)
             {
-                //item.RoomDiscount = Math.Round(item.RoomDiscount * 10, 1,MidpointRounding.AwayFromZero);
-                //item.RoomPrice = Math.Round(item.RoomPrice, 0, MidpointRounding.AwayFromZero);
-                //item.RoomNowPrice = Math.Round(item.RoomNowPrice, 0, MidpointRounding.AwayFromZero);
-
                 foreach (var bed in item.RoomBed)
                 {
                     switch (bed.Name)
@@ -87,14 +86,38 @@ namespace BS_Adoga.Service.HotelDetail
                 }
             }
 
-            //foreach (var item2 in result)
-            //{
-            //    var ad = item2.Adult;
-            //    var c = item2.Child;
-            //    var w = 0;
-            //}
 
             return result;
         }
+
+        //public RoomCheckOutData GetCheckOutData(string hotelId,string roomId)
+        //{
+        //    var hotel = _repository.GetHotel(hotelId);
+        //    var allRoomType = GetRoomType(roomId);
+        //    var selectedRoomType = from rt in allRoomType
+        //                           where rt.RoomID == roomId
+        //                           select rt;
+
+        //    var checkOutData = from h in hotel
+        //                       join rt in selectedRoomType on h.HotelID equals rt.HotelID
+        //                       select new RoomCheckOutData
+        //                       {
+        //                           HotelID = h.HotelID,
+        //                           HotelFullName = h.HotelName + " (" + h.HotelEngName + ")",
+        //                           HotelAddress = h.HotelAddress,
+        //                           RoomID = rt.RoomID,
+        //                           RoomName = rt.RoomName,
+        //                           BedType = "雙人床",
+        //                           Breakfast = rt.Breakfast,
+        //                           NoSmoking = rt.NoSmoking,
+        //                           RoomPrice = rt.RoomPrice,
+        //                           RoomDiscount = rt.RoomDiscount,
+        //                           RoomNowPrice = rt.RoomNowPrice,
+        //                           Adult = rt.Adult,
+        //                           Child = rt.Child
+        //                       };
+        //    var B = checkOutData.FirstOrDefault();
+        //    return checkOutData.FirstOrDefault();
+        //}
     }
 }

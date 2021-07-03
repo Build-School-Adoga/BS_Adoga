@@ -1,9 +1,14 @@
-﻿@model BS_Adoga.Models.ViewModels.CheckOut.CheckOutListViewModel
+﻿@*@model BS_Adoga.Models.ViewModels.CheckOut.CheckOutListViewModel*@
+@model BS_Adoga.Models.ViewModels.CheckOut.OrderVM
 
 @{
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_LayoutCheckout.cshtml";
 
+    TempData.Peek("orderData");
+
+    var hotelAndRoom = Model.roomCheckOutViewModel;
+    var checkOut = Model.checkOutListViewModel;
 }
 
 @section topCSS{
@@ -69,41 +74,41 @@
                             <p class="fw-bold h5">請填寫以下資訊</p>
                             <!--FirstName-->
                             <div class="col-md-6">
-                                @Html.LabelFor(model => model.FirstName, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.checkOutListViewModel.FirstName, new { @class = "form-label" })
+                                @Html.EditorFor(model => model.checkOutListViewModel.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.checkOutListViewModel.FirstName, "", new { @class = "text-danger" })
                                 @*<label for="firstName" class="form-label">英文名（同護照）</label>
             <input type="text" class="form-control" id="firstName">*@
                             </div>
                             <!--LastName-->
                             <div class="col-md-6">
-                                @Html.LabelFor(model => model.LastName, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.checkOutListViewModel.LastName, new { @class = "form-label" })
+                                @Html.EditorFor(model => model.checkOutListViewModel.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.checkOutListViewModel.LastName, "", new { @class = "text-danger" })
                                 @*<label for="lastName" class="form-label">英文姓（同護照）</label>
             <input type="text" class="form-control" id="lastName">*@
                             </div>
                             <!--Email-->
                             <div class="col-12">
-                                @Html.LabelFor(model => model.Email, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "請確認電子信箱填寫無誤" } })
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.checkOutListViewModel.Email, new { @class = "form-label" })
+                                @Html.EditorFor(model => model.checkOutListViewModel.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "請確認電子信箱填寫無誤" } })
+                                @Html.ValidationMessageFor(model => model.checkOutListViewModel.Email, "", new { @class = "text-danger" })
                                 @*<label for="email" class="form-label">電子信箱</label>
             <input type="email" class="form-control" id="email" placeholder="請確認電子信箱填寫無誤">*@
                             </div>
                             <!--checkEmail-->
                             <div class="col-12">
-                                @Html.LabelFor(model => model.ConfirmEmail, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.ConfirmEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "請確認電子信箱填寫無誤" } })
-                                @Html.ValidationMessageFor(model => model.ConfirmEmail, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.checkOutListViewModel.ConfirmEmail, new { @class = "form-label" })
+                                @Html.EditorFor(model => model.checkOutListViewModel.ConfirmEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "請確認電子信箱填寫無誤" } })
+                                @Html.ValidationMessageFor(model => model.checkOutListViewModel.ConfirmEmail, "", new { @class = "text-danger" })
                                 @*<label for="checkemail" class="form-label">請再次輸入電子信箱</label>
             <input type="email" class="form-control" id="checkemail">*@
                             </div>
                             <!--PhoneNumber-->
                             <div class="col-md-6">
-                                @Html.LabelFor(model => model.PhoneNumber, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.checkOutListViewModel.PhoneNumber, new { @class = "form-label" })
+                                @Html.EditorFor(model => model.checkOutListViewModel.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.checkOutListViewModel.PhoneNumber, "", new { @class = "text-danger" })
                                 @*<label for="phone" class="form-label">手機號碼</label>
             <input type="text" class="form-control" id="phone">*@
                             </div>
@@ -128,7 +133,7 @@
                                         new SelectListItem { Text = "澳洲", Value = "澳洲" }
                                     };
                                 }
-                                @Html.DropDownListFor(x => x.countries, country, new { @class = "form-select" })
+                                @Html.DropDownListFor(x => x.checkOutListViewModel.countries, country, new { @class = "form-select" })
                             </div>
                             <!--
     <div class="col-12">
@@ -174,19 +179,19 @@
                                     <div class="row m-auto g-2">
                                         <span class="p-2">吸菸需求（需視現場狀況安排）</span>
                                         <div class="form-check col-md-6">
-                                            @Html.RadioButtonFor(model => model.SmokingPreference, "禁菸房", new { @id = "non-smok", @class = "form-check-input" }) 禁菸房
+                                            @Html.RadioButtonFor(model => model.checkOutListViewModel.SmokingPreference, "禁菸房", new { @id = "non-smok", @class = "form-check-input" }) 禁菸房
                                         </div>
                                         <div class="form-check col-md-6">
-                                            @Html.RadioButtonFor(model => model.SmokingPreference, "吸菸房", new { @id = "smok", @class = "form-check-input" }) 吸菸房
+                                            @Html.RadioButtonFor(model => model.checkOutListViewModel.SmokingPreference, "吸菸房", new { @id = "smok", @class = "form-check-input" }) 吸菸房
                                         </div>
                                     </div>
                                     <div class="row m-auto g-2">
                                         <span class="p-2">床型需求（需視現場狀況安排）</span>
                                         <div class="form-check col-md-6">
-                                            @Html.RadioButtonFor(model => model.BedPreference, "大床", new { @id = "bidbed", @class = "form-check-input" }) 大床
+                                            @Html.RadioButtonFor(model => model.checkOutListViewModel.BedPreference, "大床", new { @id = "bidbed", @class = "form-check-input" }) 大床
                                         </div>
                                         <div class="form-check col-md-6">
-                                            @Html.RadioButtonFor(model => model.BedPreference, "兩床", new { @id = "twobed", @class = "form-check-input" }) 兩床
+                                            @Html.RadioButtonFor(model => model.checkOutListViewModel.BedPreference, "兩床", new { @id = "twobed", @class = "form-check-input" }) 兩床
                                         </div>
                                     </div>
                                 </div>
@@ -263,7 +268,7 @@
                                         new SelectListItem { Text = "01:00 - 02:00", Value = "01:00 - 02:00" }
                                     };
                                 }
-                                @Html.DropDownListFor(m => m.ArrivingTime, arrivingTime, new { @class = "form-select" })
+                                @Html.DropDownListFor(m => m.checkOutListViewModel.ArrivingTime, arrivingTime, new { @class = "form-select" })
                             </div>
                             <div class="border border-3 bg-white p-3 m-1">
                                 <p>
@@ -294,7 +299,7 @@
                         </div>
                     </div>
                     -->
-                    @Html.Raw(ViewBag.CreditPay)
+                    @*@Html.Raw(ViewBag.CreditPay)*@
                 }
             </fieldset>
 
@@ -396,15 +401,14 @@
                     </div>
                     <div class="col-md-7">
                         <div class="card-body">
-                            <h5 class="card-title">板橋凱撒大飯店 (Caesar Park Hotel Banqiao)</h5>
+                            <h5 class="card-title">@hotelAndRoom.HotelFullName</h5>
+                            @*<h5 class="card-title">板橋凱撒大飯店 (Caesar Park Hotel Banqiao)</h5>*@
                             <p class="card-text">⭐⭐⭐⭐⭐</p>
                             <p class="card-text">
-                                <small class="text-muted">
-                                    新北市板橋區縣民大道2段8號, 板橋區, 台北市, 台北市, 台灣,
-                                    22065
-                                </small>
+                                <address class="text-muted">
+                                    @hotelAndRoom.Address
+                                </address>
                             </p>
-                            <p> 地點超優 - 週邊景點</p>
                         </div>
                     </div>
                 </div>
@@ -412,26 +416,26 @@
             <!--房型資訊-->
             <div class="col border border-2 bg-white mb-3">
                 <div class="m-2 d-flex justify-content-between">
-                    <div>YYYY-MM-DD ~ YYYY-MM-DD </div>
-                    <div>N晚</div>
+                    <div>2021-06-20 ~ 2021-06-22 </div>
+                    <div>@hotelAndRoom.CountNight 晚</div>
                 </div>
                 <div class="line"></div>
                 <div class="m-2">
-                    N間房，N位大人
-                    <div class="col-12">N位大人</div>
+                    @hotelAndRoom.RoomOrder 間房，@hotelAndRoom.Adult 位大人
+                    <div class="col-12">@hotelAndRoom.Adult 位大人</div>
                 </div>
             </div>
             <!--金額資訊-->
             <div class="col border border-2 mb-3">
                 <div class="m-2 d-flex justify-content-between">
                     <div>總金額</div>
-                    <div>NT$3,600.00</div>
+                    <div>NT$ @hotelAndRoom.TotalPrice</div>
                 </div>
                 <div class="line"></div>
-                <div class="m-2 d-flex justify-content-between">
+                @*<div class="m-2 d-flex justify-content-between">
                     <div>含稅總價</div>
                     <div>NT$4,158.00</div>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>

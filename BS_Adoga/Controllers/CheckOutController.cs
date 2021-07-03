@@ -8,6 +8,7 @@ using BS_Adoga.Models.ViewModels.CheckOut;
 using ECPay.Payment.Integration;
 using System.Collections;
 using System.Web.Security;
+using System.Data.Entity;
 
 namespace BS_Adoga.Controllers
 {
@@ -23,6 +24,8 @@ namespace BS_Adoga.Controllers
         // GET: CheckOut
         public ActionResult Index()
         {
+            OrderVM orderData = (OrderVM)TempData.Peek("orderData");
+            //OrderVM orderData = (OrderVM)TempData["orderData"];
 
             //List<SelectListItem> selectCountry = new List<SelectListItem>() {
             //    new SelectListItem { Text = "台灣", Value = "台灣" },
@@ -41,42 +44,44 @@ namespace BS_Adoga.Controllers
             //items.Add(new SelectListItem { Text = "Yao", Value = "24" });
             //ViewBag.list = items;
 
-            return View();
+            return View(orderData);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(CheckOutListViewModel orderVM)
+        public ActionResult Index(OrderVM orderVM)
         {
+            OrderVM orderData = (OrderVM)TempData.Peek("orderData");
+
 
             if (ModelState.IsValid)
             {
                 //1.View Model(RegisterViewModel) --> Data Model (HotelEmployee)
-                string firstname = HttpUtility.HtmlEncode(orderVM.FirstName);
-                string lastname = HttpUtility.HtmlEncode(orderVM.LastName);
-                string email = HttpUtility.HtmlEncode(orderVM.Email);
-                string ConfirmEmail = HttpUtility.HtmlEncode(orderVM.ConfirmEmail);
-                string phonenumber = HttpUtility.HtmlEncode(orderVM.PhoneNumber);
+                string firstname = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.FirstName);
+                string lastname = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.LastName);
+                string email = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.Email);
+                string ConfirmEmail = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.ConfirmEmail);
+                string phonenumber = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.PhoneNumber);
                 string customerId = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
 
                 Order od = new Order()
                 {
                     OrderID = "Adoga" + DateTime.Now.ToString("yyyyMMddHHmmss") + new Random().Next(0, 10).ToString(),
                     CustomerID = customerId,
-                    RoomID = "room01",
+                    RoomID = orderData.roomCheckOutViewModel.RoomID,
                     OrderDate = DateTime.Now,
                     CheckInDate = DateTime.Now,
                     CheckOutDate = DateTime.Now,
-                    RoomCount = 1,
-                    RoomPriceTotal = 3000,
+                    RoomCount = orderData.roomCheckOutViewModel.RoomOrder,
+                    RoomPriceTotal = orderData.roomCheckOutViewModel.TotalPrice,
                     FirstName = firstname,
                     LastName = lastname,
                     Email = email,
                     PhoneNumber = phonenumber,
-                    Country = orderVM.countries,
-                    SmokingPreference = orderVM.SmokingPreference,
-                    BedPreference = orderVM.BedPreference,
-                    ArrivingTime = orderVM.ArrivingTime,
+                    Country = orderVM.checkOutListViewModel.countries,
+                    SmokingPreference = orderVM.checkOutListViewModel.SmokingPreference,
+                    BedPreference = orderVM.checkOutListViewModel.BedPreference,
+                    ArrivingTime = orderVM.checkOutListViewModel.ArrivingTime,
                     PaymentStatus = false,
                     Logging = "建立" + "," + firstname + lastname + "," + DateTime.Now.ToString(),
                 };
@@ -112,12 +117,12 @@ namespace BS_Adoga.Controllers
                     oPayment.ServiceURL = "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5";//要呼叫介接服務的網址
                     oPayment.HashKey = "5294y06JbISpM5x9";//ECPay提供的Hash Key
                     oPayment.HashIV = "v77hoKGq4kWxNNIS";//ECPay提供的Hash IV
-                    oPayment.MerchantID = "2000132";//ECPay提供的特店編號
+                    oPayment.MerchantID = "2000214";//ECPay提供的特店編號 2000132
 
                     /* 基本參數 */
-                    oPayment.Send.ReturnURL = "http://localhost:44352/CheckOut/PayFeedback";//付款完成通知回傳的網址
+                    oPayment.Send.ReturnURL = "https://localhost:44352/CheckOut/PayFeedback";//付款完成通知回傳的網址
                     oPayment.Send.ClientBackURL = "http://adoga.azurewebsites.net/";//瀏覽器端返回的廠商網址
-                    oPayment.Send.OrderResultURL = "";//瀏覽器端回傳付款結果網址
+                    oPayment.Send.OrderResultURL = "https://localhost:44352/CheckOut/PayFeedback";//瀏覽器端回傳付款結果網址
                     oPayment.Send.MerchantTradeNo = orderId;//廠商的交易編號
                     oPayment.Send.MerchantTradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");//廠商的交易時間
                     oPayment.Send.TotalAmount = Decimal.Parse("4042");//交易總金額
@@ -204,6 +209,7 @@ namespace BS_Adoga.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult PayFeedback()
         {
 
@@ -266,10 +272,18 @@ namespace BS_Adoga.Controllers
             }
             finally
             {
-                this.Response.Clear();
+                
                 // 回覆成功訊息。
                 if (enErrors.Count() == 0)
+                {
+                    string odpayId = (string)htFeedback["MerchantTradeNo"];
+                    var payStatus = _context.Orders.Where(x => x.OrderID == odpayId).First();
+                    payStatus.PaymentStatus = true;
+                    _context.Entry(payStatus).State = EntityState.Modified;
+                    _context.SaveChanges();
+                    this.Response.Clear();
                     this.Response.Write("1|OK");
+                }                   
                 // 回覆錯誤訊息。
                 else
                     this.Response.Write(String.Format("0|{0}", String.Join("\\r\\n", enErrors)));

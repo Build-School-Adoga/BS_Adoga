@@ -1,7 +1,16 @@
 ﻿
-<div class="page" id="detail-page">
+@{
+    ViewBag.Title = "個人資料";
+    Layout = "~/Views/Account/_LayoutMember.cshtml";
+}
+
+@section topCSS{
+    <link rel="stylesheet" href="~/Asset/CSS/MemberAccount/MemberProfile.css" />
+}
+
+<div class="page ps-5 pt-4" id="profile-page">
     <section class="user_details mb-5">
-        <h3 class="gray-header ms-3">用戶詳細資料</h3>
+        <h3 class="gray-header ms-3 lead">用戶詳細資料</h3>
 
         <section class="name-component m-3">
             <div class="name-component component-wrap">
@@ -52,7 +61,7 @@
                     </div>
                     <p class="display-email-value">
                         st1034332@ms.tsh.ttu.edu.tw
-                        <span class="badge bg-info text-dark">已通過驗證</span>
+                        <span class="email-verify-badge">已通過驗證</span>
                     </p>
                 </div>
             </div>
@@ -104,7 +113,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="telphonenumber" class="form-label">電話號碼</label>
-                    <input type="tel" class="form-control" id="telphonenumber" placeholder="電話號碼" value="09888888888"/>
+                    <input type="tel" class="form-control" id="telphonenumber" placeholder="電話號碼" value="09888888888" />
                 </div>
 
                 <div>
@@ -158,7 +167,7 @@
     </section>
 
     <section class="social_networks-link m-3 mb-5">
-        <h3 class="gray-header">社群網路連結</h3>
+        <h3 class="gray-header lead">社群網路連結</h3>
         <section class="facebook-component">
             <div class="facebook-component component-wrap">
                 <div class="facebook-component-display">
@@ -170,7 +179,7 @@
     </section>
 
     <section class="payment-methods m-3">
-        <h3 class="gray-header">付款方式</h3>
+        <h3 class="gray-header lead">付款方式</h3>
         <div class="payment-component component-wrap">
             <div class="payment-component-add">+</div>
             <div class="payment-component-add-method">新增付款方式</div>
@@ -212,7 +221,7 @@
     </section>
 
     <section class="email_subscriptions-link m-3 mb-5">
-        <h3 class="gray-header">訂閱電子郵件</h3>
+        <h3 class="gray-header lead">訂閱電子郵件</h3>
         <div class="reminders-component component-wrap mb-3">
             <p class="gray-bold-text mb-0">我希望預訂小幫手能提醒我重要消息</p>
 
@@ -263,3 +272,38 @@
         </div>
     </section>
 </div>
+
+@section endJS{
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="~/Asset/js/MemberAccount/MemberProfile.js"></script>
+    <script>
+        //let links = ["booking", "inbox", "reviews", "profile"]
+        //let pages = ["booking-page", "inbox-page", "reviews-page", "profile-page"]
+        //function addCurrentPage(linkBox,currentPage) {
+        //    if (detailPage.style.display == 'block') {
+        //        linkBox.classList.add("currentPage")
+        //    }            
+        //}
+        
+        //function showPage(showPage, hidePage) {
+        //    showPage.style.display = "block";
+        //    hidePage.style.display = "none";
+        //}
+
+        //let bookingsLink = document.getElementById("bookings")
+        //bookingsLink.addEventListener('click', () => {
+        //    bookingPage.style.display = "block";
+        //    detailPage.style.display = "none";
+        //    addCurrentPage(bookingsLink);
+        //})
+        //links.forEach((link,index)=>{
+        //    let linkBox = document.getElementById(link)
+        //    linkBox.addEventListener('click', () => {
+        //        detailPage.style.display = "block";
+        //        bookingPage.style.display = "none";
+        //        addCurrentPage(profileLink);
+        //    })
+        //})
+        
+    </script>
+}

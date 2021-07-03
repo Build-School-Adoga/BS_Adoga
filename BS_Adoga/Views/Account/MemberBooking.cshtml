@@ -1,5 +1,13 @@
-﻿@*<div class="page">*@
-<div id="booking-page">
+﻿@{
+    Layout = "~/Views/Account/_LayoutMember.cshtml";
+}
+
+@section topCSS{
+     <link rel="stylesheet" href="~/Asset/CSS/MemberAccount/MemberBookings.css" />
+}
+
+@*<div class="page">*@
+<div id="booking-page" class="ps-5 pt-4">
     <!-- <div class="AgodaVIPBanner_Container">
         <figure class="AgodaVipBanner_Image"></figure>
         <div class="AgodaVipBanner_Badge">
@@ -22,7 +30,6 @@
             <button class="btn">瞭解更多</button>
         </div>
     </div> -->
-
     <div class="my-bookings-filter">
         <div class="filter-container_based-on-time_or_cancel">
             <span class="filter-option-Upcoming">未來式</span>
@@ -69,3 +76,5 @@
     </div>
 </div>
 @*</div>*@
+
+
