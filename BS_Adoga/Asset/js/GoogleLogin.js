@@ -11,7 +11,7 @@ $(function () {
 function GoogleSigninInit() {
     gapi.load('auth2', function () {
         gapi.auth2.init({
-            client_id: "373077817054-6c6eaqcq6nun968jq67q8epn6pbdl9bo.apps.googleusercontent.com"//必填，記得開發時期要開啟 Chrome開發人員工具 查看有沒有403錯誤(Javascript來源被禁止)
+            client_id: "373077817054-5hahnkio91en8pnqqqpaginugjt0f85v.apps.googleusercontent.com"//必填，記得開發時期要開啟 Chrome開發人員工具 查看有沒有403錯誤(Javascript來源被禁止)
         });
     });//end gapi.load
 }//end GoogleSigninInit function
@@ -30,7 +30,7 @@ function GoogleLogin() {
             data: { id_token: id_token },
             success: function (msg) {
                 console.log(msg);
-                document.location.href ="https://localhost:44352/";
+                document.location.href ="http://adoga.azurewebsites.net/";
             }
         });//end $.ajax
 
