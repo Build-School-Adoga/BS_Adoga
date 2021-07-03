@@ -30,7 +30,7 @@ function GoogleLogin() {
             data: { id_token: id_token },
             success: function (msg) {
                 console.log(msg);
-                document.location.href ="http://adoga.azurewebsites.net/";
+                document.location.href ="https://adoga.azurewebsites.net/";
             }
         });//end $.ajax
 
