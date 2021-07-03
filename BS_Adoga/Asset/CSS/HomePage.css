@@ -96,14 +96,19 @@ table {
     height: 66px;
     font-size: 25px;
     margin-top: 50px;
+    
+   
 }
 
 #inputGroupSelect03 {
-    width: 403px;
+    width: 502px;
     height: 66px;
     font-size: 25px;
-    margin-left: 85px;
-    margin-top: 110px;
+    margin-left: 520px;
+    margin-top: -90px;
+    background-color: #fff;
+   position:relative;
+
 }
 
 #inputGroupSelect04 {
@@ -177,7 +182,7 @@ a {
     line-height: 12px;
     font-weight: 400;
     position: relative;
-    z-index: 2;
+    z-index: 4;
     margin-top: -60px;
     margin-left: -550px;
 }
@@ -248,7 +253,9 @@ li a {
 select {
     font-family: FontAwesome;
 }
+el-select{
 
+}
 datalist {
     position: absolute;
     max-height: 30em;
@@ -270,3 +277,231 @@ datalist {
             background-color: blueviolet;
             outline: 0 none;
         }
+/*        右側選單*/
+.search-filter-nav {
+    color: grey;
+    font-size: 16px;
+    width: 502px;
+    margin-left: 500px;
+    height:66px;
+    margin-top:-75px;
+
+}
+
+    .search-filter-nav p {
+        margin: auto;
+    }
+
+    .search-filter-nav i {
+        font-size: 20px;
+        margin: auto 10px;
+    }
+
+    .search-filter-nav img {
+        vertical-align: bottom;
+    }
+
+    
+    .main-body,
+    
+    .filter-container {
+        /* 控制整体维持60vw在中间 */
+        width: 70vw;
+        margin: auto;
+    }
+
+.search-bar,
+.main-body,
+.nav-item,
+.search-bar button {
+    margin: 10px auto;
+}
+
+   
+    .main-body,
+    .nav-item,
+    .nav-item .search-date,
+    .filter-container,
+    .filter-container .array-list,
+    .filter-container .array-list .array-item,
+    .main-body .infomation .card {
+        display: flex;
+        justify-content: space-between;
+    }
+        /*.filter-container .array-list{*/
+        /*没有作用*/
+        /*padding-bottom: 100px;
+}*/
+        .nav-item .choose-info,
+        .nav-item .search-date,
+        .main-body .infomation {
+            flex-grow: 1;
+        }
+
+.nav-item {
+    border-radius: 5px;
+    background-color: #fff;
+    width: 502px;
+    position: relative;
+    z-index:3;
+    height: 66px;
+    border: 1px solid #ced4da;
+}
+ .nav-item:nth-child(2) div.line {
+    width: 1px;
+    height: 100%;
+    background-color: grey;
+}
+
+div#person-info {
+    width: 100%;
+    display: flex;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    background-color: transparent;
+}
+
+    .dropdown-item:focus, .dropdown-item:hover button > p {
+        color: #5392F9;
+    }
+
+/* filter人数设定 */
+.nav-item #person-box {
+    position: absolute;
+    top: 120%;
+    display: flex;
+}
+
+    .nav-item #person-box #choosing-box,
+    .nav-item #person-box #count-person {
+        /* height: 300px; */
+        width: 300px;
+        visibility: hidden;
+        z-index: 2;
+    }
+
+    .nav-item #person-box #choosing-box {
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        background-color: #F8F7F9;
+    }
+
+        .nav-item #person-box #choosing-box > div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .nav-item #person-box #choosing-box > div > * {
+                margin: 0 10px;
+            }
+
+            .nav-item #person-box #choosing-box > div:hover {
+                color: #5392F9;
+            }
+
+.travel.onUse {
+    background-color: white;
+    box-shadow: 5px 5px 10px rgba(59, 59, 59, 0.1);
+}
+
+.nav-item #person-box #choosing-box > div,
+.nav-item #person-box #count-person .count-box {
+    padding: 12px 5px;
+    font-size: 18px;
+    border-bottom: 1px solid #DDDFE2;
+    margin: 10px 0;
+}
+
+.nav-item #person-box #count-person {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    box-shadow: 5px 5px 10px rgba(59, 59, 59, 0.1);
+    background-color: white;
+}
+
+    .nav-item #person-box #count-person .count-box {
+        display: flex;
+        flex-direction: row;
+    }
+
+        .nav-item #person-box #count-person .count-box span {
+            color: #5392F9;
+            font-size: 24px;
+        }
+
+        .nav-item #person-box #count-person .count-box i {
+            color: #B4D0FC;
+        }
+
+    .nav-item #person-box #count-person button#done-counting {
+        justify-self: flex-end;
+        align-self: flex-end;
+        position: absolute;
+        bottom: 0;
+        padding: 6px 20px;
+        font-size: 18px;
+        left: 40%;
+    }
+
+    button,
+    .nav-item #person-box #count-person button#done-counting {
+        background-color: #5392F9;
+        color: #CBDEFD;
+        border: none;
+        border-radius: 5px;
+    }
+
+        button:hover,
+        .nav-item #person-box #count-person button#done-counting:hover {
+            background-color: #75A8F9;
+        }
+
+.nav-item #filter-black {
+    position: absolute;
+    top: 100%;
+    /* background: #000;
+opacity: .7;
+z-index: 1; */
+    /* height: fit-content();
+width: 30vw;
+background-color: rgba(0, 0, 0, 0.7); */
+
+}
+
+/*日曆*/
+.calendar-minus {
+    position:relative;
+    z-index: 2;
+}
+.timebox {
+    position: absolute;
+    width: 514px;
+    height: 66px;
+    background-color: white;
+    z-index: 3;
+    border: 1px solid #DDDFE2;
+    pointer-events: none;
+}
+.line {
+    position: absolute;
+    z-index: 4;
+    width: 1px;
+    height: 50px;
+    background-color:darkgray;
+    margin-left:-50px;
+}
+/*遮罩*/
+.bg {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    opacity: 0.7;
+}
