@@ -1,7 +1,10 @@
 ﻿@model RoomTypeVM
 
-@{ 
+@{
     var room = Model;
+    var discount = Math.Round((1 - room.RoomDiscount) * 10, 1);
+    var roomPrice = Math.Round(room.RoomPrice, 0, MidpointRounding.AwayFromZero);
+    var roomNowPrice = Math.Round(room.RoomNowPrice, 0, MidpointRounding.AwayFromZero);
 }
 <div class="room-type mb-4">
     <div class="room-type-title">
@@ -29,17 +32,17 @@
                         </div>
                     }
                     @*<div class="d-flex align-items-center mb-2">
-                        <i class="fas fa-bed me-3"></i>
-                        <span class="fz-14">@Model.BedAmount 張 @Model.BedName</span>
-                    </div>*@
+                            <i class="fas fa-bed me-3"></i>
+                            <span class="fz-14">@Model.BedAmount 張 @Model.BedName</span>
+                        </div>*@
 
                     <!--<div class="d-flex align-items-center mb-2">
-        <i class="fas fa-ruler-horizontal me-3"></i>
-        <span class="fz-14">客房面積：<span> 52平方公尺/560平方英尺</span></span>
-    </div>-->
+                        <i class="fas fa-ruler-horizontal me-3"></i>
+                        <span class="fz-14">客房面積：<span> 52平方公尺/560平方英尺</span></span>
+                    </div>-->
                     <!-- <div class="d-flex align-items-center mb-2"><i class="fas fa-city me-3"></i><span class="fz-14">景觀：市景
-        </span>
-    </div> -->
+                        </span>
+                    </div> -->
                     @if (room.NoSmoking)
                     {
                         <div class="d-flex align-items-center mb-2">
@@ -57,8 +60,8 @@
                         <span class="fz-14">看看所有設施與服務</span>
                     </div>
                     <!--<div class="equim-serv" v-show="hover">
-        ddd
-    </div>-->
+                        ddd
+                    </div>-->
                     @*</div>*@
                 </div>
             </div>
@@ -80,7 +83,7 @@
                     <div class="col-3">
                     </div>
                 </div>
-                <div class="row room-case pe-3 mb-3">
+                <div class="row room-case one-case pe-3 mb-3">
                     <div class="col-4 pt-2">
                         <p class="fz-12 fw-bold mb-2">優惠專案</p>
                         @if (room.Breakfast)
@@ -88,8 +91,8 @@
                             <p class="fz-14 mb-2">
                                 <i class="fas fa-check color-green fz-14 me-2"></i>
                                 包含早餐 @*-
-                                <span class="red-del-line fw-bold fz-14">NT$ 950</span>
-                                <span class="fw-bold color-green"> 包含</span>*@
+                                    <span class="red-del-line fw-bold fz-14">NT$ 950</span>
+                                    <span class="fw-bold color-green"> 包含</span>*@
                             </p>
                         }
 
@@ -101,9 +104,9 @@
                             </p>
                         }
                         @*<p class="fz-14 mb-2">
-                            <i class="fas fa-check color-green fz-14 me-2"></i>
-                            【促銷價】點此查看取消條款
-                        </p>*@
+                                <i class="fas fa-check color-green fz-14 me-2"></i>
+                                【促銷價】點此查看取消條款
+                            </p>*@
                     </div>
                     <div class="col-2 pt-2 color-gray text-center">
                         <div>
@@ -119,27 +122,40 @@
                         </p>
                     </div>
                     <div class="col-2 pt-2 text-end ps-0">
-                        <p class="text-start mb-3"><span class="room-case-discount">今日 @Math.Round((1-room.RoomDiscount) * 10, 1) 折！</span></p>
+                        <p class="text-start mb-3"><span class="room-case-discount">今日 @discount 折！</span></p>
                         <del class="room-case-price fz-16 color-gray fw-bold">
                             <span class="fz-16">NT$</span>
-                            @Math.Round(room.RoomPrice, 0, MidpointRounding.AwayFromZero)
+                            @roomPrice
                         </del>
                         <p class="room-case-price">
                             <span class="fz-16">NT$</span>
-                            @Math.Round(room.RoomNowPrice, 0, MidpointRounding.AwayFromZero)
+                            @roomNowPrice
                         </p>
                         <p class="color-gray fz-12">每晚低至</p>
                     </div>
                     <div class="col-1 pt-2 text-center">
                         <select name="" id="">
-                            <option value="0" selected>0</option>
-                            <option value="1">1</option>
+                            <option value="2" selected>2</option>
+                            @*<option value="1">1</option>
                             <option value="2">2</option>
-                            <option value="3">3</option>
+                            <option value="3">3</option>*@
                         </select>
                     </div>
                     <div class="col-3 pt-2 text-end">
-                        @Html.ActionLink("保留", "Index", "CheckOut", null, new { @class = "keep-btn btn fz-14 py-2 mb-2" })
+                        @Html.ActionLink("保留", "SetCheckOutData", new
+                        {
+                            hotelId = room.HotelID,
+                            roomId = room.RoomID,
+                            roomName = room.RoomName,
+                            breakfast = room.Breakfast,
+                            bedType = "雙人床",
+                            adult = room.Adult,
+                            child = room.Child,
+                            roomOrder = 2,
+                            roomPrice = roomPrice,
+                            roomDiscount = discount,
+                            roomNowPrice = Math.Round(room.RoomNowPrice *2, 0, MidpointRounding.AwayFromZero)                                
+                         }, new { @class = "keep-btn btn fz-14 py-2 mb-2" })
                         @*<button class="keep-btn btn fz-14 py-2 mb-2">保留</button>*@
                         <button class="cart-btn btn fz-14 py-2 mb-5">加入購物車</button>
                         <!-- <p class="green">一次訂兩間更划算</p>

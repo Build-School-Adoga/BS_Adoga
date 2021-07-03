@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "PayAPI";
+    Layout = "~/Views/Shared/_LayoutCheckout.cshtml";
+}
+
+@section topCSS{
+    <link rel="stylesheet" href="~/Asset/CSS/Reset.css" />
+    <link rel="stylesheet" href="~/Asset/CSS/StepBar.css" />
+    <style>
+        #Customer-Service {
+            background-color: rgb(230, 228, 228);
+            width: 100%;
+            height: 227.2px;
+        }
+
+        footer {
+            background-color: #333;
+        }
+
+        .line {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #999;
+        }
+
+            .line::before,
+            .line::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+                background: #ccc;
+            }
+
+        #form fieldset:not(:first-of-type) {
+            display: none
+        }
+    </style>
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PayAPI</title>
+</head>
+<body>
+    <div>
+        @Html.Raw(ViewBag.CreditPay)
+    </div>
+</body>
+</html>
+
+@section endJS{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Asset/js/navbar.js"></script>
+    <script type="text/javascript" src="~/Asset/js/formStep.js"></script>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

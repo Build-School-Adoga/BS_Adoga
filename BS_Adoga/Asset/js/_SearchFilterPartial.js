@@ -37,8 +37,8 @@ travel.forEach(item => item.addEventListener('click', function () {
     }
     else {
         open_filter();
-        if(item.classList.contains("bussiness")){
-        kid_num.style.visibility = "hidden";
+        if (item.classList.contains("bussiness")) {
+            kid_num.style.visibility = "hidden";
         }
     }
 }))
@@ -55,7 +55,7 @@ $(document).click(function (e) {
     var k = document.getElementById('kids-num').getElementsByTagName('span');
 
     showRoom.innerHTML = r[0].innerText + "间房间";
-    showPerson.innerHTML= a[0].innerText + "位大人";
+    showPerson.innerHTML = a[0].innerText + "位大人";
     if (parseInt(k[0].innerText) > 0) {
         showPerson.innerHTML += "," + k[0].innerText + "位兒童";
     }
@@ -81,4 +81,3 @@ function close_filter() {
     kid_num.style.visibility = "hidden";
 
 }
-

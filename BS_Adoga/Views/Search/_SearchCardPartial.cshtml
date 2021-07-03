@@ -1,23 +1,23 @@
 ﻿@using BS_Adoga.Models.ViewModels.Search
-@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
+@*@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel*@
+@model BS_Adoga.Models.ViewModels.Search.HotelSearchViewModel
 @{
     string HotelFullName;
     RoomDetailViewModel rd = Model.I_RoomDetailVM;
     RoomViewModel r = Model.I_RoomVM;
-    HotelDetailViewModel hd = Model.I_HotelDetailVM;
 
     var leftroom = rd.RoomCount - rd.RoomOrder;
-    var newPrice = r.RoomPrice * (1 - rd.RoomDiscount);
+    var newPrice = (int)(r.RoomPrice * (1 - rd.RoomDiscount));
     var roomdiscount = (int)(rd.RoomDiscount * 100);
-    var roomprice = (int)Math.Round(r.RoomPrice);
-    var hotelAddress = hd.HotelCity + ", " + hd.HotelDistrict;
+    var roomprice = (int)r.RoomPrice;
+    var hotelAddress = Model.HotelCity + ", " + Model.HotelDistrict;
 }
 
-@if (hd.HotelEngName != null)
+@if (Model.HotelEngName != null)
 {
-    HotelFullName = hd.HotelName + "(" + hd.HotelEngName + ")";
+    HotelFullName = Model.HotelName + "(" + Model.HotelEngName + ")";
 }
-else { HotelFullName = hd.HotelName; }
+else { HotelFullName = Model.HotelName; }
 
 <div class="card">
     <div class="img">
@@ -36,7 +36,7 @@ else { HotelFullName = hd.HotelName; }
         <a href="#">@HotelFullName</a>
         <div class="small-rank">
             <div class="star">
-                @for (int i = 1; i <= hd.Star; i++)
+                @for (int i = 1; i <= Model.Star; i++)
                 {
                     <i class="fas fa-star"></i>
                 }
@@ -60,24 +60,24 @@ else { HotelFullName = hd.HotelName; }
     </div>
     <div class="rank">
         <!-- 目前不用 <div class="point">
-        <div class="comment">
-            <p>很讚</p>
-            <p><span>10,237</span> 份評鑑</p>
-            <p>地點 <span>9.0</span></p>
-        </div>
-        <div class="icon">
-            <p>8.5</p>
-        </div>
-    </div> -->
+            <div class="comment">
+                <p>很讚</p>
+                <p><span>10,237</span> 份評鑑</p>
+                <p>地點 <span>9.0</span></p>
+            </div>
+            <div class="icon">
+                <p>8.5</p>
+            </div>
+        </div> -->
         <div class="offer">
             <p>只剩<span>@leftroom</span>間房可享<span>@roomdiscount</span>％優惠</p>
         </div>
         <div class="price">
             <p>每晚含稅價</p>
             <del>@roomprice</del>
-            <ins>NT$<span>@Math.Round(newPrice, 0, MidpointRounding.AwayFromZero)</span></ins>
+            <ins>NT$<span>@newPrice</span></ins>
         </div>
-        
-        @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = hd.HotelID }, new { @class = "btn btn-primary", })
+
+        @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = Model.HotelID }, new { @class = "btn btn-primary", })
     </div>
 </div>
