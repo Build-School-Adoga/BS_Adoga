@@ -43,8 +43,12 @@ travel.forEach(item => item.addEventListener('click', function () {
     }
 }))
 
-var btnDone = document.getElementById('done-counting');
-btnDone.addEventListener('click', function () {
+
+$(document).click(function (e) {
+    e.stopPropagation();
+    var container = $(".search-filter-nav");
+
+    //幾時更新上方Filter的數量
     var active = document.getElementById('choosing-box').getElementsByClassName('travel onUse');
     var r = document.getElementById('room-num').getElementsByTagName('span');
     var a = document.getElementById('adult-num').getElementsByTagName('span');
@@ -55,10 +59,12 @@ btnDone.addEventListener('click', function () {
     if (parseInt(k[0].innerText) > 0) {
         showPerson.innerHTML += "," + k[0].innerText + "位兒童";
     }
-    close_filter();
-});
 
-
+    //check if the clicked area is dropDown or not
+    if (container.has(e.target).length === 0) {
+        close_filter();
+    }
+})
 
 
 function on_Use(el) {

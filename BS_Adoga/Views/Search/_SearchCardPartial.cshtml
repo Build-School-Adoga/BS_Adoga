@@ -4,19 +4,20 @@
     string HotelFullName;
     RoomDetailViewModel rd = Model.I_RoomDetailVM;
     RoomViewModel r = Model.I_RoomVM;
+    HotelDetailViewModel hd = Model.I_HotelDetailVM;
 
     var leftroom = rd.RoomCount - rd.RoomOrder;
     var newPrice = r.RoomPrice * (1 - rd.RoomDiscount);
     var roomdiscount = (int)(rd.RoomDiscount * 100);
     var roomprice = (int)Math.Round(r.RoomPrice);
-    var hotelAddress = Model.HotelCity + ", " + Model.HotelDistrict;
+    var hotelAddress = hd.HotelCity + ", " + hd.HotelDistrict;
 }
 
-@if (Model.HotelEngName != null)
+@if (hd.HotelEngName != null)
 {
-    HotelFullName = Model.HotelName + "(" + Model.HotelEngName + ")";
+    HotelFullName = hd.HotelName + "(" + hd.HotelEngName + ")";
 }
-else { HotelFullName = Model.HotelName; }
+else { HotelFullName = hd.HotelName; }
 
 <div class="card">
     <div class="img">
@@ -35,7 +36,7 @@ else { HotelFullName = Model.HotelName; }
         <a href="#">@HotelFullName</a>
         <div class="small-rank">
             <div class="star">
-                @for (int i = 1; i <= Model.Star; i++)
+                @for (int i = 1; i <= hd.Star; i++)
                 {
                     <i class="fas fa-star"></i>
                 }
@@ -77,6 +78,6 @@ else { HotelFullName = Model.HotelName; }
             <ins>NT$<span>@Math.Round(newPrice, 0, MidpointRounding.AwayFromZero)</span></ins>
         </div>
         
-        @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = Model.HotelID }, new { @class = "btn btn-primary", })
+        @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = hd.HotelID }, new { @class = "btn btn-primary", })
     </div>
 </div>

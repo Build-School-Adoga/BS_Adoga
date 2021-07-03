@@ -30,10 +30,16 @@ namespace BS_Adoga.Service.Search
             var result = _r.GetHotel(Name);
             return result;
         }
-        public SearchCardViewModel GetHomeByFilter()
+        public IQueryable<SearchCardViewModel> GetListToFilter()
         {
-            var result = _r.GetHotelForFilter();
-            return result;
+            var filterList = new SearchCardViewModel
+            {
+                FilterSearchCityVM = _r.GetCityForFilter(),
+                FilterSearchHotelVM = _r.GetHotelForFilter()
+            };
+            
+            return (IQueryable<SearchCardViewModel>)filterList;
+            
         }
     }
 }

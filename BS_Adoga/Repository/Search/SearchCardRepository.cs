@@ -26,13 +26,16 @@ namespace BS_Adoga.Repository.Search
                         join D in _context.RoomsDetails on R.RoomID equals D.RoomID
                         select new SearchCardViewModel
                         {
-                            HotelID = H.HotelID,
-                            HotelName = H.HotelName,
-                            HotelEngName = H.HotelEngName,
-                            HotelAddress = H.HotelAddress,
-                            Star = H.Star,
-                            HotelCity = H.HotelCity,
-                            HotelDistrict = H.HotelDistrict,
+                            I_HotelDetailVM = new HotelDetailViewModel
+                            {
+                                HotelID = H.HotelID,
+                                HotelName = H.HotelName,
+                                HotelEngName = H.HotelEngName,
+                                HotelAddress = H.HotelAddress,
+                                Star = H.Star,
+                                HotelCity = H.HotelCity,
+                                HotelDistrict = H.HotelDistrict,
+                            },
                             I_RoomVM = new RoomViewModel
                             {
                                 HotelID = H.HotelID,
@@ -51,14 +54,29 @@ namespace BS_Adoga.Repository.Search
                         };
             return hotel;
         }
-        public SearchCardViewModel GetHotelForFilter()
+        public IQueryable<FilterSearchHotelViewModel> GetHotelForFilter()
         {
-            SearchCardViewModel productss = new SearchCardViewModel()
-            {
-                Hotels = _context.Hotels.ToList()
-            };
+            var h = from hotel in _context.Hotels
+                    select new HotelDetailViewModel
+                    {
+                        HotelID = hotel.HotelID,
+                        HotelName = hotel.HotelName
+                    };
 
-            return productss;
+            return h;
+        }
+        public IQueryable<FilterSearchCityViewModel> GetCityForFilter()
+        {
+            var c = from city in _context.Hotels
+                    group _context.Hotels by city.HotelCity into citylist
+                    select new HotelDetailViewModel
+                    {
+                        //HotelID = 
+                        HotelCity=citylist.Key,
+
+                    };
+
+            return c;
         }
 
         public IQueryable<SearchCardViewModel> GetHotel(string Name)
@@ -69,13 +87,16 @@ namespace BS_Adoga.Repository.Search
                         where H.HotelCity.Contains(Name)
                         select new SearchCardViewModel
                         {
-                            HotelID = H.HotelID,
-                            HotelName = H.HotelName,
-                            HotelEngName = H.HotelEngName,
-                            HotelAddress = H.HotelAddress,
-                            Star = H.Star,
-                            HotelCity = H.HotelCity,
-                            HotelDistrict = H.HotelDistrict,
+                            I_HotelDetailVM = new HotelDetailViewModel
+                            {
+                                HotelID = H.HotelID,
+                                HotelName = H.HotelName,
+                                HotelEngName = H.HotelEngName,
+                                HotelAddress = H.HotelAddress,
+                                Star = H.Star,
+                                HotelCity = H.HotelCity,
+                                HotelDistrict = H.HotelDistrict,
+                            },
                             I_RoomVM = new RoomViewModel
                             {
                                 HotelID = H.HotelID,

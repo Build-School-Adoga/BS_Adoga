@@ -28,22 +28,25 @@ namespace BS_Adoga.Controllers
         //[HttpPost]
         public ActionResult Search(SearchCardViewModel searchVM)
         {
-            string search = TempData["search"].ToString();
-            SearchCardViewModel a = new SearchCardViewModel()
+            //string search = TempData["search"].ToString();
+            //SearchCardViewModel a = new SearchCardViewModel()
+            //{
+            //    var room = s.GetHomeByFilter(search);
+            //    return View(room);
+            //}
+            s.GetListToFilter();
+
+            var a=1;
+            if (TempData["search"] == null)
             {
-                var room = s.GetHomeByFilter(search);
-                return View(room);
+                var hotels = s.ALLHotel();
+                return View(hotels);
             }
-            //if(TempData["search"] == null)
-            //{
-            //    var hotels = s.ALLHotel();
-            //    return View(hotels);
-            //}
-            //else
-            //{
-            //    var hotels = s.GetHotels(TempData["search"].ToString());
-            //    return View(hotels);
-            //}
+            else
+            {
+                var hotels = s.GetHotels(TempData["search"].ToString());
+                return View(hotels);
+            }
 
         }
 

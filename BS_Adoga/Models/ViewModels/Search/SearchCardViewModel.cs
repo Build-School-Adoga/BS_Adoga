@@ -9,19 +9,15 @@ namespace BS_Adoga.Models.ViewModels.Search
 {
     public class SearchCardViewModel
     {
-        public string HotelID { get; set; }
-        public string HotelName { get; set; }
-        public string HotelEngName { get; set; }
-        public string HotelAddress { get; set; }
-        public string HotelCity { get; set; }
-        public string HotelDistrict { get; set; }
-        public int Star { get; set; }
+        public HotelDetailViewModel I_HotelDetailVM { get; set; }
         public RoomViewModel I_RoomVM { get; set; }
         public RoomDetailViewModel I_RoomDetailVM { get; set; }
+        public IQueryable<FilterSearchCityViewModel> FilterSearchCityVM { get; set; }
+        public IQueryable<FilterSearchHotelViewModel> FilterSearchHotelVM { get; set; }
 
         /// <summary>
         /// faker Tom
         /// </summary>
-        public virtual IEnumerable<Hotel> Hotels { get; set; }
+        public virtual IEnumerable<Hotel> FilterHotels { get; set; }
     }
 }
