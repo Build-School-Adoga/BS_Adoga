@@ -344,12 +344,13 @@
     <Content Include="Views\Shared\_FunctionPage.cshtml" />
     <Content Include="Views\Function\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_nav.cshtml" />
-    <Content Include="Views\Search\_option.cshtml" />
+    <Content Include="Views\Search\_optionHotel.cshtml" />
     <Content Include="Views\Account\_LayoutMember.cshtml" />
     <Content Include="Views\Account\MemberBooking.cshtml" />
     <Content Include="Views\Account\_MemberDetailPartial.cshtml" />
     <Content Include="Views\Account\_MemberBookingPartial.cshtml" />
     <Content Include="Views\CheckOut\PayAPI.cshtml" />
+    <Content Include="Views\Search\_optionCity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIController\Account\" />
@@ -366,11 +367,9 @@
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Models\ViewModels\Account\" />
-    <Folder Include="Repository\Account\" />
     <Folder Include="Repository\CheckOut\" />
     <Folder Include="Repository\HotelLogin\" />
     <Folder Include="Repository\MemberLogin\" />
-    <Folder Include="Service\Account\" />
     <Folder Include="Service\CheckOut\" />
     <Folder Include="Service\HotelLogin\" />
     <Folder Include="Service\MemberLogin\" />

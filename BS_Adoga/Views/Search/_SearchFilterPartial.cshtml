@@ -110,6 +110,7 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
 <script>
     var filter = new Vue({
         el: '#nav',
@@ -122,16 +123,10 @@
                          label: '熱門城市',
                          options: [
 
-                             @*@foreach (var item in Model)
+                              @foreach (var item in Model)
                              {
-                                @Html.Partial("_option2", item)
-
-                                 var value = item.HotelName;
-                                 var label = item.HotelCity;
-                                 var price = item.HotelCity;
-
-
-                             }*@
+                                  Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
+                              },
                          ]
                      },
                      {
@@ -141,7 +136,7 @@
 
                               @foreach (var item in Model)
                              {
-                                  Html.RenderPartial("~/Views/Search/_option.cshtml", item); 
+                                  Html.RenderPartial("~/Views/Search/_optionHotel.cshtml", item);
                               },
                          ]
                      }
