@@ -733,13 +733,13 @@
                                 console.log(response.picture);
                             console.log(response);
                                 $.ajax({
-                                    url: "https://ec5dfbe2a53b.ngrok.io/MemberLogin/FacebookLoginAPI",
+                                    url: "http://adoga.azurewebsites.net/MemberLogin/FacebookLoginAPI",
                                     method: "post",
                                     data: { Id: response.email, Name: response.name, Email: response.email, Picture: response.picture },
                                     
                                     success: function (msg) {
                                         console.log(msg);
-                                        document.location.href = "https://ec5dfbe2a53b.ngrok.io";
+                                        document.location.href = "http://adoga.azurewebsites.net";
                                     }
                                 });
                              /*   window.loction.href = "https://localhost:44352/";*/

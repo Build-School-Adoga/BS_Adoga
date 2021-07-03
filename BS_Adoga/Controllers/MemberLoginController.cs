@@ -218,6 +218,7 @@ namespace BS_Adoga.Controllers
             //5.Response.Redirect
             return RedirectToAction("HomePage", "Home");
         }
+        #region facebook登入
         [HttpPost]
         public async Task<ActionResult> FacebookLoginAPI(string Id,string Name,string Email,string Picture )
         {
@@ -294,7 +295,7 @@ namespace BS_Adoga.Controllers
             return Content("ok");
 
         }
-    
+        #endregion
 
 
         #region GoogleLogin(Google登入)
