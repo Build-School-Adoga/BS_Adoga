@@ -23,13 +23,20 @@ namespace BS_Adoga.Controllers
 
             if(TempData["search"] == null)
             {
-                var hotels = s.ALLHotel();
+                //var hotels = s.ALLHotel();
+                //return View(hotels);
+
+                var hotels = s.GetSearchViewModelData("");
                 return View(hotels);
+
             }
             else
             {
-                var hotels = s.GetHotels(TempData["search"].ToString());
-                return View(hotels);
+                //var hotels = s.GetHotels(TempData["search"].ToString());
+                //return View(hotels);
+
+                var data = s.GetSearchViewModelData(TempData["Search"].ToString());
+                return View(data);
             }
 
         }

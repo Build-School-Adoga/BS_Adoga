@@ -1,5 +1,5 @@
-﻿@model IQueryable<BS_Adoga.Models.ViewModels.Search.SearchCardViewModel>
-
+﻿@*@model IQueryable<BS_Adoga.Models.ViewModels.Search.SearchCardViewModel>*@
+@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
@@ -10,7 +10,12 @@
     <link href="~/Asset/CSS/Search.css" rel="stylesheet" />
 }
 
-@Html.Partial("_SearchFilterPartial")
+@section endJS{
+    <script src="~/Asset/js/Search.js"></script>
+    <script src="~/Asset/js/_SearchFilterPartial.js"></script>
+}
+
+@Html.Partial("_SearchFilterPartial", Model.HotelOptionVM)
 
 <div id="filter">
     <div class="filter-bar">
@@ -494,10 +499,10 @@
                 </button>
             </div>
         </nav>
-            @foreach (var card in Model)
-            {
-                @Html.Partial("_SearchCardPartial", card);
-            }
+        @foreach (var card in Model.HotelSearchVM)
+        {
+            @Html.Partial("_SearchCardPartial", card);
+        }
     </div>
 </div>
 

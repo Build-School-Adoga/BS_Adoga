@@ -1,5 +1,6 @@
 ﻿@using BS_Adoga.Models.ViewModels.Search
-@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
+@*@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel*@
+@model BS_Adoga.Models.ViewModels.Search.HotelSearchViewModel
 @{
     string HotelFullName;
     RoomDetailViewModel rd = Model.I_RoomDetailVM;
@@ -59,15 +60,15 @@ else { HotelFullName = Model.HotelName; }
     </div>
     <div class="rank">
         <!-- 目前不用 <div class="point">
-        <div class="comment">
-            <p>很讚</p>
-            <p><span>10,237</span> 份評鑑</p>
-            <p>地點 <span>9.0</span></p>
-        </div>
-        <div class="icon">
-            <p>8.5</p>
-        </div>
-    </div> -->
+            <div class="comment">
+                <p>很讚</p>
+                <p><span>10,237</span> 份評鑑</p>
+                <p>地點 <span>9.0</span></p>
+            </div>
+            <div class="icon">
+                <p>8.5</p>
+            </div>
+        </div> -->
         <div class="offer">
             <p>只剩<span>@leftroom</span>間房可享<span>@roomdiscount</span>％優惠</p>
         </div>
@@ -76,7 +77,7 @@ else { HotelFullName = Model.HotelName; }
             <del>@roomprice</del>
             <ins>NT$<span>@newPrice</span></ins>
         </div>
-        
+
         @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = Model.HotelID }, new { @class = "btn btn-primary", })
     </div>
 </div>
