@@ -77,6 +77,7 @@
                                 @Html.ActionLink("個人資料", "MemberProfile", "Account")
                             </li>
                             @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2", @id = "btnDisconnect" })
+                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2",onclick= "FacebookLogout()" })
                         </ul>
                     </div>
                 </div>
@@ -207,6 +208,33 @@
     <!-- vueJS 開發developer版 引用 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
+    <!--FB登出使用-->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '287554039737731',
+                cookie: true,
+                xfbml: true,
+                version: 'v11.0'
+            });
+
+            FB.AppEvents.logPageView();
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function FacebookLogout() {
+            FB.logout(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+    </script>
     <!--Google引用內容開始   Google登入使用的引用JS -->
     <!-- 引用jQuery-->
     @*<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>*@
