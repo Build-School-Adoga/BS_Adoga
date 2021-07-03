@@ -14,6 +14,12 @@ namespace BS_Adoga
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "BookingDetail",
+                url: "BookingDetail/{id}",
+                defaults: new { controller = "Account", action = "BookingDetail", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "HomePage", id = UrlParameter.Optional }

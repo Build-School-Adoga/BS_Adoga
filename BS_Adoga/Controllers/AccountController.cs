@@ -50,5 +50,10 @@ namespace BS_Adoga.Controllers
 
             //return View();
         }
+
+        public ActionResult BookingDetail(string id)
+        {
+            return View();
+        }
     }
 }

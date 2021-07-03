@@ -227,7 +227,7 @@
 
     <!-- mine -->
     <script>
-        let linkCurrent = @ViewBag.MemberCurrentPage;//不知道為什麼，明明viewBag裡面我只放字串，可是linkCurrent就是抓到id=字串的物件。
+        let linkCurrent = document.getElementById(@ViewBag.MemberCurrentPage)//不知道為什麼，明明viewBag裡面我只放字串，可是linkCurrent就是抓到id=字串的物件。
         linkCurrent.classList.add("currentPage");
     </script>
     @RenderSection("endJS", false)
