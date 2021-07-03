@@ -11,7 +11,7 @@ namespace BS_Adoga.Models.ViewModels.CheckOut
 {
     public class CheckOutListViewModel
     {
-        //public string OrderID { get; set; }
+        
 
         [Required(ErrorMessage = "您必須輸入英文姓氏")]
         [Display(Name = "英文護照名")]
@@ -38,10 +38,15 @@ namespace BS_Adoga.Models.ViewModels.CheckOut
         [Compare("Email", ErrorMessage = "兩次輸入的電子郵件必須相符！")]
         public string ConfirmEmail { get; set; }
 
-        [Display(Name ="手機號碼")]
+        [Display(Name = "手機號碼")]
         public string PhoneNumber { get; set; }
 
-        //public SelectList Country { get; set; }
+        public string countries { get; set; }
 
+        public string SmokingPreference { get; set; }
+
+        public string BedPreference { get; set; }
+
+        public string ArrivingTime { get; set; }
     }
 }

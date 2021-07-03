@@ -17,7 +17,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>true</Use64BitIISExpress>
+    <Use64BitIISExpress />
     <IISExpressSSLPort>44352</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ECPay.Payment.Integration">
+      <HintPath>..\..\ECPayAIO_Net-1.191231\ECPay.Payment.Integration.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -55,6 +58,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -63,6 +69,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -140,6 +152,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\CheckOut\CheckOutListViewModel.cs" />
+    <Compile Include="Models\ViewModels\CheckOut\OrderVM.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\demoshopViewModels.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
     <Compile Include="Models\DBContext\AdogaContext.cs" />
@@ -159,6 +172,7 @@
     <Compile Include="Models\ViewModels\homeViewModels\demoshopViewModels.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\UserCookieViewModel.cs" />
+    <Compile Include="Models\ViewModels\HotelDetail\RoomCheckOutData.cs" />
     <Compile Include="Models\ViewModels\Search\RoomDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\Search\RoomViewModel.cs" />
     <Compile Include="Models\ViewModels\Search\SearchCardViewModel.cs" />
@@ -172,7 +186,9 @@
     <Compile Include="Models\ViewModels\HotelDetail\RoomBedVM.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\RoomTypeVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Account\MemberAccountRepository.cs" />
     <Compile Include="Repository\Home\HomeRepository.cs" />
+    <Compile Include="Service\Account\MemberAccountService.cs" />
     <Compile Include="Service\Home\HomeService.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\HotelVM.cs" />
     <Compile Include="Repository\HotelDetail\HotelDetailRepository.cs" />
@@ -187,7 +203,8 @@
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
     <Content Include="Asset\CSS\HotelLogin.css" />
-    <Content Include="Asset\CSS\MemberAccount\MemberDetail.css" />
+    <Content Include="Asset\CSS\MemberAccount\MemberProfile.css" />
+    <Content Include="Asset\CSS\MemberAccount\MemberLeftMenu.css" />
     <Content Include="Asset\CSS\Search.css" />
     <Content Include="Asset\CSS\SearchFilterPartial.css" />
     <Content Include="Asset\CSS\StepBar.css" />
@@ -215,6 +232,8 @@
     <Content Include="Asset\images\img6.png" />
     <Content Include="Asset\images\tw.svg.png" />
     <Content Include="Asset\JS\formStep.js" />
+    <Content Include="Asset\JS\home.js" />
+    <Content Include="Asset\JS\MemberAccount\MemberProfile.js" />
     <Content Include="Asset\JS\navbar.js" />
     <Content Include="Asset\JS\Search.js" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -237,6 +256,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Library\ECPay.Payment.Integration.dll" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -307,7 +327,7 @@
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Search\_SearchFilterPartial.cshtml" />
     <Content Include="Views\HotelDetail\_AlbumPartial.cshtml" />
-    <Content Include="Views\Account\AccountBookings.cshtml" />
+    <Content Include="Views\Account\MemberProfile.cshtml" />
     <Content Include="Views\HotelLogin\HotelLogin.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\ProductList.cshtml" />
@@ -322,8 +342,9 @@
     <Content Include="Views\Shared\_FunctionPage.cshtml" />
     <Content Include="Views\Function\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_nav.cshtml" />
-    <Content Include="Views\Account\_MemberDetailPartial.cshtml" />
-    <Content Include="Views\Account\_MemberBookingPartial.cshtml" />
+    <Content Include="Views\Account\_LayoutMember.cshtml" />
+    <Content Include="Views\Account\MemberBooking.cshtml" />
+    <Content Include="Views\CheckOut\PayAPI.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIController\Account\" />
@@ -356,6 +377,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

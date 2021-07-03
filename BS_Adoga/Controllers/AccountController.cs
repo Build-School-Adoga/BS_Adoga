@@ -3,14 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BS_Adoga.Service.Account;
 
 namespace BS_Adoga.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
-        public ActionResult AccountBookings()
+        private MemberAccountService _service;
+
+        public AccountController()
         {
+            _service = new MemberAccountService();
+        }
+
+        // GET: Account
+        public ActionResult MemberBooking()
+        {
+            ViewBag.MemberCurrentPage = "booking";
+            return View();
+        }
+        public ActionResult MemberProfile()
+        {
+            //string member = User.Identity.Name;
+            //var data = _service.GetMember(member);
+            ViewBag.MemberCurrentPage = "profile";
             return View();
         }
     }

@@ -5,13 +5,25 @@
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
 
     HotelVM hotel = Model.hotelVM;
-    IQueryable<RoomTypeVM> rooms = Model.roomTypeVM;    
+    IEnumerable<RoomTypeVM> rooms = Model.roomTypeVM;    
 }
 
 @section topCSS{
     <link rel="stylesheet" href="~/Asset/CSS/HotelDetailShare.css" />
     <link rel="stylesheet" href="~/Asset/CSS/HotelDetail.css" />
     <link rel="stylesheet" href="~/Asset/CSS/SearchFilterPartial.css" />
+    <style>
+        .room-type .col-9{
+            position:relative;
+        }
+        .row.room-case.one-case.pe-3.mb-3 {
+            position: absolute;
+            left: 1.5rem;
+            right: 1rem;
+            bottom: 0;
+            top: 30px;
+        }
+    </style>
 }
 
 @section scrollNav{
