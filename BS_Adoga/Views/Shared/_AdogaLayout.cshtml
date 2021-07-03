@@ -76,8 +76,7 @@
                                 <i class="far fa-user me-2"></i>
                                 @Html.ActionLink("個人資料", "MemberProfile", "Account")
                             </li>
-                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2", @id = "btnDisconnect" })
-                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2",onclick= "FacebookLogout()" })
+                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2", onclick= "FacebookLogout()", @id = "btnDisconnect" })
                         </ul>
                     </div>
                 </div>

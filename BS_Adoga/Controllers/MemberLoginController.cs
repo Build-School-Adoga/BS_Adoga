@@ -294,8 +294,8 @@ namespace BS_Adoga.Controllers
             return Content("ok");
 
         }
-    }
-}
+    
+
 
         #region GoogleLogin(Google登入)
         [HttpPost]
