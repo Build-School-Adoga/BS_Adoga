@@ -54,39 +54,27 @@
 
             <!--個人資料-->
             <fieldset>
-                <!--
-                <div class="alert alert-light p-2 m-1" role="alert"
-                     style="border-left-width: 48px; border-color: #428bca;">
-                    A simple light alert wit
-                </div>
-                <div class="alert alert-light p-2 m-1" role="alert"
-                     style="border-left-width: 5px; border-color: #5cb85c;">
-                    高分住宿 - 評分高達8.2分！（綜合9307條住客評鑑）
-                </div>
-                -->
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                    <div class="border border-3 bg-white p-3 m-1">
-
-                        <form class="row g-3" action="" method="post">
+                    <form class="row g-3" action="" method="post">
+                        <div class="border border-3 bg-white p-3 m-1 row">
                             <p class="fw-bold h5">請填寫以下資訊</p>
                             <!--FirstName-->
                             <div class="col-md-6">
                                 @Html.LabelFor(model => model.checkOutListViewModel.FirstName, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.checkOutListViewModel.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.checkOutListViewModel.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "FirstName" } })
                                 @Html.ValidationMessageFor(model => model.checkOutListViewModel.FirstName, "", new { @class = "text-danger" })
                                 @*<label for="firstName" class="form-label">英文名（同護照）</label>
-            <input type="text" class="form-control" id="firstName">*@
+                                    <input type="text" class="form-control" id="firstName">*@
                             </div>
                             <!--LastName-->
                             <div class="col-md-6">
                                 @Html.LabelFor(model => model.checkOutListViewModel.LastName, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.checkOutListViewModel.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.checkOutListViewModel.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "LastName" } })
                                 @Html.ValidationMessageFor(model => model.checkOutListViewModel.LastName, "", new { @class = "text-danger" })
                                 @*<label for="lastName" class="form-label">英文姓（同護照）</label>
-            <input type="text" class="form-control" id="lastName">*@
+                                    <input type="text" class="form-control" id="lastName">*@
                             </div>
                             <!--Email-->
                             <div class="col-12">
@@ -94,7 +82,7 @@
                                 @Html.EditorFor(model => model.checkOutListViewModel.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "請確認電子信箱填寫無誤" } })
                                 @Html.ValidationMessageFor(model => model.checkOutListViewModel.Email, "", new { @class = "text-danger" })
                                 @*<label for="email" class="form-label">電子信箱</label>
-            <input type="email" class="form-control" id="email" placeholder="請確認電子信箱填寫無誤">*@
+                                    <input type="email" class="form-control" id="email" placeholder="請確認電子信箱填寫無誤">*@
                             </div>
                             <!--checkEmail-->
                             <div class="col-12">
@@ -102,30 +90,30 @@
                                 @Html.EditorFor(model => model.checkOutListViewModel.ConfirmEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "請確認電子信箱填寫無誤" } })
                                 @Html.ValidationMessageFor(model => model.checkOutListViewModel.ConfirmEmail, "", new { @class = "text-danger" })
                                 @*<label for="checkemail" class="form-label">請再次輸入電子信箱</label>
-            <input type="email" class="form-control" id="checkemail">*@
+                                    <input type="email" class="form-control" id="checkemail">*@
                             </div>
                             <!--PhoneNumber-->
                             <div class="col-md-6">
                                 @Html.LabelFor(model => model.checkOutListViewModel.PhoneNumber, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.checkOutListViewModel.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.checkOutListViewModel.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ex: 09xx123456" } })
                                 @Html.ValidationMessageFor(model => model.checkOutListViewModel.PhoneNumber, "", new { @class = "text-danger" })
                                 @*<label for="phone" class="form-label">手機號碼</label>
-            <input type="text" class="form-control" id="phone">*@
+                                    <input type="text" class="form-control" id="phone">*@
                             </div>
                             <!--Country-->
                             <div class="col-md-6">
                                 <label for="country" class="form-label">居住地</label>
                                 @*<select id="country" class="form-select">
-                                    <option selected>台灣</option>
-                                    <option>日本</option>
-                                    <option>韓國</option>
-                                    <option>美國</option>
-                                    <option>中國</option>
-                                    <option>澳洲</option>
-                                </select>*@
+                                        <option selected>台灣</option>
+                                        <option>日本</option>
+                                        <option>韓國</option>
+                                        <option>美國</option>
+                                        <option>中國</option>
+                                        <option>澳洲</option>
+                                    </select>*@
                                 @{
                                     List<SelectListItem> country = new List<SelectListItem>
-                                    {
+                                                                                        {
                                         new SelectListItem { Text = "台灣", Value = "台灣", Selected = true},
                                         new SelectListItem { Text = "日本", Value = "日本" },
                                         new SelectListItem { Text = "韓國", Value = "韓國" },
@@ -136,42 +124,42 @@
                                 @Html.DropDownListFor(x => x.checkOutListViewModel.countries, country, new { @class = "form-select" })
                             </div>
                             <!--
-    <div class="col-12">
-        <p>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="helpCheck"
-                       data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false"
-                       aria-controls="collapseExample">
-                <label class="form-check-label" for="helpCheck">
-                    若僅幫忙訂房，不會同行，請打勾！並於下方欄位輸入實際住客姓名與居住地。
-                </label>
-            </div>
-        </p>
-        <div class="collapse" id="collapseExample">
-            <div class="row">
-                <div class="col-6">
-                    <label for="helpFirstName" class="form-label">英文名（同護照）</label>
-                    <input type="text" class="form-control" id="helpFirstName">
-                </div>
-                <div class="col-6">
-                    <label for="helpLastName" class="form-label">英文姓（同護照）</label>
-                    <input type="text" class="form-control" id="helpLastName">
-                </div>
-                <div class="col-6">
-                    <label for="helpCountry" class="form-label">居住地</label>
-                    <select id="helpCountry" class="form-select">
-                        <option selected>台灣</option>
-                        <option>日本</option>
-                        <option>韓國</option>
-                        <option>美國</option>
-                        <option>中國</option>
-                        <option>澳洲</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
+                            <div class="col-12">
+                                <p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="helpCheck"
+                                               data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false"
+                                               aria-controls="collapseExample">
+                                        <label class="form-check-label" for="helpCheck">
+                                            若僅幫忙訂房，不會同行，請打勾！並於下方欄位輸入實際住客姓名與居住地。
+                                        </label>
+                                    </div>
+                                </p>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="helpFirstName" class="form-label">英文名（同護照）</label>
+                                            <input type="text" class="form-control" id="helpFirstName">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="helpLastName" class="form-label">英文姓（同護照）</label>
+                                            <input type="text" class="form-control" id="helpLastName">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="helpCountry" class="form-label">居住地</label>
+                                            <select id="helpCountry" class="form-select">
+                                                <option selected>台灣</option>
+                                                <option>日本</option>
+                                                <option>韓國</option>
+                                                <option>美國</option>
+                                                <option>中國</option>
+                                                <option>澳洲</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
                             <div class="col-12">
                                 <p class="fw-bold">需要加註特殊需求嗎？</p>
                                 <p>我們會在預訂完成後將你的需求發送給住宿。</p>
@@ -195,7 +183,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p>
+                                @*<p>
                                     <a data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false"
                                        aria-controls="collapseExample">
                                         新增其他特殊需求
@@ -226,43 +214,43 @@
                                             <span>請使用英文或中文填寫特殊需求：</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                             <div class="col-12 col-md-6">
                                 <p class="fw-bold">預計何時能抵達住宿？</p>
                                 <span>請選擇預計抵達的時間，我們會幫你通知住宿或房東。</span>
                                 @*<select class="form-select" aria-label="Default select example">
-                                    <option selected>還不確定</option>
-                                    <option value="1">00:00 - 01:00</option>
-                                    <option value="2">01:00 - 02:00</option>
-                                    <option value="3">02:00 - 03:00</option>
-                                    <option value="3">03:00 - 04:00</option>
-                                    <option value="3">04:00 - 05:00</option>
-                                    <option value="3">05:00 - 06:00</option>
-                                    <option value="3">06:00 - 07:00</option>
-                                    <option value="3">07:00 - 08:00</option>
-                                    <option value="3">08:00 - 09:00</option>
-                                    <option value="3">09:00 - 10:00</option>
-                                    <option value="3">10:00 - 11:00</option>
-                                    <option value="3">11:00 - 12:00</option>
-                                    <option value="3">12:00 - 13:00</option>
-                                    <option value="3">13:00 - 14:00</option>
-                                    <option value="3">14:00 - 15:00</option>
-                                    <option value="3">15:00 - 16:00</option>
-                                    <option value="3">16:00 - 17:00</option>
-                                    <option value="3">17:00 - 18:00</option>
-                                    <option value="3">18:00 - 19:00</option>
-                                    <option value="3">19:00 - 20:00</option>
-                                    <option value="3">20:00 - 21:00</option>
-                                    <option value="3">21:00 - 22:00</option>
-                                    <option value="3">22:00 - 23:00</option>
-                                    <option value="3">23:00 - 24:00</option>
-                                    <option value="3">00:00 - 01:00(隔天)</option>
-                                    <option value="3">01:00 - 02:00(隔天)</option>
-                                </select>*@
+                                        <option selected>還不確定</option>
+                                        <option value="1">00:00 - 01:00</option>
+                                        <option value="2">01:00 - 02:00</option>
+                                        <option value="3">02:00 - 03:00</option>
+                                        <option value="3">03:00 - 04:00</option>
+                                        <option value="3">04:00 - 05:00</option>
+                                        <option value="3">05:00 - 06:00</option>
+                                        <option value="3">06:00 - 07:00</option>
+                                        <option value="3">07:00 - 08:00</option>
+                                        <option value="3">08:00 - 09:00</option>
+                                        <option value="3">09:00 - 10:00</option>
+                                        <option value="3">10:00 - 11:00</option>
+                                        <option value="3">11:00 - 12:00</option>
+                                        <option value="3">12:00 - 13:00</option>
+                                        <option value="3">13:00 - 14:00</option>
+                                        <option value="3">14:00 - 15:00</option>
+                                        <option value="3">15:00 - 16:00</option>
+                                        <option value="3">16:00 - 17:00</option>
+                                        <option value="3">17:00 - 18:00</option>
+                                        <option value="3">18:00 - 19:00</option>
+                                        <option value="3">19:00 - 20:00</option>
+                                        <option value="3">20:00 - 21:00</option>
+                                        <option value="3">21:00 - 22:00</option>
+                                        <option value="3">22:00 - 23:00</option>
+                                        <option value="3">23:00 - 24:00</option>
+                                        <option value="3">00:00 - 01:00(隔天)</option>
+                                        <option value="3">01:00 - 02:00(隔天)</option>
+                                    </select>*@
                                 @{
                                     List<SelectListItem> arrivingTime = new List<SelectListItem>
-                                    {
+                                                                                        {
                                         new SelectListItem { Text = "還不確定", Value = "還不確定", Selected = true},
                                         new SelectListItem { Text = "00:00 - 01:00", Value = "00:00 - 01:00" },
                                         new SelectListItem { Text = "01:00 - 02:00", Value = "01:00 - 02:00" }
@@ -270,21 +258,21 @@
                                 }
                                 @Html.DropDownListFor(m => m.checkOutListViewModel.ArrivingTime, arrivingTime, new { @class = "form-select" })
                             </div>
-                            <div class="border border-3 bg-white p-3 m-1">
-                                <p>
-                                    繼續使用代表你同意Agoda的
-                                    <a href="#" class="text-decoration-none">服務條款</a>
-                                    與
-                                    <a href="#" class="text-decoration-none">隱私權政策</a>
-                                    。
-                                </p>
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end next action-button">
-                                    <button type="submit" class="btn btn-primary me-md-2">繼續</button>
-                                    @*<button class="btn btn-primary me-md-2">繼續</button>*@
-                                </div>
+                        </div>
+                        <div class="border border-3 bg-white p-3 m-1">
+                            <p>
+                                繼續使用代表你同意Agoda的
+                                <a href="#" class="text-decoration-none">服務條款</a>
+                                與
+                                <a href="#" class="text-decoration-none">隱私權政策</a>
+                                。
+                            </p>
+                            <div class="d-grid gap-2 text-end d-md-block mt-3">
+                                <button type="submit" class="btn btn-primary me-md-2">繼續</button>
+                                @*<button class="btn btn-primary me-md-2">繼續</button>*@
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                     <!--
                     <div class="border border-3 bg-white p-3 m-1">
                         <p class="fw-bold">客房加值服務</p>
@@ -306,62 +294,62 @@
             <!--付款資訊-->
             <fieldset>
                 @*<div class="card">
-                    <h5 class="card-header" style="font-size: 14px;">
-                        安全付款
-                        所有卡片資訊均經過加密，確保安全無虞！
-                    </h5>
-                    <div class="card-body ">
-                        <div class="card mb-3">
-                            <div class=" row g-0">
-                                <div class="col-md-6">
-                                    <div class="row p-2">
-                                        <div class="mb-3">
-                                            <label for="formGroupExampleInput" class="form-label">持卡者姓名</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="formGroupExampleInput2"
-                                                   class="form-label">信用卡/Debit卡號碼</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput2">
-                                        </div>
-                                        <div class="col-5">
-                                            <label for="formGroupExampleInput2" class="form-label">有效期至</label>
-                                            <input type="text" class="form-control" placeholder="MM/YY"
-                                                   aria-label="First name">
-                                        </div>
-                                        <div class="col-5">
-                                            <label for="formGroupExampleInput2" class="form-label">CVC/CVV代碼</label>
-                                            <input type="text" class="form-control" aria-label="Last name">
+                        <h5 class="card-header" style="font-size: 14px;">
+                            安全付款
+                            所有卡片資訊均經過加密，確保安全無虞！
+                        </h5>
+                        <div class="card-body ">
+                            <div class="card mb-3">
+                                <div class=" row g-0">
+                                    <div class="col-md-6">
+                                        <div class="row p-2">
+                                            <div class="mb-3">
+                                                <label for="formGroupExampleInput" class="form-label">持卡者姓名</label>
+                                                <input type="text" class="form-control" id="formGroupExampleInput">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="formGroupExampleInput2"
+                                                       class="form-label">信用卡/Debit卡號碼</label>
+                                                <input type="text" class="form-control" id="formGroupExampleInput2">
+                                            </div>
+                                            <div class="col-5">
+                                                <label for="formGroupExampleInput2" class="form-label">有效期至</label>
+                                                <input type="text" class="form-control" placeholder="MM/YY"
+                                                       aria-label="First name">
+                                            </div>
+                                            <div class="col-5">
+                                                <label for="formGroupExampleInput2" class="form-label">CVC/CVV代碼</label>
+                                                <input type="text" class="form-control" aria-label="Last name">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 p-2">
-                                    <img src="./images/Custom-Designed Icons.jpg" alt="" style="width: 100%;">
+                                    <div class="col-md-6 p-2">
+                                        <img src="./images/Custom-Designed Icons.jpg" alt="" style="width: 100%;">
+                                    </div>
                                 </div>
                             </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    我想要收到Agoda的獨家促銷情報，同時根據隱私權政策，我保留隨時取消訂閱的權利。
+                                </label>
+                            </div>
+                            <p class="card-text">
+                                繼續使用代表你同意Agoda的
+                                <a href="#"> 服務條款</a>
+                                與
+                                <a href="#">隱私權政策</a>
+                                。
+                            </p>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                我想要收到Agoda的獨家促銷情報，同時根據隱私權政策，我保留隨時取消訂閱的權利。
-                            </label>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end m-2 next action-button">
+                            <button class="btn btn-primary me-md-2" type="button">繼續</button>
                         </div>
-                        <p class="card-text">
-                            繼續使用代表你同意Agoda的
-                            <a href="#"> 服務條款</a>
-                            與
-                            <a href="#">隱私權政策</a>
-                            。
-                        </p>
-                    </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end m-2 next action-button">
-                        <button class="btn btn-primary me-md-2" type="button">繼續</button>
-                    </div>
-                    <div class="card-footer">
-                        您的訂房入住憑證將會寄送至：XXXXXXXXXXXX@gmail.com
-                    </div>
-                </div>*@
-                
+                        <div class="card-footer">
+                            您的訂房入住憑證將會寄送至：XXXXXXXXXXXX@gmail.com
+                        </div>
+                    </div>*@
+
             </fieldset>
 
             <!--收據資訊-->
@@ -393,21 +381,21 @@
         </div>
 
         <!--右側資訊欄-->
-        <div class="col-lg-4 order-0 order-lg-1">
-            <div class="card mb-3">
+        <div class="col-lg-4 order-0 order-lg-1 mt-0">
+            <div class="card mb-3 border border-3 bg-white p-1 m-1">
                 <div class="row g-0">
-                    <div class="col-md-5 m-auto">
-                        <img class="mw-100" src="./images/linus-mimietz-sgIhwj4cSiU-unsplash.jpg">
+                    <div class="col-md-6 m-auto p-1">
+                        <img class="w-100" src="https://picsum.photos/600/700?random=1">
                     </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
+                    <div class="col-md-6">
+                        <div class="card-body mt-1 p-2">
                             <h5 class="card-title">@hotelAndRoom.HotelFullName</h5>
                             @*<h5 class="card-title">板橋凱撒大飯店 (Caesar Park Hotel Banqiao)</h5>*@
                             <p class="card-text">⭐⭐⭐⭐⭐</p>
                             <p class="card-text">
-                                <address class="text-muted">
+                                <small class="text-muted">
                                     @hotelAndRoom.Address
-                                </address>
+                                </small>
                             </p>
                         </div>
                     </div>
@@ -431,11 +419,11 @@
                     <div>總金額</div>
                     <div>NT$ @hotelAndRoom.TotalPrice</div>
                 </div>
-                <div class="line"></div>
+                @*<div class="line"></div>*@
                 @*<div class="m-2 d-flex justify-content-between">
-                    <div>含稅總價</div>
-                    <div>NT$4,158.00</div>
-                </div>*@
+                        <div>含稅總價</div>
+                        <div>NT$4,158.00</div>
+                    </div>*@
             </div>
         </div>
     </div>
