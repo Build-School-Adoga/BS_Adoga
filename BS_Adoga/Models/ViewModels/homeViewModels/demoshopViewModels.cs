@@ -9,7 +9,7 @@ namespace BS_Adoga.Models.ViewModels.homeViewModels
     public class demoshopViewModels
     {
 
-        public  MyHotels My_MyHotels { get; set; }
+        public IEnumerable<MyHotels> My_MyHotels { get; set; }
         public virtual IEnumerable<CardViewModels> My_CardViewModels { get; set; }
 
 

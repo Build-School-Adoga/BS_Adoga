@@ -31,8 +31,11 @@ namespace BS_Adoga.Repository.Home
                          join z in _context.RoomsDetails on d.RoomID equals z.RoomID
                          select new CardViewModels
                          {
+                             HotelID = p.HotelID,
+                             HotelName = p.HotelName,
+                             HotelCity = p.HotelCity,
+                             Star =p.Star,
 
-                             
                              My_HotelImages = new MyHoteiImages
                              {
                                  HotelID = p.HotelID,
@@ -52,7 +55,7 @@ namespace BS_Adoga.Repository.Home
                          };
             return images;
         }
-        public IQueryable<MyHotels> GetHotelModels()
+        public IEnumerable<MyHotels> GetHotelModels()
         {
             var hotel = from p in _context.Hotels
                         select new MyHotels
@@ -63,7 +66,7 @@ namespace BS_Adoga.Repository.Home
                             HotelAddress = p.HotelAddress,
                             Star = p.Star
                         };
-            return hotel;
+            return hotel.ToList();
         }
         //public demoshopViewModels Getcards()
         //{

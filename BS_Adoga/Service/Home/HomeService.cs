@@ -19,14 +19,14 @@ namespace BS_Adoga.Service.Home
         //    var result = _homeRepository.Getcards();
         //    return result;
         //}
-        public IQueryable<demoshopViewModels> ALLImages()
+        public demoshopViewModels  ALLImages()
         {
-            demoshopViewModels productss = new demoshopViewModels() {
-                My_MyHotels = (MyHotels)_homeRepository.GetHotelModels(),
-              My_CardViewModels  = _homeRepository.GetCardModels().ToList()
+           var productss = new demoshopViewModels() {
+                My_MyHotels = _homeRepository.GetHotelModels(),
+              My_CardViewModels  = _homeRepository.GetCardModels()
                   };
 
-            return (IQueryable<demoshopViewModels>)productss;
+            return productss;
         }
 
 

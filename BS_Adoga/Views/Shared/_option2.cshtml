@@ -1,12 +1,12 @@
 ﻿@model demoshopViewModels
     @{ 
-        MyHotels hotel = Model.My_MyHotels
+        var hotel = Model.My_MyHotels;
     }
 
 
 {
-value: '@Model.HotelCity',
-label: '@Model.HotelCity',
-price: '@Model.HotelCity',
+value: '@hotel.HotelCity',
+label: '@hotel.HotelCity',
+price: '@hotel.HotelCity',
 
 },
