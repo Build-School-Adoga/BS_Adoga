@@ -7,7 +7,10 @@ using System.Web.Security;  //FormsAuthentication
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels;
 using BS_Adoga.Models.ViewModels.HotelLogin;
+using BS_Adoga.Models.ViewModels.MemberLogin;
 using BS_Adoga.Service;
+using BS_Adoga.Service.HotelLogin;
+using Newtonsoft.Json;
 
 namespace BS_Adoga.Controllers
 {
@@ -56,6 +59,8 @@ namespace BS_Adoga.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(MixHotelLoginViewModel registerVM)
         {
+            #region 未重構前的作法
+            /*
             if (ModelState.IsValid)
             {
                 //1.View Model(RegisterViewModel) --> Data Model (HotelEmployee)
@@ -86,8 +91,30 @@ namespace BS_Adoga.Controllers
                     return Content("新增帳號失敗:" + ex.ToString());
                 }
             }
-
-            return View(registerVM);
+            else return View(registerVM);
+            */
+            #endregion
+            #region 重構後的作法
+            if (ModelState.IsValid)
+            {
+                var service = new HotelEmployeeService();
+                var result = service.Register(registerVM);
+                if (result.IsSuccessful)
+                {
+                    return Content("新增帳號成功");
+                }
+                else
+                {
+                    var Log = result.WriteLog();
+                    return Content("新增帳號失敗:" + Log);
+                }
+            }
+            else
+            {
+                return View(registerVM);
+            }
+            #endregion
+            
         }
         #endregion
 
@@ -97,6 +124,8 @@ namespace BS_Adoga.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(MixHotelLoginViewModel loginVM)
         {
+            #region 未重構前的作法
+            /*
             //一.未通過Model驗證
             if (!ModelState.IsValid)
             {
@@ -127,6 +156,11 @@ namespace BS_Adoga.Controllers
             //https://docs.microsoft.com/zh-tw/dotnet/api/system.web.security.formsauthenticationticket?view=netframework-4.8
 
 
+            UserCookieViewModel UserData = new UserCookieViewModel()
+            {
+                Id = user.Email,
+                PictureUrl = string.Empty
+            };
             //1.Create FormsAuthenticationTicket
             var ticket = new FormsAuthenticationTicket(
             version: 1,
@@ -134,7 +168,7 @@ namespace BS_Adoga.Controllers
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: loginVM.HotelLoginView.Remember,// 是否要記住我 true or false
-            userData: loginVM.HotelLoginView.Email, //可以放使用者角色名稱
+            userData: JsonConvert.SerializeObject(UserData), //可以放使用者角色名稱
             cookiePath: FormsAuthentication.FormsCookiePath);
 
             //2.Encrypt the Ticket
@@ -149,6 +183,39 @@ namespace BS_Adoga.Controllers
 
             //5.Response.Redirect
             return RedirectToAction("Index", "Function");
+            */
+            #endregion
+
+            #region 重構後的作法
+
+            //一.未通過Model驗證
+            if (!ModelState.IsValid)
+            {
+                return View(loginVM);
+            }
+
+            //二.通過Model驗證
+            //三.EF比對資料庫帳密
+            //以Name及Password查詢比對Account資料表記錄
+            var service = new HotelEmployeeService();
+            HotelEmployee user = service.CheckEmailPassword(loginVM);
+            //找不到則彈回Login頁
+            if (user == null)
+            {
+                ModelState.AddModelError("NotFound", "無效的帳號或密碼!");
+
+                return View(loginVM);
+            }
+
+            //四.FormsAuthentication Class -- https://docs.microsoft.com/zh-tw/dotnet/api/system.web.security.formsauthentication?view=netframework-4.8
+            //FormsAuthenticationTicket Class
+            //https://docs.microsoft.com/zh-tw/dotnet/api/system.web.security.formsauthenticationticket?view=netframework-4.8
+            Response.Cookies.Add(service.cookie(loginVM, user));
+
+            //5.Response.Redirect
+            return RedirectToAction("Index", "Function");
+            
+            #endregion
         }
         #endregion
 

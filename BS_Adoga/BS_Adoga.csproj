@@ -214,6 +214,8 @@
     <Compile Include="Repository\Search\SearchCardRepository.cs" />
     <Compile Include="Service\HotelDetail\HotelDetailService.cs" />
     <Compile Include="Service\HotelLoginAuthorizeAttribute.cs" />
+    <Compile Include="Service\HotelLogin\HotelEmployeeService.cs" />
+    <Compile Include="Service\OperationResult.cs" />
     <Compile Include="Service\Search\SearchCardService.cs" />
     <Compile Include="Service\HashService.cs" />
     <Compile Include="Service\MultiButtonAttribute.cs" />
@@ -385,7 +387,6 @@
     <Folder Include="Repository\HotelLogin\" />
     <Folder Include="Repository\MemberLogin\" />
     <Folder Include="Service\CheckOut\" />
-    <Folder Include="Service\HotelLogin\" />
     <Folder Include="Service\MemberLogin\" />
   </ItemGroup>
   <ItemGroup>
