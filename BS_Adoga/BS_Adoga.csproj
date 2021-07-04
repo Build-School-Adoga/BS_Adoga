@@ -205,6 +205,7 @@
     <Compile Include="Models\ViewModels\HotelDetail\RoomTypeVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Account\MemberAccountRepository.cs" />
+    <Compile Include="Repository\DBRepository.cs" />
     <Compile Include="Repository\Home\HomeRepository.cs" />
     <Compile Include="Service\Account\MemberAccountService.cs" />
     <Compile Include="Service\Home\HomeService.cs" />
@@ -380,11 +381,9 @@
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Models\ViewModels\Account\" />
-    <Folder Include="Repository\Account\" />
     <Folder Include="Repository\CheckOut\" />
     <Folder Include="Repository\HotelLogin\" />
     <Folder Include="Repository\MemberLogin\" />
-    <Folder Include="Service\Account\" />
     <Folder Include="Service\CheckOut\" />
     <Folder Include="Service\HotelLogin\" />
     <Folder Include="Service\MemberLogin\" />
