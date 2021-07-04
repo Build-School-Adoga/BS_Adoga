@@ -90,6 +90,7 @@ namespace BS_Adoga.Service.HotelDetail
             return result;
         }
 
+
         //public RoomCheckOutData GetCheckOutData(string hotelId,string roomId)
         //{
         //    var hotel = _repository.GetHotel(hotelId);
