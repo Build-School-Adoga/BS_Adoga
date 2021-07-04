@@ -45,20 +45,12 @@ namespace BS_Adoga.Controllers
         [HttpGet]
         public ActionResult HomePage()
         {
-            var products = _homeService.GetHomeByFilter();
-
-            return View(products);
-
-        }
-        [HttpPost]
-        public ActionResult HomePage(demoshopViewModels productss)
-        {
-            //string name = Request.Form["label"];
-
-            //ViewData["w"] = "name";
-            return View();
+            var images = _homeService.ALLImages();
+        
+            return View(images);
 
         }
+      
 
         
         [HttpPost]

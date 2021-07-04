@@ -14,11 +14,21 @@ namespace BS_Adoga.Service.Home
         {
             _homeRepository = new HomeRepository();
         }
-        public demoshopViewModels GetHomeByFilter()
+        //public demoshopViewModels GetHomeByFilter()
+        //{
+        //    var result = _homeRepository.Getcards();
+        //    return result;
+        //}
+        public IQueryable<demoshopViewModels> ALLImages()
         {
-            var result = _homeRepository.Getcards();
-            return result;
+            demoshopViewModels productss = new demoshopViewModels() {
+                My_MyHotels = (MyHotels)_homeRepository.GetHotelModels(),
+              My_CardViewModels  = _homeRepository.GetCardModels().ToList()
+                  };
+
+            return (IQueryable<demoshopViewModels>)productss;
         }
+
 
     }
 }
