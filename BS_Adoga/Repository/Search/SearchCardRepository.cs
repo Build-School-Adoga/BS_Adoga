@@ -19,65 +19,65 @@ namespace BS_Adoga.Repository.Search
             _context = new AdogaContext();
         }
 
-        public IQueryable<HotelSearchViewModel> ALLHotel()
-        {
-            var hotel = from H in _context.Hotels
-                        join R in _context.Rooms on H.HotelID equals R.HotelID
-                        join D in _context.RoomsDetails on R.RoomID equals D.RoomID
-                        select new HotelSearchViewModel
-                        {
-                            I_HotelDetailVM = new HotelDetailViewModel
-                            {
-                                HotelID = H.HotelID,
-                                HotelName = H.HotelName,
-                                HotelEngName = H.HotelEngName,
-                                HotelAddress = H.HotelAddress,
-                                Star = H.Star,
-                                HotelCity = H.HotelCity,
-                                HotelDistrict = H.HotelDistrict,
-                            },
-                            I_RoomVM = new RoomViewModel
-                            {
-                                HotelID = H.HotelID,
-                                RoomID = R.RoomID,
-                                RoomPrice = R.RoomPrice
-                            },
-                            I_RoomDetailVM = new RoomDetailViewModel
-                            {
-                                RoomID = R.RoomID,
-                                CheckInDate = D.CheckInDate,
-                                CheckOutDate = D.CheckOutDate,
-                                RoomCount = D.RoomCount,
-                                RoomOrder = D.RoomOrder,
-                                RoomDiscount = D.RoomDiscount
-                            }
-                        };
-            return hotel;
-        }
-        public IQueryable<FilterSearchHotelViewModel> GetHotelForFilter()
-        {
-            var h = from hotel in _context.Hotels
-                    select new HotelDetailViewModel
-                    {
-                        HotelID = hotel.HotelID,
-                        HotelName = hotel.HotelName
-                    };
+        //public IQueryable<HotelSearchViewModel> ALLHotel()
+        //{
+        //    var hotel = from H in _context.Hotels
+        //                join R in _context.Rooms on H.HotelID equals R.HotelID
+        //                join D in _context.RoomsDetails on R.RoomID equals D.RoomID
+        //                select new HotelSearchViewModel
+        //                {
+        //                    I_HotelDetailVM = new HotelDetailViewModel
+        //                    {
+        //                        HotelID = H.HotelID,
+        //                        HotelName = H.HotelName,
+        //                        HotelEngName = H.HotelEngName,
+        //                        HotelAddress = H.HotelAddress,
+        //                        Star = H.Star,
+        //                        HotelCity = H.HotelCity,
+        //                        HotelDistrict = H.HotelDistrict,
+        //                    },
+        //                    I_RoomVM = new RoomViewModel
+        //                    {
+        //                        HotelID = H.HotelID,
+        //                        RoomID = R.RoomID,
+        //                        RoomPrice = R.RoomPrice
+        //                    },
+        //                    I_RoomDetailVM = new RoomDetailViewModel
+        //                    {
+        //                        RoomID = R.RoomID,
+        //                        CheckInDate = D.CheckInDate,
+        //                        CheckOutDate = D.CheckOutDate,
+        //                        RoomCount = D.RoomCount,
+        //                        RoomOrder = D.RoomOrder,
+        //                        RoomDiscount = D.RoomDiscount
+        //                    }
+        //                };
+        //    return hotel;
+        //}
+        //public IQueryable<FilterSearchHotelViewModel> GetHotelForFilter()
+        //{
+        //    var h = from hotel in _context.Hotels
+        //            select new HotelDetailViewModel
+        //            {
+        //                HotelID = hotel.HotelID,
+        //                HotelName = hotel.HotelName
+        //            };
 
-            return h;
-        }
-        public IQueryable<FilterSearchCityViewModel> GetCityForFilter()
-        {
-            var c = from city in _context.Hotels
-                    group _context.Hotels by city.HotelCity into citylist
-                    select new HotelDetailViewModel
-                    {
-                        //HotelID = 
-                        HotelCity=citylist.Key,
+        //    return h;
+        //}
+        //public IQueryable<FilterSearchCityViewModel> GetCityForFilter()
+        //{
+        //    var c = from city in _context.Hotels
+        //            group _context.Hotels by city.HotelCity into citylist
+        //            select new HotelDetailViewModel
+        //            {
+        //                //HotelID = 
+        //                HotelCity=citylist.Key,
 
-                    };
+        //            };
 
-            return c;
-        }
+        //    return c;
+        //}
 
         public IQueryable<HotelSearchViewModel> GetHotel(string Name)
         {
@@ -87,8 +87,7 @@ namespace BS_Adoga.Repository.Search
                         where H.HotelCity.Contains(Name)
                         select new HotelSearchViewModel
                         {
-                            I_HotelDetailVM = new HotelDetailViewModel
-                            {
+                            
                                 HotelID = H.HotelID,
                                 HotelName = H.HotelName,
                                 HotelEngName = H.HotelEngName,
@@ -96,7 +95,6 @@ namespace BS_Adoga.Repository.Search
                                 Star = H.Star,
                                 HotelCity = H.HotelCity,
                                 HotelDistrict = H.HotelDistrict,
-                            },
                             I_RoomVM = new RoomViewModel
                             {
                                 HotelID = H.HotelID,

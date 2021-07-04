@@ -8,10 +8,10 @@ var chooseInfo = document.getElementsByClassName('choose-info');
 var showPerson = document.getElementById('final-person');
 var showRoom = document.getElementById('final-room');
 
-//debugger;
+/*debugger;*/
 person_info.addEventListener('click', function () {
     if (choosing_box.style.visibility == "visible") {
-        choosing_box.style.visibility = "hidden";
+        choosing_box.style.display = "none";
         close_filter();
     }
     else {
@@ -49,16 +49,29 @@ $(document).click(function (e) {
     var container = $(".search-filter-nav");
 
     //幾時更新上方Filter的數量
-    var active = document.getElementById('choosing-box').getElementsByClassName('travel onUse');
+    var active = document.getElementsByClassName('travel onUse');
     var r = document.getElementById('room-num').getElementsByTagName('span');
     var a = document.getElementById('adult-num').getElementsByTagName('span');
     var k = document.getElementById('kids-num').getElementsByTagName('span');
 
-    showRoom.innerHTML = r[0].innerText + "间房间";
-    showPerson.innerHTML = a[0].innerText + "位大人";
-    if (parseInt(k[0].innerText) > 0) {
-        showPerson.innerHTML += "," + k[0].innerText + "位兒童";
+    if (active.length!=0) {
+        if (active[0].classList.contains("single")) {
+            showPerson.innerHTML = "1位大人";
+            showRoom.innerHTML = "1間客房";
+        }
+        else if (active[0].classList.contains("couple")) {
+            showPerson.innerHTML = "2位大人";
+            showRoom.innerHTML = "1間客房";
+        }
+        else {
+            showRoom.innerHTML = r[0].innerText + "间房间";
+            showPerson.innerHTML = a[0].innerText + "位大人";
+            if (parseInt(k[0].innerText) > 0) {
+                showPerson.innerHTML += "," + k[0].innerText + "位兒童";
+            }
+        }
     }
+    
 
     //check if the clicked area is dropDown or not
     if (container.has(e.target).length === 0) {
@@ -76,8 +89,8 @@ function open_filter() {
 
 }
 function close_filter() {
-    choosing_box.style.visibility = "hidden";
-    count_person.style.visibility = "hidden";
+    choosing_box.style.display = "none";
+    count_person.style.display = "none";
     kid_num.style.visibility = "hidden";
 
 }

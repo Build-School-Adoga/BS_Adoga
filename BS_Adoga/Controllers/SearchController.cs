@@ -18,13 +18,6 @@ namespace BS_Adoga.Controllers
             s = new SearchCardService();
         }
 
-        //public ActionResult Search()
-        //{
-        //    //var products = s.GetHomeByFilter();
-        //    //return View(products);
-        //    return View();
-        //}
-
         //[HttpPost]
         public ActionResult Search(SearchCardViewModel searchVM)
         {
@@ -34,9 +27,8 @@ namespace BS_Adoga.Controllers
             //    var room = s.GetHomeByFilter(search);
             //    return View(room);
             //}
-            s.GetListToFilter();
+            //s.GetListToFilter();
 
-            var a=1;
             if (TempData["search"] == null)
             {
                 //var hotels = s.ALLHotel();
