@@ -1,30 +1,32 @@
 ﻿
-<nav id="nav " class="search-filter-nav">
-    <div class="" style="width:auto;">
+<nav id="nav" class="search-filter-nav">
+    <div class="" style="        width: auto;
+        margin-left: 70px;">
 
         <div class="nav-item" id="app">
-            <div id="person-info" class="choose-bar align-items-center justify-content-center" style="height:64px;">
+            <div id="person-info" class="choose-bar align-items-center justify-content-center" style="height:64px;" >
                 <i class="fas fa-user-friends"></i>
                 <div class="choose-info">
-                    <p id="choose-info1">1位大人,1位兒童<br> <span>1間客房</span></p>
-                 
+                    <input id="final-person"name="people"value="5位大人"style=" pointer-events: none;"/><br>
+                    <input id="final-room"name="room" value="1間客房"style=" pointer-events: none;"/>
+
                 </div>
                 <i class="fas fa-angle-down"></i>
             </div>
             <div id="person-box">
                 <div id="choosing-box">
-                    <div class="travel single"id="single">
+                    <div class="travel single" id="single">
                         <div class="d-flex flex-column">
                             <p>單人旅遊</p>
                             <div style=" width: auto; height: auto; font-size: 12px; line-height: 12px; font-weight: 400;" class="d-flex justify-content-center bg-danger align-items-center">
                                 <h4 class="text-white ">訂房最多可省12%</h4>
                             </div>
                         </div>
-                       
+
                         <p>1間客房, 1位大人</p>
                     </div>
-                    <div class="travel couple"id="couple">
-                        <p >雙人旅遊</p>
+                    <div class="travel couple" id="couple">
+                        <p>雙人旅遊</p>
                         <p>1間客房, 2位大人</p>
                     </div>
                     <div class="travel family">
@@ -42,25 +44,83 @@
                 </div>
                 <div id="count-person">
                     <div class="count-box" id="room-num">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>間房間</p>
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-minus" v-on:click="minus('room')"></i>
+                        <p><span>{{room}}</span>間房間</p>
+                        <i class="fas fa-plus" v-on:click="plus('room')"></i>
                     </div>
                     <div class="count-box" id="adult-num">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>位大人</p>
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-minus" v-on:click="minus('adult')"></i>
+                        <p><span>{{adult}}</span>位大人</p>
+                        <i class="fas fa-plus" v-on:click="plus('adult')"></i>
                     </div>
                     <div class="count-box" id="kids-num">
-                        <i class="fas fa-minus"></i>
-                        <p><span>1</span>位兒童</p>
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-minus" v-on:click="minus('kids')"></i>
+                        <p><span>{{kids}}</span>位兒童</p>
+
+                        <i class="fas fa-plus" v-on:click="plus('kids')"></i>
                     </div>
-                    <button id="done-counting">
-                        完成
-                    </button>
+                    
                 </div>
             </div>
         </div>
     </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    var filter = new Vue({
+        el: '#nav',
+        data: {
+            room: 1,
+            adult: 1,
+            kids: 0,
+        },
+        methods: {
+            minus: function (e) {
+                switch (e) {
+                    case 'room':
+                        if (this.room > 1) {
+                            this.room -= 1;
+                        }
+                        else { alert("數量不可為0！"); }
+                        break;
+                    case "adult":
+                        if (this.adult > 1) {
+                            this.adult -= 1
+                        }
+                        else { alert("數量不可為0！"); }
+                        break;
+                    default://小孩
+                        if (this.kids > 0) {
+                            this.kids -= 1
+                        }
+                        else { alert("數量不可少於0！"); }
+                        break;
+                }
+            },
+            plus: function (e) {
+                switch (e) {
+                    case 'room':
+                        if (this.room < 9) {
+                            this.room += 1;
+                        }
+                        else { alert("數量最多為9！"); }
+                        break;
+                    case "adult":
+                        
+                        if (this.adult < 9) {
+                            this.adult += 1
+                        }
+                        else { alert("數量最多為9！"); }
+                        break;
+                    default://小孩
+                        if (this.kids < 9) {
+                            this.kids += 1
+                        }
+                        else { alert("數量最多為9！"); }
+                        break;
+                }
+            }
+        }
+    })
+</script>

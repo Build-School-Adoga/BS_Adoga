@@ -187,7 +187,13 @@
     <Compile Include="Models\DBContext\RoomBed.cs" />
     <Compile Include="Models\DBContext\RoomImage.cs" />
     <Compile Include="Models\DBContext\RoomsDetail.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\CardViewModels.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\demoshopViewModels.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\MyHoteiImages.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\MyHotels.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\MyRoom.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\MyRoomsDetails.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\UserCookieViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\RoomCheckOutData.cs" />
@@ -381,9 +387,11 @@
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Models\ViewModels\Account\" />
+    <Folder Include="Repository\Account\" />
     <Folder Include="Repository\CheckOut\" />
     <Folder Include="Repository\HotelLogin\" />
     <Folder Include="Repository\MemberLogin\" />
+    <Folder Include="Service\Account\" />
     <Folder Include="Service\CheckOut\" />
     <Folder Include="Service\HotelLogin\" />
     <Folder Include="Service\MemberLogin\" />
