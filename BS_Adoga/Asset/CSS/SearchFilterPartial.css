@@ -67,6 +67,16 @@
     background-color: grey;
 }
 
+
+.el-input.el-input--suffix,
+input#inputGroupSelect {
+    height: 100%;
+}
+.el-select{
+    width:100%;
+}
+
+
 div#person-info {
     width: 100%;
     display: flex;
@@ -92,6 +102,7 @@ div#person-info {
         /* height: 300px;  */
         width: 300px;
         visibility: hidden;
+        display: none;
         z-index: 2;
     }
 

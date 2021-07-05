@@ -10,12 +10,15 @@ var showRoom = document.getElementById('final-room');
 
 /*debugger;*/
 person_info.addEventListener('click', function () {
-    if (choosing_box.style.visibility == "visible") {
+    debugger;
+    /*if (choosing_box.style.visibility == "visible") {*/
+    if (choosing_box.style.display == "flex") {
         choosing_box.style.display = "none";
         close_filter();
     }
     else {
         choosing_box.style.visibility = "visible";
+        choosing_box.style.display = "flex";
     }
 })
 travel.forEach(item => item.addEventListener('click', function () {
@@ -25,18 +28,11 @@ travel.forEach(item => item.addEventListener('click', function () {
     })
     on_Use(item);
     if (item.classList.contains("single") || item.classList.contains("couple")) {
-        if (item.classList.contains("single")) {
-            showPerson.innerHTML = "1位大人";
-            showRoom.innerHTML = "1間客房";
-        }
-        else {
-            showPerson.innerHTML = "2位大人";
-            showRoom.innerHTML = "1間客房";
-        }
         close_filter();
     }
     else {
         open_filter();
+        choosing_box.style.display = "flex";
         if (item.classList.contains("bussiness")) {
             kid_num.style.visibility = "hidden";
         }
@@ -48,7 +44,7 @@ $(document).click(function (e) {
     e.stopPropagation();
     var container = $(".search-filter-nav");
 
-    //幾時更新上方Filter的數量
+    //及時更新上方Filter的數量
     var active = document.getElementsByClassName('travel onUse');
     var r = document.getElementById('room-num').getElementsByTagName('span');
     var a = document.getElementById('adult-num').getElementsByTagName('span');
@@ -85,8 +81,8 @@ function on_Use(el) {
 }
 function open_filter() {
     count_person.style.visibility = "visible";
+    count_person.style.display = "flex";
     kid_num.style.visibility = "visible";
-
 }
 function close_filter() {
     choosing_box.style.display = "none";
