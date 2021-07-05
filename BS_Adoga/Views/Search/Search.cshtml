@@ -11,11 +11,235 @@
 }
 
 @section endJS{
+    <!-- VueJS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
     <script src="~/Asset/js/Search.js"></script>
     <script src="~/Asset/js/_SearchFilterPartial.js"></script>
+
+    <script>
+    var filternav = new Vue({
+        el: '#nav',
+        data: {
+            room: 1,
+            adult: 1,
+            kids: 0,
+            Value: '',
+            Options: [
+                {
+                    label: '熱門城市',
+                    option: [
+                        @foreach (var item in Model.HotelOptionVM)
+                        {
+                             @Html.Partial("~/Views/Search/_optionCity.cshtml", item);
+                        }
+                    ]
+                },
+                {
+                    label: '飯店名稱',
+                    option: [
+                        @foreach (var item in Model.HotelOptionVM)
+                        {
+                            @Html.Partial("~/Views/Search/_optionHotel.cshtml", item);
+                        }
+                    ]
+                }
+            ]
+        },
+        methods: {
+            minus: function (e) {
+                switch (e) {
+                    case 'room':
+                        if (this.room > 1) {
+                            this.room -= 1;
+                        }
+                        break;
+                    case "adult":
+                        if (this.adult > 1) {
+                            this.adult -= 1
+                        }
+                        break;
+                    default:
+                        if (this.kids > 0) {
+                            this.kids -= 1
+                        }
+                        break;
+                }
+            },
+            plus: function (e) {
+                switch (e) {
+                    case 'room':
+                        if (this.room < 9) {
+                            this.room += 1;
+                        }
+                        break;
+                    case "adult":
+                        debugger;
+                        if (this.adult < 9) {
+                            this.adult += 1
+                        }
+                        break;
+                    default:
+                        if (this.kids < 9) {
+                            this.kids += 1
+                        }
+                        break;
+                }
+            }
+        },
+        created: function () {
+            @*this.Options = [
+                {
+                    label: '熱門城市',
+                    option: [
+
+                        @foreach (var item in Model)
+                        {
+                             Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
+                        },
+                    ]
+                },
+                {
+                    label: '飯店名稱',
+                    option: [
+                        @foreach (var item in Model)
+                        {
+                            Html.RenderPartial("~/Views/Search/_optionHotel.cshtml", item);
+                        },
+                    ]
+                }
+            ]*@
+
+        },
+        mounted: function () {
+            @*this.Options = [
+                {
+                    label: '熱門城市',
+                    option: [
+
+                        @foreach (var item in Model)
+                        {
+                             Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
+                        },
+                    ]
+                },
+                {
+                    label: '飯店名稱',
+                    option: [
+                        @foreach (var item in Model)
+                        {
+                            Html.RenderPartial("~/Views/Search/_optionHotel.cshtml", item);
+                        },
+                    ]
+                }
+            ]*@
+        }
+    });
+    </script>
 }
 
-@Html.Partial("_SearchFilterPartial", Model.HotelOptionVM)
+<nav id="nav" class="search-filter-nav">
+    <div class="search-bar">
+        <div class="nav-item" id="choose-city">
+            @*
+                <div class="choose-info city-info">
+                    <p id="city-name">台南市</p>
+                    <p id="place-left">794間住宿還有空房</p>
+                </div>*@
+
+            <el-select style="height:100%;width:100%" id="inputGroupSelect" v-model="Value"
+                       placeholder=" 輸入城市、區域、景點或住宿名稱" filterable name="search">
+                <el-option-group v-for="item in Options"
+                                 :key="item.label"
+                                 :label="item.label">
+                    <el-option v-for="o in item.option"
+                               :key="o.value"
+                               :label="o.label"
+                               :value="o.value">
+                        <span style="float: left">{{o.label}}</span>
+                        <span style="float: right; color: #8492a6; font-size: 13px">{{o.price}}</span>
+                    </el-option>
+                </el-option-group>
+            </el-select>
+        </div>
+
+        <div class="nav-item">
+            <div class="search-date">
+                <i class="fas fa-calendar-alt"></i>
+                <div class="choose-info">
+                    <p id="checkIn-date">2021年5月17日</p>
+                    <p id="date-description">週一</p>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="search-date">
+                <i class="fas fa-calendar-alt"></i>
+                <div class="choose-info">
+                    <p id="checkOut-date">2021年5月19日</p>
+                    <p id="date-description">週三</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <div id="person-info" class="choose-bar">
+                <i class="fas fa-user-friends"></i>
+                <div class="choose-info">
+                    <p id="final-person"></p>
+                    <p id="final-room"></p>
+                </div>
+                <i class="fas fa-angle-down"></i>
+            </div>
+            <div id="person-box">
+                <div id="choosing-box">
+                    <div class="travel single">
+                        <p>單人旅遊</p>
+                        <p>1間客房, 1位大人</p>
+                    </div>
+                    <div class="travel couple">
+                        <p>雙人旅遊</p>
+                        <p>1間客房, 2位大人</p>
+                    </div>
+                    <div class="travel family">
+                        <p>家庭旅遊</p>
+                        <div><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                    <div class="travel group">
+                        <p>團體旅遊</p>
+                        <div><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                    <div class="travel bussiness">
+                        <p>商務旅遊</p>
+                        <div><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+                <div id="count-person">
+                    <div class="count-box" id="room-num">
+                        <i class="fas fa-minus" v-on:click="minus('room')"></i>
+                        <p><span>{{room}}</span>間房間</p>
+                        <i class="fas fa-plus" v-on:click="plus('room')"></i>
+                    </div>
+                    <div class="count-box" id="adult-num">
+                        <i class="fas fa-minus" v-on:click="minus('adult')"></i>
+                        <p><span>{{adult}}</span>位大人</p>
+                        <i class="fas fa-plus" v-on:click="plus('adult')"></i>
+                    </div>
+                    <div class="count-box" id="kids-num">
+                        <i class="fas fa-minus" v-on:click="minus('kids')"></i>
+                        <p><span>{{kids}}</span>位兒童</p>
+                        <i class="fas fa-plus" v-on:click="plus('kids')"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-search">搜出好價</button>
+    </div>
+</nav>
+
 
 <div id="filter">
     <div class="filter-bar">
@@ -106,9 +330,9 @@
                 </div>
             </div>
             @*<form>
-                <button><i class="fas fa-search"></i></button>
-                <input type="search" placeholder="想搜什麼就搜什麼">
-            </form>*@
+                    <button><i class="fas fa-search"></i></button>
+                    <input type="search" placeholder="想搜什麼就搜什麼">
+                </form>*@
         </div>
     </div>
 </div>

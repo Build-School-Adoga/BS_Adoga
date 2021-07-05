@@ -48,7 +48,7 @@
         /*没有作用*/
         /*padding-bottom: 100px;
     }*/
-        .nav-item .choose-info,
+        
         .nav-item .search-date,
         .main-body .infomation {
             flex-grow: 1;
@@ -67,6 +67,15 @@
     background-color: grey;
 }
 
+/*地區*/
+.el-input.el-input--suffix{
+    height:100%;
+}
+
+input#inputGroupSelect{
+    height:100%;
+    margin-bottom:0;
+}
 div#person-info {
     width: 100%;
     display: flex;
