@@ -485,6 +485,7 @@
     <Content Include="Views\CheckOut\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutCheckout.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Search\_SearchFilterPartial.cshtml" />
     <Content Include="Views\HotelDetail\_AlbumPartial.cshtml" />
     <Content Include="Views\Account\MemberProfile.cshtml" />
     <Content Include="Views\HotelLogin\HotelLogin.cshtml" />
