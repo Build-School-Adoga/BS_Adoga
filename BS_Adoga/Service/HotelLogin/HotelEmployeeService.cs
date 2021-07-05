@@ -46,6 +46,11 @@ namespace BS_Adoga.Service.HotelLogin
             return result;
         }
 
+        /// <summary>
+        /// 比對帳密是否存在
+        /// </summary>
+        /// <param name="loginVM"></param>
+        /// <returns></returns>
         public HotelEmployee CheckEmailPassword(MixHotelLoginViewModel loginVM)
         {
             string email = HttpUtility.HtmlEncode(loginVM.HotelLoginView.Email);
@@ -58,6 +63,12 @@ namespace BS_Adoga.Service.HotelLogin
             return user;
         }
 
+        /// <summary>
+        /// 產生cookie
+        /// </summary>
+        /// <param name="loginVM"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public HttpCookie cookie(MixHotelLoginViewModel loginVM,HotelEmployee user)
         {
             UserCookieViewModel UserData = new UserCookieViewModel()
