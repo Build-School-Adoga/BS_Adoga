@@ -39,12 +39,15 @@ namespace BS_Adoga.Repository.HotelDetail
             var startDate = DateTime.Parse("2021-06-20");
             var endDate = DateTime.Parse("2021-06-22");
 
+            //1. 先找出符合條件的hotel 和 room
             var table = (from h in _context.Hotels
                             join r in _context.Rooms on h.HotelID equals r.HotelID
                             join r_detail in _context.RoomsDetails on r.RoomID equals r_detail.RoomID
                             where h.HotelID == hotelId && r.NumberOfPeople*orderRoom >= orderPerson && r_detail.CheckInDate >= startDate && r_detail.CheckInDate < endDate
                             select new { HotelID = h.HotelID, r, r_detail }).AsEnumerable();
 
+
+            //2. 再針對找出來的hotel和room去計算那段日期內的剩餘房間數和折扣。
             //t 裡面除了HotelID 還有  r_detail (RoomDetail) 這2個表格  
             var table_2 = from t in table
                         //join pick in pickDate on t.r_detail.CheckInDate.ToString("yyyy-MM-dd") equals pick
