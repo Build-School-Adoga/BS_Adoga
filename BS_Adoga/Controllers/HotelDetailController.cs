@@ -21,12 +21,12 @@ namespace BS_Adoga.Controllers
         }
 
         // GET: HotelDetail
-        public ActionResult Detail(string hotelId)
+        public ActionResult Detail(string hotelId, string startDate, string endDate, int orderRoom, int adult)
         {
             DetailVM hotelDetail;
 
             if (hotelId != null)
-                hotelDetail = _service.GetDetailVM(hotelId);
+                hotelDetail = _service.GetDetailVM(hotelId, startDate, endDate, orderRoom, adult);
             else if (TempData["search"] != null)
                 hotelDetail = _service.GetDetailVM(TempData["search"].ToString());
             else

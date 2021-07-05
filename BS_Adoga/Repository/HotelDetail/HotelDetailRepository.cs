@@ -30,14 +30,13 @@ namespace BS_Adoga.Repository.HotelDetail
 
         }
 
-        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId)
+        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId,string startDate,string endDate,int orderRoom,int adult)
         {
             int orderDay = 2;
-            //string[] pickDate = new string[] { "2021-06-20", "2021-06-21", "2021-06-22" };
-            int orderPerson = 12;
-            int orderRoom = 2;
-            var startDate = DateTime.Parse("2021-06-20");
-            var endDate = DateTime.Parse("2021-06-22");
+            int orderPerson = adult;//12
+            //int orderRoom = 2;
+            //DateTime startDate = DateTime.Parse("2021-06-20");
+            //DateTime endDate = DateTime.Parse("2021-06-22");
 
             //1. 先找出符合條件的hotel 和 room
             var table = (from h in _context.Hotels
@@ -50,7 +49,6 @@ namespace BS_Adoga.Repository.HotelDetail
             //2. 再針對找出來的hotel和room去計算那段日期內的剩餘房間數和折扣。
             //t 裡面除了HotelID 還有  r_detail (RoomDetail) 這2個表格  
             var table_2 = from t in table
-                        //join pick in pickDate on t.r_detail.CheckInDate.ToString("yyyy-MM-dd") equals pick
                         group new { t.HotelID, t.r_detail } by new { t.HotelID, t.r_detail.RoomID, } into roomGroup
                         where roomGroup.Count() >= orderDay && roomGroup.Min(r => r.r_detail.RoomCount - r.r_detail.RoomOrder)>=orderRoom 
                         select new
