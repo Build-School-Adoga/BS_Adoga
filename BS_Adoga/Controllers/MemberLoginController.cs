@@ -313,7 +313,7 @@ namespace BS_Adoga.Controllers
             {
                 payload = await GoogleJsonWebSignature.ValidateAsync(id_token, new GoogleJsonWebSignature.ValidationSettings()
                 {
-                    Audience = new List<string>() { "373077817054-6c6eaqcq6nun968jq67q8epn6pbdl9bo.apps.googleusercontent.com" }//要驗證的client id，把自己申請的Client ID填進去
+                    Audience = new List<string>() { "373077817054-5hahnkio91en8pnqqqpaginugjt0f85v.apps.googleusercontent.com" }//要驗證的client id，把自己申請的Client ID填進去
                 });
                 //測試
             }
