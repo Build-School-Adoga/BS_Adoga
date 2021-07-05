@@ -56,17 +56,18 @@ namespace BS_Adoga.Controllers
         [HttpPost]
         public ActionResult Search(string search,string date_range,string people,string room)
         {
+            var date = date_range.Split('-');
+            var start = date[0];
+            var end = date[1];
+            var peo = people.Split('位');
+            var ple = peo[0];
+            var rmo = room.Split('間');
+            var rom = rmo[0];
             if (search.Length ==3)
             {
                 TempData["search"] = search;
                 
-                var date = date_range.Split('-');
-                var start = date[0];
-                var end = date[1];
-                var peo= people.Split('位');
-                var ple = peo[0];
-                var rmo= room.Split('間');
-                var rom = rmo[0];
+               
                 TempData["start"] = start;
                 TempData["end"] = end;
                 TempData["ple"] = ple;
@@ -78,7 +79,10 @@ namespace BS_Adoga.Controllers
                 var xxx = from p in _homeService._homeRepository._context.Hotels
                           where p.HotelName == search
                           select p.HotelID;
-
+                TempData["start"] = start;
+                TempData["end"] = end;
+                TempData["ple"] = ple;
+                TempData["rom"] = rom;
 
                 TempData["search"] = xxx.FirstOrDefault();
 
