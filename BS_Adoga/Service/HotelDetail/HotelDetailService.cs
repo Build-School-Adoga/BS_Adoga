@@ -5,6 +5,7 @@ using System.Web;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
 using BS_Adoga.Repository.HotelDetail;
+using BS_Adoga.Repository.Search;
 
 namespace BS_Adoga.Service.HotelDetail
 {
@@ -22,7 +23,8 @@ namespace BS_Adoga.Service.HotelDetail
             DetailVM hotelDetail = new DetailVM()
             {
                 hotelVM = GetHotelById(hotelId),
-                roomTypeVM = GetRoomTypeByFilter(hotelId)
+                roomTypeVM = GetRoomTypeByFilter(hotelId),
+                hotelOptionVM = new SearchCardRepository().GetHotelOption()
             };
             return hotelDetail;
         }

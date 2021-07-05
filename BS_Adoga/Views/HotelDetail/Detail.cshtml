@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
 
     HotelVM hotel = Model.hotelVM;
-    IEnumerable<RoomTypeVM> rooms = Model.roomTypeVM;    
+    IEnumerable<RoomTypeVM> rooms = Model.roomTypeVM;
 }
 
 @section topCSS{
@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="~/Asset/CSS/HotelDetail.css" />
     <link rel="stylesheet" href="~/Asset/CSS/SearchFilterPartial.css" />
     <style>
-        .room-type .col-9{
-            position:relative;
+        .room-type .col-9 {
+            position: relative;
         }
+
         .row.room-case.one-case.pe-3.mb-3 {
             position: absolute;
             left: 1.5rem;
@@ -28,7 +29,111 @@
 
 @section scrollNav{
     <div class="scroll-nav">
-        @Html.Partial("~/Views/Search/_SearchFilterPartial.cshtml")
+        @*@Html.Partial("~/Views/Search/_SearchFilterPartial.cshtml")*@
+        @using (Html.BeginForm("", "Search"))
+        {
+            <nav id="nav" class="search-filter-nav">
+                <div class="search-bar">
+                    <div class="nav-item" id="choose-city">
+                        @*<i class="fas fa-search"></i>
+                        <div class="choose-info city-info">
+                            <p id="city-name">台南市</p>
+                            <p id="place-left">794間住宿還有空房</p>
+                        </div>*@
+
+                        <el-select style="color: #666;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
+                                   name="search">
+                            <el-option-group v-for="group in options2"
+                                             :key="group.label"
+                                             :label="group.label">
+                                <el-option v-for="item in group.options"
+                                           :key="item.value"
+                                           :label="item.label"
+                                           :value="item.value">
+                                    @*<span style="float: left">item.label</span>
+
+                                    <span style="float: right; color: #8492a6; font-size: 13px">item.price</span>*@
+                                </el-option>
+                            </el-option-group>
+                        </el-select>
+                    </div>
+
+                    <div class="nav-item">
+                        <div class="search-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="choose-info">
+                                <p id="checkIn-date">2021年5月17日</p>
+                                <p id="date-description">週一</p>
+                            </div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="search-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="choose-info">
+                                <p id="checkOut-date">2021年5月19日</p>
+                                <p id="date-description">週三</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-item">
+                        <div id="person-info" class="choose-bar">
+                            <i class="fas fa-user-friends"></i>
+                            <div class="choose-info">
+                                <p id="final-person"></p>
+                                <p id="final-room"></p>
+                            </div>
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                        <div id="person-box">
+                            <div id="choosing-box">
+                                <div class="travel single">
+                                    <p>單人旅遊</p>
+                                    <p>1間客房, 1位大人</p>
+                                </div>
+                                <div class="travel couple">
+                                    <p>雙人旅遊</p>
+                                    <p>1間客房, 2位大人</p>
+                                </div>
+                                <div class="travel family">
+                                    <p>家庭旅遊</p>
+                                    <div><i class="fas fa-chevron-right"></i></div>
+                                </div>
+                                <div class="travel group">
+                                    <p>團體旅遊</p>
+                                    <div><i class="fas fa-chevron-right"></i></div>
+                                </div>
+                                <div class="travel bussiness">
+                                    <p>商務旅遊</p>
+                                    <div><i class="fas fa-chevron-right"></i></div>
+                                </div>
+                            </div>
+                            <div id="count-person">
+                                <div class="count-box" id="room-num">
+                                    <i class="fas fa-minus" v-on:click="minus('room')"></i>
+                                    <p><span>{{room}}</span>間房間</p>
+                                    <i class="fas fa-plus" v-on:click="plus('room')"></i>
+                                </div>
+                                <div class="count-box" id="adult-num">
+                                    <i class="fas fa-minus" v-on:click="minus('adult')"></i>
+                                    <p><span>{{adult}}</span>位大人</p>
+                                    <i class="fas fa-plus" v-on:click="plus('adult')"></i>
+                                </div>
+                                <div class="count-box" id="kids-num">
+                                    <i class="fas fa-minus" v-on:click="minus('kids')"></i>
+                                    <p><span>{{kids}}</span>位兒童</p>
+                                    <i class="fas fa-plus" v-on:click="plus('kids')"></i>
+                                </div>
+                                <button id="done-counting">
+                                    完成
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-search">搜出好價</button>
+                </div>
+            </nav>
+        }
         <nav class="hotel-nav bg-white">
             <div class="wrap-1100 d-flex justify-content-between">
                 <div class="hotel-nav-wrap d-flex align-items-center">
@@ -52,7 +157,8 @@
         <li class="breadcrumb-item"><a href="#">首頁</a></li>
         <li class="breadcrumb-item"><a href="#">台灣住宿</a><span>&nbsp;(17,283)</span></li>
         <li class="breadcrumb-item"><a href="#">@hotel.HotelCity 住宿</a><span>&nbsp;(1,597)</span></li>
-        <li class="breadcrumb-item active" aria-current="page">預定 @hotel.HotelName ( @hotel.HotelEngName )</li>@*台中商旅 (Hung's Mansion)*@
+        <li class="breadcrumb-item active" aria-current="page">預定 @hotel.HotelName ( @hotel.HotelEngName )</li>
+        @*台中商旅 (Hung's Mansion)*@
     </ol>
 </nav>
 <div class="wrap-1100 row mb-3">
@@ -81,7 +187,7 @@
                     <div class="img-wrap">
                         <img class="" src="~/Asset/images/HotelDetail/Room/room02.jpg">
                         <div class="show-shadow">
-                        @*@Html.ActionLink("【完整相簿】共12張", "DetailAlbum", null,new { @class= "album-link fz-14" })*@
+                            @*@Html.ActionLink("【完整相簿】共12張", "DetailAlbum", null,new { @class= "album-link fz-14" })*@
                             <a href="#" class="album-link fz-14">【完整相簿】共12張</a>
                         </div>
                     </div>
@@ -98,7 +204,7 @@
                     {
                         <i class="fas fa-star"></i>
                     }
-                    </h2>
+                </h2>
                 <address class="mb-0">@hotel.HotelAddress</address>@*臺灣大道三段593號, 西屯區, 台中市, 台灣, 40757*@
             </div>
         </div>
@@ -401,7 +507,7 @@
                                     </select>
                                 </div>
                                 <div class="col-3 pt-2 text-end">
-                                    @Html.ActionLink("保留","Index","CheckOut",null,new {@class= "keep-btn btn fz-14 py-2 mb-2" })
+                                    @Html.ActionLink("保留", "Index", "CheckOut", null, new { @class = "keep-btn btn fz-14 py-2 mb-2" })
                                     @*<button class="keep-btn btn fz-14 py-2 mb-2">保留</button>*@
                                     <button class="cart-btn btn fz-14 py-2 mb-5">加入購物車</button>
                                     <!-- <p class="green">一次訂兩間更划算</p>
@@ -461,7 +567,7 @@
                                     @*<button class="keep-btn btn fz-14 py-2 mb-2">保留</button>*@
                                     <button class="cart-btn btn fz-14 py-2 mb-5">加入購物車</button>
                                     <!-- <p class="green">一次訂兩間更划算</p>
-    <p class="hurry2min">訂房只需2分鐘</p> -->
+                                    <p class="hurry2min">訂房只需2分鐘</p> -->
                                     <p class="remain fw-bold fz-14 color-red mb-4">本站剩4間！</p>
                                 </div>
                             </div>
@@ -470,8 +576,9 @@
                 </div>
             </div>
         </div>
-        @foreach(RoomTypeVM room in rooms) {             
-            @Html.Partial("~/Views/HotelDetail/_RoomTypePartial.cshtml",room)
+        @foreach (RoomTypeVM room in rooms)
+        {
+            @Html.Partial("~/Views/HotelDetail/_RoomTypePartial.cshtml", room)
         }
     </div>
 </div>
@@ -488,16 +595,16 @@
         <p class="col-5 mt-2">
             @hotel.HotelAbout
             @*位於台中市有名的餐飲, 夜生活, 購物區內的<strong>台中商旅</strong>提供優質的住宿，是商務和休閒旅行的熱門之選。
-            因為離市中心僅的路程，離機場也只有的路程，這間4星級飯店每年都會接待大量的旅客。 對於喜歡冒險的旅客來說，Zann Kitchen Cooking Class, 秋紅谷景觀生態公園, 威秀影城 -
-            台中老虎城再合適不過了。
-            <br><br>
-            <strong>台中商旅</strong>的一流設施和優質服務能確保客人住宿愉快。 住宿擁有一系列獨具特色的服務，例如：所有房型皆附免費WiFi, 代客叫車服務, 24小時前台服務,
-            配有無障礙協助設備,
-            可寄放行李。
-            <br><br>
-            在這裡，您能真切的感受最極致的舒適住宿體驗，部分客房提供平面電視, WiFi, 免費WiFi, 按摩浴缸, 禁菸房，給住客更完整的服務。
-            不管您是健身愛好者還是只想在疲憊的一天後放鬆一下自己，住宿的頂級娛樂設施都是不二選擇，例如：健身房, 按摩服務, 花園。
-            一流的設施與得天獨厚的地理位置都讓<strong>台中商旅</strong>成為台中市旅遊時的最佳住宿選擇。*@
+                因為離市中心僅的路程，離機場也只有的路程，這間4星級飯店每年都會接待大量的旅客。 對於喜歡冒險的旅客來說，Zann Kitchen Cooking Class, 秋紅谷景觀生態公園, 威秀影城 -
+                台中老虎城再合適不過了。
+                <br><br>
+                <strong>台中商旅</strong>的一流設施和優質服務能確保客人住宿愉快。 住宿擁有一系列獨具特色的服務，例如：所有房型皆附免費WiFi, 代客叫車服務, 24小時前台服務,
+                配有無障礙協助設備,
+                可寄放行李。
+                <br><br>
+                在這裡，您能真切的感受最極致的舒適住宿體驗，部分客房提供平面電視, WiFi, 免費WiFi, 按摩浴缸, 禁菸房，給住客更完整的服務。
+                不管您是健身愛好者還是只想在疲憊的一天後放鬆一下自己，住宿的頂級娛樂設施都是不二選擇，例如：健身房, 按摩服務, 花園。
+                一流的設施與得天獨厚的地理位置都讓<strong>台中商旅</strong>成為台中市旅遊時的最佳住宿選擇。*@
         </p>
     </div>
 </section>
@@ -752,7 +859,6 @@
             </a>
         </div>
     </div>
-    </div>
 
 </section>
 <div id="comment-area" class="comment-area wrap-1100 mt-3">
@@ -883,7 +989,95 @@
 </div>
 
 @section endJS{
+    <!-- VueJS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
     <script type="text/javascript" src="~/Asset/js/Search.js"></script>
+    <script>
+    var filter = new Vue({
+        el: '#nav',
+        data: {
+            room: 1,
+            adult: 1,
+            kids: 0,
+            options: [
+                     {
+                         label: '熱門城市',
+                         options: [
+
+                              @foreach (var item in Model.hotelOptionVM)
+                             {
+                                  Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
+                              },
+                         ]
+                     },
+                     {
+                         label: '飯店名稱',
+                         options: [
+
+
+                              @foreach (var item in Model.hotelOptionVM)
+                             {
+                                  Html.RenderPartial("~/Views/Search/_optionHotel.cshtml", item);
+                              },
+                         ]
+                     }
+                 ],
+                 options2: [],
+                 value: ''
+        },
+        methods: {
+            minus: function (e) {
+                switch (e) {
+                    case 'room':
+                        if (this.room > 1) {
+                            this.room -= 1;
+                        }
+                        else { alert("數量不可為0！"); }
+                        break;
+                    case "adult":
+                        if (this.adult > 1) {
+                            this.adult -= 1
+                        }
+                        else { alert("數量不可為0！"); }
+                        break;
+                    default://小孩
+                        if (this.kids > 0) {
+                            this.kids -= 1
+                        }
+                        else { alert("數量不可少於0！"); }
+                        break;
+                }
+            },
+            plus: function (e) {
+                switch (e) {
+                    case 'room':
+                        if (this.room < 9) {
+                            this.room += 1;
+                        }
+                        else { alert("數量最多為9！"); }
+                        break;
+                    case "adult":
+                        debugger;
+                        if (this.adult < 9) {
+                            this.adult += 1
+                        }
+                        else { alert("數量最多為9！"); }
+                        break;
+                    default://小孩
+                        if (this.kids < 9) {
+                            this.kids += 1
+                        }
+                        else { alert("數量最多為9！"); }
+                        break;
+                }
+            }
+        }
+    })
+    </script>
     <script>
         window.addEventListener('scroll', function () {
             let html = document.getElementsByTagName('html')[0];

@@ -32,20 +32,22 @@ namespace BS_Adoga.Repository.HotelDetail
 
         public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId)
         {
-            int orderDay = 3;
-            string[] pickDate = new string[] { "2021-06-20", "2021-06-21", "2021-06-22" };
+            int orderDay = 2;
+            //string[] pickDate = new string[] { "2021-06-20", "2021-06-21", "2021-06-22" };
             int orderPerson = 12;
             int orderRoom = 2;
+            var startDate = DateTime.Parse("2021-06-20");
+            var endDate = DateTime.Parse("2021-06-22");
 
             var table = (from h in _context.Hotels
                             join r in _context.Rooms on h.HotelID equals r.HotelID
                             join r_detail in _context.RoomsDetails on r.RoomID equals r_detail.RoomID
-                            where h.HotelID == hotelId && r.NumberOfPeople*orderRoom >= orderPerson
+                            where h.HotelID == hotelId && r.NumberOfPeople*orderRoom >= orderPerson && r_detail.CheckInDate >= startDate && r_detail.CheckInDate < endDate
                             select new { HotelID = h.HotelID, r, r_detail }).AsEnumerable();
 
             //t 裡面除了HotelID 還有  r_detail (RoomDetail) 這2個表格  
             var table_2 = from t in table
-                        join pick in pickDate on t.r_detail.CheckInDate.ToString("yyyy-MM-dd") equals pick
+                        //join pick in pickDate on t.r_detail.CheckInDate.ToString("yyyy-MM-dd") equals pick
                         group new { t.HotelID, t.r_detail } by new { t.HotelID, t.r_detail.RoomID, } into roomGroup
                         where roomGroup.Count() >= orderDay && roomGroup.Min(r => r.r_detail.RoomCount - r.r_detail.RoomOrder)>=orderRoom 
                         select new

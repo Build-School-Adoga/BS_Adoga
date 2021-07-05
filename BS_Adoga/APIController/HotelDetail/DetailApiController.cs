@@ -21,11 +21,13 @@ namespace BS_Adoga.APIController.HotelDetail
         }
 
         // GET: DetailApi
-        [HttpGet]
+        //[HttpGet]
+        [AcceptVerbs("GET", "POST")]
         public IHttpActionResult Index()
         {
-           var a =  _service.GetRoomTypeByFilter(null);
-            return Ok(JsonConvert.SerializeObject(a));
+           var a =  _service.GetRoomTypeByFilter("hotel04");
+            return Json(a);
+            //return Ok(JsonConvert.SerializeObject(a));
         }
     }
 }
