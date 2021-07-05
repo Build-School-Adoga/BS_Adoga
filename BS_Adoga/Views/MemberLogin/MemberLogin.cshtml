@@ -152,37 +152,30 @@
                 @*<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" autologoutlink="true">
         </fb:login-button>*@
 
-                
+
                 @*0703line登入*@
-                <button onclick="LineAuth()">點選 Line Login</button>
-                <script>
+                @*<script>
                     function LineAuth() {
                         var URL = 'https://access.line.me/oauth2/v2.1/authorize?';
                         URL += 'response_type=code';
                         URL += '&client_id=1656167198';
-                        URL += '&redirect_uri= https://localhost:44352/MemberLogin/MemberLogin/callback';    
+                        URL += '&redirect_uri= https://localhost:44352/MemberLogin/MemberLogin/callback';
                         URL += '&state=abcde';
                         URL += '&scope=profile%20openid%20email';
                         window.location.href = URL;
-                        //fetch('https://api.line.me/oauth2/v2.1/token')
-
-                        //    .then(function (response) {
-                        //        return response.json()//解析成一個json 物件
-                        //        console.log(response)
-                        //    }).catch(function (err) {
-                        //        // 錯誤處理
-                        //    });
                     }
-                </script>
-
+                </script>*@
                 <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-card" onclick="FBLoginReal();">
                     <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
                     Facebook
                 </button>
-                <button type="button" class="otherlogin-btn" id="Phoneapplelogin-card">
-                    <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt="">
-                    Apple
+                <button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="location.href='@Url.Action("LineLoginDirect")'">
+                    <img src="~/Asset/images/btn_base.png" alt="">
+                    Line
                 </button>
+                @*<a href="@Url.Action("LineLoginDirect")">
+                    <img src="~/Asset/images/btn_base.png" alt="">
+                </a>*@
                 @*<button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="FacebookLogout();">
             <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt="">
             logout
