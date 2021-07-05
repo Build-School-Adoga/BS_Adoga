@@ -1,4 +1,4 @@
-﻿@model IQueryable<demoshopViewModels>
+﻿@model demoshopViewModels
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
@@ -1157,7 +1157,7 @@
                 return (match ? false : hashTable[key] = true);
             });
         }
-        var deduped = dedup([   @foreach (var item in Model)
+        var deduped = dedup([   @foreach (var item in Model.My_MyHotels)
                             {
 
 
@@ -1176,7 +1176,7 @@
                         options: deduped
                     }, {
                         label: '飯店名',
-                        options: [    @foreach (var item in Model)
+                        options: [    @foreach (var item in Model.My_MyHotels)
                             {
 
 

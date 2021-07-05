@@ -54,12 +54,23 @@ namespace BS_Adoga.Controllers
 
         
         [HttpPost]
-        public ActionResult Search(string search,string time)
+        public ActionResult Search(string search,string date_range,string people,string room)
         {
             if (search.Length ==3)
             {
                 TempData["search"] = search;
                 
+                var date = date_range.Split('-');
+                var start = date[0];
+                var end = date[1];
+                var peo= people.Split('位');
+                var ple = peo[0];
+                var rmo= room.Split('間');
+                var rom = rmo[0];
+                TempData["start"] = start;
+                TempData["end"] = end;
+                TempData["ple"] = ple;
+                TempData["rom"] = rom;
 
                 return RedirectToAction("Search", "Search", search);
             }
