@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
-using BS_Adoga.Service.Search;
+using BS_Adoga.Service;
+using BS_Adoga.Models.ViewModels.homeViewModels;
+using BS_Adoga.Models.ViewModels.Search;
 
 namespace BS_Adoga.Controllers
 {
@@ -15,21 +17,34 @@ namespace BS_Adoga.Controllers
         {
             s = new SearchCardService();
         }
-        
-        
-        public ActionResult Search()
+
+        //[HttpPost]
+        public ActionResult Search(SearchCardViewModel searchVM)
         {
             //string search = TempData["search"].ToString();
+            //SearchCardViewModel a = new SearchCardViewModel()
+            //{
+            //    var room = s.GetHomeByFilter(search);
+            //    return View(room);
+            //}
+            //s.GetListToFilter();
 
-            if(TempData["search"] == null)
+            if (TempData["search"] == null)
             {
-                var hotels = s.ALLHotel();
+                //var hotels = s.ALLHotel();
+                //return View(hotels);
+
+                var hotels = s.GetSearchViewModelData("");
                 return View(hotels);
+
             }
             else
             {
-                var hotels = s.GetHotels(TempData["search"].ToString());
-                return View(hotels);
+                //var hotels = s.GetHotels(TempData["search"].ToString());
+                //return View(hotels);
+
+                var data = s.GetSearchViewModelData(TempData["Search"].ToString());
+                return View(data);
             }
 
         }
