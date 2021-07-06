@@ -25,15 +25,8 @@
         <input type="submit" name="cardlocal" value="" id="btn1" style="display: none;" />
 
     }*@
-@using (Html.BeginForm("HomePage", "Home"))
-{
 
-    <input type="text" name="cardlocal" v-model="projectForm.collectionName" value="" id="btn1" style="display: none;" />
-
-}
-<input type="text" name="cba"  value="" id="btn2" style="display: none;" />
 <div class="bg"></div>
-
 @using (Html.BeginForm("Search", "Home"))
 {
 
@@ -314,12 +307,11 @@
             @foreach (var man in Model.My_CardViewModels)
             {
 
-                @Html.Partial("_SimpleCardPartial", man);
+            @Html.Partial("_SimpleCardPartial", man);
+
 
 
             }
-
-
 
 
 
@@ -1182,41 +1174,7 @@
 
     </script>
 
-    <script>
 
-        window.onload = function () {
-          
-            document.getElementsByName("cardlocal")[0].value = localStorage.getItem("key");
-            if (document.getElementsByName("cardlocal")[0].value != sessionStorage.getItem("online")) {
-                hand2(document.getElementsByName("cardlocal")[0].value);
-                getSavedValue2(document.getElementsByName("cardlocal")[0].value);
-
-                function hand2(e) {
-                    var name = "online";
-                    var val = e;
-                    console.log(val);
-                    sessionStorage.setItem(name, val);
-                }
-                function getSavedValue2(v) {
-                    if (!sessionStorage.getItem(v)) {
-                        return "";
-                    }
-                    return sessionStorage.getItem(v);
-
-                }
-
-                var button = document.getElementsByName("cardlocal")[0];
-                button.form.submit();
-            }
-
-              
-            
-
-        }
-
-
-
-    </script>
 
 }
 

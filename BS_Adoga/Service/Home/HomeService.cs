@@ -19,16 +19,27 @@ namespace BS_Adoga.Service.Home
         //    var result = _homeRepository.Getcards();
         //    return result;
         //}
-        public demoshopViewModels  ALLImages()
+        public demoshopViewModels  ALLImages(string cardlocal)
         {
+           
            var productss = new demoshopViewModels() {
                 My_MyHotels = _homeRepository.GetHotelModels(),
-              My_CardViewModels  = _homeRepository.GetCardModels()
+              My_CardViewModels  = _homeRepository.GetCardModels(cardlocal)
                   };
 
             return productss;
         }
+        public demoshopViewModels ALLImages2()
+        {
 
+            var productss = new demoshopViewModels()
+            {
+                My_MyHotels = _homeRepository.GetHotelModels(),
+                My_CardViewModels = _homeRepository.GetCardModels2()
+            };
+
+            return productss;
+        }
 
     }
 }

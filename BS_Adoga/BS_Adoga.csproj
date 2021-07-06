@@ -339,9 +339,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\HotelDetail\Detail.cshtml" />
     <Content Include="Views\MemberLogin\MemberLogin.cshtml" />
     <Content Include="Views\Shared\_AdogaLayout.cshtml" />
@@ -371,6 +368,7 @@
     <Content Include="Views\Account\_LayoutMember.cshtml" />
     <Content Include="Views\Account\MemberBooking.cshtml" />
     <Content Include="Views\CheckOut\PayAPI.cshtml" />
+    <Content Include="Views\Home\Searchtwo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIController\Account\" />
@@ -387,11 +385,9 @@
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Models\ViewModels\Account\" />
-    <Folder Include="Repository\Account\" />
     <Folder Include="Repository\CheckOut\" />
     <Folder Include="Repository\HotelLogin\" />
     <Folder Include="Repository\MemberLogin\" />
-    <Folder Include="Service\Account\" />
     <Folder Include="Service\CheckOut\" />
     <Folder Include="Service\HotelLogin\" />
     <Folder Include="Service\MemberLogin\" />
