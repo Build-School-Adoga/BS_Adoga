@@ -1,24 +1,35 @@
 ﻿using BS_Adoga.Models.ViewModels.homeViewModels;
-using BS_Adoga.Repository.Home;
+using BS_Adoga.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BS_Adoga.Service.Home
+namespace BS_Adoga.Service
 {
     public class HomeService
     {
         public HomeRepository _homeRepository;
-        public HomeService() 
+        public HomeService()
         {
             _homeRepository = new HomeRepository();
         }
-        public demoshopViewModels GetHomeByFilter()
+        //public demoshopViewModels GetHomeByFilter()
+        //{
+        //    var result = _homeRepository.Getcards();
+        //    return result;
+        //}
+        public demoshopViewModels ALLImages()
         {
-            var result = _homeRepository.Getcards();
-            return result;
+            var productss = new demoshopViewModels()
+            {
+                My_MyHotels = _homeRepository.GetHotelModels(),
+                My_CardViewModels = _homeRepository.GetCardModels()
+            };
+
+            return productss;
         }
+
 
     }
 }
