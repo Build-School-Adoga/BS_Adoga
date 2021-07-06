@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 //using System.Web.Mvc;
-using BS_Adoga.Service.HotelDetail;
+using BS_Adoga.Service;
 using BS_Adoga.Models.ViewModels.HotelDetail;
 using System.Web.Http.Description;
 using Newtonsoft.Json;

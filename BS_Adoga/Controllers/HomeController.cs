@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.homeViewModels;
-using BS_Adoga.Service.Home;
+using BS_Adoga.Service;
 using Microsoft.Ajax.Utilities;
 using System.Security.Cryptography;
 
