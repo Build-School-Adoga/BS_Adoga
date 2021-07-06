@@ -47,6 +47,11 @@ namespace BS_Adoga.Controllers
             return View(orderData);
         }
 
+        /// <summary>
+        /// 送出表單資料，新增至資料庫
+        /// </summary>
+        /// <param name="orderVM"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(OrderVM orderVM)
@@ -86,18 +91,23 @@ namespace BS_Adoga.Controllers
                     Logging = "建立" + "," + firstname + lastname + "," + DateTime.Now.ToString(),
                 };
 
-                //EF
-                try
-                {
-                    _context.Orders.Add(od);
-                    _context.SaveChanges();
-                    TempData["OrderId"] = od.OrderID;
 
-                    return RedirectToAction("PayAPI");
-                }
-                catch (Exception ex)
+                using (var tran = _context.Database.BeginTransaction())
                 {
-                    return Content("訂單建立失敗:" + ex.ToString());
+                    //EF
+                    try
+                    {
+                        _context.Orders.Add(od);
+                        _context.SaveChanges();
+                        TempData["OrderId"] = od.OrderID;
+                        tran.Commit();
+                        return RedirectToAction("PayAPI");
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        return Content("訂單建立失敗:" + ex.ToString());
+                    }
                 }
             }
 
@@ -123,7 +133,7 @@ namespace BS_Adoga.Controllers
                     oPayment.MerchantID = "2000214";//ECPay提供的特店編號 2000132
 
                     /* 基本參數 */
-                    oPayment.Send.ReturnURL = "https://localhost:44352/CheckOut/PayFeedback";//付款完成通知回傳的網址
+                    oPayment.Send.ReturnURL = "https://localhost:44352/CheckOut/Index";//付款完成通知回傳的網址https://localhost:44352/CheckOut/PayFeedback
                     oPayment.Send.ClientBackURL = "http://adoga.azurewebsites.net/";//瀏覽器端返回的廠商網址
                     oPayment.Send.OrderResultURL = "https://localhost:44352/CheckOut/PayFeedback";//瀏覽器端回傳付款結果網址
                     oPayment.Send.MerchantTradeNo = orderId;//廠商的交易編號
@@ -275,7 +285,7 @@ namespace BS_Adoga.Controllers
             }
             finally
             {
-                
+
                 // 回覆成功訊息。
                 if (enErrors.Count() == 0)
                 {
@@ -285,8 +295,16 @@ namespace BS_Adoga.Controllers
                     _context.Entry(payStatus).State = EntityState.Modified;
                     _context.SaveChanges();
                     this.Response.Clear();
-                    this.Response.Write("1|OK");    
-                }                   
+
+                    //List<string> list = htFeedback.Keys.Cast<string>().ToList();
+                    //List<string> list2 = htFeedback.Values.Cast<string>().ToList();
+
+                    foreach (string s in htFeedback.Keys)
+                    {
+                        this.Response.Write(s + " = " + htFeedback[s] + "</br>");
+                    }
+                    //this.Response.Write("OK");
+                }
                 // 回覆錯誤訊息。
                 else
                     this.Response.Write(String.Format("0|{0}", String.Join("\\r\\n", enErrors)));
