@@ -6,7 +6,7 @@ using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.Search;
 using System.ComponentModel.DataAnnotations;
 
-namespace BS_Adoga.Repository
+namespace BS_Adoga.Repository.Search
 {
     public class SearchCardRepository
     {

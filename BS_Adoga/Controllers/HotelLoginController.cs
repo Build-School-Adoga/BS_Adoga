@@ -9,6 +9,7 @@ using BS_Adoga.Models.ViewModels;
 using BS_Adoga.Models.ViewModels.HotelLogin;
 using BS_Adoga.Models.ViewModels.MemberLogin;
 using BS_Adoga.Service;
+using BS_Adoga.Service.HotelLogin;
 using Newtonsoft.Json;
 
 namespace BS_Adoga.Controllers

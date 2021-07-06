@@ -1,11 +1,11 @@
 ﻿using BS_Adoga.Models.ViewModels.homeViewModels;
-using BS_Adoga.Repository;
+using BS_Adoga.Repository.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BS_Adoga.Service
+namespace BS_Adoga.Service.Home
 {
     public class HomeService
     {

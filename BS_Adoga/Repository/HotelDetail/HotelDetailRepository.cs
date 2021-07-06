@@ -8,7 +8,7 @@ using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
 using System.ComponentModel.DataAnnotations;
 
-namespace BS_Adoga.Repository
+namespace BS_Adoga.Repository.HotelDetail
 {
     public class HotelDetailRepository
     {

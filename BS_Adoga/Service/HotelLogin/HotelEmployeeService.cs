@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 
-namespace BS_Adoga.Service
+namespace BS_Adoga.Service.HotelLogin
 {
     public class HotelEmployeeService
     {

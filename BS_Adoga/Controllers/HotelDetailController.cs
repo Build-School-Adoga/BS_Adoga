@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
 using BS_Adoga.Models.ViewModels.CheckOut;
-using BS_Adoga.Service;
+using BS_Adoga.Service.HotelDetail;
 
 namespace BS_Adoga.Controllers
 {
