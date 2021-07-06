@@ -10,7 +10,7 @@ var showRoom = document.getElementById('final-room');
 
 /*debugger;*/
 person_info.addEventListener('click', function () {
-    debugger;
+    //debugger;
     /*if (choosing_box.style.visibility == "visible") {*/
     if (choosing_box.style.display == "flex") {
         choosing_box.style.display = "none";
@@ -52,18 +52,18 @@ $(document).click(function (e) {
 
     if (active.length!=0) {
         if (active[0].classList.contains("single")) {
-            showPerson.innerHTML = "1位大人";
-            showRoom.innerHTML = "1間客房";
+            showPerson.value = "1位大人";
+            showRoom.value = "1間客房";
         }
         else if (active[0].classList.contains("couple")) {
-            showPerson.innerHTML = "2位大人";
-            showRoom.innerHTML = "1間客房";
+            showPerson.value = "2位大人";
+            showRoom.value = "1間客房";
         }
         else {
-            showRoom.innerHTML = r[0].innerText + "间房间";
-            showPerson.innerHTML = a[0].innerText + "位大人";
+            showRoom.value = r[0].innerText + "间房间";
+            showPerson.value = a[0].innerText + "位大人";
             if (parseInt(k[0].innerText) > 0) {
-                showPerson.innerHTML += "," + k[0].innerText + "位兒童";
+                showPerson.value += "," + k[0].innerText + "位兒童";
             }
         }
     }

@@ -75,6 +75,11 @@ input#inputGroupSelect {
 .el-select{
     width:100%;
 }
+input#final-person,
+input#final-room{
+    pointer-events: none;
+    border: 0;
+}
 
 
 div#person-info {
@@ -193,4 +198,17 @@ div#person-info {
     /* height: fit-content();
         width: 30vw;
         background-color: rgba(0, 0, 0, 0.7); */
+}
+
+
+/*日期*/
+div#datetime,
+.timebox.d-flex.justify-content-center.align-items-center {
+    height: 100%;
+    position:relative;
+}
+
+input#demo{
+    /*display:none;*/
+    position: absolute;
 }

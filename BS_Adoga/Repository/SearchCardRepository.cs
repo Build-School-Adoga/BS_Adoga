@@ -7,7 +7,7 @@ using BS_Adoga.Models.ViewModels.Search;
 using System.ComponentModel.DataAnnotations;
 using BS_Adoga.Models.ViewModels.homeViewModels;
 
-namespace BS_Adoga.Repository.Search
+namespace BS_Adoga.Repository
 {
     //資料庫帶資料
     public class SearchCardRepository

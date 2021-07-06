@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
-using BS_Adoga.Service.Search;
+using BS_Adoga.Service;
 using BS_Adoga.Models.ViewModels.homeViewModels;
 using BS_Adoga.Models.ViewModels.Search;
 
