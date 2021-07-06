@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.Search;
-using BS_Adoga.Repository.Search;
+using BS_Adoga.Repository;
 
-namespace BS_Adoga.Service.Search
+namespace BS_Adoga.Service
 {
     public class SearchCardService
     {
