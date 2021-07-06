@@ -10,6 +10,10 @@ using System.Web.Security;
 using System.Threading.Tasks;
 using Google.Apis.Auth;
 using Newtonsoft.Json;
+using System.Net;
+using System.Text;
+using System.Collections.Specialized;
+using System.IO;
 
 namespace BS_Adoga.Controllers
 {
@@ -82,7 +86,7 @@ namespace BS_Adoga.Controllers
                     LastName = lastname,
                     Email = email,
                     MD5HashPassword = HashService.MD5Hash(password),
-                    Logging = "建立" + "," + firstname+lastname + "," + DateTime.Now.ToString(),
+                    Logging = "建立" + "," + firstname + lastname + "," + DateTime.Now.ToString(),
                     RegisterDatetime = DateTime.Now
                 };
                 //EF
@@ -111,7 +115,7 @@ namespace BS_Adoga.Controllers
             //一.未通過Model驗證
             if (!ModelState.IsValid)
             {
-              
+
                 return View(loginVM);
             }
 
@@ -142,7 +146,7 @@ namespace BS_Adoga.Controllers
             //1.Create FormsAuthenticationTicket
             var ticket = new FormsAuthenticationTicket(
             version: 1,
-            name: user.FirstName+user.LastName.ToString(), //可以放使用者Id
+            name: user.FirstName + user.LastName.ToString(), //可以放使用者Id
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: loginVM.MemberLoginViewModel.Remember,// 是否要記住我 true or false
@@ -220,7 +224,7 @@ namespace BS_Adoga.Controllers
         }
         #region facebook登入
         [HttpPost]
-        public async Task<ActionResult> FacebookLoginAPI(string Id,string Name,string Email,string Picture )
+        public async Task<ActionResult> FacebookLoginAPI(string Id, string Name, string Email, string Picture)
         {
             UserCookieViewModel UserData = new UserCookieViewModel()
             {
@@ -337,7 +341,7 @@ namespace BS_Adoga.Controllers
                     Id = GoogleMail,
                     PictureUrl = GooglePicture
                 };
-                if(_context.Customers.Where(x => x.Email == GoogleMail).FirstOrDefault() == null)
+                if (_context.Customers.Where(x => x.Email == GoogleMail).FirstOrDefault() == null)
                 {
                     using (var transaction = _context.Database.BeginTransaction())
                     {
@@ -350,7 +354,7 @@ namespace BS_Adoga.Controllers
                                 LastName = GoogleLastName,
                                 Email = GoogleMail,
                                 MD5HashPassword = string.Empty,
-                                Logging = "建立" + ","  + GoogleFirstName + GoogleLastName + "," + DateTime.Now.ToString(),
+                                Logging = "建立" + "," + GoogleFirstName + GoogleLastName + "," + DateTime.Now.ToString(),
                                 RegisterDatetime = DateTime.Now
                             };
                             _context.Customers.Add(cust);
@@ -383,7 +387,7 @@ namespace BS_Adoga.Controllers
                     }
                 }
 
-                else 
+                else
                 {
                     //1.Create FormsAuthenticationTicket
                     var ticket = new FormsAuthenticationTicket(
@@ -412,6 +416,211 @@ namespace BS_Adoga.Controllers
             return Content("OK");
         }
         #endregion
+        #region LineLogin
+        string redirect_uri = "https://localhost:44352/MemberLogin/callback";
+        string client_id = "1656167198";
+        string client_secret = "ef98822259547db7297ecb9606b357b1";
 
+        public ActionResult LineLoginDirect()
+        {
+            string state = Guid.NewGuid().ToString();
+            TempData["state"] = state;//利用TempData被取出資料後即消失的特性，來防禦CSRF攻擊
+            string response_type = "code";
+            string client_id = "1656167198";
+            string redirect_uri = HttpUtility.UrlEncode("https://localhost:44352/MemberLogin/callback");
+            string LineLoginUrl = string.Format("https://access.line.me/oauth2/v2.1/authorize?response_type={0}&client_id={1}&redirect_uri={2}&state={3}&scope=profile%20openid%20email",
+                response_type,
+                client_id,
+                redirect_uri,
+                state
+                );
+            return Redirect(LineLoginUrl);
+        }
+
+        public ActionResult callback(string state, string code, string error, string error_description)
+        {
+            if (!string.IsNullOrEmpty(error))
+            {//用戶沒授權你的LineApp
+                ViewBag.error = error;
+                ViewBag.error_description = error_description;
+                return View();
+            }
+
+            if (TempData["state"] == null)
+            {//可能使用者停留Line登入頁面太久
+
+                return Content("頁面逾期");
+
+            }
+
+            if (Convert.ToString(TempData["state"]) != state)
+            {//使用者原先Request QueryString的TempData["state"]和Line導頁回來夾帶的state Querystring不一樣，可能是parameter tampering或CSRF攻擊
+
+                return Content("state驗證失敗");
+
+            }
+
+            if (Convert.ToString(TempData["state"]) == state)
+            {//state字串驗證通過
+
+                //取得id_token和access_token:https://developers.line.biz/en/docs/line-login/web/integrate-line-login/#spy-getting-an-access-token
+                string issue_token_url = "https://api.line.me/oauth2/v2.1/token";
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(issue_token_url);
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                //必須透過ParseQueryString()來建立NameValueCollection物件，之後.ToString()才能轉換成queryString
+                NameValueCollection postParams = HttpUtility.ParseQueryString(string.Empty);
+                postParams.Add("grant_type", "authorization_code");
+                postParams.Add("code", code);
+                postParams.Add("redirect_uri", this.redirect_uri);
+                postParams.Add("client_id", this.client_id);
+                postParams.Add("client_secret", this.client_secret);
+
+                //要發送的字串轉為byte[] 
+                byte[] byteArray = Encoding.UTF8.GetBytes(postParams.ToString());
+                using (Stream reqStream = request.GetRequestStream())
+                {
+                    reqStream.Write(byteArray, 0, byteArray.Length);
+                }//end using
+
+                //API回傳的字串
+                string responseStr = "";
+                //發出Request
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                    {
+                        responseStr = sr.ReadToEnd();
+                    }//end using  
+                }
+
+
+                LineLoginToken tokenObj = JsonConvert.DeserializeObject<LineLoginToken>(responseStr);
+                string id_token = tokenObj.id_token;
+
+                //方案總管>參考>右鍵>管理Nuget套件 搜尋 System.IdentityModel.Tokens.Jwt 來安裝
+                var jst = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(id_token);
+                LineUserProfile user = new LineUserProfile();
+                //↓自行決定要從id_token的Payload中抓什麼user資料
+                user.userId = jst.Payload.Sub;
+                user.displayName = jst.Payload["name"].ToString();
+                user.pictureUrl = jst.Payload["picture"].ToString();
+                if (jst.Payload.ContainsKey("email") && !string.IsNullOrEmpty(Convert.ToString(jst.Payload["email"])))
+                {//有包含email，使用者有授權email個資存取，並且用戶的email有值
+                    user.email = jst.Payload["email"].ToString();
+                }
+
+
+                string access_token = tokenObj.access_token;
+                ViewBag.access_token = access_token;
+                #region 接下來是為了抓用戶的statusMessage狀態消息，如果你不想要可以省略不發出下面的Request
+
+                //Social API v2.1 Getting user profiles
+                //https://developers.line.biz/en/docs/social-api/getting-user-profiles/
+                //取回User Profile
+                string profile_url = "https://api.line.me/v2/profile";
+
+
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(profile_url);
+                req.Headers.Add("Authorization", "Bearer " + access_token);
+                req.Method = "GET";
+                //API回傳的字串
+                string resStr = "";
+                //發出Request
+                using (HttpWebResponse res = (HttpWebResponse)req.GetResponse())
+                {
+                    using (StreamReader sr = new StreamReader(res.GetResponseStream(), Encoding.UTF8))
+                    {
+                        resStr = sr.ReadToEnd();
+                    }//end using  
+
+                }
+
+                LineUserProfile userProfile = JsonConvert.DeserializeObject<LineUserProfile>(resStr);
+                user.statusMessage = userProfile.statusMessage;//補上狀態訊息
+
+                #endregion
+
+                ViewBag.user = JsonConvert.SerializeObject(user, new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    Formatting = Formatting.Indented
+                });
+
+
+                UserCookieViewModel UserData = new UserCookieViewModel()
+                {
+                    Id = user.email,
+                    PictureUrl = string.Empty
+                };
+                if (_context.Customers.Where(x => x.Email == user.email).FirstOrDefault() == null)
+                {
+                    using (var transaction = _context.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            Customer cust = new Customer()
+                            {
+                                CustomerID = user.email,
+                                FirstName = user.displayName,
+                                LastName = string.Empty,
+                                Email = user.email,
+                                MD5HashPassword = string.Empty,
+                                Logging = "建立" + "," + user.displayName + "," + DateTime.Now.ToString(),
+                                RegisterDatetime = DateTime.Now
+                            };
+                            _context.Customers.Add(cust);
+                            _context.SaveChanges();
+
+                            //1.Create FormsAuthenticationTicket
+                            var ticket = new FormsAuthenticationTicket(
+                            version: 1,
+                            name: cust.FirstName + cust.LastName, //可以放使用者Id
+                            issueDate: DateTime.UtcNow,//現在UTC時間
+                            expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
+                            isPersistent: false,// 是否要記住我 true or false
+                            userData: JsonConvert.SerializeObject(UserData), //可以放使用者角色名稱
+                            cookiePath: FormsAuthentication.FormsCookiePath);
+
+                            //2.Encrypt the Ticket
+                            var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+                            //3.Create the cookie.
+                            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                            Response.Cookies.Add(cookie);
+                            transaction.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            //result.IsSuccessful = false;
+                            //result.Exception = ex;
+                            transaction.Rollback();
+                        }
+                    }
+                }
+                else
+                {
+                    //1.Create FormsAuthenticationTicket
+                    var ticket = new FormsAuthenticationTicket(
+                    version: 1,
+                    name: user.displayName, //可以放使用者Id
+                    issueDate: DateTime.UtcNow,//現在UTC時間
+                    expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
+                    isPersistent: false,// 是否要記住我 true or false
+                    userData: JsonConvert.SerializeObject(UserData), //可以放使用者角色名稱
+                    cookiePath: FormsAuthentication.FormsCookiePath);
+
+                    //2.Encrypt the Ticket
+                    var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+                    //3.Create the cookie.
+                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    Response.Cookies.Add(cookie);
+                }
+            }//end if 
+
+            return RedirectToAction("HomePage", "Home");
+        }
+        #endregion 
     }
 }
