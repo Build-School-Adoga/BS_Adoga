@@ -46,15 +46,15 @@ namespace BS_Adoga.Controllers
         public ActionResult HomePage()
         {
             var images = _homeService.ALLImages();
-        
+
             return View(images);
 
         }
-      
 
-        
+
+
         [HttpPost]
-        public ActionResult Search(string search,string date_range,string people,string room)
+        public ActionResult Search(string search, string date_range, string people, string room)
         {
             var date = date_range.Split('-');
             var start = date[0];
@@ -64,11 +64,11 @@ namespace BS_Adoga.Controllers
             var rmo = room.Split('間');
             var rom = rmo[0];
 
-            if (search.Length ==3)
+            if (search.Length == 3)
             {
                 TempData["search"] = search;
-                
-               
+
+
                 TempData["start"] = start;
                 TempData["end"] = end;
                 TempData["ple"] = ple;
@@ -76,7 +76,8 @@ namespace BS_Adoga.Controllers
 
                 return RedirectToAction("Search", "Search", search);
             }
-            else {
+            else
+            {
                 var xxx = from p in _homeService._homeRepository._context.Hotels
                           where p.HotelName == search
                           select p.HotelID;
@@ -87,13 +88,20 @@ namespace BS_Adoga.Controllers
 
                 TempData["search"] = xxx.FirstOrDefault();
 
-                return RedirectToAction("Detail", "HotelDetail", new { hotelId=TempData["search"],startDate = TempData["start"], endDate= TempData["end"], orderRoom= TempData["rom"], adult = TempData["ple"] });
+                return RedirectToAction("Detail", "HotelDetail", new
+                {
+                    hotelId = TempData["search"],
+                    startDate = TempData["start"],
+                    endDate = TempData["end"],
+                    orderRoom = TempData["rom"],
+                    adult = TempData["ple"]
+                });
             }
 
-           
+
         }
-       
-     
+
+
     }
 
 }
