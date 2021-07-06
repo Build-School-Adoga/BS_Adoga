@@ -62,47 +62,47 @@
                             <p class="fw-bold h5">請填寫以下資訊</p>
                             <!--FirstName-->
                             <div class="col-md-6">
-                                @Html.LabelFor(model => model.checkOutListViewModel.FirstName, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.checkOutListViewModel.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "FirstName" } })
+                                @Html.LabelFor(model => model.checkOutListViewModel.FirstName)
+                                @Html.EditorFor(model => model.checkOutListViewModel.FirstName, new { htmlAttributes = new { @class = "form-control mb-2", @placeholder = "FirstName" } })
                                 @Html.ValidationMessageFor(model => model.checkOutListViewModel.FirstName, "", new { @class = "text-danger" })
                                 @*<label for="firstName" class="form-label">英文名（同護照）</label>
                                     <input type="text" class="form-control" id="firstName">*@
                             </div>
                             <!--LastName-->
                             <div class="col-md-6">
-                                @Html.LabelFor(model => model.checkOutListViewModel.LastName, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.checkOutListViewModel.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "LastName" } })
+                                @Html.LabelFor(model => model.checkOutListViewModel.LastName)
+                                @Html.EditorFor(model => model.checkOutListViewModel.LastName, new { htmlAttributes = new { @class = "form-control mb-2", @placeholder = "LastName" } })
                                 @Html.ValidationMessageFor(model => model.checkOutListViewModel.LastName, "", new { @class = "text-danger" })
                                 @*<label for="lastName" class="form-label">英文姓（同護照）</label>
                                     <input type="text" class="form-control" id="lastName">*@
                             </div>
                             <!--Email-->
                             <div class="col-12">
-                                @Html.LabelFor(model => model.checkOutListViewModel.Email, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.checkOutListViewModel.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "請確認電子信箱填寫無誤" } })
+                                @Html.LabelFor(model => model.checkOutListViewModel.Email)
+                                @Html.EditorFor(model => model.checkOutListViewModel.Email, new { htmlAttributes = new { @class = "form-control mb-2", @placeholder = "請確認電子信箱填寫無誤" } })
                                 @Html.ValidationMessageFor(model => model.checkOutListViewModel.Email, "", new { @class = "text-danger" })
                                 @*<label for="email" class="form-label">電子信箱</label>
                                     <input type="email" class="form-control" id="email" placeholder="請確認電子信箱填寫無誤">*@
                             </div>
                             <!--checkEmail-->
                             <div class="col-12">
-                                @Html.LabelFor(model => model.checkOutListViewModel.ConfirmEmail, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.checkOutListViewModel.ConfirmEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "請確認電子信箱填寫無誤" } })
+                                @Html.LabelFor(model => model.checkOutListViewModel.ConfirmEmail)
+                                @Html.EditorFor(model => model.checkOutListViewModel.ConfirmEmail, new { htmlAttributes = new { @class = "form-control mb-2", @placeholder = "請確認電子信箱填寫無誤" } })
                                 @Html.ValidationMessageFor(model => model.checkOutListViewModel.ConfirmEmail, "", new { @class = "text-danger" })
                                 @*<label for="checkemail" class="form-label">請再次輸入電子信箱</label>
                                     <input type="email" class="form-control" id="checkemail">*@
                             </div>
                             <!--PhoneNumber-->
                             <div class="col-md-6">
-                                @Html.LabelFor(model => model.checkOutListViewModel.PhoneNumber, new { @class = "form-label" })
-                                @Html.EditorFor(model => model.checkOutListViewModel.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ex: 09xx123456" } })
+                                @Html.LabelFor(model => model.checkOutListViewModel.PhoneNumber)
+                                @Html.EditorFor(model => model.checkOutListViewModel.PhoneNumber, new { htmlAttributes = new { @class = "form-control mb-2", @placeholder = "Ex: 09xx123456" } })
                                 @Html.ValidationMessageFor(model => model.checkOutListViewModel.PhoneNumber, "", new { @class = "text-danger" })
                                 @*<label for="phone" class="form-label">手機號碼</label>
                                     <input type="text" class="form-control" id="phone">*@
                             </div>
                             <!--Country-->
                             <div class="col-md-6">
-                                <label for="country" class="form-label">居住地</label>
+                                <label for="country">居住地</label>
                                 @*<select id="country" class="form-select">
                                         <option selected>台灣</option>
                                         <option>日本</option>
@@ -293,7 +293,8 @@
 
             <!--付款資訊-->
             <fieldset>
-                @*<div class="card">
+                <!--
+                <div class="card">
                         <h5 class="card-header" style="font-size: 14px;">
                             安全付款
                             所有卡片資訊均經過加密，確保安全無虞！
@@ -348,8 +349,63 @@
                         <div class="card-footer">
                             您的訂房入住憑證將會寄送至：XXXXXXXXXXXX@gmail.com
                         </div>
-                    </div>*@
-
+                    </div><div class="card">
+                        <h5 class="card-header" style="font-size: 14px;">
+                            安全付款
+                            所有卡片資訊均經過加密，確保安全無虞！
+                        </h5>
+                        <div class="card-body ">
+                            <div class="card mb-3">
+                                <div class=" row g-0">
+                                    <div class="col-md-6">
+                                        <div class="row p-2">
+                                            <div class="mb-3">
+                                                <label for="formGroupExampleInput" class="form-label">持卡者姓名</label>
+                                                <input type="text" class="form-control" id="formGroupExampleInput">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="formGroupExampleInput2"
+                                                       class="form-label">信用卡/Debit卡號碼</label>
+                                                <input type="text" class="form-control" id="formGroupExampleInput2">
+                                            </div>
+                                            <div class="col-5">
+                                                <label for="formGroupExampleInput2" class="form-label">有效期至</label>
+                                                <input type="text" class="form-control" placeholder="MM/YY"
+                                                       aria-label="First name">
+                                            </div>
+                                            <div class="col-5">
+                                                <label for="formGroupExampleInput2" class="form-label">CVC/CVV代碼</label>
+                                                <input type="text" class="form-control" aria-label="Last name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 p-2">
+                                        <img src="./images/Custom-Designed Icons.jpg" alt="" style="width: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    我想要收到Agoda的獨家促銷情報，同時根據隱私權政策，我保留隨時取消訂閱的權利。
+                                </label>
+                            </div>
+                            <p class="card-text">
+                                繼續使用代表你同意Agoda的
+                                <a href="#"> 服務條款</a>
+                                與
+                                <a href="#">隱私權政策</a>
+                                。
+                            </p>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end m-2 next action-button">
+                            <button class="btn btn-primary me-md-2" type="button">繼續</button>
+                        </div>
+                        <div class="card-footer">
+                            您的訂房入住憑證將會寄送至：XXXXXXXXXXXX@gmail.com
+                        </div>
+                    </div>
+                    -->
             </fieldset>
 
             <!--收據資訊-->
@@ -390,7 +446,6 @@
                     <div class="col-md-6">
                         <div class="card-body mt-1 p-2">
                             <h5 class="card-title">@hotelAndRoom.HotelFullName</h5>
-                            @*<h5 class="card-title">板橋凱撒大飯店 (Caesar Park Hotel Banqiao)</h5>*@
                             <p class="card-text">⭐⭐⭐⭐⭐</p>
                             <p class="card-text">
                                 <small class="text-muted">
