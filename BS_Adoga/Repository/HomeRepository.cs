@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BS_Adoga.Repository.Home
+namespace BS_Adoga.Repository
 {
     public class HomeRepository
     {

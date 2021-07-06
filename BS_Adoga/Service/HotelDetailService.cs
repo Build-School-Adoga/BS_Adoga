@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
-using BS_Adoga.Repository.HotelDetail;
+using BS_Adoga.Repository;
 
-namespace BS_Adoga.Service.HotelDetail
+namespace BS_Adoga.Service
 {
     public class HotelDetailService
     {
