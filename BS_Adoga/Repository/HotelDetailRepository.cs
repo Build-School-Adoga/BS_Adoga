@@ -130,7 +130,5 @@ namespace BS_Adoga.Repository
             //return roomTypeData; //Iqueryable型別
             return finalTable;
         }
-
-
     }
 }

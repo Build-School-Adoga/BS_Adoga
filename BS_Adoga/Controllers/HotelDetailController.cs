@@ -23,7 +23,7 @@ namespace BS_Adoga.Controllers
         }
 
         // GET: HotelDetail
-        public ActionResult Detail(string hotelId, string startDate, string endDate, int orderRoom, int adult)
+        public ActionResult Detail(string hotelId="hotel04", string startDate="2021/06/20", string endDate="2021/06/22", int orderRoom=2, int adult=6)
         {
             DetailVM hotelDetail;
 
