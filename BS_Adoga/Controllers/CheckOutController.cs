@@ -9,6 +9,8 @@ using ECPay.Payment.Integration;
 using System.Collections;
 using System.Web.Security;
 using System.Data.Entity;
+using BS_Adoga.Models.ViewModels.MemberLogin;
+using Newtonsoft.Json;
 
 namespace BS_Adoga.Controllers
 {
@@ -68,6 +70,10 @@ namespace BS_Adoga.Controllers
                 string ConfirmEmail = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.ConfirmEmail);
                 string phonenumber = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.PhoneNumber);
                 string customerId = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+
+                //string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+                //UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+                //string customerId = UserCookie.Id;
 
                 Order od = new Order()
                 {
