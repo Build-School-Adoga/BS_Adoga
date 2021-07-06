@@ -352,7 +352,7 @@
     <Compile Include="Service\HotelDetailService.cs" />
     <Compile Include="Service\HotelLoginAuthorizeAttribute.cs" />
     <Compile Include="Service\SearchCardService.cs" />
-    <Compile Include="Service\HotelLogin\HotelEmployeeService.cs" />
+    <Compile Include="Service\HotelEmployeeService.cs" />
     <Compile Include="Service\OperationResult.cs" />
     <Compile Include="Service\HashService.cs" />
     <Compile Include="Service\MultiButtonAttribute.cs" />
