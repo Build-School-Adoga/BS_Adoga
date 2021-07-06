@@ -510,13 +510,7 @@
     <Content Include="Views\Search\_optionCity.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="APIController\Account\" />
-    <Folder Include="APIController\CheckOut\" />
-    <Folder Include="APIController\Home\" />
-    <Folder Include="APIController\HotelDetail\" />
-    <Folder Include="APIController\HotelLogin\" />
-    <Folder Include="APIController\MemberLogin\" />
-    <Folder Include="APIController\Search\" />
+    <Folder Include="APIController\" />
     <Folder Include="App_Data\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
