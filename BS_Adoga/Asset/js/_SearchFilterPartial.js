@@ -50,7 +50,7 @@ $(document).click(function (e) {
     var a = document.getElementById('adult-num').getElementsByTagName('span');
     var k = document.getElementById('kids-num').getElementsByTagName('span');
 
-    if (active.length!=0) {
+    if (active.length != 0) {
         if (active[0].classList.contains("single")) {
             showPerson.value = "1位大人";
             showRoom.value = "1間客房";
@@ -67,7 +67,7 @@ $(document).click(function (e) {
             }
         }
     }
-    
+
 
     //check if the clicked area is dropDown or not
     if (container.has(e.target).length === 0) {

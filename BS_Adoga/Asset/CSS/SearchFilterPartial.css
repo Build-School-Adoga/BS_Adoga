@@ -72,11 +72,13 @@
 input#inputGroupSelect {
     height: 100%;
 }
-.el-select{
-    width:100%;
+
+.el-select {
+    width: 100%;
 }
+
 input#final-person,
-input#final-room{
+input#final-room {
     pointer-events: none;
     border: 0;
 }
@@ -205,10 +207,10 @@ div#person-info {
 div#datetime,
 .timebox.d-flex.justify-content-center.align-items-center {
     height: 100%;
-    position:relative;
+    position: relative;
 }
 
-input#demo{
+input#demo {
     /*display:none;*/
     position: absolute;
 }

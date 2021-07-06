@@ -22,6 +22,12 @@ namespace BS_Adoga.Controllers
         public ActionResult Search(SearchCardViewModel searchVM)
         {
             //string search = TempData["search"].ToString();
+            //SearchCardViewModel a = new SearchCardViewModel()
+            //{
+            //    var room = s.GetHomeByFilter(search);
+            //    return View(room);
+            //}
+            //s.GetListToFilter();
 
             if (TempData["search"] == null)
             {
