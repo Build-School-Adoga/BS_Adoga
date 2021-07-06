@@ -1189,7 +1189,7 @@
 
     <script>
 
-        window.onload = function () {
+        $(document).ready(function () {
 
             document.getElementsByName("cardlocal")[0].value = localStorage.getItem("key");
             if (document.getElementsByName("cardlocal")[0].value != sessionStorage.getItem("online")) {
@@ -1217,7 +1217,7 @@
 
 
 
-        }
+        });
 
 
 
