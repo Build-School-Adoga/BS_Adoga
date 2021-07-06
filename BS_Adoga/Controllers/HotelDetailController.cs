@@ -6,7 +6,9 @@ using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
 using BS_Adoga.Models.ViewModels.CheckOut;
-using BS_Adoga.Service.HotelDetail;
+using BS_Adoga.Service;
+using BS_Adoga.Repository;
+using System.Net;
 
 namespace BS_Adoga.Controllers
 {
@@ -21,27 +23,27 @@ namespace BS_Adoga.Controllers
         }
 
         // GET: HotelDetail
-        public ActionResult Detail(string hotelId)
+        public ActionResult Detail(string hotelId, string startDate, string endDate, int orderRoom, int adult)
         {
             DetailVM hotelDetail;
 
             if (hotelId != null)
-                hotelDetail = _service.GetDetailVM(hotelId);
+                hotelDetail = _service.GetDetailVM(hotelId, startDate, endDate, orderRoom, adult);
             else if (TempData["search"] != null)
-                hotelDetail = _service.GetDetailVM(TempData["search"].ToString());
+                hotelDetail = _service.GetDetailVM(hotelId, startDate, endDate, orderRoom, adult);
             else
-                hotelDetail = _service.GetDetailVM("hotel04"); //應該做報錯
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //hotelDetail = _service.GetDetailVM("hotel04"); //應該做報錯
 
             return View(hotelDetail);
         }
 
-        public ActionResult SetCheckOutData(string hotelId,string roomId, string roomName,bool breakfast, string bedType , int adult,int child,
-                                            int roomOrder ,decimal roomPrice,decimal roomDiscount , decimal roomNowPrice)
+        public ActionResult SetCheckOutData(string hotelId, string roomId, string roomName, bool breakfast, string bedType, int adult, int child,
+                                            int roomOrder, decimal roomPrice, decimal roomDiscount, decimal roomNowPrice)
         {
-            //var a = _service.GetCheckOutData(hotelId, roomId);
-            //TempData["Order"] = _service.GetCheckOutData(hotelId,roomId);
             var hotel = _service.GetHotelById(hotelId);
-            OrderVM orderData = new OrderVM(){
+            OrderVM orderData = new OrderVM()
+            {
                 roomCheckOutViewModel = new RoomCheckOutData
                 {
                     HotelID = hotel.HotelID,
@@ -62,8 +64,6 @@ namespace BS_Adoga.Controllers
             };
 
             TempData["orderData"] = orderData;
-
-            
 
             return RedirectToAction("Index", "CheckOut");
         }

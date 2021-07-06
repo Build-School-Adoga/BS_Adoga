@@ -27,6 +27,8 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
 
         public int Child { get; set; }
 
+        public int RoomOrder { get; set; }
+
         public decimal RoomPrice { get; set; }
 
         public decimal RoomDiscount { get; set; }
