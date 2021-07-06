@@ -6,7 +6,9 @@ using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
 using BS_Adoga.Models.ViewModels.CheckOut;
-using BS_Adoga.Service.HotelDetail;
+using BS_Adoga.Service;
+using BS_Adoga.Repository;
+using System.Net;
 
 namespace BS_Adoga.Controllers
 {
@@ -28,9 +30,10 @@ namespace BS_Adoga.Controllers
             if (hotelId != null)
                 hotelDetail = _service.GetDetailVM(hotelId, startDate, endDate, orderRoom, adult);
             else if (TempData["search"] != null)
-                hotelDetail = _service.GetDetailVM(TempData["search"].ToString());
+                hotelDetail = _service.GetDetailVM(hotelId, startDate, endDate, orderRoom, adult);
             else
-                hotelDetail = _service.GetDetailVM("hotel04"); //應該做報錯
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //hotelDetail = _service.GetDetailVM("hotel04"); //應該做報錯
 
             return View(hotelDetail);
         }

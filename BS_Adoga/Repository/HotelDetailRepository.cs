@@ -8,7 +8,7 @@ using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
 using System.ComponentModel.DataAnnotations;
 
-namespace BS_Adoga.Repository.HotelDetail
+namespace BS_Adoga.Repository
 {
     public class HotelDetailRepository
     {
@@ -35,14 +35,14 @@ namespace BS_Adoga.Repository.HotelDetail
             int orderDay = 2;
             int orderPerson = adult;//12
             //int orderRoom = 2;
-            //DateTime startDate = DateTime.Parse("2021-06-20");
-            //DateTime endDate = DateTime.Parse("2021-06-22");
+            DateTime startDate_p = DateTime.Parse(startDate);
+            DateTime endDate_p = DateTime.Parse(endDate);
 
             //1. 先找出符合條件的hotel 和 room
             var table = (from h in _context.Hotels
                             join r in _context.Rooms on h.HotelID equals r.HotelID
                             join r_detail in _context.RoomsDetails on r.RoomID equals r_detail.RoomID
-                            where h.HotelID == hotelId && r.NumberOfPeople*orderRoom >= orderPerson && r_detail.CheckInDate >= startDate && r_detail.CheckInDate < endDate
+                            where h.HotelID == hotelId && r.NumberOfPeople*orderRoom >= orderPerson && r_detail.CheckInDate >= startDate_p && r_detail.CheckInDate < endDate_p
                             select new { HotelID = h.HotelID, r, r_detail }).AsEnumerable();
 
 
@@ -90,41 +90,42 @@ namespace BS_Adoga.Repository.HotelDetail
                                                 }),
                                      Adult = r.NumberOfPeople,
                                      Child = 2,
+                                     RoomOrder = orderRoom,
                                      RoomPrice = r.RoomPrice,
                                      RoomDiscount = 1 - t2.Discount,
                                      RoomNowPrice = (r.RoomPrice * (1 - t2.Discount)),
                                      RoomLeft = t2.MinRoom
                                  };
 
-            var roomTypeData = from h in _context.Hotels
-                               join r in _context.Rooms on h.HotelID equals r.HotelID
-                               join bath in _context.BathroomTypes on r.TypesOfBathroomID equals bath.TypesOfBathroomID
-                               join r_detail in _context.RoomsDetails on r.RoomID equals r_detail.RoomID
-                               where h.HotelID == hotelId && r_detail.RoomCount - r_detail.RoomOrder >= orderRoom && r.NumberOfPeople >= (orderPerson / orderRoom)
-                               select new RoomTypeVM
-                               {
-                                   HotelID = h.HotelID,
-                                   RoomID = r.RoomID,
-                                   RoomName = r.RoomName,
-                                   WiFi = r.WiFi,
-                                   Breakfast = r.Breakfast,
-                                   NoSmoking = r.NoSmoking,
-                                   BathroomName = bath.Name,
-                                   RoomBed = (from r_bed in _context.RoomBeds
-                                              join bed in _context.BedTypes on r_bed.TypesOfBedsID equals bed.TypesOfBedsID
-                                              where r_bed.RoomID == r.RoomID
-                                              select new RoomBedVM
-                                              {
-                                                  Name = bed.Name,
-                                                  Amount = r_bed.Amount
-                                              }),
-                                   Adult = 0,
-                                   Child = 0,
-                                   RoomPrice = r.RoomPrice,
-                                   RoomDiscount = 1 - r_detail.RoomDiscount,
-                                   RoomNowPrice = (r.RoomPrice * (1 - r_detail.RoomDiscount)),
-                                   RoomLeft = (r_detail.RoomCount - r_detail.RoomOrder)
-                               };
+            //var roomTypeData = from h in _context.Hotels
+            //                   join r in _context.Rooms on h.HotelID equals r.HotelID
+            //                   join bath in _context.BathroomTypes on r.TypesOfBathroomID equals bath.TypesOfBathroomID
+            //                   join r_detail in _context.RoomsDetails on r.RoomID equals r_detail.RoomID
+            //                   where h.HotelID == hotelId && r_detail.RoomCount - r_detail.RoomOrder >= orderRoom && r.NumberOfPeople >= (orderPerson / orderRoom)
+            //                   select new RoomTypeVM
+            //                   {
+            //                       HotelID = h.HotelID,
+            //                       RoomID = r.RoomID,
+            //                       RoomName = r.RoomName,
+            //                       WiFi = r.WiFi,
+            //                       Breakfast = r.Breakfast,
+            //                       NoSmoking = r.NoSmoking,
+            //                       BathroomName = bath.Name,
+            //                       RoomBed = (from r_bed in _context.RoomBeds
+            //                                  join bed in _context.BedTypes on r_bed.TypesOfBedsID equals bed.TypesOfBedsID
+            //                                  where r_bed.RoomID == r.RoomID
+            //                                  select new RoomBedVM
+            //                                  {
+            //                                      Name = bed.Name,
+            //                                      Amount = r_bed.Amount
+            //                                  }),
+            //                       Adult = 0,
+            //                       Child = 0,
+            //                       RoomPrice = r.RoomPrice,
+            //                       RoomDiscount = 1 - r_detail.RoomDiscount,
+            //                       RoomNowPrice = (r.RoomPrice * (1 - r_detail.RoomDiscount)),
+            //                       RoomLeft = (r_detail.RoomCount - r_detail.RoomOrder)
+            //                   };
 
             //return roomTypeData; //Iqueryable型別
             return finalTable;

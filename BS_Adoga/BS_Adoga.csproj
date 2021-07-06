@@ -155,7 +155,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APIController\HotelDetail\DetailApiController.cs" />
+    <Compile Include="APIController\DetailApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -214,17 +214,17 @@
     <Compile Include="Models\ViewModels\HotelDetail\RoomTypeVM.cs" />
     <Compile Include="Models\ViewModels\Search\HotelOptionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Account\MemberAccountRepository.cs" />
+    <Compile Include="Repository\MemberAccountRepository.cs" />
     <Compile Include="Repository\DBRepository.cs" />
-    <Compile Include="Repository\Home\HomeRepository.cs" />
-    <Compile Include="Service\Account\MemberAccountService.cs" />
-    <Compile Include="Service\Home\HomeService.cs" />
+    <Compile Include="Repository\HomeRepository.cs" />
+    <Compile Include="Service\MemberAccountService.cs" />
+    <Compile Include="Service\HomeService.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\HotelVM.cs" />
-    <Compile Include="Repository\HotelDetail\HotelDetailRepository.cs" />
-    <Compile Include="Repository\Search\SearchCardRepository.cs" />
-    <Compile Include="Service\HotelDetail\HotelDetailService.cs" />
+    <Compile Include="Repository\HotelDetailRepository.cs" />
+    <Compile Include="Repository\SearchCardRepository.cs" />
+    <Compile Include="Service\HotelDetailService.cs" />
     <Compile Include="Service\HotelLoginAuthorizeAttribute.cs" />
-    <Compile Include="Service\Search\SearchCardService.cs" />
+    <Compile Include="Service\SearchCardService.cs" />
     <Compile Include="Service\HashService.cs" />
     <Compile Include="Service\MultiButtonAttribute.cs" />
   </ItemGroup>
@@ -382,13 +382,6 @@
     <Content Include="Views\Search\_optionCity.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="APIController\Account\" />
-    <Folder Include="APIController\CheckOut\" />
-    <Folder Include="APIController\Home\" />
-    <Folder Include="APIController\HotelDetail\" />
-    <Folder Include="APIController\HotelLogin\" />
-    <Folder Include="APIController\MemberLogin\" />
-    <Folder Include="APIController\Search\" />
     <Folder Include="App_Data\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
@@ -396,14 +389,6 @@
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Models\ViewModels\Account\" />
-    <Folder Include="Repository\Account\" />
-    <Folder Include="Repository\CheckOut\" />
-    <Folder Include="Repository\HotelLogin\" />
-    <Folder Include="Repository\MemberLogin\" />
-    <Folder Include="Service\Account\" />
-    <Folder Include="Service\CheckOut\" />
-    <Folder Include="Service\HotelLogin\" />
-    <Folder Include="Service\MemberLogin\" />
     <Folder Include="Views\DetailApi\" />
   </ItemGroup>
   <ItemGroup>

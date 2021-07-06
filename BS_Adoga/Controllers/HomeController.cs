@@ -63,6 +63,7 @@ namespace BS_Adoga.Controllers
             var ple = peo[0];
             var rmo = room.Split('間');
             var rom = rmo[0];
+
             if (search.Length ==3)
             {
                 TempData["search"] = search;
@@ -86,7 +87,7 @@ namespace BS_Adoga.Controllers
 
                 TempData["search"] = xxx.FirstOrDefault();
 
-                return RedirectToAction("Detail", "HotelDetail", search);
+                return RedirectToAction("Detail", "HotelDetail", new { hotelId=TempData["search"],startDate = TempData["start"], endDate= TempData["end"], orderRoom= TempData["rom"], adult = TempData["ple"] });
             }
 
            
