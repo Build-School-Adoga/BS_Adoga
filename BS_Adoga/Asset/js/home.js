@@ -30,12 +30,12 @@ travel.forEach(item => item.addEventListener('click', function () {
    
     if (item.classList.contains("single") || item.classList.contains("couple")) {
         if (item.classList.contains("single")) {
-            showPerson.innerHTML = "1位大人";
-            showRoom.innerHTML = "1間客房";
+            showPerson.value = "1位大人";
+            showRoom.value = "1間客房";
         }
         else {
-            showPerson.innerHTML = "2位大人";
-            showRoom.innerHTML = "1間客房";
+            showPerson.value = "2位大人";
+            showRoom.value = "1間客房";
         }
         close_filter();
     }
@@ -48,7 +48,7 @@ travel.forEach(item => item.addEventListener('click', function () {
 }))
 
 
-$(document).click(function (e) {
+$(count_person).click(function (e) {
     e.stopPropagation();
     var container = $(".search-filter-nav");
     var active = document.getElementById('choosing-box').getElementsByClassName('travel onUse');
@@ -57,12 +57,21 @@ $(document).click(function (e) {
     var k = document.getElementById('kids-num').getElementsByTagName('span');
 
 
-    showRoom.innerHTML = r[0].innerText + "间房间";
+    showRoom.value = r[0].innerText + "間房間";
 
-    showPerson.innerHTML = a[0].innerText + "位大人";
+    showPerson.value = a[0].innerText + "位大人";
     if (parseInt(k[0].innerText) > 0) {
-        showPerson.innerHTML += "," + k[0].innerText + "位兒童";
+        showPerson.value += "," + k[0].innerText+ "位兒童";
     }
+    //check if the clicked area is dropDown or not
+    if (container.has(e.target).length === 0) {
+        close_filter();
+    }
+})
+$(document).click(function (e) {
+    e.stopPropagation();
+    var container = $(".search-filter-nav");
+  
     //check if the clicked area is dropDown or not
     if (container.has(e.target).length === 0) {
         close_filter();

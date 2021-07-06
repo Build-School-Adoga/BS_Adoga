@@ -300,7 +300,12 @@ datalist {
     .search-filter-nav img {
         vertical-align: bottom;
     }
-
+#final-person {
+    border-style: none;
+}
+#final-room {
+    border-style: none;
+}
     
     .main-body,
     

@@ -1,4 +1,4 @@
-﻿
+﻿@model demoshopViewModels
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
@@ -42,7 +42,7 @@
 
 
                 <el-select style="color: #666;z-index: 3;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
-                           name="search" clearable>
+                           name="search" clearable default-first-option>
                     <el-option-group v-for="group in options2"
                                      :key="group.label"
                                      :label="group.label">
@@ -100,10 +100,7 @@
                         <div class="container " id="container1">
 
                             <div id="datetime">
-                                <!-- <input id="date" type="date" value="2017-06-01"> -->
-                                @*<input name="daterange" type="text" class="calendar-minus 	calendar-plus"
-                                    value="  &#xf272; 2021年6月1日 &#xf271; 2021年6月2日"
-                                    style="width: 514px; border: 1px solid #ced4da;">*@
+                     
                                 <div class="timebox d-flex justify-content-center  align-items-center">
                                     <div class="col-6 d-flex">
                                         <i class="far fa-calendar fa-2x" style="margin:0 20px 0 20px;width:30.6px;height:44px"></i>
@@ -133,12 +130,7 @@
 
 
 
-                            @*<select class="form-select " id="inputGroupSelect03" style="width: 500px;">
-                                    <option selected> &#xf007; 兩位大人</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>*@
+                    
 
                             @Html.Partial("_nav")
 
@@ -161,19 +153,6 @@
 
         </div>
         <button type="submit" class="btn btn-danger" style="width:480px;height: 64px; background-color: rgb(83, 146, 249);" id="search">搜尋</button>
-        <!--bear : 0610新增-->
-        @*@Html.ActionLink("搜出好價", "Search", "Search", null, new
-            {
-                @type = "button",
-                @class = "btn btn-primary  btn-lg",
-                @id = "search",
-                @style = "width:480px;height: 64px; background-color: rgb(83, 146, 249);",
-            })*@
-        @*<button type="button" class="btn btn-primary  btn-lg" id="search"
-                    style="width:480px;height: 64px; background-color: rgb(83, 146, 249);">
-                搜出好價
-            </button>*@
-
     </div>
 
 }
@@ -308,67 +287,16 @@
         <span class="visually-hidden">Next</span>
     </a>
 </div>
-
-
-<!--
-<div class="container d-flex justify-content-center flex-column   " style="margin-top: 100px;">
-    <div class=" d-flex justify-content-center" style="margin-bottom: 50px;">
-        <h1 class="fs-4">台灣熱門城市</h1>
-    </div>
-
-    <div class="row">
-        <div class="d-flex   align-items-center">
-            <i class="fas fa-angle-left"></i>
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                <img class="rounded-circle"
-                    src="https://pix6.agoda.net/geo/city/4951/1_4951_02.jpg?s=124x124&ar=1x1">
-                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">台北市</h2>
-                <p style="font-size: 12px; line-height:16px;">2,976間宿舍</p>
-            </div>
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                <img class="rounded-circle"
-                    src="https://pix6.agoda.net/geo/city/12080/1_12080_02.jpg?s=124x124&ar=1x1">
-                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">台中市</h2>
-                <p style="font-size: 12px; line-height:16px;">1,592間宿舍</p>
-            </div>
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                <img class="rounded-circle" src="https://pix6.agoda.net/geo/city/756/1_756_02.jpg?s=124x124&ar=1x1">
-                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">高雄市</h2>
-                <p style="font-size: 12px; line-height:16px;">957間宿舍</p>
-            </div>
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                <img class="rounded-circle"
-                    src="https://pix6.agoda.net/geo/city/18347/1_18347_02.jpg?s=124x124&ar=1x1">
-                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">台南市</h2>
-                <p style="font-size: 12px; line-height:16px;">1,420間宿舍</p>
-            </div>
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                <img class="rounded-circle"
-                    src="https://pix6.agoda.net/geo/city/88773/1_88773_02.jpg?s=124x124&ar=1x1">
-                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">宜蘭縣</h2>
-                <p style="font-size: 12px; line-height:16px;">1,843間宿舍</p>
-            </div>
-            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                <img class="rounded-circle"
-                    src="https://pix6.agoda.net/geo/city/23127/1_23127_02.jpg?s=124x124&ar=1x1">
-                <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">花蓮縣</h2>
-                <p style="font-size: 12px; line-height:16px;">2,003間宿舍</p>
-            </div>
-            <i class="fas fa-angle-right"></i>
-        </div>
-    </div>
-</div> -->
-
 <div class="container d-flex justify-content-center align-items-center flex-column" style="margin-top: 50px;">
     <h1 style=" font-size: 23px; line-height:32px; margin-bottom: 20px;">推薦您下一趟旅行去處！</h1>
     <div class="row" id="motal">
         <div class="d-flex  align-items-center " id="box" style="margin-left: -100px;">
 
             @*@model IEnumerable<Card>*@
-            @foreach (var man in Model.Cards)
-            {
-                @Html.Partial("_SimpleCardPartial", man);
-            }
+            @*@foreach (var man in Model)
+                {
+                    @Html.Partial("_SimpleCardPartial", man);
+                }*@
 
         </div>
     </div>
@@ -1124,7 +1052,27 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="~/Asset/js/home.js"></script>
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-    
+
+    <script>
+        document.getElementById("search").addEventListener('click', function () {
+            hand(document.getElementsByName("search")[0].value);
+        });
+        getSavedValue(document.getElementsByName("search")[0].value);
+
+        function hand(e) {
+            var name = "key";
+            var val = e;
+            console.log(val);
+            localStorage.setItem(name, val);
+        }
+        function getSavedValue(v) {
+            if (!localStorage.getItem(v)) {
+                return "";
+            }
+            return localStorage.getItem(v);
+
+        }
+    </script>
 
     <script>
         moment().format();
@@ -1195,7 +1143,7 @@
     </script>
 
     <script>
-        @model BS_Adoga.Models.ViewModels.homeViewModels.demoshopViewModels
+
 
 
 
@@ -1209,7 +1157,7 @@
                 return (match ? false : hashTable[key] = true);
             });
         }
-        var deduped = dedup([   @foreach (var item in Model.Hotels)
+        var deduped = dedup([   @foreach (var item in Model.My_MyHotels)
                             {
 
 
@@ -1217,18 +1165,18 @@
 
 
                             }]);
-            var Main = {
-                data() {
-                    return {
+        var Main = {
+            data() {
+                return {
 
 
 
-                        options3: [{
-                            label: '熱門城市',
-                            options: deduped
-                        }, {
-                            label: '飯店名',
-                            options: [    @foreach (var item in Model.Hotels)
+                    options3: [{
+                        label: '熱門城市',
+                        options: deduped
+                    }, {
+                        label: '飯店名',
+                        options: [    @foreach (var item in Model.My_MyHotels)
                             {
 
 
@@ -1236,53 +1184,57 @@
 
 
                             }]
-                            }],
-                        options2: [
-                        ],
+                    }],
+                    options2: [
+                    ],
 
 
-                        value: ''
-                    };
+                    value: ''
+                };
 
-                },
-                methods: {
+            },
+            methods: {
 
-                    handleFilter(letter) {
-                        if (!letter) {
-                            this.options2 = this.options3
+                handleFilter(letter) {
+                    if (!letter) {
+                        this.options2 = this.options3
 
-                            return
+                        return
 
-                        }
-                        this.options2 = this.options.filter(function (el, i, arr) {
-                            return arr.indexOf(el) === i;
-                        });
-                        if (letter.lenght === 3) {
-                            this.options2 = this.options.filter(v => {
-                                return v.label.includes(letter)
-                            })
-                        }
-                        else {
-                            this.options2 = this.options.filter(v => {
-                                return v.label.includes(letter)
-                            })
-                        }
-
-
-
-
-
+                    }
+                    this.options2 = this.options.filter(function (el, i, arr) {
+                        return arr.indexOf(el) === i;
+                    });
+                    if (letter.lenght === 3) {
+                        this.options2 = this.options.filter(v => {
+                            return v.label.includes(letter)
+                        })
+                    }
+                    else {
+                        this.options2 = this.options.filter(v => {
+                            return v.label.includes(letter)
+                        })
                     }
 
 
-                },
-                mounted() {
 
-                    this.options2 = this.options3
+
 
                 }
 
+
+            },
+            mounted() {
+
+                this.options2 = this.options3
+
+
+            }
+
         };
+
+
+
 
             var Ctor = Vue.extend(Main)
             new Ctor().$mount('#app')
@@ -1297,7 +1249,7 @@
 
     </script>
 
-   
+
 
 }
 
