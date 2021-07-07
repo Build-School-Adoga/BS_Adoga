@@ -56,13 +56,17 @@ namespace BS_Adoga.Repository
         }
 
             public IQueryable<CardViewModels> GetCardModels(string cardlocal)
-        { 
-            if(cardlocal == null)
+        {
+            var city = from p in _context.Hotels
+                       where p.HotelCity == cardlocal
+                       select p.HotelCity;
+            if (cardlocal == null)
             {
                 var images = (from p in _context.Hotels
                               join s in _context.HotelImages on p.HotelID equals s.HotelID
                               join d in _context.Rooms on p.HotelID equals d.HotelID
                               join z in _context.RoomsDetails on d.RoomID equals z.RoomID
+                              orderby p.HotelEngName
                               select new CardViewModels
                               {
                                   HotelID = p.HotelID,
@@ -96,7 +100,7 @@ namespace BS_Adoga.Repository
                               join s in _context.HotelImages on p.HotelID equals s.HotelID
                               join d in _context.Rooms on p.HotelID equals d.HotelID
                               join z in _context.RoomsDetails on d.RoomID equals z.RoomID    
-                              orderby p.HotelID
+                              orderby p.HotelEngName
                               select new CardViewModels
                               {
                                   HotelID = p.HotelID,
@@ -123,8 +127,8 @@ namespace BS_Adoga.Repository
                               }).Take(4);
                 return images;
 
-            } 
-            else if (cardlocal.Length == 3)
+            }         
+            else if (city.Count()>0)
             {
                 var images = (from p in _context.Hotels
                              join s in _context.HotelImages on p.HotelID equals s.HotelID

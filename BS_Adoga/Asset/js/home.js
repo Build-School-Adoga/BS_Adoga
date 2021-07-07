@@ -3,7 +3,7 @@ var choosing_box = document.getElementById("choosing-box");
 var count_person = document.getElementById("count-person");
 var travel = document.querySelectorAll('.travel');
 var kid_num = document.getElementById("kids-num");
-
+var room_kid = document.getElementById("final-kid");
 var chooseInfo = document.getElementsByClassName('choose-info');
 var showPerson = document.getElementById('final-person');
 var showRoom = document.getElementById('final-room');
@@ -60,9 +60,9 @@ $(count_person).click(function (e) {
     showRoom.value = r[0].innerText + "間房間";
 
     showPerson.value = a[0].innerText + "位大人";
-    if (parseInt(k[0].innerText) > 0) {
-        showPerson.value += "," + k[0].innerText+ "位兒童";
-    }
+   
+        room_kid.value = " ," + k[0].innerText+ "位兒童";
+    
     //check if the clicked area is dropDown or not
     if (container.has(e.target).length === 0) {
         close_filter();
@@ -78,7 +78,10 @@ $(document).click(function (e) {
     }
 })
 
-
+$(document).ready(function () {
+    choosing_box.style.visibility = "hidden"
+    choosing_box.style.display = "none";
+});
 function on_Use(el) {
     el.classList.add("onUse");
 }

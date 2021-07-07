@@ -63,29 +63,46 @@ namespace BS_Adoga.Controllers
 
 
         [HttpPost]
-        public ActionResult Search(string search, string date_range, string people, string room, string data, string cardlocal)
+        public ActionResult Search(string search, string date_range, string people, string room,string kid, string data, string cardlocal)
         {
             var date = date_range.Split('-');
             var start = date[0];
             var end = date[1];
             var peo = people.Split('位');
             var ple = peo[0];
+
+          
             var rmo = room.Split('間');
             var rom = rmo[0];
+            var dik = kid.Split('位');
+            var kkk = dik[0];
+            var ddd = kkk.Split(',');
+            var kids = ddd[1];
+            var Hotels = from p in _homeService._homeRepository._context.Hotels
+                     where p.HotelCity == search
+                     select p.HotelCity;
 
-
-
-            if (search.Length == 3)
+            
+            if (Hotels.Count() >0)
             {
-                TempData["search"] = search;
-
-
-                TempData["start"] = start;
-                TempData["end"] = end;
-                TempData["ple"] = ple;
-                TempData["rom"] = rom;
-                TempData["data"] = data;
-                return RedirectToAction("Search", "Search", search);
+                    TempData["search"] = search;                              
+                    TempData["start"] = start;
+                    TempData["end"] = end;
+                    TempData["ple"] = ple;
+                    TempData["rom"] = rom;
+                    TempData["data"] = data;
+                    TempData["kids"] = kids;
+            
+            
+               
+                return RedirectToAction("Search", "Search", new { search = TempData["search"] ,
+                    start= TempData["start"] ,
+                    end= TempData["end"],
+                    ple= TempData["ple"],
+                    rom= TempData["rom"],
+                    data= TempData["data"],
+                    kids=TempData["kids"]
+            });
             }
             else
             {
@@ -93,15 +110,25 @@ namespace BS_Adoga.Controllers
                           where p.HotelName == search
                           select p.HotelID;
 
-
+                   
+                    TempData["kids"] = kids;
+            
                 TempData["start"] = start;
                 TempData["end"] = end;
                 TempData["ple"] = ple;
                 TempData["rom"] = rom;
                 TempData["data"] = data;
+                
                 TempData["search"] = xxx.FirstOrDefault();
 
-                return RedirectToAction("Detail", "HotelDetail", search);
+                return RedirectToAction("Detail", "HotelDetail",new {
+                    hotelId = TempData["search"],
+                    startDate = TempData["start"],
+                    endDate = TempData["end"],
+                    orderRoom = TempData["rom"],
+                    adult = TempData["ple"],
+                    child = TempData["kids"]
+                });
             }
 
             var card = _homeService.ALLImages(cardlocal);
