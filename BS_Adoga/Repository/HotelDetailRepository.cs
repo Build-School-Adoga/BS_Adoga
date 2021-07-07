@@ -30,10 +30,10 @@ namespace BS_Adoga.Repository
 
         }
 
-        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId,string startDate,string endDate,int orderRoom,int adult)
+        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId,string startDate,string endDate,int orderRoom,int adult,int child)
         {
             int orderDay = 2;
-            int orderPerson = adult;//12
+            int orderPerson = adult+child;//12
             //int orderRoom = 2;
             DateTime startDate_p = DateTime.Parse(startDate);
             DateTime endDate_p = DateTime.Parse(endDate);

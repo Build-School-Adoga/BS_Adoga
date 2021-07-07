@@ -17,12 +17,12 @@ namespace BS_Adoga.Service
             _repository = new HotelDetailRepository();
         }
 
-        public DetailVM GetDetailVM (string hotelId, string startDate, string endDate, int orderRoom, int adult)
+        public DetailVM GetDetailVM (string hotelId, string startDate, string endDate, int orderRoom, int adult,int child)
         {
             DetailVM hotelDetail = new DetailVM()
             {
                 hotelVM = GetHotelById(hotelId),
-                roomTypeVM = GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult),
+                roomTypeVM = GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult,child),
                 hotelOptionVM = new SearchCardRepository().GetHotelOption()
             };
             return hotelDetail;
@@ -52,11 +52,11 @@ namespace BS_Adoga.Service
             return result;
         }
         
-        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId, string startDate, string endDate, int orderRoom, int adult)
+        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId, string startDate, string endDate, int orderRoom, int adult,int child)
         {
             if (hotelId == null) hotelId = "hotel04";
 
-            var result = _repository.GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult);
+            var result = _repository.GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult,child);
             foreach (var item in result)
             {
                 foreach (var bed in item.RoomBed)
