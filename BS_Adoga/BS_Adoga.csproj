@@ -299,6 +299,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\Account\MemberBookingViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOut\CheckOutListViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOut\OrderVM.cs" />
     <Compile Include="Models\DBContext\AdogaContext.cs" />
@@ -517,7 +518,6 @@
     <Folder Include="Asset\images\HotelLogin\" />
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
-    <Folder Include="Models\ViewModels\Account\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

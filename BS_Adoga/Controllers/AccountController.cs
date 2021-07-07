@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BS_Adoga.Service.Account;
+using BS_Adoga.Service;
 using System.Web.Security;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.MemberLogin;
 using Newtonsoft.Json;
+using BS_Adoga.Repository;
+using BS_Adoga.Models.ViewModels.Account;
 
 namespace BS_Adoga.Controllers
 {
@@ -25,7 +27,12 @@ namespace BS_Adoga.Controllers
         public ActionResult MemberBooking()
         {
             ViewBag.MemberCurrentPage = "booking";
-            return View();
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+            var mar = new MemberAccountRepository();
+
+            return View(mar.GetBookingDESC(user_id));
         }
         public ActionResult MemberProfile()
         {

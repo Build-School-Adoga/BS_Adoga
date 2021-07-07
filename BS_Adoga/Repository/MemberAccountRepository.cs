@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels;
+using BS_Adoga.Models.ViewModels.Account;
+using BS_Adoga.Models.ViewModels.HotelDetail;
 
-namespace BS_Adoga.Repository.Account
+namespace BS_Adoga.Repository
 {
     public class MemberAccountRepository
     {
@@ -23,6 +25,36 @@ namespace BS_Adoga.Repository.Account
                              select c;
 
             return memberData;
+        }
+
+        public IEnumerable<MemberBookingViewModel> GetBookingDESC(string customerID)
+        {
+            var table = (from o in _context.Orders
+                          join r in _context.Rooms on o.RoomID equals r.RoomID
+                          join h in _context.Hotels on r.HotelID equals h.HotelID
+                          where o.CustomerID == customerID
+                          orderby o.OrderID descending
+                          select new MemberBookingViewModel 
+                          {
+                              OrderID = o.OrderID,
+                              HotelName = h.HotelName,
+                              HotelEngName = h.HotelEngName,
+                              RoomBed = ((from rb in _context.RoomBeds
+                                          join bt in _context.BedTypes on rb.TypesOfBedsID equals bt.TypesOfBedsID
+                                          where rb.RoomID == o.RoomID
+                                          select new RoomBedVM
+                                          {
+                                              Name = bt.Name,
+                                              Amount = rb.Amount
+                                          })),
+                              RoomPriceTotal = o.RoomPriceTotal,
+                              OrderDate = o.OrderDate,
+                              CheckInDate = o.CheckInDate,
+                              CheckOutDate = o.CheckOutDate,
+                              Breakfast = r.Breakfast,
+                              City = h.HotelCity
+                          });
+            return table;
         }
     }
 }

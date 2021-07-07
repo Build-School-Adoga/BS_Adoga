@@ -1,9 +1,10 @@
-﻿@{
+﻿@model IEnumerable<BS_Adoga.Models.ViewModels.Account.MemberBookingViewModel>
+@{
     Layout = "~/Views/Account/_LayoutMember.cshtml";
 }
 
 @section topCSS{
-     <link rel="stylesheet" href="~/Asset/CSS/MemberAccount/MemberBookings.css" />
+    <link rel="stylesheet" href="~/Asset/CSS/MemberAccount/MemberBookings.css" />
 }
 
 <div id="booking-page" class="ps-5 pt-4">
@@ -45,13 +46,19 @@
     <div class="search-order-wrap mt-3 mb-5">
         <label for="input_order-id">訂單編號</label>
         <div class="search-order">
-            <input id="input_order-id" placeholder="訂單編號"></input>
+            <input id="input_order-id" placeholder="訂單編號">
             <button id="search" type="button" class="btn btn-secondary">搜尋</button>
             <button id="clear-button" type="button" class="btn btn-light">清除</button>
         </div>
     </div>
-    
-    @Html.Partial("~/Views/Account/_BookingPartial.cshtml")
+
+    @foreach (var item in Model)
+    {
+        @Html.Partial("~/Views/Account/_BookingPartial.cshtml", item);
+        //Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
+    }
+
+    @*@Html.Partial("~/Views/Account/_BookingPartial.cshtml")*@
 
     <div class="no-booking-panel mt-5">
         <img id="no-booking_img" src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
