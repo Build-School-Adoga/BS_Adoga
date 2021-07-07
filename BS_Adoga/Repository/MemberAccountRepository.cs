@@ -5,7 +5,7 @@ using System.Web;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels;
 
-namespace BS_Adoga.Repository
+namespace BS_Adoga.Repository.Account
 {
     public class MemberAccountRepository
     {

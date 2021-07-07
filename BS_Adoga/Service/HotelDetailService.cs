@@ -17,12 +17,13 @@ namespace BS_Adoga.Service
             _repository = new HotelDetailRepository();
         }
 
-        public DetailVM GetDetailVM (string hotelId)
+        public DetailVM GetDetailVM(string hotelId, string startDate, string endDate, int orderRoom, int adult)
         {
             DetailVM hotelDetail = new DetailVM()
             {
                 hotelVM = GetHotelById(hotelId),
-                roomTypeVM = GetRoomTypeByFilter(hotelId)
+                roomTypeVM = GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult),
+                hotelOptionVM = new SearchCardRepository().GetHotelOption()
             };
             return hotelDetail;
         }
@@ -41,7 +42,7 @@ namespace BS_Adoga.Service
                 HotelName = s.HotelName,
                 HotelEngName = s.HotelEngName,
                 HotelCity = s.HotelCity,
-                HotelAddress =  s.HotelAddress,/*s.HotelCity + "," + s.HotelDistrict + "," +*/
+                HotelAddress = s.HotelAddress,/*s.HotelCity + "," + s.HotelDistrict + "," +*/
                 HotelAbout = s.HotelAbout,
                 Longitude = s.Longitude,
                 Latitude = s.Latitude,
@@ -51,12 +52,11 @@ namespace BS_Adoga.Service
             return result;
         }
 
-        //public IQueryable<RoomTypeVM> GetRoomType(string hotelId)
-        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId)
+        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId, string startDate, string endDate, int orderRoom, int adult)
         {
             if (hotelId == null) hotelId = "hotel04";
 
-            var result = _repository.GetRoomTypeByFilter(hotelId);
+            var result = _repository.GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult);
             foreach (var item in result)
             {
                 foreach (var bed in item.RoomBed)
@@ -89,6 +89,7 @@ namespace BS_Adoga.Service
 
             return result;
         }
+
 
         //public RoomCheckOutData GetCheckOutData(string hotelId,string roomId)
         //{

@@ -236,17 +236,17 @@
     </script>
     <!--Google引用內容開始   Google登入使用的引用JS -->
     <!-- 引用jQuery-->
-    @*<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>*@
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <!--從 Web.config檔 抓取Googl App Client ID-->
-    @*<script type="text/javascript">
+    <script type="text/javascript">
            let GoolgeApp_Cient_Id = "@WebConfigurationManager.AppSettings["373077817054-5hahnkio91en8pnqqqpaginugjt0f85v.apps.googleusercontent.com"]";
            let id_token_to_userIDUrl = "@Url.Action("GoogleLoginAPI","MemberLogin")";
-    </script>*@
+    </script>
     <!--引用Google Sign-in必須的.js，callback function(GoogleSigninInit)名稱自訂 -->
-    @*<script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>*@
+    <script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>
 
     <!--以下請放置到*.js檔-->
-    @*<script src="~/Asset/js/GoogleLogin.js"></script>*@
+    <script src="~/Asset/js/GoogleLogin.js"></script>
     <!--Google引用內容結束   Google登入使用的引用JS -->
     <!-- mine -->
     @RenderSection("endJS", false)

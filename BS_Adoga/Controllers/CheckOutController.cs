@@ -47,6 +47,11 @@ namespace BS_Adoga.Controllers
             return View(orderData);
         }
 
+        /// <summary>
+        /// 送出表單資料，新增至資料庫
+        /// </summary>
+        /// <param name="orderVM"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(OrderVM orderVM)
@@ -86,17 +91,23 @@ namespace BS_Adoga.Controllers
                     Logging = "建立" + "," + firstname + lastname + "," + DateTime.Now.ToString(),
                 };
 
-                //EF
-                try
+
+                using (var tran = _context.Database.BeginTransaction())
                 {
-                    _context.Orders.Add(od);
-                    _context.SaveChanges();
-                    TempData["OrderId"] = od.OrderID;
-                    return RedirectToAction("PayAPI");
-                }
-                catch (Exception ex)
-                {
-                    return Content("訂單建立失敗:" + ex.ToString());
+                    //EF
+                    try
+                    {
+                        _context.Orders.Add(od);
+                        _context.SaveChanges();
+                        TempData["OrderId"] = od.OrderID;
+                        tran.Commit();
+                        return RedirectToAction("PayAPI");
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        return Content("訂單建立失敗:" + ex.ToString());
+                    }
                 }
             }
 
@@ -106,6 +117,8 @@ namespace BS_Adoga.Controllers
         public ActionResult PayAPI()
         {
             string orderId = (string)TempData["OrderId"];
+            OrderVM orderData = (OrderVM)TempData.Peek("orderData");
+
             List<string> enErrors = new List<string>();
             string payment = String.Empty;
             try
@@ -120,12 +133,12 @@ namespace BS_Adoga.Controllers
                     oPayment.MerchantID = "2000214";//ECPay提供的特店編號 2000132
 
                     /* 基本參數 */
-                    oPayment.Send.ReturnURL = "https://localhost:44352/CheckOut/PayFeedback";//付款完成通知回傳的網址
+                    oPayment.Send.ReturnURL = "https://localhost:44352/CheckOut/Index";//付款完成通知回傳的網址https://localhost:44352/CheckOut/PayFeedback
                     oPayment.Send.ClientBackURL = "http://adoga.azurewebsites.net/";//瀏覽器端返回的廠商網址
                     oPayment.Send.OrderResultURL = "https://localhost:44352/CheckOut/PayFeedback";//瀏覽器端回傳付款結果網址
                     oPayment.Send.MerchantTradeNo = orderId;//廠商的交易編號
                     oPayment.Send.MerchantTradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");//廠商的交易時間
-                    oPayment.Send.TotalAmount = Decimal.Parse("4042");//交易總金額
+                    oPayment.Send.TotalAmount = orderData.roomCheckOutViewModel.TotalPrice;//交易總金額
                     oPayment.Send.TradeDesc = "交易描述";//交易描述
                     oPayment.Send.ChoosePayment = PaymentMethod.Credit;//使用的付款方式
                     oPayment.Send.Remark = "WWWWW";//備註欄位
@@ -144,8 +157,8 @@ namespace BS_Adoga.Controllers
                     //訂單的商品資料
                     oPayment.Send.Items.Add(new Item()
                     {
-                        Name = "寒舍艾麗酒店",//商品名稱
-                        Price = Decimal.Parse("4,042"),//商品單價
+                        Name = orderData.roomCheckOutViewModel.HotelFullName,//商品名稱
+                        Price = orderData.roomCheckOutViewModel.TotalPrice,//商品單價
                         Currency = "新台幣",//幣別單位
                         Quantity = Int32.Parse("1"),//購買數量
                         URL = "http://google.com",//商品的說明網址
@@ -272,7 +285,7 @@ namespace BS_Adoga.Controllers
             }
             finally
             {
-                
+
                 // 回覆成功訊息。
                 if (enErrors.Count() == 0)
                 {
@@ -282,8 +295,16 @@ namespace BS_Adoga.Controllers
                     _context.Entry(payStatus).State = EntityState.Modified;
                     _context.SaveChanges();
                     this.Response.Clear();
-                    this.Response.Write("1|OK");
-                }                   
+
+                    //List<string> list = htFeedback.Keys.Cast<string>().ToList();
+                    //List<string> list2 = htFeedback.Values.Cast<string>().ToList();
+
+                    foreach (string s in htFeedback.Keys)
+                    {
+                        this.Response.Write(s + " = " + htFeedback[s] + "</br>");
+                    }
+                    //this.Response.Write("OK");
+                }
                 // 回覆錯誤訊息。
                 else
                     this.Response.Write(String.Format("0|{0}", String.Join("\\r\\n", enErrors)));
