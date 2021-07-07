@@ -6,6 +6,7 @@
 }
 
 @section topCSS{
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.css" />
     <link href="~/Asset/CSS/Search.css" rel="stylesheet" />
     <link href="~/Asset/CSS/SearchFilterPartial.css" rel="stylesheet" />
 }
@@ -89,73 +90,12 @@
             }
         });
     </script>
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
 
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-    <script>
-        moment().format();
-        $('#demo').daterangepicker({
-            "autoApply": true,
-            "locale": {
-                "format": "MM/DD/YYYY",
-                "separator": " - ",
-                "applyLabel": "確認",
-                "cancelLabel": "取消",
-                "fromLabel": "從",
-                "toLabel": "到",
-                "customRangeLabel": "Custom Range",
-                "weekLabel": "W",
-                "daysOfWeek": [
-                    "日", "一", "二", "三", "四", "五", "六"
-                ],
-                "monthNames": [
-                    "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
-                ],
-                "firstDay": 1
-            },
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
 
-
-            "startDate": moment(),
-            "endDate": moment().add('days', 1)
-        }).on('change', function () {
-            var date_range = $('#demo').val();
-            var dates = date_range.split(" - ");
-
-            var start1 = moment(dates[0]).format('YYYY年MM月DD日');
-            var end1 = moment(dates[1]).format('YYYY年MM月DD日');
-            $('#range_start').val(start1);
-            $('#range_end').val(end1);
-            moment.locale('zh-tw');
-            var start1 = moment(dates[0]).format('dddd');
-
-            $('#week_start').val(start1);
-
-            var end1 = moment(dates[1]).format('dddd');
-
-            $('#week_end').val(end1);
-            $('#person-info').trigger("click");
-        });
-
-        var date_range = $('#demo').val();
-        var dates = date_range.split(" - ");
-
-        var start = moment(dates[0]).format('YYYY年MM月DD日');
-        var end = moment(dates[1]).format('YYYY年MM月DD日');
-        $('#range_start').val(start);
-        $('#range_end').val(end);
-        moment.locale('zh-tw');
-        var start = moment(dates[0]).format('dddd');
-
-        $('#week_start').val(start);
-        var end = moment(dates[1]).format('dddd');
-
-        $('#week_end').val(end);
-        var start = moment(dates[0], 'YYYY MM DD');
-        var end = moment(dates[1], 'YYYY MM DD');
-
-        $(".asd").click(function () {
-            $('#demo').trigger("click");
-        });
-    </script>
 
     <script src="~/Asset/js/Search.js"></script>
     <script src="~/Asset/js/_SearchFilterPartial.js"></script>
@@ -207,32 +147,32 @@
                     </div>*@
 
                 <div id="datetime">
-                    <div class="timebox d-flex justify-content-center  align-items-center">
-                        <div class="col-6 d-flex">
-                            <i class="far fa-calendar fa-2x" style="margin:0 20px 0 20px;width:30.6px;height:44px"></i>
+                    <div class="timebox">
+                        <div class="d-flex">
+                            <i class="far fa-calendar fa-2x"></i>
                             <div>
-                                <input type="text" id="range_start" name="start" value="" style=" width: 150px; border-style: none; " />
-
-                                <input type="text" id="week_start" value="" style="      width: 150px;
-                                       border-style: none;color: gray; " />
+                                <input type="text" id="range_start" name="start" value="" />
+                                <input type="text" id="week_start" value="" />
                             </div>
-
                         </div>
 
                         <div class="line">
 
                         </div>
-                        <div class="col-6 d-flex">
-                            <i class="fas fa-calendar fa-2x" style="margin:0 20px 0 0px;width:30.6px;height:44px"></i>
+                        <div class="d-flex">
+                            <i class="fas fa-calendar fa-2x"></i>
                             <div>
-                                <input type="text" id="range_end" name="end" value="" style="  width: 150px; border-style: none;" />
-                                <input type="text" id="week_end" value="" style=" width: 150px; border-style: none;    color: grey;" />
+                                <input type="text" id="range_end" name="end" value="" />
+                                <input type="text" id="week_end" value="" />
                             </div>
                         </div>
                     </div>
-                    <input type="text" class="calendar-minus 	calendar-plus from-control" id="demo" style="width: 514px; border: 1px solid #ced4da;" name="date_range" />
+
+                    @* 真正選擇日期的input *@
+                    <input type="text" class="calendar-minus calendar-plus from-control" id="demo" name="date_range" />
 
                 </div>
+
             </div>
 
             <div class="nav-item">
@@ -286,7 +226,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary btn-search">搜出好價</button>
+            <button type="button" class="btn btn-primary btn-search" id="btn-searchAll">搜出好價</button>
         </div>
     </nav>
 }

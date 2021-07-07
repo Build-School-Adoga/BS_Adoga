@@ -1,4 +1,6 @@
-﻿var person_info = document.getElementById("person-info");
+﻿//const { search } = require("modernizr");
+
+var person_info = document.getElementById("person-info");
 var choosing_box = document.getElementById("choosing-box");
 var count_person = document.getElementById("count-person");
 var travel = document.querySelectorAll('.travel');
@@ -90,3 +92,85 @@ function close_filter() {
     kid_num.style.visibility = "hidden";
 
 }
+
+//日曆
+moment().format();//中文化
+
+$('#demo').daterangepicker({
+    "autoApply": true,
+    "locale": {
+        "format": "MM/DD/YYYY",
+        "separator": " - ",
+        "applyLabel": "確認",
+        "cancelLabel": "取消",
+        "fromLabel": "從",
+        "toLabel": "到",
+        "customRangeLabel": "Custom Range",
+        "weekLabel": "W",
+        "daysOfWeek": [
+            "日", "一", "二", "三", "四", "五", "六"
+        ],
+        "monthNames": [
+            "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"
+        ],
+        "firstDay": 1
+    },
+    "startDate": moment(),
+    "endDate": moment().add('days', 1)
+}).on('change', function () {
+    var date_range = $('#demo').val();
+    var dates = date_range.split(" - ");
+
+    var start1 = moment(dates[0]).format('YYYY年MM月DD日');
+    var end1 = moment(dates[1]).format('YYYY年MM月DD日');
+    $('#range_start').val(start1);
+    $('#range_end').val(end1);
+    moment.locale('zh-tw');
+    var start1 = moment(dates[0]).format('dddd');
+
+    $('#week_start').val(start1);
+
+    var end1 = moment(dates[1]).format('dddd');
+
+    $('#week_end').val(end1);
+    $('#person-info').trigger("click");
+});
+
+var date_range = $('#demo').val();
+var dates = date_range.split(" - ");
+
+var start = moment(dates[0]).format('YYYY年MM月DD日');
+var end = moment(dates[1]).format('YYYY年MM月DD日');
+$('#range_start').val(start);
+$('#range_end').val(end);
+moment.locale('zh-tw');
+var start = moment(dates[0]).format('dddd');
+
+$('#week_start').val(start);
+var end = moment(dates[1]).format('dddd');
+
+$('#week_end').val(end);
+var start = moment(dates[0], 'YYYY MM DD');
+var end = moment(dates[1], 'YYYY MM DD');
+
+        //$(".asd").click(function () {
+        //    $('#demo').trigger("click");
+        //});
+
+//$('#demo').click(function () {
+//    //$('.bg').css({ 'display': 'block' });
+//    $('#datetime').css({ 'display': 'block' });
+//});
+
+//var demo = document.getElementById('demo');
+//var datetime = document.getElementById('datetime');
+////demo.addEventListener('click', function () {
+////    datetime.style.display = "block";
+////})
+
+
+//按鈕傳參數
+//var btn_search = document.getElementById("btn-searchAll");
+//btn_search.addEventListener('click', function () {
+//    alert("Lets search");
+//})
