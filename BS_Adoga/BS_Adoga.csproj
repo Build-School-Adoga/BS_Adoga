@@ -358,6 +358,7 @@
     <Compile Include="Service\MultiButtonAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
     <Content Include="Asset\CSS\HotelLogin.css" />
@@ -505,6 +506,8 @@
     <Content Include="Views\CheckOut\PayAPI.cshtml" />
     <Content Include="Views\Home\Searchtwo.cshtml" />
     <Content Include="Views\Search\_optionCity.cshtml" />
+    <Content Include="Views\Account\BookingDetail.cshtml" />
+    <Content Include="Views\Account\_BookingPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIController\" />
