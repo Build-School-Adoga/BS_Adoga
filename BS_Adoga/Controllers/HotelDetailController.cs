@@ -23,7 +23,7 @@ namespace BS_Adoga.Controllers
         }
 
         // GET: HotelDetail
-        public ActionResult Detail(string hotelId, string startDate, string endDate, int orderRoom, int adult,int child)
+        public ActionResult Detail(string hotelId="hotel04", string startDate="2021-06-20", string endDate="2021-06-22", int orderRoom=2, int adult=1,int child=0)
         {
             DetailVM hotelDetail;
 
@@ -41,6 +41,7 @@ namespace BS_Adoga.Controllers
         public ActionResult SetCheckOutData(string hotelId,string roomId, string roomName,bool breakfast, string bedType , int adult,int child,
                                             int roomOrder ,decimal roomPrice,decimal roomDiscount , decimal roomNowPrice)
         {
+
             var hotel = _service.GetHotelById(hotelId);
             OrderVM orderData = new OrderVM(){
                 roomCheckOutViewModel = new RoomCheckOutData
@@ -52,8 +53,8 @@ namespace BS_Adoga.Controllers
                     RoomName = roomName,
                     Breakfast = breakfast,
                     BedType = bedType,
-                    Adult = 12,
-                    Child = 2,
+                    Adult = adult,
+                    Child = child,
                     CountNight = 2,
                     RoomOrder = roomOrder,
                     RoomPrice = roomPrice,

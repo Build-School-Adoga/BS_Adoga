@@ -327,6 +327,7 @@
     <Compile Include="Models\ViewModels\homeViewModels\MyRoom.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\MyRoomsDetails.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
+    <Compile Include="Models\ViewModels\HotelDetail\SearchByMemberVM.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\LineLoginToken.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\LineUserProfile.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\UserCookieViewModel.cs" />

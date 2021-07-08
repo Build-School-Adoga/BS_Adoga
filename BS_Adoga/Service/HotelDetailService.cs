@@ -47,45 +47,52 @@ namespace BS_Adoga.Service
                 Longitude = s.Longitude,
                 Latitude = s.Latitude,
                 Star = s.Star
-            }).FirstOrDefault();
+            }).First();
 
             return result;
         }
         
         public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId, string startDate, string endDate, int orderRoom, int adult,int child)
         {
+            //設定好傳給repository的引數。
             if (hotelId == null) hotelId = "hotel04";
+            DateTime startDate_p = DateTime.Parse(startDate);
+            DateTime endDate_p = DateTime.Parse(endDate);
+            int countNight = new TimeSpan(endDate_p.Ticks - startDate_p.Ticks).Days;//2;
+            //int orderRoom = 2;
+            int totalPerson = adult + child;//12
 
-            var result = _repository.GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult,child);
-            foreach (var item in result)
+            var result = _repository.GetRoomTypeByFilter(hotelId, startDate_p, endDate_p, countNight, orderRoom, adult,child,totalPerson).ToList();
+
+            result.ForEach((x) =>
             {
-                foreach (var bed in item.RoomBed)
+                foreach(var bed in x.RoomBed)
                 {
                     switch (bed.Name)
                     {
                         case "雙人床":
                         case "加大雙人床":
                         case "單人床(兩床)":
-                            item.Adult = item.Adult + (2 * bed.Amount);
-                            item.Child = item.Child + (1 * bed.Amount);
+                            //result.Where((x,index)=>index==count).
+                            x.Adult = x.Adult + (2 * bed.Amount);
+                            x.Child = x.Child + (1 * bed.Amount);
                             break;
 
                         case "特大雙人床":
-                            item.Adult = item.Adult + (2 * bed.Amount);
-                            item.Child = item.Child + (2 * bed.Amount);
+                            x.Adult = x.Adult + (2 * bed.Amount);
+                            x.Child = x.Child + (2 * bed.Amount);
                             break;
 
                         case "上下舖":
-                            item.Adult = item.Adult + (2 * bed.Amount);
-                            item.Child = item.Child + 0;
+                            x.Adult = x.Adult + (2 * bed.Amount);
+                            x.Child = x.Child + 0;
                             break;
 
                         default:
                             break;
                     }
-                }
-            }
-
+                }                
+            });
 
             return result;
         }

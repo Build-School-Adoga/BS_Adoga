@@ -25,7 +25,7 @@ namespace BS_Adoga.APIController.HotelDetail
         [AcceptVerbs("GET", "POST")]
         public IHttpActionResult Index()
         {
-           var a =  _service.GetRoomTypeByFilter("hotel04","2021-06-20","2021-06-22",2,6,2);
+           var a =  _service.GetRoomTypeByFilter("hotel04","2021-06-20","2021-06-22",1,2,0);
            return Json(a);
             //return Ok(JsonConvert.SerializeObject(a));
         }
