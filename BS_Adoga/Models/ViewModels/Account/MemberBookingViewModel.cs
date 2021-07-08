@@ -9,6 +9,7 @@ namespace BS_Adoga.Models.ViewModels.Account
     public class MemberBookingViewModel
     {
         public string OrderID { get; set; }
+        public string HotelID { get; set; }
         public string HotelName { get; set; }
         public string HotelEngName { get; set; }
         public IQueryable<RoomBedVM> RoomBed { get; set; }

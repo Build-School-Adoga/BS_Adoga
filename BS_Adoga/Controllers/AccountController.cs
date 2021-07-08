@@ -17,10 +17,12 @@ namespace BS_Adoga.Controllers
     public class AccountController : Controller
     {
         private MemberAccountService _service;
+        private MemberAccountRepository _memberacoountrepository;
 
         public AccountController()
         {
             _service = new MemberAccountService();
+            _memberacoountrepository = new MemberAccountRepository();
         }
 
         // GET: Account
@@ -30,9 +32,8 @@ namespace BS_Adoga.Controllers
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
-            var mar = new MemberAccountRepository();
 
-            return View(mar.GetBookingDESC(user_id));
+            return View(_memberacoountrepository.GetBookingDESC(user_id));
         }
         public ActionResult MemberProfile()
         {
@@ -60,9 +61,12 @@ namespace BS_Adoga.Controllers
             //return View();
         }
 
-        public ActionResult BookingDetail(string id)
+        public ActionResult BookingDetail(string orderid)
         {
-            return View();
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+            return View(_memberacoountrepository.GetBookingDetail(orderid,user_id));
         }
     }
 }

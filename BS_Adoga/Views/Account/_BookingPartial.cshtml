@@ -13,6 +13,7 @@
 
     //幾天前訂的房間
     var FewDaysAgo  = new TimeSpan(DateTime.Now.Ticks - Model.OrderDate.Ticks).Days;
+
 }
 <div class="booking-item">
     <div class="side-info">
@@ -71,7 +72,8 @@
                     <a href="">索取電子收據</a>
                     <a href="">訂別間</a>
                 </div>
-                <a href="/Account/BookingDetail" type="button" class="detail-btn">查看更多細節</a>
+                @Html.ActionLink("查看更多細節", "BookingDetail", new { orderID = Model.OrderID })
+                @*<a href="/Account/BookingDetail" type="button" class="detail-btn">查看更多細節</a>*@
             </div>
         </div>
     </div>
