@@ -10,6 +10,7 @@ using BS_Adoga.Models.ViewModels.homeViewModels;
 using BS_Adoga.Service;
 using Microsoft.Ajax.Utilities;
 using System.Security.Cryptography;
+using System.Web.WebPages;
 
 namespace BS_Adoga.Controllers
 {
@@ -45,16 +46,24 @@ namespace BS_Adoga.Controllers
         [HttpGet]
         public ActionResult HomePage()
         {
-            var images = _homeService.ALLImages();
+            var images = _homeService.ALLImages2();
 
+            return View(images);
+
+        }
+        [HttpPost]
+        public ActionResult HomePage(string cardlocal)
+        {
+            var images = _homeService.ALLImages(cardlocal);
+
+            ViewBag.Error = "這是錯誤訊息";
             return View(images);
 
         }
 
 
-
         [HttpPost]
-        public ActionResult Search(string search, string date_range, string people, string room)
+        public ActionResult Search(string search, string date_range, string people, string room, string data, string cardlocal)
         {
             var date = date_range.Split('-');
             var start = date[0];
@@ -63,6 +72,8 @@ namespace BS_Adoga.Controllers
             var ple = peo[0];
             var rmo = room.Split('間');
             var rom = rmo[0];
+
+
 
             if (search.Length == 3)
             {
@@ -73,7 +84,7 @@ namespace BS_Adoga.Controllers
                 TempData["end"] = end;
                 TempData["ple"] = ple;
                 TempData["rom"] = rom;
-
+                TempData["data"] = data;
                 return RedirectToAction("Search", "Search", search);
             }
             else
@@ -81,11 +92,13 @@ namespace BS_Adoga.Controllers
                 var xxx = from p in _homeService._homeRepository._context.Hotels
                           where p.HotelName == search
                           select p.HotelID;
+
+
                 TempData["start"] = start;
                 TempData["end"] = end;
                 TempData["ple"] = ple;
                 TempData["rom"] = rom;
-
+                TempData["data"] = data;
                 TempData["search"] = xxx.FirstOrDefault();
 
                 return RedirectToAction("Detail", "HotelDetail", new
@@ -98,10 +111,17 @@ namespace BS_Adoga.Controllers
                 });
             }
 
-
+            var card = _homeService.ALLImages(cardlocal);
+            return View(card);
         }
 
+        [HttpPost]
+        public ActionResult Searchtwo(string cardlocal)
+        {
 
+            var card = _homeService.ALLImages(cardlocal);
+            return View(card);
+        }
     }
 
 }

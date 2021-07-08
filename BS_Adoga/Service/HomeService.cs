@@ -10,7 +10,7 @@ namespace BS_Adoga.Service
     public class HomeService
     {
         public HomeRepository _homeRepository;
-        public HomeService() 
+        public HomeService()
         {
             _homeRepository = new HomeRepository();
         }
@@ -19,16 +19,28 @@ namespace BS_Adoga.Service
         //    var result = _homeRepository.Getcards();
         //    return result;
         //}
-        public demoshopViewModels  ALLImages()
+        public demoshopViewModels ALLImages(string cardlocal)
         {
-           var productss = new demoshopViewModels() {
+
+            var productss = new demoshopViewModels()
+            {
                 My_MyHotels = _homeRepository.GetHotelModels(),
-              My_CardViewModels  = _homeRepository.GetCardModels()
-                  };
+                My_CardViewModels = _homeRepository.GetCardModels(cardlocal)
+            };
 
             return productss;
         }
+        public demoshopViewModels ALLImages2()
+        {
 
+            var productss = new demoshopViewModels()
+            {
+                My_MyHotels = _homeRepository.GetHotelModels(),
+                My_CardViewModels = _homeRepository.GetCardModels2()
+            };
+
+            return productss;
+        }
 
     }
 }

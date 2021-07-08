@@ -38,10 +38,9 @@ namespace BS_Adoga.Controllers
             return View(hotelDetail);
         }
 
-        public ActionResult SetCheckOutData(string hotelId,string roomId, string roomName,bool breakfast, string bedType , int adult,int child,
-                                            int roomOrder ,decimal roomPrice,decimal roomDiscount , decimal roomNowPrice)
+        public ActionResult SetCheckOutData(string hotelId, string roomId, string roomName, bool breakfast, string bedType, int adult, int child,
+                                            int roomOrder, decimal roomPrice, decimal roomDiscount, decimal roomNowPrice)
         {
-
             var hotel = _service.GetHotelById(hotelId);
             OrderVM orderData = new OrderVM(){
                 roomCheckOutViewModel = new RoomCheckOutData

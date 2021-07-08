@@ -11,18 +11,17 @@
                         <p id="place-left">794間住宿還有空房</p>
                     </div>*@
 
-                <el-select style="color: #666;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
-                           name="search">
-                    <el-option-group v-for="group in options2"
-                                     :key="group.label"
-                                     :label="group.label">
-                        <el-option v-for="item in group.options"
-                                   :key="item.value"
-                                   :label="item.label"
-                                   :value="item.value">
-                            @*<span style="float: left">item.label</span>
-
-                                <span style="float: right; color: #8492a6; font-size: 13px">item.price</span>*@
+                <el-select style="color: #666;" id="inputGroupSelect" v-model="Value" 
+                           placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable name="search">
+                    <el-option-group v-for="item in Options" 
+                                     :key="item.label" 
+                                     :label="item.label">
+                        <el-option v-for="o in Options.option" 
+                                   :key="o.value" 
+                                   :label="o.label" 
+                                   @*:value="o.value"*@>
+                            <span style="float: left">{{item.label}}</span>
+                            <span style="float: right; color: #8492a6; font-size: 13px">{{item.price}}</span>
                         </el-option>
                     </el-option-group>
                 </el-select>
@@ -94,9 +93,6 @@
                             <p><span>{{kids}}</span>位兒童</p>
                             <i class="fas fa-plus" v-on:click="plus('kids')"></i>
                         </div>
-                        <button id="done-counting">
-                            完成
-                        </button>
                     </div>
                 </div>
             </div>
@@ -106,43 +102,41 @@
 }
 
 <!-- VueJS -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
 <script>
-    var filter = new Vue({
+    var filternav = new Vue({
         el: '#nav',
         data: {
             room: 1,
             adult: 1,
             kids: 0,
-            options: [
-                     {
-                         label: '熱門城市',
-                         options: [
+            Value: '',
+            Options: [
+                {
+                    label: '熱門城市',
+                    option: [
 
-                              @foreach (var item in Model)
-                             {
-                                  Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
-                              },
-                         ]
-                     },
-                     {
-                         label: '飯店名稱',
-                         options: [
-
-
-                              @foreach (var item in Model)
-                             {
-                                  Html.RenderPartial("~/Views/Search/_optionHotel.cshtml", item);
-                              },
-                         ]
-                     }
-                 ],
-                 options2: [],
-                 value: ''
+                        @foreach (var item in Model)
+                        {
+                             Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
+                        },
+                    ]
+                },
+                {
+                    label: '飯店名稱',
+                    option: [
+                        @foreach (var item in Model)
+                        {
+                            Html.RenderPartial("~/Views/Search/_optionHotel.cshtml", item);
+                        },
+                    ]
+                }
+            ]
         },
         methods: {
             minus: function (e) {
@@ -151,19 +145,16 @@
                         if (this.room > 1) {
                             this.room -= 1;
                         }
-                        else { alert("數量不可為0！"); }
                         break;
                     case "adult":
                         if (this.adult > 1) {
                             this.adult -= 1
                         }
-                        else { alert("數量不可為0！"); }
                         break;
-                    default://小孩
+                    default:
                         if (this.kids > 0) {
                             this.kids -= 1
                         }
-                        else { alert("數量不可少於0！"); }
                         break;
                 }
             },
@@ -173,24 +164,68 @@
                         if (this.room < 9) {
                             this.room += 1;
                         }
-                        else { alert("數量最多為9！"); }
                         break;
                     case "adult":
                         debugger;
                         if (this.adult < 9) {
                             this.adult += 1
                         }
-                        else { alert("數量最多為9！"); }
                         break;
-                    default://小孩
+                    default:
                         if (this.kids < 9) {
                             this.kids += 1
                         }
-                        else { alert("數量最多為9！"); }
                         break;
                 }
             }
+        },
+        created: function () {
+            @*this.Options = [
+                {
+                    label: '熱門城市',
+                    option: [
+
+                        @foreach (var item in Model)
+                        {
+                             Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
+                        },
+                    ]
+                },
+                {
+                    label: '飯店名稱',
+                    option: [
+                        @foreach (var item in Model)
+                        {
+                            Html.RenderPartial("~/Views/Search/_optionHotel.cshtml", item);
+                        },
+                    ]
+                }
+            ]*@
+
+        },
+        mounted: function () {
+            @*this.Options = [
+                {
+                    label: '熱門城市',
+                    option: [
+
+                        @foreach (var item in Model)
+                        {
+                             Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
+                        },
+                    ]
+                },
+                {
+                    label: '飯店名稱',
+                    option: [
+                        @foreach (var item in Model)
+                        {
+                            Html.RenderPartial("~/Views/Search/_optionHotel.cshtml", item);
+                        },
+                    ]
+                }
+            ]*@
         }
-    })
+    });
 </script>
 

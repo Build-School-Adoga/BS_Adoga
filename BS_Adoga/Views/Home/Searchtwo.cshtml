@@ -25,15 +25,8 @@
         <input type="submit" name="cardlocal" value="" id="btn1" style="display: none;" />
 
     }*@
-@using (Html.BeginForm("HomePage", "Home"))
-{
 
-    <input type="text" name="cardlocal" v-model="projectForm.collectionName" value="" id="btn1" style="display: none;" />
-
-}
-<input type="text" name="cba"  value="" id="btn2" style="display: none;" />
 <div class="bg"></div>
-
 @using (Html.BeginForm("Search", "Home"))
 {
 
@@ -314,18 +307,21 @@
             @foreach (var man in Model.My_CardViewModels)
             {
 
-                @Html.Partial("_SimpleCardPartial", man);
+            @Html.Partial("_SimpleCardPartial", man);
+
 
 
             }
 
 
 
-
-
         </div>
     </div>
 </div>
+
+
+
+
 
 <div id="carouselExampleControls2" class="carousel slide" data-interval="false"
      style="margin-top: 100px; margin-bottom: 100px;">
@@ -961,29 +957,21 @@
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 
     <script>
-        
         document.getElementById("search").addEventListener('click', function () {
-            debugger;
             hand(document.getElementsByName("search")[0].value);
         });
-        debugger;
         getSavedValue(document.getElementsByName("search")[0].value);
-        debugger;
 
         function hand(e) {
             var name = "key";
             var val = e;
             console.log(val);
-            debugger;
             localStorage.setItem(name, val);
         }
         function getSavedValue(v) {
-            debugger;
             if (!localStorage.getItem(v)) {
-                debugger;
                 return "";
             }
-            debugger;
             return localStorage.getItem(v);
 
         }
@@ -1186,41 +1174,7 @@
 
     </script>
 
-    <script>
 
-        window.onload = function () {
-          
-            document.getElementsByName("cardlocal")[0].value = localStorage.getItem("key");
-            if (document.getElementsByName("cardlocal")[0].value != sessionStorage.getItem("online")) {
-                hand2(document.getElementsByName("cardlocal")[0].value);
-                getSavedValue2(document.getElementsByName("cardlocal")[0].value);
-
-                function hand2(e) {
-                    var name = "online";
-                    var val = e;
-                    console.log(val);
-                    sessionStorage.setItem(name, val);
-                }
-                function getSavedValue2(v) {
-                    if (!sessionStorage.getItem(v)) {
-                        return "";
-                    }
-                    return sessionStorage.getItem(v);
-
-                }
-
-                var button = document.getElementsByName("cardlocal")[0];
-                button.form.submit();
-            }
-
-              
-            
-
-        }
-
-
-
-    </script>
 
 }
 

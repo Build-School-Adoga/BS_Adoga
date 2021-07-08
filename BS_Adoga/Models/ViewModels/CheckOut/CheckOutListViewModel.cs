@@ -39,6 +39,7 @@ namespace BS_Adoga.Models.ViewModels.CheckOut
         public string ConfirmEmail { get; set; }
 
         [Display(Name = "手機號碼")]
+        [RegularExpression(@"^\d{4}\-?\d{3}\-?\d{3}$", ErrorMessage = "需為09xx-xxx-xxx格式")]
         public string PhoneNumber { get; set; }
 
         public string countries { get; set; }
