@@ -19,23 +19,35 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
     <script>
+        //var td = ViewData["con"];
+
+        function dedup(arr) {
+            var hashTable = {};
+            return arr.filter(function (el) {
+                var key = JSON.stringify(el);
+                var match = Boolean(hashTable[key]);
+                return (match ? false : hashTable[key] = true);
+            });
+        }
+        var deduped = dedup([
+            @foreach (var item in Model.HotelOptionVM)
+            {
+                 @Html.Partial("~/Views/Search/_optionCity.cshtml", item);
+            }
+        ]);
+
         //搜尋地區、人數
         var filternav = new Vue({
             el: '#nav',
             data: {
-                room: 1,
-                adult: 1,
+                room: @ViewData["room"],
+                adult: @ViewData["people"],
                 kids: 0,
-                Value: '',
+                Value: '@ViewData["con"]',
                 Options: [
                     {
                         label: '熱門城市',
-                        option: [
-                            @foreach (var item in Model.HotelOptionVM)
-                            {
-                                 @Html.Partial("~/Views/Search/_optionCity.cshtml", item);
-                            }
-                        ]
+                        option: deduped
                     },
                     {
                         label: '飯店名稱',
@@ -47,6 +59,18 @@
                         ]
                     }
                 ]
+            },
+            computed: {
+                //Value() {
+                //    let vd = ViewData["con"];
+                //    debugger;
+                //    if (vd!=null) {
+                //        return vd;
+                //    }
+                //    else {
+                //        return "";
+                //    }
+                //}
             },
             methods: {
                 minus: function (e) {
@@ -102,8 +126,8 @@
 }
 
 
-@using (Html.BeginForm("Search", "Search"))
-{
+@*@using (Html.BeginForm("GetTempData", "Search"))
+{*@
     <nav id="nav" class="search-filter-nav">
         <div class="search-bar">
             <div class="nav-item" id="choose-city">
@@ -226,10 +250,10 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary btn-search" id="btn-searchAll">搜出好價</button>
+            <button id="btn-searchAll" type="submit" name="SaveButton" value="Save" class="btn btn-primary btn-search">搜出好價</button>
         </div>
     </nav>
-}
+@*}*@
 
 
 <div id="filter">

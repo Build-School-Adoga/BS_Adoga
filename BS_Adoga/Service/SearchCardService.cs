@@ -20,11 +20,11 @@ namespace BS_Adoga.Service
             return result;
         }
 
-        public SearchCardViewModel GetSearchViewModelData(string Name)
+        public SearchCardViewModel GetSearchViewModelData(string CityOrName/*, string startDate, string endDate, int nRoom, int nAdult, int nKid*/)
         {
             var data = new SearchCardViewModel
             {
-                HotelSearchVM = _r.GetHotelAfterSearchByCityOrName(Name),
+                HotelSearchVM = _r.GetHotelAfterSearchByCityOrName(CityOrName/*, startDate,endDate,nRoom,nAdult,nKid*/),
                 HotelOptionVM = _r.GetHotelOption()
             };
             return data;

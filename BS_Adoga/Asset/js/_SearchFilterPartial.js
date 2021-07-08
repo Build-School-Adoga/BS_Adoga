@@ -143,6 +143,7 @@ var start = moment(dates[0]).format('YYYY年MM月DD日');
 var end = moment(dates[1]).format('YYYY年MM月DD日');
 $('#range_start').val(start);
 $('#range_end').val(end);
+
 moment.locale('zh-tw');
 var start = moment(dates[0]).format('dddd');
 
@@ -174,3 +175,25 @@ var end = moment(dates[1], 'YYYY MM DD');
 //btn_search.addEventListener('click', function () {
 //    alert("Lets search");
 //})
+
+document.getElementById("btn-searchAll").addEventListener('click', function () {
+    debugger;
+    hand(document.getElementsByName("search")[0].value);
+});
+getSavedValue(document.getElementsByName("search")[0].value);
+
+function hand(e) {
+    var name = "key";
+    var val = e;
+    console.log(val);
+    localStorage.setItem(name, val);
+    debugger;
+}
+function getSavedValue(v) {
+    if (!localStorage.getItem(v)) {
+        debugger;
+        return "";
+    }
+    debugger;
+    return localStorage.getItem(v);
+}
