@@ -963,27 +963,27 @@
     <script>
         
         document.getElementById("search").addEventListener('click', function () {
-            debugger;
             hand(document.getElementsByName("search")[0].value);
+            //debugger;
         });
-        debugger;
+        //debugger;
         getSavedValue(document.getElementsByName("search")[0].value);
-        debugger;
+        //debugger;
 
         function hand(e) {
             var name = "key";
             var val = e;
             console.log(val);
-            debugger;
+            //debugger;
             localStorage.setItem(name, val);
         }
         function getSavedValue(v) {
-            debugger;
+            //debugger;
             if (!localStorage.getItem(v)) {
-                debugger;
+                //debugger;
                 return "";
             }
-            debugger;
+            //debugger;
             return localStorage.getItem(v);
 
         }

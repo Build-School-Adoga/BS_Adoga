@@ -41,9 +41,11 @@
             el: '#nav',
             data: {
                 room: @ViewData["room"],
-                adult: @ViewData["people"],
-                kids: 0,
-                Value: '@ViewData["con"]',
+                adult: @ViewData["adult"],
+                kids: @ViewData["kid"],
+                Value: '@ViewData["CityOrName"]',
+                startDate: '@ViewData["sDate"]',
+                endDate:'@ViewData["end"]',
                 Options: [
                     {
                         label: '熱門城市',
@@ -105,10 +107,10 @@
                             }
                             break;
                         default:
-                            if (this.kids < 9) {
+                          if (this.kids < 9) {
                                 this.kids += 1
-                            }
-                            break;
+                          }
+                          break;
                     }
                 }
             }
@@ -126,8 +128,8 @@
 }
 
 
-@*@using (Html.BeginForm("GetTempData", "Search"))
-{*@
+@using (Html.BeginForm("GetTempData", "Search"))
+{
     <nav id="nav" class="search-filter-nav">
         <div class="search-bar">
             <div class="nav-item" id="choose-city">
@@ -253,7 +255,7 @@
             <button id="btn-searchAll" type="submit" name="SaveButton" value="Save" class="btn btn-primary btn-search">搜出好價</button>
         </div>
     </nav>
-@*}*@
+}
 
 
 <div id="filter">

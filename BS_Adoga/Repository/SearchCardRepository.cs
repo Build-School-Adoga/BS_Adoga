@@ -115,14 +115,14 @@ namespace BS_Adoga.Repository
             return hotel;
         }
 
-        public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(string CityOrName/*, string startDate,string endDate,int nRoom, int nAdult, int nKid*/)
+        public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(SearchDataViewModel info/*string CityOrName, string startDate,string endDate,int nRoom, int nAdult, int nKid*/)
         {
             //int people = nAdult + nKid;
 
             var data = from H in _context.Hotels
                        join R in _context.Rooms on H.HotelID equals R.HotelID
                        join D in _context.RoomsDetails on R.RoomID equals D.RoomID
-                       where (H.HotelCity.Contains(CityOrName) || H.HotelName.Contains(CityOrName)) //&&
+                       where (H.HotelCity.Contains(info.HotelNameOrCity) || H.HotelName.Contains(info.HotelNameOrCity)) //&&
                        //         D.OpenRoom==true && (D.RoomCount-D.RoomOrder) >= nRoom 
                        //         && (D.RoomCount - D.RoomOrder)*R.NumberOfPeople >= people
                        select new HotelSearchViewModel
