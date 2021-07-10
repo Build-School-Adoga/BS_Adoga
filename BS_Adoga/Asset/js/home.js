@@ -105,7 +105,8 @@ function close_filter() {
 
 /*遮罩*/
 $(function () {
-    $('#inputGroupSelect02').click(function () {
+    var $active_light = $('#inputGroupSelect02');
+    $active_light.click(function () {
         $('.bg').css({ 'display': 'block' });
         $('#inputGroupSelect02').css({ 'display': 'block' });
     });

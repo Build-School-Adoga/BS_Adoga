@@ -55,9 +55,8 @@ namespace BS_Adoga.Controllers
         public ActionResult HomePage(string cardlocal)
         {
             var images = _homeService.ALLImages(cardlocal);
-
             ViewBag.Error = "這是錯誤訊息";
-            return View(images);
+            return PartialView("_SimpleCardPartial", images);
 
         }
 
