@@ -52,21 +52,12 @@ namespace BS_Adoga.Service
             return result;
         }
         
-        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId, string startDate, string endDate, int orderRoom, int adult,int child)
+        //根據床型判斷房間可以有多少個大人和小孩
+        public List<RoomTypeVM> Helper_CountAdultChild(List<RoomTypeVM> data)
         {
-            //設定好傳給repository的引數。
-            if (hotelId == null) hotelId = "hotel04";
-            DateTime startDate_p = DateTime.Parse(startDate);
-            DateTime endDate_p = DateTime.Parse(endDate);
-            int countNight = new TimeSpan(endDate_p.Ticks - startDate_p.Ticks).Days;//2;
-            //int orderRoom = 2;
-            int totalPerson = adult + child;//12
-
-            var result = _repository.GetRoomTypeByFilter(hotelId, startDate_p, endDate_p, countNight, orderRoom, adult,child,totalPerson).ToList();
-
-            result.ForEach((x) =>
+            data.ForEach((x) =>
             {
-                foreach(var bed in x.RoomBed)
+                foreach (var bed in x.RoomBed)
                 {
                     switch (bed.Name)
                     {
@@ -91,8 +82,45 @@ namespace BS_Adoga.Service
                         default:
                             break;
                     }
-                }                
+                }
             });
+
+            return data;
+        }
+        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId, string startDate, string endDate, int orderRoom, int adult,int child)
+        {
+            //設定好傳給repository的引數。
+            if (hotelId == null) hotelId = "hotel04";
+            DateTime startDate_p = DateTime.Parse(startDate);
+            DateTime endDate_p = DateTime.Parse(endDate);
+            int countNight = new TimeSpan(endDate_p.Ticks - startDate_p.Ticks).Days;//2;
+            //int orderRoom = 2;
+            int totalPerson = adult + child;//12
+
+            var result = _repository.GetRoomTypeByFilter(hotelId, startDate_p, endDate_p, countNight, orderRoom, adult,child,totalPerson).ToList();
+
+            result = Helper_CountAdultChild(result);
+
+            return result;
+        }
+
+        public IEnumerable<RoomTypeVM> GetSpecificRoomType(string hotelId, string startDate, string endDate, int orderRoom, int adult, int child,bool breakfast,bool noSmoking,int family)
+        {
+            //設定好傳給repository的引數。
+            if (hotelId == null) hotelId = "hotel04";
+            DateTime startDate_p = DateTime.Parse(startDate);
+            DateTime endDate_p = DateTime.Parse(endDate);
+            int countNight = new TimeSpan(endDate_p.Ticks - startDate_p.Ticks).Days;//2;
+            //int orderRoom = 2;
+            int totalPerson = adult + child;//12
+
+            var allRoom = _repository.GetRoomTypeByFilter(hotelId, startDate_p, endDate_p, countNight, orderRoom, adult, child, totalPerson).ToList();
+
+            allRoom = Helper_CountAdultChild(allRoom);
+
+            var result = from room in allRoom
+                         where room.Breakfast == breakfast && room.NoSmoking == noSmoking && room.Adult + room.Child > family
+                         select room;
 
             return result;
         }

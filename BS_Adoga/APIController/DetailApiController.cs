@@ -14,7 +14,7 @@ namespace BS_Adoga.APIController.HotelDetail
     public class DetailApiController : ApiController
     {
         private HotelDetailService _service;
-        
+
         public DetailApiController()
         {
             _service = new HotelDetailService();
@@ -23,11 +23,25 @@ namespace BS_Adoga.APIController.HotelDetail
         // GET: DetailApi
         //[HttpGet]
         [AcceptVerbs("GET", "POST")]
-        public IHttpActionResult Index()
+        public IHttpActionResult GetAllRoom()
         {
-           var a =  _service.GetRoomTypeByFilter("hotel04","2021-06-20","2021-06-22",1,2,0);
-           return Json(a);
+            var data = _service.GetRoomTypeByFilter("hotel04", "2021-06-20", "2021-06-22", 1, 2, 0);
+
+            return Json(data);
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public IHttpActionResult GetSpecificRoom(bool freeBreakfast=false, bool noSmoking=true, bool family=false)
+        {
+            var ppl = 1;
+            if (family) ppl = 4;
+
+            var data = _service.GetSpecificRoomType("hotel04", "2021-06-20", "2021-06-22", 1, 2, 0, freeBreakfast, noSmoking, ppl);
+
+            return Json(data);
             //return Ok(JsonConvert.SerializeObject(a));
         }
+
+        
     }
 }
