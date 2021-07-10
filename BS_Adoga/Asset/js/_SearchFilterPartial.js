@@ -47,7 +47,7 @@ var r = document.getElementById('room-num').getElementsByTagName('span');
 var a = document.getElementById('adult-num').getElementsByTagName('span');
 var k = document.getElementById('kids-num').getElementsByTagName('span');
 
-showRoom.value = filternav.room + "间房间";
+showRoom.value = filternav.room + "間房間";
 showPerson.value = filternav.adult + "位大人";
 if (parseInt(filternav.kids) > 0) {
     showPerson.value += "," + filternav.kids + "位兒童";
@@ -92,7 +92,7 @@ $(document).click(function (e) {
         }
 
         else {
-            showRoom.value = r[0].innerText + "间房间";
+            showRoom.value = r[0].innerText + "間房間";
             showPerson.value = a[0].innerText + "位大人";
             if (parseInt(k[0].innerText) > 0) {
                 showPerson.value += "," + k[0].innerText + "位兒童";

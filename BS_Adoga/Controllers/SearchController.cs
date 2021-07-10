@@ -16,7 +16,7 @@ namespace BS_Adoga.Controllers
         {
             s = new SearchCardService();
         }
-        public ActionResult GetTempData(string search, string start, string end, string people, int room)
+        public ActionResult GetTempData(string search, string date_range, string people, string room)
         {
             var human = people.Split(',');
             var a = human[0].Split('位');
@@ -24,12 +24,11 @@ namespace BS_Adoga.Controllers
             var adult = int.Parse(a[0]);
             var kid = int.Parse(b[0]);
 
-            //TempData["CityOrName"] = search;
-            //TempData["sdate"] = start;
-            //TempData["end"] = end;
-            //TempData["adult"] = int.Parse(adult);
-            //TempData["kid"] = int.Parse(kid);
-            //TempData["room"] = int.Parse(room);
+            var r = room.Split('間');
+
+            var date = date_range.Split('-');
+            var start = date[0];
+            var end = date[1];
 
             SearchDataViewModel info = new SearchDataViewModel
             {
@@ -38,7 +37,7 @@ namespace BS_Adoga.Controllers
                 CheckOutDate = end,
                 AdultCount = adult,
                 KidCount = kid,
-                RoomCount = room
+                RoomCount = int.Parse(r[0])
             };
 
             return RedirectToAction("Search",info);
