@@ -57,7 +57,7 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
-                    <form class="row g-3" action="" method="post">
+                    <form class="row g-3">
                         <div class="border border-3 bg-white p-3 m-1 row">
                             <p class="fw-bold h5">請填寫以下資訊</p>
                             <!--FirstName-->
@@ -410,7 +410,7 @@
 
             <!--收據資訊-->
             <fieldset>
-                <div class="card border-success mb-3">
+                @*<div class="card border-success mb-3">
                     <div class="card-header">您的訂單資訊:</div>
                     <div class="card-body text-success text-center">
                         <h5 class="card-title">付款成功</h5>
@@ -432,7 +432,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div>*@
             </fieldset>
         </div>
 
@@ -445,11 +445,11 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card-body mt-1 p-2">
-                            <h5 class="card-title">@hotelAndRoom.HotelFullName</h5>
+                            @*<h5 class="card-title">@hotelAndRoom.HotelFullName</h5>*@
                             <p class="card-text">⭐⭐⭐⭐⭐</p>
                             <p class="card-text">
                                 <small class="text-muted">
-                                    @hotelAndRoom.Address
+                                    @*@hotelAndRoom.Address*@
                                 </small>
                             </p>
                         </div>
@@ -460,19 +460,19 @@
             <div class="col border border-2 bg-white mb-3">
                 <div class="m-2 d-flex justify-content-between">
                     <div>2021-06-20 ~ 2021-06-22 </div>
-                    <div>@hotelAndRoom.CountNight 晚</div>
+                    @*<div>@hotelAndRoom.CountNight 晚</div>*@
                 </div>
                 <div class="line"></div>
                 <div class="m-2">
-                    @hotelAndRoom.RoomOrder 間房，@hotelAndRoom.Adult 位大人
-                    <div class="col-12">@hotelAndRoom.Adult 位大人</div>
+                    @*@hotelAndRoom.RoomOrder 間房，@hotelAndRoom.Adult 位大人
+                    <div class="col-12">@hotelAndRoom.Adult 位大人</div>*@
                 </div>
             </div>
             <!--金額資訊-->
             <div class="col border border-2 mb-3">
                 <div class="m-2 d-flex justify-content-between">
                     <div>總金額</div>
-                    <div>NT$ @hotelAndRoom.TotalPrice</div>
+                    @*<div>NT$ @hotelAndRoom.TotalPrice</div>*@
                 </div>
                 @*<div class="line"></div>*@
                 @*<div class="m-2 d-flex justify-content-between">

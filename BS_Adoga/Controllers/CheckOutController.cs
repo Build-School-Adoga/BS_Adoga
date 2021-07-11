@@ -139,7 +139,7 @@ namespace BS_Adoga.Controllers
                     oPayment.MerchantID = "2000214";//ECPay提供的特店編號 2000132
 
                     /* 基本參數 */
-                    oPayment.Send.ReturnURL = "https://localhost:44352/CheckOut/Index";//付款完成通知回傳的網址https://localhost:44352/CheckOut/PayFeedback
+                    oPayment.Send.ReturnURL = "https://localhost:44352/CheckOut/PayFeedback";//付款完成通知回傳的網址https://localhost:44352/CheckOut/PayFeedback
                     oPayment.Send.ClientBackURL = "http://adoga.azurewebsites.net/";//瀏覽器端返回的廠商網址
                     oPayment.Send.OrderResultURL = "https://localhost:44352/CheckOut/PayFeedback";//瀏覽器端回傳付款結果網址
                     oPayment.Send.MerchantTradeNo = orderId;//廠商的交易編號
@@ -147,7 +147,7 @@ namespace BS_Adoga.Controllers
                     oPayment.Send.TotalAmount = orderData.roomCheckOutViewModel.TotalPrice;//交易總金額
                     oPayment.Send.TradeDesc = "交易描述";//交易描述
                     oPayment.Send.ChoosePayment = PaymentMethod.Credit;//使用的付款方式
-                    oPayment.Send.Remark = "WWWWW";//備註欄位
+                    oPayment.Send.Remark = "Test";//備註欄位
                     oPayment.Send.ChooseSubPayment = PaymentMethodItem.None;//使用的付款子項目
                     oPayment.Send.NeedExtraPaidInfo = ExtraPaymentInfo.No;//是否需要額外的付款資訊
                     oPayment.Send.DeviceSource = DeviceType.PC;//來源裝置
@@ -227,9 +227,9 @@ namespace BS_Adoga.Controllers
             ViewBag.CreditPay = payment;
             return View();
         }
-
+      
         [HttpPost]
-        public ActionResult PayFeedback()
+        public ActionResult PayFeedback(ECPayResultsViewModel PayResult)
         {
 
             List<string> enErrors = new List<string>();
@@ -295,8 +295,15 @@ namespace BS_Adoga.Controllers
                 // 回覆成功訊息。
                 if (enErrors.Count() == 0)
                 {
-                    string odpayId = (string)htFeedback["MerchantTradeNo"];
-                    var payStatus = _context.Orders.Where(x => x.OrderID == odpayId).First();
+                    //ECPayResultsViewModel PayResult = new ECPayResultsViewModel();
+                    PayResult.OrderId = (string)htFeedback["MerchantTradeNo"];
+                    PayResult.TradeDate = (string)htFeedback["TradeDate"];
+                    PayResult.PaymentDate = (string)htFeedback["PaymentDate"];
+                    PayResult.TradePrice = (string)htFeedback["TradeAmt"];
+                    TempData["PayResult"] = PayResult;
+
+                    //更新付款資訊
+                    var payStatus = _context.Orders.Where(x => x.OrderID == PayResult.OrderId).First();
                     payStatus.PaymentStatus = true;
                     _context.Entry(payStatus).State = EntityState.Modified;
                     _context.SaveChanges();
@@ -305,19 +312,29 @@ namespace BS_Adoga.Controllers
                     //List<string> list = htFeedback.Keys.Cast<string>().ToList();
                     //List<string> list2 = htFeedback.Values.Cast<string>().ToList();
 
-                    foreach (string s in htFeedback.Keys)
-                    {
-                        this.Response.Write(s + " = " + htFeedback[s] + "</br>");
-                    }
+                    //foreach (string s in htFeedback.Keys)
+                    //{
+                    //    this.Response.Write(s + " = " + htFeedback[s] + "</br>");
+                    //}
                     //this.Response.Write("OK");
+                    //this.Session["PayResult"] = PayResult;
+                    //this.Response.Redirect("https://localhost:44352/CheckOut/ECPayResult");
+                    //this.Server.Transfer("https://localhost:44352/CheckOut/ECPayResult");
+
                 }
                 // 回覆錯誤訊息。
                 else
                     this.Response.Write(String.Format("0|{0}", String.Join("\\r\\n", enErrors)));
-                this.Response.Flush();
-                this.Response.End();
+                //this.Response.Flush();
+                //this.Response.End();
             }
-            return View();
+            return RedirectToAction("ECPayResult", "CheckOut");
+        }
+
+        public ActionResult ECPayResult(ECPayResultsViewModel model)
+        {
+            model = (ECPayResultsViewModel)TempData["PayResult"];
+            return View(model);
         }
     }
 }
