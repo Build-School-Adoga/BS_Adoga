@@ -17,12 +17,12 @@ namespace BS_Adoga.Service
             _repository = new HotelDetailRepository();
         }
 
-        public DetailVM GetDetailVM (string hotelId, string startDate, string endDate, int orderRoom, int adult,int child)
+        public DetailVM GetDetailVM(string hotelId, string startDate, string endDate, int orderRoom, int adult, int child)
         {
             DetailVM hotelDetail = new DetailVM()
             {
                 hotelVM = GetHotelById(hotelId),
-                roomTypeVM = GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult,child),
+                roomTypeVM = GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult, child),
                 hotelOptionVM = new SearchCardRepository().GetHotelOption()
             };
             return hotelDetail;
@@ -42,7 +42,7 @@ namespace BS_Adoga.Service
                 HotelName = s.HotelName,
                 HotelEngName = s.HotelEngName,
                 HotelCity = s.HotelCity,
-                HotelAddress =  s.HotelAddress,/*s.HotelCity + "," + s.HotelDistrict + "," +*/
+                HotelAddress = s.HotelAddress,/*s.HotelCity + "," + s.HotelDistrict + "," +*/
                 HotelAbout = s.HotelAbout,
                 Longitude = s.Longitude,
                 Latitude = s.Latitude,
@@ -51,7 +51,7 @@ namespace BS_Adoga.Service
 
             return result;
         }
-        
+
         //根據床型判斷房間可以有多少個大人和小孩
         public List<RoomTypeVM> Helper_CountAdultChild(List<RoomTypeVM> data)
         {
@@ -87,7 +87,7 @@ namespace BS_Adoga.Service
 
             return data;
         }
-        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId, string startDate, string endDate, int orderRoom, int adult,int child)
+        public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId, string startDate, string endDate, int orderRoom, int adult, int child)
         {
             //設定好傳給repository的引數。
             if (hotelId == null) hotelId = "hotel04";
@@ -97,30 +97,39 @@ namespace BS_Adoga.Service
             //int orderRoom = 2;
             int totalPerson = adult + child;//12
 
-            var result = _repository.GetRoomTypeByFilter(hotelId, startDate_p, endDate_p, countNight, orderRoom, adult,child,totalPerson).ToList();
+            var result = _repository.GetRoomTypeByFilter(hotelId, startDate_p, endDate_p, countNight, orderRoom, adult, child, totalPerson).ToList();
 
             result = Helper_CountAdultChild(result);
 
             return result;
         }
 
-        public IEnumerable<RoomTypeVM> GetSpecificRoomType(string hotelId, string startDate, string endDate, int orderRoom, int adult, int child,bool breakfast,bool noSmoking,int family)
-        {
-            //設定好傳給repository的引數。
-            if (hotelId == null) hotelId = "hotel04";
-            DateTime startDate_p = DateTime.Parse(startDate);
-            DateTime endDate_p = DateTime.Parse(endDate);
-            int countNight = new TimeSpan(endDate_p.Ticks - startDate_p.Ticks).Days;//2;
-            //int orderRoom = 2;
-            int totalPerson = adult + child;//12
-
-            var allRoom = _repository.GetRoomTypeByFilter(hotelId, startDate_p, endDate_p, countNight, orderRoom, adult, child, totalPerson).ToList();
-
-            allRoom = Helper_CountAdultChild(allRoom);
+        public IEnumerable<RoomTypeVM> GetSpecificRoomType(string hotelId, string startDate, string endDate, int orderRoom, int adult, int child, bool breakfast, bool noSmoking, bool family)
+        {            
+            //這隻service要做的事情跟別的service有重複到，就直接讓那個service處理先
+            var allRoom = GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult, child).ToList();
 
             var result = from room in allRoom
-                         where room.Breakfast == breakfast && room.NoSmoking == noSmoking && room.Adult + room.Child > family
                          select room;
+            if (breakfast)
+            {
+                result = from room in result
+                         where room.Breakfast == breakfast
+                         select room;
+            }
+            if (noSmoking)
+            {
+                result = from room in result
+                         where room.NoSmoking == noSmoking
+                         select room;
+            }
+            if (family)
+            {
+                int ppl = 4;
+                result = from room in result
+                         where room.Adult + room.Child >= ppl
+                         select room;
+            }
 
             return result;
         }

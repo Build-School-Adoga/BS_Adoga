@@ -31,12 +31,9 @@ namespace BS_Adoga.APIController.HotelDetail
         }
 
         [AcceptVerbs("GET", "POST")]
-        public IHttpActionResult GetSpecificRoom(bool freeBreakfast=false, bool noSmoking=true, bool family=false)
+        public IHttpActionResult GetSpecificRoom(bool freeBreakfast, bool noSmoking, bool family)
         {
-            var ppl = 1;
-            if (family) ppl = 4;
-
-            var data = _service.GetSpecificRoomType("hotel04", "2021-06-20", "2021-06-22", 1, 2, 0, freeBreakfast, noSmoking, ppl);
+            var data = _service.GetSpecificRoomType("hotel04", "2021-06-20", "2021-06-22", 1, 2, 0, freeBreakfast, noSmoking, family);
 
             return Json(data);
             //return Ok(JsonConvert.SerializeObject(a));
