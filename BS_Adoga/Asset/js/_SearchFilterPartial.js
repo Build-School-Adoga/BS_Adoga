@@ -145,8 +145,8 @@ $('#demo').daterangepicker({
         ],
         "firstDay": 1
     },
-    "startDate": moment(),
-    "endDate": moment().add('days', 1)
+    "startDate": moment(s),
+    "endDate": moment(e)
 }).on('change', function () {
     var date_range = $('#demo').val();
     var dates = date_range.split(" - ");
@@ -212,7 +212,7 @@ document.getElementById("btn-searchAll").addEventListener('click', function () {
     debugger;
     hand(document.getElementsByName("search")[0].value);
 });
-getSavedValue(document.getElementsByName("search")[0].value);
+//getSavedValue(document.getElementsByName("search")[0].value);
 
 function hand(e) {
     var name = "key";

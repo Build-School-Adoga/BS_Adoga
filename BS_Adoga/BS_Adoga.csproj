@@ -326,6 +326,8 @@
     <Compile Include="Models\ViewModels\MemberLogin\LineUserProfile.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\UserCookieViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\RoomCheckOutData.cs" />
+    <Compile Include="Models\ViewModels\Search\EquipmentListViewModel.cs" />
+    <Compile Include="Models\ViewModels\Search\FacilityViewModel.cs" />
     <Compile Include="Models\ViewModels\Search\HotelSearchViewModel.cs" />
     <Compile Include="Models\ViewModels\Search\RoomDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\Search\RoomViewModel.cs" />

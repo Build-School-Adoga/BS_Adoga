@@ -6,6 +6,7 @@ using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.Search;
 using System.ComponentModel.DataAnnotations;
 using BS_Adoga.Models.ViewModels.homeViewModels;
+using BS_Adoga.Models.ViewModels.HotelDetail;
 
 namespace BS_Adoga.Repository
 {
@@ -144,7 +145,10 @@ namespace BS_Adoga.Repository
                            {
                                HotelID = H.HotelID,
                                RoomID = R.RoomID,
-                               RoomPrice = R.RoomPrice
+                               RoomPrice = R.RoomPrice,
+                               NoSmoking = R.NoSmoking,
+                               Breakfast = R.Breakfast,
+                               WiFi = R.WiFi
                            },
                            I_RoomDetailVM = new RoomDetailViewModel
                            {
@@ -174,6 +178,33 @@ namespace BS_Adoga.Repository
             return optionData.ToList();
         }
 
-
+        //public FacilityViewModel GetEquipmentList()
+        //{
+        //    var equipList = from e in _context.Facilities
+        //                    select new FacilityViewModel
+        //                    {
+        //                        SwimmingPool = e.SwimmingPool,
+        //                        AirportTransfer = e.AirportTransfer,
+        //                        FamilyChildFriendly = e.FamilyChildFriendly,
+        //                        Restaurants = e.Restaurants,
+        //                        Nightclub = e.Nightclub,
+        //                        GolfCourse = e.GolfCourse,
+        //                        Gym = e.Gym,
+        //                        NoSmoking=e.NoSmoking,
+        //                        SmokingArea=e.SmokingArea,
+        //                        FacilitiesFordisabledGuests=e.FacilitiesFordisabledGuests,
+        //                        CarPark=e.CarPark,
+        //                        FrontDesk=e.FrontDesk,
+        //                        SpaSauna=e.SpaSauna,
+        //                        BusinessFacilities=e.BusinessFacilities,
+        //                        Internet=e.Internet,
+        //                        PetsAllowed=e.PetsAllowed
+        //                    };
+        //    return equipList.ToList();
+        //}
+        //public RoomBedVM GetBedType()
+        //{
+        //    return "hi";
+        //}
     }
 }

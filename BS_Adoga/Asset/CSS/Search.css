@@ -58,7 +58,7 @@ nav .search-bar,
 .search-bar .nav-item {
     border-radius: 5px;
     background-color: #fff;
-    width: 30%;
+    /*width: 30%;haoxiangguandiao jiuhuizhenchang le */
 }
 
 nav .nav-item:nth-child(2) div.line {
@@ -556,12 +556,18 @@ i.fas.fa-star {
 .infomation .card .include-list {
     font-size: 14px;
     /*width: fit-content;*/
-    width: max-content;
-    padding: 2px 4px;
-    border: 1px solid #28871C;
-    color: #28871C;
-    border-radius: 10%;
+    display: flex;
 }
+    .infomation .card .include-list p {
+        width: max-content;
+        padding: 2px 4px;
+        border: 1px solid #28871C;
+        color: #28871C;
+        border-radius: 10%;
+        margin: 0;
+        margin-right: 5px;
+    }
+
 
 .infomation .card .tag-list,
 .infomation .card .advantage {

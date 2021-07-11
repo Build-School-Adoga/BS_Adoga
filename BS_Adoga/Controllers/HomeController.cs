@@ -70,10 +70,20 @@ namespace BS_Adoga.Controllers
             var start = date[0];
             var end = date[1];
 
-            var peo = people.Split('位');
-            var adu = int.Parse(peo[0]);
-            var str = peo[1].Split(',');
-            var kid = int.Parse(str[1]);
+            //var peo = people.Split('位');
+            //var adu = int.Parse(peo[0]);
+            //var str = peo[1].Split(',');
+            //var kid = int.Parse(str[1]);
+
+            var human = people.Split(',');
+            var a = human[0].Split('位');
+            var adu = int.Parse(a[0]);
+            var kid = 0;
+            if (human.Length > 1)
+            {
+                var b = human[1].Split('位');
+                kid = int.Parse(b[0]);
+            }
 
             var rmo = room.Split('間');
             var rom = int.Parse(rmo[0]);

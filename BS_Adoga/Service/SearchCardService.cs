@@ -25,7 +25,12 @@ namespace BS_Adoga.Service
             var data = new SearchCardViewModel
             {
                 HotelSearchVM = _r.GetHotelAfterSearchByCityOrName(info/*CityOrName, startDate,endDate,nRoom,nAdult,nKid*/),
-                HotelOptionVM = _r.GetHotelOption()
+                HotelOptionVM = _r.GetHotelOption(),
+                //EquipmentVM =
+                //{
+                //    FacilityVM =_r.GetEquipmentList(),
+                //    BedType = _r.GetBedType()
+                //}
             };
             return data;
         }

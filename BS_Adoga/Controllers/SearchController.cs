@@ -19,11 +19,16 @@ namespace BS_Adoga.Controllers
         public ActionResult GetTempData(string search, string date_range, string people, string room)
         {
             var human = people.Split(',');
+            
             var a = human[0].Split('位');
-            var b = human[1].Split('位');
             var adult = int.Parse(a[0]);
-            var kid = int.Parse(b[0]);
-
+            var kid = 0;
+            if (human.Length > 1)
+            {
+                var b = human[1].Split('位');
+                kid = int.Parse(b[0]);
+            }
+            
             var r = room.Split('間');
 
             var date = date_range.Split('-');
