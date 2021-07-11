@@ -511,6 +511,7 @@
     <Content Include="Views\Search\_optionCity.cshtml" />
     <Content Include="Views\Account\BookingDetail.cshtml" />
     <Content Include="Views\Account\_BookingPartial.cshtml" />
+    <Content Include="Views\Search\_SearchDataEmptyCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIController\" />

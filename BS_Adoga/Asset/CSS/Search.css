@@ -583,3 +583,14 @@ i.fas.fa-star {
     .infomation .card .advantage p {
         flex-grow: 1;
     }
+
+div#emptyCard{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    background-color: #E9ECEF;
+    font-size: 30px;
+}
+div#emptyCard i{
+    font-size: 40px;
+}

@@ -720,10 +720,22 @@
                 </button>
             </div>
         </nav>
-        
-        @foreach (var card in Model.HotelSearchVM)
-        {
-            @Html.Partial("_SearchCardPartial", card);
+        @{ 
+            if (Model.HotelSearchVM.Count() == 0)
+            {
+                <div id="emptyCard">
+                    <p>
+                        查無資料<i class="fas fa-frown-open"></i>
+                    </p>
+                </div>
+            }
+            else
+            {
+                foreach(var card in Model.HotelSearchVM)
+                {
+                    @Html.Partial("_SearchCardPartial", card);
+                }
+            }
         }
     </div>
 </div>
