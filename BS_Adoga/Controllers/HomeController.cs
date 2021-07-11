@@ -11,6 +11,7 @@ using BS_Adoga.Service;
 using Microsoft.Ajax.Utilities;
 using System.Security.Cryptography;
 using System.Web.WebPages;
+using BS_Adoga.Models.ViewModels.Search;
 
 namespace BS_Adoga.Controllers
 {
@@ -68,24 +69,38 @@ namespace BS_Adoga.Controllers
             var date = date_range.Split('-');
             var start = date[0];
             var end = date[1];
+
             var peo = people.Split('位');
-            var ple = peo[0];
+            var adu = int.Parse(peo[0]);
+            var str = peo[1].Split(',');
+            var kid = int.Parse(str[1]);
+
             var rmo = room.Split('間');
-            var rom = rmo[0];
+            var rom = int.Parse(rmo[0]);
 
-
+            //Irene變更： 因為If-else裡面都會用TempData且資料都一樣 所以把它抽出來(不需要重複2次)
+            TempData["start"] = start;
+            TempData["end"] = end;
+            TempData["ple"] = adu;
+            TempData["kid"] = kid;
+            TempData["rom"] = rom;
+            TempData["data"] = data;
 
             if (search.Length == 3)
             {
                 TempData["search"] = search;
 
-
-                TempData["start"] = start;
-                TempData["end"] = end;
-                TempData["ple"] = ple;
-                TempData["rom"] = rom;
-                TempData["data"] = data;
-                return RedirectToAction("Search", "Search", search);
+                //Irene變更：傳遞資料的型別更改至SearchDataViewModel
+                SearchDataViewModel info = new SearchDataViewModel
+                {
+                    HotelNameOrCity = search,
+                    CheckInDate = start,
+                    CheckOutDate = end,
+                    AdultCount = adu,
+                    KidCount = kid,
+                    RoomCount = rom
+                };
+                return RedirectToAction("Search", "Search", info);
             }
             else
             {
@@ -93,12 +108,7 @@ namespace BS_Adoga.Controllers
                           where p.HotelName == search
                           select p.HotelID;
 
-
-                TempData["start"] = start;
-                TempData["end"] = end;
-                TempData["ple"] = ple;
-                TempData["rom"] = rom;
-                TempData["data"] = data;
+                
                 TempData["search"] = xxx.FirstOrDefault();
 
                 return RedirectToAction("Detail", "HotelDetail", new

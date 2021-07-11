@@ -41,6 +41,35 @@ travel.forEach(item => item.addEventListener('click', function () {
     }
 }))
 
+//及時更新上方Filter的數量
+debugger;
+var r = document.getElementById('room-num').getElementsByTagName('span');
+var a = document.getElementById('adult-num').getElementsByTagName('span');
+var k = document.getElementById('kids-num').getElementsByTagName('span');
+
+showRoom.value = filternav.room + "間房間";
+showPerson.value = filternav.adult + "位大人";
+if (parseInt(filternav.kids) > 0) {
+    showPerson.value += "," + filternav.kids + "位兒童";
+}
+
+var s = filternav.startDate;
+var e = filternav.endDate;
+var start = moment(s).format('YYYY年MM月DD日');
+var end = moment(e).format('YYYY年MM月DD日');
+$('#range_start').val(start);
+$('#range_end').val(end);
+
+moment.locale('zh-tw');
+var start = moment(s).format('dddd');
+$('#week_start').val(start);
+
+var end = moment(e).format('dddd');
+$('#week_end').val(end);
+
+var start = moment(s, 'YYYY MM DD');
+var end = moment(e, 'YYYY MM DD');
+
 
 $(document).click(function (e) {
     e.stopPropagation();
@@ -48,21 +77,22 @@ $(document).click(function (e) {
 
     //及時更新上方Filter的數量
     var active = document.getElementsByClassName('travel onUse');
-    var r = document.getElementById('room-num').getElementsByTagName('span');
-    var a = document.getElementById('adult-num').getElementsByTagName('span');
-    var k = document.getElementById('kids-num').getElementsByTagName('span');
+    //var r = document.getElementById('room-num').getElementsByTagName('span');
+    //var a = document.getElementById('adult-num').getElementsByTagName('span');
+    //var k = document.getElementById('kids-num').getElementsByTagName('span');
 
     if (active.length != 0) {
         if (active[0].classList.contains("single")) {
             showPerson.value = "1位大人";
             showRoom.value = "1間客房";
         }
-        else if (active[0].classList.contains("couple")) {
+        if (active[0].classList.contains("couple")) {
             showPerson.value = "2位大人";
             showRoom.value = "1間客房";
         }
+
         else {
-            showRoom.value = r[0].innerText + "间房间";
+            showRoom.value = r[0].innerText + "間房間";
             showPerson.value = a[0].innerText + "位大人";
             if (parseInt(k[0].innerText) > 0) {
                 showPerson.value += "," + k[0].innerText + "位兒童";
@@ -123,6 +153,7 @@ $('#demo').daterangepicker({
 
     var start1 = moment(dates[0]).format('YYYY年MM月DD日');
     var end1 = moment(dates[1]).format('YYYY年MM月DD日');
+
     $('#range_start').val(start1);
     $('#range_end').val(end1);
     moment.locale('zh-tw');
@@ -136,23 +167,24 @@ $('#demo').daterangepicker({
     $('#person-info').trigger("click");
 });
 
-var date_range = $('#demo').val();
-var dates = date_range.split(" - ");
 
-var start = moment(dates[0]).format('YYYY年MM月DD日');
-var end = moment(dates[1]).format('YYYY年MM月DD日');
-$('#range_start').val(start);
-$('#range_end').val(end);
+//debugger;
+//var s = ;
+//var e = @ViewData["end"];
+//var start = moment(s).format('YYYY年MM月DD日');
+//var end = moment(e).format('YYYY年MM月DD日');
+//$('#range_start').val(start);
+//$('#range_end').val(end);
 
-moment.locale('zh-tw');
-var start = moment(dates[0]).format('dddd');
+//moment.locale('zh-tw');
+//var start = moment(dates[0]).format('dddd');
 
-$('#week_start').val(start);
-var end = moment(dates[1]).format('dddd');
+//$('#week_start').val(start);
+//var end = moment(dates[1]).format('dddd');
 
-$('#week_end').val(end);
-var start = moment(dates[0], 'YYYY MM DD');
-var end = moment(dates[1], 'YYYY MM DD');
+//$('#week_end').val(end);
+//var start = moment(dates[0], 'YYYY MM DD');
+//var end = moment(dates[1], 'YYYY MM DD');
 
         //$(".asd").click(function () {
         //    $('#demo').trigger("click");
