@@ -6,6 +6,7 @@ using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.Search;
 using System.ComponentModel.DataAnnotations;
 using BS_Adoga.Models.ViewModels.homeViewModels;
+using BS_Adoga.Models.ViewModels.HotelDetail;
 
 namespace BS_Adoga.Repository
 {
@@ -115,12 +116,22 @@ namespace BS_Adoga.Repository
             return hotel;
         }
 
-        public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(string Name)
+        public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(SearchDataViewModel info/*string CityOrName, string startDate,string endDate,int nRoom, int nAdult, int nKid*/)
         {
+            int kidcountasadult = (info.KidCount / 2)+ (info.KidCount % 2);
+            int people = info.AdultCount+(kidcountasadult);
+            DateTime start = DateTime.Parse(info.CheckInDate);
+            DateTime end = DateTime.Parse(info.CheckOutDate).AddDays(1);
+
             var data = from H in _context.Hotels
                        join R in _context.Rooms on H.HotelID equals R.HotelID
                        join D in _context.RoomsDetails on R.RoomID equals D.RoomID
-                       where H.HotelCity.Contains(Name) || H.HotelName.Contains(Name)
+                       where (H.HotelCity.Contains(info.HotelNameOrCity) || H.HotelName.Contains(info.HotelNameOrCity))
+                                && D.OpenRoom == true
+                                && (D.RoomCount - D.RoomOrder) >= info.RoomCount
+                                && (D.RoomCount - D.RoomOrder) * R.NumberOfPeople >= people
+                                && D.CheckInDate >= start
+                                && D.CheckOutDate <= end
                        select new HotelSearchViewModel
                        {
                            HotelID = H.HotelID,
@@ -134,7 +145,10 @@ namespace BS_Adoga.Repository
                            {
                                HotelID = H.HotelID,
                                RoomID = R.RoomID,
-                               RoomPrice = R.RoomPrice
+                               RoomPrice = R.RoomPrice,
+                               NoSmoking = R.NoSmoking,
+                               Breakfast = R.Breakfast,
+                               WiFi = R.WiFi
                            },
                            I_RoomDetailVM = new RoomDetailViewModel
                            {
@@ -147,7 +161,7 @@ namespace BS_Adoga.Repository
                            }
                        };
 
-            return data.ToList();
+            return data;
         }
 
         public IEnumerable<HotelOptionViewModel> GetHotelOption()
@@ -164,6 +178,33 @@ namespace BS_Adoga.Repository
             return optionData.ToList();
         }
 
-
+        //public FacilityViewModel GetEquipmentList()
+        //{
+        //    var equipList = from e in _context.Facilities
+        //                    select new FacilityViewModel
+        //                    {
+        //                        SwimmingPool = e.SwimmingPool,
+        //                        AirportTransfer = e.AirportTransfer,
+        //                        FamilyChildFriendly = e.FamilyChildFriendly,
+        //                        Restaurants = e.Restaurants,
+        //                        Nightclub = e.Nightclub,
+        //                        GolfCourse = e.GolfCourse,
+        //                        Gym = e.Gym,
+        //                        NoSmoking=e.NoSmoking,
+        //                        SmokingArea=e.SmokingArea,
+        //                        FacilitiesFordisabledGuests=e.FacilitiesFordisabledGuests,
+        //                        CarPark=e.CarPark,
+        //                        FrontDesk=e.FrontDesk,
+        //                        SpaSauna=e.SpaSauna,
+        //                        BusinessFacilities=e.BusinessFacilities,
+        //                        Internet=e.Internet,
+        //                        PetsAllowed=e.PetsAllowed
+        //                    };
+        //    return equipList.ToList();
+        //}
+        //public RoomBedVM GetBedType()
+        //{
+        //    return "hi";
+        //}
     }
 }

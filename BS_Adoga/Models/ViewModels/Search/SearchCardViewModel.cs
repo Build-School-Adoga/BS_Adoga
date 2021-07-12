@@ -12,6 +12,7 @@ namespace BS_Adoga.Models.ViewModels.Search
 
         
         public IEnumerable<HotelOptionViewModel>  HotelOptionVM { get; set; }
+        public EquipmentListViewModel EquipmentVM { get; set; }
 
     }
 }
