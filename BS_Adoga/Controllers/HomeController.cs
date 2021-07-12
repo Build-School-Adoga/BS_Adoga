@@ -75,6 +75,7 @@ namespace BS_Adoga.Controllers
             //var str = peo[1].Split(',');
             //var kid = int.Parse(str[1]);
 
+            //Irene更新: 稍微把人數的部分改了一些
             var human = people.Split(',');
             var a = human[0].Split('位');
             var adu = int.Parse(a[0]);

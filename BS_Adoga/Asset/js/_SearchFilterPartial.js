@@ -13,6 +13,9 @@ var showRoom = document.getElementById('final-room');
 /*debugger;*/
 person_info.addEventListener('click', function () {
     //debugger;
+    var person_box = document.getElementById("person-box");
+    person_box.style.display = "flex";
+
     /*if (choosing_box.style.visibility == "visible") {*/
     if (choosing_box.style.display == "flex") {
         choosing_box.style.display = "none";
@@ -212,7 +215,7 @@ document.getElementById("btn-searchAll").addEventListener('click', function () {
     debugger;
     hand(document.getElementsByName("search")[0].value);
 });
-//getSavedValue(document.getElementsByName("search")[0].value);
+getSavedValue(document.getElementsByName("search")[0].value);
 
 function hand(e) {
     var name = "key";

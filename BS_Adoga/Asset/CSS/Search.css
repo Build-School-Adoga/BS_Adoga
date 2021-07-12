@@ -398,8 +398,11 @@ i.fas.fa-star {
         border: none;
         background-color: white;
         flex-grow: 1;
-        color: #808090;
         padding: .5rem 0;
+    }
+    .infomation button a {
+        text-decoration: none;
+        color: #808090;
     }
 
         .infomation nav button p {
