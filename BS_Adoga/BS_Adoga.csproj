@@ -290,6 +290,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
+    <Compile Include="Models\ViewModels\HotelLogin\districts.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelDetailController.cs" />
@@ -324,6 +325,9 @@
     <Compile Include="Models\ViewModels\homeViewModels\MyRoom.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\MyRoomsDetails.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
+    <Compile Include="Models\ViewModels\HotelLogin\HotelCreateViewModel.cs" />
+    <Compile Include="Models\ViewModels\HotelLogin\HotelListViewModel.cs" />
+    <Compile Include="Models\ViewModels\HotelLogin\SimpleZipCodeVM.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\LineLoginToken.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\LineUserProfile.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\UserCookieViewModel.cs" />
@@ -343,9 +347,11 @@
     <Compile Include="Models\ViewModels\HotelDetail\RoomTypeVM.cs" />
     <Compile Include="Models\ViewModels\Search\HotelOptionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\FunctionRepository.cs" />
     <Compile Include="Repository\MemberAccountRepository.cs" />
     <Compile Include="Repository\DBRepository.cs" />
     <Compile Include="Repository\HomeRepository.cs" />
+    <Compile Include="Service\FunctionService.cs" />
     <Compile Include="Service\MemberAccountService.cs" />
     <Compile Include="Service\HomeService.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\HotelVM.cs" />
@@ -2282,6 +2288,7 @@
     <Content Include="Asset\StartbootstrapAdminPages\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Asset\StartbootstrapAdminPages\vendor\jquery\jquery.min.map" />
     <Content Include="Asset\StartbootstrapAdminPages\vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Asset\JSON\SimpleZipCode.json" />
     <None Include="Properties\PublishProfiles\adoga - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\adoga - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\adoga - Web Deploy.pubxml" />
@@ -2330,8 +2337,8 @@
     <Content Include="Views\Search\SearchHotel.cshtml" />
     <Content Include="Views\HotelDetail\_RoomTypePartial.cshtml" />
     <Content Include="Views\Shared\_option2.cshtml" />
-    <Content Include="Views\Function\Index.cshtml" />
-    <Content Include="Views\Shared\_FunctionPage.cshtml" />
+    <Content Include="Views\Function\Index2.cshtml" />
+    <Content Include="Views\Shared\_FunctionPage2.cshtml" />
     <Content Include="Views\Function\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_nav.cshtml" />
     <Content Include="Views\Search\_optionHotel.cshtml" />
@@ -2342,6 +2349,11 @@
     <Content Include="Views\Search\_optionCity.cshtml" />
     <Content Include="Views\Account\BookingDetail.cshtml" />
     <Content Include="Views\Account\_BookingPartial.cshtml" />
+    <Content Include="Views\Shared\_FunctionPage.cshtml" />
+    <Content Include="Views\Function\Index.cshtml" />
+    <Content Include="Views\Function\HotelIndex.cshtml" />
+    <Content Include="Views\Function\HotelLList.cshtml" />
+    <Content Include="Views\Function\HotelCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIController\" />
