@@ -29,6 +29,16 @@ namespace BS_Adoga.Repository
 
         }
 
+        public string GetHotelIdByName(string hotelName)
+        {
+            var hotelId = (from h in _context.Hotels
+                        where h.HotelName.Contains(hotelName)
+                        select h.HotelID).First();
+
+            return hotelId;
+
+        }
+
         public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId,DateTime startDate,DateTime endDate,int countNight, int orderRoom,int adult,int child,int totalPerson)
         {
             //1. 先找出符合條件的hotel 和 room

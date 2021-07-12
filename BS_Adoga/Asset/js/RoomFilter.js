@@ -7,9 +7,25 @@ var hoverEquimServ = new Vue({
 })
 
 $().ready(function () {
+
+    //一開始載入頁面時要帶入Room的全部資料
+    axios.get('https://localhost:44352/api/HotelDetail/GetAllRoom')
+        .then(function (response) {
+            console.log("j");
+            console.log(response.data);
+            appendRoomType(response.data);
+        }).catch((error) => console.log(error))
+
+
     Vue.component('room-type', {
-        props: ['room'],
-        template: '#roomTypeTemplate'
+        props: { room: ['room'] },
+        template: '#roomTypeTemplate',
+        data: function () {
+            return {
+                bookingRoom: this.room.RoomID
+
+            }
+        }
     })
 
     var filterRoom = new Vue({
@@ -59,7 +75,7 @@ $().ready(function () {
         el: '#room-group',
         data: {
             group: []
-        },
+        }
     })
 
     function appendRoomType(response) {
@@ -73,11 +89,16 @@ $().ready(function () {
 
             //給RoomBed[]塞物件 方法1
             var roomBed = [];
-            (item.RoomBed).forEach((bed) => {
+            var bedTypeStr = '';
+            (item.RoomBed).forEach((bed,index) => {
                 roomBed.push({
                     Name: bed.Name,
                     Amount: bed.Amount
                 })
+                if (index != item.RoomBed.length-1)
+                    bedTypeStr += bed.Name + ","
+                else
+                    bedTypeStr += bed.Name
             })
             roomGroup.$set(roomGroup.group, index,
                 {
@@ -95,7 +116,26 @@ $().ready(function () {
                     RoomPrice: Math.ceil(item.RoomPrice),
                     RoomDiscount: Math.round((1 - item.RoomDiscount) * 10),
                     RoomNowPrice: Math.ceil(item.RoomNowPrice),
-                    RoomLeft: item.RoomLeft
+                    RoomLeft: item.RoomLeft,
+                    Booking: function () {
+                        alert(item.RoomPrice + "," + item.RoomDiscount);
+                        axios.get('https://localhost:44352/HotelDetail/SetCheckOutData', {
+                            params: {
+                                hotelId: item.HotelID,
+                                roomId: item.RoomID,
+                                roomName: item.RoomName,
+                                noSmoking: item.NoSmoking,
+                                breakfast: item.Breakfast,
+                                bedType: bedTypeStr,
+                                roomOrder: item.RoomOrder,
+                                roomPrice: item.RoomPrice,
+                                roomDiscount: item.RoomDiscount,
+                                roomNowPrice: item.RoomNowPrice
+                            }
+                        }).then(function (response) {
+                            console.log(response);
+                        }).catch((error) => console.log(error));
+                    }
                 }
             );
 

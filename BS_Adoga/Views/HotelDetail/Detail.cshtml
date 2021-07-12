@@ -11,7 +11,8 @@
 @section topCSS{
     <link rel="stylesheet" href="~/Asset/CSS/HotelDetailShare.css" />
     <link rel="stylesheet" href="~/Asset/CSS/HotelDetail.css" />
-    <link rel="stylesheet" href="~/Asset/CSS/SearchFilterPartial.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.css" />
+    <link href="~/Asset/CSS/SearchFilterPartial.css" rel="stylesheet" />
     <style>
     </style>
 }
@@ -19,7 +20,7 @@
 @section scrollNav{
     <div class="scroll-nav">
         @*@Html.Partial("~/Views/Search/_SearchFilterPartial.cshtml")*@
-        @using (Html.BeginForm("", "Search"))
+        @using (Html.BeginForm("GetTempData", "Detail"))
         {
             <nav id="nav" class="search-filter-nav">
                 <div class="search-bar">
@@ -30,47 +31,74 @@
                                 <p id="place-left">794間住宿還有空房</p>
                             </div>*@
 
-                        <el-select style="color: #666;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
-                                   name="search">
-                            <el-option-group v-for="group in options2"
-                                             :key="group.label"
-                                             :label="group.label">
-                                <el-option v-for="item in group.options"
-                                           :key="item.value"
-                                           :label="item.label"
-                                           :value="item.value">
-                                    @*<span style="float: left">item.label</span>
-
-                                        <span style="float: right; color: #8492a6; font-size: 13px">item.price</span>*@
+                        <el-select style="color: #666;" id="inputGroupSelect" v-model="Value"
+                                   placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable name="search">
+                            <el-option-group v-for="item in Options"
+                                             :key="item.label"
+                                             :label="item.label">
+                                <el-option v-for="o in item.option"
+                                           :key="o.value"
+                                           :label="o.label"
+                                           :value="o.value">
+                                    <span style="float: left">{{o.label}}</span>
+                                    <span style="float: right; color: #8492a6; font-size: 13px">{{o.price}}</span>
                                 </el-option>
                             </el-option-group>
                         </el-select>
                     </div>
 
                     <div class="nav-item">
-                        <div class="search-date">
-                            <i class="fas fa-calendar-alt"></i>
-                            <div class="choose-info">
-                                <p id="checkIn-date">2021年5月17日</p>
-                                <p id="date-description">週一</p>
+                        @*<div class="search-date">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div class="choose-info">
+                                    <p id="checkIn-date">2021年5月17日</p>
+                                    <p id="date-description">週一</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="search-date">
-                            <i class="fas fa-calendar-alt"></i>
-                            <div class="choose-info">
-                                <p id="checkOut-date">2021年5月19日</p>
-                                <p id="date-description">週三</p>
+                            <div class="line"></div>
+                            <div class="search-date">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div class="choose-info">
+                                    <p id="checkOut-date">2021年5月19日</p>
+                                    <p id="date-description">週三</p>
+                                </div>
+                            </div>*@
+
+                        <div id="datetime">
+                            <div class="timebox">
+                                <div class="d-flex">
+                                    <i class="far fa-calendar fa-2x"></i>
+                                    <div>
+                                        <input type="text" id="range_start" name="start" value="" />
+                                        <input type="text" id="week_start" value="" />
+                                    </div>
+                                </div>
+
+                                <div class="line">
+
+                                </div>
+                                <div class="d-flex">
+                                    <i class="fas fa-calendar fa-2x"></i>
+                                    <div>
+                                        <input type="text" id="range_end" name="end" value="" />
+                                        <input type="text" id="week_end" value="" />
+                                    </div>
+                                </div>
                             </div>
+
+                            @* 真正選擇日期的input *@
+                            <input type="text" class="calendar-minus calendar-plus from-control" id="demo" name="date_range" />
+
                         </div>
+
                     </div>
 
                     <div class="nav-item">
                         <div id="person-info" class="choose-bar">
                             <i class="fas fa-user-friends"></i>
                             <div class="choose-info">
-                                <p id="final-person"></p>
-                                <p id="final-room"></p>
+                                <input id="final-person" name="people" /><br>
+                                <input id="final-room" name="room" />
                             </div>
                             <i class="fas fa-angle-down"></i>
                         </div>
@@ -113,13 +141,10 @@
                                     <p><span>{{kids}}</span>位兒童</p>
                                     <i class="fas fa-plus" v-on:click="plus('kids')"></i>
                                 </div>
-                                <button id="done-counting">
-                                    完成
-                                </button>
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary btn-search">搜出好價</button>
+                    <button id="btn-searchAll" type="submit" name="SaveButton" value="Save" class="btn btn-primary btn-search">搜出好價</button>
                 </div>
             </nav>
         }
@@ -565,13 +590,13 @@
                     </div>
                 </div>
             </div>*@
-        <div id="room-group" class="wrap-1100">
+        <div id="room-group" class="wrap-1100" >
             <!-- <room-type v-for="room in group" v-bind:key="room.RoomID" v-bind:room="room"></room-type> -->
             @*@foreach (RoomTypeVM room in rooms)
                 {
                 @Html.Partial("~/Views/HotelDetail/_RoomTypePartial.cshtml", room)
                 }*@
-            <template id="roomTypeTemplate" v-for="room in group" v-bind:room="room">
+            <template id="roomTypeTemplate" v-for="room in group" v-bind:room="room" >
                 <div v-bind:key="room.RoomID" class="room-type mb-4">
                     <div class="room-type-title">
                         <h5>{{room.RoomName}}</h5>
@@ -680,7 +705,19 @@
                                         </select>
                                     </div>
                                     <div class="col-3 pt-2 text-end">
-                                        @Html.ActionLink("保留", "Index", "CheckOut", null, new { @class = "keep-btn btn fz-14 py-2 mb-2" })
+                                        @*@Html.ActionLink("保留", "SetCheckOutData", "HotelDetail", new
+                                   {
+                                       hotelId = Model.hotelVM.HotelID,
+                                       roomId ={ { room.RoomDiscount} },
+                                            roomName =,
+                                            breakfast=,
+                                            bedType=,
+                                       roomOrder=,
+                                            roomPrice=,
+                                            roomDiscount=,
+                                            roomNowPrice=
+                                        }, new { @class = "keep-btn btn fz-14 py-2 mb-2" })*@
+                                        <button v-on:click="room.Booking" class="keep-btn btn fz-14 py-2 mb-2">保留</button>
                                         <button class="cart-btn btn fz-14 py-2 mb-5">加入購物車</button>
                                         <p class="remain fw-bold fz-14 color-red mb-4">本站剩{{room.RoomLeft}}間！</p>
                                     </div>
@@ -1103,105 +1140,113 @@
     <!-- axios 的引用 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <!-- 搜尋欄的JS和Vue -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>*@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
-    <script type="text/javascript" src="~/Asset/js/Search.js"></script>
     <script>
-    var filter = new Vue({
-        el: '#nav',
-        data: {
-            room: 1,
-            adult: 1,
-            kids: 0,
-            options: [
-                     {
-                         label: '熱門城市',
-                         options: [
-                              @foreach (var item in Model.hotelOptionVM)
-                                {
-                                  Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
-                                },
-                         ]
-                     },
-                     {
-                         label: '飯店名稱',
-                         options: [
-                              @foreach (var item in Model.hotelOptionVM)
-                                {
-                                  Html.RenderPartial("~/Views/Search/_optionHotel.cshtml", item);
-                                },
-                         ]
-                     }
-                 ],
-                 options2: [],
-                 value: ''
-        },
-        methods: {
-            minus: function (e) {
-                switch (e) {
-                    case 'room':
-                        if (this.room > 1) {
-                            this.room -= 1;
-                        }
-                        else { alert("數量不可為0！"); }
-                        break;
-                    case "adult":
-                        if (this.adult > 1) {
-                            this.adult -= 1
-                        }
-                        else { alert("數量不可為0！"); }
-                        break;
-                    default://小孩
-                        if (this.kids > 0) {
-                            this.kids -= 1
-                        }
-                        else { alert("數量不可少於0！"); }
-                        break;
-                }
+        //var td = ViewData["con"];
+
+        function dedup(arr) {
+            var hashTable = {};
+            return arr.filter(function (el) {
+                var key = JSON.stringify(el);
+                var match = Boolean(hashTable[key]);
+                return (match ? false : hashTable[key] = true);
+            });
+        }
+        var deduped = dedup([
+            @foreach (var item in Model.hotelOptionVM)
+            {
+                 @Html.Partial("~/Views/Search/_optionCity.cshtml", item);
+            }
+        ]);
+
+        @{ 
+            var searchData =  (SearchByMemberVM)TempData["SearchData"];
+            TempData.Keep("SearchData");
+         }
+
+        //搜尋地區、人數
+        var filternav = new Vue({
+            el: '#nav',
+            data: {
+                room: @searchData.RoomOrder, @*@ViewData["room"],*@
+                adult: @searchData.Adult, @*@ViewData["adult"],*@
+                kids: @searchData.Child, @*@ViewData["kid"],*@
+                Value: '@searchData.CityOrHotel', @*'@ViewData["CityOrName"]',*@
+                startDate: '@searchData.CheckInDate', @*'@ViewData["sDate"]',*@
+                endDate: '@searchData.CheckOutDate', @*'@ViewData["end"]',*@
+                Options: [
+                    {
+                        label: '熱門城市',
+                        option: deduped
+                    },
+                    {
+                        label: '飯店名稱',
+                        option: [
+                            @foreach (var item in Model.hotelOptionVM)
+                            {
+                                @Html.Partial("~/Views/Search/_optionHotel.cshtml", item);
+                            }
+                        ]
+                    }
+                ]
             },
-            plus: function (e) {
-                switch (e) {
-                    case 'room':
-                        if (this.room < 9) {
-                            this.room += 1;
-                        }
-                        else { alert("數量最多為9！"); }
-                        break;
-                    case "adult":
-                        debugger;
-                        if (this.adult < 9) {
-                            this.adult += 1
-                        }
-                        else { alert("數量最多為9！"); }
-                        break;
-                    default://小孩
-                        if (this.kids < 9) {
-                            this.kids += 1
-                        }
-                        else { alert("數量最多為9！"); }
-                        break;
+            methods: {
+                minus: function (e) {
+                    switch (e) {
+                        case 'room':
+                            if (this.room > 1) {
+                                this.room -= 1;
+                            }
+                            break;
+                        case "adult":
+                            if (this.adult > 1) {
+                                this.adult -= 1
+                            }
+                            break;
+                        default:
+                            if (this.kids > 0) {
+                                this.kids -= 1
+                            }
+                            break;
+                    }
+                },
+                plus: function (e) {
+                    switch (e) {
+                        case 'room':
+                            if (this.room < 9) {
+                                this.room += 1;
+                            }
+                            break;
+                        case "adult":
+                            if (this.adult < 9) {
+                                this.adult += 1
+                            }
+                            break;
+                        default:
+                          if (this.kids < 9) {
+                                this.kids += 1
+                          }
+                          break;
+                    }
                 }
             }
-        }
-    })
+        });
     </script>
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+
+    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
+
+    <script src="~/Asset/js/_SearchFilterPartial.js"></script>
+
     <!--此處開始是飯店詳細頁面的JS-->
     <script>
-        //一開始進來時要帶入Room的全部資料
-        axios.get('https://localhost:44352/api/HotelDetail/GetSpecificRoom', {
-            params: {
-                freeBreakfast: this.FreeBreakfast,
-                noSmoking: this.NoSmoking,
-                family: this.FamilyRoom,
-            }
-        }).then(function (response) {
-            console.log(response.data);
-            appendRoomType(response.data)
-        }).catch((error) => console.log(error))
-
         //根據捲軸往下的高度，決定是否顯示固定頂端列
         window.addEventListener('scroll', function () {
             let html = document.getElementsByTagName('html')[0];

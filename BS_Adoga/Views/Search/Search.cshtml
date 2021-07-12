@@ -1,4 +1,6 @@
-﻿@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
+﻿@using BS_Adoga.Models.ViewModels.HotelDetail;
+
+@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
@@ -13,7 +15,7 @@
 
 @section endJS{
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>*@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -93,7 +95,7 @@
                             }
                             break;
                     }
-                },
+          TempDataempData     },
                 plus: function (e) {
                     switch (e) {
                         case 'room':

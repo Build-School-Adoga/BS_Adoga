@@ -28,7 +28,7 @@ namespace BS_Adoga.Service
             return hotelDetail;
         }
 
-        public HotelVM GetHotelById(string hotelId)
+            public HotelVM GetHotelById(string hotelId)
         {
             //if (hotelId == null) hotelId = "hotel04"; //controller已處理，這裡不用再寫
 

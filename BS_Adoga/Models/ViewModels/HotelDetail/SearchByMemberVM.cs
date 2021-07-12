@@ -9,15 +9,15 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
     {
         public string CityOrHotel { get; set; }
 
-        public string StartDate { get; set; }
+        public string CheckInDate { get; set; }
 
-        public string EndDate { get; set; }
+        public string CheckOutDate { get; set; }
 
         public int CountNight { get; set; }
 
         public int RoomOrder { get; set; }
 
-        public string TravelType { get; set; }
+        //public string TravelType { get; set; }
 
         public int Adult { get; set; }
 

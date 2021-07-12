@@ -101,7 +101,7 @@ div#person-info {
 .nav-item #person-box {
     position: absolute;
     top: 120%;
-    display: flex;
+    display: none;
 }
 
     .nav-item #person-box #choosing-box,
