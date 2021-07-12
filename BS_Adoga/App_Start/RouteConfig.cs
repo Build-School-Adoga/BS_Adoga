@@ -13,6 +13,17 @@ namespace BS_Adoga
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            routes.MapRoute(
+            name: "HotelCity",
+            url: "Taiwan/{city}",
+            defaults: new { controller = "Search", action = "Search", city = UrlParameter.Optional }
+        );
+            routes.MapRoute(
+         name: "Hotel",
+         url: "Taiwan/Hotel/{id}",
+         defaults: new { controller = "HotelDetail", action = "Detail", id = UrlParameter.Optional }
+     );
             routes.MapRoute(
                 name: "Login",
                 url: "MemberLogin",
@@ -24,6 +35,7 @@ namespace BS_Adoga
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "HomePage", id = UrlParameter.Optional }
             );
+         
         }
     }
 }
