@@ -127,11 +127,11 @@ namespace BS_Adoga.Repository
                        join R in _context.Rooms on H.HotelID equals R.HotelID
                        join D in _context.RoomsDetails on R.RoomID equals D.RoomID
                        where (H.HotelCity.Contains(info.HotelNameOrCity) || H.HotelName.Contains(info.HotelNameOrCity))
-                                && D.OpenRoom == true
-                                && (D.RoomCount - D.RoomOrder) >= info.RoomCount
-                                && (D.RoomCount - D.RoomOrder) * R.NumberOfPeople >= people
-                                && D.CheckInDate >= start
-                                && D.CheckOutDate <= end
+                                //&& D.OpenRoom == true
+                                //&& (D.RoomCount - D.RoomOrder) >= info.RoomCount
+                                //&& (D.RoomCount - D.RoomOrder) * R.NumberOfPeople >= people
+                                //&& D.CheckInDate >= start
+                                //&& D.CheckOutDate <= end
                        select new HotelSearchViewModel
                        {
                            HotelID = H.HotelID,

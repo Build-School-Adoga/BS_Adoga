@@ -68,16 +68,16 @@ namespace BS_Adoga.Controllers
             var date = date_range.Split('-');
             var start = date[0];
             var end = date[1];
-            var peo = people.Split('位');
-            var ple = peo[0];
+            //var peo = people.Split('位');
+            //var ple = peo[0];
 
-          
-            var rmo = room.Split('間');
-            var rom = rmo[0];
-            var dik = kid.Split('位');
-            var kkk = dik[0];
-            var ddd = kkk.Split(',');
-            var kids = ddd[1];
+
+            //var rmo = room.Split('間');
+            //var rom = rmo[0];
+            //var dik = kid.Split('位');
+            //var kkk = dik[0];
+            //var ddd = kkk.Split(',');
+            //var kids = ddd[1];
             var Hotels = from p in _homeService._homeRepository._context.Hotels
                      where p.HotelCity == search
                      select p.HotelCity;
@@ -91,29 +91,29 @@ namespace BS_Adoga.Controllers
             var human = people.Split(',');
             var a = human[0].Split('位');
             var adu = int.Parse(a[0]);
-            var kid = 0;
-            
-            // if (Hotels.Count() >0)
+            var kids = 0;
+
+            //?? if (Hotels.Count() >0)
             if (human.Length > 1)
             {
                 var b = human[1].Split('位');
-                kid = int.Parse(b[0]);
+                kids = int.Parse(b[0]);
             }
 
             var rmo = room.Split('間');
             var rom = int.Parse(rmo[0]);
 
-            //Irene變更： 因為If-else裡面都會用TempData且資料都一樣 所以把它抽出來(不需要重複2次)
+            //Irene變更： 因為If - else裡面都會用TempData且資料都一樣 所以把它抽出來(不需要重複2次)
             TempData["start"] = start;
             TempData["end"] = end;
             TempData["ple"] = adu;
-            TempData["kid"] = kid;
+            TempData["kid"] = kids;
             TempData["rom"] = rom;
             TempData["data"] = data;
 
             if (search.Length == 3)
             {
-                TempData["search"] = search;
+                //TempData["search"] = search;
 
                 //Irene變更：傳遞資料的型別更改至SearchDataViewModel
                 SearchDataViewModel info = new SearchDataViewModel
@@ -122,28 +122,31 @@ namespace BS_Adoga.Controllers
                     CheckInDate = start,
                     CheckOutDate = end,
                     AdultCount = adu,
-                    KidCount = kid,
+                    KidCount = kids,
                     RoomCount = rom
                 };
                 return RedirectToAction("Search", "Search", info);
-                    /*TempData["search"] = search;                              
-                    TempData["start"] = start;
-                    TempData["end"] = end;
-                    TempData["ple"] = ple;
-                    TempData["rom"] = rom;
-                    TempData["data"] = data;
-                    TempData["kids"] = kids;
-            
-            
-               
-                return RedirectToAction("Search", "Search", new { search = TempData["search"] ,
-                    start= TempData["start"] ,
-                    end= TempData["end"],
-                    ple= TempData["ple"],
-                    rom= TempData["rom"],
-                    data= TempData["data"],
-                    kids=TempData["kids"]
-            });*/
+
+                //沒有用？？TempData["search"] = search;
+                //TempData["start"] = start;
+                //TempData["end"] = end;
+                //TempData["ple"] = ple;
+                //TempData["rom"] = rom;
+                //TempData["data"] = data;
+                //TempData["kids"] = kids;
+
+
+
+                //return RedirectToAction("Search", "Search", new
+                //{
+                //    search = TempData["search"],
+                //    start = TempData["start"],
+                //    end = TempData["end"],
+                //    ple = TempData["ple"],
+                //    rom = TempData["rom"],
+                //    data = TempData["data"],
+                //    kids = TempData["kids"]
+                //});
             }
             else
             {
@@ -152,13 +155,13 @@ namespace BS_Adoga.Controllers
                           select p.HotelID;
 
                    
-                    TempData["kids"] = kids;
+                //    TempData["kids"] = kids;
             
-                TempData["start"] = start;
-                TempData["end"] = end;
-                TempData["ple"] = ple;
-                TempData["rom"] = rom;
-                TempData["data"] = data;
+                //TempData["start"] = start;
+                //TempData["end"] = end;
+                //TempData["ple"] = ple;
+                //TempData["rom"] = rom;
+                //TempData["data"] = data;
                 
                 TempData["search"] = xxx.FirstOrDefault();
 
