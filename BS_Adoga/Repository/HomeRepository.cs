@@ -55,14 +55,18 @@ namespace BS_Adoga.Repository
             return images;
         }
 
-        public IQueryable<CardViewModels> GetCardModels(string cardlocal)
+            public IQueryable<CardViewModels> GetCardModels(string cardlocal)
         {
+            var city = from p in _context.Hotels
+                       where p.HotelCity == cardlocal
+                       select p.HotelCity;
             if (cardlocal == null)
             {
                 var images = (from p in _context.Hotels
                               join s in _context.HotelImages on p.HotelID equals s.HotelID
                               join d in _context.Rooms on p.HotelID equals d.HotelID
                               join z in _context.RoomsDetails on d.RoomID equals z.RoomID
+                              orderby p.HotelEngName
                               select new CardViewModels
                               {
                                   HotelID = p.HotelID,
@@ -95,8 +99,8 @@ namespace BS_Adoga.Repository
                 var images = (from p in _context.Hotels
                               join s in _context.HotelImages on p.HotelID equals s.HotelID
                               join d in _context.Rooms on p.HotelID equals d.HotelID
-                              join z in _context.RoomsDetails on d.RoomID equals z.RoomID
-                              orderby p.HotelID
+                              join z in _context.RoomsDetails on d.RoomID equals z.RoomID    
+                              orderby p.HotelEngName
                               select new CardViewModels
                               {
                                   HotelID = p.HotelID,
@@ -123,75 +127,75 @@ namespace BS_Adoga.Repository
                               }).Take(4);
                 return images;
 
-            }
-            else if (cardlocal.Length == 3)
+            }         
+            else if (city.Count()>0)
             {
                 var images = (from p in _context.Hotels
-                              join s in _context.HotelImages on p.HotelID equals s.HotelID
-                              join d in _context.Rooms on p.HotelID equals d.HotelID
-                              join z in _context.RoomsDetails on d.RoomID equals z.RoomID
+                             join s in _context.HotelImages on p.HotelID equals s.HotelID
+                             join d in _context.Rooms on p.HotelID equals d.HotelID
+                             join z in _context.RoomsDetails on d.RoomID equals z.RoomID
                               where p.HotelCity.Contains(cardlocal)
                               select new CardViewModels
-                              {
-                                  HotelID = p.HotelID,
-                                  HotelName = p.HotelName,
-                                  HotelCity = p.HotelCity,
-                                  Star = p.Star,
+                             {
+                                 HotelID = p.HotelID,
+                                 HotelName = p.HotelName,
+                                 HotelCity = p.HotelCity,
+                                 Star = p.Star,
 
-                                  My_HotelImages = new MyHoteiImages
-                                  {
-                                      HotelID = p.HotelID,
-                                      ImageID = s.ImageID,
-                                      ImageURL = s.ImageURL
-                                  },
-                                  My_Rooms = new MyRoom
-                                  {
-                                      HotelID = p.HotelID,
-                                      RoomPrice = d.RoomPrice
-                                  },
-                                  My_RoomsDetails = new MyRoomsDetails
-                                  {
-                                      RoomID = d.RoomID,
-                                      RoomDiscount = z.RoomDiscount
-                                  }
-                              }).Take(4);
+                                 My_HotelImages = new MyHoteiImages
+                                 {
+                                     HotelID = p.HotelID,
+                                     ImageID = s.ImageID,
+                                     ImageURL = s.ImageURL
+                                 },
+                                 My_Rooms = new MyRoom
+                                 {
+                                     HotelID = p.HotelID,
+                                     RoomPrice = d.RoomPrice
+                                 },
+                                 My_RoomsDetails = new MyRoomsDetails
+                                 {
+                                     RoomID = d.RoomID,
+                                     RoomDiscount = z.RoomDiscount
+                                 }
+                             }).Take(4);
                 return images;
             }
             else
             {
                 var images = (from p in _context.Hotels
-                              join s in _context.HotelImages on p.HotelID equals s.HotelID
-                              join d in _context.Rooms on p.HotelID equals d.HotelID
-                              join z in _context.RoomsDetails on d.RoomID equals z.RoomID
+                             join s in _context.HotelImages on p.HotelID equals s.HotelID
+                             join d in _context.Rooms on p.HotelID equals d.HotelID
+                             join z in _context.RoomsDetails on d.RoomID equals z.RoomID
                               where p.HotelName.Contains(cardlocal)
                               select new CardViewModels
-                              {
-                                  HotelID = p.HotelID,
-                                  HotelName = p.HotelName,
-                                  HotelCity = p.HotelCity,
-                                  Star = p.Star,
+                             {
+                                 HotelID = p.HotelID,
+                                 HotelName = p.HotelName,
+                                 HotelCity = p.HotelCity,
+                                 Star = p.Star,
 
-                                  My_HotelImages = new MyHoteiImages
-                                  {
-                                      HotelID = p.HotelID,
-                                      ImageID = s.ImageID,
-                                      ImageURL = s.ImageURL
-                                  },
-                                  My_Rooms = new MyRoom
-                                  {
-                                      HotelID = p.HotelID,
-                                      RoomPrice = d.RoomPrice
-                                  },
-                                  My_RoomsDetails = new MyRoomsDetails
-                                  {
-                                      RoomID = d.RoomID,
-                                      RoomDiscount = z.RoomDiscount
-                                  }
-                              }).Take(4);
+                                 My_HotelImages = new MyHoteiImages
+                                 {
+                                     HotelID = p.HotelID,
+                                     ImageID = s.ImageID,
+                                     ImageURL = s.ImageURL
+                                 },
+                                 My_Rooms = new MyRoom
+                                 {
+                                     HotelID = p.HotelID,
+                                     RoomPrice = d.RoomPrice
+                                 },
+                                 My_RoomsDetails = new MyRoomsDetails
+                                 {
+                                     RoomID = d.RoomID,
+                                     RoomDiscount = z.RoomDiscount
+                                 }
+                             }).Take(4);
                 return images;
             }
 
-
+          
         }
         public IEnumerable<MyHotels> GetHotelModels()
         {
@@ -206,7 +210,7 @@ namespace BS_Adoga.Repository
                         };
             return hotel.ToList();
         }
-
+    
         //public demoshopViewModels Getcards()
         //{
         //    demoshopViewModels productss = new demoshopViewModels()

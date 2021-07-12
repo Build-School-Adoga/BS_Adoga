@@ -147,40 +147,40 @@
                     <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
                 </button>
                 @*0629新增登入測試區塊*@
-            <div class="loginbuttonwithfa">
-                @*fb內建的button*@
-                @*<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" autologoutlink="true">
-        </fb:login-button>*@
+                <div class="loginbuttonwithfa">
+                    @*fb內建的button*@
+                    @*<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" autologoutlink="true">
+                        </fb:login-button>*@
 
 
-                @*0703line登入*@
-                @*<script>
-                    function LineAuth() {
-                        var URL = 'https://access.line.me/oauth2/v2.1/authorize?';
-                        URL += 'response_type=code';
-                        URL += '&client_id=1656167198';
-                        URL += '&redirect_uri= https://localhost:44352/MemberLogin/MemberLogin/callback';
-                        URL += '&state=abcde';
-                        URL += '&scope=profile%20openid%20email';
-                        window.location.href = URL;
-                    }
-                </script>*@
-                <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-card" onclick="FBLoginReal();">
-                    <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
-                    Facebook
-                </button>
-                <button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="location.href='@Url.Action("LineLoginDirect")'">
-                    <img src="~/Asset/images/btn_base.png" alt="">
-                    Line
-                </button>
-                @*<a href="@Url.Action("LineLoginDirect")">
-                    <img src="~/Asset/images/btn_base.png" alt="">
-                </a>*@
-                @*<button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="FacebookLogout();">
-            <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt="">
-            logout
-        </button>*@
-            </div>
+                    @*0703line登入*@
+                    @*<script>
+                            function LineAuth() {
+                                var URL = 'https://access.line.me/oauth2/v2.1/authorize?';
+                                URL += 'response_type=code';
+                                URL += '&client_id=1656167198';
+                                URL += '&redirect_uri= https://localhost:44352/MemberLogin/MemberLogin/callback';
+                                URL += '&state=abcde';
+                                URL += '&scope=profile%20openid%20email';
+                                window.location.href = URL;
+                            }
+                        </script>*@
+                    <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-card" onclick="FBLoginReal();">
+                        <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
+                        Facebook
+                    </button>
+                    <button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="location.href='@Url.Action("LineLoginDirect")'">
+                        <img src="~/Asset/images/btn_base.png" alt="">
+                        Line
+                    </button>
+                    @*<a href="@Url.Action("LineLoginDirect")">
+                            <img src="~/Asset/images/btn_base.png" alt="">
+                        </a>*@
+                    @*<button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="FacebookLogout();">
+                            <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt="">
+                            logout
+                        </button>*@
+                </div>
             </div>
 
             <div class="youshouldknow">
@@ -218,21 +218,35 @@
                 <p>或</p>
             </div>
             <div class="modal-body">
-                <!-- 忘記密碼內容 -->
-                <div class="mb-3" id="aaa">
-                    <label for="ForgetPassword" class="form-label">電子信箱</label>
-                    <input type="email" class="form-control" id="ForgetPassword" aria-describedby="emailHelp"
-                           placeholder="電子信箱">
-                    <p>請於上方欄位輸入您的電子信箱 協助您找回密碼的操作說明將會寄至您的電子信箱。</p>
-                </div>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="button">
-                        重設密碼
-                    </button>
-                </div>
-                <div class="ForgetPasswordtoLogin">
-                    <a href="#model" data-bs-toggle="modal" data-bs-target="#SigninModal" id="ForgetPasswordtoLogin">登入這邊請</a>
-                </div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <form>
+                        <!-- 忘記密碼內容 -->
+                        <div class="mb-3" id="aaa">
+                            @*<label for="ForgetPassword" class="form-label">電子信箱</label>
+                                <input type="email" name="useremail" class="form-control" id="ForgetPassword" aria-describedby="emailHelp"
+                                       placeholder="電子信箱">*@
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(model => model.ForgetPasswordViewModel.Email)
+                                @Html.EditorFor(model => model.ForgetPasswordViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
+                                @Html.ValidationMessageFor(model => model.ForgetPasswordViewModel.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <p>請於上方欄位輸入您的電子信箱 協助您找回密碼的操作說明將會寄至您的電子信箱。</p>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit" name="useremail">
+                                重設密碼
+                            </button>
+                        </div>
+                        <div class="ForgetPasswordtoLogin">
+                            <a href="#model" data-bs-toggle="modal" data-bs-target="#SigninModal" id="ForgetPasswordtoLogin">登入這邊請</a>
+                        </div>
+                    </form>
+                }
+
+
             </div>
         </div>
     </div>
@@ -319,6 +333,7 @@
                                        id="EmailLogintoForgetPassword"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
                                 </div>
                             </form>
+
                         }
                     </div>
 
@@ -575,7 +590,52 @@
         </div>
     </div>
 </div>
+<!-- -------------------------------------------------------------------------------------------------------------- -->
+<!-- 第四個Modal -->
+<!-- 重設密碼 -->
+<!-- Button trigger modal -->
+@*維修用按鈕*@
+@*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ResetPasswordModal">
+        Launch demo modal
+    </button>*@
 
+<!-- Modal -->
+<div class="modal fade" id="ResetPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">請為此帳號設定一組新密碼</h5>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                    <div class="mb-3 form-group">
+                        @Html.LabelFor(model => model.ResetPasswordViewModel.Password)
+                        @Html.EditorFor(model => model.ResetPasswordViewModel.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "Password" }, { "aria-describedby", "emailHelp" }, } })
+                        @Html.ValidationMessageFor(model => model.ResetPasswordViewModel.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="mb-3 form-group">
+                        @Html.LabelFor(model => model.ResetPasswordViewModel.ConfirmPassword)
+                        @Html.EditorFor(model => model.ResetPasswordViewModel.ConfirmPassword, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "ConfirmPassword" }, { "aria-describedby", "emailHelp" }, } })
+                        @Html.ValidationMessageFor(model => model.ResetPasswordViewModel.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="robot">
+                        <div class="g-recaptcha"
+                             data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit" name="ResetPassword">
+                            變更密碼
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 @section endJS{
     <script>
         //程式碼區域
@@ -590,21 +650,31 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <!--bear新增的主畫面大登入表單 -->
     @*<script>
-        let EmailLogintoForgetPasswordcard = document.getElementById('EmailLogintoForgetPassword-card')
-        EmailLogintoForgetPasswordcard.addEventListener('click', function () {
-            $('#SigninModal').modal('hide');
+            let EmailLogintoForgetPasswordcard = document.getElementById('EmailLogintoForgetPassword-card')
+            EmailLogintoForgetPasswordcard.addEventListener('click', function () {
+                $('#SigninModal').modal('hide');
 
-        })
-    </script>*@
+            })
+        </script>*@
     <!-- bear電子郵件登入到註冊 -->
     @*<script>
-        let EmailLogintoRegistercard = document.getElementById('EmailLogintoRegister-card')
-        EmailLogintoRegistercard.addEventListener('click', function () {
-            $('#SigninModal').modal('hide');
+            let EmailLogintoRegistercard = document.getElementById('EmailLogintoRegister-card')
+            EmailLogintoRegistercard.addEventListener('click', function () {
+                $('#SigninModal').modal('hide');
 
-        })
-    </script>*@
+            })
+        </script>*@
     PhoneLogintoForgetPassword-card
+    <script>
+        window.addEventListener("load", function (event) {
+            // All resources finished loading!'
+            if (window.location.toString().includes("email")) {
+                $('#ResetPasswordModal').modal('show');
+
+            }
+
+        });
+    </script>
     <!--電子郵件登入到忘記密碼 -->
     <script>
         let EmailLogintoForgetPassword = document.getElementById('EmailLogintoForgetPassword')
@@ -656,12 +726,12 @@
     </script>
     <!-- 電子郵件註冊到登入 -->
     @*<script>
-        let SignintoPhone = document.getElementById('SignintoPhone')
-        SignintoPhone.addEventListener('click', function () {
-            $('#RegisterModal').modal('hide');
-            $('#SigninModal').modal('show');
-        })
-    </script>*@
+            let SignintoPhone = document.getElementById('SignintoPhone')
+            SignintoPhone.addEventListener('click', function () {
+                $('#RegisterModal').modal('hide');
+                $('#SigninModal').modal('show');
+            })
+        </script>*@
 
     <script>
         //官方script
@@ -722,20 +792,20 @@
                             'fields': 'id,name,email,picture'
                         }, function (response) {
                             console.log(response.name);
-                                console.log(response.email);
-                                console.log(response.picture);
+                            console.log(response.email);
+                            console.log(response.picture);
                             console.log(response);
-                                $.ajax({
-                                    url: "https://adoga.azurewebsites.net/MemberLogin/FacebookLoginAPI",
-                                    method: "post",
-                                    data: { Id: response.email, Name: response.name, Email: response.email, Picture: response.picture },
-                                    
-                                    success: function (msg) {
-                                        console.log(msg);
-                                        document.location.href = "https://adoga.azurewebsites.net";
-                                    }
-                                });
-                             /*   window.loction.href = "https://localhost:44352/";*/
+                            $.ajax({
+                                url: "https://adoga.azurewebsites.net/MemberLogin/FacebookLoginAPI",
+                                method: "post",
+                                data: { Id: response.email, Name: response.name, Email: response.email, Picture: response.picture },
+
+                                success: function (msg) {
+                                    console.log(msg);
+                                    document.location.href = "https://adoga.azurewebsites.net";
+                                }
+                            });
+                            /*   window.loction.href = "https://localhost:44352/";*/
                         });
                     } else {
                         // user FB取消授權

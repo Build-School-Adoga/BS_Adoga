@@ -56,20 +56,37 @@ namespace BS_Adoga.Controllers
         public ActionResult HomePage(string cardlocal)
         {
             var images = _homeService.ALLImages(cardlocal);
-
             ViewBag.Error = "這是錯誤訊息";
-            return View(images);
+            return PartialView("_SimpleCardPartial", images);
 
         }
 
 
         [HttpPost]
-        public ActionResult Search(string search, string date_range, string people, string room, string data, string cardlocal)
+        public ActionResult Search(string search, string date_range, string people, string room,string kid, string data, string cardlocal)
         {
+            var date = date_range.Split('-');
+            var start = date[0];
+            var end = date[1];
+            var peo = people.Split('位');
+            var ple = peo[0];
+
+          
+            var rmo = room.Split('間');
+            var rom = rmo[0];
+            var dik = kid.Split('位');
+            var kkk = dik[0];
+            var ddd = kkk.Split(',');
+            var kids = ddd[1];
+            var Hotels = from p in _homeService._homeRepository._context.Hotels
+                     where p.HotelCity == search
+                     select p.HotelCity;
             string[] date = date_range.Split('-');
             string start = date[0];
             string end = date[1];
 
+            
+            if (Hotels.Count() >0)
             string[] peo = people.Split('位');
             int adu = int.Parse(peo[0]);
 
@@ -106,6 +123,24 @@ namespace BS_Adoga.Controllers
                     RoomCount = rom
                 };
                 return RedirectToAction("Search", "Search", info);
+                    TempData["search"] = search;                              
+                    /*TempData["start"] = start;
+                    TempData["end"] = end;
+                    TempData["ple"] = ple;
+                    TempData["rom"] = rom;
+                    TempData["data"] = data;
+                    TempData["kids"] = kids;
+            
+            
+               
+                return RedirectToAction("Search", "Search", new { search = TempData["search"] ,
+                    start= TempData["start"] ,
+                    end= TempData["end"],
+                    ple= TempData["ple"],
+                    rom= TempData["rom"],
+                    data= TempData["data"],
+                    kids=TempData["kids"]
+            });*/
             }
             else
             {
@@ -126,7 +161,18 @@ namespace BS_Adoga.Controllers
                     adult = TempData["ple"],
                     child = TempData["kid"]
                 });
+                   
+                    /*TempData["kids"] = kids;
+            
+                TempData["start"] = start;
+                TempData["end"] = end;
+                TempData["ple"] = ple;
+                TempData["rom"] = rom;
+                TempData["data"] = data;
+                
+                TempData["search"] = xxx.FirstOrDefault();*/
 
+                //return RedirectToAction("Detail", "HotelDetail", search);
             }
 
             var card = _homeService.ALLImages(cardlocal);
