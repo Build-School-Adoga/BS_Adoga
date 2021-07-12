@@ -3,8 +3,8 @@
 @{
     var room = Model;
     var discount = Math.Round((1 - room.RoomDiscount) * 10, 1);
-    var roomPrice = Math.Round(room.RoomPrice, 0, MidpointRounding.AwayFromZero);
-    var roomNowPrice = Math.Round(room.RoomNowPrice, 0, MidpointRounding.AwayFromZero);
+    var roomPrice = Math.Ceiling(room.RoomPrice); //Math.Round(room.RoomPrice, 0, MidpointRounding.AwayFromZero);
+    var roomNowPrice = Math.Ceiling(room.RoomNowPrice); //Math.Round(room.RoomNowPrice, 0, MidpointRounding.AwayFromZero);
 }
 <div class="room-type mb-4">
     <div class="room-type-title">
@@ -134,11 +134,12 @@
                         <p class="color-gray fz-12">每晚低至</p>
                     </div>
                     <div class="col-1 pt-2 text-center">
+                        @*<p>@room.RoomOrder</p>*@
                         <select name="" id="">
-                            <option value="2" selected>2</option>
+                            <option value="@room.RoomOrder" selected>@room.RoomOrder</option>
                             @*<option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>*@
+                                <option value="2">2</option>
+                                <option value="3">3</option>*@
                         </select>
                     </div>
                     <div class="col-3 pt-2 text-end">
@@ -154,7 +155,7 @@
                             roomOrder = 2,
                             roomPrice = roomPrice,
                             roomDiscount = discount,
-                            roomNowPrice = Math.Round(room.RoomNowPrice *2, 0, MidpointRounding.AwayFromZero)                                
+                            roomNowPrice = Math.Round(room.RoomNowPrice * 2, 0, MidpointRounding.AwayFromZero)
                          }, new { @class = "keep-btn btn fz-14 py-2 mb-2" })
                         @*<button class="keep-btn btn fz-14 py-2 mb-2">保留</button>*@
                         <button class="cart-btn btn fz-14 py-2 mb-5">加入購物車</button>
@@ -167,4 +168,3 @@
         </div>
     </div>
 </div>
-
