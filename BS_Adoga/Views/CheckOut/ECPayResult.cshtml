@@ -23,6 +23,10 @@
                         <th scope="row" class="table-active">付款時間</th>
                         <td>@Html.DisplayFor(model => model.PaymentDate)</td>
                     </tr>
+                    <tr>
+                        <th scope="row" class="table-active">付款方式</th>
+                        <td>@Html.DisplayFor(model => model.PaymentType)</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -36,8 +40,8 @@
                         <td scope="col" class="text-end">小計 Subtotal</td>
                     </tr>
                     <tr>
-                        <td scope="col" class="text-start">Test</td>
-                        <td scope="col" class="text-end">NT$@Html.DisplayFor(model => model.TradePrice)</td>
+                        <td scope="col" class="text-start">@Html.DisplayFor(model => model.HotelName)</td>
+                        <td scope="col" class="text-end">NT$@Html.DisplayFor(model => model.Price)</td>
                     </tr>
                 </tbody>
             </table>

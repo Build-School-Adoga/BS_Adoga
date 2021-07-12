@@ -295,11 +295,13 @@ namespace BS_Adoga.Controllers
                 // 回覆成功訊息。
                 if (enErrors.Count() == 0)
                 {
+                    
                     //ECPayResultsViewModel PayResult = new ECPayResultsViewModel();
                     PayResult.OrderId = (string)htFeedback["MerchantTradeNo"];
                     PayResult.TradeDate = (string)htFeedback["TradeDate"];
                     PayResult.PaymentDate = (string)htFeedback["PaymentDate"];
                     PayResult.TradePrice = (string)htFeedback["TradeAmt"];
+                    PayResult.PaymentType = (string)htFeedback["PaymentType"];                 
                     TempData["PayResult"] = PayResult;
 
                     //更新付款資訊
@@ -333,6 +335,7 @@ namespace BS_Adoga.Controllers
 
         public ActionResult ECPayResult(ECPayResultsViewModel model)
         {
+
             model = (ECPayResultsViewModel)TempData["PayResult"];
             return View(model);
         }
