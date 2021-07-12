@@ -176,7 +176,7 @@ namespace BS_Adoga.Controllers
                 //TempData["rom"] = rom;
                 //TempData["data"] = data;
                 
-                TempData["search"] = xxx.FirstOrDefault();
+                //TempData["search"] = xxx.FirstOrDefault();
 
                 //return RedirectToAction("Detail", "HotelDetail", search);
             }
