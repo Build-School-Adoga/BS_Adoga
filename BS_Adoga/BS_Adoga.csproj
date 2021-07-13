@@ -2352,8 +2352,10 @@
     <Content Include="Views\Shared\_FunctionPage.cshtml" />
     <Content Include="Views\Function\Index.cshtml" />
     <Content Include="Views\Function\HotelIndex.cshtml" />
-    <Content Include="Views\Function\HotelLList.cshtml" />
+    <Content Include="Views\Function\HotelList.cshtml" />
     <Content Include="Views\Function\HotelCreate.cshtml" />
+    <Content Include="Views\Function\HotelDetails.cshtml" />
+    <Content Include="Views\Function\HotelEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIController\" />

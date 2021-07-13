@@ -2,7 +2,7 @@
 @model BS_Adoga.Models.ViewModels.HotelLogin.HotelCreateViewModel
 @using BS_Adoga.Models.ViewModels.HotelLogin
 @{
-    ViewBag.Title = "HotelCreate";
+    ViewBag.Title = "HotelEdit";
     Layout = "~/Views/Shared/_FunctionPage.cshtml";
 
 }
@@ -21,7 +21,7 @@
         });
     </script>
 }
-<h2>HotelCreate</h2>
+<h2>HotelEdit</h2>
 
 @using (Html.BeginForm())
 {
@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HotelID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HotelID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.HotelID, new { htmlAttributes = new { @class = "form-control" , @disabled = "disabled" } })
                 @Html.ValidationMessageFor(model => model.HotelID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -110,10 +110,21 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="建立" class="btn btn-primary" />
-                @Html.ActionLink("返回列表", "HotelIndex", null, htmlAttributes: new { @class = "btn btn-warning" })
+            @Html.LabelFor(model => model.Logging, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Logging, new { htmlAttributes = new { @class = "form-control" , @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Logging, "", new { @class = "text-danger" })
             </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="儲存" class="btn btn-primary" /> |
+                @Html.ActionLink("詳細資料", "HotelDetails", new { hotelid = Model.HotelID }, htmlAttributes: new { @class = "btn btn-info" }) |
+                @Html.ActionLink("刪除", "HotelDelete", new { hotelid = Model.HotelID }, htmlAttributes: new { @class = "btn btn-danger" }) |
+                @Html.ActionLink("返回列表", "HotelIndex",null, htmlAttributes: new { @class = "btn btn-warning" })
+            </div>
+            
         </div>
     </div>
 }

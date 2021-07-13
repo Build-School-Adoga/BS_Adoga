@@ -50,5 +50,8 @@ namespace BS_Adoga.Models.ViewModels.HotelLogin
         [Required]
         [Display(Name = "¬P¯Å")]
         public int Star { get; set; }
+
+        [Display(Name = "¬ö¿ý")]
+        public string Logging { get; set; }
     }
 }

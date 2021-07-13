@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -112,11 +114,109 @@ namespace BS_Adoga.Controllers
             return View(HotelCreateVM);
         }
 
-        public ActionResult HotelLList()
+        public ActionResult HotelList()
         {
             return View(_context.Hotels.ToList());
         }
 
+        public ActionResult HotelDetails(string hotelid)
+        {
+            if (hotelid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Hotel hotel = _context.Hotels.Find(hotelid);
+
+            if (hotel == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(hotel);
+        }
+
+        public ActionResult HotelEdit(string hotelid)
+        {
+            if (hotelid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Hotel hotel = _context.Hotels.Find(hotelid);
+            HotelCreateViewModel hotelCreateVM = new HotelCreateViewModel() 
+            {
+                HotelID = hotel.HotelID,
+                HotelName = hotel.HotelName,
+                HotelEngName = hotel.HotelEngName,
+                HotelCity = hotel.HotelCity,
+                HotelDistrict = hotel.HotelDistrict,
+                HotelAddress = hotel.HotelAddress,
+                HotelAbout = hotel.HotelAbout,
+                Longitude = hotel.Longitude,
+                Latitude = hotel.Latitude,
+                Star = hotel.Star,
+                Logging = hotel.Logging
+            };
+            if (hotel == null)
+            {
+                return HttpNotFound();
+            }
+
+            List<SimpleZipCodeVM> Citys = JsonConvert.DeserializeObject<List<SimpleZipCodeVM>>(_service.CityJSON());
+            List<SelectListItem> firstitems = new List<SelectListItem>();
+            List<SelectListItem> seconditems = new List<SelectListItem>();
+            foreach (var item in Citys)
+            {
+                firstitems.Add(new SelectListItem()
+                {
+                    Text = item.city,
+                    Value = item.city,
+                    Selected = item.city.Equals(hotel.HotelCity)
+                });
+                if (item.city == hotel.HotelCity)
+                {
+                    foreach (var item2 in item.districts)
+                        seconditems.Add(new SelectListItem()
+                        {
+                            Text = item2.district,
+                            Value = item2.district,
+                            Selected = item2.district.Equals(hotel.HotelDistrict)
+                        });
+                }
+            }
+            ViewBag.firstitems = firstitems;
+            ViewBag.seconditems = seconditems;
+
+            return View(hotelCreateVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HotelEdit(HotelCreateViewModel hotelCreateVM)
+        {
+            #region 重構後的作法
+            if (ModelState.IsValid)
+            {
+                var service = new FunctionService();
+                var result = service.HotelEdit(hotelCreateVM, User.Identity.Name);
+                if (result.IsSuccessful)
+                {
+                    return RedirectToAction("HotelIndex");
+                }
+                else
+                {
+                    var Log = result.WriteLog();
+                    return Content("編輯失敗:" + Log);
+                }
+                //return View(hotelCreateVM);
+            }
+            else
+            {
+                return View(hotelCreateVM);
+            }
+            #endregion
+        }
+
+        //第二個區動態取得資料
         public ActionResult SecondItems(string city)
         {
             List<SimpleZipCodeVM> Citys = JsonConvert.DeserializeObject<List<SimpleZipCodeVM>>(_service.CityJSON());
