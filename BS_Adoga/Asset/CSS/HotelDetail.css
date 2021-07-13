@@ -607,7 +607,56 @@ nav[aria-label='breadcrumb'] {
     font-size: 12px;
     color: rgb(141, 141, 141);
 }
+.no-room-type {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid rgb(211, 211, 211);
+    /* background-color: rgb(70, 70, 70); */
+    border-radius: 5px;
+}
 
+    .no-room-type p {
+        text-align: center;
+        font-size: 30px;
+        color: rgb(194, 193, 193);
+    }
+
+    .no-room-type i.fa-home {
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 60px;
+        color: rgb(194, 193, 193);
+        animation-name: shake-icon;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in;
+    }
+
+@keyframes shake-icon {
+    0% {
+        transform: rotate(10deg);
+    }
+
+    25% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    75% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+        color: rgba(0, 0, 0, 0);
+    }
+}
 .room-type {
     border: 1px solid rgba(201, 201, 201, 0.671);
 }

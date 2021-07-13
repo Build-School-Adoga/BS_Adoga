@@ -158,7 +158,7 @@ namespace BS_Adoga.Controllers
                 //TempData["search"] = xxx.FirstOrDefault();
                 TempData["search"] = search;
 
-                return RedirectToAction("Detail", "HotelDetail", new
+                return RedirectToAction("HotelDetail", "HotelDetail", new
                 {
                     hotelName = TempData["search"],
                     startDate = TempData["start"],

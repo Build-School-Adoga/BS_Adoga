@@ -9,10 +9,16 @@ var hoverEquimServ = new Vue({
 $().ready(function () {
 
     //一開始載入頁面時要帶入Room的全部資料
-    axios.get('https://localhost:44352/api/HotelDetail/GetAllRoom')
-        .then(function (response) {
-            console.log("j");
-            console.log(response.data);
+    axios.get('https://localhost:44352/api/HotelDetail/GetAllRoom', {
+        params: {
+            hotelName: filternav.Value,
+            startDate: filternav.startDate,
+            endDate: filternav.endDate,
+            orderRoom: filternav.room,
+            adult: filternav.adult,
+            child: filternav.kids,
+        }
+    }).then(function (response) {
             appendRoomType(response.data);
         }).catch((error) => console.log(error))
 
@@ -23,7 +29,6 @@ $().ready(function () {
         data: function () {
             return {
                 bookingRoom: this.room.RoomID
-
             }
         }
     })
@@ -53,12 +58,17 @@ $().ready(function () {
             filter() {
                 axios.get('https://localhost:44352/api/HotelDetail/GetSpecificRoom', {
                     params: {
+                        hotelName: filternav.Value,
+                        startDate: filternav.startDate,
+                        endDate: filternav.endDate,
+                        orderRoom: filternav.room,
+                        adult: filternav.adult,
+                        child: filternav.kids,
                         freeBreakfast: this.FreeBreakfast,
                         noSmoking: this.NoSmoking,
                         family: this.FamilyRoom,
                     }
                 }).then(function (response) {
-                    console.log(response.data);
                     appendRoomType(response.data)
                 }).catch((error) => console.log(error))
             },
@@ -90,12 +100,12 @@ $().ready(function () {
             //給RoomBed[]塞物件 方法1
             var roomBed = [];
             var bedTypeStr = '';
-            (item.RoomBed).forEach((bed,index) => {
+            (item.RoomBed).forEach((bed, index) => {
                 roomBed.push({
                     Name: bed.Name,
                     Amount: bed.Amount
                 })
-                if (index != item.RoomBed.length-1)
+                if (index != item.RoomBed.length - 1)
                     bedTypeStr += bed.Name + ","
                 else
                     bedTypeStr += bed.Name

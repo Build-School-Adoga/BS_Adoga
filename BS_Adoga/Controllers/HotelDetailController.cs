@@ -26,14 +26,21 @@ namespace BS_Adoga.Controllers
         }
 
         // GET: HotelDetail
-        public ActionResult Detail(string hotelName = "台中商旅", string startDate = "2021-06-20", string endDate = "2021-06-22", int orderRoom = 2, int adult = 1, int child = 0)
+        public ActionResult HotelDetail(string hotelName, string startDate, string endDate, int orderRoom, int adult, int child)
         {
+
             //ViewData["CityOrName"] = hotelName;
             //ViewData["sDate"] = startDate;
             //ViewData["end"] = endDate;
             //ViewData["adult"] = adult;
             //ViewData["kid"] = child;
             //ViewData["room"] = orderRoom;
+
+            if (hotelName == null || startDate == null || endDate ==null || orderRoom == 0 || adult == 0 )
+            {
+                return Content("請在搜尋框選好全部欄位的資料，才可幫您進行飯店查詢喔。");
+            }
+
             DateTime checkInDate = DateTime.Parse(startDate);
             DateTime checkOutDate = DateTime.Parse(endDate);
             SearchByMemberVM searchData = new SearchByMemberVM()
@@ -60,29 +67,34 @@ namespace BS_Adoga.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //hotelDetail = _service.GetDetailVM("hotel04"); //應該做報錯
 
-            return View(hotelDetail);
+            return View("Detail",hotelDetail);
         }
 
         public ActionResult GetTempData(string search, string date_range, string people, string room)
         {
-            var human = people.Split(',');
-            var a = human[0].Split('位');
-            var b = human[1].Split('位');
-            var adult = int.Parse(a[0]);
-            var kid = int.Parse(b[0]);
+            string[] human = people.Split(',');
+            string[] adultSplit = human[0].Split('位');
+            string[] kidSplit =new string[1];
+            int adult = int.Parse(adultSplit[0]);
+            int kid = 0;
+            if (human.Length > 1)
+            {
+                kidSplit = human[1].Split('位');
+                kid = int.Parse(kidSplit[0]);
+            }
 
-            var r = room.Split('間');
+            string[] roomSplit = room.Split('間');
 
-            var date = date_range.Split('-');
-            var start = date[0];
-            var end = date[1];
+            string[] date = date_range.Split('-');
+            string start = date[0];
+            string end = date[1];
 
-            return RedirectToAction("Detail", new
+            return RedirectToAction("HotelDetail", new
             {
                 hotelName = search,
                 startDate = start,
                 endDate = end,
-                orderRoom = int.Parse(r[0]),
+                orderRoom = int.Parse(roomSplit[0]),
                 adult = adult,
                 child = kid
             });
