@@ -168,6 +168,8 @@ namespace BS_Adoga.Controllers
             return RedirectToAction("HomePage", "Home");
         }
         #endregion
+
+        #region Facebook登入
         public ActionResult FacebookLogin(MixMemberLoginViewModel loginVM)
         {
             if (!ModelState.IsValid)
@@ -223,7 +225,9 @@ namespace BS_Adoga.Controllers
             //5.Response.Redirect
             return RedirectToAction("HomePage", "Home");
         }
-        #region facebook登入
+        #endregion
+
+        #region facebook註冊
         [HttpPost]
         public async Task<ActionResult> FacebookLoginAPI(string Id, string Name, string Email, string Picture)
         {
@@ -301,7 +305,6 @@ namespace BS_Adoga.Controllers
 
         }
         #endregion
-
 
         #region GoogleLogin(Google登入)
         [HttpPost]
@@ -417,6 +420,7 @@ namespace BS_Adoga.Controllers
             return Content("OK");
         }
         #endregion
+
         #region LineLogin
         string redirect_uri = "https://localhost:44352/MemberLogin/callback";
         string client_id = "1656167198";
@@ -623,6 +627,8 @@ namespace BS_Adoga.Controllers
             return RedirectToAction("HomePage", "Home");
         }
         #endregion
+
+        #region 寄送email
         public ActionResult SendEmail()
         {
             return View();
@@ -658,6 +664,9 @@ namespace BS_Adoga.Controllers
 
             return View();
         }
+        #endregion
+
+        #region 重設密碼
         public ActionResult ResetPassword()
         {
             return View();
@@ -676,14 +685,10 @@ namespace BS_Adoga.Controllers
             AdogaContext db = new AdogaContext();
             var data = db.Customers.Find(email = email);
             data.MD5HashPassword = HashService.MD5Hash(FirstPassword);
-
-            data = db.Customers.Find(email = email);
             db.SaveChanges();
-
-
-
             return RedirectToAction("HomePage", "Home");
 
         }
+        #endregion
     }
 }
