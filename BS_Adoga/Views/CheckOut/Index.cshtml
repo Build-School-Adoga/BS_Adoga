@@ -111,7 +111,7 @@
                                 </select>*@
                             @{
                                 List<SelectListItem> country = new List<SelectListItem>
-                                                                                                        {
+                                                                                                                        {
                                         new SelectListItem { Text = "台灣", Value = "台灣", Selected = true},
                                         new SelectListItem { Text = "日本", Value = "日本" },
                                         new SelectListItem { Text = "韓國", Value = "韓國" },
@@ -248,7 +248,7 @@
                                 </select>*@
                             @{
                                 List<SelectListItem> arrivingTime = new List<SelectListItem>
-                                                                                                        {
+                                                                                                                        {
                                         new SelectListItem { Text = "還不確定", Value = "還不確定", Selected = true},
                                         new SelectListItem { Text = "00:00 - 01:00", Value = "00:00 - 01:00" },
                                         new SelectListItem { Text = "01:00 - 02:00", Value = "01:00 - 02:00" }
@@ -312,13 +312,13 @@
             <!--房型資訊-->
             <div class="col border border-2 bg-white mb-3">
                 <div class="m-2 d-flex justify-content-between">
-                    <div>2021-06-20 ~ 2021-06-22 </div>
+                    <div>@hotelAndRoom.CheckInDate ~ @hotelAndRoom.CheckOutDate</div>
                     <div>@hotelAndRoom.CountNight 晚</div>
                 </div>
                 <div class="line"></div>
                 <div class="m-2">
                     @hotelAndRoom.RoomOrder 間房，@hotelAndRoom.Adult 位大人
-                    <div class="col-12">@hotelAndRoom.Adult 位大人</div>
+                    <div class="col-12">@hotelAndRoom.Adult 位大人， @hotelAndRoom.Child 位小孩</div>
                 </div>
             </div>
             <!--金額資訊-->
@@ -328,10 +328,9 @@
                     <div>NT$ @hotelAndRoom.TotalPrice</div>
                 </div>
                 @*<div class="line"></div>
-                <div class="m-2 d-flex justify-content-between">
-                    <div>含稅總價</div>
-                    <div>NT$4,158.00</div>*@
-                </div>
+                    <div class="m-2 d-flex justify-content-between">
+                        <div>含稅總價</div>
+                        <div>NT$4,158.00</div>*@
             </div>
         </div>
     </div>

@@ -69,20 +69,20 @@ namespace BS_Adoga.Controllers
                 string email = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.Email);
                 string ConfirmEmail = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.ConfirmEmail);
                 string phonenumber = HttpUtility.HtmlEncode(orderVM.checkOutListViewModel.PhoneNumber);
-                string customerId = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+                //string customerId = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
 
-                //string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
-                //UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
-                //string customerId = UserCookie.Id;
+                string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+                UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+                string customer = UserCookie.Id;
 
                 Order od = new Order()
                 {
                     OrderID = "Adoga" + DateTime.Now.ToString("yyyyMMddHHmmss") + new Random().Next(0, 10).ToString(),
-                    CustomerID = customerId,
+                    CustomerID = customer,
                     RoomID = orderData.roomCheckOutViewModel.RoomID,
                     OrderDate = DateTime.Now,
-                    CheckInDate = DateTime.Now,
-                    CheckOutDate = DateTime.Now,
+                    CheckInDate = DateTime.Parse(orderData.roomCheckOutViewModel.CheckInDate),
+                    CheckOutDate = DateTime.Parse(orderData.roomCheckOutViewModel.CheckOutDate),
                     RoomCount = orderData.roomCheckOutViewModel.RoomOrder,
                     RoomPriceTotal = orderData.roomCheckOutViewModel.TotalPrice,
                     FirstName = firstname,
@@ -166,7 +166,7 @@ namespace BS_Adoga.Controllers
                         Name = orderData.roomCheckOutViewModel.HotelFullName,//商品名稱
                         Price = orderData.roomCheckOutViewModel.TotalPrice,//商品單價
                         Currency = "新台幣",//幣別單位
-                        Quantity = Int32.Parse("1"),//購買數量
+                        Quantity = orderData.roomCheckOutViewModel.RoomOrder,//購買數量
                         URL = "http://google.com",//商品的說明網址
 
                     });
@@ -335,8 +335,8 @@ namespace BS_Adoga.Controllers
 
         public ActionResult ECPayResult(ECPayResultsViewModel model)
         {
-
-            model = (ECPayResultsViewModel)TempData["PayResult"];
+            //var hotelName = _context.Orders.Where(x => x.OrderID == model.OrderId).First();
+            model = (ECPayResultsViewModel)TempData.Peek("PayResult");
             return View(model);
         }
     }
