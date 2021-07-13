@@ -17,7 +17,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>true</Use64BitIISExpress>
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
     <IISExpressSSLPort>44352</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -480,7 +481,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\HotelDetail\Detail.cshtml" />
+    <Content Include="Views\HotelDetail\HotelDetail.cshtml" />
     <Content Include="Views\MemberLogin\MemberLogin.cshtml" />
     <Content Include="Views\Shared\_AdogaLayout.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
