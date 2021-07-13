@@ -24,12 +24,6 @@ namespace BS_Adoga
             );
 
             config.Routes.MapHttpRoute(
-                name: "SetCheckOutData",
-                routeTemplate: "api/HotelDetail/SetCheckOutData",
-                defaults: new { controller = "HotelDetail", action = "SetCheckOutData", id = RouteParameter.Optional }
-            );
-
-            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

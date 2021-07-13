@@ -14,7 +14,7 @@
 }
 
 @section endJS{
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>*@
     @*<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>*@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
@@ -42,12 +42,12 @@
         var filternav = new Vue({
             el: '#nav',
             data: {
-                room: @ViewData["room"],
-                adult: @ViewData["adult"],
-                kids: @ViewData["kid"],
-                Value: '@ViewData["CityOrName"]',
-                startDate: '@ViewData["sDate"]',
-                endDate:'@ViewData["end"]',
+                room: @TempData["room"],
+                adult: @TempData["adult"],
+                kids: @TempData["kid"],
+                Value: '@TempData["CityOrName"]',
+                startDate: '@TempData["sDate"]',
+                endDate:'@TempData["end"]',
                 Options: [
                     {
                         label: '熱門城市',
@@ -95,7 +95,7 @@
                             }
                             break;
                     }
-          TempDataempData     },
+                },
                 plus: function (e) {
                     switch (e) {
                         case 'room':
@@ -360,7 +360,7 @@
 <div id="filter-equipment">
     <section class="equipment-box">
         <div class="filter-body">
-            <div class="accommodation row">
+            <div class="facilities row">
                 <p>住宿設施&服務</p>
                 <div class="form-list col-4">
                     <input class="form-check-input" type="checkbox" value="" id="swim">
@@ -542,36 +542,16 @@
             <hr class="dropdown-divider">
             <div class="bed row">
                 <p>床型</p>
+                @*@foreach (var bed in Model)*@
+                @* {*@
                 <div class="form-list col-4">
                     <input class="form-check-input" type="checkbox" value="" id="swim">
                     <label class="form-check-label" for="swim">
                         <p>游泳池(123)</p>
                     </label>
                 </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
+                @* } *@
+
             </div>
             <hr class="dropdown-divider">
             <div class="roomOffer row">
@@ -735,16 +715,29 @@
             <div class="container-fluid">
                 <span class="navbar-brand mb-0 h1 navbar-light bg-light">排序</span>
                 <button>
-                    <p>最低價優先</p>
+                    @Html.ActionLink("最低價優先", "Search", new { sortOrder = ViewBag.PriceSortParm })
                 </button>
                 <button>
-                    <p>優良評價優先</p>
+                    @Html.ActionLink("優良評價優先", "Search", new { sortOrder = ViewBag.StarSortParm })
                 </button>
             </div>
         </nav>
-        @foreach (var card in Model.HotelSearchVM)
-        {
-            @Html.Partial("_SearchCardPartial", card);
+        @{ 
+            if (Model.HotelSearchVM.Count() == 0)
+            {
+                <div id="emptyCard">
+                    <p>
+                        查無資料<i class="fas fa-frown-open"></i>
+                    </p>
+                </div>
+            }
+            else
+            {
+                foreach(var card in Model.HotelSearchVM)
+                {
+                    @Html.Partial("_SearchCardPartial", card);
+                }
+            }
         }
     </div>
 </div>

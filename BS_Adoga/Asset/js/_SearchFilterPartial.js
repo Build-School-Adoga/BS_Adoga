@@ -13,9 +13,10 @@ var showRoom = document.getElementById('final-room');
 /*debugger;*/
 person_info.addEventListener('click', function () {
     //debugger;
-/*if (choosing_box.style.visibility == "visible") {*/
     var person_box = document.getElementById("person-box");
     person_box.style.display = "flex";
+
+    /*if (choosing_box.style.visibility == "visible") {*/
     if (choosing_box.style.display == "flex") {
         choosing_box.style.display = "none";
         close_filter();
@@ -147,8 +148,8 @@ $('#demo').daterangepicker({
         ],
         "firstDay": 1
     },
-    "startDate": moment(),
-    "endDate": moment().add('days', 1)
+    "startDate": moment(s),
+    "endDate": moment(e)
 }).on('change', function () {
     var date_range = $('#demo').val();
     var dates = date_range.split(" - ");

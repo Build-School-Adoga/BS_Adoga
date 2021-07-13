@@ -14,6 +14,7 @@ using System.Net;
 using System.Text;
 using System.Collections.Specialized;
 using System.IO;
+using System.Web.Helpers;
 
 namespace BS_Adoga.Controllers
 {
@@ -621,6 +622,68 @@ namespace BS_Adoga.Controllers
 
             return RedirectToAction("HomePage", "Home");
         }
-        #endregion 
+        #endregion
+        public ActionResult SendEmail()
+        {
+            return View();
+        }
+        [HttpPost]
+        [MultiButton("useremail")]
+        [ValidateAntiForgeryToken]
+        public ActionResult SendEmail(MixMemberLoginViewModel ForgetVm)
+        {
+
+            var useremail = HttpUtility.HtmlEncode(ForgetVm.ForgetPasswordViewModel.Email);
+
+
+
+            //var emailusername = _context.Customers.Where(x => x.Email == useremail).FirstOrDefault();
+            //var aaa = from m in _context.Customers
+            //          where m.Email == useremail
+            //          select m;
+
+
+            //select Name
+            //from Customer
+            //where Email = 'useremail'
+            var lnkHref = "<a href='" + Url.Action("MemberLogin", "MemberLogin", new { email = useremail }, "https") + "'>Reset Password</a>";
+            Content("ok");
+            string subject = "Adoga Login - Password reset instructions";
+            string body = "Hi" + "<br/><br/>Forget your password?no problem.Just click the link  to reset" +
+            "<br/>" + lnkHref;
+
+
+            WebMail.Send(useremail, subject, body, null, null, null, true, null, null, null, null, null, null);
+            ViewBag.msg = "email ok";
+
+            return View();
+        }
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [MultiButton("ResetPassword")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(MixMemberLoginViewModel ResetVM)
+        {
+            string email = Request.Params["email"];
+            string FirstPassword = HttpUtility.HtmlEncode(ResetVM.ResetPasswordViewModel.Password);
+
+            Customer cust = new Customer();
+            cust.Email = email;
+            cust.MD5HashPassword = HashService.MD5Hash(FirstPassword);
+            AdogaContext db = new AdogaContext();
+            var data = db.Customers.Find(email = email);
+            data.MD5HashPassword = HashService.MD5Hash(FirstPassword);
+
+            data = db.Customers.Find(email = email);
+            db.SaveChanges();
+
+
+
+            return RedirectToAction("HomePage", "Home");
+
+        }
     }
 }

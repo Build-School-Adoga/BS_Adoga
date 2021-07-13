@@ -16,14 +16,21 @@ namespace BS_Adoga.Controllers
         {
             s = new SearchCardService();
         }
+
+        //搜尋欄裡用beginForm去收集資料，再對給Search(action)做搜尋
         public ActionResult GetTempData(string search, string date_range, string people, string room)
         {
             var human = people.Split(',');
+            
             var a = human[0].Split('位');
-            var b = human[1].Split('位');
             var adult = int.Parse(a[0]);
-            var kid = int.Parse(b[0]);
-
+            var kid = 0;
+            if (human.Length > 1)
+            {
+                var b = human[1].Split('位');
+                kid = int.Parse(b[0]);
+            }
+            
             var r = room.Split('間');
 
             var date = date_range.Split('-');
@@ -40,50 +47,91 @@ namespace BS_Adoga.Controllers
                 RoomCount = int.Parse(r[0])
             };
 
+            
+
             return RedirectToAction("Search",info);
         }
 
         //[HttpGet]
-        public ActionResult Search(SearchDataViewModel info/*string cityOrName, string startDate, string endDate, int nRoom, int nAdult, int nKid*/)
+        public ActionResult Search(SearchDataViewModel info, string sortOrder)
         {
-            ViewData["CityOrName"] = info.HotelNameOrCity;
-            ViewData["sDate"] = info.CheckInDate;
-            ViewData["end"] = info.CheckOutDate;
-            ViewData["adult"] = info.AdultCount;
-            ViewData["kid"] = info.KidCount;
-            ViewData["room"] = info.RoomCount;
+            if(info.HotelNameOrCity==null)
+            {
+                info.HotelNameOrCity = TempData["CityOrName"].ToString();
+                info.CheckInDate = TempData["sDate"].ToString();
+                info.CheckOutDate = TempData["end"].ToString();
+                info.AdultCount = (int)TempData["adult"];
+                info.KidCount = (int)TempData["kid"];
+                info.RoomCount = (int)TempData["room"];
+                TempData.Keep();
+            }
+            else
+            {
+                TempData["CityOrName"] = info.HotelNameOrCity;
+                TempData["sDate"] = info.CheckInDate;
+                TempData["end"] = info.CheckOutDate;
+                TempData["adult"] = info.AdultCount;
+                TempData["kid"] = info.KidCount;
+                TempData["room"] = info.RoomCount;
+                TempData.Keep();
+            }
+            var data = s.GetSearchViewModelData(info);
 
-            //ViewBag["cityorname"] = TempData["CityOrName"];
-            //string search = TempData["search"].ToString();
-            //SearchCardViewModel a = new SearchCardViewModel()
-            //{
-            //    var room = s.GetHomeByFilter(search);
-            //    return View(room);
-            //}
-            //s.GetListToFilter();
+            //排序 預設抓星級最好的
+            ViewBag.StarSortParm = sortOrder == null ? "star_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+            
+            switch (sortOrder)
+            {
+                case "star_desc":
+                    data.HotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.Star);
+                    break;
 
-            //if (TempData["search"] == null)
-            //{
-            //    //var hotels = s.ALLHotel();
-            //    //return View(hotels);
+                case "price_desc":
+                    data.HotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.I_RoomVM.RoomPrice);
+                    break;
 
-            //    var hotels = s.GetSearchViewModelData("");
-            //    return View(hotels);
+                case "Price":
+                    data.HotelSearchVM = data.HotelSearchVM.OrderBy(o => o.I_RoomVM.RoomPrice);
+                    break;
 
-            //}
-            //else
-            //{
-            //var hotels = s.GetHotels(TempData["search"].ToString());
-            //return View(hotels);
-
+                default:
+                    data.HotelSearchVM = data.HotelSearchVM.OrderBy(o => o.Star);
+                    break;
+            }
 
 
-            //var data = s.GetSearchViewModelData(TempData["Search"].ToString());
-            var data = s.GetSearchViewModelData(info/*cityOrName, startDate,endDate,nRoom,nAdult,nKid*/);
-                return View(data);
-            //}
+            return View(data);
 
         }
 
+        //public ViewResult Order(string sortOrder, SearchDataViewModel info)
+        //{
+        //    //預設抓星級最好的
+        //    ViewBag.StarSortParm = sortOrder==null ? "star_desc" : "";
+        //    ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+
+        //    SearchCardViewModel OrderList = s.GetSearchViewModelData(info);
+        //    switch (sortOrder)
+        //    {
+        //        case "star_desc":
+        //            OrderList.HotelSearchVM = OrderList.HotelSearchVM.OrderByDescending(o => o.Star);
+        //            break;
+
+        //        case "price_desc":
+        //            OrderList.HotelSearchVM = OrderList.HotelSearchVM.OrderByDescending(o => o.I_RoomVM.RoomPrice);
+        //            break;
+
+        //        case "Price":
+        //            OrderList.HotelSearchVM = OrderList.HotelSearchVM.OrderBy(o => o.I_RoomVM.RoomPrice);
+        //            break;
+
+        //        default:
+        //            OrderList.HotelSearchVM = OrderList.HotelSearchVM.OrderBy(o => o.Star);
+        //            break;
+        //    }
+
+        //    return View(OrderList);
+        //}
     }
 }

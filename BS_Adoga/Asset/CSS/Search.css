@@ -58,7 +58,7 @@ nav .search-bar,
 .search-bar .nav-item {
     border-radius: 5px;
     background-color: #fff;
-    width: 30%;
+    /*width: 30%;haoxiangguandiao jiuhuizhenchang le */
 }
 
 nav .nav-item:nth-child(2) div.line {
@@ -398,8 +398,11 @@ i.fas.fa-star {
         border: none;
         background-color: white;
         flex-grow: 1;
-        color: #808090;
         padding: .5rem 0;
+    }
+    .infomation button a {
+        text-decoration: none;
+        color: #808090;
     }
 
         .infomation nav button p {
@@ -556,12 +559,18 @@ i.fas.fa-star {
 .infomation .card .include-list {
     font-size: 14px;
     /*width: fit-content;*/
-    width: max-content;
-    padding: 2px 4px;
-    border: 1px solid #28871C;
-    color: #28871C;
-    border-radius: 10%;
+    display: flex;
 }
+    .infomation .card .include-list p {
+        width: max-content;
+        padding: 2px 4px;
+        border: 1px solid #28871C;
+        color: #28871C;
+        border-radius: 10%;
+        margin: 0;
+        margin-right: 5px;
+    }
+
 
 .infomation .card .tag-list,
 .infomation .card .advantage {
@@ -577,3 +586,14 @@ i.fas.fa-star {
     .infomation .card .advantage p {
         flex-grow: 1;
     }
+
+div#emptyCard{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    background-color: #E9ECEF;
+    font-size: 30px;
+}
+div#emptyCard i{
+    font-size: 40px;
+}

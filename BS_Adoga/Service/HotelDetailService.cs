@@ -28,7 +28,7 @@ namespace BS_Adoga.Service
             return hotelDetail;
         }
 
-            public HotelVM GetHotelById(string hotelId)
+        public HotelVM GetHotelById(string hotelId)
         {
             //if (hotelId == null) hotelId = "hotel04"; //controller已處理，這裡不用再寫
 
@@ -105,7 +105,7 @@ namespace BS_Adoga.Service
         }
 
         public IEnumerable<RoomTypeVM> GetSpecificRoomType(string hotelId, string startDate, string endDate, int orderRoom, int adult, int child, bool breakfast, bool noSmoking, bool family)
-        {            
+        {
             //這隻service要做的事情跟別的service有重複到，就直接讓那個service處理先
             var allRoom = GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult, child).ToList();
 
