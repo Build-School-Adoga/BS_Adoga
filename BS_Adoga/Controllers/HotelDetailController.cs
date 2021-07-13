@@ -67,7 +67,7 @@ namespace BS_Adoga.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //hotelDetail = _service.GetDetailVM("hotel04"); //應該做報錯
 
-            return View("Detail",hotelDetail);
+            return View(hotelDetail);
         }
 
         public ActionResult GetTempData(string search, string date_range, string people, string room)

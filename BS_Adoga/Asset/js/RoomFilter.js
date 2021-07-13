@@ -128,7 +128,6 @@ $().ready(function () {
                     RoomNowPrice: Math.ceil(item.RoomNowPrice),
                     RoomLeft: item.RoomLeft,
                     Booking: function () {
-                        alert(item.RoomPrice + "," + item.RoomDiscount);
                         axios.get('https://localhost:44352/HotelDetail/SetCheckOutData', {
                             params: {
                                 hotelId: item.HotelID,
