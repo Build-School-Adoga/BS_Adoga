@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
 using BS_Adoga.Models.ViewModels.CheckOut;
+using BS_Adoga.Models.ViewModels.Search;
 using BS_Adoga.Service;
 using BS_Adoga.Repository;
 using System.Net;
@@ -16,32 +17,103 @@ namespace BS_Adoga.Controllers
     {
         //private AdogaContext _context;
         private HotelDetailService _service;
+        private HotelDetailRepository _repository;
         public HotelDetailController()
         {
             //_context = new AdogaContext();
             _service = new HotelDetailService();
+            _repository = new HotelDetailRepository();
         }
 
         // GET: HotelDetail
-        public ActionResult HotelDetail(string hotelId, string startDate, string endDate, int orderRoom, int adult)
+        public ActionResult HotelDetail(string hotelName, string startDate, string endDate, int orderRoom, int adult, int child)
         {
+
+            //ViewData["CityOrName"] = hotelName;
+            //ViewData["sDate"] = startDate;
+            //ViewData["end"] = endDate;
+            //ViewData["adult"] = adult;
+            //ViewData["kid"] = child;
+            //ViewData["room"] = orderRoom;
+
+            if (hotelName == null || startDate == null || endDate ==null || orderRoom == 0 || adult == 0 )
+            {
+                return Content("請在搜尋框選好全部欄位的資料，才可幫您進行飯店查詢喔。");
+            }
+
+            DateTime checkInDate = DateTime.Parse(startDate);
+            DateTime checkOutDate = DateTime.Parse(endDate);
+            SearchByMemberVM searchData = new SearchByMemberVM()
+            {
+                CityOrHotel = hotelName,
+                CheckInDate = startDate,
+                CheckOutDate = endDate,
+                RoomOrder = orderRoom,
+                CountNight = new TimeSpan(checkOutDate.Ticks - checkInDate.Ticks).Days,
+                Adult = adult,
+                Child = child
+            };
+
+            TempData["SearchData"] = searchData;            
+
             DetailVM hotelDetail;
+            string hotelId = _repository.GetHotelIdByName(hotelName);
 
             if (hotelId != null)
-                hotelDetail = _service.GetDetailVM(hotelId, startDate, endDate, orderRoom, adult);
+                hotelDetail = _service.GetDetailVM(hotelId, startDate, endDate, orderRoom, adult, child);
             else if (TempData["search"] != null)
-                hotelDetail = _service.GetDetailVM(hotelId, startDate, endDate, orderRoom, adult);
+                hotelDetail = _service.GetDetailVM(hotelId, startDate, endDate, orderRoom, adult, child);
             else
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //hotelDetail = _service.GetDetailVM("hotel04"); //應該做報錯
 
-            return View(hotelDetail);
+            return View("Detail",hotelDetail);
         }
 
-        public ActionResult SetCheckOutData(string hotelId, string roomId, string roomName, bool breakfast, string bedType, int adult, int child,
-                                            int roomOrder, decimal roomPrice, decimal roomDiscount, decimal roomNowPrice)
+        public ActionResult GetTempData(string search, string date_range, string people, string room)
+        {
+            string[] human = people.Split(',');
+            string[] adultSplit = human[0].Split('位');
+            string[] kidSplit =new string[1];
+            int adult = int.Parse(adultSplit[0]);
+            int kid = 0;
+            if (human.Length > 1)
+            {
+                kidSplit = human[1].Split('位');
+                kid = int.Parse(kidSplit[0]);
+            }
+
+            string[] roomSplit = room.Split('間');
+
+            string[] date = date_range.Split('-');
+            string start = date[0];
+            string end = date[1];
+
+            return RedirectToAction("HotelDetail", new
+            {
+                hotelName = search,
+                startDate = start,
+                endDate = end,
+                orderRoom = int.Parse(roomSplit[0]),
+                adult = adult,
+                child = kid
+            });
+        }
+
+        
+        [HttpGet]
+        public ActionResult SetCheckOutData( string hotelId, string roomId,string roomName,bool noSmoking,bool breakfast,string bedType,
+                                                int roomOrder,decimal roomPrice,decimal roomDiscount, decimal roomNowPrice)
         {
             var hotel = _service.GetHotelById(hotelId);
+            var searchData = (SearchByMemberVM)TempData["SearchData"];
+            TempData.Keep("SearchData");
+            
+            //DateTime checkInDate = DateTime.Parse(searchData.CheckInDate);
+            //DateTime checkOutDate = DateTime.Parse(searchData.CheckOutDate);
+            //int adult = searchData.Adult;
+            //int child = searchData.Child;
+
             OrderVM orderData = new OrderVM()
             {
                 roomCheckOutViewModel = new RoomCheckOutData
@@ -51,11 +123,14 @@ namespace BS_Adoga.Controllers
                     Address = hotel.HotelAddress,
                     RoomID = roomId,
                     RoomName = roomName,
+                    NoSmoking = noSmoking,
                     Breakfast = breakfast,
                     BedType = bedType,
-                    Adult = 12,
-                    Child = 2,
-                    CountNight = 2,
+                    CheckInDate = searchData.CheckInDate,
+                    CheckOutDate = searchData.CheckOutDate,
+                    Adult = searchData.Adult,
+                    Child = searchData.Child,
+                    CountNight = searchData.CountNight,
                     RoomOrder = roomOrder,
                     RoomPrice = roomPrice,
                     Discount = roomDiscount,

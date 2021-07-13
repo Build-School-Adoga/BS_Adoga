@@ -23,8 +23,6 @@ namespace BS_Adoga.Controllers
             _homeService = new HomeService();
         }
 
-
-
         public ActionResult Index()
         {
             return View();
@@ -111,28 +109,17 @@ namespace BS_Adoga.Controllers
                 return RedirectToAction("Search", "Search", info);
             }
 
-
-            var hotelId = from p in _homeService._homeRepository._context.Hotels
-                          where p.HotelName == search
-                          select p.HotelID;
-
-            TempData["search"] = hotelId.First();
+            TempData["search"] = search;
 
             return RedirectToAction("HotelDetail", "HotelDetail", new
             {
-                hotelId = TempData["search"],
+                hotelName = TempData["search"],
                 startDate = TempData["start"],
                 endDate = TempData["end"],
                 orderRoom = TempData["rom"],
                 adult = TempData["ple"],
-                //child = TempData["kids"]
-            }
-            );
-
-
-
+                child = TempData["kid"]
+            });
         }
-
     }
-
 }

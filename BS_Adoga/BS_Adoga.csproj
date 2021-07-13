@@ -286,9 +286,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIController\DetailApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
@@ -326,6 +328,7 @@
     <Compile Include="Models\ViewModels\homeViewModels\MyRoomsDetails.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\ForgetPasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\HotelDetail\SearchByMemberVM.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\LineLoginToken.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\LineUserProfile.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\ResetPasswordViewModel.cs" />
@@ -403,7 +406,9 @@
     <Content Include="Asset\JS\MemberAccount\MemberProfile.js" />
     <Content Include="Asset\JS\GoogleLogin.js" />
     <Content Include="Asset\JS\navbar.js" />
+    <Content Include="Asset\JS\RoomFilter.js" />
     <Content Include="Asset\JS\Search.js" />
+    <Content Include="Asset\JS\_SearchFilterPartial.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -524,6 +529,8 @@
     <Folder Include="Asset\images\HotelLogin\" />
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
+    <Folder Include="Models\ViewModels\Account\" />
+    <Folder Include="Views\DetailApi\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
