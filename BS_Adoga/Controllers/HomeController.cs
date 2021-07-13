@@ -61,15 +61,15 @@ namespace BS_Adoga.Controllers
 
 
         [HttpPost]
-        public ActionResult Search(string search, string date_range, string people, string room,string kid, string data)
+        public ActionResult Search(string search, string date_range, string people, string room, string kid, string data)
         {
             var date = date_range.Split('-');
             var start = date[0];
             var end = date[1];
-         
+
             var Hotels = from p in _homeService._homeRepository._context.Hotels
-                     where p.HotelCity == search
-                     select p.HotelCity;
+                         where p.HotelCity == search
+                         select p.HotelCity;
             //Irene更新: 稍微把人數的部分改了一些
             var human = people.Split(',');
             var a = human[0].Split('位');
@@ -108,7 +108,6 @@ namespace BS_Adoga.Controllers
                 };
                 return RedirectToAction("Search", "Search", info);
             }
-
             TempData["search"] = search;
 
             return RedirectToAction("HotelDetail", "HotelDetail", new
@@ -120,6 +119,8 @@ namespace BS_Adoga.Controllers
                 adult = TempData["ple"],
                 child = TempData["kid"]
             });
+
+
         }
     }
 }
