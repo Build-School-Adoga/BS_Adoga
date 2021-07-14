@@ -41,21 +41,11 @@
             <div class="tab-content" id="myTabContent-card">
                 <div class="tab-pane fade show active" id="emailgo-card" role="tabpanel" aria-labelledby="home-tab-card">
                     <!-- 電子郵件登入區塊 -->
-                    @*0620改下面為原本的程式碼*@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         <form>
-                            @*<div class="mb-3">
-                                    <label for="LoginEmail" class="form-label">電子信箱</label>
-                                    <input type="email" class="form-control" id="LoginEmail" aria-describedby="emailHelp"
-                                           placeholder="電子信箱" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="LoginPassword" class="form-label">密碼</label>
-                                    <input type="password" class="form-control" id="LoginPassword" placeholder="密碼" />
-                                </div>*@
                             <div class="mb-3 form-group">
                                 @Html.LabelFor(model => model.MemberLoginViewModel.Email)
                                 @Html.EditorFor(model => model.MemberLoginViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail-card" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
@@ -82,31 +72,7 @@
                             </div>
                         </form>
                     }
-                    <!--<form>
-                    <div class="mb-3">
-                        <label for="LoginEmail" class="form-label">電子信箱</label>
-                        <input type="email" class="form-control" id="LoginEmail-card" aria-describedby="emailHelp-card"
-                               placeholder="電子信箱" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="LoginPassword" class="form-label">密碼</label>
-                        <input type="password" class="form-control" id="LoginPassword-card" placeholder="密碼" />
-                    </div>
-                    <div class="d-grid gap-2">
-                        <!--bear : 0610新增-->
-                    <!--@Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "submit", @class = "btn btn-primary my-2 py-2 login-btn" })-->
-                    @*<button type="submit" class="btn btn-primary my-2 py-2 login-btn">
-                            登入
-                        </button>*@
-                    @*</div>
-                            <div class="register">
-                                <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
-                                   id="EmailLogintoRegister-card">我是新朋友</a>
-                                <a href="#modal" data-bs-toggle="modal" data-bs-target="#ForgetPasswordModal"
-                                   id="EmailLogintoForgetPassword-card"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
-                            </div>
-
-                        </form>-->*@
+                    <!--@Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "submit", @class = "btn btn-primary my-2 py-2 login-btn" })-->    
                 </div>
 
                 <div class="tab-pane fade" id="phonego-card" role="tabpanel" aria-labelledby="profile-tab-card">
@@ -125,9 +91,6 @@
                         <div class="d-grid gap-2">
                             <!--bear : 0610新增-->
                             @Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "button", @class = "btn btn-primary my-2 py-2 login-btn" })
-                            @*<button class="btn btn-primary my-2 py-2 login-btn" type="button">
-                                    登入
-                                </button>*@
                         </div>
                         <div class="register">
                             <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
@@ -144,42 +107,17 @@
 
             <div class="d-grid gap-2 otherlogin-btn-group">
                 <button class="otherlogin-btn" id="btnSignIn" type="button">
-                    <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
+                    <img src="~/Asset/images/MemberLogin/google_PNG19635.png" alt=""> Google
                 </button>
-                @*0629新增登入測試區塊*@
                 <div class="loginbuttonwithfa">
-                    @*fb內建的button*@
-                    @*<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" autologoutlink="true">
-                        </fb:login-button>*@
-
-
-                    @*0703line登入*@
-                    @*<script>
-                            function LineAuth() {
-                                var URL = 'https://access.line.me/oauth2/v2.1/authorize?';
-                                URL += 'response_type=code';
-                                URL += '&client_id=1656167198';
-                                URL += '&redirect_uri= https://localhost:44352/MemberLogin/MemberLogin/callback';
-                                URL += '&state=abcde';
-                                URL += '&scope=profile%20openid%20email';
-                                window.location.href = URL;
-                            }
-                        </script>*@
                     <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-card" onclick="FBLoginReal();">
-                        <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
+                        <img src="~/Asset/images/MemberLogin/f_logo_RGB-Blue_58.png" alt="">
                         Facebook
                     </button>
                     <button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="location.href='@Url.Action("LineLoginDirect")'">
-                        <img src="~/Asset/images/btn_base.png" alt="">
+                        <img src="~/Asset/images/MemberLogin/btn_base.png" alt="">
                         Line
                     </button>
-                    @*<a href="@Url.Action("LineLoginDirect")">
-                            <img src="~/Asset/images/btn_base.png" alt="">
-                        </a>*@
-                    @*<button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="FacebookLogout();">
-                            <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt="">
-                            logout
-                        </button>*@
                 </div>
             </div>
 
@@ -205,9 +143,9 @@
                     <div id="ForgetPasswordLabel" class="form-text" style="font-size: 15.5px">
                         <p>記不住你的Agoda密碼？改用Facebook登入，從此少記一組密碼！</p>
                     </div>
-                    <div class="d-grid gap-2">
-                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-cardforget">
-                            <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
+                    <div class="d-grid gap-2 otherlogin-btn-group">
+                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-cardforget"onclick="FBLoginReal();">
+                            <img src="~/Asset/images/MemberLogin/f_logo_RGB-Blue_58.png" alt="">
                             Facebook
                         </button>
                     </div>
@@ -225,9 +163,6 @@
                     <form>
                         <!-- 忘記密碼內容 -->
                         <div class="mb-3" id="aaa">
-                            @*<label for="ForgetPassword" class="form-label">電子信箱</label>
-                                <input type="email" name="useremail" class="form-control" id="ForgetPassword" aria-describedby="emailHelp"
-                                       placeholder="電子信箱">*@
                             <div class="mb-3 form-group">
                                 @Html.LabelFor(model => model.ForgetPasswordViewModel.Email)
                                 @Html.EditorFor(model => model.ForgetPasswordViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
@@ -241,7 +176,7 @@
                             </button>
                         </div>
                         <div class="ForgetPasswordtoLogin">
-                            <a href="#model" data-bs-toggle="modal" data-bs-target="#SigninModal" id="ForgetPasswordtoLogin">登入這邊請</a>
+                            @Html.ActionLink("已經是會員?登入", "MemberLogin", "MemberLogin")
                         </div>
                     </form>
                 }
@@ -385,7 +320,7 @@
                     </button>
                     <div class="loginbuttonwithfa">
                         <button type="button" class="otherlogin-btn" id="Phonefacebooklogin">
-                            <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
+                            <img src="~/Asset/images/MemberLogin/f_logo_RGB-Blue_58.png" alt="">
                             Facebook
                         </button>
                         <button type="button" class="otherlogin-btn" id="Phoneapplelogin">
@@ -442,81 +377,82 @@
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                            <form>
-                                <div class="mb-3 form-group">
-                                    @Html.LabelFor(model => model.MemberRegisterViewModel.FirstName)
-                                    @Html.EditorFor(model => model.MemberRegisterViewModel.FirstName, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "EnglishFirstName" }, { "placeholder", "英文護照名" } } })
-                                    @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.FirstName, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="mb-3 form-group">
-                                    @Html.LabelFor(model => model.MemberRegisterViewModel.LastName)
-                                    @Html.EditorFor(model => model.MemberRegisterViewModel.LastName, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "EnglishLastName" }, { "placeholder", "英文護照姓" } } })
-                                    @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.LastName, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="mb-3 form-group">
-                                    @Html.LabelFor(model => model.MemberRegisterViewModel.Email)
-                                    @Html.EditorFor(model => model.MemberRegisterViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
-                                    @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.Email, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="mb-3 form-group">
-                                    @Html.LabelFor(model => model.MemberRegisterViewModel.Password)
-                                    @Html.EditorFor(model => model.MemberRegisterViewModel.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmailPassword" }, { "aria-describedby", "emailHelp" }, { "placeholder", "密碼" } } })
-                                    @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.Password, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="mb-3 form-group">
-                                    @Html.LabelFor(model => model.MemberRegisterViewModel.ConfirmPassword)
-                                    @Html.EditorFor(model => model.MemberRegisterViewModel.ConfirmPassword, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "DoubleCheck" }, { "aria-describedby", "emailHelp" }, { "placeholder", "確認密碼" } } })
-                                    @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.ConfirmPassword, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="EmailRegisterCheck">
-                                    <label class="form-check-label"
-                                           for="EmailRegisterCheck">我想要收到Adoga的獨家促銷情報，同時根據隱私權政策，我保留隨時取消訂閱的權利</label>
-                                </div>
-                                <div class="robot">
+                        <form>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(model => model.MemberRegisterViewModel.FirstName)
+                                @Html.EditorFor(model => model.MemberRegisterViewModel.FirstName, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "EnglishFirstName" }, { "placeholder", "英文護照名" } } })
+                                @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(model => model.MemberRegisterViewModel.LastName)
+                                @Html.EditorFor(model => model.MemberRegisterViewModel.LastName, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "EnglishLastName" }, { "placeholder", "英文護照姓" } } })
+                                @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.LastName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(model => model.MemberRegisterViewModel.Email)
+                                @Html.EditorFor(model => model.MemberRegisterViewModel.Email, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmail" }, { "aria-describedby", "emailHelp" }, { "placeholder", "電子信箱" } } })
+                                @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(model => model.MemberRegisterViewModel.Password)
+                                @Html.EditorFor(model => model.MemberRegisterViewModel.Password, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "RegisterEmailPassword" }, { "aria-describedby", "emailHelp" }, { "placeholder", "密碼" } } })
+                                @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(model => model.MemberRegisterViewModel.ConfirmPassword)
+                                @Html.EditorFor(model => model.MemberRegisterViewModel.ConfirmPassword, new { htmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "id", "DoubleCheck" }, { "aria-describedby", "emailHelp" }, { "placeholder", "確認密碼" } } })
+                                @Html.ValidationMessageFor(model => model.MemberRegisterViewModel.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="EmailRegisterCheck">
+                                <label class="form-check-label"
+                                       for="EmailRegisterCheck">我想要收到Adoga的獨家促銷情報，同時根據隱私權政策，我保留隨時取消訂閱的權利</label>
+                            </div>
+                            <div class="robot">
 
-                                    <div class="g-recaptcha"
-                                         data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
-                                </div>
-                                <div class="checkcodeline">
-                                    <div class="d-grid gap-2">
-                                        <button type="submit" class="btn btn-primary" name="register">加入會員</button>
-                                    </div>
-                                </div>
-                                <div class="otherlogin">
-                                    <p>使用其他登入方式</p>
-                                </div>
+                                <div class="g-recaptcha"
+                                     data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
+                            </div>
+                            <div class="checkcodeline">
                                 <div class="d-grid gap-2">
-                                    <button class="otherlogin-btn" id="btnSignIn" type="button">
-                                        <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
+                                    <button type="submit" class="btn btn-primary" name="register">加入會員</button>
+                                </div>
+                            </div>
+                            <div class="otherlogin">
+                                <p>使用其他登入方式</p>
+                            </div>
+                            <div class="d-grid gap-2 otherlogin-btn-group">
+                                <button class="otherlogin-btn" id="btnSignIn" type="button">
+                                    <img src="~/Asset/images/MemberLogin/google_PNG19635.png" alt=""> Google
+                                </button>
+                                <div class="loginbuttonwithfa">
+                                    <button type="button" class="otherlogin-btn" id="Emailfacebooklogin" onclick="FBLoginReal();">
+                                        <img src="~/Asset/images/MemberLogin/f_logo_RGB-Blue_58.png" alt="">
+                                        Facebook
                                     </button>
-                                    <div class="loginbuttonwithfa">
-                                        <button type="button" class="otherlogin-btn" id="Emailfacebooklogin">
-                                            <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
-                                            Facebook
-                                        </button>
-                                        <button type="button" class="otherlogin-btn" id="Emailapplelogin">
-                                            <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt=""> Apple
-                                        </button>
-                                    </div>
+                                    <button type="button" class="otherlogin-btn" id="EmailLinelogin" onclick="location.href='@Url.Action("LineLoginDirect")'">
+                                        <img src="~/Asset/images/MemberLogin/btn_base1.png" alt="">
+                                        Line
+                                    </button>
                                 </div>
-                                <div class="line">
+                            </div>
+                            <div class="line">
+                            </div>
+                            <div class="tologin">
+                                <div class="d-grid gap-2">
+                                    @Html.ActionLink("已經是會員?登入", "MemberLogin", "MemberLogin", null, new { @type = "submit", @class = "btn btn-outline-primary" })
+                                    @*原始程式碼*@
+                                    @*<button class="btn btn-outline-primary" id="SignintoPhone" type="button">
+                  已經是會員?登入
+                </button>*@
                                 </div>
-                                <div class="tologin">
-                                    <div class="d-grid gap-2">
-                                        @Html.ActionLink("已經是會員?登入", "MemberLogin", "MemberLogin", null, new { @type = "submit", @class = "btn btn-outline-primary" })
-                                        @*原始程式碼*@
-                                        @*<button class="btn btn-outline-primary" id="SignintoPhone" type="button">
-                                              已經是會員?登入
-                                            </button>*@
-                                    </div>
-                                </div>
-                                <div class="youshouldknow">
-                                    <p>
-                                        點擊登錄即代表我同意Agoda的 <a href="">服務條款</a> 和 <a href="">隱私權政策</a>
-                                    </p>
-                                </div>
-                            </form>
+                            </div>
+                            <div class="youshouldknow">
+                                <p>
+                                    點擊登錄即代表我同意Agoda的 <a href="">服務條款</a> 和 <a href="">隱私權政策</a>
+                                </p>
+                            </div>
+                        </form>
                         }
 
                     </div>
@@ -552,17 +488,18 @@
                                     <p>使用其他登入方式</p>
                                 </div>
 
-                                <div class="d-grid gap-2">
+                                <div class="d-grid gap-2 otherlogin-btn-group">
                                     <button class="otherlogin-btn" id="btnSignIn" type="button">
-                                        <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
+                                        <img src="~/Asset/images/MemberLogin/google_PNG19635.png" alt=""> Google
                                     </button>
                                     <div class="loginbuttonwithfa">
-                                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin">
-                                            <img src="https://cdn6.agoda.net/images/universal-login/facebook-logo.svg" alt="">
+                                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin" onclick="FBLoginReal();">
+                                            <img src="~/Asset/images/MemberLogin/f_logo_RGB-Blue_58.png" alt="">google_PNG19635.png
                                             Facebook
                                         </button>
-                                        <button type="button" class="otherlogin-btn" id="Phoneapplelogin">
-                                            <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt=""> Apple
+                                        <button type="button" class="otherlogin-btn" id="EmailLinelogin" onclick="location.href='@Url.Action("LineLoginDirect")'">
+                                            <img src="~/Asset/images/MemberLogin/btn_base1.png" alt="">
+                                            Line
                                         </button>
                                     </div>
                                 </div>
@@ -639,40 +576,16 @@
 @section endJS{
     <script>
         //程式碼區域
-        //國際電話script
-        //const phoneInputField = document.querySelector("#phone");
-        //const phoneInput = window.intlTelInput(phoneInputField, {
-        //    utilsScript:
-        //        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-        //});
     </script>
     <!-- //google我不是機器人 -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <!--bear新增的主畫面大登入表單 -->
-    @*<script>
-            let EmailLogintoForgetPasswordcard = document.getElementById('EmailLogintoForgetPassword-card')
-            EmailLogintoForgetPasswordcard.addEventListener('click', function () {
-                $('#SigninModal').modal('hide');
-
-            })
-        </script>*@
-    <!-- bear電子郵件登入到註冊 -->
-    @*<script>
-            let EmailLogintoRegistercard = document.getElementById('EmailLogintoRegister-card')
-            EmailLogintoRegistercard.addEventListener('click', function () {
-                $('#SigninModal').modal('hide');
-
-            })
-        </script>*@
-    PhoneLogintoForgetPassword-card
     <script>
         window.addEventListener("load", function (event) {
             // All resources finished loading!'
             if (window.location.toString().includes("email")) {
                 $('#ResetPasswordModal').modal('show');
-
             }
-
         });
     </script>
     <!--電子郵件登入到忘記密碼 -->
@@ -680,7 +593,6 @@
         let EmailLogintoForgetPassword = document.getElementById('EmailLogintoForgetPassword')
         EmailLogintoForgetPassword.addEventListener('click', function () {
             $('#SigninModal').modal('hide');
-
         })
     </script>
     <!-- 電話登入到忘記密碼 -->
@@ -688,7 +600,6 @@
         let PhoneLogintoForgetPassword = document.getElementById('PhoneLogintoForgetPassword')
         PhoneLogintoForgetPassword.addEventListener('click', function () {
             $('#SigninModal').modal('hide');
-
         })
     </script>
     <!-- 忘記密碼的超連結到註冊 -->
@@ -709,7 +620,6 @@
     </script>
     <!-- 電話號碼登入到註冊 -->
     <script>
-
         let PhoneLogintoRegister = document.getElementById('PhoneLogintoRegister')
         PhoneLogintoRegister.addEventListener('click', function () {
             $('#SigninModal').modal('hide');
@@ -724,15 +634,6 @@
             $('#SigninModal').modal('show');
         })
     </script>
-    <!-- 電子郵件註冊到登入 -->
-    @*<script>
-            let SignintoPhone = document.getElementById('SignintoPhone')
-            SignintoPhone.addEventListener('click', function () {
-                $('#RegisterModal').modal('hide');
-                $('#SigninModal').modal('show');
-            })
-        </script>*@
-
     <script>
         //官方script
         window.fbAsyncInit = function () {
@@ -745,7 +646,6 @@
 
             FB.AppEvents.logPageView();
         };
-
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) { return; }
@@ -753,25 +653,7 @@
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-        //確認登入狀態
-        //function checkLoginState() {
-        //    FB.getLoginStatus(function (response) {
-        //        console.log(response);
-        //        //如果已連線
-        //        if (response.status === "connected") {
-        //            FB.api('/me', {
-        //                'fields': 'id,name,email,picture'
-        //            }, function (response) {
-        //                console.log(response);
-
-        //            });
-        //        }
-        //    }, {
-        //        scope: 'email',
-        //        auth_type: 'rerequest'
-        //    });
-        //}
-        /*登出紐*/
+        //登出按鈕
         function FacebookLogout() {
             FB.logout(function (response) {
                 statusChangeCallback(response);
