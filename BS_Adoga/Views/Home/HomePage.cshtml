@@ -955,7 +955,7 @@
                    
                     
                     }
-                });``
+                });
                
             }
 
@@ -1099,20 +1099,6 @@
                     this.options2 = this.options.filter(function (el, i, arr) {
                         return arr.indexOf(el) === i;
                     });
-                    if (letter.lenght === 3) {
-                        this.options2 = this.options.filter(v => {
-                            return v.label.includes(letter)
-                        })
-                    }
-                    else {
-                        this.options2 = this.options.filter(v => {
-                            return v.label.includes(letter)
-                        })
-                    }
-
-
-
-
 
                 }
 
@@ -1127,8 +1113,7 @@
 
         };
             var Ctor = Vue.extend(Main)
-        new Ctor().$mount('#app')
-
+            new Ctor().$mount('#app')
 
 
     </script>

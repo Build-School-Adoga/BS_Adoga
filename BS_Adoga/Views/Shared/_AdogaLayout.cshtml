@@ -1,4 +1,5 @@
-﻿@using System.Web.Configuration
+﻿@using System.Web @*Irene*@
+@using System.Web.Configuration
 @using Newtonsoft.Json;
 @using BS_Adoga.Models.ViewModels.MemberLogin;
 <!DOCTYPE html>
@@ -76,7 +77,7 @@
                                 <i class="far fa-user me-2"></i>
                                 @Html.ActionLink("個人資料", "MemberProfile", "Account")
                             </li>
-                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2", onclick= "FacebookLogout()", @id = "btnDisconnect" })
+                            @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2", onclick = "FacebookLogout()", @id = "btnDisconnect" })
                         </ul>
                     </div>
                 </div>

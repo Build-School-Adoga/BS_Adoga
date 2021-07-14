@@ -47,7 +47,18 @@ else { HotelFullName = Model.HotelName; }
             </div>
         </div>
         <div class="include-list">
-            <p class="Breakfast">早餐</p>
+            @if (Model.I_RoomVM.Breakfast)
+            {
+                <p class="Breakfast">早餐</p>
+            }
+            @if (Model.I_RoomVM.NoSmoking)
+            {
+                <p class="NoSomking">禁煙</p>
+            }
+            @if (Model.I_RoomVM.WiFi)
+            {
+                <p class="wifi">WiFi</p>
+            }
         </div>
         <div class="tag-list">
             <i class="fas fa-money-bill-alt"></i>

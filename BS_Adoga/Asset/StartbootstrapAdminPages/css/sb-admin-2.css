@@ -10476,7 +10476,8 @@ a:focus {
   text-align: center;
   padding: 0 1rem;
   font-weight: 800;
-  font-size: 0.65rem;
+  /*font-size: 0.65rem;  原始設定*/
+  font-size: 1.5rem;
 }
 
 .sidebar .sidebar-card {
