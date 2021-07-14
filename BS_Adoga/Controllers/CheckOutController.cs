@@ -301,7 +301,8 @@ namespace BS_Adoga.Controllers
                     PayResult.OrderId = (string)htFeedback["MerchantTradeNo"];
                     PayResult.TradeDate = (string)htFeedback["TradeDate"];
                     PayResult.PaymentDate = (string)htFeedback["PaymentDate"];
-                    PayResult.PaymentType = (string)htFeedback["PaymentType"];                 
+                    PayResult.PaymentType = (string)htFeedback["PaymentType"];
+                    PayResult.TradePrice = (string)htFeedback["TradeAmt"];
                     TempData["PayResult"] = PayResult;
 
                     //更新付款資訊
