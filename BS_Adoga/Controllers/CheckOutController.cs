@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace BS_Adoga.Controllers
 {
-    [Authorize]
+    
     public class CheckOutController : Controller
     {
         private AdogaContext _context;
@@ -23,6 +23,7 @@ namespace BS_Adoga.Controllers
             _context = new AdogaContext();
         }
 
+        [Authorize]
         // GET: CheckOut
         public ActionResult Index()
         {
