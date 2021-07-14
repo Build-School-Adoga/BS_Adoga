@@ -37,6 +37,18 @@ namespace BS_Adoga
             );
 
             routes.MapRoute(
+                name: "HotelEdit",
+                url: "Hotel/Edit/{hotelid}",
+                defaults: new { controller = "Function", action = "HotelEdit", hotelid = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "HotelBackEndDetail",
+                url: "Hotel/Detail/{hotelid}",
+                defaults: new { controller = "Function", action = "HotelDetails", hotelid = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "HomePage", id = UrlParameter.Optional }

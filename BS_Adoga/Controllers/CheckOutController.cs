@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace BS_Adoga.Controllers
 {
-    [Authorize]
+    
     public class CheckOutController : Controller
     {
         private AdogaContext _context;
@@ -23,6 +23,7 @@ namespace BS_Adoga.Controllers
             _context = new AdogaContext();
         }
 
+        [Authorize]
         // GET: CheckOut
         public ActionResult Index()
         {
@@ -84,7 +85,7 @@ namespace BS_Adoga.Controllers
                     CheckInDate = DateTime.Parse(orderData.roomCheckOutViewModel.CheckInDate),
                     CheckOutDate = DateTime.Parse(orderData.roomCheckOutViewModel.CheckOutDate),
                     RoomCount = orderData.roomCheckOutViewModel.RoomOrder,
-                    RoomPriceTotal = orderData.roomCheckOutViewModel.TotalPrice,
+                    RoomPriceTotal = Math.Ceiling(orderData.roomCheckOutViewModel.TotalPrice),
                     FirstName = firstname,
                     LastName = lastname,
                     Email = email,
@@ -144,7 +145,7 @@ namespace BS_Adoga.Controllers
                     oPayment.Send.OrderResultURL = "https://localhost:44352/CheckOut/PayFeedback";//瀏覽器端回傳付款結果網址
                     oPayment.Send.MerchantTradeNo = orderId;//廠商的交易編號
                     oPayment.Send.MerchantTradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");//廠商的交易時間
-                    oPayment.Send.TotalAmount = orderData.roomCheckOutViewModel.TotalPrice;//交易總金額
+                    oPayment.Send.TotalAmount = Math.Ceiling(orderData.roomCheckOutViewModel.TotalPrice);//交易總金額
                     oPayment.Send.TradeDesc = "交易描述";//交易描述
                     oPayment.Send.ChoosePayment = PaymentMethod.Credit;//使用的付款方式
                     oPayment.Send.Remark = "Test";//備註欄位
@@ -164,7 +165,7 @@ namespace BS_Adoga.Controllers
                     oPayment.Send.Items.Add(new Item()
                     {
                         Name = orderData.roomCheckOutViewModel.HotelFullName,//商品名稱
-                        Price = orderData.roomCheckOutViewModel.TotalPrice,//商品單價
+                        Price = Math.Ceiling(orderData.roomCheckOutViewModel.TotalPrice),//商品單價
                         Currency = "新台幣",//幣別單位
                         Quantity = orderData.roomCheckOutViewModel.RoomOrder,//購買數量
                         URL = "http://google.com",//商品的說明網址
@@ -300,8 +301,8 @@ namespace BS_Adoga.Controllers
                     PayResult.OrderId = (string)htFeedback["MerchantTradeNo"];
                     PayResult.TradeDate = (string)htFeedback["TradeDate"];
                     PayResult.PaymentDate = (string)htFeedback["PaymentDate"];
+                    PayResult.PaymentType = (string)htFeedback["PaymentType"];
                     PayResult.TradePrice = (string)htFeedback["TradeAmt"];
-                    PayResult.PaymentType = (string)htFeedback["PaymentType"];                 
                     TempData["PayResult"] = PayResult;
 
                     //更新付款資訊
