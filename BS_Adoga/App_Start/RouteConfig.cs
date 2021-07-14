@@ -13,6 +13,29 @@ namespace BS_Adoga
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            routes.MapRoute(
+            name: "HotelCity",
+            url: "Taiwan/{city}",
+            defaults: new { controller = "Search", action = "Search", city = UrlParameter.Optional }
+        );
+            routes.MapRoute(
+         name: "Hotel",
+         url: "Taiwan/Hotel/{id}",
+         defaults: new { controller = "HotelDetail", action = "Detail", id = UrlParameter.Optional }
+     );
+            routes.MapRoute(
+                name: "Login",
+                url: "MemberLogin",
+                defaults: new { controller = "MemberLogin", action = "MemberLogin", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "HotelDetail",
+                url: "HotelDetail/{hotelId}-({startDate})-({endDate})-{orderRoom}-{adult}-{child}",
+                defaults: new { controller = "HotelDetail", action = "Detail"}
+            );
+
             routes.MapRoute(
                 name: "HotelEdit",
                 url: "Hotel/Edit/{hotelid}",
@@ -30,6 +53,7 @@ namespace BS_Adoga
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "HomePage", id = UrlParameter.Optional }
             );
+         
         }
     }
 }

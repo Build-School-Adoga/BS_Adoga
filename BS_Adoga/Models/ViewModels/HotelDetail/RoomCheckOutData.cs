@@ -17,10 +17,15 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
 
         public string RoomName { get; set; }
 
+        public bool NoSmoking { get; set; }
+
         public bool Breakfast { get; set; }
 
         public string BedType { get; set; }
         //public IQueryable<RoomBedVM> RoomBed { get; set; }
+        public string CheckInDate { get; set; }
+
+        public string CheckOutDate { get; set; }
 
         public int CountNight { get; set; }
 

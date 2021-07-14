@@ -25,13 +25,14 @@
         <input type="submit" name="cardlocal" value="" id="btn1" style="display: none;" />
 
     }*@
+
 @using (Html.BeginForm("HomePage", "Home"))
 {
 
-    <input type="text" name="cardlocal" v-model="projectForm.collectionName" value="" id="btn1" style="display: none;" />
+    <input class="none" type="text" name="cardlocal" v-model="projectForm.collectionName" value="" id="btn1" />
 
 }
-<input type="text" name="cba"  value="" id="btn2" style="display: none;" />
+<input class="none" type="text" name="cba" value="" id="btn2" />
 <div class="bg"></div>
 
 @using (Html.BeginForm("Search", "Home"))
@@ -39,24 +40,21 @@
 
 
     <div class="island d-flex flex-column  align-items-center">
-        <h3 class="text-white fw-bold"
-            style="font-size: 24px; line-height: 31.2px; margin-top: 50px; font-family: mallory,Helvetica Neue,Helvetica,Arial,sans-serif;">
+        <h3 class="text-white fw-bold first-title ">
             訂飯店、住度假村、睡青年旅館
         </h3>
-        <p class="text-white" style="font-size: 21px; line-height: 26px;">
+        <p class="text-white first-title2 ">
             包山包海超過200萬間國內外各類優惠住宿
 
         </p>
-        <input type="text" name="data" value="" style="display:none;" />
+        <input class="none" type="text" name="data" value="" />
 
     </div>
 
-    <div class="container  " id="container" style="border-radius: 16px;">
+    <div class="container  " id="container">
         <div class="input-group mb-3">
             <div id="app">
-
-
-                <el-select style="color: #666;z-index: 3;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
+                <el-select style=" z-index: 3;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
                            name="search" clearable default-first-option>
                     <el-option-group v-for="group in options2"
                                      :key="group.label"
@@ -74,41 +72,6 @@
 
 
             </div>
-            @*<input list="browsers" name="myBrowser" id="inputGroupSelect02" style="        color: #666;
-                        width: 1300px;
-                        border: 1px solid #ced4da;
-                " type="text" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱">*@
-
-
-            @*@model BS_Adoga.Models.ViewModels.homeViewModels.demoshopViewModels*@
-            @*@model IEnumerable<BS_Adoga.Hotel>*@
-
-            @*<datalist id="browsers" name="ServiceCity">
-                    @foreach (var item in Model.Hotels)
-                    {
-
-
-                        @Html.Partial("_option", item);
-
-
-                    }
-                </datalist>*@
-
-
-
-            @*<option value="Chrome">
-                <option value="Firefox">
-                <option value="Internet Explorer">
-                <option value="Opera">
-                <option value="Safari">*@
-
-
-            @*@model IEnumerable<BS_Adoga.Hotel>
-                @foreach (var item in Model)
-                {
-                    @Html.Partial("SearchProduct", item)
-                }*@
-
             <div class="container-fluid">
                 <div class="row">
                     <div class=" bd-content">
@@ -118,13 +81,12 @@
 
                                 <div class="timebox d-flex justify-content-center  align-items-center">
                                     <div class="col-6 d-flex">
-                                        <i class="far fa-calendar fa-2x" style="margin:0 20px 0 20px;width:30.6px;height:44px"></i>
+                                        <i class="far fa-calendar fa-2x time-box-1"></i>
                                         <div>
 
-                                            <input type="text" id="range_start" name="start" value="" style=" width: 150px; border-style: none; " />
+                                            <input type="text" id="range_start" name="start" value="" />
 
-                                            <input type="text" id="week_start" value="" style="      width: 150px;
-                                       border-style: none;color: gray; " />
+                                            <input type="text" id="week_start" value="" />
                                         </div>
 
                                     </div>
@@ -132,14 +94,14 @@
 
                                     </div>
                                     <div class="col-6 d-flex">
-                                        <i class="fas fa-calendar fa-2x" style="margin:0 20px 0 0px;width:30.6px;height:44px"></i>
+                                        <i class="fas fa-calendar fa-2x time-box-2"></i>
                                         <div>
-                                            <input type="text" id="range_end" name="end" value="" style="  width: 150px; border-style: none;" />
-                                            <input type="text" id="week_end" value="" style=" width: 150px; border-style: none;    color: grey;" />
+                                            <input type="text" id="range_end" name="end" value="" />
+                                            <input type="text" id="week_end" value="" style=" " />
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" class="calendar-minus 	calendar-plus from-control" id="demo" style="width: 514px; border: 1px solid #ced4da;" name="date_range" />
+                                <input type="text" class="calendar-minus 	calendar-plus from-control" id="demo" name="date_range" />
 
                             </div>
 
@@ -154,10 +116,9 @@
                     </div>
                 </div>
             </div>
-            <div class="form-check border d-flex " id="sale-absolute" style="z-index: 3;width:514px;margin-left:1px">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                       style=" margin-left: -10px;">
-                <label class="form-check-label" for="flexCheckDefault" style="width: 514px; margin-left: 10px;">
+            <div class="form-check border d-flex " id="sale-absolute">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" id="saleprice" for="flexCheckDefault">
                     享達25%的訂房折扣
                 </label>
                 <div id="sale" class="d-flex justify-content-center bg-danger align-items-center">
@@ -167,11 +128,11 @@
 
 
         </div>
-        <button type="submit" class="btn btn-danger" style="width:480px;height: 64px; background-color: rgb(83, 146, 249);" id="search">搜尋</button>
+        <button type="submit" class="btn btn-danger" id="search">搜尋</button>
     </div>
 
 }
-<div id="carouselExampleControls" class="carousel slide" data-interval="false" style="margin-top: 100px;">
+<div id="carouselExampleControls" class="carousel slide" data-interval="false">
     <div class=" d-flex justify-content-center" style="margin-bottom: 50px;">
         <h1 class="fs-4">台灣熱門城市</h1>
     </div>
@@ -184,50 +145,50 @@
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/4951/1_4951_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-1" style="">
                                 台北市
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">2,976間宿舍</p>
+                            <p id="tw-p-1">2,976間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/12080/1_12080_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line" style="">
                                 台中市
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">1,592間宿舍</p>
+                            <p id="tw-p-1">1,592間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/756/1_756_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 高雄市
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">957間宿舍</p>
+                            <p id="tw-p-1" style="">957間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/18347/1_18347_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 台南市
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">1,420間宿舍</p>
+                            <p id="tw-p-1">1,420間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/88773/1_88773_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 宜蘭縣
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">1,843間宿舍</p>
+                            <p id="tw-p-1">1,843間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/23127/1_23127_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 花蓮縣
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">2,003間宿舍</p>
+                            <p id="tw-p-1">2,003間宿舍</p>
                         </div>
                     </div>
                 </div>
@@ -241,48 +202,48 @@
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/4740/1_4740_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 台東縣
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">1,138間宿舍</p>
+                            <p id="tw-p-1">1,138間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/18343/1_18343_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">墾丁</h2>
-                            <p style="font-size: 12px; line-height:16px;">1,196間宿舍</p>
+                            <h2 class="fw-bold" id="tw-line">墾丁</h2>
+                            <p id="tw-p-1">1,196間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/11977/1_11977_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 嘉義縣
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">353間宿舍</p>
+                            <p id="tw-p-1">353間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/18346/1_18346_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line" ">
                                 南投縣
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">1,019間宿舍</p>
+                            <p id="tw-p-1">1,019間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/8453/1_8453_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 桃園市
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">352間宿舍</p>
+                            <p id="tw-p-1">352間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/23127/1_23127_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 新竹縣
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">244間宿舍</p>
+                            <p id="tw-p-1">244間宿舍</p>
                         </div>
                     </div>
                 </div>
@@ -303,24 +264,16 @@
     </a>
 </div>
 <div class="container d-flex justify-content-center align-items-center flex-column" style="margin-top: 50px;">
-    <h1 style=" font-size: 23px; line-height:32px; margin-bottom: 20px;">推薦您下一趟旅行去處！</h1>
+    <h1 id="travel">推薦您下一趟旅行去處！</h1>
     <div class="row" id="motal">
         <div class="d-flex  align-items-center " id="box" style="margin-left: -100px;">
 
             @*@model IEnumerable<Card>*@
 
 
-
-            @foreach (var man in Model.My_CardViewModels)
-            {
-
-                @Html.Partial("_SimpleCardPartial", man);
-
-
-            }
-
-
-
+            
+                @Html.Partial("_SimpleCardPartial");
+       
 
 
         </div>
@@ -328,7 +281,7 @@
 </div>
 
 <div id="carouselExampleControls2" class="carousel slide" data-interval="false"
-     style="margin-top: 100px; margin-bottom: 100px;">
+     style="">
     <div class=" d-flex justify-content-center" style="margin-bottom: 50px;">
         <h1 class="fs-4">台灣境外的熱門城市</h1>
     </div>
@@ -341,45 +294,45 @@
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/16808/1_16808_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">香港</h2>
-                            <p style="font-size: 12px; line-height:16px;">1,792間宿舍</p>
+                            <h2 class="fw-bold" id="tw-line">香港</h2>
+                            <p id="tw-p-1">1,792間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/13170/1_13170_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 胡志明市
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">10,146間宿舍</p>
+                            <p id="tw-p-1">10,146間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/21397/1_21397_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">澳門</h2>
-                            <p style="font-size: 12px; line-height:16px;">144間宿舍</p>
+                            <h2 class="fw-bold" id="tw-line">澳門</h2>
+                            <p id="tw-p-1">144間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/2758/1_2758_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">河內</h2>
-                            <p style="font-size: 12px; line-height:16px;">6,699間宿舍</p>
+                            <h2 class="fw-bold" id="tw-line">河內</h2>
+                            <p id="tw-p-1">6,699間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/14524/1_14524_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 吉隆坡
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">11,303間宿舍</p>
+                            <p id="tw-p-1">11,303間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
 
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/9395/1_9395_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 曼谷
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">10,409間宿舍</p>
+                            <p id="tw-p-1">10,409間宿舍</p>
 
                         </div>
 
@@ -395,44 +348,44 @@
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/5085/1_5085_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 東京
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">11,333間宿舍</p>
+                            <p id="tw-p-1">11,333間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/115678/1_115678_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">平陽</h2>
-                            <p style="font-size: 12px; line-height:16px;">125間宿舍</p>
+                            <h2 class="fw-bold" id="tw-line">平陽</h2>
+                            <p id="tw-p-1">125間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/10372/1_10372_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 墨爾本
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">3,374間宿舍</p>
+                            <p id="tw-p-1">3,374間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/4064/1_4064_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">
+                            <h2 class="fw-bold" id="tw-line">
                                 新加坡
                             </h2>
-                            <p style="font-size: 12px; line-height:16px;">1,085間宿舍</p>
+                            <p id="tw-p-1">1,085間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/17190/1_17190_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">頭頓</h2>
-                            <p style="font-size: 12px; line-height:16px;">3,071間宿舍</p>
+                            <h2 class="fw-bold" id="tw-line">頭頓</h2>
+                            <p id="tw-p-1">3,071間宿舍</p>
                         </div>
                         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/1808/1_1808_02.jpg?s=124x124&ar=1x1">
-                            <h2 class="fw-bold" style="font-size: 16px; line-height:22px; margin-top: 20px;">新山</h2>
-                            <p style="font-size: 12px; line-height:16px;">3,662間宿舍</p>
+                            <h2 class="fw-bold" id="tw-line">新山</h2>
+                            <p id="tw-p-1">3,662間宿舍</p>
                         </div>
                     </div>
                 </div>
@@ -458,11 +411,11 @@
 
     <div class="container" style="width:1132px; margin-top: 50px; margin-bottom: 50px;">
         <div class="d-flex">
-            <div style="width: 156.8px;   list-style:none; ">
-                <span class="fw-normal" style="width: 65px; line-height: 60px; font-size: 16px;">
+            <div id="Citybox" style=" ">
+                <span class="fw-normal purpose" style="">
                     目的地城市
                 </span>
-                <li style=" line-height: 30px; font-size: 16px;">
+                <li id="Asia">
                     <span>
                         亞洲
                     </span>
@@ -595,7 +548,7 @@
                 </ul>
             </div>
 
-            <div style="width: 156.8px; list-style:none; ">
+            <div id="Citybox">
 
                 <ul>
                     <li> <a href="">澳門飯店 </a></li>
@@ -677,7 +630,7 @@
                     </li>
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox" style="">
                         <span>歐洲</span>
                     </li>
                     <li>
@@ -692,7 +645,7 @@
                     </li>
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>中東</span>
                     </li>
                     <li>
@@ -702,9 +655,9 @@
                     </li>
                 </ul>
             </div>
-            <div style="width: 156.8px; list-style:none; ">
+            <div id="Citybox">
                 <ul>
-                    <li style="line-height: 60px; font-size: 16px;">
+                    <li id="country " style="">
                         <span>
                             國家和地區
                         </span>
@@ -712,7 +665,7 @@
 
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>非洲</span>
                     </li>
                     <li>
@@ -728,7 +681,7 @@
 
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>美洲</span>
                     </li>
                     <li>
@@ -763,7 +716,7 @@
                     </li>
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>亞洲</span>
                     </li>
                     <li><a href="">柬埔寨飯店</a></li>
@@ -787,10 +740,10 @@
 
 
 
-            <div style="width: 156.8px; list-style:none; ">
+            <div id="Citybox">
 
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>歐洲</span>
                     </li>
 
@@ -814,7 +767,7 @@
 
 
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>中東</span>
                     </li>
                     <li><a href="">巴林飯店</a></li>
@@ -823,7 +776,7 @@
                     <li><a href="">阿拉伯聯合大公國飯店</a></li>
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>太平洋</span>
                     </li>
                     <li><a href="">澳洲飯店</a></li>
@@ -834,13 +787,13 @@
             </div>
 
 
-            <div style="width: 156.8px; list-style:none; ">
-                <li style=" line-height: 40px; font-size: 16px; ">
+            <div id="Citybox">
+                <li id="smaillbox">
                     <span>目的地指南</span>
                 </li>
                 <li><a href="">目的地指南首頁</a></li>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>亞洲</span>
                     </li>
                     <li><a href="">峇里島指南</a></li>
@@ -864,13 +817,13 @@
                     <li><a href="">東京指南</a></li>
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>歐洲</span>
                     </li>
                     <li><a href="">巴黎指南</a></li>
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>中東</span>
                     </li>
                     <li><a href="">杜拜指南</a></li>
@@ -878,7 +831,7 @@
                     <li><a href="">沙烏地阿拉伯指南</a></li>
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>太平洋洲</span>
                     </li>
                     <li><a href="">布里斯本指南</a></li>
@@ -886,13 +839,13 @@
                     <li><a href="">雪梨指南</a></li>
                 </ul>
             </div>
-            <div style="width: 156.8px; list-style:none; ">
-                <li style=" line-height: 40px; font-size: 16px; ">
+            <div id="Citybox">
+                <li id="smaillbox">
                     <span>Agoda Homes</span>
                 </li>
                 <ul>
 
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>亞洲公寓</span>
                     </li>
                     <li><a href="">曼谷公寓</a></li>
@@ -904,7 +857,7 @@
 
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>亞洲小屋</span>
                     </li>
                     <li><a href="">峇里島小屋</a></li>
@@ -915,7 +868,7 @@
                     <li><a href="">富國島小屋</a></li>
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>亞洲別墅</span>
                     </li>
                     <li><a href="">峇里島別墅</a></li>
@@ -926,7 +879,7 @@
                     <li><a href="">波德申別墅</a></li>
                 </ul>
                 <ul>
-                    <li style=" line-height: 40px; font-size: 16px; ">
+                    <li id="smaillbox">
                         <span>亞洲度假住宿</span>
                     </li>
                     <li><a href="">濟州島度假住宿</a></li>
@@ -938,8 +891,8 @@
 
                 </ul>
             </div>
-            <div style="width: 156.8px; list-style:none; ">
-                <li style=" line-height: 40px; font-size: 16px; ">
+            <div id="Citybox">
+                <li id="smaillbox">
                     <span>探索</span>
                 </li>
                 <li><a href="">長住方案</a></li>
@@ -961,43 +914,63 @@
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 
     <script>
-        document.getElementById("search").addEventListener('click', function () {
-            hand(document.getElementsByName("search")[0].value);
+      
+        $(document).ready(function () {
+         
+            document.getElementsByName("cardlocal")[0].value = localStorage.getItem("key");
+            if (document.getElementsByName("cardlocal")[0].value != sessionStorage.getItem("online")) {
+                hand2(document.getElementsByName("cardlocal")[0].value);
+                getSavedValue2(document.getElementsByName("cardlocal")[0].value);
+
+                function hand2(e) {
+                    var name = "online";
+                    var val = e;
+                    console.log(val);
+                    sessionStorage.setItem(name, val);
+                }
+                function getSavedValue2(v) {
+                    if (!sessionStorage.getItem(v)) {
+                        return "";
+                    }
+                    return sessionStorage.getItem(v);
+
+                }
+                
+                var lol = $("#btn1").val();
+                
+                //button.form.submit();
+                $.ajax({
+                    url: "/Home/HomePage",
+                    //传给服务器的数据(即后台AddUsers()方法的参数,参数类型要一致才可以)
+                    type: 'POST',
+                    cache: false,
+                    data: {cardlocal:lol},
+                    //数据类型必须有
+                    async: true,//异步
+                    error: function () {
+                        alert("An error occurred.");
+                    },
+                    success: function (data) {
+                        $("#box").html(data);
+                   
+                    
+                    }
+                });
+               
+            }
+
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+
+
         });
-        getSavedValue(document.getElementsByName("search")[0].value);
 
-        function hand(e) {
-            var name = "key";
-            var val = e;
-            console.log(val);
-            localStorage.setItem(name, val);
-        }
-        function getSavedValue(v) {
-            if (!localStorage.getItem(v)) {
-                return "";
-            }
-            return localStorage.getItem(v);
-
-        }
-    </script>
-    @*<script>
-            window.onload = function () {
-
-
-                document.getElementsByName("cardlocal")[0].value = localStorage.getItem("key");
-                var button = document.getElementsByName("cardlocal")[0];
-                button.form.submit();
-
-            }
-        </script>*@
-
-    <script>
-        moment().format();
     </script>
     <script>
 
 
-
+              moment().format();
         $('#demo').daterangepicker({
             "autoApply": true,
             "locale": {
@@ -1068,14 +1041,6 @@
         var end = moment(dates[1], 'YYYY MM DD');
 
 
-    </script>
-
-
-    <script>
-
-
-
-
         function dedup(arr) {
             var hashTable = {};
 
@@ -1134,20 +1099,6 @@
                     this.options2 = this.options.filter(function (el, i, arr) {
                         return arr.indexOf(el) === i;
                     });
-                    if (letter.lenght === 3) {
-                        this.options2 = this.options.filter(v => {
-                            return v.label.includes(letter)
-                        })
-                    }
-                    else {
-                        this.options2 = this.options.filter(v => {
-                            return v.label.includes(letter)
-                        })
-                    }
-
-
-
-
 
                 }
 
@@ -1161,10 +1112,6 @@
             }
 
         };
-
-
-
-
             var Ctor = Vue.extend(Main)
             new Ctor().$mount('#app')
 
@@ -1174,47 +1121,30 @@
         $(".asd").click(function () {
             $('#demo').trigger("click");
         });
+        document.getElementById("search").addEventListener('click', function () {
+            hand(document.getElementsByName("search")[0].value);
+        });
+        getSavedValue(document.getElementsByName("search")[0].value);
 
-
-    </script>
-
-    <script>
-
-        window.onload = function () {
-          
-            document.getElementsByName("cardlocal")[0].value = localStorage.getItem("key");
-            if (document.getElementsByName("cardlocal")[0].value != sessionStorage.getItem("online")) {
-                hand2(document.getElementsByName("cardlocal")[0].value);
-                getSavedValue2(document.getElementsByName("cardlocal")[0].value);
-
-                function hand2(e) {
-                    var name = "online";
-                    var val = e;
-                    console.log(val);
-                    sessionStorage.setItem(name, val);
-                }
-                function getSavedValue2(v) {
-                    if (!sessionStorage.getItem(v)) {
-                        return "";
-                    }
-                    return sessionStorage.getItem(v);
-
-                }
-
-                var button = document.getElementsByName("cardlocal")[0];
-                button.form.submit();
+        function hand(e) {
+            var name = "key";
+            var val = e;
+            console.log(val);
+            localStorage.setItem(name, val);
+        }
+        function getSavedValue(v) {
+            if (!localStorage.getItem(v)) {
+                return "";
             }
-
-              
-            
+            return localStorage.getItem(v);
 
         }
-
-
-
     </script>
 
+
+
 }
+
 
 
 

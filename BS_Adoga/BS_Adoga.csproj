@@ -50,25 +50,25 @@
       <HintPath>..\..\ECPayAIO_Net-1.191231\ECPay.Payment.Integration.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis, Version=1.52.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.52.0\lib\net45\Google.Apis.dll</HintPath>
+    <Reference Include="Google.Apis, Version=1.43.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.43.0\lib\net45\Google.Apis.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Auth, Version=1.52.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Auth.1.52.0\lib\net461\Google.Apis.Auth.dll</HintPath>
+    <Reference Include="Google.Apis.Auth, Version=1.43.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.43.0\lib\net45\Google.Apis.Auth.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.52.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Auth.1.52.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.43.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.43.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Core, Version=1.52.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Core.1.52.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    <Reference Include="Google.Apis.Core, Version=1.43.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.43.0\lib\net45\Google.Apis.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.PlatformServices, Version=1.52.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.52.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.43.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.43.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="LineBot, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LineBotSDK.2.4.32\lib\net45\LineBot.dll</HintPath>
@@ -168,7 +168,7 @@
       <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -181,6 +181,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.11.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.11.1\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
@@ -285,9 +286,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIController\DetailApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\districts.cs" />
@@ -303,6 +306,7 @@
     <Compile Include="Models\ViewModels\Account\BookingDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\Account\MemberBookingViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOut\CheckOutListViewModel.cs" />
+    <Compile Include="Models\ViewModels\CheckOut\ECPayResultsViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOut\OrderVM.cs" />
     <Compile Include="Models\DBContext\AdogaContext.cs" />
     <Compile Include="Models\DBContext\BathroomType.cs" />
@@ -325,14 +329,20 @@
     <Compile Include="Models\ViewModels\homeViewModels\MyRoom.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\MyRoomsDetails.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
+    <Compile Include="Models\ViewModels\MemberLogin\ForgetPasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\HotelDetail\SearchByMemberVM.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\HotelCreateViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\HotelListViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\SimpleZipCodeVM.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\LineLoginToken.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\LineUserProfile.cs" />
+    <Compile Include="Models\ViewModels\MemberLogin\ResetPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\UserCookieViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\RoomCheckOutData.cs" />
+    <Compile Include="Models\ViewModels\Search\EquipmentListViewModel.cs" />
+    <Compile Include="Models\ViewModels\Search\FacilityViewModel.cs" />
     <Compile Include="Models\ViewModels\Search\HotelSearchViewModel.cs" />
+    <Compile Include="Models\ViewModels\MemberLogin\UserCookieViewModel.cs" />
     <Compile Include="Models\ViewModels\Search\RoomDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\Search\RoomViewModel.cs" />
     <Compile Include="Models\ViewModels\Search\SearchCardViewModel.cs" />
@@ -346,6 +356,7 @@
     <Compile Include="Models\ViewModels\HotelDetail\RoomBedVM.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\RoomTypeVM.cs" />
     <Compile Include="Models\ViewModels\Search\HotelOptionViewModel.cs" />
+    <Compile Include="Models\ViewModels\Search\SearchDataViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\FunctionRepository.cs" />
     <Compile Include="Repository\MemberAccountRepository.cs" />
@@ -403,6 +414,7 @@
     <Content Include="Asset\JS\MemberAccount\MemberProfile.js" />
     <Content Include="Asset\JS\GoogleLogin.js" />
     <Content Include="Asset\JS\navbar.js" />
+    <Content Include="Asset\JS\RoomFilter.js" />
     <Content Include="Asset\JS\Search.js" />
     <Content Include="Asset\JS\_SearchFilterPartial.js" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.css" />
@@ -2315,7 +2327,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\HotelDetail\Detail.cshtml" />
+    <Content Include="Views\HotelDetail\HotelDetail.cshtml" />
     <Content Include="Views\MemberLogin\MemberLogin.cshtml" />
     <Content Include="Views\Shared\_AdogaLayout.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
@@ -2349,6 +2361,7 @@
     <Content Include="Views\Search\_optionCity.cshtml" />
     <Content Include="Views\Account\BookingDetail.cshtml" />
     <Content Include="Views\Account\_BookingPartial.cshtml" />
+    <Content Include="Views\CheckOut\ECPayResult.cshtml" />
     <Content Include="Views\Shared\_FunctionPage.cshtml" />
     <Content Include="Views\Function\Index.cshtml" />
     <Content Include="Views\Function\HotelIndex.cshtml" />
@@ -2365,6 +2378,8 @@
     <Folder Include="Asset\images\HotelLogin\" />
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
+    <Folder Include="Models\ViewModels\Account\" />
+    <Folder Include="Views\DetailApi\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
