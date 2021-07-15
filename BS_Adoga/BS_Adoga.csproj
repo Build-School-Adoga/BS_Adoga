@@ -396,6 +396,7 @@
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.svg" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.svg" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Asset\CDN\JS\jquery-3.3.1.js" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
@@ -2404,7 +2405,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Asset\CDN\CSS\" />
-    <Folder Include="Asset\CDN\JS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />

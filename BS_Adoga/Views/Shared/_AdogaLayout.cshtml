@@ -33,9 +33,9 @@
             @Html.ActionLink("刊登飯店空房", "HotelLogin", "HotelLogin", null, new { @class = "head-nav-item red" })
             @*<a href="#" class="head-nav-item red">刊登家中空房</a>*@
             @*<div class="head-nav-item">
-                <img src="~/Asset/images/tw.svg.png" alt="" class="flag-icon">
-            </div>
-            <a href="#" class="head-nav-item currency ff-mont fz-12">NT$</a>*@
+                    <img src="~/Asset/images/tw.svg.png" alt="" class="flag-icon">
+                </div>
+                <a href="#" class="head-nav-item currency ff-mont fz-12">NT$</a>*@
 
 
             @*0624新增使用者登入與登出介面*@
@@ -234,9 +234,13 @@
             });
         }
     </script>
+
     <!--Google引用內容開始   Google登入使用的引用JS -->
     <!-- 引用jQuery-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    @*<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>*@
+    <script src="~/Asset/CDN/JS/jquery-3.3.1.js"></script>
+
+
     <!--從 Web.config檔 抓取Googl App Client ID-->
     <script type="text/javascript">
            let GoolgeApp_Cient_Id = "@WebConfigurationManager.AppSettings["373077817054-5hahnkio91en8pnqqqpaginugjt0f85v.apps.googleusercontent.com"]";
