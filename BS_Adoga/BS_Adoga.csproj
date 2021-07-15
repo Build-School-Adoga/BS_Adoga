@@ -2371,14 +2371,14 @@
     <Content Include="Views\Function\HotelEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="APIController\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Asset\CDN\CSS\" />
+    <Folder Include="Asset\CDN\JS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />
     <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
-    <Folder Include="Models\ViewModels\Account\" />
     <Folder Include="Views\DetailApi\" />
   </ItemGroup>
   <ItemGroup>
