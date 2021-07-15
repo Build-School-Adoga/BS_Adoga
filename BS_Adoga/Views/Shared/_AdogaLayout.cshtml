@@ -68,14 +68,14 @@
                         <ul>
                             <li>
                                 <i class="far fa-calendar-check me-2"></i>
-                                @Html.ActionLink("管理訂單", "MemberBooking", "Account",new { @class = "member-menu-link"})
+                                @Html.ActionLink("管理訂單", "MemberBooking", "Account",null,new { @class = "member-menu-link"})
                             </li>
                             <li><i class="fas fa-inbox me-2"></i> 收件匣</li>
                             <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
                             @*<li><i class="far fa-star me-2"></i> 住宿評鑒</li>*@
                             <li>
                                 <i class="far fa-user me-2"></i>
-                                @Html.ActionLink("個人資料", "MemberProfile", "Account", new { @class = "member-menu-link" })
+                                @Html.ActionLink("個人資料", "MemberProfile", "Account", null,new { @class = "member-menu-link" })
                             </li>
                             @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2", onclick = "FacebookLogout()", @id = "btnDisconnect" })
                         </ul>
