@@ -377,6 +377,25 @@
     <Compile Include="Service\MultiButtonAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\attribution.js" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\all.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\all.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\brands.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\brands.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\fontawesome.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\fontawesome.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\regular.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\regular.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\solid.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\solid.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\svg-with-js.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\svg-with-js.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\v4-shims.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\v4-shims.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\LICENSE.txt" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.svg" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.svg" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.svg" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
@@ -2301,6 +2320,18 @@
     <Content Include="Asset\StartbootstrapAdminPages\vendor\jquery\jquery.min.map" />
     <Content Include="Asset\StartbootstrapAdminPages\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Asset\JSON\SimpleZipCode.json" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.eot" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.ttf" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.woff" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.woff2" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.eot" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.ttf" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.woff" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.woff2" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.eot" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.ttf" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.woff" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.woff2" />
     <None Include="Properties\PublishProfiles\adoga - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\adoga - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\adoga - Web Deploy.pubxml" />
