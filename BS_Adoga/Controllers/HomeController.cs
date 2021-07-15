@@ -23,8 +23,6 @@ namespace BS_Adoga.Controllers
             _homeService = new HomeService();
         }
 
-
-
         public ActionResult Index()
         {
             return View();
@@ -63,37 +61,20 @@ namespace BS_Adoga.Controllers
 
 
         [HttpPost]
-        public ActionResult Search(string search, string date_range, string people, string room,string kid, string data, string cardlocal)
+        public ActionResult Search(string search, string date_range, string people, string room, string kid, string data)
         {
             var date = date_range.Split('-');
             var start = date[0];
             var end = date[1];
-            //var peo = people.Split('位');
-            //var ple = peo[0];
 
-
-            //var rmo = room.Split('間');
-            //var rom = rmo[0];
-            //var dik = kid.Split('位');
-            //var kkk = dik[0];
-            //var ddd = kkk.Split(',');
-            //var kids = ddd[1];
             var Hotels = from p in _homeService._homeRepository._context.Hotels
-                     where p.HotelCity == search
-                     select p.HotelCity;
-
-            //var peo = people.Split('位');
-            //var adu = int.Parse(peo[0]);
-            //var str = peo[1].Split(',');
-            //var kid = int.Parse(str[1]);
-
+                         where p.HotelCity == search
+                         select p.HotelCity;
             //Irene更新: 稍微把人數的部分改了一些
             var human = people.Split(',');
             var a = human[0].Split('位');
             var adu = int.Parse(a[0]);
             var kids = 0;
-
-            //?? if (Hotels.Count() >0)
             if (human.Length > 1)
             {
                 var b = human[1].Split('位');
@@ -110,8 +91,8 @@ namespace BS_Adoga.Controllers
             TempData["kid"] = kids;
             TempData["rom"] = rom;
             TempData["data"] = data;
-
-            if (search.Length == 3)
+            TempData["search"] = search;
+            if (Hotels.Count() > 0)
             {
                 //TempData["search"] = search;
 
@@ -126,66 +107,20 @@ namespace BS_Adoga.Controllers
                     RoomCount = rom
                 };
                 return RedirectToAction("Search", "Search", info);
-
-                //沒有用？？TempData["search"] = search;
-                //TempData["start"] = start;
-                //TempData["end"] = end;
-                //TempData["ple"] = ple;
-                //TempData["rom"] = rom;
-                //TempData["data"] = data;
-                //TempData["kids"] = kids;
-
-
-
-                //return RedirectToAction("Search", "Search", new
-                //{
-                //    search = TempData["search"],
-                //    start = TempData["start"],
-                //    end = TempData["end"],
-                //    ple = TempData["ple"],
-                //    rom = TempData["rom"],
-                //    data = TempData["data"],
-                //    kids = TempData["kids"]
-                //});
             }
-            else
+            TempData["search"] = search;
+
+            return RedirectToAction("HotelDetail", "HotelDetail", new
             {
-                var xxx = from p in _homeService._homeRepository._context.Hotels
-                          where p.HotelName == search
-                          select p.HotelID;
+                hotelName = TempData["search"],
+                startDate = TempData["start"],
+                endDate = TempData["end"],
+                orderRoom = TempData["rom"],
+                adult = TempData["ple"],
+                child = TempData["kid"]
+            });
 
-                   
-                //    TempData["kids"] = kids;
-            
-                //TempData["start"] = start;
-                //TempData["end"] = end;
-                //TempData["ple"] = ple;
-                //TempData["rom"] = rom;
-                //TempData["data"] = data;
-                
-                TempData["search"] = xxx.FirstOrDefault();
 
-                return RedirectToAction("Detail", "HotelDetail",new {
-                    hotelId = TempData["search"],
-                    startDate = TempData["start"],
-                    endDate = TempData["end"],
-                    orderRoom = TempData["rom"],
-                    adult = TempData["ple"],
-                    child = TempData["kids"]
-                });
-            }
-
-            var card = _homeService.ALLImages(cardlocal);
-            return View(card);
-        }
-
-        [HttpPost]
-        public ActionResult Searchtwo(string cardlocal)
-        {
-
-            var card = _homeService.ALLImages(cardlocal);
-            return View(card);
         }
     }
-
 }

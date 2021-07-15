@@ -45,7 +45,7 @@ travel.forEach(item => item.addEventListener('click', function () {
 }))
 
 //及時更新上方Filter的數量
-debugger;
+//debugger;
 var r = document.getElementById('room-num').getElementsByTagName('span');
 var a = document.getElementById('adult-num').getElementsByTagName('span');
 var k = document.getElementById('kids-num').getElementsByTagName('span');
@@ -222,13 +222,13 @@ function hand(e) {
     var val = e;
     console.log(val);
     localStorage.setItem(name, val);
-    debugger;
+    //debugger;
 }
 function getSavedValue(v) {
     if (!localStorage.getItem(v)) {
-        debugger;
+        //debugger;
         return "";
     }
-    debugger;
+    //debugger;
     return localStorage.getItem(v);
 }

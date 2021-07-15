@@ -3,8 +3,8 @@
 @{
     var room = Model;
     var discount = Math.Round((1 - room.RoomDiscount) * 10, 1);
-    var roomPrice = Math.Round(room.RoomPrice, 0, MidpointRounding.AwayFromZero);
-    var roomNowPrice = Math.Round(room.RoomNowPrice, 0, MidpointRounding.AwayFromZero);
+    var roomPrice = Math.Ceiling(room.RoomPrice); //Math.Round(room.RoomPrice, 0, MidpointRounding.AwayFromZero);
+    var roomNowPrice = Math.Ceiling(room.RoomNowPrice); //Math.Round(room.RoomNowPrice, 0, MidpointRounding.AwayFromZero);
 }
 <div class="room-type mb-4">
     <div class="room-type-title">

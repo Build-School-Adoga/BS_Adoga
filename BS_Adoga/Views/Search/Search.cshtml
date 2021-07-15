@@ -1,4 +1,6 @@
-﻿@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
+﻿@using BS_Adoga.Models.ViewModels.HotelDetail;
+
+@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Search";
@@ -745,6 +747,5 @@
         @Html.PagedListPager(Model.PageOfHotelSearchVM, page => Url.Action("Search",
             new { sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, page }))
     </div>
-
 </div>
 
