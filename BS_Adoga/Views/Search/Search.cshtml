@@ -1,4 +1,5 @@
 ﻿@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
@@ -9,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.css" />
     <link href="~/Asset/CSS/Search.css" rel="stylesheet" />
     <link href="~/Asset/CSS/SearchFilterPartial.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 }
 
 @section endJS{
@@ -716,11 +718,11 @@
                     @Html.ActionLink("最低價優先", "Search", new { sortOrder = ViewBag.PriceSortParm })
                 </button>
                 <button>
-                    @Html.ActionLink("優良評價優先", "Search", new { sortOrder = ViewBag.StarSortParm })
+                    @Html.ActionLink("星級優先", "Search", new { sortOrder = ViewBag.StarSortParm })
                 </button>
             </div>
         </nav>
-        @{ 
+        @{
             if (Model.HotelSearchVM.Count() == 0)
             {
                 <div id="emptyCard">
@@ -731,12 +733,18 @@
             }
             else
             {
-                foreach(var card in Model.HotelSearchVM)
+                foreach (var card in Model.PageOfHotelSearchVM)
                 {
                     @Html.Partial("_SearchCardPartial", card);
                 }
             }
         }
+        <br />
+        @*Page @(Model.HotelSearchVM)*@
+
+        @Html.PagedListPager(Model.PageOfHotelSearchVM, page => Url.Action("Search",
+            new { sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, page }))
     </div>
+
 </div>
 

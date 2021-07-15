@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Service;
 using BS_Adoga.Models.ViewModels.Search;
+using PagedList;
+
 
 namespace BS_Adoga.Controllers
 {
@@ -47,14 +49,13 @@ namespace BS_Adoga.Controllers
                 RoomCount = int.Parse(r[0])
             };
 
-            
-
             return RedirectToAction("Search",info);
         }
 
         //[HttpGet]
-        public ActionResult Search(SearchDataViewModel info, string sortOrder)
+        public ActionResult Search(SearchDataViewModel info, string sortOrder, string currentFilter, string currentOrder, int? page)
         {
+            //當按下排序的按鈕時，因為會“刷新”頁面所以資料也會需要重新查詢出來，這時讓它抓之前設的TempData去找同樣的條件
             if(info.HotelNameOrCity==null)
             {
                 info.HotelNameOrCity = TempData["CityOrName"].ToString();
@@ -75,63 +76,43 @@ namespace BS_Adoga.Controllers
                 TempData["room"] = info.RoomCount;
                 TempData.Keep();
             }
+
             var data = s.GetSearchViewModelData(info);
 
             //排序 預設抓星級最好的
             ViewBag.StarSortParm = sortOrder == null ? "star_desc" : "";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
             
+            //分頁
+            ViewBag.CurrentSort = sortOrder;
+            if (currentOrder != null) { page = 1; }
+            else { currentOrder = currentFilter; }
+            ViewBag.CurrentFilter = currentFilter;
+
+            int pageSize = 4;
+            int pageNumber = (page ?? 1); //如果page裡面沒有值就會回傳1，else就傳自己的值
+            
             switch (sortOrder)
             {
                 case "star_desc":
-                    data.HotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.Star);
+                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.Star).ToPagedList(pageNumber, pageSize);
                     break;
 
                 case "price_desc":
-                    data.HotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.I_RoomVM.RoomPrice);
+                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.I_RoomVM.RoomPrice).ToPagedList(pageNumber, pageSize);
                     break;
 
                 case "Price":
-                    data.HotelSearchVM = data.HotelSearchVM.OrderBy(o => o.I_RoomVM.RoomPrice);
+                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderBy(o => o.I_RoomVM.RoomPrice).ToPagedList(pageNumber, pageSize);
                     break;
 
                 default:
-                    data.HotelSearchVM = data.HotelSearchVM.OrderBy(o => o.Star);
+                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderBy(o => o.Star).ToPagedList(pageNumber, pageSize);
                     break;
             }
-
 
             return View(data);
 
         }
-
-        //public ViewResult Order(string sortOrder, SearchDataViewModel info)
-        //{
-        //    //預設抓星級最好的
-        //    ViewBag.StarSortParm = sortOrder==null ? "star_desc" : "";
-        //    ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
-
-        //    SearchCardViewModel OrderList = s.GetSearchViewModelData(info);
-        //    switch (sortOrder)
-        //    {
-        //        case "star_desc":
-        //            OrderList.HotelSearchVM = OrderList.HotelSearchVM.OrderByDescending(o => o.Star);
-        //            break;
-
-        //        case "price_desc":
-        //            OrderList.HotelSearchVM = OrderList.HotelSearchVM.OrderByDescending(o => o.I_RoomVM.RoomPrice);
-        //            break;
-
-        //        case "Price":
-        //            OrderList.HotelSearchVM = OrderList.HotelSearchVM.OrderBy(o => o.I_RoomVM.RoomPrice);
-        //            break;
-
-        //        default:
-        //            OrderList.HotelSearchVM = OrderList.HotelSearchVM.OrderBy(o => o.Star);
-        //            break;
-        //    }
-
-        //    return View(OrderList);
-        //}
     }
 }

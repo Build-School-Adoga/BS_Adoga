@@ -20,118 +20,35 @@ namespace BS_Adoga.Repository
             _context = new AdogaContext();
         }
 
-        //public IQueryable<HotelSearchViewModel> ALLHotel()
-        //{
-        //    var hotel = from H in _context.Hotels
-        //                join R in _context.Rooms on H.HotelID equals R.HotelID
-        //                join D in _context.RoomsDetails on R.RoomID equals D.RoomID
-        //                select new HotelSearchViewModel
-        //                {
-        //                    I_HotelDetailVM = new HotelDetailViewModel
-        //                    {
-        //                        HotelID = H.HotelID,
-        //                        HotelName = H.HotelName,
-        //                        HotelEngName = H.HotelEngName,
-        //                        HotelAddress = H.HotelAddress,
-        //                        Star = H.Star,
-        //                        HotelCity = H.HotelCity,
-        //                        HotelDistrict = H.HotelDistrict,
-        //                    },
-        //                    I_RoomVM = new RoomViewModel
-        //                    {
-        //                        HotelID = H.HotelID,
-        //                        RoomID = R.RoomID,
-        //                        RoomPrice = R.RoomPrice
-        //                    },
-        //                    I_RoomDetailVM = new RoomDetailViewModel
-        //                    {
-        //                        RoomID = R.RoomID,
-        //                        CheckInDate = D.CheckInDate,
-        //                        CheckOutDate = D.CheckOutDate,
-        //                        RoomCount = D.RoomCount,
-        //                        RoomOrder = D.RoomOrder,
-        //                        RoomDiscount = D.RoomDiscount
-        //                    }
-        //                };
-        //    return hotel;
-        //}
-        //public IQueryable<FilterSearchHotelViewModel> GetHotelForFilter()
-        //{
-        //    var h = from hotel in _context.Hotels
-        //            select new HotelDetailViewModel
-        //            {
-        //                HotelID = hotel.HotelID,
-        //                HotelName = hotel.HotelName
-        //            };
-
-        //    return h;
-        //}
-        //public IQueryable<FilterSearchCityViewModel> GetCityForFilter()
-        //{
-        //    var c = from city in _context.Hotels
-        //            group _context.Hotels by city.HotelCity into citylist
-        //            select new HotelDetailViewModel
-        //            {
-        //                //HotelID = 
-        //                HotelCity=citylist.Key,
-
-        //            };
-
-        //    return c;
-        //}
-
-        public IQueryable<HotelSearchViewModel> GetHotel(string Name)
-        {
-            IQueryable<HotelSearchViewModel> hotel = from H in _context.Hotels
-                                                     join R in _context.Rooms on H.HotelID equals R.HotelID
-                                                     join D in _context.RoomsDetails on R.RoomID equals D.RoomID
-                                                     where H.HotelCity.Contains(Name)
-                                                     select new HotelSearchViewModel
-                                                     {
-
-                                                         HotelID = H.HotelID,
-                                                         HotelName = H.HotelName,
-                                                         HotelEngName = H.HotelEngName,
-                                                         HotelAddress = H.HotelAddress,
-                                                         Star = H.Star,
-                                                         HotelCity = H.HotelCity,
-                                                         HotelDistrict = H.HotelDistrict,
-                                                         I_RoomVM = new RoomViewModel
-                                                         {
-                                                             HotelID = H.HotelID,
-                                                             RoomID = R.RoomID,
-                                                             RoomPrice = R.RoomPrice
-                                                         },
-                                                         I_RoomDetailVM = new RoomDetailViewModel
-                                                         {
-                                                             RoomID = R.RoomID,
-                                                             CheckInDate = D.CheckInDate,
-                                                             CheckOutDate = D.CheckOutDate,
-                                                             RoomCount = D.RoomCount,
-                                                             RoomOrder = D.RoomOrder,
-                                                             RoomDiscount = D.RoomDiscount
-                                                         }
-                                                     };
-
-            return hotel;
-        }
-
-        public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(SearchDataViewModel info/*string CityOrName, string startDate,string endDate,int nRoom, int nAdult, int nKid*/)
+        public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(SearchDataViewModel info)
         {
             int kidcountasadult = (info.KidCount / 2)+ (info.KidCount % 2);
             int people = info.AdultCount+(kidcountasadult);
             DateTime start = DateTime.Parse(info.CheckInDate);
             DateTime end = DateTime.Parse(info.CheckOutDate).AddDays(1);
 
+            //var data = from h in _context.Hotels
+            //           join r in _context.Rooms on h.HotelID equals r.HotelID
+            //           join rd in _context.RoomsDetails on r.RoomID equals rd.RoomID
+            //           where h.HotelID.Contains(from H in _context.Hotels
+            //                                    where H.HotelCity == info.HotelNameOrCity
+            //                                    select new { HotelID = H.HotelID })
+            //                 and rd.CheckInDate in ('2021-06-20', '2021-06-21')--使用者選擇的日期
+            //                    and rd.RoomCount - rd.RoomOrder >= 2--房間數量
+            //                    and r.NumberOfPeople * (rd.RoomCount - rd.RoomOrder) >= 2
+            //            group by h.HotelID,r.RoomID
+            //            order by OneNightPrice
+
+
             var data = from H in _context.Hotels
                        join R in _context.Rooms on H.HotelID equals R.HotelID
                        join D in _context.RoomsDetails on R.RoomID equals D.RoomID
                        where (H.HotelCity.Contains(info.HotelNameOrCity) || H.HotelName.Contains(info.HotelNameOrCity))
-                                //&& D.OpenRoom == true
-                                //&& (D.RoomCount - D.RoomOrder) >= info.RoomCount
-                                //&& (D.RoomCount - D.RoomOrder) * R.NumberOfPeople >= people
-                                //&& D.CheckInDate >= start
-                                //&& D.CheckOutDate <= end
+                                && D.OpenRoom == true
+                                && (D.RoomCount - D.RoomOrder) >= info.RoomCount
+                                && (D.RoomCount - D.RoomOrder) * R.NumberOfPeople >= people
+                                && D.CheckInDate >= start
+                                && D.CheckOutDate <= end
                        select new HotelSearchViewModel
                        {
                            HotelID = H.HotelID,

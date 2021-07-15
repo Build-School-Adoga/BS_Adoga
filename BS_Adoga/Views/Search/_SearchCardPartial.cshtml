@@ -89,6 +89,7 @@ else { HotelFullName = Model.HotelName; }
             <ins>NT$<span>@newPrice</span></ins>
         </div>
 
-        @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = Model.HotelID }, new { @class = "btn btn-primary", })
+        @* ActionLink沒辦法進去HotelDetail的Action *@
+        @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = Model.HotelID, startDate = "2021/06/20", endDate = "2021/06/22", orderRoom = 2, adult=6}, new { @class = "btn btn-primary", })
     </div>
 </div>
