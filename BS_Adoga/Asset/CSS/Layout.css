@@ -157,6 +157,16 @@ i.head-nav-item {
     color: rgb(99, 155, 238);
 }
 
+.member-menu li:hover>.member-menu-link {
+    color: rgb(99, 155, 238);
+}
+
+.member-menu-link {
+    font-size: 14px;
+    color: rgb(73, 73, 73);
+    text-decoration:none;
+}
+
 .logout-btn {
     width: 100%;
     margin-top: 15px;

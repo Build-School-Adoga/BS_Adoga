@@ -60,8 +60,13 @@ namespace BS_Adoga.Repository
                             RoomID = roomGroup.Key.RoomID,
                             MinRoom = roomGroup.Min(r=>r.r_detail.RoomCount-r.r_detail.RoomOrder),
                             Discount = roomGroup.Sum(r => r.r_detail.RoomDiscount) / countNight,
+                            //d= roomGroup.Sum(r => r.r_detail.RoomDiscount)
                         };
-            
+
+            //查看裡面每筆的總discount
+            //var a = table_2.Select(d => d.d).ToList();
+            //a.ForEach(s => { var b = s;
+            //    var c = s; });
 
             //3.查詢出最終的結果並放進view Model
             var finalTable =  from t2 in table_2

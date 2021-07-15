@@ -33,7 +33,7 @@ namespace BS_Adoga
             routes.MapRoute(
                 name: "HotelDetail",
                 url: "HotelDetail/{hotelId}-({startDate})-({endDate})-{orderRoom}-{adult}-{child}",
-                defaults: new { controller = "HotelDetail", action = "Detail"}
+                defaults: new { controller = "HotelDetail", action = "HotelDetail"}
             );
 
             routes.MapRoute(

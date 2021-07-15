@@ -58,14 +58,14 @@
             </div>
             <div class="d-flex justify-content-end  flex-column  align-items-end" style="height: 144px;">
                 <div id="sale" class="d-flex justify-content-center bg-danger align-items-center">
-                    <h4 class="text-white ">@roomdetail.RoomDiscount</h4>
+                    <h4 class="text-white ">@Math.Round((1 - roomdetail.RoomDiscount) * 10, 1) 折 </h4>
                 </div>
                 <span style="text-decoration:line-through; color: #90949c; font-family: Comic Sans MS;font-size: 14px;line-height: 20px;font-weight: 400;">
-                    @rooms.RoomPrice
+                    NT$ @Math.Ceiling(rooms.RoomPrice)
                 </span>
                 <p class="text-danger"
                    style="font-size: 12px;font-weight: 300;line-height: 20px; font-family: Comic Sans MS;">
-                    @newPrice
+                    NT$ @newPrice
                 </p>
             </div>
         </div>

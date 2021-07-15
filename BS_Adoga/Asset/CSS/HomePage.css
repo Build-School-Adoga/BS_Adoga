@@ -594,6 +594,7 @@ background-color: rgba(0, 0, 0, 0.7); */
 #range_start {
     width: 150px;
     border-style: none;
+    font-family: sans-serif;
 }
 #week_start {
     width: 150px;
@@ -608,9 +609,23 @@ background-color: rgba(0, 0, 0, 0.7); */
 #range_end {
     width: 150px;
     border-style: none;
+    font-family: sans-serif;
 }
 #week_end {
     width: 150px;
     border-style: none;
     color: grey;
+}
+
+/*#range_start 和 #range_end也有改成Sans-serif的字體*/
+#sale-absolute,
+.search-filter-nav,
+#smaillbox,
+#tw-p-1,
+.first-title2,
+p#Quantity,
+#sale,
+#Customer-Service .d-flex.justify-content-center,
+footer p.text-white-50 {
+    font-family: sans-serif;
 }
