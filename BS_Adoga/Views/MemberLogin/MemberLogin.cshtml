@@ -31,12 +31,13 @@
                         電子郵件登入
                     </button>
                 </li>
+                @*0715手機註冊註解掉
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab-card" data-bs-toggle="tab" data-bs-target="#phonego-card"
-                            type="button" role="tab" aria-controls="profile" aria-selected="false">
-                        手機號碼登入
-                    </button>
-                </li>
+            <button class="nav-link" id="profile-tab-card" data-bs-toggle="tab" data-bs-target="#phonego-card"
+                    type="button" role="tab" aria-controls="profile" aria-selected="false">
+                手機號碼登入
+            </button>
+        </li>*@
             </ul>
             <div class="tab-content" id="myTabContent-card">
                 <div class="tab-pane fade show active" id="emailgo-card" role="tabpanel" aria-labelledby="home-tab-card">
@@ -74,11 +75,11 @@
                     }
                     <!--@Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "submit", @class = "btn btn-primary my-2 py-2 login-btn" })-->    
                 </div>
-
-                <div class="tab-pane fade" id="phonego-card" role="tabpanel" aria-labelledby="profile-tab-card">
-                    <form>
+                @*0715手機註冊註解掉*@
+                <!--<div class="tab-pane fade" id="phonego-card" role="tabpanel" aria-labelledby="profile-tab-card">
+                    <form>-->
                         <!-- phone登入區塊 -->
-                        <div class="mb-3 inputphone">
+                        <!--<div class="mb-3 inputphone">
                             <label for="PhoneLogin" class="form-label">手機號碼</label>
                             <input type="tel" class="form-control" id="PhoneLogin-card" aria-describedby="emailHelp-card"
                                    placeholder="手機號碼">
@@ -88,9 +89,9 @@
                             <input type="password" class="form-control" id="PhonePassword-card" aria-describedby="emailHelp-card"
                                    placeholder="密碼">
                         </div>
-                        <div class="d-grid gap-2">
+                        <div class="d-grid gap-2">-->
                             <!--bear : 0610新增-->
-                            @Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "button", @class = "btn btn-primary my-2 py-2 login-btn" })
+                            <!--@Html.ActionLink("登入", "HomePage", "Home", null, new { @type = "button", @class = "btn btn-primary my-2 py-2 login-btn" })
                         </div>
                         <div class="register">
                             <a href="#modal" data-bs-toggle="modal" data-bs-target="#RegisterModal"
@@ -99,7 +100,7 @@
                                id="PhoneLogintoForgetPassword-card"><i class="fas fa-lock"></i>忘記密碼？別慌，點此找幫手！</a>
                         </div>
                     </form>
-                </div>
+                </div>-->
             </div>
             <div class="otherlogin">
                 <p>使用其他登入方式</p>
@@ -218,12 +219,13 @@
                             電子郵件登入
                         </button>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#phonego" type="button"
-                                role="tab" aria-controls="profile" aria-selected="false">
-                            手機號碼登入
-                        </button>
-                    </li>
+                    @*0715手機註冊註解掉*@
+                    @*<li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#phonego" type="button"
+                    role="tab" aria-controls="profile" aria-selected="false">
+                手機號碼登入
+            </button>
+        </li>*@
                 </ul>
                 <div class="social_login"></div>
                 <div class="tab-content" id="myTabContent">
@@ -271,10 +273,10 @@
 
                         }
                     </div>
-
-                    <div class="tab-pane fade" id="phonego" role="tabpanel" aria-labelledby="profile-tab">
+                     @*0715手機註冊註解掉*@
+                    <!--<div class="tab-pane fade" id="phonego" role="tabpanel" aria-labelledby="profile-tab">-->
                         <!-- phone登入區塊 -->
-                        <form>
+                        <!--<form>
                             <div class="mb-3 inputphone">
                                 <label for="PhoneLogin" class="form-label">手機號碼</label>
                                 <input type="tel" class="form-control" id="PhoneLogin" aria-describedby="emailHelp"
@@ -284,7 +286,7 @@
                                 <label for="PhonePassword" class="form-label">密碼</label>
                                 <input type="password" class="form-control" id="PhonePassword" aria-describedby="emailHelp"
                                        placeholder="密碼">
-                            </div>
+                            </div>-->
                             <!-- <div class="form-check">
                               <input type="checkbox" class="form-check-input" id="PhoneLoginCheck">
                               <label class="form-check-label" for="PhoneLoginCheck">我想要收到特惠情報</label>
@@ -292,7 +294,7 @@
                             <!-- <div class="robot">
 
                               </div> -->
-                            <div class="phonelogin">
+                            <!--<div class="phonelogin">
                                 <div class="d-grid gap-2">
                                     <button class="btn btn-primary my-2 py-2 login-btn" type="button">
                                         @Html.ActionLink("登入", "HomePage", "Home")
@@ -308,7 +310,7 @@
                             </div>
                         </form>
 
-                    </div>
+                    </div>-->
                 </div>
 
                 <div class="otherlogin">
@@ -316,7 +318,7 @@
                 </div>
                 <div class="d-grid gap-2">
                     <button class="otherlogin-btn" id="btnSignIn" type="button">
-                        <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
+                        <img src="~/Asset/images/MemberLogin/google_PNG19635.png" alt=""> Google
                     </button>
                     <div class="loginbuttonwithfa">
                         <button type="button" class="otherlogin-btn col-5" id="Phonefacebooklogin">
@@ -324,7 +326,7 @@
                             Facebook
                         </button>
                         <button type="button" class="otherlogin-btn col-5" id="Phoneapplelogin">
-                            <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt=""> Apple
+                            <img src="~/Asset/images/MemberLogin/btn_base.png" alt=""> Line
                         </button>
                     </div>
                 </div>
@@ -362,12 +364,13 @@
                             電子信箱
                         </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                     @*0715手機註冊註解掉*@
+                    @*<li class="nav-item" role="presentation">
                         <button class="nav-link" id="-card" data-bs-toggle="tab" data-bs-target="#signin" type="button" role="tab"
                                 aria-controls="profile" aria-selected="false">
                             手機號碼
                         </button>
-                    </li>
+                    </li>*@
                 </ul>
                 <div class="social_login"></div>
                 <div class="tab-content" id="myTabContent">
@@ -456,9 +459,10 @@
                         }
 
                     </div>
-                    <div class="tab-pane fade" id="signin" role="tabpanel" aria-labelledby="-card">
+                     @*0715手機註冊註解掉*@
+                    <!--<div class="tab-pane fade" id="signin" role="tabpanel" aria-labelledby="-card">-->
                         <!-- 註冊電話號碼片段 -->
-                        <div class="Phone_container">
+                        <!--<div class="Phone_container">
                             <form id="login" onsubmit="process(event)">
                                 <p>請輸入手機號碼:</p>
                                 <input id="phone" type="tel" name="phone" placeholder="手機號碼" />
@@ -521,7 +525,7 @@
                             </form>
 
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -589,51 +593,51 @@
         });
     </script>
     <!--電子郵件登入到忘記密碼 -->
-    <script>
+    <!--<script>
         let EmailLogintoForgetPassword = document.getElementById('EmailLogintoForgetPassword')
         EmailLogintoForgetPassword.addEventListener('click', function () {
             $('#SigninModal').modal('hide');
         })
-    </script>
+    </script>-->
     <!-- 電話登入到忘記密碼 -->
-    <script>
+    <!--<script>
         let PhoneLogintoForgetPassword = document.getElementById('PhoneLogintoForgetPassword')
         PhoneLogintoForgetPassword.addEventListener('click', function () {
             $('#SigninModal').modal('hide');
         })
-    </script>
+    </script>-->
     <!-- 忘記密碼的超連結到註冊 -->
-    <script>
+    <!--<script>
         let ForgetPasswordtoLogin = document.getElementById('ForgetPasswordtoLogin')
         ForgetPasswordtoLogin.addEventListener('click', function () {
             $('#ForgetPasswordModal').modal('hide');
 
         })
-    </script>
+    </script>-->
     <!-- 電子郵件登入到註冊 -->
-    <script>
+    <!--<script>
         let EmailLogintoRegister = document.getElementById('EmailLogintoRegister')
         EmailLogintoRegister.addEventListener('click', function () {
             $('#SigninModal').modal('hide');
 
         })
-    </script>
+    </script>-->
     <!-- 電話號碼登入到註冊 -->
-    <script>
+    <!--<script>
         let PhoneLogintoRegister = document.getElementById('PhoneLogintoRegister')
         PhoneLogintoRegister.addEventListener('click', function () {
             $('#SigninModal').modal('hide');
 
         })
-    </script>
+    </script>-->
     <!-- 電話註冊到登入按鈕 -->
-    <script>
+    <!--<script>
         let RegisterPhonetoLogin = document.getElementById('RegisterPhonetoLogin')
         RegisterPhonetoLogin.addEventListener('click', function () {
             $('#RegisterModal').modal('hide');
             $('#SigninModal').modal('show');
         })
-    </script>
+    </script>-->
     <script>
         //官方script
         window.fbAsyncInit = function () {
