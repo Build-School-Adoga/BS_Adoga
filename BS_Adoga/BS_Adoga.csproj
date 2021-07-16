@@ -383,6 +383,10 @@
     <Compile Include="Service\MultiButtonAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asset\CDN\CSS\daterangepicker.css" />
+    <Content Include="Asset\CDN\JS\daterangepicker.js" />
+    <Content Include="Asset\CDN\JS\moment.min.js" />
+    <Content Include="Asset\CDN\JS\package.js" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
@@ -2308,6 +2312,8 @@
     <Content Include="Asset\StartbootstrapAdminPages\vendor\jquery\jquery.min.map" />
     <Content Include="Asset\StartbootstrapAdminPages\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Asset\JSON\SimpleZipCode.json" />
+    <Content Include="Asset\CDN\JSON\bower.json" />
+    <Content Include="Asset\CDN\JSON\package.json" />
     <None Include="Properties\PublishProfiles\adoga - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\adoga - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\adoga - Web Deploy.pubxml" />
@@ -2379,8 +2385,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Asset\CDN\CSS\" />
-    <Folder Include="Asset\CDN\JS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />
