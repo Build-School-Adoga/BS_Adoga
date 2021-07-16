@@ -178,7 +178,6 @@ div#person-info {
         left: 40%;
     }
 
-    button,
     .nav-item #person-box #count-person button#done-counting {
         background-color: #5392F9;
         color: #CBDEFD;
@@ -186,7 +185,6 @@ div#person-info {
         border-radius: 5px;
     }
 
-        button:hover,
         .nav-item #person-box #count-person button#done-counting:hover {
             background-color: #75A8F9;
         }
@@ -249,10 +247,10 @@ input#demo {
 
     #datetime .line {
         /*position: absolute;
-        z-index: 4;*/
         /*height: 50px;*/
         /*margin-left: -50px;*/
 
+        z-index: 4;
         width: 1px;
         height: 100%;
         background-color: darkgray;
@@ -264,16 +262,21 @@ input#demo {
         margin: 0;
     }
         #datetime .timebox .d-flex i {
-            margin: 0 10px;
-            /*width: 30.6px;*/
+            /*margin: 0;
+            width: 20%;*/
+            /*padding: auto;*/
             /*height: 44px;*/
         }
-        #datetime .timebox .d-flex input{
-            border-style: none;
+        #datetime .timebox .d-flex div{
+            width: 80%;
         }
-        #datetime .timebox .d-flex input:nth-child(2){
-            color: grey;
-        }
+                #datetime .timebox .d-flex input {
+                    border-style: none;
+                    width: 100%
+                }
+                #datetime .timebox .d-flex input:nth-child(2){
+                    color: grey;
+                }
         
 
 /*input#demo {*/
