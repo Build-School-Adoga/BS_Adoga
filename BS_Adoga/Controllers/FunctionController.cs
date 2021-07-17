@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -50,6 +51,9 @@ namespace BS_Adoga.Controllers
 
         public ActionResult HotelIndex()
         {
+            List<Facility> facilities = _context.Facilities.ToList();
+            ViewBag.Facilities = facilities;
+
             return View(_repository.GetHotelList());
         }
         public ActionResult HotelCreate()
@@ -259,9 +263,17 @@ namespace BS_Adoga.Controllers
             return View(facilities.ToList());
         }
 
-        public ActionResult HotelFacilityCreate()
+        public ActionResult HotelFacilityCreate(string hotelids)
         {
-            ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName");
+            if(string.IsNullOrEmpty(hotelids))
+            {
+                ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName");
+            }
+            else
+            {
+                ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelids), "HotelID", "HotelName");
+            }
+
             return View();
         }
 
@@ -269,13 +281,15 @@ namespace BS_Adoga.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult HotelFacilityCreate(Facility facility)
         {
-            if (ModelState.IsValid)
+            
+            facility.Logging = "建立" + "," + User.Identity.Name + "," + DateTime.Now.ToString();
+            if (facility.Logging != null)
             {
                 _context.Facilities.Add(facility);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("HotelIndex");
             }
-
+            ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == facility.HotelID), "HotelID", "HotelName");
             return View(facility);
         }
 
@@ -304,7 +318,7 @@ namespace BS_Adoga.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName", facility.HotelID);
+            ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == facility.HotelID), "HotelID", "HotelName", facility.HotelID);
             return View(facility);
         }
 
@@ -315,13 +329,14 @@ namespace BS_Adoga.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult HotelFacilityEdit([Bind(Include = "FacilitieID,HotelID,SwimmingPool,AirportTransfer,FamilyChildFriendly,Restaurants,Nightclub,GolfCourse,Internet,Gym,NoSmoking,SmokingArea,FacilitiesFordisabledGuests,CarPark,FrontDesk,SpaSauna,PetsAllowed,BusinessFacilities,Logging")] Facility facility)
         {
+            facility.Logging = facility.Logging + ";" + "修改" + "," + User.Identity.Name + "," + DateTime.Now.ToString();
             if (ModelState.IsValid)
             {
                 _context.Entry(facility).State = EntityState.Modified;
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("HotelFacilityEdit", facility);
             }
-            ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName", facility.HotelID);
+            ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == facility.HotelID), "HotelID", "HotelName", facility.HotelID);
             return View(facility);
         }
     }

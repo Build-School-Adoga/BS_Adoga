@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "HotelIndex";
     Layout = "~/Views/Shared/_FunctionPage.cshtml";
+
+    List<Facility> facilities = ViewBag.facilities;
+
 }
 
 @section topCSS
@@ -57,7 +60,7 @@
                                     <th>@Html.DisplayNameFor(model => model.HotelCity)</th>
                                     <th>@Html.DisplayNameFor(model => model.HotelDistrict)</th>
                                     <th>@Html.DisplayNameFor(model => model.HotelAddress)</th>
-                                    @*<th></th>*@
+                                    <th>設施</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -68,7 +71,7 @@
                                     <th>@Html.DisplayNameFor(model => model.HotelCity)</th>
                                     <th>@Html.DisplayNameFor(model => model.HotelDistrict)</th>
                                     <th>@Html.DisplayNameFor(model => model.HotelAddress)</th>
-                                    @*<th></th>*@
+                                    <th>設施</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -98,6 +101,16 @@
                                         @Html.ActionLink("詳細資料", "HotelLDetails", new { hotelid = item.HotelID }, htmlAttributes: new { @class = "btn btn-info" }) |
                                         @Html.ActionLink("刪除", "Delete", new { hotelid = item.HotelID }, htmlAttributes: new { @class = "btn btn-danger" })
                                     </td>*@
+                                <td>
+                                    @if (@facilities.Where(x => x.HotelID == item.HotelID).FirstOrDefault() != null)
+                                    {
+                                        @Html.ActionLink("Edit Facilities", "HotelFacilityEdit", new { id = @facilities.Where(x => x.HotelID == item.HotelID).FirstOrDefault().FacilitieID }, htmlAttributes: new { @class = "btn btn-success" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Add Facilities", "HotelFacilityCreate", new { hotelids = item.HotelID }, htmlAttributes: new { @class = "btn btn-danger" })
+                                    }
+                                </td>
                                 </tr>
                                 }
                             </tbody>

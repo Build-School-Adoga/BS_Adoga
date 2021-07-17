@@ -20,6 +20,7 @@ namespace BS_Adoga.Models.DBContext
         [StringLength(50)]
         public string HotelID { get; set; }
 
+        [Display(Name = "¶º©±¦WºÙ")]
         [Required]
         [StringLength(50)]
         public string HotelName { get; set; }
