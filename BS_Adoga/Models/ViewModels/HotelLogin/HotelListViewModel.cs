@@ -11,7 +11,7 @@ namespace BS_Adoga.Models.ViewModels.HotelLogin
         [Display(Name = "飯店編號")]
         public string HotelID { get; set; }
 
-        [Display(Name = "名稱")]
+        [Display(Name = "飯店名稱")]
         public string HotelName { get; set; }
 
         [Display(Name = "英文名稱")]

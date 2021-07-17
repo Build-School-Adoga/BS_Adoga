@@ -339,5 +339,22 @@ namespace BS_Adoga.Controllers
             ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == facility.HotelID), "HotelID", "HotelName", facility.HotelID);
             return View(facility);
         }
+
+
+        public ActionResult HotelRoomIndex()
+        {
+            //List<Facility> facilities = _context.Facilities.ToList();
+            //ViewBag.Facilities = facilities;
+
+            return View(_repository.GetHotelRoomCount());
+        }
+
+        public ActionResult HotelRoomsIndex(string hotelid)
+        {
+            //List<Facility> facilities = _context.Facilities.ToList();
+            //ViewBag.Facilities = facilities;
+            var test = _repository.GetHotelRoomAll(hotelid);
+            return View(_repository.GetHotelRoomAll(hotelid));
+        }
     }
 }
