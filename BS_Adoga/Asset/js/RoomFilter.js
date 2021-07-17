@@ -143,6 +143,7 @@ $().ready(function () {
                             }
                         }).then(function (response) {
                             console.log(response);
+                            window.location.href = 'https://localhost:44352/CheckOut/Index';
                         }).catch((error) => console.log(error));
                     }
                 }

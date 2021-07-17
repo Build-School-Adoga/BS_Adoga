@@ -165,7 +165,7 @@
                                 <div class="row m-auto g-2">
                                     <span class="p-2">吸菸需求（需視現場狀況安排）</span>
                                     <div class="form-check col-md-6">
-                                        @Html.RadioButtonFor(model => model.checkOutListViewModel.SmokingPreference, "禁菸房", new { @id = "non-smok", @class = "form-check-input" }) 禁菸房
+                                        @Html.RadioButtonFor(model => model.checkOutListViewModel.SmokingPreference, "禁菸房", new { @id = "non-smok", @class = "form-check-input", @checked = true }) 禁菸房
                                     </div>
                                     <div class="form-check col-md-6">
                                         @Html.RadioButtonFor(model => model.checkOutListViewModel.SmokingPreference, "吸菸房", new { @id = "smok", @class = "form-check-input" }) 吸菸房
@@ -174,7 +174,7 @@
                                 <div class="row m-auto g-2">
                                     <span class="p-2">床型需求（需視現場狀況安排）</span>
                                     <div class="form-check col-md-6">
-                                        @Html.RadioButtonFor(model => model.checkOutListViewModel.BedPreference, "大床", new { @id = "bidbed", @class = "form-check-input" }) 大床
+                                        @Html.RadioButtonFor(model => model.checkOutListViewModel.BedPreference, "大床", new { @id = "bidbed", @class = "form-check-input", @checked = true }) 大床
                                     </div>
                                     <div class="form-check col-md-6">
                                         @Html.RadioButtonFor(model => model.checkOutListViewModel.BedPreference, "兩床", new { @id = "twobed", @class = "form-check-input" }) 兩床
@@ -325,7 +325,8 @@
             <div class="col border border-2 mb-3">
                 <div class="m-2 d-flex justify-content-between">
                     <div>總金額</div>
-                    <div>NT$ @hotelAndRoom.TotalPrice</div>
+                    <div>NT$@String.Format("{0:#,#}", @Math.Ceiling(@hotelAndRoom.TotalPrice))</div>
+                    @*<div>NT$@Math.Ceiling(@hotelAndRoom.TotalPrice).ToString("N0")</div>*@
                 </div>
                 @*<div class="line"></div>
                     <div class="m-2 d-flex justify-content-between">
