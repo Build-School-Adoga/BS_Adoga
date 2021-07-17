@@ -57,8 +57,8 @@
                                 @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Password, "", new { @class = "text-danger" })
                             </div>
                             <div class="mb-3 form-group">
-                                @Html.LabelFor(model => model.MemberLoginViewModel.Remember)
                                 @Html.EditorFor(model => model.MemberLoginViewModel.Remember)
+                                @Html.LabelFor(model => model.MemberLoginViewModel.Remember)
                                 @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Remember, "", new { @class = "text-danger" })
                             </div>
                             <div class="d-grid gap-2">
@@ -106,15 +106,15 @@
             </div>
 
             <div class="d-grid gap-2 otherlogin-btn-group">
-                <button class="otherlogin-btn" id="btnSignIn" type="button">
+                <button class="otherlogin-btn " id="btnSignIn" type="button">
                     <img src="~/Asset/images/MemberLogin/google_PNG19635.png" alt=""> Google
                 </button>
                 <div class="loginbuttonwithfa">
-                    <button type="button" class="otherlogin-btn" id="Phonefacebooklogin-card" onclick="FBLoginReal();">
+                    <button type="button" class="otherlogin-btn col-5" id="Phonefacebooklogin-card" onclick="FBLoginReal();">
                         <img src="~/Asset/images/MemberLogin/f_logo_RGB-Blue_58.png" alt="">
                         Facebook
                     </button>
-                    <button type="button" class="otherlogin-btn" id="Phoneapplelogin-card" onclick="location.href='@Url.Action("LineLoginDirect")'">
+                    <button type="button" class="otherlogin-btn col-5" id="Phoneapplelogin-card" onclick="location.href='@Url.Action("LineLoginDirect")'">
                         <img src="~/Asset/images/MemberLogin/btn_base.png" alt="">
                         Line
                     </button>
@@ -254,8 +254,8 @@
                                     @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Password, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="mb-3 form-group">
-                                    @Html.LabelFor(model => model.MemberLoginViewModel.Remember)
                                     @Html.EditorFor(model => model.MemberLoginViewModel.Remember)
+                                    @Html.LabelFor(model => model.MemberLoginViewModel.Remember)
                                     @Html.ValidationMessageFor(model => model.MemberLoginViewModel.Remember, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="d-grid gap-2">
@@ -319,11 +319,11 @@
                         <img src="https://cdn6.agoda.net/images/universal-login/google-logo-v2.svg" alt=""> Google
                     </button>
                     <div class="loginbuttonwithfa">
-                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin">
+                        <button type="button" class="otherlogin-btn col-5" id="Phonefacebooklogin">
                             <img src="~/Asset/images/MemberLogin/f_logo_RGB-Blue_58.png" alt="">
                             Facebook
                         </button>
-                        <button type="button" class="otherlogin-btn" id="Phoneapplelogin">
+                        <button type="button" class="otherlogin-btn col-5" id="Phoneapplelogin">
                             <img src="https://cdn6.agoda.net/images/universal-login/apple-logo.svg" alt=""> Apple
                         </button>
                     </div>
@@ -426,11 +426,11 @@
                                     <img src="~/Asset/images/MemberLogin/google_PNG19635.png" alt=""> Google
                                 </button>
                                 <div class="loginbuttonwithfa">
-                                    <button type="button" class="otherlogin-btn" id="Emailfacebooklogin" onclick="FBLoginReal();">
+                                    <button type="button" class="otherlogin-btn col-5" id="Emailfacebooklogin" onclick="FBLoginReal();">
                                         <img src="~/Asset/images/MemberLogin/f_logo_RGB-Blue_58.png" alt="">
                                         Facebook
                                     </button>
-                                    <button type="button" class="otherlogin-btn" id="EmailLinelogin" onclick="location.href='@Url.Action("LineLoginDirect")'">
+                                    <button type="button" class="otherlogin-btn col-5" id="EmailLinelogin" onclick="location.href='@Url.Action("LineLoginDirect")'">
                                         <img src="~/Asset/images/MemberLogin/btn_base1.png" alt="">
                                         Line
                                     </button>
@@ -493,11 +493,11 @@
                                         <img src="~/Asset/images/MemberLogin/google_PNG19635.png" alt=""> Google
                                     </button>
                                     <div class="loginbuttonwithfa">
-                                        <button type="button" class="otherlogin-btn" id="Phonefacebooklogin" onclick="FBLoginReal();">
+                                        <button type="button" class="otherlogin-btn col-5" id="Phonefacebooklogin" onclick="FBLoginReal();">
                                             <img src="~/Asset/images/MemberLogin/f_logo_RGB-Blue_58.png" alt="">google_PNG19635.png
                                             Facebook
                                         </button>
-                                        <button type="button" class="otherlogin-btn" id="EmailLinelogin" onclick="location.href='@Url.Action("LineLoginDirect")'">
+                                        <button type="button" class="otherlogin-btn col-5" id="EmailLinelogin" onclick="location.href='@Url.Action("LineLoginDirect")'">
                                             <img src="~/Asset/images/MemberLogin/btn_base1.png" alt="">
                                             Line
                                         </button>
