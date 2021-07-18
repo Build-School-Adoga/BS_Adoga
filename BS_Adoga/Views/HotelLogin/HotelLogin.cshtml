@@ -49,8 +49,8 @@
                     @Html.ValidationMessageFor(model => model.HotelLoginView.Password, "", new { @class = "text-danger" })
                 </div>
                 <div class="mb-3 form-group">
-                    @Html.LabelFor(model => model.HotelLoginView.Remember)
                     @Html.EditorFor(model => model.HotelLoginView.Remember)
+                    @Html.LabelFor(model => model.HotelLoginView.Remember)
                     @Html.ValidationMessageFor(model => model.HotelLoginView.Remember, "", new { @class = "text-danger" })
                 </div>
 

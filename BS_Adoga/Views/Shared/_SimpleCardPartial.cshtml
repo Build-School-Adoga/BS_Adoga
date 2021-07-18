@@ -65,11 +65,11 @@
                     <h4 class="text-white ">@Math.Round((1 - roomdetail.RoomDiscount) * 10, 1) 折 </h4>
                 </div>
                 <span style="text-decoration:line-through; color: #90949c; font-family: Comic Sans MS;font-size: 14px;line-height: 20px;font-weight: 400;">
-                    NT$ @Math.Ceiling(rooms.RoomPrice)
+                    NT$ @Math.Ceiling(rooms.RoomPrice).ToString("N0")
                 </span>
                 <p class="text-danger"  
                    style="font-size: 12px;font-weight: 300;line-height: 20px; font-family: Comic Sans MS;">
-                    NT$ @newPrice
+                    NT$ @newPrice.ToString("N0")
                 </p>
             </div>
         </div>
