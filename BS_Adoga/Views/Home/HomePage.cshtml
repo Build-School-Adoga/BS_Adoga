@@ -52,9 +52,9 @@
     </div>
 
     <div class="container  " id="container">
-        <div class="input-group mb-3">
-            <div id="app">
-                <el-select style=" z-index: 3;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
+        <div class="input-group mb-3"style="padding-right:58px">
+            <div id="app" v-cloak class="col-xs-12 col-12" >
+                <el-select class="col-12 col-xs-12" style="margin-left:10px; z-index: 3;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
                            name="search" clearable default-first-option>
                     <el-option-group v-for="group in options2"
                                      :key="group.label"
@@ -69,54 +69,59 @@
                         </el-option>
                     </el-option-group>
                 </el-select>
-
-
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class=" bd-content">
-                        <div class="container " id="container1">
 
-                            <div id="datetime">
+        </div>
+            @*<div class="container-fluid">*@
+              
+                    
+                        <div class="bd-content container row " id="container1 datetime">
 
-                                <div class="timebox d-flex justify-content-center  align-items-center">
-                                    <div class="col-6 d-flex">
-                                        <i class="far fa-calendar fa-2x time-box-1"></i>
-                                        <div>
+                            @*<div id="datetime"class="row">*@
+                                <div class="" style="     width:1296px;   display: flex;justify-content: space-between;flex-wrap: wrap;">
+                                    <div class="col-12 col-md-12 col-xl-6">
+                                        <div class="timebox col-6 col-md-10 d-flex col-xl-4" style="display: flex;justify-content: space-around;align-items: center;border-right:none">
+                                            <div class="col-6 col-md-4 d-flex col-xl-6">
+                                                <i class="far fa-calendar fa-2x time-box-1"></i>
+                                                <div>
 
-                                            <input type="text" id="range_start" name="start" value="" />
+                                                    <input type="text" id="range_start" name="start" value="" />
 
-                                            <input type="text" id="week_start" value="" />
+                                                    <input type="text" id="week_start" value="" />
+                                                </div>
+
+                                            </div>
+                                            <div class="line">
+
+                                            </div>
+                                            <div class="col-6 col-md-4 d-flex col-xl-6" style="">
+                                                <i class="fas fa-calendar fa-2x time-box-2"></i>
+                                                <div>
+                                                    <input type="text" id="range_end" name="end" value="" />
+                                                    <input type="text" id="week_end" value="" style=" " />
+                                                </div>
+                                            </div>
+
                                         </div>
+                                        <input type="text" class="calendar-minus col-xl-12 col-md-12	calendar-plus from-control" id="demo" name="date_range" style="margin-left:-10px;"/>
+                                    </div>
 
-                                    </div>
-                                    <div class="line">
-
-                                    </div>
-                                    <div class="col-6 d-flex">
-                                        <i class="fas fa-calendar fa-2x time-box-2"></i>
-                                        <div>
-                                            <input type="text" id="range_end" name="end" value="" />
-                                            <input type="text" id="week_end" value="" style=" " />
-                                        </div>
-                                    </div>
+                                    @Html.Partial("_nav")
                                 </div>
-                                <input type="text" class="calendar-minus 	calendar-plus from-control" id="demo" name="date_range" />
-
-                            </div>
+                            @*</div>*@
 
 
 
 
 
-                            @Html.Partial("_nav")
+                      
 
 
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-check border d-flex " id="sale-absolute">
+                  
+            
+            @*</div>*@
+            @*<div class="form-check border d-flex " id="sale-absolute">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" id="saleprice" for="flexCheckDefault">
                     享達25%的訂房折扣
@@ -124,10 +129,10 @@
                 <div id="sale" class="d-flex justify-content-center bg-danger align-items-center">
                     <h4 class="text-white ">住宿</h4>
                 </div>
-            </div>
+            </div>*@
 
 
-        </div>
+     
         <button type="submit" class="btn btn-danger" id="search">搜尋</button>
     </div>
 
@@ -254,7 +259,7 @@
 
     <a class="carousel-control-prev carousel-dark" href="#carouselExampleControls" role="button"
        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon" aria-hidden="true" style=""></span>
         <span class="visually-hidden">Previous</span>
     </a>
     <a class="carousel-control-next carousel-dark" href="#carouselExampleControls" role="button"
@@ -263,17 +268,18 @@
         <span class="visually-hidden">Next</span>
     </a>
 </div>
-<div class="container d-flex justify-content-center align-items-center flex-column" style="margin-top: 50px;">
+<div class=" d-flex justify-content-center align-items-center flex-column col-12 col-xl-12 col-md-12 col-lg-12" style="margin-top: 50px;">
     <h1 id="travel">推薦您下一趟旅行去處！</h1>
-    <div class="row" id="motal">
-        <div class="d-flex  align-items-center " id="box" style="margin-left: -100px;">
+    <div class="row col-xl-12 col-md-12 col-12" id="box">
+        <div class=" d-flex col-xl-12  col-12  col-md-12 justify-content-center row" id="motal">
+          
 
-            @*@model IEnumerable<Card>*@
+                @*@model IEnumerable<Card>*@
 
 
-            
-                @Html.Partial("_SimpleCardPartial");
-       
+
+                @Html.Partial("_SimpleCardPartial")
+
 
 
         </div>
@@ -409,7 +415,7 @@
 @section HomePageCountryArea{
 
 
-    <div class="container" style="width:1132px; margin-top: 50px; margin-bottom: 50px;">
+    <div class="container col-12" style=" margin-top: 50px; margin-bottom: 50px;">
         <div class="d-flex">
             <div id="Citybox" style=" ">
                 <span class="fw-normal purpose" style="">
