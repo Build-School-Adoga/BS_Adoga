@@ -2405,6 +2405,10 @@
     <Content Include="Views\Function\HotelCreate.cshtml" />
     <Content Include="Views\Function\HotelDetails.cshtml" />
     <Content Include="Views\Function\HotelEdit.cshtml" />
+    <Content Include="Views\Function\HotelFacilityCreate.cshtml" />
+    <Content Include="Views\Function\HotelFacilityIndex.cshtml" />
+    <Content Include="Views\Function\HotelFacilityDetails.cshtml" />
+    <Content Include="Views\Function\HotelFacilityEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

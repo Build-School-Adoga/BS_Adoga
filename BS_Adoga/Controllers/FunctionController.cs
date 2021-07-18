@@ -252,5 +252,77 @@ namespace BS_Adoga.Controllers
             return Content(tb.ToString());
 
         }
+
+        public ActionResult HotelFacilityIndex()
+        {
+            var facilities = _context.Facilities.Include(f => f.Hotel);
+            return View(facilities.ToList());
+        }
+
+        public ActionResult HotelFacilityCreate()
+        {
+            ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HotelFacilityCreate(Facility facility)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Facilities.Add(facility);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(facility);
+        }
+
+        public ActionResult HotelFacilityDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Facility facility = _context.Facilities.Find(id);
+            if (facility == null)
+            {
+                return HttpNotFound();
+            }
+            return View(facility);
+        }
+
+        public ActionResult HotelFacilityEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Facility facility = _context.Facilities.Find(id);
+            if (facility == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName", facility.HotelID);
+            return View(facility);
+        }
+
+        // POST: Facilities/Edit/5
+        // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
+        // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HotelFacilityEdit([Bind(Include = "FacilitieID,HotelID,SwimmingPool,AirportTransfer,FamilyChildFriendly,Restaurants,Nightclub,GolfCourse,Internet,Gym,NoSmoking,SmokingArea,FacilitiesFordisabledGuests,CarPark,FrontDesk,SpaSauna,PetsAllowed,BusinessFacilities,Logging")] Facility facility)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(facility).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName", facility.HotelID);
+            return View(facility);
+        }
     }
 }
