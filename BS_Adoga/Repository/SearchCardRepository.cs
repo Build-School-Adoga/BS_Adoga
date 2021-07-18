@@ -24,11 +24,6 @@ namespace BS_Adoga.Repository
 
         public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(SearchDataViewModel info)
         {
-            //int kidcountasadult = (info.KidCount / 2) + (info.KidCount % 2);
-            //int people = info.AdultCount + (kidcountasadult);
-            //DateTime start = DateTime.Parse(info.CheckInDate);
-            //DateTime end = DateTime.Parse(info.CheckOutDate);
-
             var countNight = (DateTime.Parse(info.CheckOutDate) - DateTime.Parse(info.CheckInDate)).TotalDays;
 
             var a = GetEachHotelOneRoom(info.HotelNameOrCity, info.CheckInDate, info.CheckOutDate, (int)countNight, info.RoomCount, info.AdultCount, info.KidCount);
@@ -127,19 +122,10 @@ namespace BS_Adoga.Repository
                                }
                            }).GroupBy(x => x.HotelID, (key, g) => g.OrderBy(x => x.I_RoomVM.RoomPrice * (1 - x.I_RoomDetailVM.RoomDiscount)).First());
 
-            //RoomNowPrice = (r.RoomPrice * (1 - t2.Discount)),
-
             foreach (var a in table_3)
             {
                 var aa = a;
                 decimal total = a.I_RoomVM.RoomPrice * (1 - a.I_RoomDetailVM.RoomDiscount);
-                var x = 0;
-                //foreach (var b in a)
-                //{
-                //    var bb = b;
-                //    decimal total = b.I_RoomVM.RoomPrice * (1 - b.I_RoomDetailVM.RoomDiscount);
-                //    
-                //}
             }
             return table_3;
 
