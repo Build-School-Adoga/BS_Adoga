@@ -1,4 +1,5 @@
-﻿
+﻿import RoomType from './RoomComponent.js'
+
 var hoverEquimServ = new Vue({
     el: '#hover-equim-serv',
     data: {
@@ -23,15 +24,10 @@ $().ready(function () {
         }).catch((error) => console.log(error))
 
 
-    Vue.component('room-type', {
-        props: { room: ['room'] },
-        template: '#roomTypeTemplate',
-        data: function () {
-            return {
-                bookingRoom: this.room.RoomID
-            }
-        }
-    })
+    //Vue.component('room-type', {
+    //    props: { room: ['room'] },
+    //    template: '#roomTypeTemplate',
+    //})
 
     var filterRoom = new Vue({
         el: '#filter-room',
@@ -85,6 +81,9 @@ $().ready(function () {
         el: '#room-group',
         data: {
             group: []
+        },
+        components: {
+            'room-type': RoomType
         }
     })
 
@@ -123,9 +122,9 @@ $().ready(function () {
                     Adult: item.Adult,
                     Child: item.Child,
                     RoomOrder: item.RoomOrder,
-                    RoomPrice: Math.ceil(item.RoomPrice),
+                    RoomPrice: Math.ceil(item.RoomPrice).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","),
                     RoomDiscount: Math.round((1 - item.RoomDiscount) * 10),
-                    RoomNowPrice: Math.ceil(item.RoomNowPrice),
+                    RoomNowPrice: Math.ceil(item.RoomNowPrice).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","),
                     RoomLeft: item.RoomLeft,
                     Booking: function () {
                         axios.get('https://localhost:44352/HotelDetail/SetCheckOutData', {

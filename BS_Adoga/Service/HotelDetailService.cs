@@ -30,8 +30,6 @@ namespace BS_Adoga.Service
 
         public HotelVM GetHotelById(string hotelId)
         {
-            //if (hotelId == null) hotelId = "hotel04"; //controller已處理，這裡不用再寫
-
             var source = _repository.GetHotelById(hotelId);
 
             //先first 再轉 view model
@@ -47,6 +45,33 @@ namespace BS_Adoga.Service
                 Longitude = s.Longitude,
                 Latitude = s.Latitude,
                 Star = s.Star
+            }).First();
+
+            return result;
+        }
+
+        public object GetHotelFacilityById(string hotelId)
+        {
+            var source = _repository.GetHotelFacilityById(hotelId);
+
+            var result = source.Select(x => new
+            {
+                x.AirportTransfer,
+                x.BusinessFacilities,
+                x.CarPark,
+                x.FacilitiesFordisabledGuests,
+                x.FamilyChildFriendly,
+                x.FrontDesk,
+                x.GolfCourse,
+                x.Gym,
+                x.Internet,
+                x.Nightclub,
+                x.NoSmoking,
+                x.PetsAllowed,
+                x.Restaurants,
+                x.SmokingArea,
+                x.SpaSauna,
+                x.SwimmingPool
             }).First();
 
             return result;
@@ -134,35 +159,5 @@ namespace BS_Adoga.Service
             return result;
         }
 
-
-        //public RoomCheckOutData GetCheckOutData(string hotelId,string roomId)
-        //{
-        //    var hotel = _repository.GetHotel(hotelId);
-        //    var allRoomType = GetRoomType(roomId);
-        //    var selectedRoomType = from rt in allRoomType
-        //                           where rt.RoomID == roomId
-        //                           select rt;
-
-        //    var checkOutData = from h in hotel
-        //                       join rt in selectedRoomType on h.HotelID equals rt.HotelID
-        //                       select new RoomCheckOutData
-        //                       {
-        //                           HotelID = h.HotelID,
-        //                           HotelFullName = h.HotelName + " (" + h.HotelEngName + ")",
-        //                           HotelAddress = h.HotelAddress,
-        //                           RoomID = rt.RoomID,
-        //                           RoomName = rt.RoomName,
-        //                           BedType = "雙人床",
-        //                           Breakfast = rt.Breakfast,
-        //                           NoSmoking = rt.NoSmoking,
-        //                           RoomPrice = rt.RoomPrice,
-        //                           RoomDiscount = rt.RoomDiscount,
-        //                           RoomNowPrice = rt.RoomNowPrice,
-        //                           Adult = rt.Adult,
-        //                           Child = rt.Child
-        //                       };
-        //    var B = checkOutData.FirstOrDefault();
-        //    return checkOutData.FirstOrDefault();
-        //}
     }
 }
