@@ -349,6 +349,7 @@ namespace BS_Adoga.Controllers
             return View(_repository.GetHotelRoomCount());
         }
 
+        // GET: Hotel/Room/{hotelid}
         public ActionResult HotelRoomsIndex(string hotelid)
         {
             //List<Facility> facilities = _context.Facilities.ToList();
@@ -356,5 +357,132 @@ namespace BS_Adoga.Controllers
             var test = _repository.GetHotelRoomAll(hotelid);
             return View(_repository.GetHotelRoomAll(hotelid));
         }
+
+        public ActionResult HotelRoomCreate(string hotelids)
+        {
+            if (string.IsNullOrEmpty(hotelids))
+            {
+                ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName");
+            }
+            else
+            {
+                ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelids), "HotelID", "HotelName");
+            }
+            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes, "TypesOfBathroomID", "Name");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HotelRoomCreate(HotelRoomCreateViewModel hotelRoomCreateVM)
+        {
+            if (ModelState.IsValid)
+            {
+                Room room = new Room()
+                {
+                    RoomID = hotelRoomCreateVM.HotelID + DateTime.Now.ToString("yyyyMMddHHmmss"),
+                    HotelID = hotelRoomCreateVM.HotelID,
+                    RoomName = hotelRoomCreateVM.RoomName,
+                    NumberOfPeople = hotelRoomCreateVM.NumberOfPeople,
+                    RoomCount = hotelRoomCreateVM.RoomCount,
+                    RoomPrice = hotelRoomCreateVM.RoomPrice,
+                    TypesOfBathroomID = hotelRoomCreateVM.TypesOfBathroomID,
+                    NoSmoking = hotelRoomCreateVM.NoSmoking,
+                    Breakfast = hotelRoomCreateVM.Breakfast,
+                    WiFi = hotelRoomCreateVM.WiFi,
+                    TV = hotelRoomCreateVM.TV,
+                    Logging = "建立" + "," + User.Identity.Name + "," + DateTime.Now.ToString()
+                };
+                _context.Rooms.Add(room);
+                _context.SaveChanges();
+                return RedirectToAction("HotelRoomIndex");
+            }
+
+            ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelRoomCreateVM.HotelID), "HotelID", "HotelName");
+            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes, "TypesOfBathroomID", "Name");
+            return View(hotelRoomCreateVM);
+        }
+
+        public ActionResult HotelRoomDetails(string roomid)
+        {
+            if (roomid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Room room = _context.Rooms.Find(roomid);
+            if (room == null)
+            {
+                return HttpNotFound();
+            }
+            return View(room);
+        }
+
+        public ActionResult HotelRoomEdit(string hotelids,string roomid)
+        {
+            TempData["roomid"] = roomid;
+            Room room = _context.Rooms.Find(roomid);
+            HotelRoomCreateViewModel hotelRoomCreateVM = new HotelRoomCreateViewModel()
+            {
+                HotelID = room.HotelID,
+                RoomName = room.RoomName,
+                NumberOfPeople = room.NumberOfPeople,
+                RoomCount = room.RoomCount,
+                RoomPrice = room.RoomPrice,
+                TypesOfBathroomID = room.TypesOfBathroomID,
+                NoSmoking = room.NoSmoking,
+                Breakfast = room.Breakfast,
+                WiFi = room.WiFi,
+                TV = room.TV
+            };
+
+            TempData["Logging"] = room.Logging;
+
+            if (string.IsNullOrEmpty(hotelids))
+            {
+                ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName");
+            }
+            else
+            {
+                ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelids), "HotelID", "HotelName");
+            }
+            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes, "TypesOfBathroomID", "Name");
+            return View(hotelRoomCreateVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HotelRoomEdit(HotelRoomCreateViewModel hotelRoomCreateVM)
+        {
+            var roomid = TempData["roomid"].ToString();
+            string Logging = TempData["Logging"].ToString();
+
+            if (ModelState.IsValid)
+            {
+                Room room = new Room()
+                {
+                    RoomID = roomid,
+                    HotelID = hotelRoomCreateVM.HotelID,
+                    RoomName = hotelRoomCreateVM.RoomName,
+                    NumberOfPeople = hotelRoomCreateVM.NumberOfPeople,
+                    RoomCount = hotelRoomCreateVM.RoomCount,
+                    RoomPrice = hotelRoomCreateVM.RoomPrice,
+                    TypesOfBathroomID = hotelRoomCreateVM.TypesOfBathroomID,
+                    NoSmoking = hotelRoomCreateVM.NoSmoking,
+                    Breakfast = hotelRoomCreateVM.Breakfast,
+                    WiFi = hotelRoomCreateVM.WiFi,
+                    TV = hotelRoomCreateVM.TV,
+                    Logging = Logging + ";" + "修改" + "," + User.Identity.Name + "," + DateTime.Now.ToString()
+                };
+
+                _context.Entry(room).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("HotelRoomEdit", hotelRoomCreateVM);
+            }
+
+            ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelRoomCreateVM.HotelID), "HotelID", "HotelName");
+            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes, "TypesOfBathroomID", "Name");
+            return View(hotelRoomCreateVM);
+        }
+
     }
 }

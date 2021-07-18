@@ -78,7 +78,7 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr onclick="location.href = '/Function/HotelRoomDetails/@item.RoomID'">
+                                    <tr onclick="location.href = '/Hotel/Room/Edit/@item.HotelID-@item.RoomID'">
                                         <td>@Html.DisplayFor(modelItem => item.RoomID)</td>
                                         <td>@Html.DisplayFor(modelItem => item.HotelID)</td>
                                         <td>@Html.DisplayFor(modelItem => item.RoomName)</td>

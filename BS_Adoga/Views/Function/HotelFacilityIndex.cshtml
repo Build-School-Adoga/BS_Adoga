@@ -46,6 +46,7 @@
                         <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
+                                    <th>@Html.DisplayNameFor(model => model.Hotel.HotelID)</th>
                                     <th>@Html.DisplayNameFor(model => model.Hotel.HotelName)</th>
                                     <th>@Html.DisplayNameFor(model => model.SwimmingPool)</th>
                                     <th>@Html.DisplayNameFor(model => model.AirportTransfer)</th>
@@ -68,6 +69,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th>@Html.DisplayNameFor(model => model.Hotel.HotelID)</th>
                                     <th>@Html.DisplayNameFor(model => model.Hotel.HotelName)</th>
                                     <th>@Html.DisplayNameFor(model => model.SwimmingPool)</th>
                                     <th>@Html.DisplayNameFor(model => model.AirportTransfer)</th>
@@ -92,6 +94,7 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr onclick="location.href = '/Function/HotelFacilityDetails/@item.FacilitieID'">
+                                        <td>@Html.DisplayFor(modelItem => item.Hotel.HotelID)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Hotel.HotelName)</td>
                                         <td>@Html.DisplayFor(modelItem => item.SwimmingPool)</td>
                                         <td>@Html.DisplayFor(modelItem => item.AirportTransfer)</td>

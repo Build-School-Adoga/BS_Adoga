@@ -48,7 +48,7 @@
                                     <th>@Html.DisplayNameFor(model => model.HotelID)</th>
                                     <th>@Html.DisplayNameFor(model => model.HotelName)</th>
                                     <th>@Html.DisplayNameFor(model => model.RoomCount)</th>
-                                    <th>設施</th>
+                                    <th>建立房型</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -56,7 +56,7 @@
                                     <th>@Html.DisplayNameFor(model => model.HotelID)</th>
                                     <th>@Html.DisplayNameFor(model => model.HotelName)</th>
                                     <th>@Html.DisplayNameFor(model => model.RoomCount)</th>
-                                    <th>設施</th>
+                                    <th>建立房型</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -72,18 +72,21 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.RoomCount)
                                         </td>
-                                        
+
                                         @*<td>
                                                 @Html.ActionLink("編輯", "Edit", new { hotelid = item.HotelID }, htmlAttributes: new { @class = "btn btn-secondary" }) |
                                                 @Html.ActionLink("詳細資料", "HotelLDetails", new { hotelid = item.HotelID }, htmlAttributes: new { @class = "btn btn-info" }) |
                                                 @Html.ActionLink("刪除", "Delete", new { hotelid = item.HotelID }, htmlAttributes: new { @class = "btn btn-danger" })
                                             </td>*@
                                         <td>
-
-                                           
-
-                                           @Html.ActionLink("Add Facilities", "HotelFacilityCreate", new { hotelids = item.HotelID }, htmlAttributes: new { @class = "btn btn-danger" })
-                                       
+                                            @if (item.RoomCount == 0)
+                                            {
+                                                @Html.ActionLink("新增房型", "HotelRoomCreate", new { hotelids = item.HotelID }, htmlAttributes: new { @class = "btn btn-danger" })
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("新增房型", "HotelRoomCreate", new { hotelids = item.HotelID }, htmlAttributes: new { @class = "btn btn-primary" })
+                                            }
                                         </td>
                                     </tr>
                                 }
