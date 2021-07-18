@@ -89,7 +89,7 @@ namespace BS_Adoga.Controllers
             else { currentOrder = currentFilter; }
             ViewBag.CurrentFilter = currentFilter;
 
-            int pageSize = 4;
+            int pageSize = 1;
             int pageNumber = (page ?? 1); //如果page裡面沒有值就會回傳1，else就傳自己的值
             
             switch (sortOrder)
