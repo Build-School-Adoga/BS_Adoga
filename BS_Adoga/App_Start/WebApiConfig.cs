@@ -14,13 +14,25 @@ namespace BS_Adoga
             config.Routes.MapHttpRoute(
                 name: "GetAllRoom",
                 routeTemplate: "api/HotelDetail/GetAllRoom",
-                defaults: new { controller="DetailApi",action="GetAllRoom",id = RouteParameter.Optional }
+                defaults: new { controller = "DetailApi", action = "GetAllRoom", id = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
                 name: "GetSpecificRoom",
                 routeTemplate: "api/HotelDetail/GetSpecificRoom",
                 defaults: new { controller = "DetailApi", action = "GetSpecificRoom", id = RouteParameter.Optional }
+            );
+
+           config.Routes.MapHttpRoute(
+                name: "GetHotelFacilities",
+                routeTemplate: "api/HotelDetail/GetHotelFacilities",
+                defaults: new { controller = "DetailApi", action = "GetHotelFacilities", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "GetEachHotelOneRoom",
+                routeTemplate: "api/HotelDetail/GetEachHotelOneRoom",
+                defaults: new { controller = "DetailApi", action = "GetEachHotelOneRoom", id = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
