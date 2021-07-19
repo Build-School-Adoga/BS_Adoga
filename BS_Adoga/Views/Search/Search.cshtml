@@ -359,12 +359,12 @@
         <div class="filter-body">
             <div class="facilities row">
                 <p>住宿設施&服務</p>
-                @*<div class="form-list col-4" v-for="(value, name) in HotelEquipName">
-                    <input class="form-check-input" type="checkbox" value="" id={{name}}>
-                    <label class="form-check-label" for={{name}}>
+                <div class="form-list col-4" v-for="(value, name) in HotelEquipName">
+                    <input class="form-check-input" type="checkbox" :id="`${name}`">
+                    <label class="form-check-label" :for="`${name}`">
                         {{value}}
                     </label>
-                </div>*@
+                </div>
 
             </div>
             <hr class="dropdown-divider">
