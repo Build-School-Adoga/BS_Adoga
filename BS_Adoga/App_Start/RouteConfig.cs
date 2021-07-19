@@ -15,15 +15,17 @@ namespace BS_Adoga
 
 
             routes.MapRoute(
-            name: "HotelCity",
-            url: "Taiwan/{city}",
-            defaults: new { controller = "Search", action = "Search", city = UrlParameter.Optional }
-        );
+                name: "HotelCity",
+                url: "Taiwan/{city}",
+                defaults: new { controller = "Search", action = "Search", city = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
-         name: "Hotel",
-         url: "Taiwan/Hotel/{id}",
-         defaults: new { controller = "HotelDetail", action = "Detail", id = UrlParameter.Optional }
-     );
+                name: "Hotel",
+                url: "Taiwan/Hotel/{id}",
+                defaults: new { controller = "HotelDetail", action = "Detail", id = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Login",
                 url: "MemberLogin",
@@ -34,6 +36,12 @@ namespace BS_Adoga
                 name: "HotelDetail",
                 url: "HotelDetail/{hotelId}-({startDate})-({endDate})-{orderRoom}-{adult}-{child}",
                 defaults: new { controller = "HotelDetail", action = "HotelDetail"}
+            );
+
+            routes.MapRoute(
+                name: "BookingOrderDetail",
+                url: "BookingDetail/{orderid}",
+                defaults: new { controller = "Account", action = "BookingDetail" }
             );
 
             routes.MapRoute(

@@ -27,5 +27,43 @@ namespace BS_Adoga.Service
         {
             return _repository.GetBookingDetail(orderID,customerID);
         }
+
+        public IEnumerable<BookingOrderViewModel> GetBookingOrderDESC (string customerID)
+        {
+            var data = _repository.GetBookingDESC(customerID);
+
+            var result = from item in data
+                         select new BookingOrderViewModel
+                         {
+                             OrderID = item.OrderID,
+                             HotelID = item.HotelID,
+                             HotelName = item.HotelName,
+                             HotelEngName = item.HotelEngName,
+                             RoomBed = item.RoomBed,
+                             RoomPriceTotal = item.RoomPriceTotal,
+                             
+                             OrderDate= item.OrderDate,
+                             CheckInDate= item.CheckInDate,
+                             CheckOutDate = item.CheckOutDate,
+                             
+                             FewDaysAgo = new TimeSpan(DateTime.Now.Ticks - item.OrderDate.Ticks).Days,
+                             
+                             OrderDateStr = item.OrderDate.ToString("yyyy年MM月dd日"),
+                             
+                             CheckInDay = item.CheckInDate.ToString("dd"),
+                             CheckInWeek = item.CheckInDate.ToString("MMM"),
+                             CheckInMonth = item.CheckInDate.ToString("ddd"),
+                             
+                             CheckOutDay = item.CheckOutDate.ToString("dd"),
+                             CheckOutWeek = item.CheckOutDate.ToString("MMM"),
+                             CheckOutMonth = item.CheckOutDate.ToString("ddd"),
+                             
+                             CheckCheckOut = item.CheckOutDate.CompareTo(DateTime.Now),
+                             City= item.City,
+                             Breakfast= item.Breakfast,
+                         };
+
+            return result;
+        }
     }
 }

@@ -293,12 +293,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIController\DetailApiController.cs" />
+    <Compile Include="APIController\BookingApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
+    <Compile Include="Models\ViewModels\Account\BookingOrderViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\TestVM.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\districts.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
@@ -407,6 +409,7 @@
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.svg" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.svg" />
     <Content Include="Asset\CDN\JS\jquery-3.3.1.js" />
+    <Content Include="Asset\CDN\JS\moment-with-locales.min.js" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
@@ -444,6 +447,7 @@
     <Content Include="Asset\JS\HotelDetail\Facility.js" />
     <Content Include="Asset\JS\HotelDetail\FacilityComponent.js" />
     <Content Include="Asset\JS\HotelDetail\RoomComponent.js" />
+    <Content Include="Asset\JS\MemberAccount\BookingComponent.js" />
     <Content Include="Asset\JS\MemberAccount\MemberProfile.js" />
     <Content Include="Asset\JS\GoogleLogin.js" />
     <Content Include="Asset\JS\navbar.js" />
