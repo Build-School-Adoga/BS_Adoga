@@ -445,7 +445,7 @@ namespace BS_Adoga.Controllers
             {
                 ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelids), "HotelID", "HotelName");
             }
-            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes, "TypesOfBathroomID", "Name");
+            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes.Where(x => x.TypesOfBathroomID == room.TypesOfBathroomID), "TypesOfBathroomID", "Name");
             return View(hotelRoomCreateVM);
         }
 
@@ -480,7 +480,7 @@ namespace BS_Adoga.Controllers
             }
 
             ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelRoomCreateVM.HotelID), "HotelID", "HotelName");
-            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes, "TypesOfBathroomID", "Name");
+            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes.Where(x => x.TypesOfBathroomID == hotelRoomCreateVM.TypesOfBathroomID), "TypesOfBathroomID", "Name");
             return View(hotelRoomCreateVM);
         }
 
