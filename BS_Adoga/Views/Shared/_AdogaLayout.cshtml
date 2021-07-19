@@ -99,7 +99,8 @@
                     <h6>我要登入</h6>
                     <div>
                         @Html.ActionLink("A咖登入", "MemberLogin", "MemberLogin", null, new { @class = "head-nav-item login-btn" })
-                        <a href="#" class="head-nav-item register-btn">我是新朋友</a>
+                        @Html.ActionLink("我是新朋友", "MemberLogin", "MemberLogin", null, new { @class = "head-nav-item register-btn" })
+                        @*<a href="#" class="head-nav-item register-btn">我是新朋友</a>*@
                     </div>
                     <h6>在Adooka刊登飯店</h6>
                     <div>
