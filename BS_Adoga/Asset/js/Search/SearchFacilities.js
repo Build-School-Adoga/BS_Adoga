@@ -1,4 +1,4 @@
-﻿import component from './FacilitiesComponent.js'
+﻿import component from './SearchFacilitiesComponent.js'
 
 //axios去get資料先
 

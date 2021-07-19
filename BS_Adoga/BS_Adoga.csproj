@@ -444,8 +444,8 @@
     <Content Include="Asset\images\tw.svg.png" />
     <Content Include="Asset\JS\formStep.js" />
     <Content Include="Asset\JS\home.js" />
-    <Content Include="Asset\JS\HotelDetail\Facility.js" />
-    <Content Include="Asset\JS\HotelDetail\FacilityComponent.js" />
+    <Content Include="Asset\JS\HotelDetail\HotelFacility.js" />
+    <Content Include="Asset\JS\HotelDetail\HotelFacilityComponent.js" />
     <Content Include="Asset\JS\HotelDetail\RoomComponent.js" />
     <Content Include="Asset\JS\MemberAccount\BookingComponent.js" />
     <Content Include="Asset\JS\MemberAccount\MemberProfile.js" />
@@ -453,8 +453,8 @@
     <Content Include="Asset\JS\navbar.js" />
     <Content Include="Asset\JS\HotelDetail\RoomFilter.js" />
     <Content Include="Asset\JS\Search.js" />
-    <Content Include="Asset\JS\Search\Facilities.js" />
-    <Content Include="Asset\JS\Search\FacilitiesComponent.js" />
+    <Content Include="Asset\JS\Search\SearchFacilities.js" />
+    <Content Include="Asset\JS\Search\SearchFacilitiesComponent.js" />
     <Content Include="Asset\JS\Search\_SearchFilterPartial.js" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.css" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.min.css" />

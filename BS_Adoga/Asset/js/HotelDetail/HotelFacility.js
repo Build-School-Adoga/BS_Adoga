@@ -1,5 +1,5 @@
 ﻿
-import Facilities from './FacilityComponent.js';
+import Facilities from './HotelFacilityComponent.js';
 
 var icons = {
     wifi: "fas fa-wifi",

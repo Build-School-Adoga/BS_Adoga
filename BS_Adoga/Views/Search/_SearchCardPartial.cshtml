@@ -84,7 +84,7 @@ else { HotelFullName = Model.HotelName; }
         {
             <div class="price">
                 <p>每晚含稅價</p>
-                <ins>NT$<span>@newPrice</span></ins>
+                <ins>NT$<span>@newPrice.ToString("N0")</span></ins>
             </div>
         }
         else
@@ -94,8 +94,8 @@ else { HotelFullName = Model.HotelName; }
             </div>
             <div class="price">
                 <p>每晚含稅價</p>
-                <del>@roomprice</del>
-                <ins>NT$<span>@newPrice</span></ins>
+                <del>@roomprice.ToString("N0")</del>
+                <ins>NT$<span>@newPrice.ToString("N0")</span></ins>
             </div>
         }
 
