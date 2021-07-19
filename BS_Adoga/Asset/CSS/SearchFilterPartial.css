@@ -185,6 +185,7 @@ div#person-info {
         border-radius: 5px;
     }
 
+        /*button:hover,*/
         .nav-item #person-box #count-person button#done-counting:hover {
             background-color: #75A8F9;
         }

@@ -299,6 +299,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
+    <Compile Include="Models\ViewModels\HotelDetail\TestVM.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\districts.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -335,6 +336,9 @@
     <Compile Include="Models\ViewModels\homeViewModels\MyRoom.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\MyRoomsDetails.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
+    <Compile Include="Models\ViewModels\HotelLogin\HotelRoomCreateViewModel.cs" />
+    <Compile Include="Models\ViewModels\HotelLogin\HotelRoomViewModel.cs" />
+    <Compile Include="Models\ViewModels\HotelLogin\RoomViewModel.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\ForgetPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\SearchByMemberVM.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\HotelCreateViewModel.cs" />
@@ -383,10 +387,26 @@
     <Compile Include="Service\MultiButtonAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Asset\CDN\CSS\daterangepicker.css" />
-    <Content Include="Asset\CDN\JS\daterangepicker.js" />
-    <Content Include="Asset\CDN\JS\moment.min.js" />
-    <Content Include="Asset\CDN\JS\package.js" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\attribution.js" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\all.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\all.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\brands.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\brands.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\fontawesome.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\fontawesome.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\regular.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\regular.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\solid.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\solid.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\svg-with-js.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\svg-with-js.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\v4-shims.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\v4-shims.min.css" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\LICENSE.txt" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.svg" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.svg" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Asset\CDN\JS\jquery-3.3.1.js" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
@@ -421,10 +441,13 @@
     <Content Include="Asset\images\tw.svg.png" />
     <Content Include="Asset\JS\formStep.js" />
     <Content Include="Asset\JS\home.js" />
+    <Content Include="Asset\JS\HotelDetail\Facility.js" />
+    <Content Include="Asset\JS\HotelDetail\FacilityComponent.js" />
+    <Content Include="Asset\JS\HotelDetail\RoomComponent.js" />
     <Content Include="Asset\JS\MemberAccount\MemberProfile.js" />
     <Content Include="Asset\JS\GoogleLogin.js" />
     <Content Include="Asset\JS\navbar.js" />
-    <Content Include="Asset\JS\RoomFilter.js" />
+    <Content Include="Asset\JS\HotelDetail\RoomFilter.js" />
     <Content Include="Asset\JS\Search.js" />
     <Content Include="Asset\JS\_SearchFilterPartial.js" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.css" />
@@ -2312,6 +2335,18 @@
     <Content Include="Asset\StartbootstrapAdminPages\vendor\jquery\jquery.min.map" />
     <Content Include="Asset\StartbootstrapAdminPages\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Asset\JSON\SimpleZipCode.json" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.eot" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.ttf" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.woff" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.woff2" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.eot" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.ttf" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.woff" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.woff2" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.eot" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.ttf" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.woff" />
+    <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.woff2" />
     <Content Include="Asset\CDN\JSON\bower.json" />
     <Content Include="Asset\CDN\JSON\package.json" />
     <None Include="Properties\PublishProfiles\adoga - FTP.pubxml" />
@@ -2382,9 +2417,20 @@
     <Content Include="Views\Function\HotelCreate.cshtml" />
     <Content Include="Views\Function\HotelDetails.cshtml" />
     <Content Include="Views\Function\HotelEdit.cshtml" />
+    <Content Include="Views\Function\HotelFacilityCreate.cshtml" />
+    <Content Include="Views\Function\HotelFacilityIndex.cshtml" />
+    <Content Include="Views\Function\HotelFacilityDetails.cshtml" />
+    <Content Include="Views\Function\HotelFacilityEdit.cshtml" />
+    <Content Include="Views\Function\HotelRoomIndex.cshtml" />
+    <Content Include="Views\Function\HotelRoomsIndex.cshtml" />
+    <Content Include="Views\Function\HotelRoomCreate.cshtml" />
+    <Content Include="Views\Function\HotelRoomEdit.cshtml" />
+    <Content Include="Views\Function\HotelRoomDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Asset\CDN\CSS\" />
+    <Folder Include="Asset\CDN\JS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />
