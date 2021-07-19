@@ -405,13 +405,11 @@
     font-family: Montserrat,sans-serif;
     text-align: center;
 }
-
     .footer-area p {
         line-height: 2;
         color: rgb(148, 148, 148);
     }
-
-    .footer-area span {
-        display: block;
-        color: rgb(148, 148, 148);
-    }
+.footer-area span {
+    display: block;
+    color: rgb(148, 148, 148);
+}

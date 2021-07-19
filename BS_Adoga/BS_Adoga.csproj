@@ -170,6 +170,12 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -447,7 +453,9 @@
     <Content Include="Asset\JS\navbar.js" />
     <Content Include="Asset\JS\HotelDetail\RoomFilter.js" />
     <Content Include="Asset\JS\Search.js" />
-    <Content Include="Asset\JS\_SearchFilterPartial.js" />
+    <Content Include="Asset\JS\Search\SearchFacilities.js" />
+    <Content Include="Asset\JS\Search\SearchFacilitiesComponent.js" />
+    <Content Include="Asset\JS\Search\_SearchFilterPartial.js" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.css" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.min.css" />
     <Content Include="Asset\StartbootstrapAdminPages\img\undraw_posting_photo.svg" />
@@ -2148,6 +2156,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\ElementUI\element-ui.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -2344,6 +2353,8 @@
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="Asset\CDN\JSON\bower.json" />
+    <Content Include="Asset\CDN\JSON\package.json" />
     <None Include="Properties\PublishProfiles\adoga - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\adoga - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\adoga - Web Deploy.pubxml" />
