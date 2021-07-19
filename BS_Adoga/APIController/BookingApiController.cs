@@ -25,6 +25,7 @@ namespace BS_Adoga.APIController
             _service = new MemberAccountService();
             _repository = new MemberAccountRepository();
         }
+
         [AcceptVerbs("GET", "POST")]
         public IHttpActionResult MemberBookingList(string id)
         {

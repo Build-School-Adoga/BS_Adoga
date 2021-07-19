@@ -25,13 +25,14 @@ namespace BS_Adoga.Controllers
             _memberacoountrepository = new MemberAccountRepository();
         }
 
-        [AcceptVerbs("GET", "POST")]
-        public ActionResult GoToMemberBookingList()
+        [AcceptVerbs("GET")]
+        public ActionResult GetMemberBookingList()
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
-            return RedirectToAction("MemberBookingList", "BookingApi", new { id = user_id});
+
+            return Json(_service.GetBookingOrderDESC(user_id), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Account
@@ -70,6 +71,7 @@ namespace BS_Adoga.Controllers
             //return View();
         }
 
+        
         public ActionResult BookingDetail(string orderid)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;

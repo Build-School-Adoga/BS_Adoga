@@ -51,15 +51,18 @@
             <button id="clear-button" type="button" class="btn btn-light">清除</button>
         </div>
     </div>
-
-    @foreach (var item in Model)
+    <div id="BookingList">
+        <booking-card v-for="order in group" v-bind:order="order"></booking-card>
+    </div>
+    @*@foreach (var item in Model)
     {
         @Html.Partial("~/Views/Account/_BookingPartial.cshtml", item);
         //Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
-    }
+    }*@
 
     @*@Html.Partial("~/Views/Account/_BookingPartial.cshtml")*@
 
+    @if(Model.Count() == 0) { 
     <div class="no-booking-panel mt-5">
         <img id="no-booking_img" src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
 
@@ -74,6 +77,95 @@
             </p>
         </div>
     </div>
+    }
 </div>
+
+@section endJS{
+    <!-- axios 的引用 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+    <!--Vue在Layout已有引用-->
+
+    <!--Mine-->
+    <script type="module">
+        import BookingCard from '../../Asset/JS/MemberAccount/BookingComponent.js'
+
+        //一開始載入頁面時要帶入Room的全部資料
+        axios.get('https://localhost:44352/Account/GetMemberBookingList')
+            .then(function (response) {
+                console.log(response.data)
+                appendBookingList(response.data);
+            })
+            .catch(
+                (error) => console.log(error))
+
+        var BookingList = new Vue({
+            el: '#BookingList',
+            data: {
+                group: []
+            },
+            components: {
+                'booking-card': BookingCard
+            }
+        })
+
+        function appendBookingList(response) {
+           
+            BookingList.group = []; //先清空資料
+
+            var data = response;     //好像response進來就直接轉成js了，所以不需要用JSON.parse轉格式喔
+
+            (data).forEach((item, index) => {
+
+                //產生床型的字串
+                var bedTypeStr = '';
+                (item.RoomBed).forEach((bed, index) => {
+                    if (index != item.RoomBed.length - 1)
+                        bedTypeStr += bed.Name + "x" + bed.Amount + " , "
+                    else
+                        bedTypeStr += bed.Name
+                })
+                console.log(item.OrderID)
+                //開始給BookingList（Vue物件）的group塞資料&設定裡面的屬性
+                BookingList.$set(BookingList.group, index,
+                    {
+                        CustomerID: item.CustomerID,
+                        OrderID: item.OrderID,
+                        HotelID: item.HotelID,
+                        HotelName: item.HotelName,
+                        HotelEngName: item.HotelEngName,
+                        BedStr: bedTypeStr,
+                        RoomPriceTotal: Math.ceil(item.RoomPriceTotal).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","),
+
+                        OrderDate: item.OrderDate,
+                        CheckInDate: item.CheckInDate,
+                        CheckOutDate: item.CheckOutDate,          
+                        
+                        FewDaysAgo: item.FewDaysAgo,
+
+                        OrderDateStr : item.OrderDateStr,
+
+                        CheckInDay :item.CheckInDay,
+                        CheckInWeek :item.CheckInWeek ,
+                        CheckInMonth :item.CheckInMonth,
+
+                        CheckOutDay :item.CheckOutDay,
+                        CheckOutWeek :item.CheckOutWeek ,
+                        CheckOutMonth :item.CheckOutMonth,
+
+                        CheckCheckOut: item.CheckCheckOut,
+                        City: item.City,
+                        Breakfast: item.Breakfast,
+
+                        GoToDetail: function () {
+                                window.location.href = 'https://localhost:44352/BookingDetail/' + item.OrderID;
+                        }
+                    }
+                );
+            })
+        }
+
+    </script>
+}
 
 

@@ -405,9 +405,10 @@ footer {
     font-family: Montserrat,sans-serif;
     text-align: center;
 }
-footer p{
-    line-height: 2;
-}
+    footer p {
+        line-height: 2;
+        color: rgb(148, 148, 148);
+    }
 footer span{
     display: block;
 }
