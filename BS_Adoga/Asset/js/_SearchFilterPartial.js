@@ -212,7 +212,7 @@ $('#demo').daterangepicker({
 //})
 
 document.getElementById("btn-searchAll").addEventListener('click', function () {
-    debugger;
+    //debugger;
     hand(document.getElementsByName("search")[0].value);
 });
 getSavedValue(document.getElementsByName("search")[0].value);
