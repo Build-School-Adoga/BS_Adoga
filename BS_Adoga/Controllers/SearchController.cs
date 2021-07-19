@@ -7,7 +7,7 @@ using BS_Adoga.Models.DBContext;
 using BS_Adoga.Service;
 using BS_Adoga.Models.ViewModels.Search;
 using PagedList;
-
+using System.Web.Http;
 
 namespace BS_Adoga.Controllers
 {
@@ -114,5 +114,13 @@ namespace BS_Adoga.Controllers
             return View(data);
 
         }
+
+        //Get: api
+        //[AcceptVerbs("GET","POST")]
+        //public IHttpActionResult GetAllRoom(string hotelId)
+        //{
+        //    var facilityId = s.GetHotelFacilityId(hotelId);
+        //    return facilityId;
+        //}
     }
 }

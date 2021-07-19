@@ -145,6 +145,33 @@ namespace BS_Adoga.Repository
             return optionData.ToList();
         }
 
+        public IEnumerable<FacilityViewModel> GetFacilitiId(string hotelId)
+        {
+            var data = from F in _context.Facilities
+                       where hotelId.Contains(F.HotelID)
+                       select new FacilityViewModel
+                       {
+                           FacilitieID = F.FacilitieID,
+                           HotelID = F.HotelID,
+                           SwimmingPool = F.SwimmingPool,
+                           AirportTransfer = F.AirportTransfer,
+                           FamilyChildFriendly = F.FamilyChildFriendly,
+                           Restaurants = F.Restaurants,
+                           Nightclub = F.Nightclub,
+                           GolfCourse = F.GolfCourse,
+                           Gym = F.Gym,
+                           NoSmoking = F.NoSmoking,
+                           SmokingArea = F.SmokingArea,
+                           FacilitiesFordisabledGuests = F.FacilitiesFordisabledGuests,
+                           CarPark = F.CarPark,
+                           SpaSauna = F.SpaSauna,
+                           BusinessFacilities = F.BusinessFacilities,
+                           Internet = F.Internet,
+                           PetsAllowed = F.PetsAllowed
+                       };
+            return data.ToList();
+        }
+
         //public FacilityViewModel GetEquipmentList()
         //{
         //    var equipList = from e in _context.Facilities

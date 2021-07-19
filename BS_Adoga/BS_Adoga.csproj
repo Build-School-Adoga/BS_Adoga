@@ -449,7 +449,9 @@
     <Content Include="Asset\JS\navbar.js" />
     <Content Include="Asset\JS\HotelDetail\RoomFilter.js" />
     <Content Include="Asset\JS\Search.js" />
-    <Content Include="Asset\JS\_SearchFilterPartial.js" />
+    <Content Include="Asset\JS\Search\Facilities.js" />
+    <Content Include="Asset\JS\Search\FacilitiesComponent.js" />
+    <Content Include="Asset\JS\Search\_SearchFilterPartial.js" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.css" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.min.css" />
     <Content Include="Asset\StartbootstrapAdminPages\img\undraw_posting_photo.svg" />
@@ -2430,7 +2432,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Asset\CDN\CSS\" />
-    <Folder Include="Asset\CDN\JS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />

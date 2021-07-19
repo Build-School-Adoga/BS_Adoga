@@ -34,5 +34,11 @@ namespace BS_Adoga.Service
             };
             return data;
         }
+        //public FacilityViewModel GetHotelFacilityId(string hotelId)
+        //{
+        //    var id = _r.GetFacilitiId(hotelId);
+
+        //    return id;
+        //}
     }
 }

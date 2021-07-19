@@ -35,6 +35,13 @@ namespace BS_Adoga
                 defaults: new { controller = "DetailApi", action = "GetEachHotelOneRoom", id = RouteParameter.Optional }
             );
 
+            //Irene
+            config.Routes.MapHttpRoute(
+               name: "GetAllSearchFicilities",
+               routeTemplate: "api/Search/GetAllSearchFicilities",
+               defaults: new { controller = "Search", action = "GetAllSearchFicilities", id = RouteParameter.Optional }
+           );
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

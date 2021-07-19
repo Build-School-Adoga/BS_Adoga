@@ -27,11 +27,19 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
     @*<script src="~/Asset/CDN/JS/daterangepicker.js"></script>
-    <script src="~/Asset/CDN/JS/moment.min.js"></script>
-    <script src="~/Asset/CDN/JS/package.js"></script>*@
-<script>
+        <script src="~/Asset/CDN/JS/moment.min.js"></script>
+        <script src="~/Asset/CDN/JS/package.js"></script>*@
+
+    <script>
         //var td = ViewData["con"];
 
+        //過濾出地區(distinct)
+        var deduped = dedup([
+            @foreach (var item in Model.HotelOptionVM)
+            {
+                 @Html.Partial("~/Views/Search/_optionCity.cshtml", item);
+            }
+        ]);
         function dedup(arr) {
             var hashTable = {};
             return arr.filter(function (el) {
@@ -40,12 +48,6 @@
                 return (match ? false : hashTable[key] = true);
             });
         }
-        var deduped = dedup([
-            @foreach (var item in Model.HotelOptionVM)
-            {
-                 @Html.Partial("~/Views/Search/_optionCity.cshtml", item);
-            }
-        ]);
 
         //搜尋地區、人數
         var filternav = new Vue({
@@ -126,16 +128,18 @@
                 }
             }
         });
-</script>
+    </script>
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
 
-        <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-        <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
 
 
     <script src="~/Asset/js/Search.js"></script>
     <script src="~/Asset/js/_SearchFilterPartial.js"></script>
+    <script src="~/Asset/js/Search/Facilities.js"></script>
+
 }
 
 
@@ -355,100 +359,13 @@
         <div class="filter-body">
             <div class="facilities row">
                 <p>住宿設施&服務</p>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
+                <div class="form-list col-4" v-for="(value, name) in HotelEquipName">
+                    <input class="form-check-input" type="checkbox" value="" id={{name}}>
+                    <label class="form-check-label" for={{name}}>
+                        {{value}}
                     </label>
                 </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div><div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div><div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
+
             </div>
             <hr class="dropdown-divider">
             <div class="room row">

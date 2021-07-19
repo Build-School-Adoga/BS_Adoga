@@ -1,32 +1,14 @@
-﻿var filter = new Vue({
-    el: '#filter',
+﻿
+var filterEquip = new Vue({
+    el: '#filter-equipment',
     data: {
-        equipmentsNum: {
-            swim: 15,
-            airport: 44,
-            familyFriendly: 468,
-            restaurant: 120,
-            club: 3,
-            golf: 1,
-            internet: 606,
-            gym: 38,
-            nSmoke: 288,
-            Smoke: 144,
-            FFG: 100,
-            carPark: 317,
-            frontDesk: 139,
-            Spa: 17,
-            petAllow: 102,
-            business: 61
-        },
-        equipmentsName: {
+        HotelEquipName: {
             swim: '游泳池',
             airport: '機場接送',
             familyFriendly: '親子友善住宿',
             restaurant: '餐廳',
             club: '夜店',
             golf: '附設高爾夫球場',
-            internet: '網路',
             gym: '健身房',
             nSmoke: '禁菸',
             Smoke: '吸菸區',
@@ -34,14 +16,18 @@
             carPark: '停車場',
             frontDesk: '24小時櫃台服務',
             Spa: 'Spa桑拿',
-            petAllow: '可帶寵物',
             business: '商務設備'
+        },
+        RoomEquipName: {
+            internet: '網路',
+            petAllow: '可帶寵物'
         }
     },
     method: {
 
     }
 })
+
 
 // JS
 var openFilter = document.getElementById("openFilter");

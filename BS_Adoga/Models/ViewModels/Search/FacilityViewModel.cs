@@ -7,6 +7,8 @@ namespace BS_Adoga.Models.ViewModels.Search
 {
     public class FacilityViewModel
     {
+        public int FacilitieID { get; set; }
+        public string HotelID { get; set; }
         //住宿設施
         public bool SwimmingPool { get; set; }
         public bool AirportTransfer { get; set; }
