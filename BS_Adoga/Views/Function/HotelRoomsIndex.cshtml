@@ -57,6 +57,7 @@
                                     <th>@Html.DisplayNameFor(model => model.WiFi)</th>
                                     <th>@Html.DisplayNameFor(model => model.TV)</th>
                                     @*<th>@Html.DisplayNameFor(model => model.Logging)</th>*@
+                                    <td>房間日期展開</td>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -73,6 +74,7 @@
                                     <th>@Html.DisplayNameFor(model => model.WiFi)</th>
                                     <th>@Html.DisplayNameFor(model => model.TV)</th>
                                     @*<th>@Html.DisplayNameFor(model => model.Logging)</th>*@
+                                    <td>房間日期展開</td>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -91,6 +93,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.WiFi)</td>
                                         <td>@Html.DisplayFor(modelItem => item.TV)</td>
                                         @*<td>@Html.DisplayFor(modelItem => item.Logging)</td>*@
+                                        <td>@Html.ActionLink("每日房間清單", "RoomDetailsIndex", new { roomid = item.RoomID , roomname = item.RoomName }, htmlAttributes: new { @class = "btn btn-danger" })</td>
                                     </tr>
                                 }
                             </tbody>

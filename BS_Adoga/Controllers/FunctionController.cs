@@ -484,5 +484,11 @@ namespace BS_Adoga.Controllers
             return View(hotelRoomCreateVM);
         }
 
+        public ActionResult RoomDetailsIndex(string roomid, string roomname)
+        {
+            ViewBag.roomid = roomid;
+            ViewBag.roomname = roomname;
+            return View();
+        }
     }
 }
