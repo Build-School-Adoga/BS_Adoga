@@ -27,5 +27,6 @@ namespace BS_Adoga.Service
         {
             return _repository.GetBookingDetail(orderID,customerID);
         }
+
     }
 }

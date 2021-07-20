@@ -11,6 +11,7 @@ using System.Web.Security;
 using System.Data.Entity;
 using BS_Adoga.Models.ViewModels.MemberLogin;
 using Newtonsoft.Json;
+using BS_Adoga.Models.ViewModels.Account;
 
 namespace BS_Adoga.Controllers
 {
@@ -77,7 +78,7 @@ namespace BS_Adoga.Controllers
 
                 Order od = new Order()
                 {
-                    OrderID = "Adoga" + DateTime.Now.ToString("yyyyMMddHHmmss") + new Random().Next(0, 10).ToString(),
+                    OrderID = "Adoga" + DateTime.Now.ToString("yyyyMMddHHmmss"),
                     CustomerID = customer,
                     RoomID = orderData.roomCheckOutViewModel.RoomID,
                     OrderDate = DateTime.Now,
@@ -100,6 +101,7 @@ namespace BS_Adoga.Controllers
 
                 using (var tran = _context.Database.BeginTransaction())
                 {
+
                     //EF
                     try
                     {
@@ -120,10 +122,30 @@ namespace BS_Adoga.Controllers
             return View(orderVM);
         }
 
-        public ActionResult PayAPI()
+
+        public ActionResult PayAPI(PayApiInfo info)
         {
-            string orderId = (string)TempData["OrderId"];
+            string orderId = (string)TempData["OrderId"];           
+            //From Index Form
             OrderVM orderData = (OrderVM)TempData.Peek("orderData");
+            //From Account
+            RePayViewModel ReOrderData = (RePayViewModel)TempData["ReOrderData"];
+
+            if (ReOrderData == null)
+            {
+                info.OrderId = orderId;
+                info.TotalPrice = Math.Ceiling(orderData.roomCheckOutViewModel.TotalPrice);
+                info.HotelName = orderData.roomCheckOutViewModel.HotelFullName;
+                info.RoomQuantity = orderData.roomCheckOutViewModel.RoomOrder;                
+            }
+            else
+            {
+                info.OrderId = ReOrderData.OrderID + new Random().Next(0, 10).ToString();
+                info.TotalPrice = Math.Ceiling(ReOrderData.RoomPriceTotal);
+                info.HotelName = ReOrderData.HotelName;
+                info.RoomQuantity = ReOrderData.RoomQuantity;
+            }
+
 
             List<string> enErrors = new List<string>();
             string payment = String.Empty;
@@ -142,9 +164,9 @@ namespace BS_Adoga.Controllers
                     oPayment.Send.ReturnURL = "https://localhost:44352/CheckOut/PayFeedback";//付款完成通知回傳的網址https://localhost:44352/CheckOut/PayFeedback
                     oPayment.Send.ClientBackURL = "http://adoga.azurewebsites.net/";//瀏覽器端返回的廠商網址
                     oPayment.Send.OrderResultURL = "https://localhost:44352/CheckOut/PayFeedback";//瀏覽器端回傳付款結果網址
-                    oPayment.Send.MerchantTradeNo = orderId;//廠商的交易編號
+                    oPayment.Send.MerchantTradeNo = info.OrderId;//廠商的交易編號
                     oPayment.Send.MerchantTradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");//廠商的交易時間
-                    oPayment.Send.TotalAmount = Math.Ceiling(orderData.roomCheckOutViewModel.TotalPrice);//交易總金額
+                    oPayment.Send.TotalAmount = info.TotalPrice;//交易總金額
                     oPayment.Send.TradeDesc = "交易描述";//交易描述
                     oPayment.Send.ChoosePayment = PaymentMethod.Credit;//使用的付款方式
                     oPayment.Send.Remark = "Test";//備註欄位
@@ -163,10 +185,10 @@ namespace BS_Adoga.Controllers
                     //訂單的商品資料
                     oPayment.Send.Items.Add(new Item()
                     {
-                        Name = orderData.roomCheckOutViewModel.HotelFullName,//商品名稱
-                        Price = Math.Ceiling(orderData.roomCheckOutViewModel.TotalPrice),//商品單價
+                        Name = info.HotelName,//商品名稱
+                        Price = info.TotalPrice,//商品單價
                         Currency = "新台幣",//幣別單位
-                        Quantity = orderData.roomCheckOutViewModel.RoomOrder,//購買數量
+                        Quantity = info.RoomQuantity,//購買數量
                         URL = "http://google.com",//商品的說明網址
 
                     });
@@ -305,9 +327,22 @@ namespace BS_Adoga.Controllers
                     TempData["PayResult"] = PayResult;
 
                     //更新付款資訊
-                    var payStatus = _context.Orders.Where(x => x.OrderID == PayResult.OrderId).First();
-                    payStatus.PaymentStatus = true;
-                    _context.Entry(payStatus).State = EntityState.Modified;
+                    if (PayResult.OrderId.Length == 20)
+                    {
+                        string ReOrderId = PayResult.OrderId.Substring(0, PayResult.OrderId.Length - 1);
+                        var payStatus = _context.Orders.Where(x => x.OrderID == ReOrderId).First();
+                        payStatus.PaymentStatus = true;
+                        payStatus.Logging = payStatus.Logging + "; " + "已付款: " + ReOrderId + "(" + PayResult.OrderId.Substring(PayResult.OrderId.Length - 1) + ")";
+                        _context.Entry(payStatus).State = EntityState.Modified;
+                    }
+                    else 
+                    {
+                        var payStatus = _context.Orders.Where(x => x.OrderID == PayResult.OrderId).First();
+                        payStatus.PaymentStatus = true;
+                        payStatus.Logging = payStatus.Logging + "; " + "已付款: " + PayResult.OrderId;
+                        _context.Entry(payStatus).State = EntityState.Modified;
+                    }
+                                      
                     _context.SaveChanges();
                     this.Response.Clear();
 
