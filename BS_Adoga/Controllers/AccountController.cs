@@ -84,7 +84,7 @@ namespace BS_Adoga.Controllers
             return View(_memberacoountrepository.GetBookingDetail(orderid, user_id));
         }
 
-
+        [HttpGet]
         public ActionResult RePayOrder(RePayViewModel rePay, string orderid)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;

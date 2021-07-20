@@ -67,10 +67,11 @@ function appendBookingList(response) {
             if (index != item.RoomBed.length - 1)
                 bedTypeStr += bed.Name + "x" + bed.Amount + " , "
             else
-                bedTypeStr += bed.Name
+                bedTypeStr += bed.Name + "x" + bed.Amount
         })
         console.log(item.OrderID)
 
+        
         //開始給BookingList（Vue物件）的group塞資料&設定裡面的屬性
         BookingList.$set(BookingList.group, index,
             {
@@ -105,12 +106,15 @@ function appendBookingList(response) {
                 In24Hours: item.In24Hours,
 
                 ContinuePay: function () {
-                    axios.post('https://localhost:44352/CheckOut/RePayOrder', {
-                        params: {
-                            orderID: item.OrderID
-                        }
-                    }).then(response => console.log(response)
-                    ).catch(error => console.log(error))
+                    console.log(item.OrderID)
+                    //axios.get('https://localhost:44352/Account/RePayOrder', {
+                    //    params: {
+                    //        orderid: item.OrderID
+                    //    }
+                    //}).then(response => {
+                    //    console.log(response);
+                        window.location.href ='https://localhost:44352/Account/RePayOrder/'+item.OrderID
+                    //}).catch(error => console.log(error))
                 },
                 GoToDetail: function () {
                     window.location.href = 'https://localhost:44352/BookingDetail/' + item.OrderID;

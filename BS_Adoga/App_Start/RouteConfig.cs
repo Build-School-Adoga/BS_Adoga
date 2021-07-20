@@ -45,6 +45,12 @@ namespace BS_Adoga
             );
 
             routes.MapRoute(
+                name: "PayAPI",
+                url: "Account/RePayOrder/{orderid}",
+                defaults: new { controller = "Account", action = "RePayOrder" }
+            );
+
+            routes.MapRoute(
                 name: "HotelEdit",
                 url: "Hotel/Edit/{hotelid}",
                 defaults: new { controller = "Function", action = "HotelEdit", hotelid = UrlParameter.Optional }

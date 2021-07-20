@@ -83,7 +83,7 @@ namespace BS_Adoga.Service
             {
                 var data = GetBookingOrder_FilterPayment(user_id, true);
                 result = from d in data
-                         where d.CheckOutDate > DateTime.Now
+                         where d.CheckOutDate < DateTime.Now
                          select d;
             }
             else
@@ -104,7 +104,7 @@ namespace BS_Adoga.Service
             var data = _repository.GetBookingDESC(customerID);
 
             var result = from item in data
-                         where item.PaymentStatus == IsPay
+                         where item.PayStatus == IsPay
                          select new BookingOrderViewModel
                          {
                              OrderID = item.OrderID,
@@ -133,7 +133,7 @@ namespace BS_Adoga.Service
                              CheckCheckOut = item.CheckOutDate.CompareTo(DateTime.Now),
                              City = item.City,
                              Breakfast = item.Breakfast,
-                             PayStatus = item.PaymentStatus,
+                             PayStatus = item.PayStatus,
                              In24Hours = DateTime.Now.Subtract(item.OrderDate) < TimeSpan.FromHours(24)
                          };
 
