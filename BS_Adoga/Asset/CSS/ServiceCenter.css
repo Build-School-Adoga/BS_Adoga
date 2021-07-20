@@ -49,6 +49,8 @@
 }
 
 .answer {
+    border: 1px solid rgb(221, 223, 226);
+    border-bottom:none;
     height: 71.6px;
     background-color: white;
     margin-top: 20px;
@@ -91,17 +93,23 @@
     width: 662px;
     font-family: 'Arial';
 }
-.answer:hover {
-    box-shadow: rgb(0 0 0 / 30%) 0px 4px 10px 0px;
+.answer:hover, .panel:hover {
+    box-shadow: rgb(0 0 0 / 30%) 0px 10px 10px 0px;
 }
-    .panel {
-        position: relative;
-     height:auto;
-        width: 736px;
-        background-color: white;
-        float: left;
-        display: none;
-    }
+.panel {
+    margin-left: -1px;
+    border-right: 1px solid rgb(221, 223, 226);
+    border-left: 1px solid rgb(221, 223, 226);
+    border-bottom: 1px solid rgb(221, 223, 226);
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 10px 0px;
+    position: relative;
+    height: auto;
+    width: 736px;
+    background-color: white;
+    float: left;
+    display: none;
+    transition: box-shadow 0.3s ease 0s;
+}
 .clearFloat {
     clear: both;
 }
