@@ -6,11 +6,16 @@
 }
 
 @section topCSS{
+    <link rel="stylesheet" href="~/Asset/CDN/CSS/index.css">
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.css" />
-    <link rel="stylesheet" href="~/Asset/CSS/HomePage.css" />
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+          href="~/Asset/CDN/CSS/daterangepicker.min.css" />
 
+
+
+
+
+    <link href="~/Asset/CDN/CSS/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Asset/CSS/HomePage.css" />
     <!-- bear：0610 新增-->
     <style>
 
@@ -51,9 +56,9 @@
 
     </div>
 
-    <div class="container  " id="container">
-        <div class="input-group mb-3"style="padding-right:58px">
-            <div id="app" v-cloak class="col-xs-12 col-12" >
+    <div class="container" id="container">
+        <div class="input-group mb-3" style="padding-right:58px">
+            <div id="app" v-cloak class="col-xs-12 col-12">
                 <el-select class="col-12 col-xs-12" style="margin-left:10px; z-index: 3;" id="inputGroupSelect02" v-model="value" placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable
                            name="search" clearable default-first-option>
                     <el-option-group v-for="group in options2"
@@ -72,56 +77,56 @@
             </div>
 
         </div>
-            @*<div class="container-fluid">*@
-              
-                    
-                        <div class="bd-content container row " id="container1 datetime">
-
-                            @*<div id="datetime"class="row">*@
-                                <div class="" style="     width:1296px;   display: flex;justify-content: space-between;flex-wrap: wrap;">
-                                    <div class="col-12 col-md-12 col-xl-6">
-                                        <div class="timebox col-6 col-md-10 d-flex col-xl-4" style="display: flex;justify-content: space-around;align-items: center;border-right:none">
-                                            <div class="col-6 col-md-4 d-flex col-xl-6">
-                                                <i class="far fa-calendar fa-2x time-box-1"></i>
-                                                <div>
-
-                                                    <input type="text" id="range_start" name="start" value="" />
-
-                                                    <input type="text" id="week_start" value="" />
-                                                </div>
-
-                                            </div>
-                                            <div class="line">
-
-                                            </div>
-                                            <div class="col-6 col-md-4 d-flex col-xl-6" style="">
-                                                <i class="fas fa-calendar fa-2x time-box-2"></i>
-                                                <div>
-                                                    <input type="text" id="range_end" name="end" value="" />
-                                                    <input type="text" id="week_end" value="" style=" " />
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <input type="text" class="calendar-minus col-xl-12 col-md-12	calendar-plus from-control" id="demo" name="date_range" style="margin-left:-10px;"/>
-                                    </div>
-
-                                    @Html.Partial("_nav")
-                                </div>
-                            @*</div>*@
+        @*<div class="container-fluid">*@
 
 
+        <div class="bd-content container row " id="container1 datetime">
 
+            @*<div id="datetime"class="row">*@
+            <div class="" style="     width:1296px;   display: flex;justify-content: space-between;flex-wrap: wrap;">
+                <div class="col-12 col-md-12 col-xl-6">
+                    <div class="timebox col-6 col-md-10 d-flex col-xl-4" style="display: flex;justify-content: space-around;align-items: center;border-right:none">
+                        <div class="col-6 col-md-4 d-flex col-xl-6">
+                            <i class="far fa-calendar fa-2x time-box-1"></i>
+                            <div>
 
+                                <input type="text" id="range_start" name="start" value="" />
 
-                      
-
+                                <input type="text" id="week_start" value="" />
+                            </div>
 
                         </div>
-                  
-            
+                        <div class="line">
+
+                        </div>
+                        <div class="col-6 col-md-4 d-flex col-xl-6" style="">
+                            <i class="fas fa-calendar fa-2x time-box-2"></i>
+                            <div>
+                                <input type="text" id="range_end" name="end" value="" />
+                                <input type="text" id="week_end" value="" style=" " />
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="text" class="calendar-minus col-xl-12 col-md-12	calendar-plus from-control" id="demo" name="date_range" style="margin-left:-10px;" />
+                </div>
+
+                @Html.Partial("_nav")
+            </div>
             @*</div>*@
-            @*<div class="form-check border d-flex " id="sale-absolute">
+
+
+
+
+
+
+
+
+        </div>
+
+
+        @*</div>*@
+        @*<div class="form-check border d-flex " id="sale-absolute">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" id="saleprice" for="flexCheckDefault">
                     享達25%的訂房折扣
@@ -132,7 +137,7 @@
             </div>*@
 
 
-     
+
         <button type="submit" class="btn btn-danger" id="search">搜尋</button>
     </div>
 
@@ -270,19 +275,17 @@
 </div>
 <div class=" d-flex justify-content-center align-items-center flex-column col-12 col-xl-12 col-md-12 col-lg-12" style="margin-top: 50px;">
     <h1 id="travel">推薦您下一趟旅行去處！</h1>
-    <div class="row col-xl-12 col-md-12 col-12" id="box">
-        <div class=" d-flex col-xl-12  col-12  col-md-12 justify-content-center row" id="motal">
-          
-
-                @*@model IEnumerable<Card>*@
+    <div class="d-flex col-xl-12 col-md-12 col-12 container justify-content-center " id="box">
 
 
 
-                @Html.Partial("_SimpleCardPartial")
+
+        @*@model IEnumerable<Card>*@
 
 
 
-        </div>
+        @Html.Partial("_SimpleCardPartial")
+
     </div>
 </div>
 
@@ -307,7 +310,7 @@
                             <img class="rounded-circle"
                                  src="https://pix6.agoda.net/geo/city/13170/1_13170_02.jpg?s=124x124&ar=1x1">
                             <h2 class="fw-bold" id="tw-line">
-                                胡志明市
+                                河北
                             </h2>
                             <p id="tw-p-1">10,146間宿舍</p>
                         </div>
@@ -416,7 +419,7 @@
 
 
     <div class="container col-12" style=" margin-top: 50px; margin-bottom: 50px;">
-        <div class="d-flex">
+        <div class="container" id="Cityboxhiden">
             <div id="Citybox" style=" ">
                 <span class="fw-normal purpose" style="">
                     目的地城市
@@ -910,19 +913,19 @@
 }
 
 @section endJS{
-    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="~/Asset/CDN/JS/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Asset/CDN/JS/moment.min.js"></script>
 
-    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script type="text/javascript" src="~/Asset/CDN/JS/daterangepicker.min.js"></script>
+    <script src="~/Asset/CDN/JS/vue.js"></script>
+    <script src="~/Asset/CDN/JS/index.js"></script>
     <script src="~/Asset/js/home.js"></script>
-    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    <script src="~/Asset/CDN/JS/moment-with-locales.js"></script>
 
     <script>
-      
+
         $(document).ready(function () {
-         
+
             document.getElementsByName("cardlocal")[0].value = localStorage.getItem("key");
             if (document.getElementsByName("cardlocal")[0].value != sessionStorage.getItem("online")) {
                 hand2(document.getElementsByName("cardlocal")[0].value);
@@ -941,16 +944,16 @@
                     return sessionStorage.getItem(v);
 
                 }
-                
+
                 var lol = $("#btn1").val();
-                
+
                 //button.form.submit();
                 $.ajax({
                     url: "/Home/HomePage",
                     //传给服务器的数据(即后台AddUsers()方法的参数,参数类型要一致才可以)
                     type: 'POST',
                     cache: false,
-                    data: {cardlocal:lol},
+                    data: { cardlocal: lol },
                     //数据类型必须有
                     async: true,//异步
                     error: function () {
@@ -958,11 +961,11 @@
                     },
                     success: function (data) {
                         $("#box").html(data);
-                   
-                    
+
+
                     }
                 });
-               
+
             }
 
             if (window.history.replaceState) {
