@@ -104,6 +104,10 @@ div.booking-item {
     margin-top: 0.5rem;
 }
 
-.main .order-status, .order-status i {
+.main .order-status-suc, .order-status-suc i {
     color: rgb(41, 172, 41);
+}
+
+.main .order-status-fail, .order-status-fail i {
+    color: rgb(220, 53, 69);
 }

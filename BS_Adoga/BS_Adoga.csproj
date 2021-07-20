@@ -313,6 +313,7 @@
     </Compile>
     <Compile Include="Models\ViewModels\Account\BookingDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\Account\MemberBookingViewModel.cs" />
+    <Compile Include="Models\ViewModels\Account\RePayViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOut\CheckOutListViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOut\ECPayResultsViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOut\OrderVM.cs" />
@@ -330,6 +331,7 @@
     <Compile Include="Models\DBContext\RoomBed.cs" />
     <Compile Include="Models\DBContext\RoomImage.cs" />
     <Compile Include="Models\DBContext\RoomsDetail.cs" />
+    <Compile Include="Models\ViewModels\CheckOut\PayApiInfo.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\CardViewModels.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\demoshopViewModels.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\MyHoteiImages.cs" />

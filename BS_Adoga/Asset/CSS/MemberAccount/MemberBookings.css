@@ -264,8 +264,11 @@ div.booking-item {
         font-weight: bold;
     }
 
-    .hotel-status .order-status, .order-status i {
+    .hotel-status .order-status-suc, .order-status-suc i {
         color: rgb(41, 172, 41);
+    }
+    .hotel-status .order-status-fail, .order-status-fail i {
+        color: rgb(220, 53, 69);
     }
 
     .hotel-status .order-status-fail, .order-status-fail i {
@@ -355,7 +358,6 @@ div.booking-item {
     background-color: rgb(81, 131, 240);
     color: #fff;
     border: 1px solid rgb(81, 131, 240);
-    ;
     border-radius: 5px;
 }
 
