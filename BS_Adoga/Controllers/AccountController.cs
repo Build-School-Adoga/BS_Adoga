@@ -26,13 +26,15 @@ namespace BS_Adoga.Controllers
         }
 
         [AcceptVerbs("GET")]
-        public ActionResult GetMemberBookingList()
+        public ActionResult GetMemberBookingList(string filterOption,string sortOption)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
 
-            return Json(_service.GetBookingOrderDESC(user_id), JsonRequestBehavior.AllowGet);
+            var data = _service.GetBookingOrder_FilterSort(user_id, filterOption, sortOption);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Account

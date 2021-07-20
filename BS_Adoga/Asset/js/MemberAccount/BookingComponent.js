@@ -19,8 +19,11 @@
                         <div class="hotel-status mt-3 mx-4 ">
                             <h4>{{order.HotelName}} {{order.HotelEngName}}</h4>
                             <p class="order-title mb-1">訂單編號：{{order.OrderID}}</p>
-                            <p v-if="order.CheckCheckOut <= 0" class="order-status"><i
+                            <p v-if="order.PayStatus && order.CheckCheckOut < 1" class="order-status"><i
                                     class="fas fa-check-circle me-2"></i>已退房</p>
+                            <p v-if="order.PayStatus && order.CheckCheckOut >= 1" class="order-status"><i class="fas fa-check-circle me-2"></i>已付款</p>
+                            <p v-if="order.PayStatus == false" class="order-status-fail"><i
+                                    class="fas fa-times-circle me-2"></i>未付款</p>
                             <p class="room-type fw-bold mt-5 mb-0">{{order.BedStr}}</p>
                             <p v-if="order.Breakfast" class="free-status"><span
                                     class="free-tag me-2">免費</span><span>早餐</span></p>
@@ -59,6 +62,7 @@
                         <div class="link-group">
                             <a href="">留下住宿評鑑</a>
                             <a href="">訂別間</a>
+                            <a @click="order.ContinuePay" href="">繼續付款</a>
                         </div>
                         <a @click="order.GoToDetail"  type="button" class="detail-btn">查看更多細節</a>
                     </div>

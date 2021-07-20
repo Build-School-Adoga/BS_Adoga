@@ -293,7 +293,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIController\DetailApiController.cs" />
-    <Compile Include="APIController\BookingApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -448,6 +447,7 @@
     <Content Include="Asset\JS\HotelDetail\HotelFacilityComponent.js" />
     <Content Include="Asset\JS\HotelDetail\RoomComponent.js" />
     <Content Include="Asset\JS\MemberAccount\BookingComponent.js" />
+    <Content Include="Asset\JS\MemberAccount\BookingOrderFilterSort.js" />
     <Content Include="Asset\JS\MemberAccount\MemberProfile.js" />
     <Content Include="Asset\JS\GoogleLogin.js" />
     <Content Include="Asset\JS\navbar.js" />
@@ -2161,6 +2161,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Library\ECPay.Payment.Integration.dll" />
+    <Content Include="Scripts\axios.js" />
+    <Content Include="Scripts\axios.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />

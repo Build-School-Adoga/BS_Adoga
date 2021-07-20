@@ -73,138 +73,76 @@
         font-size: 14px;
     }
 
-/* section.menu-component ul .inbox:hover {
-    display: block;
-    background-color: #5392f9;
+
+.filter-sort-wrap{
+    display: flex;
+    justify-content: space-between;
 }
-
-section.menu-component ul .inbox a:hover {
-    cursor: pointer;
-    background-color: transparent;
-    color: white;
-}
-
-section.menu-component ul .reviews {
-    display: block;
-}
-
-section.menu-component ul .reviews a {
-    cursor: pointer;
-    background-color: transparent;
-}
-
-section.menu-component ul .vip {
-    display: block;
-}
-
-section.menu-component ul .vip a {
-    cursor: pointer;
-    background-color: transparent;
-}
-
-section.menu-component ul .a_cash_back {
-    display: block;
-}
-
-section.menu-component ul .a_cash_back a {
-    cursor: pointer;
-    background-color: transparent;
-}
-
-section.menu-component ul .pointsmax {
-    display: block;
-}
-
-section.menu-component ul .pointsmax a {
-    cursor: pointer;
-    background-color: transparent;
-}
-
-section.menu-component ul .profile {
-    display: block;
-}
-
-section.menu-component ul .profile a {
-    cursor: pointer;
-    background-color: transparent;
-} */
-
-.filter-my-order {
+.filter-my-order{
     /* background-color: #0f0; */
-    display: inline-flex;
+    display: inline-flex; 
 }
 
-    .filter-my-order .filter-option {
-        display: inline-block;
-        padding: 10px;
-        font-family: serif;
-        font-weight: bold;
-        font-size: 16px;
-        text-decoration: none;
-        color: #5392f9;
-        border-bottom: #dddfe2 2px solid;
-    }
-
-        .filter-my-order .filter-option.current {
-            color: black;
-            border-bottom: #75a8f9 2px solid;
-        }
-
-/* .filter-my-order span.filter-option-Past {
+.filter-my-order .filter-option {
+    display: inline-block;
+    padding: 10px;
+    font-family:'Noto Sans TC',sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
     color: #5392f9;
     border-bottom: #dddfe2 2px solid;
 }
 
-.filter-my-order span.filter-option-Cancelled {
-    color: #5392f9;
-    border-bottom: #dddfe2 2px solid;
-} */
+.filter-my-order .radio-box:checked+.filter-option {
+    color: rgb(54, 54, 54);
+    border-bottom: #75a8f9  2px solid;
+}
 
 .sort-btn-group {
-    border: darkgray 1px solid;
-    /* background-color: #0f0; */
+    border: rgb(207, 207, 207) 1px solid;
     display: inline-flex;
-    position: relative;
-    left: 200px;
-    /* margin: auto; */
+    align-self: center;
+    /* position: relative;
+    left: 200px; */
+    /* border-radius: 25px; */
 }
 
-    .sort-btn-group div {
-        /* background-color: deeppink; */
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    .sort-btn-group .sort-text {
-        font-family: serif;
-        font-weight: bold;
-    }
-
-    .sort-btn-group .sort-option {
-        color: #3f81eb
-    }
-
-        .sort-btn-group .sort-option.current {
-            color: black;
-            background-color: #e9ebee;
-        }
+.sort-btn-group .sort-text,.sort-btn-group .sort-option{
+    padding: 10px 10px;
+}
+.sort-btn-group .sort-text{
+    font-size: 14px;
+    font-family: 'Noto Sans TC',sans-serif;
+    font-weight: bold;
+    color: rgb(54, 54, 54);
+}
+.sort-btn-group .radio-box:checked+.sort-option{
+    color: #3f81eb;
+    font-weight: bold;
+    background-color: #f3f3f3;
+    /* border-radius: 25px; */
+    /* box-shadow: 3px 3px 1px 0px rgba(194, 194, 194, 0.562); */
+}
+.sort-btn-group .sort-option{
+    color: black;
+    font-size: 14px;
+}
 
 .order-id-container {
     display: flex;
     margin-top: 20px;
-    /* background-color: darkgreen; */
 }
 
 .search-order-wrap .search-order {
     display: flex;
-    /* background-color: darkmagenta; */
 }
 
 .search-order-wrap label {
-    line-height: 2;
     font-size: 14px;
-    font-family: serif;
+    font-family: sans-serif;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .search-order-wrap .search-order input {
@@ -212,7 +150,7 @@ section.menu-component ul .profile a {
     width: 250px;
     font-family: Montserrat,serif;
     color: black;
-    border: 1px solid srgb(196, 196, 196);
+    border: 1px solid rgb(196, 196, 196);
     outline-color: rgb(96, 143, 245);
 }
 
@@ -328,6 +266,10 @@ div.booking-item {
 
     .hotel-status .order-status, .order-status i {
         color: rgb(41, 172, 41);
+    }
+
+    .hotel-status .order-status-fail, .order-status-fail i {
+        color: rgb(219, 54, 48);
     }
 
 .free-status span {

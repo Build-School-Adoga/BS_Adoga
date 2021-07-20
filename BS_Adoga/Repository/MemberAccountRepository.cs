@@ -53,11 +53,13 @@ namespace BS_Adoga.Repository
                              CheckInDate = o.CheckInDate,
                              CheckOutDate = o.CheckOutDate,
                              Breakfast = r.Breakfast,
-                             City = h.HotelCity
+                             City = h.HotelCity,
+                             PaymentStatus = o.PaymentStatus
                          });
             return table;
         }
 
+        
         public BookingDetailViewModel GetBookingDetail(string orderID,string customerID)
         {
             var table = (from o in _context.Orders
