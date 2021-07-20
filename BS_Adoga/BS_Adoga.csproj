@@ -294,6 +294,7 @@
   <ItemGroup>
     <Compile Include="APIController\DetailApiController.cs" />
     <Compile Include="APIController\BookingApiController.cs" />
+    <Compile Include="APIController\SearchApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -452,7 +453,7 @@
     <Content Include="Asset\JS\GoogleLogin.js" />
     <Content Include="Asset\JS\navbar.js" />
     <Content Include="Asset\JS\HotelDetail\RoomFilter.js" />
-    <Content Include="Asset\JS\Search.js" />
+    <Content Include="Asset\JS\Search\Search.js" />
     <Content Include="Asset\JS\Search\SearchFacilities.js" />
     <Content Include="Asset\JS\Search\SearchFacilitiesComponent.js" />
     <Content Include="Asset\JS\Search\_SearchFilterPartial.js" />

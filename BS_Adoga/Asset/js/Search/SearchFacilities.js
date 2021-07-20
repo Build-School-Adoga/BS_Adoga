@@ -1,6 +1,23 @@
 ﻿import component from './SearchFacilitiesComponent.js'
 
+var allHotel = '';
+
 //axios去get資料先
+axios.get('https://localhost:44352/api/Search/GetHotelFromCity', {
+    //一開始用params裡面的資料去跑Api抓資料；成功抓完資料就會跑response
+    params: {
+        CityName: filternav.,
+        startDate: filternav.startDate,
+        endDate: filternav.endDate,
+        orderRoom: filternav.room,
+        adult: filternav.adult,
+        child: filternav.kids
+    }
+}).then(function (response) {
+    console.log(response.data);
+    allHotel = response.data;
+
+}).catch((error) => console.log(error))
 
 //var filterEquip = new Vue({
 //    el: '#filter-equipment',

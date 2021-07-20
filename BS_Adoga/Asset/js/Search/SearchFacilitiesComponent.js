@@ -15,8 +15,8 @@
 
         `
             <div class="form-list col-4" v-for="(value, name) in HotelEquipName">
-                <input class="form-check-input" type="checkbox" value="" id={{name}}>
-                <label class="form-check-label" for={{name}}>
+                <input class="form-check-input" type="checkbox"  :id={{name}}>
+                <label class="form-check-label" :for={{name}}>
                     {{value}}
                 </label>
             </div>

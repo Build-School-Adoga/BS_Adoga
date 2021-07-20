@@ -40,5 +40,23 @@ namespace BS_Adoga.Service
 
         //    return id;
         //}
+
+        //API
+        public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCity(string city, string start, string end, int adult, int kid, int room)
+        {
+            var data = new SearchDataViewModel
+            {
+                HotelNameOrCity = city,
+                CheckInDate = start,
+                CheckOutDate = end,
+                AdultCount = adult,
+                KidCount = kid,
+                RoomCount = room
+            };
+
+            var hotel = _r.GetHotelAfterSearchByCityOrName(data);
+            return hotel;
+        }
+
     }
 }

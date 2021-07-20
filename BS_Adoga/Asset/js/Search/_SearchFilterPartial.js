@@ -108,6 +108,22 @@ $(document).click(function (e) {
     if (container.has(e.target).length === 0) {
         close_filter();
     }
+
+    var Smoke = document.getElementById("Smoke");
+    var nSmoke = document.getElementById("nSmoke");
+    if (Smoke.checked) {
+        nSmoke.style.display = "none";
+        Smoke.style.display = "inline-block";
+    }
+    else if (nSmoke.checked) {
+        Smoke.style.display = "none";
+        nSmoke.style.display = "inline-block";
+    }
+    else {
+        nSmoke.style.display = "inline-block";
+        Smoke.style.display = "inline-block";
+
+    }
 })
 
 
@@ -171,38 +187,6 @@ $('#demo').daterangepicker({
 });
 
 
-//debugger;
-//var s = ;
-//var e = @ViewData["end"];
-//var start = moment(s).format('YYYY年MM月DD日');
-//var end = moment(e).format('YYYY年MM月DD日');
-//$('#range_start').val(start);
-//$('#range_end').val(end);
-
-//moment.locale('zh-tw');
-//var start = moment(dates[0]).format('dddd');
-
-//$('#week_start').val(start);
-//var end = moment(dates[1]).format('dddd');
-
-//$('#week_end').val(end);
-//var start = moment(dates[0], 'YYYY MM DD');
-//var end = moment(dates[1], 'YYYY MM DD');
-
-        //$(".asd").click(function () {
-        //    $('#demo').trigger("click");
-        //});
-
-//$('#demo').click(function () {
-//    //$('.bg').css({ 'display': 'block' });
-//    $('#datetime').css({ 'display': 'block' });
-//});
-
-//var demo = document.getElementById('demo');
-//var datetime = document.getElementById('datetime');
-////demo.addEventListener('click', function () {
-////    datetime.style.display = "block";
-////})
 
 
 //按鈕傳參數

@@ -21,10 +21,14 @@ var filterEquip = new Vue({
         RoomEquipName: {
             internet: '網路',
             petAllow: '可帶寵物'
+        },
+        BedType: {
+            //從資料庫取資料?
+            
         }
     },
     method: {
-
+        
     }
 })
 
@@ -40,7 +44,7 @@ openFilter.addEventListener('click', function () {
     }
     else {
         filter.style.visibility = "visible";
-        document.getElementsByTagName("body").preventDefault();
+        //document.getElementsByTagName("body").preventDefault();
     }
 })
 
