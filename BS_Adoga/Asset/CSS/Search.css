@@ -55,17 +55,19 @@ nav .search-bar,
             flex-grow: 1;
         }
 
-.search-bar .nav-item {
+/*.search-bar .nav-item {
     border-radius: 5px;
     background-color: #fff;
-    /*width: 30%;haoxiangguandiao jiuhuizhenchang le */
+    width: 25%;
 }
-
+.search-bar .nav-item:nth-child(2) {
+    width: 40%;
+}
 nav .nav-item:nth-child(2) div.line {
     width: 1px;
     height: 100%;
     background-color: grey;
-}
+}*/
 
 div#person-info {
     width: 100%;
