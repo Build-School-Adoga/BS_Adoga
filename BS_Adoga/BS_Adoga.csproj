@@ -389,6 +389,9 @@
     <Compile Include="Service\MultiButtonAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asset\CDN\CSS\daterangepicker.min.css" />
+    <Content Include="Asset\CDN\CSS\font-awesome.css" />
+    <Content Include="Asset\CDN\CSS\index.css" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\attribution.js" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\all.css" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\all.min.css" />
@@ -408,7 +411,13 @@
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.svg" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.svg" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Asset\CDN\JS\daterangepicker.min.js" />
+    <Content Include="Asset\CDN\JS\index.js" />
     <Content Include="Asset\CDN\JS\jquery-3.3.1.js" />
+    <Content Include="Asset\CDN\JS\jquery.min.js" />
+    <Content Include="Asset\CDN\JS\moment-with-locales.js" />
+    <Content Include="Asset\CDN\JS\moment.min.js" />
+    <Content Include="Asset\CDN\JS\vue.js" />
     <Content Include="Asset\CDN\JS\moment-with-locales.min.js" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
@@ -418,6 +427,7 @@
     <Content Include="Asset\CSS\MemberAccount\MemberLeftMenu.css" />
     <Content Include="Asset\CSS\Search.css" />
     <Content Include="Asset\CSS\SearchFilterPartial.css" />
+    <Content Include="Asset\CSS\ServiceCenter.css" />
     <Content Include="Asset\CSS\StepBar.css" />
     <Content Include="Asset\CSS\HomePage.css" />
     <Content Include="Asset\CSS\HotelDetail.css" />
@@ -426,6 +436,7 @@
     <Content Include="Asset\CSS\Reset.css" />
     <Content Include="Asset\CSS\HotelDetailShare.css" />
     <Content Include="Asset\images\adoga-logo-v2.png" />
+    <Content Include="Asset\images\Booking.png" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel01.jpg" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel02.jpg" />
     <Content Include="Asset\images\HotelDetail\Room\room01.jpg" />
@@ -441,6 +452,10 @@
     <Content Include="Asset\images\img4.png" />
     <Content Include="Asset\images\img5.png" />
     <Content Include="Asset\images\img6.png" />
+    <Content Include="Asset\images\KAYAK.png" />
+    <Content Include="Asset\images\OpenTable.png" />
+    <Content Include="Asset\images\priceline.png" />
+    <Content Include="Asset\images\Rentalcars.png" />
     <Content Include="Asset\images\tw.svg.png" />
     <Content Include="Asset\JS\formStep.js" />
     <Content Include="Asset\JS\home.js" />
@@ -2353,6 +2368,8 @@
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="Asset\CDN\CSS\fontawesome-webfont.ttf" />
+    <Content Include="Asset\CDN\CSS\fontawesome-webfont.woff" />
     <Content Include="Asset\CDN\JSON\bower.json" />
     <Content Include="Asset\CDN\JSON\package.json" />
     <None Include="Properties\PublishProfiles\adoga - FTP.pubxml" />
@@ -2427,6 +2444,7 @@
     <Content Include="Views\Function\HotelFacilityIndex.cshtml" />
     <Content Include="Views\Function\HotelFacilityDetails.cshtml" />
     <Content Include="Views\Function\HotelFacilityEdit.cshtml" />
+    <Content Include="Views\Home\ServiceCenter.cshtml" />
     <Content Include="Views\Function\HotelRoomIndex.cshtml" />
     <Content Include="Views\Function\HotelRoomsIndex.cshtml" />
     <Content Include="Views\Function\HotelRoomCreate.cshtml" />
