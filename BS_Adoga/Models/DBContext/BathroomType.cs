@@ -15,10 +15,12 @@ namespace BS_Adoga.Models.DBContext
             Rooms = new HashSet<Room>();
         }
 
+        [Display(Name = "¯D«Ç«¬ºA")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TypesOfBathroomID { get; set; }
 
+        [Display(Name = "¯D«Ç«¬ºA")]
         [Required]
         [StringLength(50)]
         public string Name { get; set; }

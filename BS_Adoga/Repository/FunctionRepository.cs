@@ -32,6 +32,28 @@ namespace BS_Adoga.Repository
             return table;
         }
 
+        public IEnumerable<HotelRoomViewModel> GetHotelRoomCount()
+        {
+            var table = (from h in _context.Hotels
+                         select new HotelRoomViewModel
+                         {
+                             HotelID = h.HotelID,
+                             HotelName = h.HotelName,
+                             RoomCount = (from r in _context.Rooms
+                                          where r.HotelID == h.HotelID
+                                          select r.RoomID).Count()
+                         });
+            return table;
+        }
+
+        public IEnumerable<Room> GetHotelRoomAll(string hotelid)
+        {
+            var table =  from r in _context.Rooms
+                         where r.HotelID == hotelid
+                         select r;
+            return table;
+        }
+
     }
     
 }

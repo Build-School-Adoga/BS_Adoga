@@ -15,15 +15,17 @@ namespace BS_Adoga
 
 
             routes.MapRoute(
-            name: "HotelCity",
-            url: "Taiwan/{city}",
-            defaults: new { controller = "Search", action = "Search", city = UrlParameter.Optional }
-        );
+                name: "HotelCity",
+                url: "Taiwan/{city}",
+                defaults: new { controller = "Search", action = "Search", city = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
-         name: "Hotel",
-         url: "Taiwan/Hotel/{id}",
-         defaults: new { controller = "HotelDetail", action = "Detail", id = UrlParameter.Optional }
-     );
+                name: "Hotel",
+                url: "Taiwan/Hotel/{id}",
+                defaults: new { controller = "HotelDetail", action = "Detail", id = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Login",
                 url: "MemberLogin",
@@ -37,6 +39,12 @@ namespace BS_Adoga
             );
 
             routes.MapRoute(
+                name: "BookingOrderDetail",
+                url: "BookingDetail/{orderid}",
+                defaults: new { controller = "Account", action = "BookingDetail" }
+            );
+
+            routes.MapRoute(
                 name: "HotelEdit",
                 url: "Hotel/Edit/{hotelid}",
                 defaults: new { controller = "Function", action = "HotelEdit", hotelid = UrlParameter.Optional }
@@ -46,6 +54,18 @@ namespace BS_Adoga
                 name: "HotelBackEndDetail",
                 url: "Hotel/Detail/{hotelid}",
                 defaults: new { controller = "Function", action = "HotelDetails", hotelid = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "HotelRoomsIndex",
+                url: "Hotel/Room/{hotelid}",
+                defaults: new { controller = "Function", action = "HotelRoomsIndex", hotelid = UrlParameter.Optional}
+            );
+
+            routes.MapRoute(
+                name: "HotelRoomEdit",
+                url: "Hotel/Room/Edit/{hotelids}-{roomid}",
+                defaults: new { controller = "Function", action = "HotelRoomEdit", hotelids = UrlParameter.Optional , roomid = UrlParameter.Optional }
             );
 
             routes.MapRoute(

@@ -154,14 +154,14 @@ body {
     color: rgb(94, 155, 245);
 }
 
-.login-btn {
+.signin_modal .login-btn, button.btn-primary[name="register"], .checkcodeline .btn-primary {
     font-weight: bold;
     background-color: rgb(60, 133, 241);
     border: none;
     box-shadow: 0px 2px 3px rgba(73, 73, 73, 0.527);
 }
 
-    .login-btn:hover {
+    .signin_modal .login-btn:hover, button.btn-primary[name="register"]:hover, .checkcodeline .btn-primary:hover {
         background-color: rgb(112, 164, 243);
     }
 
