@@ -735,11 +735,13 @@
            
         });
         $(function () {
-            $("#menu").find("a").click(function (e) {
+            $("#menu").find("div").click(function (e) {
                 $("#menu a").removeClass("on");
-                $(this).addClass("on");
+                $("#menu i").removeClass("on");
+                $(this).children("div").children("i").addClass("on");
+                $(this).children("div").children("a").addClass("on");
             });
         })
-     
+      
     </script>
 }
