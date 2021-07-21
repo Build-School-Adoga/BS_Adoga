@@ -147,7 +147,7 @@
                     {
                         if (DateTime.Now.Subtract(Model.OrderDate) < TimeSpan.FromHours(24))
                         {
-                            @Html.ActionLink("立即付款", "RePayOrder", new { orderID = Model.OrderID })
+                            @Html.ActionLink("立即付款", "RePayOrder", "Account",new { orderID = Model.OrderID },new { @class="btn-continue-pay"})
                         }
 
                     }
