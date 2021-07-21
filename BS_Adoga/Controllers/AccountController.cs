@@ -26,13 +26,15 @@ namespace BS_Adoga.Controllers
         }
 
         [AcceptVerbs("GET")]
-        public ActionResult GetMemberBookingList()
+        public ActionResult GetMemberBookingList(string filterOption,string sortOption)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
 
-            return Json(_service.GetBookingOrderDESC(user_id), JsonRequestBehavior.AllowGet);
+            var data = _service.GetBookingOrder_FilterSort(user_id, filterOption, sortOption);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Account
@@ -62,7 +64,7 @@ namespace BS_Adoga.Controllers
             var data = db.Customers.Where(x => x.CustomerID == user_id).FirstOrDefault();
             return View(data);
 
-            
+
 
             //使用表單驗證來進行使用者身份識別，當Http的連線字串等於使用者的真確性，回傳表單驗證的使用者特定資料(使用者特定字串)
             //字串 id = ((使用表單驗證來進行使用者的身份識別) Http連接字串.使用者.身份識別).取得表單驗證的使用者身份識別.取得存放使用者的特定字串
@@ -112,7 +114,40 @@ namespace BS_Adoga.Controllers
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
-            return View(_memberacoountrepository.GetBookingDetail(orderid,user_id));
+
+
+            return View(_memberacoountrepository.GetBookingDetail(orderid, user_id));
+        }
+
+        [HttpGet]
+        public ActionResult RePayOrder(RePayViewModel rePay, string orderid)
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var reOdId = _memberacoountrepository.GetReOrder(orderid, user_id);
+            rePay.OrderID = orderid;
+            rePay.HotelName = reOdId.HotelName;
+            rePay.RoomPriceTotal = reOdId.RoomPriceTotal;
+            rePay.RoomQuantity = reOdId.RoomQuantity;
+
+
+            TempData["ReOrderData"] = rePay;
+
+            if (ModelState.IsValid)
+            {
+                //EF
+                try
+                {
+                    return RedirectToAction("PayAPI", "CheckOut");
+                }
+                catch (Exception ex)
+                {
+                    return Content("訂單建立失敗:" + ex.ToString());
+                }
+            }
+            return View();
         }
     }
 }

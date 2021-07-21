@@ -29,5 +29,7 @@ namespace BS_Adoga.Models.ViewModels.Account
         public int CheckCheckOut { get; set; }
         public string City { get; set; }
         public bool Breakfast { get; set; }
+        public bool PayStatus { get; set; }
+        public bool In24Hours { get; set; }
     }
 }
