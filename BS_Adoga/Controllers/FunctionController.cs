@@ -96,7 +96,7 @@ namespace BS_Adoga.Controllers
             string username = User.Identity.Name;
             if (ModelState.IsValid)
             {
-                Hotel hotel = new Hotel() 
+                Hotel hotel = new Hotel()
                 {
                     HotelID = HotelCreateVM.HotelID,
                     HotelName = HotelCreateVM.HotelName,
@@ -146,7 +146,7 @@ namespace BS_Adoga.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Hotel hotel = _context.Hotels.Find(hotelid);
-            HotelCreateViewModel hotelCreateVM = new HotelCreateViewModel() 
+            HotelCreateViewModel hotelCreateVM = new HotelCreateViewModel()
             {
                 HotelID = hotel.HotelID,
                 HotelName = hotel.HotelName,
@@ -265,7 +265,7 @@ namespace BS_Adoga.Controllers
 
         public ActionResult HotelFacilityCreate(string hotelids)
         {
-            if(string.IsNullOrEmpty(hotelids))
+            if (string.IsNullOrEmpty(hotelids))
             {
                 ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName");
             }
@@ -281,7 +281,7 @@ namespace BS_Adoga.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult HotelFacilityCreate(Facility facility)
         {
-            
+
             facility.Logging = "建立" + "," + User.Identity.Name + "," + DateTime.Now.ToString();
             if (facility.Logging != null)
             {
@@ -417,7 +417,7 @@ namespace BS_Adoga.Controllers
             return View(room);
         }
 
-        public ActionResult HotelRoomEdit(string hotelids,string roomid)
+        public ActionResult HotelRoomEdit(string hotelids, string roomid)
         {
             TempData["roomid"] = roomid;
             Room room = _context.Rooms.Find(roomid);
@@ -484,11 +484,56 @@ namespace BS_Adoga.Controllers
             return View(hotelRoomCreateVM);
         }
 
-        public ActionResult RoomDetailsIndex(string roomid, string roomname)
+        //每日房間清單的日曆頁面
+        public ActionResult RoomDetailsIndex(string roomid)
         {
-            ViewBag.roomid = roomid;
-            ViewBag.roomname = roomname;
-            return View();
+            if (_context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault() == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            else
+            {
+                ViewBag.roomid = roomid;
+                ViewBag.roomname = _context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault().RoomName;
+                return View();
+            }
+        }
+
+        //房間月的展開
+        public ActionResult RoomDetailExpansion(string year, string month, string roomid)
+        {
+            string username = User.Identity.Name;
+
+            //如果是不存在的roomid返回錯誤頁面
+            if (_context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault() == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //如果存在則繼續
+            else
+            {
+                string RDID = year + "-" + month + "-1-" + roomid;
+
+                var test = _context.RoomsDetails.Where(x => x.RDID == "2021-06-20room01").FirstOrDefault();
+                var DBRoomDetailData = _context.RoomsDetails.Where(x => x.RDID == RDID).FirstOrDefault();
+
+                //判斷當月第一天是否已經有展開過(有展開過代表整個月已有資料)
+                if (DBRoomDetailData == null)
+                {
+                    string CurrentDate = $"{year}/{month}/30 14:00:00";
+                    DateTime DateObject = Convert.ToDateTime(CurrentDate);
+
+                    OperationResult CreatResult = _service.CreateRoomDetailExpansion(year , month , roomid, username);
+
+                    return Redirect($"~/Function/RoomDetailsIndex?roomid={roomid}");
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+            }
         }
     }
 }

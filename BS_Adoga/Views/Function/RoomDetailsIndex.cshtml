@@ -13,7 +13,10 @@
     <script type="module">
         import { $g, $c } from "../Asset/js/helpers.js";
 
+        let expansionUrl = "@Url.Action("RoomDetailsIndex", "Function")";
+
         let d = new Date();
+        let yyyy_m = get_yyyy_m(d);
 
         let h2 = $c('h2');
         h2.innerText = get_yyyy_mm(d);
@@ -24,6 +27,11 @@
         //點上一個月觸發換月
         document.getElementById('prev').addEventListener("click", function () {
             clickbutton(-1);
+        });
+
+        //本月展開
+        document.getElementById('expansion').addEventListener("click", function () {
+            document.location.href = `/Hotel/Room/Detail/Expansion/${yyyy_m}-@ViewBag.roomid`;
         });
 
         //點下一個月觸發換月
@@ -41,8 +49,18 @@
             h2.innerText = get_yyyy_mm(d);
             calendar.append(h2);
             create_table();
+            //用來存yyyy-m  ex: 2021-7 傳回後端
+            yyyy_m = get_yyyy_m(d);
         }
 
+        //用來傳回後端格式
+        function get_yyyy_m(d) {
+            let yyyy = d.getFullYear();
+            let mm = d.getMonth() + 1;
+            return `${yyyy}-${mm}`;
+        }
+
+        //前端顯示的格式
         function get_yyyy_mm(d) {
             let yyyy = d.getFullYear();
             let mm = d.getMonth() + 1;
@@ -374,6 +392,11 @@
 <h1 class="d-flex justify-content-center">每日房間清單</h1>
 <div class="d-flex justify-content-around">
     <button id="prev" type="button" class="btn btn-dark mr-30px">上個月</button>
+
+    @*<div id="expansion">*@
+        <button id="expansion" type="button" class="btn btn-dark mr-30px">本月展開</button>
+    @*</div>*@
+    
     <button id="next" type="button" class="btn btn-dark mr-30px">下個月</button>
 </div>
 <div id="calendar">
