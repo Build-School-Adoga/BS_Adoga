@@ -77,9 +77,9 @@ namespace BS_Adoga.Controllers
         [HttpPost]
         public ActionResult MemberProfilePassword(string CheckPassword, string NewPassword, string ConfirmPassword, string Email)
         {
-            string FirstPassword = HttpUtility.HtmlEncode(CheckPassword);
-            string SecendPassword = HttpUtility.HtmlEncode(NewPassword);
-            string ThirdPassword = HttpUtility.HtmlEncode(ConfirmPassword);
+            //string FirstPassword = HttpUtility.HtmlEncode(CheckPassword);
+            //string SecendPassword = HttpUtility.HtmlEncode(NewPassword);
+            //string ThirdPassword = HttpUtility.HtmlEncode(ConfirmPassword);
             Customer cust = new Customer();
             cust.Email = Email;
             cust.MD5HashPassword = HashService.MD5Hash(NewPassword);
@@ -151,27 +151,36 @@ namespace BS_Adoga.Controllers
             }
             return View();
         }
-
-
         
-        //[HttpPost]
-        //public ActionResult SearchwithOrderId(string UserInputOrderId)
-        //{
-        //    //Content(UserInputOrderId);
-        //    //var OrderIdSearchResult = _context.Orders.Where(x => x.OrderID.Contains(UserInputOrderId.ToString()));
-        //    //Content(OrderIdSearchResult.ToString());
-        //    //return RedirectToAction("MemberBooking", "Account");
+        public ActionResult MemberProfileName(string InputFirstName, string InputLastName, string Email)
+        {
+            Customer cust = new Customer();
+            cust.Email = Email;
+            AdogaContext db = new AdogaContext();
+            var data = db.Customers.Find(Email = Email);
+
+            data.FirstName = InputFirstName;
+            data.LastName = InputLastName;
+            db.SaveChanges();
+
+           
 
 
-        //    string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
-        //    UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
-        //    string user_id = UserCookie.Id;
+            return RedirectToAction("MemberProfile", "Account");
+        }
+        
+            public ActionResult MemberProfilePhone(string PhoneNumber, string Email)
+        {
 
-        //    var data = _service.GetBookingOrderByID(UserInputOrderId);
+            Customer cust = new Customer();
+            cust.Email = Email;
+            AdogaContext db = new AdogaContext();
+            var data = db.Customers.Find(Email = Email);
+            data.PhoneNumber = PhoneNumber;
+            db.SaveChanges();
 
-
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //}
+            return RedirectToAction("MemberProfile", "Account");
+        }
     }
     
 }
