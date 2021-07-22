@@ -36,16 +36,16 @@ namespace BS_Adoga
             );
 
             //Irene
-            config.Routes.MapHttpRoute(
-               name: "GetHotelFromCity",
-               routeTemplate: "api/Search/GetHotelFromCity",
-               defaults: new { controller = "Search", action = "GetHotelFromCity", id = RouteParameter.Optional }
-           );
+           // config.Routes.MapHttpRoute(
+           //    name: "GetHotelFromCity",
+           //    routeTemplate: "api/Search/GetHotelFromCity",
+           //    defaults: new { controller = "Search", action = "GetHotelFromCity", id = RouteParameter.Optional }
+           //);
 
             config.Routes.MapHttpRoute(
-               name: "GetAllSearchFicilities",
-               routeTemplate: "api/Search/GetAllSearchFicilities",
-               defaults: new { controller = "Search", action = "GetAllSearchFicilities", id = RouteParameter.Optional }
+               name: "GetHotelByCity",
+               routeTemplate: "api/Search/GetHotelByCity",
+               defaults: new { controller = "SearchApi", action = "GetHotelByCity", id = RouteParameter.Optional }
            );
 
             config.Routes.MapHttpRoute(

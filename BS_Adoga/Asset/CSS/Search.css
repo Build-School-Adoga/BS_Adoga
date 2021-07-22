@@ -22,7 +22,7 @@ img {
 }
 
 nav .search-bar,
-.main-body,
+#main-body,
 .nav-item,
 .filter-container {
     /* 控制整体维持60vw在中间 */
@@ -31,27 +31,28 @@ nav .search-bar,
 }
 
 nav .search-bar,
-.main-body,
+#main-body,
 .nav-item,
 .search-bar button {
     margin: 10px auto;
 }
 
     nav .search-bar,
-    .main-body,
+    #main-body,
     .nav-item,
     .nav-item .search-date,
     .filter-container,
     .filter-container .array-list,
     .filter-container .array-list .array-item,
-    .main-body .infomation .card {
+    #main-body .infomation .card {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
     }
 
         .nav-item .choose-info,
         .nav-item .search-date,
-        .main-body .infomation {
+        #main-body .infomation {
             flex-grow: 1;
         }
 
@@ -428,18 +429,17 @@ i.fas.fa-star {
 
 
 /* --- 主体 --- */
-.main-body #orderCard{
+#main-body #orderCard{
     margin: 5px auto;
     padding: 10px 15px;
 }
-.main-body #orderCard p,
+#main-body #orderCard p,
 #orderCard a {
     font-size: 20px;
     color: black;
 }
 
-
-.main-body .infomation .card {
+#main-body .infomation .card {
     display: flex;
     flex-direction: row;
     max-height: 250px;

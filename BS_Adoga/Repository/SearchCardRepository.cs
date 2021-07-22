@@ -20,7 +20,15 @@ namespace BS_Adoga.Repository
             _context = new AdogaContext();
         }
 
-       
+        //public IQueryable<string> GetHotels(string city)
+        //{
+        //    //原本給劉的
+        //    var hotel = from H in _context.Hotels
+        //                    where H.HotelCity.Contains(city)
+        //                    select H.HotelName;
+
+        //    return hotel;
+        //}
 
         public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(SearchDataViewModel info)
         {

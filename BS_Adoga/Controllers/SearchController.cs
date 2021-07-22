@@ -56,7 +56,7 @@ namespace BS_Adoga.Controllers
         public ActionResult Search(SearchDataViewModel info, string sortOrder, string currentFilter, string currentOrder, int? page)
         {
             //當按下排序的按鈕時，因為會“刷新”頁面所以資料也會需要重新查詢出來，這時讓它抓之前設的TempData去找同樣的條件
-            if(info.HotelNameOrCity==null)
+            if (info.HotelNameOrCity == null)
             {
                 info.HotelNameOrCity = TempData["CityOrName"].ToString();
                 info.CheckInDate = TempData["sDate"].ToString();
@@ -82,7 +82,7 @@ namespace BS_Adoga.Controllers
             //排序 預設抓星級最好的
             ViewBag.StarSortParm = sortOrder == null ? "star_desc" : "";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
-            
+
             //分頁
             ViewBag.CurrentSort = sortOrder;
             if (currentOrder != null) { page = 1; }
@@ -91,7 +91,7 @@ namespace BS_Adoga.Controllers
 
             int pageSize = 1;
             int pageNumber = (page ?? 1); //如果page裡面沒有值就會回傳1，else就傳自己的值
-            
+
             switch (sortOrder)
             {
                 case "star_desc":
@@ -112,8 +112,17 @@ namespace BS_Adoga.Controllers
             }
 
             return View(data);
+            //return View();
 
         }
+
+
+        //public ActionResult GetAllHotelInCity(string city)
+        //{
+        //    //原本給劉的
+        //    var data = s.GetHotels(city);
+        //    return View();
+        //}
 
         //Get: api
         //[AcceptVerbs("GET","POST")]

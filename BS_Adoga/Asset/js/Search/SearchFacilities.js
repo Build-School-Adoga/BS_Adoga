@@ -1,23 +1,76 @@
-﻿import component from './SearchFacilitiesComponent.js'
+﻿//import component from './SearchFacilitiesComponent.js'
 
 var allHotel = '';
 
+
 //axios去get資料先
-axios.get('https://localhost:44352/api/Search/GetHotelFromCity', {
+axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
     //一開始用params裡面的資料去跑Api抓資料；成功抓完資料就會跑response
     params: {
-        CityName: filternav.,
+        CityName: '新竹縣',
         startDate: filternav.startDate,
         endDate: filternav.endDate,
-        orderRoom: filternav.room,
         adult: filternav.adult,
-        child: filternav.kids
+        kid: filternav.kids,
+        room: filternav.room,
     }
 }).then(function (response) {
-    console.log(response.data);
+    //console.log(response.data);
     allHotel = response.data;
+    //var forCard = new Vue({
+    //    el: "#new_card",
+    //    data: {
+    //        list: respinse.data
+    //    }
+    //});
 
 }).catch((error) => console.log(error))
+
+debugger;
+var list = new Vue({
+    el: "#new_card",
+    data: {
+        hotelList: allHotel[0]
+    }
+});
+
+debugger;
+function getCurrentBindData(){
+    return list.$data.hotelList;
+}
+
+function DataBind(rec) {
+    //把最新的資料更新
+    list.$data.hotelList = rec;
+}
+
+function DataPrev() {
+    var tmp = getCurrentBindData();
+    var i = allHotel.indexOf(tmp);
+
+    if (i > 0) {
+        DataBind(allHotel[i - 1]);
+    }
+}
+
+function NextPage() {
+    var tmp = GetCurrentBindData(); //抓當前的資料出來
+    var i = allHotel.indexOf(tmp); //判斷排在第幾
+
+    //防呆
+    if (i < allHotel.length - 1) {
+        DataBind(allHotel[i + 1]);
+    }
+}
+
+$(document).ready(function () {
+    //Binding();
+    $('#orderPrice').click(OrderPrice);
+    $('#orderStar').click(OrderStar);
+    $('#next').click(NextPage);
+
+});
+
 
 //var filterEquip = new Vue({
 //    el: '#filter-equipment',

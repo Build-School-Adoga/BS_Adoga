@@ -34,11 +34,14 @@ namespace BS_Adoga.Service
             };
             return data;
         }
-        //public FacilityViewModel GetHotelFacilityId(string hotelId)
-        //{
-        //    var id = _r.GetFacilitiId(hotelId);
 
-        //    return id;
+
+        //public IQueryable<string> GetHotels(string city)
+        //{
+        //    //原本給劉的
+        //    var hotel = _r.GetHotels(city);
+
+        //    return hotel;
         //}
 
         //API
