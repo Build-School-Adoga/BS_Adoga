@@ -1,7 +1,9 @@
-﻿
+﻿@model List<BS_Adoga.Models.DBContext.RoomsDetail>
+@using Newtonsoft.Json;
 @{
     ViewBag.Title = "RoomDetailsIndex";
     Layout = "~/Views/Shared/_FunctionPage.cshtml";
+    List<RoomsDetail> roomDetails = Model;
 }
 @section topCSS{
 
@@ -14,6 +16,9 @@
         import { $g, $c } from "../Asset/js/helpers.js";
 
         let expansionUrl = "@Url.Action("RoomDetailsIndex", "Function")";
+
+        let roomdetailJSON = @Html.Raw(@ViewBag.RoomDetailThisMonthJSON);
+        //let roomdetailJSON = [{ "Room": null, "RDID": "2021-7-1-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-01T15:00:00", "CheckOutDate": "2021-07-02T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:37" }, { "Room": null, "RDID": "2021-7-2-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-02T15:00:00", "CheckOutDate": "2021-07-03T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:37" }, { "Room": null, "RDID": "2021-7-3-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-03T15:00:00", "CheckOutDate": "2021-07-04T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:38" }, { "Room": null, "RDID": "2021-7-4-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-04T15:00:00", "CheckOutDate": "2021-07-05T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:38" }, { "Room": null, "RDID": "2021-7-5-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-05T15:00:00", "CheckOutDate": "2021-07-06T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:38" }, { "Room": null, "RDID": "2021-7-6-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-06T15:00:00", "CheckOutDate": "2021-07-07T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:38" }, { "Room": null, "RDID": "2021-7-7-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-07T15:00:00", "CheckOutDate": "2021-07-08T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:38" }, { "Room": null, "RDID": "2021-7-8-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-08T15:00:00", "CheckOutDate": "2021-07-09T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:38" }, { "Room": null, "RDID": "2021-7-9-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-09T15:00:00", "CheckOutDate": "2021-07-10T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:39" }, { "Room": null, "RDID": "2021-7-10-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-10T15:00:00", "CheckOutDate": "2021-07-11T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:39" }, { "Room": null, "RDID": "2021-7-11-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-11T15:00:00", "CheckOutDate": "2021-07-12T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:39" }, { "Room": null, "RDID": "2021-7-12-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-12T15:00:00", "CheckOutDate": "2021-07-13T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:39" }, { "Room": null, "RDID": "2021-7-13-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-13T15:00:00", "CheckOutDate": "2021-07-14T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:39" }, { "Room": null, "RDID": "2021-7-14-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-14T15:00:00", "CheckOutDate": "2021-07-15T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:39" }, { "Room": null, "RDID": "2021-7-15-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-15T15:00:00", "CheckOutDate": "2021-07-16T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:40" }, { "Room": null, "RDID": "2021-7-16-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-16T15:00:00", "CheckOutDate": "2021-07-17T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:40" }, { "Room": null, "RDID": "2021-7-17-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-17T15:00:00", "CheckOutDate": "2021-07-18T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:40" }, { "Room": null, "RDID": "2021-7-18-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-18T15:00:00", "CheckOutDate": "2021-07-19T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:40" }, { "Room": null, "RDID": "2021-7-19-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-19T15:00:00", "CheckOutDate": "2021-07-20T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:40" }, { "Room": null, "RDID": "2021-7-20-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-20T15:00:00", "CheckOutDate": "2021-07-21T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:41" }, { "Room": null, "RDID": "2021-7-21-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-21T15:00:00", "CheckOutDate": "2021-07-22T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:41" }, { "Room": null, "RDID": "2021-7-22-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-22T15:00:00", "CheckOutDate": "2021-07-23T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:41" }, { "Room": null, "RDID": "2021-7-23-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-23T15:00:00", "CheckOutDate": "2021-07-24T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:41" }, { "Room": null, "RDID": "2021-7-24-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-24T15:00:00", "CheckOutDate": "2021-07-25T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:41" }, { "Room": null, "RDID": "2021-7-25-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-25T15:00:00", "CheckOutDate": "2021-07-26T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:42" }, { "Room": null, "RDID": "2021-7-26-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-26T15:00:00", "CheckOutDate": "2021-07-27T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:42" }, { "Room": null, "RDID": "2021-7-27-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-27T15:00:00", "CheckOutDate": "2021-07-28T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:42" }, { "Room": null, "RDID": "2021-7-28-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-28T15:00:00", "CheckOutDate": "2021-07-29T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:42" }, { "Room": null, "RDID": "2021-7-29-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-29T15:00:00", "CheckOutDate": "2021-07-30T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:42" }, { "Room": null, "RDID": "2021-7-30-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-30T15:00:00", "CheckOutDate": "2021-07-31T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:42" }, { "Room": null, "RDID": "2021-7-31-hotel0120210718215541", "RoomID": "hotel0120210718215541", "CheckInDate": "2021-07-31T15:00:00", "CheckOutDate": "2021-08-01T11:00:00", "RoomCount": 10, "RoomOrder": 0, "RoomDiscount": 0.0000, "OpenRoom": true, "Logging": "建立,Fred Hsu,2021/7/22 下午 02:53:43" }];
 
         let d = new Date();
         let yyyy_m = get_yyyy_m(d);
@@ -30,9 +35,11 @@
         });
 
         //本月展開
-        document.getElementById('expansion').addEventListener("click", function () {
-            document.location.href = `/Hotel/Room/Detail/Expansion/${yyyy_m}-@ViewBag.roomid`;
-        });
+        if (@roomDetails.Count == 0) {
+            document.getElementById('expansion').addEventListener("click", function () {
+                document.location.href = `/Hotel/Room/Detail/Expansion/${yyyy_m}-@ViewBag.roomid`;
+            });
+        }
 
         //點下一個月觸發換月
         document.getElementById('next').addEventListener("click", function () {
@@ -67,6 +74,7 @@
             return `${yyyy}年${mm}月`;
         }
 
+        //建立日曆表格
         function create_table() {
             let calendar = $g('#calendar');
             let table = $c('table');
@@ -77,18 +85,21 @@
             calendar.append(table);
         }
 
+        //建立日曆星期標題
         function create_thead(table) {
             let thead = $c('thead');
             create_tr_th(thead);
             table.append(thead);
         }
 
+        //建立日曆每日數字
         function create_tbody(table) {
             let tbody = $c('tbody');
             create_tr_td(tbody);
             table.append(tbody);
         }
 
+        //建立星期一到星期日標題
         function create_tr_th(thead) {
             let tr = $c('tr');
             for (let j = 1; j <= 7; j++) {
@@ -126,7 +137,7 @@
             thead.append(tr);
         }
 
-        //設定tbody內容
+        //設定tbody內容  建立每日數字
         function create_tr_td(tbody) {
             for (let i = 0; i < 6; i++) {
                 let dayArray = setday(d);
@@ -138,27 +149,35 @@
                     let mm = dayArray[i * 7 + j][1];
                     let dd = dayArray[i * 7 + j][2];
                     td.innerText = dd;
+                    //如果是上個月或是下個月的日就灰色不能點
                     if (checkPreNext(yyyy, mm, dd, d) == true) {
                         td.bgColor = "gray";
                         tr.append(td);
                     }
-                    else if (checkNotebook(`${yyyy}${mm}${dd}`) != null) {
-                        td.setAttribute("class", "button text-white bg-danger");
-                        //設定button Modal
-                        Notebook(yyyy, mm, dd, td);
-                        tr.append(td);
-                    }
-                    else if (checkToday(yyyy, mm, dd) == true) {
+                    //判斷如果日今天的日期並且有資料顯示成bg-info顏色(藍色) 可以點的Button
+                    else if (checkToday(yyyy, mm, dd) == true && @roomDetails.Count > 0) {
                         td.setAttribute("class", "button text-white bg-info");
                         //設定button Modal
-                        Notebook(yyyy, mm, dd, td);
+                        RoomDetail(yyyy, mm, dd, td);
                         tr.append(td);
                     }
-
-                    else {
-                        td.setAttribute("class", "button");
+                    //判斷如果日今天的日期並且有資料顯示成bg-info顏色(藍色) 不能點的Button
+                    else if (checkToday(yyyy, mm, dd) == true && @roomDetails.Count == 0) {
+                        td.setAttribute("class", "text-white bg-info");
+                        tr.append(td);
+                    }
+                    //判斷如果有資料存在顯示成bg-danger顏色(紅色)
+                    else if (@roomDetails.Count != 0) {
+                        td.setAttribute("class", "button text-white bg-danger");
                         //設定button Modal
-                        Notebook(yyyy, mm, dd, td);
+                        RoomDetail(yyyy, mm, dd, td);
+                        tr.append(td);
+                    }
+                    //判斷這個月沒有資料時顯示綠色 不能點
+                    else {
+                        //td.setAttribute("class", "button");
+                        //設定button Modal
+                        td.bgColor = "green";
                         tr.append(td);
                     }
 
@@ -169,7 +188,7 @@
             }
         }
 
-        //設定新增button記事本內容
+        ////設定新增button記事本內容
         function Notebook(yyyy, mm, dd, td) {
             //modal設定
             td.addEventListener('click', function () {
@@ -186,6 +205,33 @@
                 modal.querySelector('#description').value = day;
             });
         }
+
+        //設定RoomDetail內容
+        function RoomDetail(yyyy, mm, dd, td) {
+            //modal設定
+            td.addEventListener('click', function () {
+                this.setAttribute('data-toggle', 'modal');
+                this.setAttribute('data-target', '#exampleModal');
+                let modal = $g('#exampleModal');
+
+                modal.querySelector('h5').innerText = `${yyyy}年${mm}月${dd}日-房間資訊`;
+
+                modal.querySelector('#checkindate').innerText = roomdetailJSON[dd - 1].CheckInDate;
+                modal.querySelector('#checkoutdate').innerText = roomdetailJSON[dd - 1].CheckOutDate;
+                modal.querySelector('#roomcount').innerText = roomdetailJSON[dd - 1].RoomCount;
+                modal.querySelector('#roomorder').innerText = roomdetailJSON[dd - 1].RoomOrder;
+                modal.querySelector('#roomdiscount').innerText = roomdetailJSON[dd - 1].RoomDiscount;
+                if (roomdetailJSON[dd - 1].OpenRoom == true) modal.querySelector('#openroom').innerText = "開房";
+                else  modal.querySelector('#openroom').innerText = "關房";
+
+                //let storage = window.localStorage;
+                //let day = `${yyyy}${mm}${dd}`;
+                //let note = localStorage.getItem(day);
+                //modal.querySelector('#description').innerText = note;
+                //modal.querySelector('#description').value = day;
+            });
+        }
+
 
         //判斷那天記事本是否有內容
         function checkNotebook(yyyymmdd) {
@@ -393,10 +439,9 @@
 <div class="d-flex justify-content-around">
     <button id="prev" type="button" class="btn btn-dark mr-30px">上個月</button>
 
-    @*<div id="expansion">*@
-        <button id="expansion" type="button" class="btn btn-dark mr-30px">本月展開</button>
-    @*</div>*@
-    
+    @if (roomDetails.Count == 0)
+    {<button id="expansion" type="button" class="btn btn-dark mr-30px">本月展開</button>}
+
     <button id="next" type="button" class="btn btn-dark mr-30px">下個月</button>
 </div>
 <div id="calendar">
@@ -414,6 +459,14 @@
                 </button>
             </div>
             <div class="modal-body">
+                <p id="roomid">房間名稱:@ViewBag.roomname</p>
+                <span>進房日期時間:</span><span id="checkindate"></span> <br />
+                <span>退房日期時間:</span><span id="checkoutdate"></span> <br />
+                <span>房間數:</span><span id="roomcount"></span> <br />
+                <span>訂房數:</span><span id="roomorder"></span> <br />
+                <span>折扣:</span><span id="roomdiscount"></span> <br />
+                <span>狀態:</span><span id="openroom"></span> <br />
+
                 <h1 id="description" class="text-primary"></h1>
                 <textarea id="textarea" cols="40" rows="5" placeholder="輸入記事本內容" aria-label="輸入記事本內容"></textarea>
             </div>

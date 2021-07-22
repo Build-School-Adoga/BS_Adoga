@@ -496,7 +496,11 @@ namespace BS_Adoga.Controllers
             {
                 ViewBag.roomid = roomid;
                 ViewBag.roomname = _context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault().RoomName;
-                return View();
+
+                List<RoomsDetail> RoomDetailThisMonth = _repository.GetAllRoomDetailThisMonth(roomid).ToList();
+                ViewBag.RoomDetailThisMonthJSON = JsonConvert.SerializeObject(RoomDetailThisMonth);
+
+                return View(RoomDetailThisMonth);
             }
         }
 
