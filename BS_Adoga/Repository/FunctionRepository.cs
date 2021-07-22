@@ -69,6 +69,20 @@ namespace BS_Adoga.Repository
             return table;
         }
 
+        public IEnumerable<RoomsDetail> GetAllRoomDetailMonth(string year, string month, string roomid)
+        {
+            string MonthFirstDay = $"{year}/{month}/1 00:00:00";
+
+            DateTime MonthFirstDayObject = Convert.ToDateTime(MonthFirstDay);
+            DateTime NextMonthFirstDayObject = MonthFirstDayObject.AddMonths(1);
+
+            var table = from rd in _context.RoomsDetails
+                        where rd.RoomID == roomid && rd.CheckInDate >= MonthFirstDayObject && rd.CheckInDate < NextMonthFirstDayObject
+                        orderby rd.CheckInDate ascending
+                        select rd;
+            return table;
+        }
+
     }
     
 }
