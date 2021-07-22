@@ -69,18 +69,26 @@
 
     <div id="BookingList">
         <booking-card v-for="order in group" v-bind:order="order"></booking-card>
-        <div class="col-4">
             <div v-if="group.length==0">
-                <div class="container">
-                    <div class="row">
+                <div class="no-booking-panel">
+                    <img id="no-booking_img"
+                         src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
 
-
+                    <div class="no-booking-content">
+                        <h4>搜尋不到此訂單編號</h4>
+                        <p>
+                            @*想要查看
+                            <a href="" id="checked_out">已退房</a>
+                            或
+                            <a href="" id="cancelled">已取消</a>
+                            的訂單嗎?*@
+                            <h5><strong>請重新搜尋</strong></h5>
+                        </p>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
+   
   
     @*@foreach (var item in Model)
         {
