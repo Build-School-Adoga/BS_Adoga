@@ -5,7 +5,8 @@ import BookingCard from './BookingComponent.js'
 axios.get('https://localhost:44352/Account/GetMemberBookingList', {
         params: {
             filterOption: "ComingSoon",
-            sortOption: "CheckInDate"
+            sortOption: "CheckInDate",
+            UserInputOrderId: ""
         }
     }).then(function (response) {
         console.log(response.data)
@@ -17,7 +18,8 @@ var filterBookingOrder = new Vue({
     el: "#filter-sort-wrap",
     data: {
         filterOption: 'ComingSoon',
-        sortOption: 'CheckInDate'
+        sortOption: 'CheckInDate',
+        searchOrderId:''
     },
     watch: {
         filterOption() {
@@ -34,13 +36,31 @@ var filterBookingOrder = new Vue({
             axios.get('https://localhost:44352/Account/GetMemberBookingList', {
                 params: {
                     filterOption: this.filterOption,
-                    sortOption: this.sortOption
+                    sortOption: this.sortOption,
+                    UserInputOrderId: this.searchOrderId
                 }
             }).then((response) => {
                 console.log(response.data)
                 appendBookingList(response.data)
             }).catch((error) => console.log(error))
         },
+        Search() {
+            axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+                params: {
+                    filterOption: this.filterOption,
+                    sortOption: this.sortOption,
+                    UserInputOrderId: this.searchOrderId
+
+                }
+            }).then((response) => {
+                console.log(this.searchOrderId)
+                console.log(response.data)
+                appendBookingList(response.data)
+            }).catch((error) => console.log(error))
+        },
+        ClearSearch() {
+            this.searchOrderId = '';
+        }
     }
 })
 var BookingList = new Vue({

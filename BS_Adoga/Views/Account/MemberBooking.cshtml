@@ -31,64 +31,81 @@
                     <button class="btn">瞭解更多</button>
                 </div>
             </div> -->
+    <div id="filter-sort-wrap">
 
-    <div id="filter-sort-wrap" class="filter-sort-wrap">
-        <nav class="filter-my-order">
-            <input checked v-model="filterOption" id="coming-soon" value="ComingSoon"type="radio"  name="filter-order"
-                   class="radio-box d-none" />
-            <label class="filter-option current" for="coming-soon">即將入住</label>
-            <input v-model="filterOption"  id="complete" value="Complete"type="radio" name="filter-order" class="radio-box d-none" />
-            <label class="filter-option " for="complete">已完成</label>
-            <input v-model="filterOption" id="cancelled" value="Cancelled" type="radio" name="filter-order"
-                   class="radio-box d-none" />
-            <label class="filter-option " for="cancelled">已取消</label>
-        </nav>
 
-        <div class="sort-btn-group">
-            <p class="sort-text mb-0">排序<i class="fas fa-sort-amount-up ms-2"></i></p>
-            <input v-model="sortOption" id="order-date-sort" value="OrderDate" type="radio" name="sort-order"
-                   class="radio-box d-none" />
-            <label class="sort-option" for="order-date-sort">預定日期</label>
-            <input checked v-model="sortOption" id="check-in-date-sort" value="CheckInDate" type="radio" name="sort-order"
-                   class="radio-box d-none" />
-            <label class="sort-option current" for="check-in-date-sort">入住日期</label>
+        <div id="" class="filter-sort-wrap">
+            <nav class="filter-my-order">
+                <input checked v-model="filterOption" id="coming-soon" value="ComingSoon" type="radio" name="filter-order"
+                       class="radio-box d-none" />
+                <label class="filter-option current" for="coming-soon">即將入住</label>
+                <input v-model="filterOption" id="complete" value="Complete" type="radio" name="filter-order" class="radio-box d-none" />
+                <label class="filter-option " for="complete">已完成</label>
+                <input v-model="filterOption" id="cancelled" value="Cancelled" type="radio" name="filter-order"
+                       class="radio-box d-none" />
+                <label class="filter-option " for="cancelled">已取消</label>
+            </nav>
+
+            <div class="sort-btn-group">
+                <p class="sort-text mb-0">排序<i class="fas fa-sort-amount-up ms-2"></i></p>
+                <input v-model="sortOption" id="order-date-sort" value="OrderDate" type="radio" name="sort-order"
+                       class="radio-box d-none" />
+                <label class="sort-option" for="order-date-sort">預定日期</label>
+                <input checked v-model="sortOption" id="check-in-date-sort" value="CheckInDate" type="radio" name="sort-order"
+                       class="radio-box d-none" />
+                <label class="sort-option current" for="check-in-date-sort">入住日期</label>
+            </div>
+        </div>
+
+        <div class="search-order-wrap my-4">
+            <label for="input_order-id">訂單編號</label>
+            <div class="search-order">
+                <input v-model="searchOrderId" id="input_order-id" placeholder="訂單編號" name="UserInputOrderId">
+                <button v-on:click="Search" id="search" type="button" class="btn btn-secondary">搜尋</button>
+                <button v-on:click="ClearSearch" id="clear-button" type="button" class="btn btn-light">清除</button>
+            </div>
         </div>
     </div>
 
-    <div class="search-order-wrap my-4">
-        <label for="input_order-id">訂單編號</label>
-        <div class="search-order">
-            <input id="input_order-id" placeholder="訂單編號">
-            <button id="search" type="button" class="btn btn-secondary">搜尋</button>
-            <button id="clear-button" type="button" class="btn btn-light">清除</button>
-        </div>
-    </div>
     <div id="BookingList">
         <booking-card v-for="order in group" v-bind:order="order"></booking-card>
+        <div class="col-4">
+            <div v-if="group.length==0">
+                <div class="container">
+                    <div class="row">
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+  
     @*@foreach (var item in Model)
-    {
-        @Html.Partial("~/Views/Account/_BookingPartial.cshtml", item);
-        //Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
-    }*@
+        {
+            @Html.Partial("~/Views/Account/_BookingPartial.cshtml", item);
+            //Html.RenderPartial("~/Views/Search/_optionCity.cshtml", item);
+        }*@
 
     @*@Html.Partial("~/Views/Account/_BookingPartial.cshtml")*@
 
-    @if(Model.Count() == 0) { 
-    <div class="no-booking-panel mt-5">
-        <img id="no-booking_img" src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
+    @if (Model.Count() == 0)
+    {
+        <div class="no-booking-panel mt-5">
+            <img id="no-booking_img" src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
 
-        <div class="no-booking-content">
-            <p class="big-text">您目前沒有即將到來的預訂。</p>
-            <p>
-                想要查看
-                <a href="" id="checked_out">已完成</a>
-                或
-                <a href="" id="cancelled">已取消</a>
-                的訂單嗎?
-            </p>
+            <div class="no-booking-content">
+                <p class="big-text">您目前沒有即將到來的預訂。</p>
+                <p>
+                    想要查看
+                    <a href="" id="checked_out">已完成</a>
+                    或
+                    <a href="" id="cancelled">已取消</a>
+                    的訂單嗎?
+                </p>
+            </div>
         </div>
-    </div>
     }
 </div>
 
