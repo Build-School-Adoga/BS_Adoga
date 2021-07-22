@@ -44,7 +44,18 @@ namespace BS_Adoga.APIController.HotelDetail
             //return Ok(JsonConvert.SerializeObject(a));
         }
 
-    
+        [AcceptVerbs("GET", "POST")]
+        public IHttpActionResult GetHotelFacilities(string hotelName = "台中商旅")
+        {
+            string hotelId = _repository.GetHotelIdByName(hotelName);
+            var data = _service.GetHotelFacilityById(hotelId);
+            return Json(data);
+            //return Ok(JsonConvert.SerializeObject(a));
+        }
+
+        
+
+
 
 
     }

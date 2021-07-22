@@ -33,6 +33,7 @@
                 <div class="hotel-status mt-3 mx-4 ">
                     <h4>@Model.HotelName @Model.HotelEngName</h4>
                     <p class="order-title mb-1">訂單編號：@Model.OrderID</p>
+                    @if (CheckCheckOut < 0) {<p class="order-status"><i class="fas fa-check-circle me-2"></i>已退房</p>}
 
                     @{
                         if (Model.PayStatus == true)

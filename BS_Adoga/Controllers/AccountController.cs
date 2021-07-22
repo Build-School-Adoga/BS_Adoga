@@ -25,6 +25,18 @@ namespace BS_Adoga.Controllers
             _memberacoountrepository = new MemberAccountRepository();
         }
 
+        [AcceptVerbs("GET")]
+        public ActionResult GetMemberBookingList(string filterOption,string sortOption)
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var data = _service.GetBookingOrder_FilterSort(user_id, filterOption, sortOption);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Account
         public ActionResult MemberBooking()
         {
@@ -60,8 +72,44 @@ namespace BS_Adoga.Controllers
 
             //return View();
         }
+        [HttpPost]
+        public ActionResult MemberProfilePassword(string CheckPassword, string NewPassword, string ConfirmPassword,string Email)
+        {
+            string FirstPassword = HttpUtility.HtmlEncode(CheckPassword);
+            string SecendPassword = HttpUtility.HtmlEncode(NewPassword);
+            string ThirdPassword = HttpUtility.HtmlEncode(ConfirmPassword);
+            Customer cust = new Customer();
+            cust.Email = Email;
+            cust.MD5HashPassword = HashService.MD5Hash(NewPassword);
+            AdogaContext db = new AdogaContext();
+            var data = db.Customers.Find(Email = Email);
+            if(data.MD5HashPassword!= HashService.MD5Hash(CheckPassword))
+            {
+                Content("修改失敗");
+                TempData["Error"] = "原密碼輸入錯誤,請重新輸入";
+            }
+            else
+            {
+                if(NewPassword!=ConfirmPassword)
+                {
+                   
+                    Content("修改失敗");
+                    TempData["Error"] = "輸入密碼與再次輸入密碼不相等請重新輸入請重新輸入";
+                }
+               else
+                {
+                    data.MD5HashPassword = HashService.MD5Hash(NewPassword);
+                    TempData["Success"] = "密碼修改成功";
+                    db.SaveChanges();
+                  
+                }
+            }
 
-        public ActionResult BookingDetail(string orderid)
+            return RedirectToAction("MemberProfile","Account");
+        }
+            
+
+            public ActionResult BookingDetail(string orderid)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
@@ -71,7 +119,7 @@ namespace BS_Adoga.Controllers
             return View(_memberacoountrepository.GetBookingDetail(orderid, user_id));
         }
 
-
+        [HttpGet]
         public ActionResult RePayOrder(RePayViewModel rePay, string orderid)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;

@@ -122,5 +122,11 @@ namespace BS_Adoga.Controllers
 
 
         }
+        public ActionResult ServiceCenter()
+        {
+
+            return View();
+
+        }
     }
 }

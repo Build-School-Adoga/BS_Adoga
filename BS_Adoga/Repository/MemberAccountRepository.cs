@@ -59,6 +59,7 @@ namespace BS_Adoga.Repository
             return table;
         }
 
+        
         public BookingDetailViewModel GetBookingDetail(string orderID,string customerID)
         {
             var table = (from o in _context.Orders

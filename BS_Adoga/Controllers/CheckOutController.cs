@@ -15,7 +15,7 @@ using BS_Adoga.Models.ViewModels.Account;
 
 namespace BS_Adoga.Controllers
 {
-    [Authorize]
+    
     public class CheckOutController : Controller
     {
         private AdogaContext _context;
@@ -24,6 +24,7 @@ namespace BS_Adoga.Controllers
             _context = new AdogaContext();
         }
 
+        [Authorize]
         // GET: CheckOut
         public ActionResult Index()
         {
@@ -322,8 +323,8 @@ namespace BS_Adoga.Controllers
                     PayResult.OrderId = (string)htFeedback["MerchantTradeNo"];
                     PayResult.TradeDate = (string)htFeedback["TradeDate"];
                     PayResult.PaymentDate = (string)htFeedback["PaymentDate"];
+                    PayResult.PaymentType = (string)htFeedback["PaymentType"];
                     PayResult.TradePrice = (string)htFeedback["TradeAmt"];
-                    PayResult.PaymentType = (string)htFeedback["PaymentType"];                 
                     TempData["PayResult"] = PayResult;
 
                     //更新付款資訊

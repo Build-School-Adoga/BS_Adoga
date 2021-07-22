@@ -28,14 +28,6 @@ namespace BS_Adoga.Controllers
         // GET: HotelDetail
         public ActionResult HotelDetail(string hotelName, string startDate, string endDate, int orderRoom, int adult, int child)
         {
-
-            //ViewData["CityOrName"] = hotelName;
-            //ViewData["sDate"] = startDate;
-            //ViewData["end"] = endDate;
-            //ViewData["adult"] = adult;
-            //ViewData["kid"] = child;
-            //ViewData["room"] = orderRoom;
-
             if (hotelName == null || startDate == null || endDate ==null || orderRoom == 0 || adult == 0 )
             {
                 return Content("請在搜尋框選好全部欄位的資料，才可幫您進行飯店查詢喔。");

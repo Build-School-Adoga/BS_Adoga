@@ -17,9 +17,11 @@ namespace BS_Adoga.Models.DBContext
             Rooms = new HashSet<Room>();
         }
 
+        [Display(Name = "¶º©±½s¸¹")]
         [StringLength(50)]
         public string HotelID { get; set; }
 
+        [Display(Name = "¶º©±¦WºÙ")]
         [Required]
         [StringLength(50)]
         public string HotelName { get; set; }

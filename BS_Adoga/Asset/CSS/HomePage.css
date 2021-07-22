@@ -28,7 +28,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
-
+[v-cloak] {
+    display: none;
+}
 body {
     line-height: 1;
 }
@@ -73,7 +75,7 @@ table {
 }
 
 #container {
-    width: 1124px;
+    
     height: 302px;
     margin-top: -100px;
     box-shadow: rgb(0 0 0 / 20%) 0px 2px 8px 3px;
@@ -82,27 +84,27 @@ table {
 }
 
 #container1 {
-    width: 100%;
+  /*  width: 100%;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
     position: relative;
     margin-top: -100px;
-    height:0px;
+    height:0px;*/
 }
 
 #inputGroupSelect02 {
-    width: 1100px;
+  
     height: 66px;
     font-size: 25px;
-    margin-top: 50px;
+    margin-top: 30px;
     color: #666;
    
 }
 
 #demo {
-    width: 514px;
+    
     border: 1px solid #ced4da;
 }
 #inputGroupSelect03 {
@@ -162,17 +164,17 @@ table {
     width: 514px;
     margin-left: 10px;
 }
-#motal {
-    width: 1078.65px;
+
+
+.el-icon-arrow-up:before {
+    content:"";
 }
 
-
-
 #search {
-    position: relative;
+    position: absolute;
     z-index: 2;
-    margin-left: 300px;
-    margin-top: 150px;
+    margin-left: 380px;
+    margin-top: 100px;
     width: 480px;
     height: 64px;
     background-color: rgb(83, 146, 249);
@@ -219,7 +221,7 @@ a {
     line-height: 16px;
 }
 #datetime {
-    margin-top: 110px;
+  /*  margin-top: 110px;*/
     margin-left: -25px;
 }
 
@@ -248,7 +250,7 @@ input[type="text"] {
     font-size: 16px;
 }
 .calendar-plus {
-    width: 400px;
+  
     height: 66px;
     font-size: 21px;
     line-height: 21px;
@@ -280,14 +282,11 @@ input[type="text"] {
 }
 /*滑動時固定的nav-------------------------------*/
 
-.col-3 img {
-    width: 263.66px;
-    height: 150px;
-}
+
 
 #img {
-    width: 263.66px;
-    height: 150px;
+    
+    height: 50%;
 }
 
 li a {
@@ -340,13 +339,15 @@ datalist {
 .search-filter-nav {
     color: grey;
     font-size: 16px;
-    width: 502px;
-    margin-left: 500px;
+   
+  
     height:66px;
-    margin-top:-75px;
+  
 
 }
-
+a{
+    color:black;
+}
     .search-filter-nav p {
         margin: auto;
     }
@@ -361,6 +362,7 @@ datalist {
     }
 #final-person {
     border-style: none;
+    width:55px
 }
 #final-room {
     border-style: none;
@@ -378,7 +380,7 @@ datalist {
 .main-body,
 .nav-item,
 .search-bar button {
-    margin: 10px auto;
+  
 }
 
    
@@ -405,9 +407,8 @@ datalist {
 .nav-item {
     border-radius: 5px;
     background-color: #fff;
-    width: 502px;
-    position: relative;
-    z-index:3;
+   
+  
     height: 66px;
     border: 1px solid #ced4da;
 }
@@ -418,7 +419,7 @@ datalist {
 }
 
 div#person-info {
-    width: 100%;
+    
     display: flex;
 }
 
@@ -429,12 +430,15 @@ div#person-info {
     .dropdown-item:focus, .dropdown-item:hover button > p {
         color: #5392F9;
     }
+#nav {
 
+}
 /* filter人数设定 */
 .nav-item #person-box {
     position: absolute;
     top: 120%;
     display: flex;
+    
 }
 
     .nav-item #person-box #choosing-box,
@@ -542,10 +546,10 @@ background-color: rgba(0, 0, 0, 0.7); */
 }
 .timebox {
     position: absolute;
-    width: 514px;
+   margin-left:-12px;
     height: 66px;
     background-color: white;
-    z-index: 3;
+    z-index: 4;
     border: 1px solid #DDDFE2;
     pointer-events: none;
 }
@@ -594,6 +598,7 @@ background-color: rgba(0, 0, 0, 0.7); */
 #range_start {
     width: 150px;
     border-style: none;
+    font-family: sans-serif;
 }
 #week_start {
     width: 150px;
@@ -608,9 +613,219 @@ background-color: rgba(0, 0, 0, 0.7); */
 #range_end {
     width: 150px;
     border-style: none;
+    font-family: sans-serif;
 }
 #week_end {
     width: 150px;
     border-style: none;
     color: grey;
+}
+
+/*#range_start 和 #range_end也有改成Sans-serif的字體*/
+#sale-absolute,
+.search-filter-nav,
+#smaillbox,
+#tw-p-1,
+.first-title2,
+p#Quantity,
+#sale,
+#Customer-Service .d-flex.justify-content-center,
+footer p.text-white-50 {
+    font-family: sans-serif;
+}
+
+/*footer區塊-------------------------------------------*/
+footer {
+    padding: 50px 30px;
+    background-color: #333;
+    color: rgb(148, 148, 148);
+    font-size: 14px;
+    font-family: Montserrat,sans-serif;
+    text-align: center;
+}
+footer p{
+    line-height: 2;
+}
+footer span{
+    display: block;
+}
+}
+
+
+.rwdtxt {
+    font-size: 1.2rem;
+  
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+    .rwdtxt {
+        font-size: 8px;
+        line-height: 11px;
+       
+    }
+}
+
+@media (min-width: 1200px) {
+    .rwdtxt {
+       
+        font-size: 16px;
+        line-height: 22px;
+        
+    }
+    #Name {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
+.rwdtxt2 {
+    font-size: 1.2rem;
+    
+}
+
+
+@media (min-width: 600px) and (max-width: 1200px) {
+    .rwdtxt2 {
+        font-size:7px;
+        line-height: 12px;
+        margin-left:-4px;
+       
+    }
+    #nav{
+        margin-left:-12px;
+        margin-top:15px;
+    }
+    #search {
+        margin-left: 248px;
+        margin-top: 23px;
+    }
+    .carousel-control-prev-icon{
+        margin-left:-40px;
+    }
+    #Name {
+        font-size: 13px;
+        line-height: 22px;
+    }
+    #Cityboxhiden {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1200px) {
+    .rwdtxt2 {
+        font-size: 12px;
+        line-height: 13.2px;
+    }
+
+    #nav {
+    }
+
+    #Name {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    #Cityboxhiden {
+        display: flex;
+        justify-content: center;
+    }
+}
+@media (max-width: 600px) {
+    .first-title {
+        font-size: 20px;
+    }
+    .first-title2 {
+        font-size: 15px;
+    }
+    #container{
+        width:300px;
+    }
+    .input-group{
+        width:300px;
+    }
+    .bd-content{
+        width:300px;
+    }
+    .calendar-minus{
+        width: 241px;
+    }
+    .timebox{
+        width:240px;
+    }
+    .time-box-1{
+       margin:0 0 0 0;
+    }
+    #range_start {
+        width: 90px;
+        font-size: 1px;
+        line-height: 1px;
+    }
+    #week_start {
+        width: 90px;
+        font-size: 1px;
+        line-height: 1px;
+    }
+    .time-box-2 {
+        margin: 0 0 0 0;
+    }
+    #range_end {
+        width: 90px;
+        font-size: 1px;
+        line-height: 1px;
+    }
+    .line{
+        margin-left:-3px;
+    }
+    #week_end {
+        width: 90px;
+        font-size: 1px;
+        line-height: 1px;
+    }
+    #nav{
+        margin:10px 0 0 -12px;
+    }
+    #app{
+        width:240px;
+    }
+    #person-box {
+      
+        flex-direction: column;
+    }
+    #search{
+        margin-top:24px;
+        margin-left:20px;
+        width:230px;
+    }
+    .rounded-circle{
+        width:35px;
+    }
+    #tw-1 {
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 20px;
+    }
+    #tw-line {
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 20px;
+    }
+    #tw-p-1 {
+        font-size: 8px;
+        line-height: 12px;
+    }
+    .carousel-control-next-icon {
+        margin-left: -45px;
+    }
+    #box{
+        
+       
+        flex-wrap:wrap;
+    }
+    #img-column {
+       margin-left:-50px;
+    }
+    #Cityboxhiden{
+     display:none;
+    }
+    
 }

@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
+using BS_Adoga.Models.ViewModels.Search;
 using System.ComponentModel.DataAnnotations;
 
 namespace BS_Adoga.Repository
@@ -39,6 +40,18 @@ namespace BS_Adoga.Repository
 
         }
 
+        public IQueryable<Facility> GetHotelFacilityById(string hotelId)
+        {
+            var facility = from h in _context.Hotels
+                        join f in _context.Facilities on h.HotelID equals f.HotelID
+                        where h.HotelID == hotelId
+                        select f;
+
+            return facility;
+
+        }
+
+       
         public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId,DateTime startDate,DateTime endDate,int countNight, int orderRoom,int adult,int child,int totalPerson)
         {
             //1. 先找出符合條件的hotel 和 room
@@ -60,14 +73,20 @@ namespace BS_Adoga.Repository
                             RoomID = roomGroup.Key.RoomID,
                             MinRoom = roomGroup.Min(r=>r.r_detail.RoomCount-r.r_detail.RoomOrder),
                             Discount = roomGroup.Sum(r => r.r_detail.RoomDiscount) / countNight,
+                            //d= roomGroup.Sum(r => r.r_detail.RoomDiscount)
                         };
-            
+
+            //查看裡面每筆的總discount
+            //var a = table_2.Select(d => d.d).ToList();
+            //a.ForEach(s => { var b = s;
+            //    var c = s; });
 
             //3.查詢出最終的結果並放進view Model
             var finalTable =  from t2 in table_2
                                  join r in _context.Rooms on t2.HotelID equals r.HotelID
                                  join bath in _context.BathroomTypes on r.TypesOfBathroomID equals bath.TypesOfBathroomID
                                  where r.RoomID == t2.RoomID
+                                 orderby (r.RoomPrice * (1 - t2.Discount))
                                  select new RoomTypeVM
                                  {
                                      HotelID = r.HotelID,

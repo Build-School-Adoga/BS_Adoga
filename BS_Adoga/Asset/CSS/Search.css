@@ -223,11 +223,11 @@ i.fas.fa-star {
 
 /*---点击Filter出现的侧边栏---*/
 #filter-equipment {
-    height:fit-content();
+    height:100%;
     width: 100%;
     display: flex;
     position: fixed;
-    z-index: 2;
+    z-index: 5;
     visibility: hidden;
 }
 
@@ -277,6 +277,7 @@ i.fas.fa-star {
         #filter-equipment section.equipment-box .filter-footer-outlayer {
             height: 10%;
             background-color: #F8F7F9;
+            padding-bottom: 20px;
         }
 
         #filter-equipment section.equipment-box .filter-footer {
@@ -587,7 +588,13 @@ i.fas.fa-star {
         flex-grow: 1;
     }
 
-div#emptyCard{
+.infomation .pagination-container ul.pagination {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+div#emptyCard {
     width: 100%;
     height: 500px;
     display: flex;

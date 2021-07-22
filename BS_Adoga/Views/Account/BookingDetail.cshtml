@@ -29,7 +29,7 @@
         <div class="booking-detail-item mt-4 pb-4">
             <div class="hotel-status pt-5 px-5 ">
                 <!-- <div> -->
-                <h4>@Model.HotelName (@Model.HotelEngName)</h4>
+                <h4>@Model.HotelName @Model.HotelEngName</h4>
                 <p class="star mb-1">
                     @for (int i = 1; i <= Model.Star; i++)
                     {
@@ -147,7 +147,7 @@
                     {
                         if (DateTime.Now.Subtract(Model.OrderDate) < TimeSpan.FromHours(24))
                         {
-                            @Html.ActionLink("立即付款", "RePayOrder", new { orderID = Model.OrderID })
+                            @Html.ActionLink("立即付款", "RePayOrder", "Account",new { orderID = Model.OrderID },new { @class="btn-continue-pay"})
                         }
 
                     }
