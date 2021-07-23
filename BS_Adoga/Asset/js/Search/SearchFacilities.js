@@ -1,13 +1,14 @@
-﻿//import component from './SearchFacilitiesComponent.js'
+﻿import card from './SearchFacilitiesComponent.js'
 
 var allHotel = '';
 
 
 //axios去get資料先
+debugger;
 axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
     //一開始用params裡面的資料去跑Api抓資料；成功抓完資料就會跑response
     params: {
-        CityName: '新竹縣',
+        CityName: filternav.Value,
         startDate: filternav.startDate,
         endDate: filternav.endDate,
         adult: filternav.adult,
@@ -15,26 +16,25 @@ axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
         room: filternav.room,
     }
 }).then(function (response) {
-    //console.log(response.data);
+    debugger;
     allHotel = response.data;
-    //var forCard = new Vue({
-    //    el: "#new_card",
-    //    data: {
-    //        list: respinse.data
-    //    }
-    //});
-
+    console.log(allHotel);
+    //console.log(response.data);
+    var list = new Vue({
+        el: "#new_card",
+        data: {
+            page: 1,
+            hotelList: allHotel
+        },
+        components: {
+            'hotel-card':card
+        }
+    });
+    debugger;
 }).catch((error) => console.log(error))
 
-debugger;
-var list = new Vue({
-    el: "#new_card",
-    data: {
-        hotelList: allHotel[0]
-    }
-});
 
-debugger;
+
 function getCurrentBindData(){
     return list.$data.hotelList;
 }
@@ -65,9 +65,9 @@ function NextPage() {
 
 $(document).ready(function () {
     //Binding();
-    $('#orderPrice').click(OrderPrice);
-    $('#orderStar').click(OrderStar);
-    $('#next').click(NextPage);
+    //$('#orderPrice').click(OrderPrice);
+    //$('#orderStar').click(OrderStar);
+    //$('#next').click(NextPage);
 
 });
 
