@@ -369,6 +369,7 @@ namespace BS_Adoga.Controllers
                 ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelids), "HotelID", "HotelName");
             }
             ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes, "TypesOfBathroomID", "Name");
+            ViewBag.HotelIDs = hotelids;
             return View();
         }
 
