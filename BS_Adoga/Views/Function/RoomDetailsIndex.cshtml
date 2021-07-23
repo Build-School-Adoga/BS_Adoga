@@ -35,7 +35,9 @@
 
         //點上一個月觸發換月
         document.getElementById('prev').addEventListener("click", function () {
-            clickbutton(-1);
+            d.setDate(15);
+            d.setMonth(d.getMonth() - 1);
+            dataaxios();
         });
 
         //本月展開
@@ -48,23 +50,15 @@
 
         //點下一個月觸發換月
         document.getElementById('next').addEventListener("click", function () {
-            clickbutton(1);
+            d.setDate(15);
+            d.setMonth(d.getMonth() + 1);
+            dataaxios();
         });
 
-        function clickbutton(AddOrMinus) {
-            //重新抓roomdetail資料
-            //roomdetailJSON = [];
-            d.setDate(15);
-            d.setMonth(d.getMonth() + AddOrMinus);
-
-            //本月展開用格式 用來存yyyy-m  ex: 2021-7 傳回後端
-            yyyy_m = get_yyyy_m(d);
-
-            dataaxios();
-            // console.log(response)
-            //console.log(testJSON);
+        function clickbutton() {
+           
             //console.log(d);
-            console.log(roomdetailJSON);
+            //console.log(roomdetailJSON);
             let calendar = $g('#calendar');
             calendar.innerText = "";
             let h2 = $c('h2');
@@ -75,9 +69,9 @@
         }
 
         function dataaxios() {
-            console.log(d.getFullYear())
-            console.log(d.getMonth() + 1)
-            console.log(roomid)
+            //console.log(d.getFullYear())
+            //console.log(d.getMonth() + 1)
+            //console.log(roomid)
             axios.get('../api/Function/RoomDetailMonth', {
                 //URL参數放在params屬性裏面
                 params: {
@@ -93,15 +87,30 @@
                     }
                     else { console.log("error"); }
                 }).catch((error) => console.log(error))
-            //console.log(roomdetailJSON);
-            //setroomdetailJSON(response.data)
-            //.then((response) => setroomdetailJSON(response.data))
         }
 
         function setroomdetailJSON(detailJSON) {
-            console.log(detailJSON);
+            //console.log(detailJSON);
             roomdetailJSON = detailJSON;
-            console.log(roomdetailJSON);
+            //console.log(roomdetailJSON);
+
+            //本月展開用格式 用來存yyyy-m  ex: 2021-7 傳回後端
+            yyyy_m = get_yyyy_m(d);
+            console.log(d);
+            console.log(roomdetailJSON.length);
+            if (roomdetailJSON.length == 0) {
+                document.getElementById('expansion').style = "";
+                document.getElementById('expansion').addEventListener("click", function () {
+                    document.location.href = `/Hotel/Room/Detail/Expansion/${yyyy_m}-${roomid}`;
+                });
+            }
+            else
+            {
+                document.getElementById('expansion').style = "display:none";
+            }
+
+            //執行顯示所有日曆表格
+            clickbutton();
         }
 
         //本月展開用格式  用來傳回後端格式
