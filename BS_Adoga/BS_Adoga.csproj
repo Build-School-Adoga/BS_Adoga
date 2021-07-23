@@ -419,6 +419,7 @@
     <Content Include="Asset\CDN\JS\moment.min.js" />
     <Content Include="Asset\CDN\JS\vue.js" />
     <Content Include="Asset\CDN\JS\moment-with-locales.min.js" />
+    <Content Include="Asset\CSS\CityCenter.css" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
@@ -437,6 +438,7 @@
     <Content Include="Asset\CSS\HotelDetailShare.css" />
     <Content Include="Asset\images\adoga-logo-v2.png" />
     <Content Include="Asset\images\Booking.png" />
+    <Content Include="Asset\images\Home\bg-adoga.png" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel01.jpg" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel02.jpg" />
     <Content Include="Asset\images\HotelDetail\Room\room01.jpg" />
@@ -2450,10 +2452,10 @@
     <Content Include="Views\Function\HotelRoomCreate.cshtml" />
     <Content Include="Views\Function\HotelRoomEdit.cshtml" />
     <Content Include="Views\Function\HotelRoomDetails.cshtml" />
+    <Content Include="Views\Home\CityCenter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Asset\CDN\CSS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />

@@ -58,8 +58,16 @@ namespace BS_Adoga.Controllers
             return PartialView("_SimpleCardPartial", images);
 
         }
-
-
+        [HttpPost]
+        public ActionResult Search2(string search)
+        {
+            SearchDataViewModel info = new SearchDataViewModel
+            {
+                HotelNameOrCity = search
+              
+            };
+            return RedirectToAction("Search", "Search", info);
+        }
         [HttpPost]
         public ActionResult Search(string search, string date_range, string people, string room, string kid, string data)
         {
@@ -126,6 +134,14 @@ namespace BS_Adoga.Controllers
         {
 
             return View();
+
+        }
+        public ActionResult CityCenter()
+        {
+
+            var images = _homeService.ALLImages2();
+
+            return View(images);
 
         }
     }

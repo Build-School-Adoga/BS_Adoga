@@ -34,7 +34,9 @@ footer, header, hgroup, menu, nav, section {
 body {
     line-height: 1;
 }
-
+input {
+    outline: none;
+}
 ol, ul {
     list-style: none;
 }
@@ -56,7 +58,7 @@ table {
 
 /* 以上都是reset，以下才是首頁的樣式*/
 .island {
-    background-image: url("https://cdn6.agoda.net/images/MVC/default/background_image/illustrations/bg-agoda-homepage.png");
+    background-image: url("/Asset/images/Home/bg-adoga.png");
     -webkit-background-size: cover;
     /* For WebKit*/
     -moz-background-size: cover;
@@ -716,151 +718,186 @@ footer span{
     font-size: 1.2rem;
     
 }
+@media (min-width: 800px) and (max-width: 1200px) {
 
-
-@media (min-width: 600px) and (max-width: 1200px) {
-    .rwdtxt2 {
-        font-size:7px;
-        line-height: 12px;
-        margin-left:-4px;
-       
-    }
-    #nav{
-        margin-left:-12px;
-        margin-top:15px;
-    }
     #search {
-        margin-left: 248px;
+        margin-left: 240px;
         margin-top: 23px;
     }
-    .carousel-control-prev-icon{
-        margin-left:-40px;
-    }
-    #Name {
-        font-size: 13px;
-        line-height: 22px;
-    }
-    #Cityboxhiden {
-        display: flex;
-        justify-content: center;
+
+}
+@media (min-width: 767px) and (max-width: 799px) {
+
+    #search {
+        margin-left: 116px;
+        margin-top: 23px;
     }
 }
 
-@media (min-width: 1200px) {
-    .rwdtxt2 {
-        font-size: 12px;
-        line-height: 13.2px;
+    @media (min-width: 600px) and (max-width: 1200px) {
+        .rwdtxt2 {
+            font-size: 7px;
+            line-height: 12px;
+            margin-left: -4px;
+        }
+
+        #nav {
+            margin-left: -12px;
+            margin-top: 15px;
+        }
+
+        .carousel-control-prev-icon {
+            margin-left: -40px;
+        }
+
+        #Name {
+            font-size: 13px;
+            line-height: 22px;
+        }
+
+        #Cityboxhiden {
+            display: flex;
+            justify-content: center;
+        }
     }
 
-    #nav {
+    @media (min-width: 1200px) {
+        .rwdtxt2 {
+            font-size: 12px;
+            line-height: 13.2px;
+        }
+
+        #nav {
+        }
+
+        #Name {
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        #Cityboxhiden {
+            display: flex;
+            justify-content: center;
+        }
     }
 
-    #Name {
-        font-size: 16px;
-        line-height: 22px;
-    }
+    @media (max-width: 600px) {
+        .first-title {
+            font-size: 20px;
+        }
 
-    #Cityboxhiden {
-        display: flex;
-        justify-content: center;
+        .first-title2 {
+            font-size: 15px;
+        }
+
+        #container {
+            width: 300px;
+        }
+
+        .input-group {
+            width: 300px;
+        }
+
+        .bd-content {
+            width: 300px;
+        }
+
+        .calendar-minus {
+            width: 241px;
+        }
+
+        .timebox {
+            width: 240px;
+        }
+
+        .time-box-1 {
+            margin: 0 0 0 0;
+        }
+
+        #range_start {
+            width: 90px;
+            font-size: 1px;
+            line-height: 1px;
+        }
+
+        #week_start {
+            width: 90px;
+            font-size: 1px;
+            line-height: 1px;
+        }
+
+        .time-box-2 {
+            margin: 0 0 0 0;
+        }
+
+        #range_end {
+            width: 90px;
+            font-size: 1px;
+            line-height: 1px;
+        }
+
+        .line {
+            margin-left: -3px;
+        }
+
+        #week_end {
+            width: 90px;
+            font-size: 1px;
+            line-height: 1px;
+        }
+
+        #nav {
+            margin: 10px 0 0 -12px;
+        }
+
+        #app {
+            width: 240px;
+        }
+
+        #person-box {
+            flex-direction: column;
+        }
+
+        #search {
+            margin-top: 24px;
+            margin-left: 20px;
+            width: 230px;
+        }
+
+        .rounded-circle {
+            width: 35px;
+        }
+
+        #tw-1 {
+            font-size: 12px;
+            line-height: 15px;
+            margin-top: 20px;
+        }
+
+        #tw-line {
+            font-size: 12px;
+            line-height: 15px;
+            margin-top: 20px;
+        }
+
+        #tw-p-1 {
+            font-size: 8px;
+            line-height: 12px;
+        }
+
+        .carousel-control-next-icon {
+            margin-left: -45px;
+        }
+
+        #box {
+            flex-wrap: wrap;
+        }
+
+        #img-column {
+            margin-left: -50px;
+        }
+
+        #Cityboxhiden {
+            display: none;
+        }
     }
-}
-@media (max-width: 600px) {
-    .first-title {
-        font-size: 20px;
-    }
-    .first-title2 {
-        font-size: 15px;
-    }
-    #container{
-        width:300px;
-    }
-    .input-group{
-        width:300px;
-    }
-    .bd-content{
-        width:300px;
-    }
-    .calendar-minus{
-        width: 241px;
-    }
-    .timebox{
-        width:240px;
-    }
-    .time-box-1{
-       margin:0 0 0 0;
-    }
-    #range_start {
-        width: 90px;
-        font-size: 1px;
-        line-height: 1px;
-    }
-    #week_start {
-        width: 90px;
-        font-size: 1px;
-        line-height: 1px;
-    }
-    .time-box-2 {
-        margin: 0 0 0 0;
-    }
-    #range_end {
-        width: 90px;
-        font-size: 1px;
-        line-height: 1px;
-    }
-    .line{
-        margin-left:-3px;
-    }
-    #week_end {
-        width: 90px;
-        font-size: 1px;
-        line-height: 1px;
-    }
-    #nav{
-        margin:10px 0 0 -12px;
-    }
-    #app{
-        width:240px;
-    }
-    #person-box {
-      
-        flex-direction: column;
-    }
-    #search{
-        margin-top:24px;
-        margin-left:20px;
-        width:230px;
-    }
-    .rounded-circle{
-        width:35px;
-    }
-    #tw-1 {
-        font-size: 12px;
-        line-height: 15px;
-        margin-top: 20px;
-    }
-    #tw-line {
-        font-size: 12px;
-        line-height: 15px;
-        margin-top: 20px;
-    }
-    #tw-p-1 {
-        font-size: 8px;
-        line-height: 12px;
-    }
-    .carousel-control-next-icon {
-        margin-left: -45px;
-    }
-    #box{
-        
-       
-        flex-wrap:wrap;
-    }
-    #img-column {
-       margin-left:-50px;
-    }
-    #Cityboxhiden{
-     display:none;
-    }
-    
-}

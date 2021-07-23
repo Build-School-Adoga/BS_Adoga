@@ -36,7 +36,10 @@ namespace BS_Adoga.Service
             var productss = new demoshopViewModels()
             {
                 My_MyHotels = _homeRepository.GetHotelModels(),
-                My_CardViewModels = _homeRepository.GetCardModels2()
+                My_CardViewModels = _homeRepository.GetCardModels2(),
+                My_CardViewModels2 = _homeRepository.GetCardModels3(),
+                My_MyCitys = _homeRepository.GetCityModels(),
+                My_Mys = _homeRepository.GetModels()
             };
 
             return productss;
