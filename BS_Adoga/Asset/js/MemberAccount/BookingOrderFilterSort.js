@@ -2,7 +2,7 @@
 import BookingCard from './BookingComponent.js'
 
 //一開始載入頁面時要帶入order的資料，未入住的。
-axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+axios.get('../Account/GetMemberBookingList', {
         params: {
             filterOption: "ComingSoon",
             sortOption: "CheckInDate"
@@ -31,7 +31,7 @@ var filterBookingOrder = new Vue({
     },
     methods: {
         filter_sort() {
-            axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+            axios.get('../Account/GetMemberBookingList', {
                 params: {
                     filterOption: this.filterOption,
                     sortOption: this.sortOption
@@ -113,11 +113,11 @@ function appendBookingList(response) {
                     //    }
                     //}).then(response => {
                     //    console.log(response);
-                        window.location.href ='https://localhost:44352/Account/RePayOrder/'+item.OrderID
+                        window.location.href ='../Account/RePayOrder/'+item.OrderID
                     //}).catch(error => console.log(error))
                 },
                 GoToDetail: function () {
-                    window.location.href = 'https://localhost:44352/BookingDetail/' + item.OrderID;
+                    window.location.href = '../BookingDetail/' + item.OrderID;
                 }
             }
         );
