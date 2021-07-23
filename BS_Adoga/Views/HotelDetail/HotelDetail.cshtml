@@ -26,10 +26,10 @@
                 <div class="search-bar">
                     <div class="nav-item" id="choose-city">
                         @*<i class="fas fa-search"></i>
-                            <div class="choose-info city-info">
-                                <p id="city-name">台南市</p>
-                                <p id="place-left">794間住宿還有空房</p>
-                            </div>*@
+                        <div class="choose-info city-info">
+                            <p id="city-name">台南市</p>
+                            <p id="place-left">794間住宿還有空房</p>
+                        </div>*@
 
                         <el-select style="color: #666;" id="inputGroupSelect" v-model="Value"
                                    placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable name="search">
@@ -40,30 +40,14 @@
                                            :key="o.value"
                                            :label="o.label"
                                            :value="o.value">
-                                    <span style="float: left">{{o.label}}</span>
-                                    <span style="float: right; color: #8492a6; font-size: 13px">{{o.price}}</span>
+                                    <span v-cloak style="float: left">{{o.label}}</span>
+                                    <span v-cloak style="float: right; color: #8492a6; font-size: 13px">{{o.price}}</span>
                                 </el-option>
                             </el-option-group>
                         </el-select>
                     </div>
 
                     <div class="nav-item">
-                        @*<div class="search-date">
-                                <i class="fas fa-calendar-alt"></i>
-                                <div class="choose-info">
-                                    <p id="checkIn-date">2021年5月17日</p>
-                                    <p id="date-description">週一</p>
-                                </div>
-                            </div>
-                            <div class="line"></div>
-                            <div class="search-date">
-                                <i class="fas fa-calendar-alt"></i>
-                                <div class="choose-info">
-                                    <p id="checkOut-date">2021年5月19日</p>
-                                    <p id="date-description">週三</p>
-                                </div>
-                            </div>*@
-
                         <div id="datetime">
                             <div class="timebox">
                                 <div class="d-flex">
@@ -148,6 +132,7 @@
                 </div>
             </nav>
         }
+
         <nav class="hotel-nav bg-white">
             <div class="wrap-1100 d-flex justify-content-between">
                 <div class="hotel-nav-wrap d-flex align-items-center">
@@ -580,6 +565,13 @@
     <script>
         //var td = ViewData["con"];
 
+        //過濾出地區(distinct)
+        var deduped = dedup([
+            @foreach (var item in Model.hotelOptionVM)
+            {
+                 @Html.Partial("~/Views/Search/_optionCity.cshtml", item);
+            }
+        ]);
         function dedup(arr) {
             var hashTable = {};
             return arr.filter(function (el) {
@@ -588,13 +580,6 @@
                 return (match ? false : hashTable[key] = true);
             });
         }
-        var deduped = dedup([
-            @foreach (var item in Model.hotelOptionVM)
-            {
-                 @Html.Partial("~/Views/Search/_optionCity.cshtml", item);
-            }
-        ]);
-
         @{
             var searchData =  (SearchByMemberVM)TempData["SearchData"];
             TempData.Keep("SearchData");
@@ -625,6 +610,18 @@
                         ]
                     }
                 ]
+            },
+            computed: {
+                //Value() {
+                //    let vd = ViewData["con"];
+                //    debugger;
+                //    if (vd!=null) {
+                //        return vd;
+                //    }
+                //    else {
+                //        return "";
+                //    }
+                //}
             },
             methods: {
                 minus: function (e) {
@@ -674,7 +671,7 @@
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
 
-    <script src="~/Asset/js/_SearchFilterPartial.js"></script>
+    <script src="~/Asset/js/Search/_SearchFilterPartial.js"></script>
 
     <!--此處開始是飯店詳細頁面的JS-->
     <script>
@@ -710,7 +707,7 @@
     </script>
     <!--jQuery 和 Vue相關的程式-->
     <script type="module" src="~/Asset/js/HotelDetail/RoomFilter.js"></script>
-    <script type="module" src="~/Asset/js/HotelDetail/Facility.js"></script>
+    <script type="module" src="~/Asset/js/HotelDetail/HotelFacility.js"></script>
 }
 
 

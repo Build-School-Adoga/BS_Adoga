@@ -53,11 +53,13 @@ namespace BS_Adoga.Repository
                               CheckInDate = o.CheckInDate,
                               CheckOutDate = o.CheckOutDate,
                               Breakfast = r.Breakfast,
-                              City = h.HotelCity
+                              City = h.HotelCity,
+                              PayStatus = o.PaymentStatus
                           });
             return table;
         }
 
+        
         public BookingDetailViewModel GetBookingDetail(string orderID,string customerID)
         {
             var table = (from o in _context.Orders
@@ -89,10 +91,30 @@ namespace BS_Adoga.Repository
                                              Name = bt.Name,
                                              Amount = rb.Amount
                                          })),
-                             RoomPriceTotal = o.RoomPriceTotal
+                             RoomPriceTotal = o.RoomPriceTotal,
+                             PayStatus = o.PaymentStatus
                          }).FirstOrDefault();
             return table;
         }
 
+        
+        public RePayViewModel GetReOrder(string orderID, string customerID)
+        {
+            var table = (from o in _context.Orders
+                         join r in _context.Rooms on o.RoomID equals r.RoomID
+                         join h in _context.Hotels on r.HotelID equals h.HotelID
+                         where o.CustomerID == customerID && o.OrderID == orderID
+                         orderby o.OrderID descending
+                         select new RePayViewModel
+                         {
+                             HotelID = h.HotelID,
+                             HotelName = h.HotelName,
+                             OrderID = o.OrderID,
+                             RoomQuantity = o.RoomCount,
+                             RoomPriceTotal = o.RoomPriceTotal,
+                             PayStatus = o.PaymentStatus
+                         }).FirstOrDefault();
+            return table;
+        }
     }
 }

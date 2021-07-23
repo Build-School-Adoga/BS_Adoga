@@ -24,6 +24,6 @@ namespace BS_Adoga.Models.ViewModels.Account
         public string Name { get; set; }
         public IQueryable<RoomBedVM> RoomBed { get; set; }
         public decimal RoomPriceTotal { get; set; }
-        
+        public bool PayStatus { get; set; }
     }
 }

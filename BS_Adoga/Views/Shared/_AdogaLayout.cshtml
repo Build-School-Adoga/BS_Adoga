@@ -26,16 +26,16 @@
                 </a>
             </h2>
             @*<a href="#" class="head-nav-item ">找旅店</a>
-            <a href="#" class="head-nav-item ">撿便宜</a>*@
+                <a href="#" class="head-nav-item ">撿便宜</a>*@
             @*<i class="head-nav-item fas fa-ellipsis-h"></i>*@
         </div>
         @*<div class="head-nav-wrap d-flex align-items-center">*@
         @*@Html.ActionLink("刊登飯店空房", "HotelLogin", "HotelLogin", null, new { @class = "head-nav-item red" })
-        @*<a href="#" class="head-nav-item red">刊登家中空房</a>*@
+            @*<a href="#" class="head-nav-item red">刊登家中空房</a>*@
         @*<div class="head-nav-item">
-            <img src="~/Asset/images/tw.svg.png" alt="" class="flag-icon">
-        </div>
-        <a href="#" class="head-nav-item currency ff-mont fz-12">NT$</a>*@
+                <img src="~/Asset/images/tw.svg.png" alt="" class="flag-icon">
+            </div>
+            <a href="#" class="head-nav-item currency ff-mont fz-12">NT$</a>*@
 
 
         @*0624新增使用者登入與登出介面*@
@@ -88,8 +88,8 @@
         {
             //未登入時的顯示
             @*@Html.ActionLink("A咖登入", "MemberLogin", "MemberLogin", null, new { @class = "head-nav-item blue" })
-            @*<a href="#" class="head-nav-item blue" data-bs-toggle="modal" data-bs-target="#SigninModal">A咖登入</a>
-            <a href="#" class="head-nav-item blue" data-bs-toggle="modal" data-bs-target="#RegisterModal">我是新朋友</a>*@
+                @*<a href="#" class="head-nav-item blue" data-bs-toggle="modal" data-bs-target="#SigninModal">A咖登入</a>
+                <a href="#" class="head-nav-item blue" data-bs-toggle="modal" data-bs-target="#RegisterModal">我是新朋友</a>*@
 
             @*0717 Bear新增：RWD的login-menu*@
             <div class="login-burger-btn">
@@ -99,7 +99,8 @@
                     <h6>我要登入</h6>
                     <div>
                         @Html.ActionLink("A咖登入", "MemberLogin", "MemberLogin", null, new { @class = "head-nav-item login-btn" })
-                        <a href="#" class="head-nav-item register-btn">我是新朋友</a>
+                        @Html.ActionLink("我是新朋友", "MemberLogin", "MemberLogin", null, new { @class = "head-nav-item register-btn" })
+                        @*<a href="#" class="head-nav-item register-btn">我是新朋友</a>*@
                     </div>
                     <h6>在Adooka刊登飯店</h6>
                     <div>
@@ -119,99 +120,61 @@
 
     <!-- Bear加：我把首頁的footer區塊搬過來-------------------------------------------------------------------------------------------------------------- -->
     <div id="Customer-Service">
-        <div class="container   row">
-            <div class="d-flex  justify-content-center" style="margin-top: 50px; margin-left: 100px;">
-                <div class="col-2">
-                    <h3 class="fw-bolder" style=" font-size: 14px; line-height:15.4px; margin-bottom: 10px;">
-                        客服中心
-                    </h3>
-                    <p style=" font-size: 13px; line-height:18px;">
-                        服務中心 <br>
-                        常見問題 <br>
-                        隱私權政策 <br>
-                        Cookie政策 <br>
-                        服務條款
-                    </p>
-                </div>
+        <div class="info-group">
+            <div class="info-item">
+                <h6>
+                   常見問題
+                </h6>
+                @Html.ActionLink("服務中心", "ServiceCenter", "Home", null, new { @class = "text2" })
+            </div>
+            <div class="info-item">
+                <h6>
+                    關於我們
+                </h6>
+                <a href="#">
+                    成員介紹
+                </a>
+            </div>
+            <div class="info-item">
+                <h6>
+                    目的地
+                </h6>
 
-                <div class="col-2">
-                    <h3 class="fw-bolder" style=" font-size: 14px; line-height:15.4px; margin-bottom: 10px;">
-                        關於我們
-                    </h3>
-                    <p style=" font-size: 13px; line-height:18px;">
-                        PointsMax <br>
-                        職缺情報 <br>
-                        新聞報導 <br>
-                        旅遊部落格
+                <a href="#">
+                    城市
+                </a>
 
-                    </p>
-                </div>
-                <div class="col-2">
-                    <h3 class="fw-bolder" style=" font-size: 14px; line-height:15.4px; margin-bottom: 10px;">
-                        目的地
-                    </h3>
-                    <p style=" font-size: 13px; line-height:18px;">
-                        國家/地區 <br>
-                        城市
-                    </p>
-                </div>
-                <div class="col-2">
-                    <h3 class="fw-bolder" style=" font-size: 14px; line-height:15.4px; margin-bottom: 10px;">
-                        成為合作夥伴
-                    </h3>
-                    <p style=" font-size: 13px; line-height:18px;">
-                        YCS夥伴平台 <br>
-                        Partner Hub<br>
-                        供應商招募<br>
-                        行銷夥伴 <br>
-                        Connectivity平台
-                    </p>
-                </div>
-                <div class="col-2">
-                    <h3 class="fw-bolder" style=" font-size: 14px; line-height:15.4px; margin-bottom: 10px;">
-                        行動訂房神器
-                    </h3>
-                    <p style=" font-size: 13px; line-height:18px;">
-                        iOS免費下載 <br>
-                        Android 免費下載 <br>
-                    </p>
-                </div>
+
             </div>
         </div>
     </div>
-    @RenderSection("HomePageCountryArea", false)
-    <footer class="d-flex  flex-column   justify-content-center  align-items-center">
-        <p class="text-white-50" style="margin-top: 70px; text-align:center">
-            本網站內容由© 2005–2021 Adoga Company Pte. Ltd.保留所有權利 <br>
-            Adoga.com隸屬於全球線上旅遊相關事業的領導品牌Booking Holdings集團。
-        </p>
-        <div class="container" style="margin-top: 50px;">
-            <div class="d-flex">
-                <div class="col-2">
-                    <img src="~/Asset/images/adoga-logo-v2.png" alt="">
-                </div>
-                <div class="col-2">
-                    <img src="~/Asset/images/img2.png" alt="">
-                </div>
-                <div class="col-2">
-                    <img src="~/Asset/images/img3.png" alt="">
-                </div>
-                <div class="col-2">
-                    <img src="~/Asset/images/img4.png" alt="">
-                </div>
-                <div class="col-2">
-                    <img src="~/Asset/images/img5.png" alt="">
-                </div>
-                <div class="col-2">
-                    <img src="~/Asset/images/img6.png" alt="">
-                </div>
-            </div>
-        </div>
-        <p class="text-white-50" style="margin-top: 70px;">
-            hk-crweb-2009
-        </p>
 
+    <footer class="footer-area">
+        <p class="mb-0">
+            本網站內容由© 2020-2021 Adoga Company Pte. Ltd.保留所有權利 <br>
+            Adoga.com隸屬於Build School 2021 春季班 第三組。
+        </p>
+        <div class="footer-logo py-4">
+            <img src="~/Asset/images/img1.png" alt="">
+            @*<div class="col-2">
+            <img src="~/Asset/images/img2.png" alt="">
+        </div>
+        <div class="col-2">
+            <img src="~/Asset/images/img3.png" alt="">
+        </div>
+        <div class="col-2">
+            <img src="~/Asset/images/img4.png" alt="">
+        </div>
+        <div class="col-2">
+            <img src="~/Asset/images/img5.png" alt="">
+        </div>
+        <div class="col-2">
+            <img src="~/Asset/images/img6.png" alt="">
+        </div>*@
+        </div>
+        <span>&copy; 2021 BuildSchoolTeam3.All Right Reserved.</span>
     </footer>
+
 
 
 

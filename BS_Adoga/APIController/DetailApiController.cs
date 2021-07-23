@@ -53,16 +53,7 @@ namespace BS_Adoga.APIController.HotelDetail
             //return Ok(JsonConvert.SerializeObject(a));
         }
 
-        [AcceptVerbs("GET", "POST")]
-        public IHttpActionResult GetEachHotelOneRoom(string CityName = "新竹縣",string startDate="2021-07-23", string endDate="2021-07-25", int orderRoom=1, int adult=1, int child=0)
-        {
-            DateTime startDate_p = DateTime.Parse(startDate);
-            DateTime endDate_p = DateTime.Parse(endDate);
-            int countNight = new TimeSpan(endDate_p.Ticks - startDate_p.Ticks).Days;
-
-            var data = _repository.GetEachHotelOneRoom(CityName, startDate, endDate, countNight, orderRoom, adult, child);
-            return Json(data);
-        }
+        
 
 
 

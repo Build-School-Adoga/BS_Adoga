@@ -14,11 +14,11 @@ namespace BS_Adoga.Service
         {
             _r = new SearchCardRepository();
         }
-        public IQueryable<HotelSearchViewModel> GetHotels(string Name)
-        {
-            var result = _r.GetHotel(Name);
-            return result;
-        }
+        //public IQueryable<HotelSearchViewModel> GetHotels(string Name)
+        //{
+        //    var result = _r.GetHotel(Name);
+        //    return result;
+        //}
 
         public SearchCardViewModel GetSearchViewModelData(SearchDataViewModel info)
         {
@@ -34,5 +34,11 @@ namespace BS_Adoga.Service
             };
             return data;
         }
+        //public FacilityViewModel GetHotelFacilityId(string hotelId)
+        //{
+        //    var id = _r.GetFacilitiId(hotelId);
+
+        //    return id;
+        //}
     }
 }
