@@ -49,6 +49,7 @@ namespace BS_Adoga.Controllers
             return View();
         }
 
+        //顯示所有飯店
         public ActionResult HotelIndex()
         {
             List<Facility> facilities = _context.Facilities.ToList();
@@ -56,6 +57,8 @@ namespace BS_Adoga.Controllers
 
             return View(_repository.GetHotelList());
         }
+
+        //飯店建立
         public ActionResult HotelCreate()
         {
             //string URL = "https://graph.facebook.com/me?access_token=";
@@ -89,6 +92,7 @@ namespace BS_Adoga.Controllers
             return View();
         }
 
+        //飯店建立
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HotelCreate(HotelCreateViewModel HotelCreateVM)
@@ -118,11 +122,14 @@ namespace BS_Adoga.Controllers
             return View(HotelCreateVM);
         }
 
+        //顯示所有飯店
         public ActionResult HotelList()
         {
             return View(_context.Hotels.ToList());
         }
 
+        //飯店詳細說明
+        //Route: Hotel/Detail/{hotelid}
         public ActionResult HotelDetails(string hotelid)
         {
             if (hotelid == null)
@@ -139,6 +146,7 @@ namespace BS_Adoga.Controllers
             return View(hotel);
         }
 
+        //飯店修改
         public ActionResult HotelEdit(string hotelid)
         {
             if (hotelid == null)
@@ -193,6 +201,8 @@ namespace BS_Adoga.Controllers
             return View(hotelCreateVM);
         }
 
+        //飯店修改
+        //Route: Hotel/Edit/{hotelid}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HotelEdit(HotelCreateViewModel hotelCreateVM)
@@ -220,6 +230,7 @@ namespace BS_Adoga.Controllers
             #endregion
         }
 
+        //動態取得區域資料
         //第二個區動態取得資料
         public ActionResult SecondItems(string city)
         {
@@ -257,12 +268,14 @@ namespace BS_Adoga.Controllers
 
         }
 
+        //顯示所有的飯店設施
         public ActionResult HotelFacilityIndex()
         {
             var facilities = _context.Facilities.Include(f => f.Hotel);
             return View(facilities.ToList());
         }
 
+        //飯店設施建立
         public ActionResult HotelFacilityCreate(string hotelids)
         {
             if (string.IsNullOrEmpty(hotelids))
@@ -277,6 +290,7 @@ namespace BS_Adoga.Controllers
             return View();
         }
 
+        //飯店設施建立
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HotelFacilityCreate(Facility facility)
@@ -293,6 +307,7 @@ namespace BS_Adoga.Controllers
             return View(facility);
         }
 
+        //飯店設施詳細說明
         public ActionResult HotelFacilityDetails(int? id)
         {
             if (id == null)
@@ -307,6 +322,7 @@ namespace BS_Adoga.Controllers
             return View(facility);
         }
 
+        //飯店設施修改
         public ActionResult HotelFacilityEdit(int? id)
         {
             if (id == null)
@@ -322,6 +338,7 @@ namespace BS_Adoga.Controllers
             return View(facility);
         }
 
+        //飯店設施修改
         // POST: Facilities/Edit/5
         // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
@@ -340,7 +357,7 @@ namespace BS_Adoga.Controllers
             return View(facility);
         }
 
-
+        //顯示所有的飯店
         public ActionResult HotelRoomIndex()
         {
             //List<Facility> facilities = _context.Facilities.ToList();
@@ -349,7 +366,8 @@ namespace BS_Adoga.Controllers
             return View(_repository.GetHotelRoomCount());
         }
 
-        // GET: Hotel/Room/{hotelid}
+        //顯示某飯店所有的房型
+        // Route: Hotel/Room/{hotelid}
         public ActionResult HotelRoomsIndex(string hotelid)
         {
             //List<Facility> facilities = _context.Facilities.ToList();
@@ -358,6 +376,7 @@ namespace BS_Adoga.Controllers
             return View(_repository.GetHotelRoomAll(hotelid));
         }
 
+        //房型建立
         public ActionResult HotelRoomCreate(string hotelids)
         {
             if (string.IsNullOrEmpty(hotelids))
@@ -373,6 +392,7 @@ namespace BS_Adoga.Controllers
             return View();
         }
 
+        //房型建立
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HotelRoomCreate(HotelRoomCreateViewModel hotelRoomCreateVM)
@@ -404,6 +424,7 @@ namespace BS_Adoga.Controllers
             return View(hotelRoomCreateVM);
         }
 
+        //房型詳細說明
         public ActionResult HotelRoomDetails(string roomid)
         {
             if (roomid == null)
@@ -418,6 +439,8 @@ namespace BS_Adoga.Controllers
             return View(room);
         }
 
+        //房型資料修改
+        //Route: Hotel/Room/Edit/{hotelids}-{roomid}
         public ActionResult HotelRoomEdit(string hotelids, string roomid)
         {
             TempData["roomid"] = roomid;
@@ -450,6 +473,7 @@ namespace BS_Adoga.Controllers
             return View(hotelRoomCreateVM);
         }
 
+        //房型資料修改
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HotelRoomEdit(HotelRoomCreateViewModel hotelRoomCreateVM)
@@ -506,9 +530,10 @@ namespace BS_Adoga.Controllers
         }
 
         //房間月的展開
+        //Route: Hotel/Room/Detail/Expansion/{year}-{month}-{roomid}
         public ActionResult RoomDetailExpansion(string year, string month, string roomid)
         {
-            string username = User.Identity.Name;
+            string username = User.Identity.Name; //取得使用者名稱Logging要記錄誰修改
 
             //如果是不存在的roomid返回錯誤頁面
             if (_context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault() == null)

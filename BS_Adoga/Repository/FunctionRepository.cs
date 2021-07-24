@@ -1,4 +1,5 @@
 ﻿using BS_Adoga.Models.DBContext;
+using BS_Adoga.Models.ViewModels.HotelDetail;
 using BS_Adoga.Models.ViewModels.HotelLogin;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,13 @@ namespace BS_Adoga.Repository
             return table;
         }
 
+        /// <summary>
+        /// 取得一個月所有的房型的資料
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="roomid"></param>
+        /// <returns></returns>
         public IEnumerable<RoomsDetail> GetAllRoomDetailMonth(string year, string month, string roomid)
         {
             string MonthFirstDay = $"{year}/{month}/1 00:00:00";
@@ -81,6 +89,25 @@ namespace BS_Adoga.Repository
                         orderby rd.CheckInDate ascending
                         select rd;
             return table;
+        }
+
+        /// <summary>
+        /// 顯示房型有的床型
+        /// </summary>
+        /// <param name="roomid"></param>
+        /// <returns></returns>
+        public IEnumerable<RoomBedVM> GetRoomBeds(string roomid)
+        {
+
+            var RoomBeds = ((from rb in _context.RoomBeds
+                        join bt in _context.BedTypes on rb.TypesOfBedsID equals bt.TypesOfBedsID
+                        where rb.RoomID == roomid
+                        select new RoomBedVM
+                        {
+                            Name = bt.Name,
+                            Amount = rb.Amount
+                        }));
+            return RoomBeds;
         }
 
     }
