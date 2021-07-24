@@ -372,7 +372,8 @@ namespace BS_Adoga.Controllers
         {
             //List<Facility> facilities = _context.Facilities.ToList();
             //ViewBag.Facilities = facilities;
-            var test = _repository.GetHotelRoomAll(hotelid);
+            //var test = _repository.GetHotelRoomAll(hotelid);
+
             return View(_repository.GetHotelRoomAll(hotelid));
         }
 
@@ -432,6 +433,17 @@ namespace BS_Adoga.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Room room = _context.Rooms.Find(roomid);
+
+            //顯示所有床型名稱跟數量
+            string BedNameString = string.Empty;
+            foreach (var item in _repository.GetRoomBeds(roomid))
+            {
+                BedNameString = string.Join("", BedNameString + $"{item.Name}X{item.Amount}，");
+            }
+            if (!string.IsNullOrEmpty(BedNameString)) BedNameString = BedNameString.Remove(BedNameString.LastIndexOf("，"), 1);
+            else BedNameString = "空";
+            ViewBag.BedNameString = BedNameString;
+
             if (room == null)
             {
                 return HttpNotFound();
@@ -564,6 +576,66 @@ namespace BS_Adoga.Controllers
                 }
 
             }
+        }
+
+        //房間床型新增
+        public ActionResult RoomBedCreate(string roomid)
+        {
+            var hotelid = _context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault();
+            ViewBag.hotelid = hotelid.HotelID;
+            ViewBag.TypesOfBedsID = new SelectList(_context.BedTypes, "TypesOfBedsID", "Name");
+            ViewBag.RoomID = new SelectList(_context.Rooms.Where(x => x.RoomID == roomid), "RoomID", "RoomName");
+            return View();
+        }
+
+        //房間床型新增
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RoomBedCreate([Bind(Include = "RoomID,TypesOfBedsID,Amount")] RoomBed roomBed)
+        {
+            var hotelid = _context.Rooms.Where(x => x.RoomID == roomBed.RoomID).FirstOrDefault();
+            ViewBag.hotelid = hotelid.HotelID;
+            if (ModelState.IsValid)
+            {
+                _context.RoomBeds.Add(roomBed);
+                _context.SaveChanges();
+                return Redirect($"~/Hotel/Room/{hotelid.HotelID}");
+            }
+
+            ViewBag.TypesOfBedsID = new SelectList(_context.BedTypes, "TypesOfBedsID", "Name", roomBed.TypesOfBedsID);
+            ViewBag.RoomID = new SelectList(_context.Rooms.Where(x => x.RoomID == roomBed.RoomID), "RoomID", "RoomName", roomBed.RoomID);
+            return View(roomBed);
+        }
+
+
+        //房間床型刪除
+        public ActionResult RoomBedDelete(string roomid)
+        {
+            var roomBeds = _context.RoomBeds.Where(x => x.RoomID == roomid).ToList();
+            
+            if (roomBeds != null)
+            {
+                foreach (var item in roomBeds)
+                {
+                    _context.RoomBeds.Remove(item);
+                    _context.SaveChanges();
+                }
+            }
+
+            var hotelid = _context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault();
+            return Redirect($"~/Hotel/Room/{hotelid.HotelID}");
+        }
+
+
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

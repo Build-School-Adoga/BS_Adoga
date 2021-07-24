@@ -17,7 +17,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>true</Use64BitIISExpress>
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
     <IISExpressSSLPort>44352</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -2459,10 +2460,10 @@
     <Content Include="Views\Function\HotelRoomEdit.cshtml" />
     <Content Include="Views\Function\HotelRoomDetails.cshtml" />
     <Content Include="Views\Function\RoomDetailsIndex.cshtml" />
+    <Content Include="Views\Function\RoomBedCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Asset\CDN\CSS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />

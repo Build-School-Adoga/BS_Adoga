@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<BS_Adoga.Models.DBContext.Room>
+@using BS_Adoga.Repository
 @{
     ViewBag.Title = "HotelRoomsIndex";
     Layout = "~/Views/Shared/_FunctionPage.cshtml";
+    string hotelname = @Model.FirstOrDefault().Hotel.HotelName;
 }
 
 @section topCSS
@@ -30,7 +32,7 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">房型清單</h1>
+            <h1 class="h3 mb-2 text-gray-800">@hotelname 房型清單</h1>
             <p class="mb-4">
                 房型
             </p>
@@ -45,12 +47,13 @@
                         <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>@Html.DisplayNameFor(model => model.RoomID)</th>
-                                    <th>@Html.DisplayNameFor(model => model.HotelID)</th>
+                                    @*<th>@Html.DisplayNameFor(model => model.RoomID)</th>*@
+                                    @*<th>@Html.DisplayNameFor(model => model.HotelID)</th>*@
                                     <th>@Html.DisplayNameFor(model => model.RoomName)</th>
                                     <th>@Html.DisplayNameFor(model => model.NumberOfPeople)</th>
                                     <th>@Html.DisplayNameFor(model => model.RoomCount)</th>
                                     <th>@Html.DisplayNameFor(model => model.RoomPrice)</th>
+                                    <th>床型</th>
                                     <th>@Html.DisplayNameFor(model => model.BathroomType.Name)</th>
                                     <th>@Html.DisplayNameFor(model => model.NoSmoking)</th>
                                     <th>@Html.DisplayNameFor(model => model.Breakfast)</th>
@@ -58,16 +61,18 @@
                                     <th>@Html.DisplayNameFor(model => model.TV)</th>
                                     @*<th>@Html.DisplayNameFor(model => model.Logging)</th>*@
                                     <td>房間日期展開</td>
+                                    <td>床型增刪</td>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>@Html.DisplayNameFor(model => model.RoomID)</th>
-                                    <th>@Html.DisplayNameFor(model => model.HotelID)</th>
+                                    @*<th>@Html.DisplayNameFor(model => model.RoomID)</th>*@
+                                    @*<th>@Html.DisplayNameFor(model => model.HotelID)</th>*@
                                     <th>@Html.DisplayNameFor(model => model.RoomName)</th>
                                     <th>@Html.DisplayNameFor(model => model.NumberOfPeople)</th>
                                     <th>@Html.DisplayNameFor(model => model.RoomCount)</th>
                                     <th>@Html.DisplayNameFor(model => model.RoomPrice)</th>
+                                    <th>床型</th>
                                     <th>@Html.DisplayNameFor(model => model.BathroomType.Name)</th>
                                     <th>@Html.DisplayNameFor(model => model.NoSmoking)</th>
                                     <th>@Html.DisplayNameFor(model => model.Breakfast)</th>
@@ -75,18 +80,39 @@
                                     <th>@Html.DisplayNameFor(model => model.TV)</th>
                                     @*<th>@Html.DisplayNameFor(model => model.Logging)</th>*@
                                     <td>房間日期展開</td>
+                                    <td>床型增刪</td>
                                 </tr>
                             </tfoot>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
                                     <tr onclick="location.href = '/Hotel/Room/Edit/@item.HotelID-@item.RoomID'">
-                                        <td>@Html.DisplayFor(modelItem => item.RoomID)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.HotelID)</td>
+                                        @*<td>@Html.DisplayFor(modelItem => item.RoomID)</td>*@
+                                        @*<td>@Html.DisplayFor(modelItem => item.HotelID)</td>*@
                                         <td>@Html.DisplayFor(modelItem => item.RoomName)</td>
                                         <td>@Html.DisplayFor(modelItem => item.NumberOfPeople)</td>
                                         <td>@Html.DisplayFor(modelItem => item.RoomCount)</td>
                                         <td>@Html.DisplayFor(modelItem => item.RoomPrice)</td>
+                                        @*顯示所有床型名稱跟數量*@
+                                        @{
+                                            FunctionRepository _repository = new FunctionRepository(new AdogaContext());
+                                            string BedNameString = string.Empty;
+                                            foreach (var item2 in _repository.GetRoomBeds(item.RoomID))
+                                            {
+                                                BedNameString = string.Join("", BedNameString + $"{item2.Name}X{item2.Amount}，");
+                                            }
+                                            if (!string.IsNullOrEmpty(BedNameString))
+                                            {
+                                                BedNameString = BedNameString.Remove(BedNameString.LastIndexOf("，"), 1);
+                                                <td>@BedNameString</td>
+                                            }
+                                            else
+                                            {
+                                                BedNameString = "空";
+                                                <td class="btn-danger">@BedNameString</td>
+                                            }
+                                        }
+                                        @*<td class="text-danger">@BedNameString</td>*@
                                         <td>@Html.DisplayFor(modelItem => item.BathroomType.Name)</td>
                                         <td>@Html.DisplayFor(modelItem => item.NoSmoking)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Breakfast)</td>
@@ -94,6 +120,13 @@
                                         <td>@Html.DisplayFor(modelItem => item.TV)</td>
                                         @*<td>@Html.DisplayFor(modelItem => item.Logging)</td>*@
                                         <td>@Html.ActionLink("每日房間清單", "RoomDetailsIndex", new { roomid = item.RoomID }, htmlAttributes: new { @class = "btn btn-danger" })</td>
+
+                                        <td>
+                                            @Html.ActionLink("新增床型", "RoomBedCreate", new { roomid = item.RoomID }, htmlAttributes: new { @class = "btn btn-primary" })
+                                            @Html.ActionLink("刪除床型", "RoomBedDelete", new { roomid = item.RoomID }, htmlAttributes: new { @class = "btn btn-danger" })
+                                        </td>
+
+
                                     </tr>
                                 }
                             </tbody>
