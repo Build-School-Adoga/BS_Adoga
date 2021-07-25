@@ -84,32 +84,32 @@ namespace BS_Adoga.Controllers
             ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
 
             //分頁
-            ViewBag.CurrentSort = sortOrder;
-            if (currentOrder != null) { page = 1; }
-            else { currentOrder = currentFilter; }
-            ViewBag.CurrentFilter = currentFilter;
+            //ViewBag.CurrentSort = sortOrder;
+            //if (currentOrder != null) { page = 1; }
+            //else { currentOrder = currentFilter; }
+            //ViewBag.CurrentFilter = currentFilter;
 
-            int pageSize = 1;
-            int pageNumber = (page ?? 1); //如果page裡面沒有值就會回傳1，else就傳自己的值
+            //int pageSize = 1;
+            //int pageNumber = (page ?? 1); //如果page裡面沒有值就會回傳1，else就傳自己的值
 
-            switch (sortOrder)
-            {
-                case "star_desc":
-                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.Star).ToPagedList(pageNumber, pageSize);
-                    break;
+            //switch (sortOrder)
+            //{
+            //    case "star_desc":
+            //        data.PageOfHotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.Star).ToPagedList(pageNumber, pageSize);
+            //        break;
 
-                case "price_desc":
-                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.I_RoomVM.RoomPrice).ToPagedList(pageNumber, pageSize);
-                    break;
+            //    case "price_desc":
+            //        data.PageOfHotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.I_RoomVM.RoomPrice).ToPagedList(pageNumber, pageSize);
+            //        break;
 
-                case "Price":
-                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderBy(o => o.I_RoomVM.RoomPrice).ToPagedList(pageNumber, pageSize);
-                    break;
+            //    case "Price":
+            //        data.PageOfHotelSearchVM = data.HotelSearchVM.OrderBy(o => o.I_RoomVM.RoomPrice).ToPagedList(pageNumber, pageSize);
+            //        break;
 
-                default:
-                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderBy(o => o.Star).ToPagedList(pageNumber, pageSize);
-                    break;
-            }
+            //    default:
+            //        data.PageOfHotelSearchVM = data.HotelSearchVM.OrderBy(o => o.Star).ToPagedList(pageNumber, pageSize);
+            //        break;
+            //}
 
             return View(data);
             //return View();

@@ -1,10 +1,11 @@
-﻿import card from './SearchFacilitiesComponent.js'
+﻿import cardComponent from './SearchFacilitiesComponent.js'
+
+//import { forEach } from "../../StartbootstrapAdminPages/vendor/fontawesome-free/js/v4-shims";
 
 var allHotel = '';
-
-
+var list;
 //axios去get資料先
-debugger;
+//debugger;
 axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
     //一開始用params裡面的資料去跑Api抓資料；成功抓完資料就會跑response
     params: {
@@ -16,25 +17,33 @@ axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
         room: filternav.room,
     }
 }).then(function (response) {
-    debugger;
+    //debugger;
     allHotel = response.data;
     console.log(allHotel);
     //console.log(response.data);
-    var list = new Vue({
+
+    list = new Vue({
         el: "#new_card",
         data: {
-            page: 1,
             hotelList: allHotel
         },
         components: {
-            'hotel-card':card
+            'hotel-card': cardComponent
+            //'hotel-card', {
+            //    props: ['item'],
+            //    template: '<p>{{item.HotelName}}</p>'
+            //}
         }
-    });
+    })
+
+    //Vue.component('hotel-card', {})
+    
+    //console.log(list.hotelList);
     debugger;
 }).catch((error) => console.log(error))
 
-
-
+//console.log(list.hotelList);
+//console.log(allHotel);
 function getCurrentBindData(){
     return list.$data.hotelList;
 }
@@ -63,12 +72,16 @@ function NextPage() {
     }
 }
 
+function turnback() {
+    alert("turnback");
+}
 $(document).ready(function () {
     //Binding();
     //$('#orderPrice').click(OrderPrice);
     //$('#orderStar').click(OrderStar);
     //$('#next').click(NextPage);
 
+    
 });
 
 

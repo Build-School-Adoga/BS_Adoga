@@ -80,8 +80,6 @@
                     }
                 ]
             },
-            computed: {
-            },
             methods: {
                 minus: function (e) {
                     switch (e) {
@@ -134,7 +132,7 @@
     <script src="~/Asset/js/Search/Search.js"></script>
     <script src="~/Asset/js/Search/_SearchFilterPartial.js"></script>
     <script src="~/Asset/js/Search/SearchFacilities.js" type="module"></script>
-
+    @*<script src="~/Asset/js/Search/SearchPriceFormat.js" type="module"></script>*@
 
 }
 
@@ -532,19 +530,19 @@
                 }
                 else
                 {
-                    foreach (var card in Model.PageOfHotelSearchVM)
+                    @*foreach (var card in Model.PageOfHotelSearchVM)
                     {
                         @Html.Partial("_SearchCardPartial", card);
-                    }
-                    //<hotel-card v-for="hotel in allHotel" v-bind:cat></hotel-card>
+                    }*@
+                    <hotel-card v-for="hotel in hotelList" :hcard="hotel"></hotel-card>
                 }
             }
         </div>
         <br />
         @*<button id="next"> next page </button>*@
 
-        @Html.PagedListPager(Model.PageOfHotelSearchVM, page => Url.Action("Search",
-            new { sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, page }))
+        @*@Html.PagedListPager(Model.PageOfHotelSearchVM, page => Url.Action("Search",
+            new { sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, page }))*@
         
 
 

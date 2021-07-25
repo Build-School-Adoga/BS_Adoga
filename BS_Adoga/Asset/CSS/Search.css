@@ -443,6 +443,7 @@ i.fas.fa-star {
     display: flex;
     flex-direction: row;
     max-height: 250px;
+    margin-bottom: 10px;
 }
 
 /* 卡片照片*/
@@ -476,11 +477,14 @@ i.fas.fa-star {
             right: 0;
             color: white;
             text-align: center;
-            font-size: 16px;
+            font-size: 12px;
+            display:flex;
+            justify-content:center;
+            align-content: center;
         }
 
             .infomation .card .img .small-img .see-more p {
-                padding: 17px 0;
+                /*padding: 17px 0;*/
             }
 
 /* 卡片(右边) 价钱栏 */
@@ -489,13 +493,13 @@ i.fas.fa-star {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-right: 10px;
 }
 
     .infomation .card .rank .offer p {
         background-color: #E12D2D;
         color: white;
-        /*width: max-content;*/
-        width: fit-content();
+        width: max-content;
         padding: 3px 6px;
         margin-top: 3px;
     }
@@ -527,13 +531,23 @@ i.fas.fa-star {
         margin-right: 0;
     }
 
-    .infomation .card .rank button {
-        padding: 10px 0;
+    .infomation .card .rank button.moreInfo {
+        color: white;
+        padding: 10px 20px;
+        background-color: #639BEE;
+        border: none;
+        border-radius: 5px;
+        width: max-content;
+        align-self: flex-end;
     }
+    .infomation .card .rank button.moreInfo:hover {
+        background-color: #0D6EFD;
+    }
+
 
 /* 卡片详细内容 */
 .infomation .card .detail {
-    width: 60%;
+    width: 50%;
     padding: 5px 10px 10px;
 }
 
