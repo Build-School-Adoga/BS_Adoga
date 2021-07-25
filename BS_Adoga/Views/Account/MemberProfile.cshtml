@@ -67,7 +67,15 @@
                     </div>
                     <p class="display-email-value">
                         @Model.Email
+                        if(@Model.VerifyEmail==false||@Model.VerifyEmail==null)
+                        {
+                        <span class="email-verify-badge">未通過驗證</span>
+                        }
+                        else
+                        {
                         <span class="email-verify-badge">已通過驗證</span>
+                        }
+
                     </p>
                 </div>
             </div>
