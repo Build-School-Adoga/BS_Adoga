@@ -66,22 +66,22 @@
                         <span id="verify-email">點此驗證電子信箱</span>
                     </div>
                     <p class="display-email-value">
-                        @Model.Email
-                        if(@Model.VerifyEmail==false||@Model.VerifyEmail==null)
-                        {
-                        <span class="email-verify-badge">未通過驗證</span>
-                        }
-                        else
-                        {
-                        <span class="email-verify-badge">已通過驗證</span>
-                        }
 
                     </p>
+                    @Model.Email
+                    @if (Model.VerifyEmail == false)
+                    {
+                        <span class="email-verify-badge">未通過驗證</span>
+                    }
+                    else
+                    {
+                        <span class="email-verify-badge">已通過驗證</span>
+                    }
                 </div>
             </div>
             <!-- <div class="email-component-verify">
-              <span class="badge bg-info text-dark">已通過驗證</span>
-            </div> -->
+      <span class="badge bg-info text-dark">已通過驗證</span>
+    </div> -->
             <div class="verify-email-component component-wrap">
                 <div class="robot-error mb-4">
                     <p class="mb-0"> 請完成「我不是機器人」驗證程序</p>
