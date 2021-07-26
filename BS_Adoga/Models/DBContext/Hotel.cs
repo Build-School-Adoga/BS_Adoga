@@ -13,7 +13,9 @@ namespace BS_Adoga.Models.DBContext
         public Hotel()
         {
             Facilities = new HashSet<Facility>();
+            HotelEmpMappingHotels = new HashSet<HotelEmpMappingHotel>();
             HotelImages = new HashSet<HotelImage>();
+            HotelImageUploads = new HashSet<HotelImageUpload>();
             Rooms = new HashSet<Room>();
         }
 
@@ -57,7 +59,13 @@ namespace BS_Adoga.Models.DBContext
         public virtual ICollection<Facility> Facilities { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HotelEmpMappingHotel> HotelEmpMappingHotels { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HotelImage> HotelImages { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HotelImageUpload> HotelImageUploads { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Rooms { get; set; }
