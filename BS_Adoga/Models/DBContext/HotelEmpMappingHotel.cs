@@ -1,4 +1,4 @@
-namespace BS_Adoga.Models.DBContext
+﻿namespace BS_Adoga.Models.DBContext
 {
     using System;
     using System.Collections.Generic;
@@ -6,12 +6,11 @@ namespace BS_Adoga.Models.DBContext
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("RoomImage")]
-    public partial class RoomImage
+    public partial class HotelEmpMappingHotel
     {
         [Key]
-        [StringLength(55)]
-        public string ImageID { get; set; }
+        [StringLength(80)]
+        public string MappingID { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -19,12 +18,10 @@ namespace BS_Adoga.Models.DBContext
 
         [Required]
         [StringLength(50)]
-        public string RoomID { get; set; }
+        public string HotelEmployeeID { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string ImageURL { get; set; }
+        public virtual Hotel Hotel { get; set; }
 
-        public virtual Room Room { get; set; }
+        public virtual HotelEmployee HotelEmployee { get; set; }
     }
 }
