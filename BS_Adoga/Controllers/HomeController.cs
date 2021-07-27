@@ -113,8 +113,8 @@ namespace BS_Adoga.Controllers
             return RedirectToAction("HotelDetail", "HotelDetail", new
             {
                 hotelName = TempData["search"],
-                startDate = TempData["start"],
-                endDate = TempData["end"],
+                startDate = DateTime.Parse(TempData["start"].ToString()).ToString("yyyy-MM-dd"),
+                endDate = DateTime.Parse(TempData["end"].ToString()).ToString("yyyy-MM-dd"),
                 orderRoom = TempData["rom"],
                 adult = TempData["ple"],
                 child = TempData["kid"]

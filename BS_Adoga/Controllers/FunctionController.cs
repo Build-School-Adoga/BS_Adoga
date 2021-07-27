@@ -484,5 +484,20 @@ namespace BS_Adoga.Controllers
             return View(hotelRoomCreateVM);
         }
 
+        [HttpGet]
+        public ActionResult HotelImagePage()
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult HotelImageUpload()
+        {
+            return View();
+        }
     }
 }

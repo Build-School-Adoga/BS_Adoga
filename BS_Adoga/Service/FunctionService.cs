@@ -72,5 +72,21 @@ namespace BS_Adoga.Service
             streamReader.Close();
             return result;
         }
+
+        public OperationResult HotelImage_UpdataOrAdd()
+        {
+            var result = new OperationResult();
+            try
+            {
+
+                result.IsSuccessful = true;
+            }
+            catch(Exception ex)
+            {
+                result.IsSuccessful = false;
+                result.Exception = ex;
+            }
+            return result;
+        }
     }
 }

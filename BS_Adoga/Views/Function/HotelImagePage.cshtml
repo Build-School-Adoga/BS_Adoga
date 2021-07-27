@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewBag.Title = "HotelImagePage";
+    Layout = "~/Views/Shared/_FunctionPage.cshtml";
+}
+@section topCSS{
+    <link href="~/Asset/CSS/Function/HotelImagePage.css" rel="stylesheet" />
+}
+<div class="container mt-5">
+    <h2 class="m-3">飯店圖片</h2>
+    <div class="media-group row d-flex ">
+        <div class="hotel-video col-7 gx-2">
+            <div class="img-wrap">
+                <img id="show-img-0"
+                     src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768"
+                     alt="">
+                <div class="show-shadow"></div>
+            </div>
+        </div>
+        <div class="pic-group col-5 gx-0 ">
+            <div class="try-mediumpic">
+                <div class="img-wrap">
+                    <img id="show-img-1" class="medium-pic"
+                         src="http://pix6.agoda.net/hotelImages/234438/-1/473caa63348a75f0a87e7ea2c7868e81.jpg?s=1024x768">
+                    <div class="show-shadow"></div>
+                    <a class="add-fav-button"><i class="fas fa-heart"></i></a>
+                </div>
+            </div>
+            <div class="two-pic d-flex mt-1 ">
+                <div class="img-wrap me-1">
+                    <img id="show-img-2" class=""
+                         src="https://pix6.agoda.net/hotelImages/234/234438/234438_16020314120039601807.jpg?s=1024x768">
+                    <div class="show-shadow"></div>
+                </div>
+                <div class="img-wrap">
+                    <img id="show-img-3" class=""
+                         src="https://pix6.agoda.net/hotelImages/234438/-1/14b6f310d6c82575411bdc92ebd9a421.jpg?s=1024x768">
+                    <div class="show-shadow"><a href="#" class="album-link fz-14">【完整相簿】共12張</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="preview-img row border">
+
+
+    </div>
+
+    <input id="upload-img" type="file" class="file" data-preview-file-type="text" multiple>
+    <button id="upload-img-btn" class="btn btn-primary">上傳圖片</button>
+</div>
+
+<template id="img-box">
+    <figure class="img-figure col-4 border">
+        <div class="img-wrap">
+            <img src="" alt="">
+        </div>
+        <div class="figcap-wrap">
+            <p class="img-name"></p>
+            <p class="img-size"></p>
+        </div>
+        <button class="btn btn-danger">刪除</button>
+    </figure>
+</template>
+
+@section endJS{
+    <!--mine-->
+    <script>
+
+        var uploadImg = document.getElementById('upload-img');
+        var uploadImgBtn = document.getElementById('upload-img-btn');
+
+        //傳給api的
+        var formData = new FormData();
+
+        uploadImg.addEventListener('change', function () {
+            console.log(uploadImg.files)
+            readImg(uploadImg)
+        })
+        uploadImgBtn.addEventListener('click', CloudinaryUpload)
+
+        var previewContainer = document.querySelector('.preview-img');
+        var imgBox = document.getElementById('img-box');
+
+        function readImg(img) {
+            if (img.files && img.files.length > 0) {
+
+                //Length表示有多少個img要上傳。
+                formData.set('Length', img.files.length)
+
+                for (var index = 0; index < img.files.length; index++) {
+                    console.log(img.files[index].name)
+
+                    var fileName = img.files[index].name;
+                    var fileSize = img.files[index].size / 1024
+                    var fileSizeStr = fileSize + ' kb'
+                    if (fileSize >= 1000) {
+                        fileSize = fileSize / 1024
+                        fileSizeStr = fileSize + ' mb'
+                    }
+
+                    //publicId放這邊，不放在reader.onload裡面，因為reader.onload並不是跟for處於同一個迴圈，它自己會跑三次，
+                    //如果放reader.onload裡面，每個publicId會 = 最後截取出來的publicId，會變成每個都一樣的檔名。
+                    var public_id = fileName.substring(0, fileName.lastIndexOf('.'));
+                    formData.set(`${'PublicId' + index}`, public_id.toString());
+
+
+                    var i = 0;
+                    var reader = new FileReader();
+                    reader.readAsDataURL(img.files[index]);
+
+                    //reader.onload並不是跟for處於同一個迴圈，它自己會跑三次
+                    reader.onload = function (e) {
+                        var clone_imgBox = imgBox.content.cloneNode(true);
+                        var previewImg = clone_imgBox.querySelector('img');
+                        var previewImgName = clone_imgBox.querySelector('.img-name');
+                        var previewImgSize = clone_imgBox.querySelector('.img-size');
+                        var showImg = document.getElementById('show-img-' + i);
+
+                        previewImgName.innerText = fileName
+                        previewImgSize.innerText = fileSizeStr
+                        // debugger;
+                        previewImg.alt = fileName
+                        previewContainer.appendChild(clone_imgBox);
+                        previewImg.src = this.result;
+                        showImg.src = this.result;
+
+                        formData.set(`${'File' + i}`, this.result.toString());
+                        i++;
+
+                        // fileForCloudinary.push({
+                        //     PublicId: public_id,
+                        //     File: this.result
+                        // });
+                        // console.log('雲 : ' + fileForCloudinary[i].PublicId + fileForCloudinary[i].File);
+                    }
+                };
+            }
+        }
+
+        function CloudinaryUpload() {
+            axios({
+                method: 'POST',
+                url: "https://localhost:44352/api/Function/UploadImage",
+                data: formData,
+                headers: { 'Content-Type': 'multipart/form-data' },
+            }).then((response) =>
+                console.log(response)
+            ).catch((error) => {
+                console.log(error)
+            })
+        }
+
+    </script>
+}
+

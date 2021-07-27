@@ -1,0 +1,116 @@
+﻿
+
+/*上傳圖片區塊*/
+.preview-img {
+    display: flex;
+    overflow: auto;
+}
+
+.img-figure {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* height: 300px; */
+    padding: 10px;
+}
+
+.preview-img img {
+    width: 100%;
+    border-radius: 3px;
+}
+
+/*預覽圖片呈現效果的區塊*/
+.media-group {
+    width: 900px;
+    /* margin-right: 20px; */
+    margin: 0 auto 20px auto;
+}
+
+    .media-group img {
+        width: 100%;
+    }
+
+.hotel-video img {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.hotel-video .img-wrap img{
+    height:375px;
+    overflow:hidden;
+}
+
+.pic-group > .img-wrap img {
+    border-top-right-radius: 5px;
+}
+
+.pic-group .img-wrap,
+.hotel-video .img-wrap {
+    position: relative;
+}
+
+.img-wrap .show-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.two-pic img {
+    width: 100%;
+    height: 104%;
+    /* width: 165px; */
+    /* height: 128px; */
+}
+
+.two-pic .img-wrap .show-shadow {
+    height: 104%;
+}
+
+.two-pic .img-wrap:last-child img {
+    border-bottom-right-radius: 5px;
+}
+
+.two-pic .img-wrap:last-child .show-shadow {
+    text-align: center;
+    line-height: 128px;
+    background-color: rgba(0, 0, 0, 0.356);
+}
+
+    .img-wrap .show-shadow:hover,
+    .two-pic .img-wrap:last-child .show-shadow:hover,
+    .hotel-video .show-shadow:hover {
+        background-color: rgba(0, 0, 0, 0.493);
+    }
+
+.add-fav-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: block;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    color: rgb(202, 202, 202);
+    background-color: rgb(248, 248, 248);
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+    .add-fav-button:hover {
+        color: rgb(221, 59, 59);
+    }
+
+.album-link {
+    display: inline;
+    font-family: 'Noto Sans TC', serif;
+    text-decoration: none;
+    color: #fff;
+}
+
+.show-shadow:hover .album-link {
+    color: rgb(88, 150, 243);
+}

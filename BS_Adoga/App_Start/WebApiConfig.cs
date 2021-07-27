@@ -29,11 +29,11 @@ namespace BS_Adoga
                 defaults: new { controller = "DetailApi", action = "GetHotelFacilities", id = RouteParameter.Optional }
             );
 
-            config.Routes.MapHttpRoute(
-                name: "GetEachHotelOneRoom",
-                routeTemplate: "api/HotelDetail/GetEachHotelOneRoom",
-                defaults: new { controller = "DetailApi", action = "GetEachHotelOneRoom", id = RouteParameter.Optional }
-            );
+            //config.Routes.MapHttpRoute(
+            //    name: "GetEachHotelOneRoom",
+            //    routeTemplate: "api/HotelDetail/GetEachHotelOneRoom",
+            //    defaults: new { controller = "DetailApi", action = "GetEachHotelOneRoom", id = RouteParameter.Optional }
+            //);
 
             //Irene
             config.Routes.MapHttpRoute(
@@ -41,6 +41,13 @@ namespace BS_Adoga
                routeTemplate: "api/Search/GetAllSearchFicilities",
                defaults: new { controller = "Search", action = "GetAllSearchFicilities", id = RouteParameter.Optional }
            );
+
+
+            config.Routes.MapHttpRoute(
+                name: "UploadImage",
+                routeTemplate: "api/Function/UploadImage",
+                defaults: new { controller = "FunctionApi", action = "UploadImage", id = RouteParameter.Optional }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
