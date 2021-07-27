@@ -531,7 +531,7 @@ i.fas.fa-star {
         margin-right: 0;
     }
 
-    .infomation .card .rank button.moreInfo {
+    .infomation .card .rank a.moreInfo {
         color: white;
         padding: 10px 20px;
         background-color: #639BEE;
@@ -540,7 +540,7 @@ i.fas.fa-star {
         width: max-content;
         align-self: flex-end;
     }
-    .infomation .card .rank button.moreInfo:hover {
+    .infomation .card .rank a.moreInfo:hover {
         background-color: #0D6EFD;
     }
 

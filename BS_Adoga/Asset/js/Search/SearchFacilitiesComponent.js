@@ -1,7 +1,10 @@
 ﻿export default {
-    props: {
-        hcard: ['hotel'],
-    },
+    props:['hcard','fnav']
+    //{
+    //    hcard: ['hotel'],
+    //    fnav: ['fnav']
+    //}
+    ,
     filters: {
         PriceFormat: function (price) {
             if (!price) return '0'
@@ -12,6 +15,12 @@
             const intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
 
             return intPartFormat
+        }
+    },
+    methods: {
+        emitEvent: function (name) {
+            alert('/HotelDetail/' + name + ' - (' + this.fnav.start + ') - (' + this.fnav.end + ') - ' + this.fnav.room + ' - ' + this.fnav.adult + ' -' + this.fnav.kid);
+            window.location.href = '/HotelDetail/' +name+ '-(' +this.fnav.start+')-(' +this.fnav.end+ ')-' +this.fnav.room+ '-' +this.fnav.adult+ '-' +this.fnav.kid;
         }
     },
     template:
@@ -54,9 +63,9 @@
                     <del v-if="hcard.I_RoomDetailVM.RoomCount!=0">{{hcard.I_RoomVM.RoomPrice | PriceFormat}}</del>
                     <ins>NT$<span>{{parseInt(hcard.I_RoomVM.RoomPrice*(1-hcard.I_RoomDetailVM.RoomDiscount)) | PriceFormat}}</span></ins>
                 </div>
-                <button class="moreInfo">查看空房情況</button>
+                <a @click="emitEvent(hcard.HotelName)" class="moreInfo btn">查看空房情況</a>
             </div>
         </div>`
 }
-                //@* ActionLink沒辦法進去HotelDetail的Action *@
-                //@Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = Model.HotelID, startDate = "2021/06/20", endDate = "2021/06/22", orderRoom = 2, adult = 6 }, new { @class = "btn btn-primary", })
+
+//+'-('+filternav.start+')-('+filternav.end+')-'+filternav.room+'-'+filternav.adult+'-'+filternav.kids

@@ -530,11 +530,7 @@
                 }
                 else
                 {
-                    @*foreach (var card in Model.PageOfHotelSearchVM)
-                    {
-                        @Html.Partial("_SearchCardPartial", card);
-                    }*@
-                    <hotel-card v-for="hotel in hotelList" :hcard="hotel"></hotel-card>
+                    <hotel-card v-for="hotel in hotelList" :hcard="hotel" :fnav="filternav"></hotel-card>
                 }
             }
         </div>

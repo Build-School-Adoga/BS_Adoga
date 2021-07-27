@@ -4,8 +4,8 @@
 
 var allHotel = '';
 var list;
+
 //axios去get資料先
-//debugger;
 axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
     //一開始用params裡面的資料去跑Api抓資料；成功抓完資料就會跑response
     params: {
@@ -17,33 +17,37 @@ axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
         room: filternav.room,
     }
 }).then(function (response) {
-    //debugger;
     allHotel = response.data;
-    console.log(allHotel);
-    //console.log(response.data);
+
+    function DateFormat(date) {
+        var date = new Date(date);
+        return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
+    }
+
+    var startDate = DateFormat(filternav.startDate);
+    var endDate = DateFormat(filternav.endDate);
 
     list = new Vue({
         el: "#new_card",
         data: {
-            hotelList: allHotel
+            hotelList: allHotel,
+            filternav: {
+                city: filternav.Value,
+                start: startDate,
+                end: endDate,
+                adult: filternav.adult,
+                kid: filternav.kids,
+                room: filternav.room,
+            },
         },
         components: {
             'hotel-card': cardComponent
-            //'hotel-card', {
-            //    props: ['item'],
-            //    template: '<p>{{item.HotelName}}</p>'
-            //}
         }
     })
-
-    //Vue.component('hotel-card', {})
-    
-    //console.log(list.hotelList);
     debugger;
 }).catch((error) => console.log(error))
 
-//console.log(list.hotelList);
-//console.log(allHotel);
+
 function getCurrentBindData(){
     return list.$data.hotelList;
 }
