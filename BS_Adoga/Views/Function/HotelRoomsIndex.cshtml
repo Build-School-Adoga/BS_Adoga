@@ -3,7 +3,15 @@
 @{
     ViewBag.Title = "HotelRoomsIndex";
     Layout = "~/Views/Shared/_FunctionPage.cshtml";
-    string hotelname = @Model.FirstOrDefault().Hotel.HotelName;
+
+    //舊取得hotelname方式 改用ViewBag從action取得
+    //string hotelname;
+    //if (@Model.FirstOrDefault().Hotel.HotelName == null)
+    //{
+    //    hotelname = string.Empty;
+    //}
+    //else { hotelname = @Model.FirstOrDefault().Hotel.HotelName; }
+
 }
 
 @section topCSS
@@ -32,7 +40,7 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">@hotelname 房型清單</h1>
+            <h1 class="h3 mb-2 text-gray-800">@ViewBag.hotelname 房型清單</h1>
             <p class="mb-4">
                 房型
             </p>

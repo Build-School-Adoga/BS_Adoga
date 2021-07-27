@@ -18,6 +18,10 @@ namespace BS_Adoga.Repository
             _context = new AdogaContext();
         }
 
+        /// <summary>
+        /// 取得所有Hotel的資料到HotelListVM
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<HotelListViewModel> GetHotelList()
         {
             var table = (from h in _context.Hotels
@@ -33,6 +37,44 @@ namespace BS_Adoga.Repository
             return table;
         }
 
+        /// <summary>
+        /// 取得登入的使用者對應到的所有Hotel資料
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<HotelListViewModel> GetHotelListByEmpID(string EmpID)
+        {
+            var table = (from h in _context.Hotels
+                         join EmpMapHotel in _context.HotelEmpMappingHotels on h.HotelID equals EmpMapHotel.HotelID
+                         where EmpMapHotel.HotelEmployeeID == EmpID
+                         select new HotelListViewModel
+                         {
+                             HotelID = h.HotelID,
+                             HotelName = h.HotelName,
+                             HotelEngName = h.HotelEngName,
+                             HotelCity = h.HotelCity,
+                             HotelDistrict = h.HotelDistrict,
+                             HotelAddress = h.HotelAddress
+                         });
+            return table;
+        }
+
+        /// <summary>
+        /// 取得所有Hotel飯店設施 By使用者ID
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Facility> GetHotelFaciliyByEmpID(string EmpID)
+        {
+            var facility = (from f in _context.Facilities
+                            join EmpMapHotel in _context.HotelEmpMappingHotels on f.HotelID equals EmpMapHotel.HotelID
+                            where EmpMapHotel.HotelEmployeeID == EmpID
+                            select f);
+            return facility;
+        }
+
+        /// <summary>
+        /// 取得所有Hotel有幾筆Room房型
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<HotelRoomViewModel> GetHotelRoomCount()
         {
             var table = (from h in _context.Hotels
@@ -47,6 +89,32 @@ namespace BS_Adoga.Repository
             return table;
         }
 
+        /// <summary>
+        /// 取得所有Hotel有幾筆Room房型 By使用者ID
+        /// </summary>
+        /// <param name="EmpID"></param>
+        /// <returns></returns>
+        public IEnumerable<HotelRoomViewModel> GetHotelRoomCountByEmpID(string EmpID)
+        {
+            var table = (from h in _context.Hotels
+                         join EmpMapHotel in _context.HotelEmpMappingHotels on h.HotelID equals EmpMapHotel.HotelID
+                         where EmpMapHotel.HotelEmployeeID == EmpID
+                         select new HotelRoomViewModel
+                         {
+                             HotelID = h.HotelID,
+                             HotelName = h.HotelName,
+                             RoomCount = (from r in _context.Rooms
+                                          where r.HotelID == h.HotelID
+                                          select r.RoomID).Count()
+                         });
+            return table;
+        }
+
+        /// <summary>
+        /// 取得所有房型資料 BY hotelid 
+        /// </summary>
+        /// <param name="hotelid"></param>
+        /// <returns></returns>
         public IEnumerable<Room> GetHotelRoomAll(string hotelid)
         {
             var table =  from r in _context.Rooms

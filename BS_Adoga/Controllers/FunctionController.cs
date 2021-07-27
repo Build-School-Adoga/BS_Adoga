@@ -52,20 +52,30 @@ namespace BS_Adoga.Controllers
         //顯示所有飯店
         public ActionResult HotelIndex()
         {
+            //取得HotelEmpID
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            //取得所有飯店設施清單
             List<Facility> facilities = _context.Facilities.ToList();
             ViewBag.Facilities = facilities;
 
-            return View(_repository.GetHotelList());
+            
+            return View(_repository.GetHotelListByEmpID(user_id));
+
+            #region 顯示所有飯店清單_舊版本
+            //取得所有飯店設施清單
+            //List<Facility> facilities = _context.Facilities.ToList();
+            //ViewBag.Facilities = facilities;
+            //return View(_repository.GetHotelList());  //取得所有Hotel資料
+            #endregion
         }
 
         //飯店建立
         public ActionResult HotelCreate()
         {
-            //string URL = "https://graph.facebook.com/me?access_token=";
-            //string JSON = GetWebRequest(URL);
-            //dynamic json = JValue.Parse(JSON);
-            //string name = json.name;
-
+            //縣市連動區域的選項
             List<SimpleZipCodeVM> Citys = JsonConvert.DeserializeObject<List<SimpleZipCodeVM>>(_service.CityJSON());
             List<SelectListItem> firstitems = new List<SelectListItem>();
             List<SelectListItem> seconditems = new List<SelectListItem>();
@@ -98,6 +108,10 @@ namespace BS_Adoga.Controllers
         public ActionResult HotelCreate(HotelCreateViewModel HotelCreateVM)
         {
             string username = User.Identity.Name;
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
             if (ModelState.IsValid)
             {
                 Hotel hotel = new Hotel()
@@ -114,8 +128,15 @@ namespace BS_Adoga.Controllers
                     Star = HotelCreateVM.Star,
                     Logging = "建立" + "," + username + "," + DateTime.Now.ToString()
                 };
+                HotelEmpMappingHotel Mapping = new HotelEmpMappingHotel()
+                {
+                    MappingID = HotelCreateVM.HotelID + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"),
+                    HotelID = HotelCreateVM.HotelID,
+                    HotelEmployeeID = user_id
+                };
 
                 _context.Hotels.Add(hotel);
+                _context.HotelEmpMappingHotels.Add(Mapping);
                 _context.SaveChanges();
                 return RedirectToAction("HotelIndex");
             }
@@ -271,8 +292,17 @@ namespace BS_Adoga.Controllers
         //顯示所有的飯店設施
         public ActionResult HotelFacilityIndex()
         {
-            var facilities = _context.Facilities.Include(f => f.Hotel);
-            return View(facilities.ToList());
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            return View(_repository.GetHotelFaciliyByEmpID(user_id));
+
+            #region 顯示所有飯店設施清單_舊版本
+            //顯示所有的飯店設施清單
+            //var facilities = _context.Facilities.Include(f => f.Hotel);
+            //return View(facilities.ToList());
+            #endregion
         }
 
         //飯店設施建立
@@ -363,7 +393,14 @@ namespace BS_Adoga.Controllers
             //List<Facility> facilities = _context.Facilities.ToList();
             //ViewBag.Facilities = facilities;
 
-            return View(_repository.GetHotelRoomCount());
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            return View(_repository.GetHotelRoomCountByEmpID(user_id));
+
+            //顯示所有Hotel跟房型數量
+            //return View(_repository.GetHotelRoomCount());
         }
 
         //顯示某飯店所有的房型
@@ -373,6 +410,8 @@ namespace BS_Adoga.Controllers
             //List<Facility> facilities = _context.Facilities.ToList();
             //ViewBag.Facilities = facilities;
             //var test = _repository.GetHotelRoomAll(hotelid);
+            var hotel = _repository.GetHotelList().Where(x => x.HotelID == hotelid).FirstOrDefault();
+            ViewBag.hotelname = hotel.HotelName;
 
             return View(_repository.GetHotelRoomAll(hotelid));
         }
