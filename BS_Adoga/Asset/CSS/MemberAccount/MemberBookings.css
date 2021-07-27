@@ -77,6 +77,8 @@
 .filter-sort-wrap{
     display: flex;
     justify-content: space-between;
+    width:900px;
+
 }
 .filter-my-order{
     /* background-color: #0f0; */

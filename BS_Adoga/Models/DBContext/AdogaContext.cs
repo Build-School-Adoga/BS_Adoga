@@ -18,7 +18,9 @@ namespace BS_Adoga.Models.DBContext
         public virtual DbSet<Facility> Facilities { get; set; }
         public virtual DbSet<Hotel> Hotels { get; set; }
         public virtual DbSet<HotelEmployee> HotelEmployees { get; set; }
+        public virtual DbSet<HotelEmpMappingHotel> HotelEmpMappingHotels { get; set; }
         public virtual DbSet<HotelImage> HotelImages { get; set; }
+        public virtual DbSet<HotelImageUpload> HotelImageUploads { get; set; }
         public virtual DbSet<MessageBoard> MessageBoards { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
@@ -61,13 +63,28 @@ namespace BS_Adoga.Models.DBContext
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Hotel>()
+                .HasMany(e => e.HotelEmpMappingHotels)
+                .WithRequired(e => e.Hotel)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Hotel>()
                 .HasMany(e => e.HotelImages)
+                .WithRequired(e => e.Hotel)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Hotel>()
+                .HasMany(e => e.HotelImageUploads)
                 .WithRequired(e => e.Hotel)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Hotel>()
                 .HasMany(e => e.Rooms)
                 .WithRequired(e => e.Hotel)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HotelEmployee>()
+                .HasMany(e => e.HotelEmpMappingHotels)
+                .WithRequired(e => e.HotelEmployee)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Order>()

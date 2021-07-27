@@ -73,6 +73,54 @@ namespace BS_Adoga.Service
             return result;
         }
 
+        //展開一個月的RoomDetail
+        public OperationResult CreateRoomDetailExpansion(string year,string month, string roomid,string username)
+        {
+            string CheckInDate = $"{year}/{month}/1 15:00:00";
+            string CheckOutDate = $"{year}/{month}/2 11:00:00";
+
+            DateTime CheckInDateObject = Convert.ToDateTime(CheckInDate);
+            DateTime CheckOutDateObject = Convert.ToDateTime(CheckOutDate);
+            DateTime NextMonthFirstDayObject = CheckInDateObject.AddMonths(1);
+
+            var result = new OperationResult();
+            try
+            {
+                var repository = new DBRepository(new AdogaContext());
+                Room basic = repository.GetAll<Room>().Where(x => x.RoomID == roomid).FirstOrDefault();
+
+                //一直加傳入的當月資料直到下個月的第一天為止
+                while (CheckInDateObject != NextMonthFirstDayObject)
+                {
+                    RoomsDetail roomsDetail = new RoomsDetail()
+                    {
+                        RDID = CheckInDateObject.ToString("yyyy-M-d-") + roomid,
+                        RoomID = basic.RoomID,
+                        CheckInDate = CheckInDateObject,
+                        CheckOutDate = CheckOutDateObject,
+                        RoomCount = basic.RoomCount,
+                        RoomOrder = 0,
+                        RoomDiscount = 0,
+                        OpenRoom = true,
+                        Logging = "建立" + "," + username + "," + DateTime.Now.ToString()
+                    };
+
+                    repository.Create(roomsDetail);
+                    repository.SaveChanges();
+
+                    CheckInDateObject = CheckInDateObject.AddDays(1);
+                    CheckOutDateObject = CheckOutDateObject.AddDays(1);
+                }
+                result.IsSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessful = false;
+                result.Exception = ex;
+            }
+            return result;
+        }
+
         public OperationResult HotelImage_UpdataOrAdd()
         {
             var result = new OperationResult();
@@ -81,7 +129,7 @@ namespace BS_Adoga.Service
 
                 result.IsSuccessful = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 result.IsSuccessful = false;
                 result.Exception = ex;

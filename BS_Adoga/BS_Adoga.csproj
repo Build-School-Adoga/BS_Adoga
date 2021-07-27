@@ -309,6 +309,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
+    <Compile Include="Models\DBContext\HotelEmpMappingHotel.cs" />
+    <Compile Include="Models\DBContext\HotelImageUpload.cs" />
     <Compile Include="Models\ViewModels\Account\BookingOrderViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\TestVM.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\districts.cs" />
@@ -431,6 +433,7 @@
     <Content Include="Asset\CDN\JS\vue.js" />
     <Content Include="Asset\CDN\JS\moment-with-locales.min.js" />
     <Content Include="Asset\CSS\Function\HotelImagePage.css" />
+    <Content Include="Asset\CSS\calendar.css" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
@@ -472,6 +475,7 @@
     <Content Include="Asset\images\Rentalcars.png" />
     <Content Include="Asset\images\tw.svg.png" />
     <Content Include="Asset\JS\formStep.js" />
+    <Content Include="Asset\JS\helpers.js" />
     <Content Include="Asset\JS\home.js" />
     <Content Include="Asset\JS\HotelDetail\HotelFacility.js" />
     <Content Include="Asset\JS\HotelDetail\HotelFacilityComponent.js" />
@@ -2469,11 +2473,14 @@
     <Content Include="Views\Function\HotelRoomCreate.cshtml" />
     <Content Include="Views\Function\HotelRoomEdit.cshtml" />
     <Content Include="Views\Function\HotelRoomDetails.cshtml" />
+    <Content Include="Views\Function\RoomDetailsIndex.cshtml" />
+    <Content Include="Views\Function\RoomBedCreate.cshtml" />
     <Content Include="Views\HotelDetail\upload.cshtml" />
     <Content Include="Views\Function\HotelImagePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Asset\CDN\CSS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />

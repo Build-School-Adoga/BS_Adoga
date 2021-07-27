@@ -75,6 +75,12 @@ namespace BS_Adoga
             );
 
             routes.MapRoute(
+                name: "RoomDetailExpansion",
+                url: "Hotel/Room/Detail/Expansion/{year}-{month}-{roomid}",
+                defaults: new { controller = "Function", action = "RoomDetailExpansion", year = UrlParameter.Optional, month = UrlParameter.Optional, roomid = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "HomePage", id = UrlParameter.Optional }

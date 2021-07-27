@@ -1,17 +1,36 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
+﻿using BS_Adoga.Models.DBContext;
+using BS_Adoga.Repository;
+using BS_Adoga.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 
 namespace BS_Adoga.APIController
 {
     public class FunctionApiController : ApiController
     {
+        private AdogaContext _context;
+        private FunctionRepository _repository;
+        private FunctionService _service;
+        public FunctionApiController()
+        {
+            _context = new AdogaContext();
+            _repository = new FunctionRepository(_context);
+            _service = new FunctionService();
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public IHttpActionResult GetRoomDetailMonth(string year,string month,string roomid)
+        {
+            List<RoomsDetail> RoomDetailMonth = _repository.GetAllRoomDetailMonth(year,month,roomid).ToList();
+
+            return Json(RoomDetailMonth);
+        }
 
         [AcceptVerbs("POST")]
         public IHttpActionResult UploadImage()//string File,string PublicId
@@ -47,6 +66,5 @@ namespace BS_Adoga.APIController
             }
             return Json(result);
         }
-
     }
 }
