@@ -1,5 +1,6 @@
 ﻿using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.homeViewModels;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace BS_Adoga.Repository
                                  RoomID = d.RoomID,
                                  RoomDiscount = z.RoomDiscount
                              }
-                         }).Take(7);
+                         }).Take(8);
             return images;
         }
 
@@ -87,7 +88,31 @@ namespace BS_Adoga.Repository
                           }).Take(4);
             return images;
         }
+        public IQueryable<CardViewModels> GetCardModels4(string cardlocal)
+        {
+            var result = from p in _context.Hotels
+                         join d in _context.Rooms on p.HotelID equals d.HotelID
+                         where p.HotelCity == cardlocal
+                         orderby p.HotelCity
 
+                         select new CardViewModels
+                         {
+                             HotelID = p.HotelID,
+                             HotelName = p.HotelName,
+                             HotelCity = p.HotelCity,
+                             HotelAddress = p.HotelAddress,
+                             HotelEngName = p.HotelEngName,
+                               My_Rooms = new MyRoom
+                               {
+                                   HotelID = p.HotelID,
+                                   NoSmoking = d.NoSmoking,
+                                   Breakfast = d.Breakfast,
+                                   WiFi =d.WiFi,
+                                   RoomName=d.RoomName
+                               }
+                         };
+            return result;
+        }
             public IQueryable<CardViewModels> GetCardModels(string cardlocal)
         {
             var city = from p in _context.Hotels
@@ -254,7 +279,7 @@ namespace BS_Adoga.Repository
                       
 
 
-                         }).Distinct().Take(7);
+                         }).Distinct().Take(8);
            
             return hotel;
         }
@@ -271,7 +296,7 @@ namespace BS_Adoga.Repository
 
 
 
-                         });
+                         }).Take(8);
             return hotel;
         }
 

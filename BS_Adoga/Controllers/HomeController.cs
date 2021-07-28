@@ -12,7 +12,9 @@ using Microsoft.Ajax.Utilities;
 using System.Security.Cryptography;
 using System.Web.WebPages;
 using BS_Adoga.Models.ViewModels.Search;
-
+using PagedList;
+using PagedList.Mvc;
+using MvcPaging;
 namespace BS_Adoga.Controllers
 {
     public class HomeController : Controller
@@ -143,6 +145,57 @@ namespace BS_Adoga.Controllers
 
             return View(images);
 
+        }
+   
+        public ActionResult HotelDetail(string search, string sortOrder, string currentFilter, string currentOrder, int? page)
+        {
+            if (search == null)
+            {
+               search = TempData["search"].ToString();
+              
+                TempData.Keep();
+            }
+            else
+            {
+                TempData["search"] = search;
+              
+                TempData.Keep();
+            }          
+            var data = _homeService.ALLImages(search);
+            //排序 預設抓星級最好的
+            ViewBag.StarSortParm = sortOrder == null ? "star_desc" : "";
+            //ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+
+            //分頁
+            ViewBag.CurrentSort = sortOrder;
+            if (currentOrder != null) { page = 1; }
+            else { currentOrder = currentFilter; }
+            ViewBag.CurrentFilter = currentFilter;
+
+            int pageSize = 1;
+            int pageNumber = (page ?? 1); //如果page裡面沒有值就會回傳1，else就傳自己的值
+      
+            switch (sortOrder)
+            {
+               case "star_desc":
+                    data.PageOfHotelSearchVM = data.My_city.OrderByDescending(o => o.HotelID).ToPagedList(pageNumber, pageSize);
+                    break;
+
+                //    case "price_desc":
+                //        data.PageOfHotelSearchVM = data.My_city.OrderByDescending(o => o.My_Rooms.RoomPrice).ToPagedList(pageNumber, pageSize);
+                //        break;
+
+                //    case "Price":
+                //        data.PageOfHotelSearchVM = data.My_city.OrderBy(o => o.My_Rooms.RoomPrice).ToPagedList(pageNumber, pageSize);
+                //        break;
+
+                default:
+                    data.PageOfHotelSearchVM = data.My_city.OrderBy(o => o.HotelAddress).ToPagedList(pageNumber, pageSize);
+                    break;
+            }
+
+
+            return View(data);
         }
     }
 }

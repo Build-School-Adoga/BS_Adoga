@@ -167,6 +167,9 @@
     <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
+    <Reference Include="MvcPaging, Version=2.1.13.46, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcPaging.2.1.13\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -2453,6 +2456,10 @@
     <Content Include="Views\Function\HotelRoomEdit.cshtml" />
     <Content Include="Views\Function\HotelRoomDetails.cshtml" />
     <Content Include="Views\Home\CityCenter.cshtml" />
+    <Content Include="Views\Home\HotelDetail.cshtml" />
+    <Content Include="Views\Shared\_optionHotel.cshtml" />
+    <Content Include="Views\Shared\_optionCity.cshtml" />
+    <Content Include="Views\Shared\_SearchCityPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
