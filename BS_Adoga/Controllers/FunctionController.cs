@@ -10,6 +10,7 @@ using System.Web.Security;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelLogin;
 using BS_Adoga.Models.ViewModels.MemberLogin;
+using BS_Adoga.Models.ViewModels.HotelImagePage;
 using BS_Adoga.Repository;
 using BS_Adoga.Service;
 using Newtonsoft.Json;
@@ -61,7 +62,7 @@ namespace BS_Adoga.Controllers
             List<Facility> facilities = _context.Facilities.ToList();
             ViewBag.Facilities = facilities;
 
-            
+
             return View(_repository.GetHotelListByEmpID(user_id));
 
             #region 顯示所有飯店清單_舊版本
@@ -605,7 +606,7 @@ namespace BS_Adoga.Controllers
                     string CurrentDate = $"{year}/{month}/30 14:00:00";
                     DateTime DateObject = Convert.ToDateTime(CurrentDate);
 
-                    OperationResult CreatResult = _service.CreateRoomDetailExpansion(year , month , roomid, username);
+                    OperationResult CreatResult = _service.CreateRoomDetailExpansion(year, month, roomid, username);
 
                     return Redirect($"~/Function/RoomDetailsIndex?roomid={roomid}");
                 }
@@ -651,7 +652,7 @@ namespace BS_Adoga.Controllers
         public ActionResult RoomBedDelete(string roomid)
         {
             var roomBeds = _context.RoomBeds.Where(x => x.RoomID == roomid).ToList();
-            
+
             if (roomBeds != null)
             {
                 foreach (var item in roomBeds)
@@ -672,13 +673,19 @@ namespace BS_Adoga.Controllers
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
 
-            return View();
-        }
+            var query = _context.HotelEmpMappingHotels.Where(x => x.HotelEmployeeID == user_id ).First();
+            var query2 = from img in _context.HotelImageUploads
+                         where img.HotelID == query.HotelID
+                         orderby img.ImageID
+                         select new ImagesVM { ImageID = img.ImageID, ImageURL = img.ImageURL };
 
-        [HttpPost]
-        public ActionResult HotelImageUpload()
-        {
-            return View();
+            var data = new HotelImageVM
+            {
+                HotelID = query.HotelID,
+                HotelEmployeeID = query.HotelEmployeeID,
+                Images = query2
+            };
+            return View(data);
         }
 
         protected override void Dispose(bool disposing)

@@ -1,15 +1,21 @@
-﻿
+﻿@model HotelImageVM
 @{
     ViewBag.Title = "HotelImagePage";
     Layout = "~/Views/Shared/_FunctionPage.cshtml";
+
+    string user_id = Model.HotelEmployeeID;
+    string hotel_id = Model.HotelID;
+
 }
+
 @section topCSS{
     <link href="~/Asset/CSS/Function/HotelImagePage.css" rel="stylesheet" />
 }
 <div class="container mt-5">
     <h2 class="m-3">飯店圖片</h2>
     <div class="media-group row d-flex ">
-        <div class="hotel-video col-7 gx-2">
+        <div class="hotel-video  pl-0 pr-1">
+            <!--  col-7 -->
             <div class="img-wrap">
                 <img id="show-img-0"
                      src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768"
@@ -17,8 +23,9 @@
                 <div class="show-shadow"></div>
             </div>
         </div>
-        <div class="pic-group col-5 gx-0 ">
-            <div class="try-mediumpic">
+        <div class="pic-group px-0 ">
+            <!--  col-5 -->
+            <div class="medium-pic">
                 <div class="img-wrap">
                     <img id="show-img-1" class="medium-pic"
                          src="http://pix6.agoda.net/hotelImages/234438/-1/473caa63348a75f0a87e7ea2c7868e81.jpg?s=1024x768">
@@ -27,7 +34,7 @@
                 </div>
             </div>
             <div class="two-pic d-flex mt-1 ">
-                <div class="img-wrap me-1">
+                <div class="img-wrap mr-1">
                     <img id="show-img-2" class=""
                          src="https://pix6.agoda.net/hotelImages/234/234438/234438_16020314120039601807.jpg?s=1024x768">
                     <div class="show-shadow"></div>
@@ -40,113 +47,155 @@
             </div>
         </div>
     </div>
-    <div class="preview-img row border">
 
 
+    @*<input id="upload-img" type="file" class="file" data-preview-file-type="text" multiple>
+    <button id="upload-img-btn" class="btn btn-primary">上傳圖片</button>*@
+    <div class="input-group w-50 mb-3">
+        <div class="custom-file">
+            <input id="upload-img" type="file" class="custom-file-input" multiple>
+            <label class="custom-file-label upload-img-label" for="upload-img">Choose file</label>
+        </div>
+        <div class="input-group-append">
+            <button id="upload-img-btn" type="button">上傳圖片</button>
+        </div>
     </div>
-
-    <input id="upload-img" type="file" class="file" data-preview-file-type="text" multiple>
-    <button id="upload-img-btn" class="btn btn-primary">上傳圖片</button>
+    <div class="preview-img row border">
+        <!--會動態載入card，讓user預覽圖片-->
+    </div>
 </div>
 
 <template id="img-box">
-    <figure class="img-figure col-4 border">
-        <div class="img-wrap">
-            <img src="" alt="">
+    <figure class="img-figure card col-3">
+        <div>
+            <div class="img-wrap">
+                <img src="" alt="" class="card-img-top">
+            </div>
+            <div class="figcap-wrap">
+                <p class="img-name"></p>
+                <p class="img-size"></p>
+            </div>
         </div>
-        <div class="figcap-wrap">
-            <p class="img-name"></p>
-            <p class="img-size"></p>
-        </div>
-        <button class="btn btn-danger">刪除</button>
+        <button class="upload-cancel-btn">取消上傳</button>
     </figure>
 </template>
 
 @section endJS{
+    <!--axios-->
+    <script src="~/Scripts/axios.min.js"></script>
+
     <!--mine-->
     <script>
-
         var uploadImg = document.getElementById('upload-img');
         var uploadImgBtn = document.getElementById('upload-img-btn');
 
-        //傳給api的
-        var formData = new FormData();
+         //傳給api的，裡面會存圖片的base64和檔名，真正要上傳去cloudinary時會用到
+        var formData;
 
         uploadImg.addEventListener('change', function () {
-            console.log(uploadImg.files)
-            readImg(uploadImg)
+            //console.log(uploadImg.files);
+            readImg(uploadImg);
         })
-        uploadImgBtn.addEventListener('click', CloudinaryUpload)
+        uploadImgBtn.addEventListener('click', CloudinaryUpload);
 
         var previewContainer = document.querySelector('.preview-img');
         var imgBox = document.getElementById('img-box');
 
         function readImg(img) {
             if (img.files && img.files.length > 0) {
+                if (img.files.length > 4) {
+                    alert("飯店圖片最多上傳4張喔")
+                    return;
+                }
+                //每次進來都清空formData
+                formData = new FormData();
+
+                //每按一次上傳就清空之前的預覽圖片的html
+                previewContainer.innerHTML = '';
 
                 //Length表示有多少個img要上傳。
-                formData.set('Length', img.files.length)
+                formData.set('Length', img.files.length);
+
+                var uploadImgLabel = document.querySelector('.upload-img-label');
+                uploadImgLabel.innerText = img.files.length + '個檔案'
 
                 for (var index = 0; index < img.files.length; index++) {
-                    console.log(img.files[index].name)
+                    //console.log(img.files[index].name);
 
                     var fileName = img.files[index].name;
-                    var fileSize = img.files[index].size / 1024
-                    var fileSizeStr = fileSize + ' kb'
-                    if (fileSize >= 1000) {
-                        fileSize = fileSize / 1024
-                        fileSizeStr = fileSize + ' mb'
+                    var fileSize = img.files[index].size / 1024;
+                    var fileSizeStr = Math.round(fileSize * 100) / 100 + ' kb';
+                    if (fileSize >= 2000) {
+                        alert("圖片的檔案大小不可超過 2 MB ！");
                     }
+                    else if (fileSize >= 1000) {
+                        fileSize = Math.round((fileSize / 1024) * 100,) / 100;
+                        fileSizeStr = fileSize + ' mb';
+                    }
+
+                    var clone_imgBox = imgBox.content.cloneNode(true);
+                    var previewImgName = clone_imgBox.querySelector('.img-name');
+                    var previewImgSize = clone_imgBox.querySelector('.img-size');
+                    var cancelBtn = clone_imgBox.querySelector('.upload-cancel-btn');
+                    // previewImgName.innerText = fileName;
+                    previewImgSize.innerText = "檔案大小： " + fileSizeStr;
+                    cancelBtn.addEventListener('click', DeleteFile)
+                    previewContainer.appendChild(clone_imgBox);
 
                     //publicId放這邊，不放在reader.onload裡面，因為reader.onload並不是跟for處於同一個迴圈，它自己會跑三次，
                     //如果放reader.onload裡面，每個publicId會 = 最後截取出來的publicId，會變成每個都一樣的檔名。
-                    var public_id = fileName.substring(0, fileName.lastIndexOf('.'));
+                    // var public_id = fileName.substring(0, fileName.lastIndexOf('.'));
+                    var public_id = '@hotel_id' + '_img' + (index+1).toString().padStart(2, '0');
                     formData.set(`${'PublicId' + index}`, public_id.toString());
-
 
                     var i = 0;
                     var reader = new FileReader();
                     reader.readAsDataURL(img.files[index]);
-
-                    //reader.onload並不是跟for處於同一個迴圈，它自己會跑三次
                     reader.onload = function (e) {
-                        var clone_imgBox = imgBox.content.cloneNode(true);
-                        var previewImg = clone_imgBox.querySelector('img');
-                        var previewImgName = clone_imgBox.querySelector('.img-name');
-                        var previewImgSize = clone_imgBox.querySelector('.img-size');
-                        var showImg = document.getElementById('show-img-' + i);
+                        // reader.onload並不跟for處於同一個迴圈，外層的for迴圈跑完，它自己才開始跑迴圈。
 
-                        previewImgName.innerText = fileName
-                        previewImgSize.innerText = fileSizeStr
-                        // debugger;
-                        previewImg.alt = fileName
-                        previewContainer.appendChild(clone_imgBox);
+                        var showImg = document.getElementById('show-img-' + i);
+                        var previewImg = document.querySelectorAll(".img-figure .img-wrap img")[i];
+
                         previewImg.src = this.result;
                         showImg.src = this.result;
 
                         formData.set(`${'File' + i}`, this.result.toString());
                         i++;
-
-                        // fileForCloudinary.push({
-                        //     PublicId: public_id,
-                        //     File: this.result
-                        // });
-                        // console.log('雲 : ' + fileForCloudinary[i].PublicId + fileForCloudinary[i].File);
                     }
                 };
             }
         }
 
+        function DeleteFile() {
+            var allNode = previewContainer.querySelectorAll('.img-figure');
+            var deleteFileIndex = [...allNode].map(element => { return element }).indexOf(this.parentNode);
+            var newFileList = new DataTransfer();
+            for (i = 0; i < uploadImg.files.length; i++) {
+                if (i != deleteFileIndex) {
+                    newFileList.items.add(uploadImg.files[i])
+                }
+            }
+            previewContainer.removeChild(this.parentNode)
+            uploadImg.files = newFileList.files;
+            readImg(uploadImg);
+        }
+
         function CloudinaryUpload() {
             axios({
                 method: 'POST',
-                url: "https://localhost:44352/api/Function/UploadImage",
+                url: "../api/Function/UploadImage",
+                params: {
+                    userID: '@user_id',
+                    hotelID: '@hotel_id'
+                },
                 data: formData,
                 headers: { 'Content-Type': 'multipart/form-data' },
-            }).then((response) =>
-                console.log(response)
-            ).catch((error) => {
-                console.log(error)
+            }).then((response) => {
+                alert(response);
+                console.log(response);
+            }).catch((error) => {
+                console.log(error);
             })
         }
 

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using System.Web;
 
 namespace BS_Adoga.APIController
 {
@@ -33,7 +34,7 @@ namespace BS_Adoga.APIController
         }
 
         [AcceptVerbs("POST")]
-        public IHttpActionResult UploadImage()//string File,string PublicId
+        public IHttpActionResult UploadImage(string userID,string hotelID)//string File,string PublicId
         {
             var req = HttpContext.Current.Request;
             if (req.HttpMethod == "OPTIONS")
@@ -58,13 +59,17 @@ namespace BS_Adoga.APIController
                 {
                     File = new FileDescription(file),
                     PublicId = publicId,
-                    Folder = "/Adoga/Hotel/Hotel01",
+                    Folder = "/Adoga/Hotel/"+hotelID,
                     Overwrite = true,
                 };
                 var uploadResult = cloudinary.Upload(uploadParams);
-                result[i] = uploadResult;
+                //result[i] = uploadResult;
+
+                string imageID = hotelID + "_img" + (i+1).ToString().PadLeft(2, '0');
+                string imageURL = uploadResult.SecureUrl.ToString();
+                _service.HotelImageUpload_UpdataOrAdd(hotelID,imageID,imageURL);
             }
-            return Json(result);
+            return Json("成功上傳圖片！");
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿
-
-/*上傳圖片區塊*/
+/*上傳圖片區域*/
 .preview-img {
     display: flex;
+    height: 300px;
+    margin-bottom: 100px;
     overflow: auto;
 }
 
@@ -11,41 +12,118 @@
     /* flex-direction: column; */
     /* height: 300px; */
     padding: 10px;
+    background-color: #fff;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
 }
 
+#upload-img-btn {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 0 20px;
+    color: #fff;
+    background-color: rgb(95, 133, 238);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid rgb(95, 133, 238);
+}
+
+    #upload-img-btn:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+    }
+
+    #upload-img-btn:hover {
+        /* font-weight: bold; */
+        color: rgb(95, 133, 238);
+        background-color: #fff;
+    }
+
 .preview-img img {
-    width: 100%;
+    max-width: 100%;
+    /* max-height: 200px; */
+    border: 1px solid rgb(211, 211, 211);
     border-radius: 3px;
 }
 
-/*預覽圖片呈現效果的區塊*/
+.upload-cancel-btn {
+    padding: 5px;
+    background-color: rgb(219, 219, 219);
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 5px;
+    font-weight: bold;
+    color: rgb(73, 73, 73);
+}
+
+    .upload-cancel-btn:hover {
+        background-color: rgb(151, 151, 151);
+        color: rgb(250, 250, 250);
+    }
+
+/*預覽圖片群 */
 .media-group {
     width: 900px;
     /* margin-right: 20px; */
     margin: 0 auto 20px auto;
 }
 
-    .media-group img {
-        width: 100%;
-    }
-
-.hotel-video img {
+.hotel-video .img-wrap {
+    width: 520px;
+    height: 400px;
+    overflow: hidden;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
-.hotel-video .img-wrap img{
-    height:375px;
-    overflow:hidden;
+.medium-pic .img-wrap {
+    width: 375px;
+    height: 240px;
+    overflow: hidden;
+    border-top-right-radius: 5px;
 }
 
-.pic-group > .img-wrap img {
-    border-top-right-radius: 5px;
+.two-pic .img-wrap {
+    width: 185.5px;
+    height: 156px;
+    overflow: hidden;
+}
+
+.two-pic img {
+    height: 100%;
+}
+
+.two-pic .img-wrap .show-shadow {
+    height: 100%;
+}
+
+.two-pic .img-wrap:last-child {
+    border-bottom-right-radius: 5px;
+}
+
+    .two-pic .img-wrap:last-child .show-shadow {
+        text-align: center;
+        line-height: 146px;
+        background-color: rgba(0, 0, 0, 0.356);
+        border-bottom-right-radius: 5px;
+    }
+
+
+.hotel-video img,
+.medium-pic img,
+.two-pic img {
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+    display: block;
 }
 
 .pic-group .img-wrap,
 .hotel-video .img-wrap {
     position: relative;
+    vertical-align: middle;
+    background-color: rgb(58 58 58);
 }
 
 .img-wrap .show-shadow {
@@ -55,27 +133,6 @@
     width: 100%;
     height: 100%;
     transition: 0.3s;
-}
-
-.two-pic img {
-    width: 100%;
-    height: 104%;
-    /* width: 165px; */
-    /* height: 128px; */
-}
-
-.two-pic .img-wrap .show-shadow {
-    height: 104%;
-}
-
-.two-pic .img-wrap:last-child img {
-    border-bottom-right-radius: 5px;
-}
-
-.two-pic .img-wrap:last-child .show-shadow {
-    text-align: center;
-    line-height: 128px;
-    background-color: rgba(0, 0, 0, 0.356);
 }
 
     .img-wrap .show-shadow:hover,
@@ -94,14 +151,14 @@
     text-align: center;
     line-height: 40px;
     font-size: 20px;
-    color: rgb(202, 202, 202);
+    color: rgb(202, 202, 202) !important;
     background-color: rgb(248, 248, 248);
     border-radius: 5px;
     transition: 0.2s;
 }
 
     .add-fav-button:hover {
-        color: rgb(221, 59, 59);
+        color: rgb(221, 59, 59) !important;
     }
 
 .album-link {

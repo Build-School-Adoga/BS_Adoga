@@ -121,12 +121,33 @@ namespace BS_Adoga.Service
             return result;
         }
 
-        public OperationResult HotelImage_UpdataOrAdd()
+        //儲存圖片URL
+        public OperationResult HotelImageUpload_UpdataOrAdd(string hotelID,string imageID,string imageURL)
         {
             var result = new OperationResult();
             try
             {
+                var repository = new DBRepository(new AdogaContext());
+                HotelImageUpload basic = repository.GetAll<HotelImageUpload>().Where(x => x.ImageID == imageID && x.HotelID == hotelID).FirstOrDefault();
+                if(basic != null)
+                {
+                    basic.ImageURL = imageURL;
+                    repository.Update(basic);
+                    repository.SaveChanges();
+                }
+                else
+                {
+                    var hotelImg = new HotelImageUpload()
+                    {
+                        HotelID = hotelID,
+                        ImageID = imageID,
+                        ImageURL = imageURL
+                    };                    
 
+                    AdogaContext _context = new AdogaContext();
+                    _context.HotelImageUploads.Add(hotelImg);
+                    _context.SaveChanges();
+                }
                 result.IsSuccessful = true;
             }
             catch (Exception ex)
