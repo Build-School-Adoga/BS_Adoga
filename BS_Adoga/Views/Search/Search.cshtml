@@ -509,12 +509,12 @@
             <div class="container-fluid">
                 <span class="navbar-brand mb-0 h1 navbar-light bg-light">排序</span>
                 <button id="orderPrice">
-                    @*最低價優先*@
-                    @Html.ActionLink("最低價優先", "Search", new { sortOrder = ViewBag.PriceSortParm })
+                    最低價優先
+                    @*@Html.ActionLink("最低價優先", "Search", new { sortOrder = ViewBag.PriceSortParm })*@
                 </button>
                 <button id="orderStar">
-                    @*星級優先*@
-                    @Html.ActionLink("星級優先", "Search", new { sortOrder = ViewBag.StarSortParm })
+                    星級優先
+                    @*@Html.ActionLink("星級優先", "Search", new { sortOrder = ViewBag.StarSortParm })*@
                 </button>
             </div>
         </nav>
@@ -534,21 +534,6 @@
                 }
             }
         </div>
-        <br />
-        <div class="d-flex">
-            @*<button id="Prev" :disabled="pageNumber === 0" @click="prevPage">上一頁</button>
-        <button id="Next" :disabled="pageNumber >= (pageCount-1)" @click="nextPage">下一頁</button>*@
-            @*<button id="Prev" class="btn">上一頁</button>
-            <button id="Next" class="btn">下一頁</button>*@
-            @*<paginated-list :list-data="hotelList"></paginated-list>*@
-
-        </div>
-
-        @*@Html.PagedListPager(Model.PageOfHotelSearchVM, page => Url.Action("Search",
-            new { sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, page }))*@
-        
-
-
     </div>
 </div>
 

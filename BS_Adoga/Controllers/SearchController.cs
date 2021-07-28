@@ -115,27 +115,5 @@ namespace BS_Adoga.Controllers
             //return View();
 
         }
-
-
-        //public ActionResult GetAllHotelInCity(string city)
-        //{
-        //    //原本給劉的
-        //    var data = s.GetHotels(city);
-        //    return View();
-        //}
-
-        //Get: api
-        //[AcceptVerbs("GET","POST")]
-        //public IHttpActionResult GetAllRoom(string hotelId)
-        //{
-        //    var facilityId = s.GetHotelFacilityId(hotelId);
-        //    return facilityId;
-        //}
-
-        //public ActionResult GetAllBedType()
-        //{
-        //    var data = s.GetBedType();
-        //    return Json(data);
-        //}
     }
 }

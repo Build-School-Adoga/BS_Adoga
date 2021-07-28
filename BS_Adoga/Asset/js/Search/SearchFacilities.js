@@ -4,7 +4,12 @@
 
 var allHotel = '';
 var list;
+var btnOrderPrice = document.getElementById("orderPrice");
+var btnOrderStar = document.getElementById("orderStar");
 
+btnOrderPrice.addEventListener("click", function () {
+    alert("click orderPrice!");
+})
 //axios去get資料先
 axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
     //一開始用params裡面的資料去跑Api抓資料；成功抓完資料就會跑response
