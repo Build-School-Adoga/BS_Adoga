@@ -455,8 +455,8 @@
     <Content Include="Asset\JS\HotelDetail\RoomFilter.js" />
     <Content Include="Asset\JS\Search\Search.js" />
     <Content Include="Asset\JS\Search\SearchFacilities.js" />
+    <Content Include="Asset\JS\Search\SearchDataComponent.js" />
     <Content Include="Asset\JS\Search\SearchFacilitiesComponent.js" />
-    <Content Include="Asset\JS\Search\SearchPriceFormat.js" />
     <Content Include="Asset\JS\Search\_SearchFilterPartial.js" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.css" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.min.css" />
