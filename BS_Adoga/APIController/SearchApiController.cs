@@ -26,5 +26,12 @@ namespace BS_Adoga.APIController
             var allHotel = _s.GetHotelAfterSearchByCity(CityName, startDate, endDate, adult,kid,room);
             return Json(allHotel);
         }
+
+        //[AcceptVerbs("GET", "POST")]
+        //public IHttpActionResult GetFacilities(string hotelID)
+        //{
+        //    var allHotel = _s.getHotelFacility(hotelID);
+        //    return Json(allHotel);
+        //}
     }
 }

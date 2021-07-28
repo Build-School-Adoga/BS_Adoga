@@ -26,23 +26,12 @@ namespace BS_Adoga.Service
             {
                 HotelSearchVM = _r.GetHotelAfterSearchByCityOrName(info),
                 HotelOptionVM = _r.GetHotelOption(),
-                //EquipmentVM =
-                //{
-                //    FacilityVM =_r.GetEquipmentList(),
-                //    BedType = _r.GetBedType()
-                //}
+                //FacilityVM =_r.GetEquipmentList()
             };
             return data;
         }
 
 
-        //public IQueryable<string> GetHotels(string city)
-        //{
-        //    //原本給劉的
-        //    var hotel = _r.GetHotels(city);
-
-        //    return hotel;
-        //}
 
         //API
         public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCity(string city, string start, string end, int adult, int kid, int room)
@@ -60,6 +49,11 @@ namespace BS_Adoga.Service
             var hotel = _r.GetHotelAfterSearchByCityOrName(data);
             return hotel;
         }
+
+        //public IEnumerable<FacilityViewModel> getHotelFacility(string hotelID)
+        //{
+
+        //}
 
     }
 }

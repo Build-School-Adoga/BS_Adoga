@@ -530,12 +530,18 @@
                 }
                 else
                 {
-                    <hotel-card v-for="hotel in hotelList" :hcard="hotel" :fnav="filternav"></hotel-card>
+                    @*<hotel-card v-for="hotel in hotelList" :hcard="hotel" :fnav="filternav"></hotel-card>*@
+                    <paginated-list :list-data="hotelList"></paginated-list>
                 }
             }
         </div>
         <br />
-        @*<button id="next"> next page </button>*@
+        <div class="d-flex">
+            @*<button id="Prev" :disabled="pageNumber === 0" @click="prevPage">上一頁</button>
+            <button id="Next" :disabled="pageNumber >= (pageCount-1)" @click="nextPage">下一頁</button>*@
+            <button id="Prev" class="btn">上一頁</button>
+            <button id="Next" class="btn">下一頁</button>
+        </div>
 
         @*@Html.PagedListPager(Model.PageOfHotelSearchVM, page => Url.Action("Search",
             new { sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, page }))*@

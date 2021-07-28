@@ -1,9 +1,5 @@
 ﻿export default {
     props:['hcard','fnav']
-    //{
-    //    hcard: ['hotel'],
-    //    fnav: ['fnav']
-    //}
     ,
     filters: {
         PriceFormat: function (price) {
@@ -19,7 +15,6 @@
     },
     methods: {
         emitEvent: function (name) {
-            alert('/HotelDetail/' + name + ' - (' + this.fnav.start + ') - (' + this.fnav.end + ') - ' + this.fnav.room + ' - ' + this.fnav.adult + ' -' + this.fnav.kid);
             window.location.href = '/HotelDetail/' +name+ '-(' +this.fnav.start+')-(' +this.fnav.end+ ')-' +this.fnav.room+ '-' +this.fnav.adult+ '-' +this.fnav.kid;
         }
     },
