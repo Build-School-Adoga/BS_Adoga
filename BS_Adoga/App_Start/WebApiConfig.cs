@@ -49,6 +49,12 @@ namespace BS_Adoga
             );
 
             config.Routes.MapHttpRoute(
+                name: "EditRoomDetail",
+                routeTemplate: "api/Function/EditRoomDetail",
+                defaults: new { controller = "FunctionApi", action = "EditRoomDetail", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

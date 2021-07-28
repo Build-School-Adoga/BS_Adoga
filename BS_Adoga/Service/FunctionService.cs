@@ -120,5 +120,36 @@ namespace BS_Adoga.Service
             }
             return result;
         }
+
+        /// <summary>
+        /// 前端修改折扣跟開關房
+        /// </summary>
+        /// <param name="RDID"></param>
+        /// <param name="RoomDiscount"></param>
+        /// <param name="OpenRoom"></param>
+        /// <returns></returns>
+        public OperationResult RoomDetailEdit(string RDID, decimal RoomDiscount , bool OpenRoom ,string username)
+        {
+            var result = new OperationResult();
+            try
+            {
+                //1.View Model(RegisterViewModel) --> Data Model (HotelEmployee)
+                var repository = new DBRepository(new AdogaContext());
+                RoomsDetail basic = repository.GetAll<RoomsDetail>().Where(x => x.RDID == RDID).FirstOrDefault();
+                basic.RoomDiscount = RoomDiscount;
+                basic.OpenRoom = OpenRoom;
+                basic.Logging = basic.Logging + ";" + "修改" + "," + username + "," + DateTime.Now.ToString();
+
+                repository.Update(basic);
+                repository.SaveChanges();
+                result.IsSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessful = false;
+                result.Exception = ex;
+            }
+            return result;
+        }
     }
 }
