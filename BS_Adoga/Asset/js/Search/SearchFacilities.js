@@ -10,6 +10,8 @@ var btnOrderStar = document.getElementById("orderStar");
 btnOrderPrice.addEventListener("click", function () {
     alert("click orderPrice!");
 })
+
+
 //axios去get資料先
 axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
     //一開始用params裡面的資料去跑Api抓資料；成功抓完資料就會跑response
@@ -33,21 +35,25 @@ function HotelList(response) {
     Vue.component('hotel-card', {
         data() {
             return {
+                //預設目前的頁面為第幾頁
                 pageNumber: 0
             }
         },
         props: {
             listData: {
+                //收集這頁所需要的所有資料
                 type: Array,
                 required: true
             },
             size: {
+                //這頁所需要的資料數量
                 type: Number,
                 required: false,
-                default: 2
+                default: 1
             }
         },
         filters: {
+            //設定價錢的格式
             PriceFormat: function (price) {
                 if (!price) return '0'
                 // 获取整数部分
@@ -70,11 +76,13 @@ function HotelList(response) {
             }
         },
         computed: {
+            //計算出最後一頁在第幾頁
             pageCount() {
                 let l = this.listData.length,
                     s = this.size;
                 return Math.ceil(l / s);
             },
+            //單頁所需要的所有資料
             paginatedData() {
                 const start = this.pageNumber * this.size,
                     end = start + this.size;
