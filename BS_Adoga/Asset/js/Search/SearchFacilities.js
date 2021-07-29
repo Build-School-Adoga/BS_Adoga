@@ -8,9 +8,16 @@ var btnOrderPrice = document.getElementById("orderPrice");
 var btnOrderStar = document.getElementById("orderStar");
 
 btnOrderPrice.addEventListener("click", function () {
-    alert("click orderPrice!");
+    console.log(orderItem);
+    orderItem = "price";
+    console.log(orderItem);
 })
 
+btnOrderStar.addEventListener("click", function () {
+    console.log(orderItem);
+    orderItem = "Star";
+    console.log(orderItem);
+})
 
 //axios去get資料先
 axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
@@ -28,15 +35,15 @@ axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
 }).catch((error) => console.log(error))
 
 function HotelList(response) {
-    //var DataList = [];
     var DataList = response;
-    console.log(DataList);
-    debugger;
+    //console.log(DataList);
+
     Vue.component('hotel-card', {
         data() {
             return {
                 //預設目前的頁面為第幾頁
-                pageNumber: 0
+                pageNumber: 0,
+                //orderItem: this.orderKey
             }
         },
         props: {
@@ -50,7 +57,8 @@ function HotelList(response) {
                 type: Number,
                 required: false,
                 default: 1
-            }
+            },
+            /*orderKey: ["orderKey"]*/
         },
         filters: {
             //設定價錢的格式
@@ -75,6 +83,9 @@ function HotelList(response) {
                 window.location.href = '/HotelDetail/' + name + '-(' + this.fnav.start + ')-(' + this.fnav.end + ')-' + this.fnav.room + '-' + this.fnav.adult + '-' + this.fnav.kid;
             }
         },
+        watch: {
+
+        },
         computed: {
             //計算出最後一頁在第幾頁
             pageCount() {
@@ -86,9 +97,9 @@ function HotelList(response) {
             paginatedData() {
                 const start = this.pageNumber * this.size,
                     end = start + this.size;
-                return this.listData
-                    .slice(start, end);
+                return this.listData.slice(start, end);
             }
+
         },
         template: `<div>
                 <div v-for="hotel in paginatedData">
@@ -150,10 +161,21 @@ function HotelList(response) {
             </div>`
     })
 
-    new Vue({
-        el: "#new_card",
+    var mainBody= new Vue({
+        el: "#infomation",
         data: {
-            card: DataList
+            card: DataList,
+            orderKey: "price"
+        },
+        methods: {
+            orderPrice() {
+                this.orderKey = "price";
+                this.card =sortByKey(this.card, this.orderKey);
+            },
+            orderStar() {
+                this.orderKey = "Star";
+                this.card=sortByKey(this.card, this.orderKey);
+            }
         }
     })
     debugger;
@@ -162,4 +184,23 @@ function HotelList(response) {
 function DateFormat(date) {
     var date = new Date(date);
     return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
+}
+
+function sortByKey(array, key) {
+    return array.sort(function (a, b) {
+        var x;
+        var y;
+        //Price順序
+        if (key == "price") {
+            x = a.I_RoomVM.RoomPrice * (1 - a.I_RoomDetailVM.RoomDiscount);
+            y = b.I_RoomVM.RoomPrice * (1 - b.I_RoomDetailVM.RoomDiscount);
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        //Star逆序
+        else {
+            x = a[key];
+            y = b[key];
+            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+    })
 }

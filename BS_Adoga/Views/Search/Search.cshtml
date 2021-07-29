@@ -394,11 +394,11 @@
 </div>
 
 <div id="main-body">
-    <div class="side-menu">
+    <!--<div class="side-menu">
         <div class="map">
-            <img src="https://cdn6.agoda.net/images/MAPS-1213/default/bkg-map-entry.svg" alt="地图">
+            <img src="https://cdn6.agoda.net/images/MAPS-1213/default/bkg-map-entry.svg" alt="地图">-->
             <!-- <img src="https://cdn6.agoda.net/images/MAPS-1213/default/img-map-pin-red.svg" alt="地标"> -->
-            <div class="map-icon">
+            <!--<div class="map-icon">
                 <i class="fas fa-map-marker-alt"></i>
                 <p>地圖找房</p>
             </div>
@@ -502,17 +502,17 @@
                 顯示另外<span>22</span>個 ▼
             </a>
         </div>
-    </div>
+    </div>-->
 
-    <div class="infomation">
+    <div id="infomation" class="infomation">
         <nav class="navbar ">
             <div class="container-fluid">
                 <span class="navbar-brand mb-0 h1 navbar-light bg-light">排序</span>
-                <button id="orderPrice">
+                <button id="orderPrice" v-on:click="orderPrice">
                     最低價優先
                     @*@Html.ActionLink("最低價優先", "Search", new { sortOrder = ViewBag.PriceSortParm })*@
                 </button>
-                <button id="orderStar">
+                <button id="orderStar" v-on:click="orderStar">
                     星級優先
                     @*@Html.ActionLink("星級優先", "Search", new { sortOrder = ViewBag.StarSortParm })*@
                 </button>
