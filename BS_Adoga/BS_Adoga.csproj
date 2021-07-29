@@ -167,6 +167,9 @@
     <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
+    <Reference Include="MvcPaging, Version=2.1.13.46, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcPaging.2.1.13\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -423,6 +426,7 @@
     <Content Include="Asset\CDN\JS\moment.min.js" />
     <Content Include="Asset\CDN\JS\vue.js" />
     <Content Include="Asset\CDN\JS\moment-with-locales.min.js" />
+    <Content Include="Asset\CSS\CityCenter.css" />
     <Content Include="Asset\CSS\calendar.css" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
@@ -442,6 +446,7 @@
     <Content Include="Asset\CSS\HotelDetailShare.css" />
     <Content Include="Asset\images\adoga-logo-v2.png" />
     <Content Include="Asset\images\Booking.png" />
+    <Content Include="Asset\images\Home\bg-adoga.png" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel01.jpg" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel02.jpg" />
     <Content Include="Asset\images\HotelDetail\Room\room01.jpg" />
@@ -2461,11 +2466,17 @@
     <Content Include="Views\Function\HotelRoomCreate.cshtml" />
     <Content Include="Views\Function\HotelRoomEdit.cshtml" />
     <Content Include="Views\Function\HotelRoomDetails.cshtml" />
+    <Content Include="Views\Home\CityCenter.cshtml" />
+    <Content Include="Views\Home\HotelDetail.cshtml" />
+    <Content Include="Views\Shared\_optionHotel.cshtml" />
+    <Content Include="Views\Shared\_optionCity.cshtml" />
+    <Content Include="Views\Shared\_SearchCityPartial.cshtml" />
     <Content Include="Views\Function\RoomDetailsIndex.cshtml" />
     <Content Include="Views\Function\RoomBedCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Asset\CDN\CSS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />
