@@ -77,11 +77,11 @@
     <p class="remind-text">*每張圖片的檔案大小不可超過2MB</p>
 
     @*<div class="progress mt-3">
-        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-    </div>*@
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        </div>*@
     @*<div class="spinner-border text-primary" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>*@
+            <span class="sr-only">Loading...</span>
+        </div>*@
     <!--這區會動態載入card，讓user預覽圖片-->
     <div class="preview-img row border mt-4">
     </div>
@@ -217,16 +217,17 @@
         }
 
         function ReUploadFile(index, img) {
-            var re_Img = document.querySelectorAll(".img-figure .img-wrap img")[index]
-            var re_ImgReader = new FileReader();
-            var newFileList = new DataTransfer();
-            re_ImgReader.readAsDataURL(img.files[0]);
-            re_ImgReader.onload = function (e) {
-                var showImg = document.getElementById('show-img-' + index);
-                showImg.src = this.result;
-                re_Img.src = this.result;
-                uploadImg.files[index] = this.result;
-            }
+            //var re_Img = document.querySelectorAll(".img-figure .img-wrap img")[index]
+            //var re_ImgReader = new FileReader();
+            ////uploadImg.files[index] = img.files[0];
+            //console.log(uploadImg.files)
+            //re_ImgReader.readAsDataURL(img.files[0]);
+            //re_ImgReader.onload = function (e) {
+            //    var showImg = document.getElementById('show-img-' + index);
+            //    showImg.src = this.result;
+            //    re_Img.src = this.result;
+            //    //uploadImg.files[index] = this.result;
+            //}
 
             //更新FileList
             var newFileList = new DataTransfer();
@@ -234,9 +235,12 @@
                 if (i == index) {
                     newFileList.items.add(img.files[0])
                 }
-                newFileList.items.add(uploadImg.files[i])
+                else {
+                    newFileList.items.add(uploadImg.files[i])
+                }
             }
             uploadImg.files = newFileList.files;
+            readImg(uploadImg);
         }
 
         function DeleteFile(deleteIndex) {
@@ -262,7 +266,7 @@
                     hotelID: hotelSelect.value
                 },
                 data: formData,
-                headers: { 'Content-Type': 'multipart/form-data' },                
+                headers: { 'Content-Type': 'multipart/form-data' },
             }).then((response) => {
                 alert(response.data);
                 console.log(response);
