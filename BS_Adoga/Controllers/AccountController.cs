@@ -26,7 +26,7 @@ namespace BS_Adoga.Controllers
         }
 
         [AcceptVerbs("GET")]
-        public ActionResult GetMemberBookingList(string filterOption,string sortOption)
+        public ActionResult GetMemberBookingList(string filterOption, string sortOption)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
@@ -73,7 +73,7 @@ namespace BS_Adoga.Controllers
             //return View();
         }
         [HttpPost]
-        public ActionResult MemberProfilePassword(string CheckPassword, string NewPassword, string ConfirmPassword,string Email)
+        public ActionResult MemberProfilePassword(string CheckPassword, string NewPassword, string ConfirmPassword, string Email)
         {
             string FirstPassword = HttpUtility.HtmlEncode(CheckPassword);
             string SecendPassword = HttpUtility.HtmlEncode(NewPassword);
@@ -82,34 +82,34 @@ namespace BS_Adoga.Controllers
             cust.Email = Email;
             cust.MD5HashPassword = HashService.MD5Hash(NewPassword);
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(Email = Email);
-            if(data.MD5HashPassword!= HashService.MD5Hash(CheckPassword))
+            var data = db.Customers.Find(Email);
+            if (data.MD5HashPassword != HashService.MD5Hash(CheckPassword))
             {
                 Content("修改失敗");
                 TempData["Error"] = "原密碼輸入錯誤,請重新輸入";
             }
             else
             {
-                if(NewPassword!=ConfirmPassword)
+                if (NewPassword != ConfirmPassword)
                 {
-                   
+
                     Content("修改失敗");
                     TempData["Error"] = "輸入密碼與再次輸入密碼不相等請重新輸入請重新輸入";
                 }
-               else
+                else
                 {
                     data.MD5HashPassword = HashService.MD5Hash(NewPassword);
                     TempData["Success"] = "密碼修改成功";
                     db.SaveChanges();
-                  
+
                 }
             }
 
-            return RedirectToAction("MemberProfile","Account");
+            return RedirectToAction("MemberProfile", "Account");
         }
-            
 
-            public ActionResult BookingDetail(string orderid)
+
+        public ActionResult BookingDetail(string orderid)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
@@ -147,6 +147,43 @@ namespace BS_Adoga.Controllers
                     return Content("訂單建立失敗:" + ex.ToString());
                 }
             }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Evaluation(string orderid, decimal ScoreRange, string Title, string MessageText)
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+
+
+            var getId = _memberacoountrepository.GetComment(orderid, user_id);
+            //comment.OrderID = orderid;           
+            //comment.HotelID = getId.HotelID;
+            //comment.CustomerID = user_id;          
+            //comment.Title = Title;
+            //comment.MessageDate = DateTime.Now;
+            //comment.MessageText = MessageText;
+            //comment.Score = ScoreRange;
+            //comment.HotelName = getId.HotelName;
+
+            AdogaContext db = new AdogaContext();
+            MessageBoard message = new MessageBoard()
+            {
+                OrderID = orderid,
+                HotelID = getId.HotelID,
+                CustomerID = user_id,
+                Title = Title,
+                MessageDate = DateTime.Now,
+                MessageText = MessageText,
+                Score = ScoreRange
+            };
+
+            db.MessageBoards.Add(message);
+            db.SaveChanges();
+            
             return View();
         }
     }

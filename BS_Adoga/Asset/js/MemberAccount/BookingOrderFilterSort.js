@@ -43,6 +43,7 @@ var filterBookingOrder = new Vue({
         },
     }
 })
+
 var BookingList = new Vue({
     el: '#BookingList',
     data: {
@@ -52,6 +53,13 @@ var BookingList = new Vue({
         'booking-card': BookingCard
     }
 })
+
+//var modalID = new Vue({
+//    el: '#modalID',
+//    data: {
+//        orderID: 'XXXZZZZS'
+//    }
+//})
 
 function appendBookingList(response) {
 
@@ -115,6 +123,9 @@ function appendBookingList(response) {
                     //    console.log(response);
                         window.location.href ='https://localhost:44352/Account/RePayOrder/'+item.OrderID
                     //}).catch(error => console.log(error))
+                },
+                Evaluation: function () {
+                    modalID.orderID = item.OrderID
                 },
                 GoToDetail: function () {
                     window.location.href = 'https://localhost:44352/BookingDetail/' + item.OrderID;
