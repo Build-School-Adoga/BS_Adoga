@@ -462,6 +462,7 @@
     <Content Include="Asset\JS\HotelDetail\HotelFacility.js" />
     <Content Include="Asset\JS\HotelDetail\HotelFacilityComponent.js" />
     <Content Include="Asset\JS\HotelDetail\RoomComponent.js" />
+    <Content Include="Asset\JS\MemberAccount\BookingOrderComponent.js" />
     <Content Include="Asset\JS\MemberAccount\BookingComponent.js" />
     <Content Include="Asset\JS\MemberAccount\BookingOrderFilterSort.js" />
     <Content Include="Asset\JS\MemberAccount\MemberProfile.js" />
@@ -2458,7 +2459,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Asset\CDN\CSS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />

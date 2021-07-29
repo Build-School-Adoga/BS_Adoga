@@ -1,6 +1,5 @@
-﻿
-import BookingCard from './BookingComponent.js'
-
+﻿////import BookingCard from './BookingOrderComponent.js'
+ 
 //一開始載入頁面時要帶入order的資料，未入住的。
 axios.get('https://localhost:44352/Account/GetMemberBookingList', {
         params: {
@@ -24,6 +23,9 @@ var filterBookingOrder = new Vue({
     watch: {
         filterOption() {
             console.log(`filter:${this.filterOption}`)
+            //console.log(BookingCard)
+            //console.log(BookingCard.pageNumber)
+            //BookingCard.startPage;
             this.filter_sort();
         },
         sortOption() {
@@ -43,6 +45,7 @@ var filterBookingOrder = new Vue({
                 console.log(response.data)
                 appendBookingList(response.data)
             }).catch((error) => console.log(error))
+           
         },
         Search() {
             axios.get('https://localhost:44352/Account/GetMemberBookingList', {
@@ -63,14 +66,16 @@ var filterBookingOrder = new Vue({
         }
     }
 })
+
 var BookingList = new Vue({
     el: '#BookingList',
     data: {
-        group: []
+        group: [],
+        pageNumber: 0,
     },
-    components: {
-        'booking-card': BookingCard
-    }
+    //components: {
+    //    'booking-card': BookingCard
+    //}
 })
 
 function appendBookingList(response) {
