@@ -69,7 +69,17 @@
     </div>
 
     <div id="BookingList">
-        <booking-card v-bind:tttttt="group" ></booking-card>
+        <booking-card v-bind:order="order" v-for="order in paginatedData" ></booking-card>
+        <button class="btn"
+                :disabled="pageNumber === 0"
+                @@click="prevPage">
+            上一頁
+        </button>
+        <button class="btn"
+                :disabled="pageNumber >= pageCount -1"
+                @@click="nextPage">
+            下一頁
+        </button>
         <div v-if="group.length==0">
             <div class="no-booking-panel">
                 <img id="no-booking_img"
@@ -89,7 +99,7 @@
             </div>
         </div>
     </div>
-
+</div>
 
     @*@foreach (var item in Model)
         {
@@ -124,8 +134,8 @@
 
     <!--Vue在Layout已有引用-->
     <!--Mine-->
-    <script  src="~/Asset/js/MemberAccount/BookingOrderFilterSort.js"></script>
-    <script  src="~/Asset/js/MemberAccount/BookingOrderComponent.js"></script>
+    <script type="module" src="~/Asset/js/MemberAccount/BookingOrderFilterSort.js"></script>
+    @*<script  src="~/Asset/js/MemberAccount/BookingOrderComponent.js"></script>*@
     @*<script type="module">
             import BookingCard from '../../Asset/JS/MemberAccount/BookingComponent.js'
 

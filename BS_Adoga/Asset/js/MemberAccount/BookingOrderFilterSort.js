@@ -1,17 +1,17 @@
-﻿////import BookingCard from './BookingOrderComponent.js'
+﻿import BookingCard from './BookingComponent.js'
  
 //一開始載入頁面時要帶入order的資料，未入住的。
-axios.get('https://localhost:44352/Account/GetMemberBookingList', {
-        params: {
-            filterOption: "ComingSoon",
-            sortOption: "CheckInDate",
-            UserInputOrderId: ""
-        }
-    }).then(function (response) {
-        console.log(response.data)
-        console.log('success')
-        appendBookingList(response.data);
-    }).catch((error) => console.log(error))
+//axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+//        params: {
+//            filterOption: "ComingSoon",
+//            sortOption: "CheckInDate",
+//            UserInputOrderId: ""
+//        }
+//    }).then(function (response) {
+//        console.log(response.data)
+//        console.log('success')
+//        appendBookingList(response.data);
+//    }).catch((error) => console.log(error))
 
 var filterBookingOrder = new Vue({
     el: "#filter-sort-wrap",
@@ -71,11 +71,64 @@ var BookingList = new Vue({
     el: '#BookingList',
     data: {
         group: [],
+        //paginatedDataX: [],
+        //pageCountX:1,
         pageNumber: 0,
+        size:3
     },
-    //components: {
-    //    'booking-card': BookingCard
-    //}
+    methods: {
+        nextPage() {
+            this.pageNumber++;
+        },
+        prevPage() {
+            this.pageNumber--;
+        }
+    },
+    watch: {
+        group() {
+            console.log(this.pageNumber);
+            this.pageNumber = 0;
+        }
+    },
+    computed: {
+        pageCount() {
+            let l = this.group.length,
+                s = this.size;
+            return Math.floor(l / s);
+        },
+        paginatedData() {
+            const start = this.pageNumber * this.size,
+                end = start + this.size;
+            return this.group.slice(start, end);
+        }
+    },
+    created: function () {
+        axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+            params: {
+                filterOption: "ComingSoon",
+                sortOption: "CheckInDate",
+                UserInputOrderId: ""
+            }
+        }).then(function (response) {
+            console.log(response.data)
+            console.log('success')
+            appendBookingList(response.data);
+            //let l = this.group.length,
+            //    s = this.size;
+            //this.pageCountX = Math.floor(l / s);
+            //console.log(this.pageCountX)
+
+            //const start = this.pageNumber * this.size,
+            //    end = start + this.size;
+            //this.paginatedDataX = this.group.slice(start, end);
+            //console.log(this.paginatedDataX)
+        }).catch((error) => console.log(error))
+
+       
+    },
+    components: {
+        'booking-card': BookingCard
+    }
 })
 
 function appendBookingList(response) {
@@ -94,7 +147,7 @@ function appendBookingList(response) {
             else
                 bedTypeStr += bed.Name + "x" + bed.Amount
         })
-        console.log(item.OrderID)
+        //console.log(item.OrderID)
 
         
         //開始給BookingList（Vue物件）的group塞資料&設定裡面的屬性
