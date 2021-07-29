@@ -125,6 +125,8 @@ function appendBookingList(response) {
                     //}).catch(error => console.log(error))
                 },
                 Evaluation: function () {
+                    console.log(modalID.orderID);
+                    console.log(item.orderID);
                     modalID.orderID = item.OrderID
                 },
                 GoToDetail: function () {
