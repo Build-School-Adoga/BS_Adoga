@@ -13,7 +13,17 @@ axios.get('../Account/GetMemberBookingList', {
         console.log('success')
         appendBookingList(response.data);
     }).catch((error) => console.log(error))
+var mod = new Vue({
 
+    el: "#modalID",
+
+    data: {
+
+        orderID: 'XXX'
+
+    }
+
+})
 var filterBookingOrder = new Vue({
     el: "#filter-sort-wrap",
     data: {
@@ -136,6 +146,7 @@ function appendBookingList(response) {
                         window.location.href ='../Account/RePayOrder/'+item.OrderID
                     //}).catch(error => console.log(error))
                 },
+                
                 GoToDetail: function () {
                     window.location.href = '../BookingDetail/' + item.OrderID;
                 }

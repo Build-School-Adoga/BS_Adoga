@@ -1,5 +1,6 @@
 ﻿using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelLogin;
+using BS_Adoga.Models.ViewModels.HotelImagePage;
 using BS_Adoga.Repository;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,12 @@ namespace BS_Adoga.Service
 {
     public class FunctionService
     {
+        private readonly AdogaContext _context;
+        public FunctionService()
+        {
+            _context = new AdogaContext();
+        }
+
         public OperationResult HotelEdit(HotelCreateViewModel hotelCreateVM , string username)
         {
             var result = new OperationResult();
@@ -119,6 +126,36 @@ namespace BS_Adoga.Service
                 result.Exception = ex;
             }
             return result;
+        }
+
+        //取得HotelImagePage需要的ViewModel資料
+        public HotelImageVM GetHotelImageDataByUserId(string user_id)
+        {
+            var hotelEmp = _context.HotelEmpMappingHotels.Where(x => x.HotelEmployeeID == user_id).First();
+
+            var images = from img in _context.HotelImageUploads
+                         where img.HotelID == hotelEmp.HotelID
+                         orderby img.ImageID
+                         select new ImagesVM { ImageID = img.ImageID, ImageURL = img.ImageURL };
+
+            var options = from empMapHotel in _context.HotelEmpMappingHotels
+                          join h in _context.Hotels on empMapHotel.HotelID equals h.HotelID
+                          where empMapHotel.HotelEmployeeID == user_id
+                          select new HotelOption
+                          {
+                              HotelID = h.HotelID,
+                              HotelName = h.HotelName
+                          };
+
+            var data = new HotelImageVM
+            {
+                HotelID = hotelEmp.HotelID,
+                HotelEmployeeID = hotelEmp.HotelEmployeeID,
+                HotelOptions = options,
+                Images = images
+            };
+
+            return data;
         }
 
         //儲存圖片URL

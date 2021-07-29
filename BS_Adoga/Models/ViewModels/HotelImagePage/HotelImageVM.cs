@@ -10,7 +10,10 @@ namespace BS_Adoga.Models.ViewModels.HotelImagePage
         public string HotelID { get; set; }
 
         public string HotelEmployeeID { get; set; }
-        
+
+        public IEnumerable<HotelOption> HotelOptions { get; set; }       
+
         public IEnumerable<ImagesVM> Images { get; set; }
+
     }
 }

@@ -1,8 +1,10 @@
 ﻿
-/*上傳圖片區域*/
+
+
+/*--------------------上傳圖片 input們---------------------*/
 .preview-img {
     display: flex;
-    height: 300px;
+    /* height: 300px; */
     margin-bottom: 100px;
     overflow: auto;
 }
@@ -10,11 +12,45 @@
 .img-figure {
     /* display: flex; */
     /* flex-direction: column; */
+    /* justify-content: space-between; */
     /* height: 300px; */
     padding: 10px;
     background-color: #fff;
     border: 1px solid rgb(240, 240, 240);
     border-radius: 5px;
+}
+
+.img-figure .img-wrap {
+    height: 250px;
+    overflow: auto;
+}
+
+.img-figure .img-wrap::-webkit-scrollbar {
+    width: 6px;
+    background-color: rgb(255, 255, 255);
+}
+
+.img-figure .img-wrap::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #808080;
+}
+
+.img-figure .img-wrap::-webkit-scrollbar-thumb:hover {
+    background-color: #548dd8;
+}
+
+.img-figure .img-wrap::-webkit-scrollbar-track {
+    padding: 3px 0;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+}
+
+.img-figure .img-wrap img {
+    /* height: 100%; */
+    /* max-height: 100%; */
+    /* max-width: 100%; */
+    margin: auto;
+    display: block;
 }
 
 #upload-img-btn {
@@ -47,12 +83,28 @@
     border-radius: 3px;
 }
 
+.re-upload-btn,
 .upload-cancel-btn {
     padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.re-upload-btn {
+    background-color: rgb(95, 133, 238);
+    border: 1px solid rgb(95, 133, 238);
+    color: #fff;
+}
+
+    .re-upload-btn:hover {
+        background-color: #fff;
+        color: rgb(95, 133, 238);
+    }
+
+
+.upload-cancel-btn {
     background-color: rgb(219, 219, 219);
     border: 1px solid rgb(219, 219, 219);
-    border-radius: 5px;
-    font-weight: bold;
     color: rgb(73, 73, 73);
 }
 
@@ -61,7 +113,14 @@
         color: rgb(250, 250, 250);
     }
 
-/*預覽圖片群 */
+.remind-text {
+    margin-bottom: 5px;
+    margin-left: 10px;
+    font-size: 12px;
+    color: gray;
+}
+
+/*-------------------預覽圖片群----------------------- */
 .media-group {
     width: 900px;
     /* margin-right: 20px; */

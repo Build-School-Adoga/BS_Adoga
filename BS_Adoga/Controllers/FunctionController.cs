@@ -673,19 +673,8 @@ namespace BS_Adoga.Controllers
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
 
-            var query = _context.HotelEmpMappingHotels.Where(x => x.HotelEmployeeID == user_id ).First();
-            var query2 = from img in _context.HotelImageUploads
-                         where img.HotelID == query.HotelID
-                         orderby img.ImageID
-                         select new ImagesVM { ImageID = img.ImageID, ImageURL = img.ImageURL };
-
-            var data = new HotelImageVM
-            {
-                HotelID = query.HotelID,
-                HotelEmployeeID = query.HotelEmployeeID,
-                Images = query2
-            };
-            return View(data);
+            var result = _service.GetHotelImageDataByUserId(user_id);
+            return View(result);
         }
 
         protected override void Dispose(bool disposing)
