@@ -53,11 +53,19 @@
                 @@click="nextPage">
             下一頁
         </button>
-    </div>
-    <div v-if="group.length==0">
-        <div class="no-booking-panel">
-            <img id="no-booking_img"
-                 src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
+        <div v-if="group.length==0" class="no-booking-panel mt-5">
+            <img id="no-booking_img" src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
+
+            <div class="no-booking-content">
+                <p class="big-text">您目前沒有即將到來的預訂。</p>
+                <p>
+                    想要查看
+                    <a href="" id="checked_out">已完成</a>
+                    或
+                    <a href="" id="cancelled">已取消</a>
+                    的訂單嗎?
+                </p>
+            </div>
         </div>
     </div>
     @using (Html.BeginForm("Evaluation", "Account", FormMethod.Post))
@@ -102,17 +110,7 @@
     </div>
 </div>}
 
-    <div class="no-booking-content">
-        <h4>搜尋不到此訂單編號</h4>
-        <p>
-            想要查看
-            <a href="" id="checked_out">已退房</a>
-            或
-            <a href="" id="cancelled">已取消</a>
-            的訂單嗎?
-            <h5><strong>請重新搜尋</strong></h5>
-        </p>
-    </div>
+
 
 
     @*@foreach (var item in Model)
@@ -123,22 +121,8 @@
 
     @*@Html.Partial("~/Views/Account/_BookingPartial.cshtml")*@
 
-    @if (Model.Count() == 0)
-    {
-        <div class="no-booking-panel mt-5">
-            <img id="no-booking_img" src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
-        
-            <div class="no-booking-content">
-                <p class="big-text">您目前沒有即將到來的預訂。</p>
-                <p>
-                    想要查看
-                    <a href="" id="checked_out">已完成</a>
-                    或
-                    <a href="" id="cancelled">已取消</a>
-                    的訂單嗎?
-                </p>
-            </div>
-        </div>}
+
+
 </div>
 @section endJS{
     <!-- axios 的引用 -->
