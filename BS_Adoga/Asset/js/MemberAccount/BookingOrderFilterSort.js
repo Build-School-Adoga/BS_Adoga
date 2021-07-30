@@ -35,7 +35,7 @@ var filterBookingOrder = new Vue({
     },
     methods: {
         filter_sort() {
-            axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+            axios.get('../Account/GetMemberBookingList', {
                 params: {
                     filterOption: this.filterOption,
                     sortOption: this.sortOption,
@@ -131,6 +131,13 @@ var BookingList = new Vue({
     }
 })
 
+var modalID = new Vue({
+    el: '#modalID',
+    data: {
+        orderID: 'test'
+    }
+})
+
 function appendBookingList(response) {
 
     BookingList.group = []; //先清空資料
@@ -191,11 +198,16 @@ function appendBookingList(response) {
                     //    }
                     //}).then(response => {
                     //    console.log(response);
-                        window.location.href ='https://localhost:44352/Account/RePayOrder/'+item.OrderID
+                        window.location.href ='../Account/RePayOrder/'+item.OrderID
                     //}).catch(error => console.log(error))
                 },
+                Evaluation: function () {
+                    console.log(modalID.orderID);
+                    console.log(item.orderID);
+                    modalID.orderID = item.OrderID
+                },
                 GoToDetail: function () {
-                    window.location.href = 'https://localhost:44352/BookingDetail/' + item.OrderID;
+                    window.location.href = '../BookingDetail/' + item.OrderID;
                 }
             }
         );

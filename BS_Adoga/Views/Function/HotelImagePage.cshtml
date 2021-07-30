@@ -1,0 +1,280 @@
+﻿@model HotelImageVM
+@{
+    ViewBag.Title = "HotelImagePage";
+    Layout = "~/Views/Shared/_FunctionPage.cshtml";
+
+    string user_id = Model.HotelEmployeeID;
+    string hotel_id = Model.HotelID;
+
+}
+
+@section topCSS{
+    <link href="~/Asset/CSS/Function/HotelImagePage.css" rel="stylesheet" />
+}
+<div class="container mt-5">
+    <h2 class="m-3">飯店圖片</h2>
+
+    <div class="media-group row d-flex ">
+        <div class="hotel-video  pl-0 pr-1">
+            <!--  col-7 -->
+            <div class="img-wrap">
+                <img id="show-img-0"
+                     src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768"
+                     alt="">
+                <div class="show-shadow"></div>
+            </div>
+        </div>
+        <div class="pic-group px-0 ">
+            <!--  col-5 -->
+            <div class="medium-pic">
+                <div class="img-wrap">
+                    <img id="show-img-1" class="medium-pic"
+                         src="http://pix6.agoda.net/hotelImages/234438/-1/473caa63348a75f0a87e7ea2c7868e81.jpg?s=1024x768">
+                    <div class="show-shadow"></div>
+                    <a class="add-fav-button"><i class="fas fa-heart"></i></a>
+                </div>
+            </div>
+            <div class="two-pic d-flex mt-1 ">
+                <div class="img-wrap mr-1">
+                    <img id="show-img-2" class=""
+                         src="https://pix6.agoda.net/hotelImages/234/234438/234438_16020314120039601807.jpg?s=1024x768">
+                    <div class="show-shadow"></div>
+                </div>
+                <div class="img-wrap">
+                    <img id="show-img-3" class=""
+                         src="https://pix6.agoda.net/hotelImages/234438/-1/14b6f310d6c82575411bdc92ebd9a421.jpg?s=1024x768">
+                    <div class="show-shadow"><a href="#" class="album-link fz-14">【完整相簿】共12張</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--選擇圖片要上傳給哪個飯店-->
+    <div class="input-group mb-3">
+        <select class="custom-select" id="hotelOptionSelect">
+            <option selected>Choose Hotel</option>
+            @foreach (var hotel in Model.HotelOptions)
+            {
+                <option value="@hotel.HotelID">@hotel.HotelName</option>
+            }
+        </select>
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="hotelOptionSelect">飯店選項</label>
+        </div>
+    </div>
+
+    <!--上傳圖片-->
+    <div class="input-group mb-1">
+        <div class="custom-file">
+            <input id="upload-img" type="file" class="custom-file-input" multiple>
+            <label class="custom-file-label upload-img-label" for="upload-img">Choose File</label>
+        </div>
+        <div class="input-group-append">
+            <button id="upload-img-btn" type="button">上傳圖片</button>
+        </div>
+    </div>
+    <p class="remind-text">*最多上傳4張圖片</p>
+    <p class="remind-text">*每張圖片的檔案大小不可超過2MB</p>
+
+    @*<div class="progress mt-3">
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        </div>*@
+    @*<div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>*@
+    <!--這區會動態載入card，讓user預覽圖片-->
+    <div class="preview-img row border mt-4">
+    </div>
+</div>
+
+<template id="img-box">
+    <figure class="img-figure card col-3">
+        <div>
+            <div class="img-wrap">
+                <img src="" alt="" class="card-img-top">
+            </div>
+            <div class="figcap-wrap">
+                <p class="img-name"></p>
+                <p class="img-size"></p>
+            </div>
+        </div>
+        <div>
+            <input class="re-upload-input " type="file" hidden>
+            <button class="re-upload-btn mb-2"><i class="fas fa-upload"></i></button>
+            <button class="upload-cancel-btn"><i class="fas fa-trash-alt"></i></button>
+        </div>
+    </figure>
+</template>
+
+@section endJS{
+    <!--axios-->
+    <script src="~/Scripts/axios.min.js"></script>
+
+    <!--mine-->
+    <script>
+        var uploadImg = document.getElementById('upload-img');
+        var uploadImgBtn = document.getElementById('upload-img-btn');
+        var hotelSelect = document.getElementById('hotelOptionSelect');
+        var reUpload_Index;
+         //傳給api的，裡面會存圖片的base64和檔名，真正要上傳去cloudinary時會用到
+        var formData;
+
+        uploadImg.addEventListener('change', function () {
+            console.log(uploadImg.files);
+            readImg(uploadImg);
+        })
+        uploadImgBtn.addEventListener('click', CloudinaryUpload);
+
+        var previewContainer = document.querySelector('.preview-img');
+        var imgBox = document.getElementById('img-box');
+
+        function readImg(img) {
+            //console.log(img.files.length);
+            if (img.files && img.files.length > 0) {
+                if (img.files.length > 4) {
+                    alert("飯店圖片最多上傳4張喔")
+                    return;
+                }
+                //每次進來都清空formData
+                formData = new FormData();
+
+                //每按一次上傳就清空之前的預覽圖片的html
+                previewContainer.innerHTML = '';
+
+                //Length表示有多少個img要上傳。
+                formData.set('Length', img.files.length);
+
+                var uploadImgLabel = document.querySelector('.upload-img-label');
+                uploadImgLabel.innerText = img.files.length + '個檔案'
+
+                for (var index = 0; index < img.files.length; index++) {
+                    //console.log(img.files[index].name);
+
+                    var fileName = img.files[index].name;
+                    var fileSize = img.files[index].size / 1024;
+                    var fileSizeStr = Math.round(fileSize * 100) / 100 + ' kb';
+                    if (fileSize >= 2000) {
+                        alert("圖片的檔案大小不可超過 2 MB ！");
+                    }
+                    else if (fileSize >= 1000) {
+                        fileSize = Math.round((fileSize / 1024) * 100,) / 100;
+                        fileSizeStr = fileSize + ' mb';
+                    }
+
+                    //#region 建立子物件
+                    var clone_imgBox = imgBox.content.cloneNode(true);
+                    var previewImgName = clone_imgBox.querySelector('.img-name');
+                    var previewImgSize = clone_imgBox.querySelector('.img-size');
+                    var cancelBtn = clone_imgBox.querySelector('.upload-cancel-btn');
+                    var reUpload_ImgBtn = clone_imgBox.querySelector('.re-upload-btn');
+                    var reUpload_Img = clone_imgBox.querySelector('.re-upload-input');
+
+                    previewImgSize.innerText = "檔案大小： " + fileSizeStr;
+                    cancelBtn.setAttribute('data-index', index);
+                    cancelBtn.addEventListener('click', function (e) {
+                        DeleteFile(this.getAttribute('data-index'))
+                    })
+                    reUpload_ImgBtn.setAttribute('data-index', index);
+                    reUpload_ImgBtn.addEventListener('click', function (e) {
+                        reUpload_Index = this.getAttribute('data-index');
+                        reUpload_Img.click();
+                    })
+                    reUpload_Img.addEventListener('change', function () {
+                        ReUploadFile(reUpload_Index, reUpload_Img)
+                    })
+                    //#endregion
+                    previewContainer.appendChild(clone_imgBox);
+
+                    //publicId放這邊，不放在reader.onload裡面，因為reader.onload並不是跟for處於同一個迴圈，它自己會跑三次，
+                    //如果放reader.onload裡面，每個publicId會 = 最後截取出來的publicId，會變成每個都一樣的檔名。
+                    // var public_id = fileName.substring(0, fileName.lastIndexOf('.'));
+                    var public_id = hotelSelect.value + '_img' + (index + 1).toString().padStart(2, '0');
+                    formData.set(`${'PublicId' + index}`, public_id.toString());
+
+                    var i = 0;
+                    var reader = new FileReader();
+                    reader.readAsDataURL(img.files[index]);
+                    reader.onload = function (e) {
+                        // reader.onload並不跟for處於同一個迴圈，外層的for迴圈跑完，它自己才開始跑迴圈。
+
+                        var showImg = document.getElementById('show-img-' + i);
+                        var previewImg = document.querySelectorAll(".img-figure .img-wrap img")[i];
+
+                        previewImg.src = this.result;
+                        showImg.src = this.result;
+                        showImg.style.display = "block";
+
+                        formData.set(`${'File' + i}`, this.result.toString());
+                        i++;
+                    }
+                };
+            }
+            else {
+                var uploadImgLabel = document.querySelector('.upload-img-label');
+                uploadImgLabel.innerText = '0個檔案'
+                previewContainer.innerHTML = '';
+            }
+        }
+
+        function ReUploadFile(index, img) {
+            //var re_Img = document.querySelectorAll(".img-figure .img-wrap img")[index]
+            //var re_ImgReader = new FileReader();
+            ////uploadImg.files[index] = img.files[0];
+            //console.log(uploadImg.files)
+            //re_ImgReader.readAsDataURL(img.files[0]);
+            //re_ImgReader.onload = function (e) {
+            //    var showImg = document.getElementById('show-img-' + index);
+            //    showImg.src = this.result;
+            //    re_Img.src = this.result;
+            //    //uploadImg.files[index] = this.result;
+            //}
+
+            //更新FileList
+            var newFileList = new DataTransfer();
+            for (i = 0; i < uploadImg.files.length; i++) {
+                if (i == index) {
+                    newFileList.items.add(img.files[0])
+                }
+                else {
+                    newFileList.items.add(uploadImg.files[i])
+                }
+            }
+            uploadImg.files = newFileList.files;
+            readImg(uploadImg);
+        }
+
+        function DeleteFile(deleteIndex) {
+            var newFileList = new DataTransfer();
+            for (i = 0; i < 4; i++) {
+                if (i != deleteIndex && i < uploadImg.files.length) {
+                    newFileList.items.add(uploadImg.files[i])
+                }
+                //讓全部showImg都看不見，到了readImg再根據新的FileList顯示圖片。
+                var showImg = document.getElementById('show-img-' + i);
+                showImg.style.display = "none";
+            }
+            uploadImg.files = newFileList.files;
+            readImg(uploadImg);
+        }
+
+        function CloudinaryUpload() {
+            axios({
+                method: 'POST',
+                url: "../api/Function/UploadImage",
+                params: {
+                    userID: '@user_id',
+                    hotelID: hotelSelect.value
+                },
+                data: formData,
+                headers: { 'Content-Type': 'multipart/form-data' },
+            }).then((response) => {
+                alert(response.data);
+                console.log(response);
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+
+    </script>
+}
+

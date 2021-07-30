@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Http;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Service;
 using BS_Adoga.Models.ViewModels.Search;
 using PagedList;
-using System.Web.Http;
 
 namespace BS_Adoga.Controllers
 {
@@ -56,7 +56,7 @@ namespace BS_Adoga.Controllers
         public ActionResult Search(SearchDataViewModel info, string sortOrder, string currentFilter, string currentOrder, int? page)
         {
             //當按下排序的按鈕時，因為會“刷新”頁面所以資料也會需要重新查詢出來，這時讓它抓之前設的TempData去找同樣的條件
-            if(info.HotelNameOrCity==null)
+            if (info.HotelNameOrCity == null)
             {
                 info.HotelNameOrCity = TempData["CityOrName"].ToString();
                 info.CheckInDate = TempData["sDate"].ToString();
@@ -82,45 +82,38 @@ namespace BS_Adoga.Controllers
             //排序 預設抓星級最好的
             ViewBag.StarSortParm = sortOrder == null ? "star_desc" : "";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
-            
+
             //分頁
-            ViewBag.CurrentSort = sortOrder;
-            if (currentOrder != null) { page = 1; }
-            else { currentOrder = currentFilter; }
-            ViewBag.CurrentFilter = currentFilter;
+            //ViewBag.CurrentSort = sortOrder;
+            //if (currentOrder != null) { page = 1; }
+            //else { currentOrder = currentFilter; }
+            //ViewBag.CurrentFilter = currentFilter;
 
-            int pageSize = 1;
-            int pageNumber = (page ?? 1); //如果page裡面沒有值就會回傳1，else就傳自己的值
-            
-            switch (sortOrder)
-            {
-                case "star_desc":
-                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.Star).ToPagedList(pageNumber, pageSize);
-                    break;
+            //int pageSize = 1;
+            //int pageNumber = (page ?? 1); //如果page裡面沒有值就會回傳1，else就傳自己的值
 
-                case "price_desc":
-                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.I_RoomVM.RoomPrice).ToPagedList(pageNumber, pageSize);
-                    break;
+            //switch (sortOrder)
+            //{
+            //    case "star_desc":
+            //        data.PageOfHotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.Star).ToPagedList(pageNumber, pageSize);
+            //        break;
 
-                case "Price":
-                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderBy(o => o.I_RoomVM.RoomPrice).ToPagedList(pageNumber, pageSize);
-                    break;
+            //    case "price_desc":
+            //        data.PageOfHotelSearchVM = data.HotelSearchVM.OrderByDescending(o => o.I_RoomVM.RoomPrice).ToPagedList(pageNumber, pageSize);
+            //        break;
 
-                default:
-                    data.PageOfHotelSearchVM = data.HotelSearchVM.OrderBy(o => o.Star).ToPagedList(pageNumber, pageSize);
-                    break;
-            }
+            //    case "Price":
+            //        data.PageOfHotelSearchVM = data.HotelSearchVM.OrderBy(o => o.I_RoomVM.RoomPrice).ToPagedList(pageNumber, pageSize);
+            //        break;
+
+            //    default:
+            //        data.PageOfHotelSearchVM = data.HotelSearchVM.OrderBy(o => o.Star).ToPagedList(pageNumber, pageSize);
+            //        break;
+            //}
 
             return View(data);
+            //return View();
 
         }
-
-        //Get: api
-        //[AcceptVerbs("GET","POST")]
-        //public IHttpActionResult GetAllRoom(string hotelId)
-        //{
-        //    var facilityId = s.GetHotelFacilityId(hotelId);
-        //    return facilityId;
-        //}
     }
 }

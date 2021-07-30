@@ -16,7 +16,7 @@
 @if (Model.HotelEngName != null)
 {
     HotelFullName = Model.HotelName + "(" + Model.HotelEngName + ")";
-}
+}   
 else { HotelFullName = Model.HotelName; }
 
 <div class="card">
@@ -71,15 +71,15 @@ else { HotelFullName = Model.HotelName; }
     </div>
     <div class="rank">
         <!-- 目前不用 <div class="point">
-        <div class="comment">
-            <p>很讚</p>
-            <p><span>10,237</span> 份評鑑</p>
-            <p>地點 <span>9.0</span></p>
-        </div>
-        <div class="icon">
-            <p>8.5</p>
-        </div>
-    </div> -->
+            <div class="comment">
+                <p>很讚</p>
+                <p><span>10,237</span> 份評鑑</p>
+                <p>地點 <span>9.0</span></p>
+            </div>
+            <div class="icon">
+                <p>8.5</p>
+            </div>
+        </div> -->
         @if (Model.I_RoomDetailVM.RoomDiscount == 0)
         {
             <div class="price">
@@ -100,6 +100,11 @@ else { HotelFullName = Model.HotelName; }
         }
 
         @* ActionLink沒辦法進去HotelDetail的Action *@
-        @Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = Model.HotelID, startDate = "2021/06/20", endDate = "2021/06/22", orderRoom = 2, adult = 6 }, new { @class = "btn btn-primary", })
+        @Html.ActionLink("查看空房情況", "HotelDetail", "HotelDetail", 
+            new { 
+                hotelName = Model.HotelName, 
+                startDate = Model.I_RoomDetailVM.CheckInDate, 
+                endDate = Model.I_RoomDetailVM.CheckOutDate, 
+                orderRoom = 1, adult = 1, child = 1 }, new { @class = "btn btn-primary", })
     </div>
 </div>

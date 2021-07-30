@@ -29,18 +29,43 @@ namespace BS_Adoga
                 defaults: new { controller = "DetailApi", action = "GetHotelFacilities", id = RouteParameter.Optional }
             );
 
-            config.Routes.MapHttpRoute(
-                name: "GetEachHotelOneRoom",
-                routeTemplate: "api/HotelDetail/GetEachHotelOneRoom",
-                defaults: new { controller = "DetailApi", action = "GetEachHotelOneRoom", id = RouteParameter.Optional }
-            );
+            //config.Routes.MapHttpRoute(
+            //    name: "GetEachHotelOneRoom",
+            //    routeTemplate: "api/HotelDetail/GetEachHotelOneRoom",
+            //    defaults: new { controller = "DetailApi", action = "GetEachHotelOneRoom", id = RouteParameter.Optional }
+            //);
 
             //Irene
+           // config.Routes.MapHttpRoute(
+           //    name: "GetHotelFromCity",
+           //    routeTemplate: "api/Search/GetHotelFromCity",
+           //    defaults: new { controller = "Search", action = "GetHotelFromCity", id = RouteParameter.Optional }
+           //);
+
             config.Routes.MapHttpRoute(
-               name: "GetAllSearchFicilities",
-               routeTemplate: "api/Search/GetAllSearchFicilities",
-               defaults: new { controller = "Search", action = "GetAllSearchFicilities", id = RouteParameter.Optional }
+               name: "GetHotelByCity",
+               routeTemplate: "api/Search/GetHotelByCity",
+               defaults: new { controller = "SearchApi", action = "GetHotelByCity", id = RouteParameter.Optional }
            );
+
+
+            config.Routes.MapHttpRoute(
+                name: "UploadImage",
+                routeTemplate: "api/Function/UploadImage",
+                defaults: new { controller = "FunctionApi", action = "UploadImage", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "GetRoomDetailMonth",
+                routeTemplate: "api/Function/RoomDetailMonth",
+                defaults: new { controller = "FunctionApi", action = "GetRoomDetailMonth", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "EditRoomDetail",
+                routeTemplate: "api/Function/EditRoomDetail",
+                defaults: new { controller = "FunctionApi", action = "EditRoomDetail", id = RouteParameter.Optional }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
