@@ -297,7 +297,6 @@
   <ItemGroup>
     <Compile Include="APIController\DetailApiController.cs" />
     <Compile Include="APIController\FunctionApiController.cs" />
-    <Compile Include="APIController\BookingApiController.cs" />
     <Compile Include="APIController\SearchApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -2480,7 +2479,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Asset\CDN\CSS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />
