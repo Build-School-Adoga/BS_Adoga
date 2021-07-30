@@ -316,6 +316,7 @@
     <Compile Include="Models\DBContext\HotelEmpMappingHotel.cs" />
     <Compile Include="Models\DBContext\HotelImageUpload.cs" />
     <Compile Include="Models\ViewModels\Account\BookingOrderViewModel.cs" />
+    <Compile Include="Models\ViewModels\Account\CommentViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\TestVM.cs" />
     <Compile Include="Models\ViewModels\HotelImagePage\HotelOption.cs" />
     <Compile Include="Models\ViewModels\HotelImagePage\ImagesVM.cs" />

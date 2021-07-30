@@ -333,14 +333,15 @@ namespace BS_Adoga.Controllers
                         string ReOrderId = PayResult.OrderId.Substring(0, PayResult.OrderId.Length - 1);
                         var payStatus = _context.Orders.Where(x => x.OrderID == ReOrderId).First();
                         payStatus.PaymentStatus = true;
-                        payStatus.Logging = payStatus.Logging + "; " + "已付款: " + ReOrderId + "(" + PayResult.OrderId.Substring(PayResult.OrderId.Length - 1) + ")";
+                        //payStatus.Logging = payStatus.Logging + "; " + "已付款: " + ReOrderId + "(" + PayResult.OrderId.Substring(PayResult.OrderId.Length - 1) + ")";
+                        payStatus.Logging = payStatus.Logging + "; " + "已付款: " + PayResult.OrderId;
                         _context.Entry(payStatus).State = EntityState.Modified;
                     }
                     else 
                     {
                         var payStatus = _context.Orders.Where(x => x.OrderID == PayResult.OrderId).First();
                         payStatus.PaymentStatus = true;
-                        payStatus.Logging = payStatus.Logging + "; " + "已付款: " + PayResult.OrderId;
+                        //payStatus.Logging = payStatus.Logging + "; " + "已付款: " + PayResult.OrderId;
                         _context.Entry(payStatus).State = EntityState.Modified;
                     }
                                       
