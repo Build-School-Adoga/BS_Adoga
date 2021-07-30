@@ -33,6 +33,7 @@ namespace BS_Adoga.Controllers
                 return Content("請在搜尋框選好全部欄位的資料，才可幫您進行飯店查詢喔。");
             }
 
+            //var a = DateTime.Parse(startDate);
             DateTime checkInDate = DateTime.Parse(startDate);
             DateTime checkOutDate = DateTime.Parse(endDate);
             SearchByMemberVM searchData = new SearchByMemberVM()

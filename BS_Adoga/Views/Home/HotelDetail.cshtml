@@ -1,6 +1,7 @@
-﻿@using BS_Adoga.Models.ViewModels.HotelDetail;
+﻿
 
-@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel
+
+@model demoshopViewModels
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Search";
@@ -12,19 +13,15 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.css" />
     @*<link href="~/Asset/CDN/CSS/daterangepicker.css" rel="stylesheet" />*@
 
-
+    <link href="~/Asset/CDN/CSS/font-awesome.css" rel="stylesheet" />
     <link href="~/Asset/CSS/Search.css" rel="stylesheet" />
     <link href="~/Asset/CSS/SearchFilterPartial.css" rel="stylesheet" />
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
 }
 
 @section endJS{
     @*<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>*@
     @*<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>*@
-
-    <!-- axios 的引用 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
@@ -34,16 +31,14 @@
         <script src="~/Asset/CDN/JS/moment.min.js"></script>
         <script src="~/Asset/CDN/JS/package.js"></script>*@
 
-   
-
     <script>
         //var td = ViewData["con"];
 
         //過濾出地區(distinct)
         var deduped = dedup([
-            @foreach (var item in Model.HotelOptionVM)
+            @foreach (var item in Model.My_MyHotels)
             {
-                 @Html.Partial("~/Views/Search/_optionCity.cshtml", item);
+                 @Html.Partial("~/Views/Shared/_optionCity.cshtml", item);
             }
         ]);
         function dedup(arr) {
@@ -58,13 +53,10 @@
         //搜尋地區、人數
         var filternav = new Vue({
             el: '#nav',
-            data: {
-                room: @TempData["room"],
-                adult: @TempData["adult"],
-                kids: @TempData["kid"],
-                Value: '@TempData["CityOrName"]',
-                startDate: '@TempData["sDate"]',
-                endDate:'@TempData["end"]',
+            data: {    room: 1,
+            adult: 1,
+            kids: 0,
+                Value: '',
                 Options: [
                     {
                         label: '熱門城市',
@@ -73,13 +65,25 @@
                     {
                         label: '飯店名稱',
                         option: [
-                            @foreach (var item in Model.HotelOptionVM)
+                            @foreach (var item in Model.My_MyHotels)
                             {
-                                @Html.Partial("~/Views/Search/_optionHotel.cshtml", item);
+                                @Html.Partial("~/Views/Shared/_optionHotel.cshtml", item);
                             }
                         ]
                     }
                 ]
+            },
+            computed: {
+                //Value() {
+                //    let vd = ViewData["con"];
+                //    debugger;
+                //    if (vd!=null) {
+                //        return vd;
+                //    }
+                //    else {
+                //        return "";
+                //    }
+                //}
             },
             methods: {
                 minus: function (e) {
@@ -88,16 +92,19 @@
                             if (this.room > 1) {
                                 this.room -= 1;
                             }
+                            else { alert("數量不可為0！"); }
                             break;
                         case "adult":
                             if (this.adult > 1) {
                                 this.adult -= 1
                             }
+                            else { alert("數量不可為0！"); }
                             break;
-                        default:
+                        default://小孩
                             if (this.kids > 0) {
                                 this.kids -= 1
                             }
+                            else { alert("數量不可少於0！"); }
                             break;
                     }
                 },
@@ -107,17 +114,21 @@
                             if (this.room < 9) {
                                 this.room += 1;
                             }
+                            else { alert("數量最多為9！"); }
                             break;
                         case "adult":
+
                             if (this.adult < 9) {
                                 this.adult += 1
                             }
+                            else { alert("數量最多為9！"); }
                             break;
-                        default:
-                          if (this.kids < 9) {
+                        default://小孩
+                            if (this.kids < 9) {
                                 this.kids += 1
-                          }
-                          break;
+                            }
+                            else { alert("數量最多為9！"); }
+                            break;
                     }
                 }
             }
@@ -130,10 +141,9 @@
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
 
 
-    <script src="~/Asset/js/Search/Search.js"></script>
+    <script src="~/Asset/js/Search.js"></script>
     <script src="~/Asset/js/Search/_SearchFilterPartial.js"></script>
-    <script src="~/Asset/js/Search/SearchFacilities.js" type="module"></script>
-    @*<script src="~/Asset/js/Search/SearchPriceFormat.js" type="module"></script>*@
+    <script src="~/Asset/js/Search/SearchFacilities.js"></script>
 
 }
 
@@ -142,15 +152,15 @@
 {
     <nav id="nav" class="search-filter-nav">
         <div class="search-bar">
-            <div class="nav-item" id="choose-city">
+            <div class="nav-item" v-cloak id="choose-city">
                 @*<i class="fas fa-search"></i>
                     <div class="choose-info city-info">
                         <p id="city-name">台南市</p>
                         <p id="place-left">794間住宿還有空房</p>
                     </div>*@
 
-                <el-select style="color: #666;" id="inputGroupSelect" v-model="Value"
-                           placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable name="search">
+                <el-select style="color: #666;" v-cloak id="inputGroupSelect" v-model="Value"
+                           placeholder=" 輸入城市、區域、景點或住宿名稱" filterable name="search">
                     <el-option-group v-for="item in Options"
                                      :key="item.label"
                                      :label="item.label">
@@ -354,21 +364,141 @@
         <div class="filter-body">
             <div class="facilities row">
                 <p>住宿設施&服務</p>
-                <div class="form-list col-4 `${name}`" v-for="(value, name) in HotelEquipName">
-                    <input class="form-check-input" type="checkbox" :id="`${name}`">
-                    <label class="form-check-label" :for="`${name}`">
-                        {{value}}
-                    </label>
-                </div>
+                @*<div class="form-list col-4" v-for="(value, name) in HotelEquipName">
+                        <input class="form-check-input" type="checkbox" value="" id={{name}}>
+                        <label class="form-check-label" for={{name}}>
+                            {{value}}
+                        </label>
+                    </div>*@
 
             </div>
             <hr class="dropdown-divider">
             <div class="room row">
                 <p>客房設施/服務</p>
-                <div class="form-list col-4" v-for="(value, name) in RoomEquipName">
-                    <input class="form-check-input" type="checkbox" value="" :id="`${name}`">
-                    <label class="form-check-label" :for="`${name}`">
-                        {{value}}
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+            </div>
+            <hr class="dropdown-divider">
+            <div class="bed row">
+                <p>床型</p>
+                @*@foreach (var bed in Model)*@
+                @* {*@
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                @* } *@
+
+            </div>
+            <hr class="dropdown-divider">
+            <div class="roomOffer row">
+                <p>房型優惠</p>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
+                    </label>
+                </div>
+                <div class="form-list col-4">
+                    <input class="form-check-input" type="checkbox" value="" id="swim">
+                    <label class="form-check-label" for="swim">
+                        <p>游泳池(123)</p>
                     </label>
                 </div>
             </div>
@@ -384,12 +514,12 @@
     <div class="closeFilter" onclick="closeFilter()"></div>
 </div>
 
-<div id="main-body">
-    <!--<div class="side-menu">
+<div class="main-body">
+    <div class="side-menu">
         <div class="map">
-            <img src="https://cdn6.agoda.net/images/MAPS-1213/default/bkg-map-entry.svg" alt="地图">-->
+            <img src="https://cdn6.agoda.net/images/MAPS-1213/default/bkg-map-entry.svg" alt="地图">
             <!-- <img src="https://cdn6.agoda.net/images/MAPS-1213/default/img-map-pin-red.svg" alt="地标"> -->
-            <!--<div class="map-icon">
+            <div class="map-icon">
                 <i class="fas fa-map-marker-alt"></i>
                 <p>地圖找房</p>
             </div>
@@ -493,38 +623,34 @@
                 顯示另外<span>22</span>個 ▼
             </a>
         </div>
-    </div>-->
+    </div>
 
-    <div id="infomation" class="infomation">
+    <div class="infomation">
         <nav class="navbar ">
             <div class="container-fluid">
                 <span class="navbar-brand mb-0 h1 navbar-light bg-light">排序</span>
-                <button id="orderPrice" v-on:click="orderPrice">
-                    最低價優先
-                    @*@Html.ActionLink("最低價優先", "Search", new { sortOrder = ViewBag.PriceSortParm })*@
+                <button>
+                    @Html.ActionLink("最低價優先", "Search", new { sortOrder = ViewBag.PriceSortParm })
                 </button>
-                <button id="orderStar" v-on:click="orderStar">
-                    星級優先
-                    @*@Html.ActionLink("星級優先", "Search", new { sortOrder = ViewBag.StarSortParm })*@
+                <button>
+                    @Html.ActionLink("星級優先", "Search", new { sortOrder = ViewBag.StarSortParm })
                 </button>
             </div>
         </nav>
-        <div id="new_card">
-            @{
-                if (Model.HotelSearchVM.Count() == 0)
-                {
-                    <div id="emptyCard">
-                        <p>
-                            查無資料<i class="fas fa-frown-open"></i>
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <hotel-card :list-data="card"></hotel-card>
-                }
-            }
-        </div>
+        @foreach(var man in Model.PageOfHotelSearchVM)
+        {
+
+            @Html.Partial("_SearchCityPartial",man);
+
+
+        }
+        <br />
+        @*Page @(Model.HotelSearchVM)*@
+
+        @Html.PagedListPager(Model.PageOfHotelSearchVM, page => Url.Action("HotelDetail",
+            new {
+                sortOrder = ViewBag.CurrentSort,currentFilter = ViewBag.CurrentFilter,
+                page }))
     </div>
 </div>
 

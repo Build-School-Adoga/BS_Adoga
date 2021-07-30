@@ -176,6 +176,9 @@
     <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
+    <Reference Include="MvcPaging, Version=2.1.13.46, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcPaging.2.1.13\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -303,6 +306,7 @@
   <ItemGroup>
     <Compile Include="APIController\DetailApiController.cs" />
     <Compile Include="APIController\FunctionApiController.cs" />
+    <Compile Include="APIController\SearchApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -435,6 +439,7 @@
     <Content Include="Asset\CDN\JS\moment.min.js" />
     <Content Include="Asset\CDN\JS\vue.js" />
     <Content Include="Asset\CDN\JS\moment-with-locales.min.js" />
+    <Content Include="Asset\CSS\CityCenter.css" />
     <Content Include="Asset\CSS\Function\HotelImagePage.css" />
     <Content Include="Asset\CSS\calendar.css" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
@@ -457,6 +462,7 @@
     <Content Include="Asset\images\Adoga_logo_color.png" />
     <Content Include="Asset\images\Adoga_logo_white.png" />
     <Content Include="Asset\images\Booking.png" />
+    <Content Include="Asset\images\Home\bg-adoga.png" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel01.jpg" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel02.jpg" />
     <Content Include="Asset\images\HotelDetail\Room\room01.jpg" />
@@ -489,8 +495,9 @@
     <Content Include="Asset\JS\GoogleLogin.js" />
     <Content Include="Asset\JS\navbar.js" />
     <Content Include="Asset\JS\HotelDetail\RoomFilter.js" />
-    <Content Include="Asset\JS\Search.js" />
+    <Content Include="Asset\JS\Search\Search.js" />
     <Content Include="Asset\JS\Search\SearchFacilities.js" />
+    <Content Include="Asset\JS\Search\SearchDataComponent.js" />
     <Content Include="Asset\JS\Search\SearchFacilitiesComponent.js" />
     <Content Include="Asset\JS\Search\_SearchFilterPartial.js" />
     <Content Include="Asset\StartbootstrapAdminPages\css\sb-admin-2.css" />
@@ -2476,8 +2483,14 @@
     <Content Include="Views\Function\HotelRoomCreate.cshtml" />
     <Content Include="Views\Function\HotelRoomEdit.cshtml" />
     <Content Include="Views\Function\HotelRoomDetails.cshtml" />
+    <Content Include="Views\Home\CityCenter.cshtml" />
+    <Content Include="Views\Home\HotelDetail.cshtml" />
+    <Content Include="Views\Shared\_optionHotel.cshtml" />
+    <Content Include="Views\Shared\_optionCity.cshtml" />
+    <Content Include="Views\Shared\_SearchCityPartial.cshtml" />
     <Content Include="Views\Function\RoomDetailsIndex.cshtml" />
     <Content Include="Views\Function\RoomBedCreate.cshtml" />
+    <Content Include="Views\Search\GetAllHotelInCity.cshtml" />
     <Content Include="Views\HotelDetail\upload.cshtml" />
     <Content Include="Views\Function\HotelImagePage.cshtml" />
   </ItemGroup>

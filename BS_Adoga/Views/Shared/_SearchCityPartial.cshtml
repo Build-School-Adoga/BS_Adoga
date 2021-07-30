@@ -1,23 +1,21 @@
 ﻿@using BS_Adoga.Models.ViewModels.Search
 @*@model BS_Adoga.Models.ViewModels.Search.SearchCardViewModel*@
-@model BS_Adoga.Models.ViewModels.Search.HotelSearchViewModel
+@model  CardViewModels
+@*@foreach (var man in Model.My_city)*@
 @{
+    var man = Model.My_Rooms;
+
     string HotelFullName;
-    RoomDetailViewModel rd = Model.I_RoomDetailVM;
-    RoomViewModel r = Model.I_RoomVM;
+    if (man.RoomName != null)
+    {
+        HotelFullName = Model.HotelName + "(" + man.RoomName + ")";
+    }
+    else { HotelFullName = Model.HotelName; }
 
-    var leftroom = rd.RoomCount - rd.RoomOrder;
-    var newPrice = (int)(r.RoomPrice * (1 - rd.RoomDiscount));
-    var roomdiscount = (int)(rd.RoomDiscount * 100);
-    var roomprice = (int)r.RoomPrice;
-    var hotelAddress = Model.HotelCity + ", " + Model.HotelDistrict;
-}
 
-@if (Model.HotelEngName != null)
-{
-    HotelFullName = Model.HotelName + "(" + Model.HotelEngName + ")";
-}   
-else { HotelFullName = Model.HotelName; }
+
+
+
 
 <div class="card">
     <div class="img">
@@ -43,19 +41,19 @@ else { HotelFullName = Model.HotelName; }
             </div>
             <div class="address">
                 <i class="fas fa-map-marker-alt"></i>
-                <p>@hotelAddress</p>
+                <p>@Model.HotelAddress</p>
             </div>
         </div>
         <div class="include-list">
-            @if (Model.I_RoomVM.Breakfast)
+            @if (man.Breakfast)
             {
                 <p class="Breakfast">早餐</p>
             }
-            @if (Model.I_RoomVM.NoSmoking)
+            @if (man.NoSmoking)
             {
                 <p class="NoSomking">禁煙</p>
             }
-            @if (Model.I_RoomVM.WiFi)
+            @if (man.WiFi)
             {
                 <p class="wifi">WiFi</p>
             }
@@ -71,16 +69,16 @@ else { HotelFullName = Model.HotelName; }
     </div>
     <div class="rank">
         <!-- 目前不用 <div class="point">
-            <div class="comment">
-                <p>很讚</p>
-                <p><span>10,237</span> 份評鑑</p>
-                <p>地點 <span>9.0</span></p>
-            </div>
-            <div class="icon">
-                <p>8.5</p>
-            </div>
-        </div> -->
-        @if (Model.I_RoomDetailVM.RoomDiscount == 0)
+        <div class="comment">
+            <p>很讚</p>
+            <p><span>10,237</span> 份評鑑</p>
+            <p>地點 <span>9.0</span></p>
+        </div>
+        <div class="icon">
+            <p>8.5</p>
+        </div>
+    </div> -->
+        @*@if (Model.I_RoomDetailVM.RoomDiscount == 0)
         {
             <div class="price">
                 <p>每晚含稅價</p>
@@ -97,14 +95,10 @@ else { HotelFullName = Model.HotelName; }
                 <del>@roomprice.ToString("N0")</del>
                 <ins>NT$<span>@newPrice.ToString("N0")</span></ins>
             </div>
-        }
+        }*@
 
         @* ActionLink沒辦法進去HotelDetail的Action *@
-        @Html.ActionLink("查看空房情況", "HotelDetail", "HotelDetail", 
-            new { 
-                hotelName = Model.HotelName, 
-                startDate = Model.I_RoomDetailVM.CheckInDate, 
-                endDate = Model.I_RoomDetailVM.CheckOutDate, 
-                orderRoom = 1, adult = 1, child = 1 }, new { @class = "btn btn-primary", })
+        @*@Html.ActionLink("查看空房情況", "Detail", "HotelDetail", new { hotelId = Model.HotelID, startDate = "2021/06/20", endDate = "2021/06/22", orderRoom = 2, adult = 6 }, new { @class = "btn btn-primary", })*@
     </div>
 </div>
+}

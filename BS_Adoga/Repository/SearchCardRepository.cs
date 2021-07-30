@@ -20,7 +20,15 @@ namespace BS_Adoga.Repository
             _context = new AdogaContext();
         }
 
-       
+        //public IQueryable<string> GetHotels(string city)
+        //{
+        //    //原本給劉的
+        //    var hotel = from H in _context.Hotels
+        //                    where H.HotelCity.Contains(city)
+        //                    select H.HotelName;
+
+        //    return hotel;
+        //}
 
         public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(SearchDataViewModel info)
         {
@@ -172,33 +180,6 @@ namespace BS_Adoga.Repository
             return data.ToList();
         }
 
-        //public FacilityViewModel GetEquipmentList()
-        //{
-        //    var equipList = from e in _context.Facilities
-        //                    select new FacilityViewModel
-        //                    {
-        //                        SwimmingPool = e.SwimmingPool,
-        //                        AirportTransfer = e.AirportTransfer,
-        //                        FamilyChildFriendly = e.FamilyChildFriendly,
-        //                        Restaurants = e.Restaurants,
-        //                        Nightclub = e.Nightclub,
-        //                        GolfCourse = e.GolfCourse,
-        //                        Gym = e.Gym,
-        //                        NoSmoking=e.NoSmoking,
-        //                        SmokingArea=e.SmokingArea,
-        //                        FacilitiesFordisabledGuests=e.FacilitiesFordisabledGuests,
-        //                        CarPark=e.CarPark,
-        //                        FrontDesk=e.FrontDesk,
-        //                        SpaSauna=e.SpaSauna,
-        //                        BusinessFacilities=e.BusinessFacilities,
-        //                        Internet=e.Internet,
-        //                        PetsAllowed=e.PetsAllowed
-        //                    };
-        //    return equipList.ToList();
-        //}
-        //public RoomBedVM GetBedType()
-        //{
-        //    return "hi";
-        //}
+        //API
     }
 }

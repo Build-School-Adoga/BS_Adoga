@@ -19,6 +19,7 @@
         let expansionUrl = "@Url.Action("RoomDetailsIndex", "Function")";
         var roomdetailJSON = @Html.Raw(@ViewBag.RoomDetailThisMonthJSON);
         let roomid = "@Html.Raw(@ViewBag.roomid)";
+        let username = "@Html.Raw(@User.Identity.Name)";
 
         //console.log(roomdetailJSON);
         //console.log(roomdetailJSONLength);
@@ -56,7 +57,7 @@
         });
 
         function clickbutton() {
-           
+
             //console.log(d);
             //console.log(roomdetailJSON);
             let calendar = $g('#calendar');
@@ -219,9 +220,16 @@
                         td.setAttribute("class", "text-white bg-info");
                         tr.append(td);
                     }
-                    //判斷如果有資料存在顯示成bg-danger顏色(紅色)
-                    else if (roomdetailJSON.length != 0) {
+                    //判斷如果有資料存在 並且是開房狀態 顯示成bg-danger顏色(紅色)
+                    else if (roomdetailJSON.length != 0 && roomdetailJSON[dd - 1].OpenRoom == true) {
                         td.setAttribute("class", "button text-white bg-danger");
+                        //設定button Modal
+                        RoomDetail(yyyy, mm, dd, td);
+                        tr.append(td);
+                    }
+                    //判斷如果有資料存在 並且是關防狀態 顯示成bg(紫色)
+                    else if (roomdetailJSON.length != 0 && roomdetailJSON[dd - 1].OpenRoom == false) {
+                        td.setAttribute("bgcolor", "#B800B8");
                         //設定button Modal
                         RoomDetail(yyyy, mm, dd, td);
                         tr.append(td);
@@ -233,7 +241,6 @@
                         td.bgColor = "green";
                         tr.append(td);
                     }
-
                 }
 
                 tbody.append(tr);
@@ -268,20 +275,19 @@
                 let modal = $g('#exampleModal');
 
                 modal.querySelector('h5').innerText = `${yyyy}年${mm}月${dd}日-房間資訊`;
+                modal.querySelector('h5').value = `${dd}`;
 
                 modal.querySelector('#checkindate').innerText = roomdetailJSON[dd - 1].CheckInDate;
                 modal.querySelector('#checkoutdate').innerText = roomdetailJSON[dd - 1].CheckOutDate;
                 modal.querySelector('#roomcount').innerText = roomdetailJSON[dd - 1].RoomCount;
                 modal.querySelector('#roomorder').innerText = roomdetailJSON[dd - 1].RoomOrder;
-                modal.querySelector('#roomdiscount').innerText = roomdetailJSON[dd - 1].RoomDiscount;
-                if (roomdetailJSON[dd - 1].OpenRoom == true) modal.querySelector('#openroom').innerText = "開房";
-                else  modal.querySelector('#openroom').innerText = "關房";
+                modal.querySelector('#roomdiscount').value = roomdetailJSON[dd - 1].RoomDiscount;
 
-                //let storage = window.localStorage;
-                //let day = `${yyyy}${mm}${dd}`;
-                //let note = localStorage.getItem(day);
-                //modal.querySelector('#description').innerText = note;
-                //modal.querySelector('#description').value = day;
+                if (roomdetailJSON[dd - 1].OpenRoom == true) modal.querySelector('#openroom').innerHTML = `<option id="openroomtrue" value="true" selected>開房</option>
+                    <option id="openroomfalse" value="false">關房</option>`;
+                else modal.querySelector('#openroom').innerHTML = `<option id="openroomtrue" value="true">開房</option>
+                    <option id="openroomfalse" value="false" selected>關房</option>`;
+
             });
         }
 
@@ -415,6 +421,42 @@
             }
         }
 
+        //設定save後儲存資料
+        let save = $g('#save');
+        save.addEventListener('click', function () {
+
+            let modal = $g('#exampleModal');
+            let day = modal.querySelector('h5').value;
+            let discount = Number(modal.querySelector('input').value);
+            let RDID = roomdetailJSON[day - 1].RDID;
+
+            //設定discount跟房間狀態
+            roomdetailJSON[day - 1].RoomDiscount = discount;
+            if (modal.querySelector('select').value == "true") { roomdetailJSON[day - 1].OpenRoom = true; }
+            else { roomdetailJSON[day - 1].OpenRoom = false; }
+
+            //資料傳到後端修改資料庫
+            axios.get('../api/Function/EditRoomDetail', {
+                //URL参數放在params屬性裏面
+                params: {
+                    RDID: RDID,
+                    RoomDiscount: roomdetailJSON[day - 1].RoomDiscount,
+                    OpenRoom: roomdetailJSON[day - 1].OpenRoom,
+                    username: username
+                }
+             })
+                .then(function (response) {
+                    console.log(response.data);
+                    if (response.request.readyState === 4 && response.status === 200 && response.data === "OK") {
+                        //setroomdetailJSON(response.data);
+                        alert("修改成功");
+                    }
+                    else { alert("修改失敗"); }
+                }).catch((error) => console.log(error))
+
+            clickbutton();
+        });
+
         //設定按Close後清空textarea內容
         //let close = $g('#close');
         //close.addEventListener('click', function () {
@@ -442,22 +484,22 @@
         //});
 
         //設定save後儲存資料
-        let save = $g('#save');
-        save.addEventListener('click', function () {
-            let textarea = $g('#textarea');
-            let h1 = $g('#description');
-            let day = h1.value;
-            //console.log(day);
-            if (textarea.value == "") {
-                //沒資料儲存就不動作
-            }
-            else {
-                localStorage.setItem(day, textarea.value);
-            }
-            let note2 = localStorage.getItem(day);
-            h1.innerText = note2;
-            clickbutton(0);
-        });
+        //let save = $g('#save');
+        //save.addEventListener('click', function () {
+        //    let textarea = $g('#textarea');
+        //    let h1 = $g('#description');
+        //    let day = h1.value;
+        //    //console.log(day);
+        //    if (textarea.value == "") {
+        //        //沒資料儲存就不動作
+        //    }
+        //    else {
+        //        localStorage.setItem(day, textarea.value);
+        //    }
+        //    let note2 = localStorage.getItem(day);
+        //    h1.innerText = note2;
+        //    clickbutton(0);
+        //});
 
         //設定按DeleteAll後清除所有資料
         //let delall = $g('#deleteall');
@@ -516,11 +558,22 @@
                 <span>退房日期時間:</span><span id="checkoutdate"></span> <br />
                 <span>房間數:</span><span id="roomcount"></span> <br />
                 <span>訂房數:</span><span id="roomorder"></span> <br />
-                <span>折扣:</span><span id="roomdiscount"></span> <br />
-                <span>狀態:</span><span id="openroom"></span> <br />
+                <span>折扣:</span>
+                <input id="roomdiscount"
+                       type="number"
+                       step="0.01"
+                       min="0"
+                       max="1">
+                @*<span id="roomdiscount"></span>*@
+                <br />
+                <span>是否開房:</span>
+                <select id="openroom" name="openroom">
+
+                </select>
+                <br />
 
                 @*<h1 id="description" class="text-primary"></h1>
-                    <textarea id="textarea" cols="40" rows="5" placeholder="輸入記事本內容" aria-label="輸入記事本內容"></textarea>*@
+        <textarea id="textarea" cols="40" rows="5" placeholder="輸入記事本內容" aria-label="輸入記事本內容"></textarea>*@
             </div>
             <div class="modal-footer">
                 <button id="save" type="button" class="btn btn-primary">儲存</button>

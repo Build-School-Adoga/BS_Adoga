@@ -71,5 +71,14 @@ namespace BS_Adoga.APIController
             }
             return Json("成功上傳圖片！");
         }
+
+        [AcceptVerbs("GET", "POST")]
+        public IHttpActionResult EditRoomDetail(string RDID, decimal RoomDiscount, bool OpenRoom ,string username)
+        {
+            var check = _service.RoomDetailEdit(RDID, RoomDiscount, OpenRoom, username);
+
+            if (check.IsSuccessful == true) { return Ok("OK"); }
+            else { return Ok("NOTOK"); }
+        }
     }
 }

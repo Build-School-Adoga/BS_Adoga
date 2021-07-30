@@ -26,19 +26,34 @@ namespace BS_Adoga.Service
             {
                 HotelSearchVM = _r.GetHotelAfterSearchByCityOrName(info),
                 HotelOptionVM = _r.GetHotelOption(),
-                //EquipmentVM =
-                //{
-                //    FacilityVM =_r.GetEquipmentList(),
-                //    BedType = _r.GetBedType()
-                //}
+                //FacilityVM =_r.GetEquipmentList()
             };
             return data;
         }
-        //public FacilityViewModel GetHotelFacilityId(string hotelId)
-        //{
-        //    var id = _r.GetFacilitiId(hotelId);
 
-        //    return id;
+
+
+        //API
+        public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCity(string city, string start, string end, int adult, int kid, int room)
+        {
+            var data = new SearchDataViewModel
+            {
+                HotelNameOrCity = city,
+                CheckInDate = start,
+                CheckOutDate = end,
+                AdultCount = adult,
+                KidCount = kid,
+                RoomCount = room
+            };
+
+            var hotel = _r.GetHotelAfterSearchByCityOrName(data);
+            return hotel;
+        }
+
+        //public IEnumerable<FacilityViewModel> getHotelFacility(string hotelID)
+        //{
+
         //}
+
     }
 }
