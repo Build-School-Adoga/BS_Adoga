@@ -7,18 +7,21 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
 {
     public class TestVM
     {
-        public string HotelID { get; set; }
+        public string File { get; set; }
 
-        public string HotelName { get; set; }
+        public string PublicId { get; set; }
+        //public string HotelID { get; set; }
 
-        public string RoomID { get; set; }
+        //public string HotelName { get; set; }
 
-        public string RoomName { get; set; }
+        //public string RoomID { get; set; }
 
-        public decimal RoomPrice { get; set; }
+        //public string RoomName { get; set; }
 
-        public decimal RoomDiscount { get; set; }
+        //public decimal RoomPrice { get; set; }
 
-        public decimal RoomNowPrice { get; set; }
+        //public decimal RoomDiscount { get; set; }
+
+        //public decimal RoomNowPrice { get; set; }
     }
 }

@@ -16,23 +16,25 @@ namespace BS_Adoga.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private AdogaContext _context;
         private MemberAccountService _service;
         private MemberAccountRepository _memberacoountrepository;
 
         public AccountController()
         {
+            _context = new AdogaContext();
             _service = new MemberAccountService();
             _memberacoountrepository = new MemberAccountRepository();
         }
 
         [AcceptVerbs("GET")]
-        public ActionResult GetMemberBookingList(string filterOption, string sortOption)
+        public ActionResult GetMemberBookingList(string filterOption, string sortOption,string UserInputOrderId)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
 
-            var data = _service.GetBookingOrder_FilterSort(user_id, filterOption, sortOption);
+            var data = _service.GetBookingOrder_FilterSort(user_id, filterOption, sortOption, UserInputOrderId);
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
@@ -75,14 +77,14 @@ namespace BS_Adoga.Controllers
         [HttpPost]
         public ActionResult MemberProfilePassword(string CheckPassword, string NewPassword, string ConfirmPassword, string Email)
         {
-            string FirstPassword = HttpUtility.HtmlEncode(CheckPassword);
-            string SecendPassword = HttpUtility.HtmlEncode(NewPassword);
-            string ThirdPassword = HttpUtility.HtmlEncode(ConfirmPassword);
+            //string FirstPassword = HttpUtility.HtmlEncode(CheckPassword);
+            //string SecendPassword = HttpUtility.HtmlEncode(NewPassword);
+            //string ThirdPassword = HttpUtility.HtmlEncode(ConfirmPassword);
             Customer cust = new Customer();
             cust.Email = Email;
             cust.MD5HashPassword = HashService.MD5Hash(NewPassword);
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(Email);
+            var data = db.Customers.Find(Email = Email);
             if (data.MD5HashPassword != HashService.MD5Hash(CheckPassword))
             {
                 Content("修改失敗");
@@ -149,6 +151,38 @@ namespace BS_Adoga.Controllers
             }
             return View();
         }
+        
+        public ActionResult MemberProfileName(string InputFirstName, string InputLastName, string Email)
+        {
+            Customer cust = new Customer();
+            cust.Email = Email;
+            AdogaContext db = new AdogaContext();
+            var data = db.Customers.Find(Email = Email);
+
+            data.FirstName = InputFirstName;
+            data.LastName = InputLastName;
+            db.SaveChanges();
+
+           
+
+
+            return RedirectToAction("MemberProfile", "Account");
+        }
+        
+            public ActionResult MemberProfilePhone(string PhoneNumber, string Email)
+        {
+
+            Customer cust = new Customer();
+            cust.Email = Email;
+            AdogaContext db = new AdogaContext();
+            var data = db.Customers.Find(Email = Email);
+            data.PhoneNumber = PhoneNumber;
+            db.SaveChanges();
+
+            return RedirectToAction("MemberProfile", "Account");
+        }
+    }
+    
 
         [HttpPost]
         public ActionResult Evaluation(string orderid, decimal ScoreRange, string Title, string MessageText)

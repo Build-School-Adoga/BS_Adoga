@@ -17,7 +17,7 @@ var facilityData = '';
 var facilitiesVue = '';
 
 
-axios.get('https://localhost:44352/api/HotelDetail/GetHotelFacilities', {
+axios.get('../api/HotelDetail/GetHotelFacilities', {
     params: {
         hotelName: "台中商旅",
     }

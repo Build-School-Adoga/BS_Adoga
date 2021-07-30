@@ -2,10 +2,11 @@
 import BookingCard from './BookingComponent.js'
 
 //一開始載入頁面時要帶入order的資料，未入住的。
-axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+axios.get('../Account/GetMemberBookingList', {
         params: {
             filterOption: "ComingSoon",
-            sortOption: "CheckInDate"
+            sortOption: "CheckInDate",
+            UserInputOrderId: ""
         }
     }).then(function (response) {
         console.log(response.data)
@@ -17,7 +18,8 @@ var filterBookingOrder = new Vue({
     el: "#filter-sort-wrap",
     data: {
         filterOption: 'ComingSoon',
-        sortOption: 'CheckInDate'
+        sortOption: 'CheckInDate',
+        searchOrderId:''
     },
     watch: {
         filterOption() {
@@ -31,16 +33,34 @@ var filterBookingOrder = new Vue({
     },
     methods: {
         filter_sort() {
-            axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+            axios.get('../Account/GetMemberBookingList', {
                 params: {
                     filterOption: this.filterOption,
-                    sortOption: this.sortOption
+                    sortOption: this.sortOption,
+                    UserInputOrderId: this.searchOrderId
                 }
             }).then((response) => {
                 console.log(response.data)
                 appendBookingList(response.data)
             }).catch((error) => console.log(error))
         },
+        Search() {
+            axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+                params: {
+                    filterOption: this.filterOption,
+                    sortOption: this.sortOption,
+                    UserInputOrderId: this.searchOrderId
+
+                }
+            }).then((response) => {
+                console.log(this.searchOrderId)
+                console.log(response.data)
+                appendBookingList(response.data)
+            }).catch((error) => console.log(error))
+        },
+        ClearSearch() {
+            this.searchOrderId = '';
+        }
     }
 })
 
@@ -121,7 +141,7 @@ function appendBookingList(response) {
                     //    }
                     //}).then(response => {
                     //    console.log(response);
-                        window.location.href ='https://localhost:44352/Account/RePayOrder/'+item.OrderID
+                        window.location.href ='../Account/RePayOrder/'+item.OrderID
                     //}).catch(error => console.log(error))
                 },
                 Evaluation: function () {
@@ -130,7 +150,7 @@ function appendBookingList(response) {
                     modalID.orderID = item.OrderID
                 },
                 GoToDetail: function () {
-                    window.location.href = 'https://localhost:44352/BookingDetail/' + item.OrderID;
+                    window.location.href = '../BookingDetail/' + item.OrderID;
                 }
             }
         );

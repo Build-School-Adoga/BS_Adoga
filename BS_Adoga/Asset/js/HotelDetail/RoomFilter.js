@@ -10,7 +10,7 @@ var hoverEquimServ = new Vue({
 $().ready(function () {
 
     //一開始載入頁面時要帶入Room的全部資料
-    axios.get('https://localhost:44352/api/HotelDetail/GetAllRoom', {
+    axios.get('../api/HotelDetail/GetAllRoom', {
         params: {
             hotelName: filternav.Value,
             startDate: filternav.startDate,
@@ -52,7 +52,7 @@ $().ready(function () {
         },
         methods: {
             filter() {
-                axios.get('https://localhost:44352/api/HotelDetail/GetSpecificRoom', {
+                axios.get('../api/HotelDetail/GetSpecificRoom', {
                     params: {
                         hotelName: filternav.Value,
                         startDate: filternav.startDate,
@@ -72,7 +72,7 @@ $().ready(function () {
                 this.FreeBreakfast = false;
                 this.NoSmoking = false;
                 this.FamilyRoom = false;
-                $.post('https://localhost:44352/api/HotelDetail/GetAllRoom', appendRoomType)
+                $.post('../api/HotelDetail/GetAllRoom', appendRoomType)
             }
         }
     })
@@ -127,7 +127,7 @@ $().ready(function () {
                     RoomNowPrice: Math.ceil(item.RoomNowPrice).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","),
                     RoomLeft: item.RoomLeft,
                     Booking: function () {
-                        axios.get('https://localhost:44352/HotelDetail/SetCheckOutData', {
+                        axios.get('../HotelDetail/SetCheckOutData', {
                             params: {
                                 hotelId: item.HotelID,
                                 roomId: item.RoomID,
@@ -142,7 +142,7 @@ $().ready(function () {
                             }
                         }).then(function (response) {
                             console.log(response);
-                            window.location.href = 'https://localhost:44352/CheckOut/Index';
+                            window.location.href = '../CheckOut/Index';
                         }).catch((error) => console.log(error));
                     }
                 }

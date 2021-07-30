@@ -30,10 +30,7 @@
     .text:focus{
       
     }
-    .text:hover {
-        color: rgb(42, 42, 46);
-        text-decoration: none;
-    }
+  
 .on {
     color: dodgerblue;
 }
