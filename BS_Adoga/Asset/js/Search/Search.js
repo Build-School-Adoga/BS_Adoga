@@ -2,30 +2,98 @@
 var filterEquip = new Vue({
     el: '#filter-equipment',
     data: {
-        HotelEquipName: {
-            swim: '游泳池',
-            airport: '機場接送',
-            familyFriendly: '親子友善住宿',
-            restaurant: '餐廳',
-            club: '夜店',
-            golf: '附設高爾夫球場',
-            gym: '健身房',
-            nSmoke: '禁菸',
-            Smoke: '吸菸區',
-            FFG: '無障礙友善設施',
-            carPark: '停車場',
-            frontDesk: '24小時櫃台服務',
-            Spa: 'Spa桑拿',
-            business: '商務設備'
-        },
-        RoomEquipName: {
-            internet: '網路',
-            petAllow: '可帶寵物'
-        },
-        BedType: {
-            //從資料庫取資料?
-            
-        }
+        FacilityList: [
+            {
+                hotelFacilities: [
+                    {
+                        facility: "swim",
+                        facilityName: "游泳池",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "airport",
+                        facilityName: "機場接送",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "familyFriendly",
+                        facilityName: "親子友善住宿",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "restaurant",
+                        facilityName: "餐廳",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "club",
+                        facilityName: "夜店",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "golf",
+                        facilityName: "附設高爾夫球場",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "gym",
+                        facilityName: "健身房",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "nSmoke",
+                        facilityName: "禁菸區",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "Smoke",
+                        facilityName: "吸菸區",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "FFG",
+                        facilityName: "無障礙友善設施",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "carPark",
+                        facilityName: "停車場",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "frontDesk",
+                        facilityName: "24小時櫃台服務",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "Spa",
+                        facilityName: "Spa桑拿",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "business",
+                        facilityName: "商務設備",
+                        haveFacility: false
+                    }
+                ]
+            },
+            {
+                roomFacilities: [
+                    {
+                        facility: "internet",
+                        facilityName: "網路",
+                        haveFacility: false
+                    },
+                    {
+                        facility: "petAllow",
+                        facilityName: "可帶寵物",
+                        haveFacility: false
+                    }
+                ]
+            }
+        ],
+        StarList: [5, 4, 3, 2, 1, 0],
+        //priceRange: [ ]
     },
     method: {
         

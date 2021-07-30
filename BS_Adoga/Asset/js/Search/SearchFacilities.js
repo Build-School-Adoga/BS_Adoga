@@ -1,8 +1,4 @@
-﻿////import cardComponent from './SearchFacilitiesComponent.js'
-////import dataComponent from './SearchDataComponent.js'
-
-
-var allHotel = '';
+﻿var allHotel = '';
 var list;
 var btnOrderPrice = document.getElementById("orderPrice");
 var btnOrderStar = document.getElementById("orderStar");
@@ -83,9 +79,6 @@ function HotelList(response) {
                 window.location.href = '/HotelDetail/' + name + '-(' + this.fnav.start + ')-(' + this.fnav.end + ')-' + this.fnav.room + '-' + this.fnav.adult + '-' + this.fnav.kid;
             }
         },
-        watch: {
-
-        },
         computed: {
             //計算出最後一頁在第幾頁
             pageCount() {
@@ -146,7 +139,7 @@ function HotelList(response) {
                         </div>
                     </div>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex justify-content-center">
                     <button class="btn"
                         :disabled="pageNumber === 0" 
                         @click="prevPage">
