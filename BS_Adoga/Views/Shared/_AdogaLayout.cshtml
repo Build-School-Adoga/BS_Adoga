@@ -99,7 +99,8 @@
                     <h6>我要登入</h6>
                     <div>
                         @Html.ActionLink("A咖登入", "MemberLogin", "MemberLogin", null, new { @class = "head-nav-item login-btn" })
-                        <a href="#" class="head-nav-item register-btn">我是新朋友</a>
+                        @Html.ActionLink("我是新朋友", "MemberLogin", "MemberLogin", null, new { @class = "head-nav-item register-btn" })
+                        @*<a href="#" class="head-nav-item register-btn">我是新朋友</a>*@
                     </div>
                     <h6>在Adooka刊登飯店</h6>
                     <div>
@@ -122,9 +123,9 @@
         <div class="info-group">
             <div class="info-item">
                 <h6>
-                    服務中心
+                   常見問題
                 </h6>
-                <a href="#">常見問題</a>
+                @Html.ActionLink("服務中心", "ServiceCenter", "Home", null, new { @class = "text2" })
             </div>
             <div class="info-item">
                 <h6>
@@ -138,9 +139,10 @@
                 <h6>
                     目的地
                 </h6>
-                <a href="#">
-                    城市
-                </a>
+
+                @Html.ActionLink("城市", "CityCenter", "Home", null, new { @class = "text2" })
+
+
             </div>
         </div>
     </div>
@@ -151,7 +153,7 @@
             Adoga.com隸屬於Build School 2021 春季班 第三組。
         </p>
         <div class="footer-logo py-4">
-            <img src="~/Asset/images/img1.png" alt="">
+            <img src="~/Asset/images/adoga-logo-v2.png" alt="">
             @*<div class="col-2">
             <img src="~/Asset/images/img2.png" alt="">
         </div>

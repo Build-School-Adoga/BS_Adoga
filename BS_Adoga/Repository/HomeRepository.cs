@@ -1,5 +1,6 @@
 ﻿using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.homeViewModels;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,40 @@ namespace BS_Adoga.Repository
             new Card  { name= "塩‧泊思行旅", area= "高雄市", Evaluation= 4,  ground= "../Asset/images/Home/塩‧泊思行旅.jpg", sale= "2折扣", Originalprice= "NT$3,611", saleprice= "NT$764", fraction= "8.4", comment= "很讚", Quantity= "1198篇評鑑"}
 
         };
-        public IQueryable<CardViewModels> GetCardModels2()
+        public IQueryable<CardViewModels> GetCardModels3()
+        {
+            var images = (from p in _context.Hotels
+                         join s in _context.HotelImages on p.HotelID equals s.HotelID
+                         join d in _context.Rooms on p.HotelID equals d.HotelID
+                         join z in _context.RoomsDetails on d.RoomID equals z.RoomID
+                         select new CardViewModels
+                         {
+                             HotelID = p.HotelID,
+                             HotelName = p.HotelName,
+                             HotelCity = p.HotelCity,
+                             Star = p.Star,
+
+                             My_HotelImages = new MyHoteiImages
+                             {
+                                 HotelID = p.HotelID,
+                                 ImageID = s.ImageID,
+                                 ImageURL = s.ImageURL
+                             },
+                             My_Rooms = new MyRoom
+                             {
+                                 HotelID = p.HotelID,
+                                 RoomPrice = d.RoomPrice
+                             },
+                             My_RoomsDetails = new MyRoomsDetails
+                             {
+                                 RoomID = d.RoomID,
+                                 RoomDiscount = z.RoomDiscount
+                             }
+                         }).Take(8);
+            return images;
+        }
+
+            public IQueryable<CardViewModels> GetCardModels2()
         {
             var images = (from p in _context.Hotels
                           join s in _context.HotelImages on p.HotelID equals s.HotelID
@@ -54,7 +88,31 @@ namespace BS_Adoga.Repository
                           }).Take(4);
             return images;
         }
+        public IQueryable<CardViewModels> GetCardModels4(string cardlocal)
+        {
+            var result = from p in _context.Hotels
+                         join d in _context.Rooms on p.HotelID equals d.HotelID
+                         where p.HotelCity == cardlocal
+                         orderby p.HotelCity
 
+                         select new CardViewModels
+                         {
+                             HotelID = p.HotelID,
+                             HotelName = p.HotelName,
+                             HotelCity = p.HotelCity,
+                             HotelAddress = p.HotelAddress,
+                             HotelEngName = p.HotelEngName,
+                               My_Rooms = new MyRoom
+                               {
+                                   HotelID = p.HotelID,
+                                   NoSmoking = d.NoSmoking,
+                                   Breakfast = d.Breakfast,
+                                   WiFi =d.WiFi,
+                                   RoomName=d.RoomName
+                               }
+                         };
+            return result;
+        }
             public IQueryable<CardViewModels> GetCardModels(string cardlocal)
         {
             var city = from p in _context.Hotels
@@ -210,7 +268,38 @@ namespace BS_Adoga.Repository
                         };
             return hotel.ToList();
         }
-    
+        public IEnumerable<MyHotels> GetCityModels()
+        {
+            var hotel = (from p in _context.Hotels
+                      
+                         select new MyHotels
+                        {
+                        
+                            HotelCity = p.HotelCity
+                      
+
+
+                         }).Distinct().Take(8);
+           
+            return hotel;
+        }
+        public IEnumerable<MyHotels> GetModels()
+        {
+            var hotel = (from p in _context.Hotels
+                         group p by p.HotelCity into g                       
+                      
+                         select new MyHotels
+                         {
+                                
+                             HotelCity = g.Key.ToString(),
+                             Star = g.Count()
+
+
+
+                         }).Take(8);
+            return hotel;
+        }
+
         //public demoshopViewModels Getcards()
         //{
         //    demoshopViewModels productss = new demoshopViewModels()

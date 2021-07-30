@@ -49,20 +49,33 @@ namespace BS_Adoga.Controllers
             return View();
         }
 
+        //顯示所有飯店
         public ActionResult HotelIndex()
         {
+            //取得HotelEmpID
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            //取得所有飯店設施清單
             List<Facility> facilities = _context.Facilities.ToList();
             ViewBag.Facilities = facilities;
 
-            return View(_repository.GetHotelList());
+            
+            return View(_repository.GetHotelListByEmpID(user_id));
+
+            #region 顯示所有飯店清單_舊版本
+            //取得所有飯店設施清單
+            //List<Facility> facilities = _context.Facilities.ToList();
+            //ViewBag.Facilities = facilities;
+            //return View(_repository.GetHotelList());  //取得所有Hotel資料
+            #endregion
         }
+
+        //飯店建立
         public ActionResult HotelCreate()
         {
-            //string URL = "https://graph.facebook.com/me?access_token=";
-            //string JSON = GetWebRequest(URL);
-            //dynamic json = JValue.Parse(JSON);
-            //string name = json.name;
-
+            //縣市連動區域的選項
             List<SimpleZipCodeVM> Citys = JsonConvert.DeserializeObject<List<SimpleZipCodeVM>>(_service.CityJSON());
             List<SelectListItem> firstitems = new List<SelectListItem>();
             List<SelectListItem> seconditems = new List<SelectListItem>();
@@ -89,14 +102,19 @@ namespace BS_Adoga.Controllers
             return View();
         }
 
+        //飯店建立
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HotelCreate(HotelCreateViewModel HotelCreateVM)
         {
             string username = User.Identity.Name;
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
             if (ModelState.IsValid)
             {
-                Hotel hotel = new Hotel() 
+                Hotel hotel = new Hotel()
                 {
                     HotelID = HotelCreateVM.HotelID,
                     HotelName = HotelCreateVM.HotelName,
@@ -110,19 +128,29 @@ namespace BS_Adoga.Controllers
                     Star = HotelCreateVM.Star,
                     Logging = "建立" + "," + username + "," + DateTime.Now.ToString()
                 };
+                HotelEmpMappingHotel Mapping = new HotelEmpMappingHotel()
+                {
+                    MappingID = HotelCreateVM.HotelID + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"),
+                    HotelID = HotelCreateVM.HotelID,
+                    HotelEmployeeID = user_id
+                };
 
                 _context.Hotels.Add(hotel);
+                _context.HotelEmpMappingHotels.Add(Mapping);
                 _context.SaveChanges();
                 return RedirectToAction("HotelIndex");
             }
             return View(HotelCreateVM);
         }
 
+        //顯示所有飯店
         public ActionResult HotelList()
         {
             return View(_context.Hotels.ToList());
         }
 
+        //飯店詳細說明
+        //Route: Hotel/Detail/{hotelid}
         public ActionResult HotelDetails(string hotelid)
         {
             if (hotelid == null)
@@ -139,6 +167,7 @@ namespace BS_Adoga.Controllers
             return View(hotel);
         }
 
+        //飯店修改
         public ActionResult HotelEdit(string hotelid)
         {
             if (hotelid == null)
@@ -146,7 +175,7 @@ namespace BS_Adoga.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Hotel hotel = _context.Hotels.Find(hotelid);
-            HotelCreateViewModel hotelCreateVM = new HotelCreateViewModel() 
+            HotelCreateViewModel hotelCreateVM = new HotelCreateViewModel()
             {
                 HotelID = hotel.HotelID,
                 HotelName = hotel.HotelName,
@@ -193,6 +222,8 @@ namespace BS_Adoga.Controllers
             return View(hotelCreateVM);
         }
 
+        //飯店修改
+        //Route: Hotel/Edit/{hotelid}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HotelEdit(HotelCreateViewModel hotelCreateVM)
@@ -220,6 +251,7 @@ namespace BS_Adoga.Controllers
             #endregion
         }
 
+        //動態取得區域資料
         //第二個區動態取得資料
         public ActionResult SecondItems(string city)
         {
@@ -257,15 +289,26 @@ namespace BS_Adoga.Controllers
 
         }
 
+        //顯示所有的飯店設施
         public ActionResult HotelFacilityIndex()
         {
-            var facilities = _context.Facilities.Include(f => f.Hotel);
-            return View(facilities.ToList());
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            return View(_repository.GetHotelFaciliyByEmpID(user_id));
+
+            #region 顯示所有飯店設施清單_舊版本
+            //顯示所有的飯店設施清單
+            //var facilities = _context.Facilities.Include(f => f.Hotel);
+            //return View(facilities.ToList());
+            #endregion
         }
 
+        //飯店設施建立
         public ActionResult HotelFacilityCreate(string hotelids)
         {
-            if(string.IsNullOrEmpty(hotelids))
+            if (string.IsNullOrEmpty(hotelids))
             {
                 ViewBag.HotelID = new SelectList(_context.Hotels, "HotelID", "HotelName");
             }
@@ -277,11 +320,12 @@ namespace BS_Adoga.Controllers
             return View();
         }
 
+        //飯店設施建立
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HotelFacilityCreate(Facility facility)
         {
-            
+
             facility.Logging = "建立" + "," + User.Identity.Name + "," + DateTime.Now.ToString();
             if (facility.Logging != null)
             {
@@ -293,6 +337,7 @@ namespace BS_Adoga.Controllers
             return View(facility);
         }
 
+        //飯店設施詳細說明
         public ActionResult HotelFacilityDetails(int? id)
         {
             if (id == null)
@@ -307,6 +352,7 @@ namespace BS_Adoga.Controllers
             return View(facility);
         }
 
+        //飯店設施修改
         public ActionResult HotelFacilityEdit(int? id)
         {
             if (id == null)
@@ -322,6 +368,7 @@ namespace BS_Adoga.Controllers
             return View(facility);
         }
 
+        //飯店設施修改
         // POST: Facilities/Edit/5
         // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
@@ -340,24 +387,36 @@ namespace BS_Adoga.Controllers
             return View(facility);
         }
 
-
+        //顯示所有的飯店
         public ActionResult HotelRoomIndex()
         {
             //List<Facility> facilities = _context.Facilities.ToList();
             //ViewBag.Facilities = facilities;
 
-            return View(_repository.GetHotelRoomCount());
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            return View(_repository.GetHotelRoomCountByEmpID(user_id));
+
+            //顯示所有Hotel跟房型數量
+            //return View(_repository.GetHotelRoomCount());
         }
 
-        // GET: Hotel/Room/{hotelid}
+        //顯示某飯店所有的房型
+        // Route: Hotel/Room/{hotelid}
         public ActionResult HotelRoomsIndex(string hotelid)
         {
             //List<Facility> facilities = _context.Facilities.ToList();
             //ViewBag.Facilities = facilities;
-            var test = _repository.GetHotelRoomAll(hotelid);
+            //var test = _repository.GetHotelRoomAll(hotelid);
+            var hotel = _repository.GetHotelList().Where(x => x.HotelID == hotelid).FirstOrDefault();
+            ViewBag.hotelname = hotel.HotelName;
+
             return View(_repository.GetHotelRoomAll(hotelid));
         }
 
+        //房型建立
         public ActionResult HotelRoomCreate(string hotelids)
         {
             if (string.IsNullOrEmpty(hotelids))
@@ -369,9 +428,11 @@ namespace BS_Adoga.Controllers
                 ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelids), "HotelID", "HotelName");
             }
             ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes, "TypesOfBathroomID", "Name");
+            ViewBag.HotelIDs = hotelids;
             return View();
         }
 
+        //房型建立
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HotelRoomCreate(HotelRoomCreateViewModel hotelRoomCreateVM)
@@ -403,6 +464,7 @@ namespace BS_Adoga.Controllers
             return View(hotelRoomCreateVM);
         }
 
+        //房型詳細說明
         public ActionResult HotelRoomDetails(string roomid)
         {
             if (roomid == null)
@@ -410,6 +472,17 @@ namespace BS_Adoga.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Room room = _context.Rooms.Find(roomid);
+
+            //顯示所有床型名稱跟數量
+            string BedNameString = string.Empty;
+            foreach (var item in _repository.GetRoomBeds(roomid))
+            {
+                BedNameString = string.Join("", BedNameString + $"{item.Name}X{item.Amount}，");
+            }
+            if (!string.IsNullOrEmpty(BedNameString)) BedNameString = BedNameString.Remove(BedNameString.LastIndexOf("，"), 1);
+            else BedNameString = "空";
+            ViewBag.BedNameString = BedNameString;
+
             if (room == null)
             {
                 return HttpNotFound();
@@ -417,7 +490,9 @@ namespace BS_Adoga.Controllers
             return View(room);
         }
 
-        public ActionResult HotelRoomEdit(string hotelids,string roomid)
+        //房型資料修改
+        //Route: Hotel/Room/Edit/{hotelids}-{roomid}
+        public ActionResult HotelRoomEdit(string hotelids, string roomid)
         {
             TempData["roomid"] = roomid;
             Room room = _context.Rooms.Find(roomid);
@@ -445,10 +520,11 @@ namespace BS_Adoga.Controllers
             {
                 ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelids), "HotelID", "HotelName");
             }
-            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes, "TypesOfBathroomID", "Name");
+            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes.Where(x => x.TypesOfBathroomID == room.TypesOfBathroomID), "TypesOfBathroomID", "Name");
             return View(hotelRoomCreateVM);
         }
 
+        //房型資料修改
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult HotelRoomEdit(HotelRoomCreateViewModel hotelRoomCreateVM)
@@ -480,9 +556,125 @@ namespace BS_Adoga.Controllers
             }
 
             ViewBag.HotelID = new SelectList(_context.Hotels.Where(x => x.HotelID == hotelRoomCreateVM.HotelID), "HotelID", "HotelName");
-            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes, "TypesOfBathroomID", "Name");
+            ViewBag.TypesOfBathroomID = new SelectList(_context.BathroomTypes.Where(x => x.TypesOfBathroomID == hotelRoomCreateVM.TypesOfBathroomID), "TypesOfBathroomID", "Name");
             return View(hotelRoomCreateVM);
         }
 
+        //每日房間清單的日曆頁面
+        public ActionResult RoomDetailsIndex(string roomid)
+        {
+            if (_context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault() == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            else
+            {
+                ViewBag.roomid = roomid;
+                ViewBag.roomname = _context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault().RoomName;
+
+                List<RoomsDetail> RoomDetailThisMonth = _repository.GetAllRoomDetailThisMonth(roomid).ToList();
+                ViewBag.RoomDetailThisMonthJSON = JsonConvert.SerializeObject(RoomDetailThisMonth);
+
+                return View(RoomDetailThisMonth);
+            }
+        }
+
+        //房間月的展開
+        //Route: Hotel/Room/Detail/Expansion/{year}-{month}-{roomid}
+        public ActionResult RoomDetailExpansion(string year, string month, string roomid)
+        {
+            string username = User.Identity.Name; //取得使用者名稱Logging要記錄誰修改
+
+            //如果是不存在的roomid返回錯誤頁面
+            if (_context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault() == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //如果存在則繼續
+            else
+            {
+                string RDID = year + "-" + month + "-1-" + roomid;
+
+                var test = _context.RoomsDetails.Where(x => x.RDID == "2021-06-20room01").FirstOrDefault();
+                var DBRoomDetailData = _context.RoomsDetails.Where(x => x.RDID == RDID).FirstOrDefault();
+
+                //判斷當月第一天是否已經有展開過(有展開過代表整個月已有資料)
+                if (DBRoomDetailData == null)
+                {
+                    string CurrentDate = $"{year}/{month}/30 14:00:00";
+                    DateTime DateObject = Convert.ToDateTime(CurrentDate);
+
+                    OperationResult CreatResult = _service.CreateRoomDetailExpansion(year , month , roomid, username);
+
+                    return Redirect($"~/Function/RoomDetailsIndex?roomid={roomid}");
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+            }
+        }
+
+        //房間床型新增
+        public ActionResult RoomBedCreate(string roomid)
+        {
+            var hotelid = _context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault();
+            ViewBag.hotelid = hotelid.HotelID;
+            ViewBag.TypesOfBedsID = new SelectList(_context.BedTypes, "TypesOfBedsID", "Name");
+            ViewBag.RoomID = new SelectList(_context.Rooms.Where(x => x.RoomID == roomid), "RoomID", "RoomName");
+            return View();
+        }
+
+        //房間床型新增
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RoomBedCreate([Bind(Include = "RoomID,TypesOfBedsID,Amount")] RoomBed roomBed)
+        {
+            var hotelid = _context.Rooms.Where(x => x.RoomID == roomBed.RoomID).FirstOrDefault();
+            ViewBag.hotelid = hotelid.HotelID;
+            if (ModelState.IsValid)
+            {
+                _context.RoomBeds.Add(roomBed);
+                _context.SaveChanges();
+                return Redirect($"~/Hotel/Room/{hotelid.HotelID}");
+            }
+
+            ViewBag.TypesOfBedsID = new SelectList(_context.BedTypes, "TypesOfBedsID", "Name", roomBed.TypesOfBedsID);
+            ViewBag.RoomID = new SelectList(_context.Rooms.Where(x => x.RoomID == roomBed.RoomID), "RoomID", "RoomName", roomBed.RoomID);
+            return View(roomBed);
+        }
+
+
+        //房間床型刪除
+        public ActionResult RoomBedDelete(string roomid)
+        {
+            var roomBeds = _context.RoomBeds.Where(x => x.RoomID == roomid).ToList();
+            
+            if (roomBeds != null)
+            {
+                foreach (var item in roomBeds)
+                {
+                    _context.RoomBeds.Remove(item);
+                    _context.SaveChanges();
+                }
+            }
+
+            var hotelid = _context.Rooms.Where(x => x.RoomID == roomid).FirstOrDefault();
+            return Redirect($"~/Hotel/Room/{hotelid.HotelID}");
+        }
+
+
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

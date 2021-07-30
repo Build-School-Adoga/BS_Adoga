@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/Asset/CSS/MemberAccount/MemberBookings.css" />
 }
 
+
 <div id="booking-page" class="ps-5 pt-4">
     <!-- <div class="AgodaVIPBanner_Container">
                 <figure class="AgodaVipBanner_Image"></figure>
@@ -31,19 +32,30 @@
                 </div>
             </div> -->
 
-    <nav class="filter-my-order">
-        <a class="filter-option current">即將入住</a>
-        <a class="filter-option ">已完成</a>
-        <a class="filter-option ">已取消</a>
-    </nav>
+    <div id="filter-sort-wrap" class="filter-sort-wrap">
+        <nav class="filter-my-order">
+            <input checked v-model="filterOption" id="coming-soon" value="ComingSoon"type="radio"  name="filter-order"
+                   class="radio-box d-none" />
+            <label class="filter-option current" for="coming-soon">即將入住</label>
+            <input v-model="filterOption"  id="complete" value="Complete"type="radio" name="filter-order" class="radio-box d-none" />
+            <label class="filter-option " for="complete">已完成</label>
+            <input v-model="filterOption" id="cancelled" value="Cancelled" type="radio" name="filter-order"
+                   class="radio-box d-none" />
+            <label class="filter-option " for="cancelled">已取消</label>
+        </nav>
 
-    <div class="sort-btn-group">
-        <div class="sort-text">排序方式</div>
-        <div class="sort-option">預定日期</div>
-        <div class="sort-option current">入住日期</div>
+        <div class="sort-btn-group">
+            <p class="sort-text mb-0">排序<i class="fas fa-sort-amount-up ms-2"></i></p>
+            <input v-model="sortOption" id="order-date-sort" value="OrderDate" type="radio" name="sort-order"
+                   class="radio-box d-none" />
+            <label class="sort-option" for="order-date-sort">預定日期</label>
+            <input checked v-model="sortOption" id="check-in-date-sort" value="CheckInDate" type="radio" name="sort-order"
+                   class="radio-box d-none" />
+            <label class="sort-option current" for="check-in-date-sort">入住日期</label>
+        </div>
     </div>
 
-    <div class="search-order-wrap mt-3 mb-5">
+    <div class="search-order-wrap my-4">
         <label for="input_order-id">訂單編號</label>
         <div class="search-order">
             <input id="input_order-id" placeholder="訂單編號">
@@ -82,12 +94,13 @@
 
 @section endJS{
     <!-- axios 的引用 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="~/Scripts/axios.min.js"></script>
 
     <!--Vue在Layout已有引用-->
 
     <!--Mine-->
-    <script type="module">
+    <script type="module" src="~/Asset/js/MemberAccount/BookingOrderFilterSort.js"></script>
+    @*<script type="module">
         import BookingCard from '../../Asset/JS/MemberAccount/BookingComponent.js'
 
         //一開始載入頁面時要帶入Room的全部資料
@@ -165,7 +178,7 @@
             })
         }
 
-    </script>
+    </script>*@
 }
 
 

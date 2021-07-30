@@ -10,8 +10,12 @@ namespace BS_Adoga.Models.DBContext
     public partial class RoomImage
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ImageID { get; set; }
+        [StringLength(55)]
+        public string ImageID { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string HotelID { get; set; }
 
         [Required]
         [StringLength(50)]

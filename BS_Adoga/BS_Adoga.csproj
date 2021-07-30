@@ -167,6 +167,9 @@
     <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
+    <Reference Include="MvcPaging, Version=2.1.13.46, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcPaging.2.1.13\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -293,6 +296,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIController\DetailApiController.cs" />
+    <Compile Include="APIController\FunctionApiController.cs" />
     <Compile Include="APIController\BookingApiController.cs" />
     <Compile Include="APIController\SearchApiController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -301,6 +305,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
+    <Compile Include="Models\DBContext\HotelEmpMappingHotel.cs" />
+    <Compile Include="Models\DBContext\HotelImageUpload.cs" />
     <Compile Include="Models\ViewModels\Account\BookingOrderViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\TestVM.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\districts.cs" />
@@ -315,6 +321,7 @@
     </Compile>
     <Compile Include="Models\ViewModels\Account\BookingDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\Account\MemberBookingViewModel.cs" />
+    <Compile Include="Models\ViewModels\Account\RePayViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOut\CheckOutListViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOut\ECPayResultsViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOut\OrderVM.cs" />
@@ -332,6 +339,7 @@
     <Compile Include="Models\DBContext\RoomBed.cs" />
     <Compile Include="Models\DBContext\RoomImage.cs" />
     <Compile Include="Models\DBContext\RoomsDetail.cs" />
+    <Compile Include="Models\ViewModels\CheckOut\PayApiInfo.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\CardViewModels.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\demoshopViewModels.cs" />
     <Compile Include="Models\ViewModels\homeViewModels\MyHoteiImages.cs" />
@@ -390,6 +398,9 @@
     <Compile Include="Service\MultiButtonAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asset\CDN\CSS\daterangepicker.min.css" />
+    <Content Include="Asset\CDN\CSS\font-awesome.css" />
+    <Content Include="Asset\CDN\CSS\index.css" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\attribution.js" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\all.css" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\css\all.min.css" />
@@ -409,8 +420,16 @@
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-brands-400.svg" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-regular-400.svg" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Asset\CDN\JS\daterangepicker.min.js" />
+    <Content Include="Asset\CDN\JS\index.js" />
     <Content Include="Asset\CDN\JS\jquery-3.3.1.js" />
+    <Content Include="Asset\CDN\JS\jquery.min.js" />
+    <Content Include="Asset\CDN\JS\moment-with-locales.js" />
+    <Content Include="Asset\CDN\JS\moment.min.js" />
+    <Content Include="Asset\CDN\JS\vue.js" />
     <Content Include="Asset\CDN\JS\moment-with-locales.min.js" />
+    <Content Include="Asset\CSS\CityCenter.css" />
+    <Content Include="Asset\CSS\calendar.css" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
     <Content Include="Asset\CSS\FunctionPage.css" />
@@ -419,6 +438,7 @@
     <Content Include="Asset\CSS\MemberAccount\MemberLeftMenu.css" />
     <Content Include="Asset\CSS\Search.css" />
     <Content Include="Asset\CSS\SearchFilterPartial.css" />
+    <Content Include="Asset\CSS\ServiceCenter.css" />
     <Content Include="Asset\CSS\StepBar.css" />
     <Content Include="Asset\CSS\HomePage.css" />
     <Content Include="Asset\CSS\HotelDetail.css" />
@@ -427,6 +447,8 @@
     <Content Include="Asset\CSS\Reset.css" />
     <Content Include="Asset\CSS\HotelDetailShare.css" />
     <Content Include="Asset\images\adoga-logo-v2.png" />
+    <Content Include="Asset\images\Booking.png" />
+    <Content Include="Asset\images\Home\bg-adoga.png" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel01.jpg" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel02.jpg" />
     <Content Include="Asset\images\HotelDetail\Room\room01.jpg" />
@@ -442,13 +464,19 @@
     <Content Include="Asset\images\img4.png" />
     <Content Include="Asset\images\img5.png" />
     <Content Include="Asset\images\img6.png" />
+    <Content Include="Asset\images\KAYAK.png" />
+    <Content Include="Asset\images\OpenTable.png" />
+    <Content Include="Asset\images\priceline.png" />
+    <Content Include="Asset\images\Rentalcars.png" />
     <Content Include="Asset\images\tw.svg.png" />
     <Content Include="Asset\JS\formStep.js" />
+    <Content Include="Asset\JS\helpers.js" />
     <Content Include="Asset\JS\home.js" />
     <Content Include="Asset\JS\HotelDetail\HotelFacility.js" />
     <Content Include="Asset\JS\HotelDetail\HotelFacilityComponent.js" />
     <Content Include="Asset\JS\HotelDetail\RoomComponent.js" />
     <Content Include="Asset\JS\MemberAccount\BookingComponent.js" />
+    <Content Include="Asset\JS\MemberAccount\BookingOrderFilterSort.js" />
     <Content Include="Asset\JS\MemberAccount\MemberProfile.js" />
     <Content Include="Asset\JS\GoogleLogin.js" />
     <Content Include="Asset\JS\navbar.js" />
@@ -2163,6 +2191,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Library\ECPay.Payment.Integration.dll" />
+    <Content Include="Scripts\axios.js" />
+    <Content Include="Scripts\axios.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -2355,6 +2385,8 @@
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Asset\CDN\fontawesome-free-5.15.2-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="Asset\CDN\CSS\fontawesome-webfont.ttf" />
+    <Content Include="Asset\CDN\CSS\fontawesome-webfont.woff" />
     <Content Include="Asset\CDN\JSON\bower.json" />
     <Content Include="Asset\CDN\JSON\package.json" />
     <None Include="Properties\PublishProfiles\adoga - FTP.pubxml" />
@@ -2372,6 +2404,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\vue.js" />
+    <Content Include="Scripts\vue.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2429,11 +2463,19 @@
     <Content Include="Views\Function\HotelFacilityIndex.cshtml" />
     <Content Include="Views\Function\HotelFacilityDetails.cshtml" />
     <Content Include="Views\Function\HotelFacilityEdit.cshtml" />
+    <Content Include="Views\Home\ServiceCenter.cshtml" />
     <Content Include="Views\Function\HotelRoomIndex.cshtml" />
     <Content Include="Views\Function\HotelRoomsIndex.cshtml" />
     <Content Include="Views\Function\HotelRoomCreate.cshtml" />
     <Content Include="Views\Function\HotelRoomEdit.cshtml" />
     <Content Include="Views\Function\HotelRoomDetails.cshtml" />
+    <Content Include="Views\Home\CityCenter.cshtml" />
+    <Content Include="Views\Home\HotelDetail.cshtml" />
+    <Content Include="Views\Shared\_optionHotel.cshtml" />
+    <Content Include="Views\Shared\_optionCity.cshtml" />
+    <Content Include="Views\Shared\_SearchCityPartial.cshtml" />
+    <Content Include="Views\Function\RoomDetailsIndex.cshtml" />
+    <Content Include="Views\Function\RoomBedCreate.cshtml" />
     <Content Include="Views\Search\GetAllHotelInCity.cshtml" />
   </ItemGroup>
   <ItemGroup>

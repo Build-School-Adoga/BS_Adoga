@@ -26,6 +26,10 @@
     font-size: 24px;
 }
 
+[v-cloak] {
+    display: none;
+}
+
 /* <!-- hotel-nav 關於酒店詳細資訊的分類 --> */
 /* <!-- 滑動時，浮動式nav會固定在top --> */
 

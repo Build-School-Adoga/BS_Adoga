@@ -11,7 +11,9 @@ nav {
 p {
     margin: auto;
 }
-
+[v-cloak] {
+    display: none;
+}
 i {
     font-size: 20px;
     margin: auto 10px;

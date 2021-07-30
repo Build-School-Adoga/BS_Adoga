@@ -19,5 +19,6 @@ namespace BS_Adoga.Models.ViewModels.Account
         public DateTime CheckOutDate { get; set; }
         public string City { get; set; }
         public bool Breakfast { get; set; }
+        public bool PayStatus { get; set; }
     }
 }

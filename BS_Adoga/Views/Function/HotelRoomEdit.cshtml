@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "HotelRoomEdit";
     Layout = "~/Views/Shared/_FunctionPage.cshtml";
-    string roomid = TempData["roomid"].ToString();
+    string roomid = TempData.Peek("roomid").ToString();
 }
 
 <h2>HotelRoomEdit</h2>

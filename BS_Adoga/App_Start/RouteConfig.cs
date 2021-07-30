@@ -45,6 +45,12 @@ namespace BS_Adoga
             );
 
             routes.MapRoute(
+                name: "PayAPI",
+                url: "Account/RePayOrder/{orderid}",
+                defaults: new { controller = "Account", action = "RePayOrder" }
+            );
+
+            routes.MapRoute(
                 name: "HotelEdit",
                 url: "Hotel/Edit/{hotelid}",
                 defaults: new { controller = "Function", action = "HotelEdit", hotelid = UrlParameter.Optional }
@@ -66,6 +72,12 @@ namespace BS_Adoga
                 name: "HotelRoomEdit",
                 url: "Hotel/Room/Edit/{hotelids}-{roomid}",
                 defaults: new { controller = "Function", action = "HotelRoomEdit", hotelids = UrlParameter.Optional , roomid = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "RoomDetailExpansion",
+                url: "Hotel/Room/Detail/Expansion/{year}-{month}-{roomid}",
+                defaults: new { controller = "Function", action = "RoomDetailExpansion", year = UrlParameter.Optional, month = UrlParameter.Optional, roomid = UrlParameter.Optional }
             );
 
             routes.MapRoute(
