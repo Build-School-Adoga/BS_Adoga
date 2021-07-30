@@ -171,7 +171,7 @@ function HotelList(response) {
             }
         }
     })
-    debugger;
+    //debugger;
 }
 
 function DateFormat(date) {
