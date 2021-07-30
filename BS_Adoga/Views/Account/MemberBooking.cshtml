@@ -100,8 +100,8 @@
                         <div class="form-group form-label-group p-3">
                             <span>寫下您的評論:</span>
                             <textarea class="form-control mt-2" id="text_txt1" rows="5" placeholder="Suggestion"
-                                      maxlength="50" , name="MessageText"></textarea>
-                            <span id="num_txt1">50 / 50</span>
+                                      maxlength="100" , name="MessageText"></textarea>
+                            <span id="num_txt1">100 / 100</span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -161,14 +161,14 @@
             $('#text_txt1').on('keyup', function () {
                 var txtval = $('#text_txt1').val().length;
                 // console.log(txtval);
-                var str = parseInt(50 - txtval);
+                var str = parseInt(100 - txtval);
                 // console.log(str);
                 if (str > 0) {
-                    $('#num_txt1').html(str + ' / 50');
+                    $('#num_txt1').html(str + ' / 100');
                 } else {
-                    $('#num_txt1').html('0 / 50');
+                    $('#num_txt1').html('0 / 100');
                     $('#text_txt1').val($('#text_txt1').val().substring(0,
-                        50)); //這裡意思是當裡面的文字小於等於0的時候，那麼字數不能再增加，只能是600個字
+                        100)); //這裡意思是當裡面的文字小於等於0的時候，那麼字數不能再增加，只能是600個字
                 }
             });
         })
