@@ -77,7 +77,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" id="modalID" name="orderID" v-model="orderID">
+                        <input type="text" id="modalID" name="orderID" v-model="orderID" hidden>
                         <!--評分Bar-->
                         <div class="row form-group p-3">
                             <span class="mb-1">評分:</span>
@@ -170,12 +170,12 @@
             });
         })
 
-        var modalID = new Vue({
-            el: '#modalID',
-            data: {
-                orderID: 'XXXZZZZS'
-            }
-        })
+        //var modalID = new Vue({
+        //    el: '#modalID',
+        //    data: {
+        //        orderID: 'XXXZZZZS'
+        //    }
+        //})
     </script>
 
     <!--Mine-->

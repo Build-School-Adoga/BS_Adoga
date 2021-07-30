@@ -54,12 +54,12 @@ var BookingList = new Vue({
     }
 })
 
-//var modalID = new Vue({
-//    el: '#modalID',
-//    data: {
-//        orderID: 'XXXZZZZS'
-//    }
-//})
+var modalID = new Vue({
+    el: '#modalID',
+    data: {
+        orderID: 'test'
+    }
+})
 
 function appendBookingList(response) {
 

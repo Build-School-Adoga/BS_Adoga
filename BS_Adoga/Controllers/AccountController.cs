@@ -160,14 +160,7 @@ namespace BS_Adoga.Controllers
 
 
             var getId = _memberacoountrepository.GetComment(orderid, user_id);
-            //comment.OrderID = orderid;           
-            //comment.HotelID = getId.HotelID;
-            //comment.CustomerID = user_id;          
-            //comment.Title = Title;
-            //comment.MessageDate = DateTime.Now;
-            //comment.MessageText = MessageText;
-            //comment.Score = ScoreRange;
-            //comment.HotelName = getId.HotelName;
+
 
             AdogaContext db = new AdogaContext();
             MessageBoard message = new MessageBoard()
@@ -183,8 +176,8 @@ namespace BS_Adoga.Controllers
 
             db.MessageBoards.Add(message);
             db.SaveChanges();
-            
-            return View();
+
+            return RedirectToAction("MemberBooking");
         }
     }
 }
