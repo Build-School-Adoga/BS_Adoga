@@ -3,6 +3,7 @@
 
 /* <!-- 最頂端的Agoda nav --> */
 
+
 .head-nav {
     padding: 0px 20px;
     border-bottom: 1px solid rgb(228, 228, 228);
@@ -14,12 +15,11 @@
         font-size: 0;
     }
 
-        /*.head-nav-wrap h2 img {
-            width: 89px;
-            height: 37px;
+        .head-nav-wrap h2 img {
+           /* width: 89px;
+            height: 37px;*/
             vertical-align: bottom;
-        }*/
-
+        }
 .head-nav-item {
     display: inline-block;
     /*margin-left: 30px;*/
@@ -278,11 +278,7 @@
 
 /*電腦*/
 @media screen and (min-width:769px) {
-    .head-nav-wrap h2 img {
-        width: 89px;
-        height: 37px;
-        vertical-align: bottom;
-    }
+    
 
     .login-menu {
         display: flex;
@@ -318,12 +314,6 @@
 
 /* 手機或小平板 */
 @media screen and (max-width:768px) {
-
-    .head-nav-wrap h2 img {
-        width: 89px;
-        height: 37px;
-        vertical-align: bottom;
-    }
 
     #login-menu-chkbox:checked + .login-menu {
         display: block;
@@ -435,11 +425,6 @@
 
 /*更小的手機 比如iphone 5*/
 @media screen and (max-width:570px) {
-    .head-nav-wrap h2 img {
-        width: 72px;
-        height: 30px;
-        vertical-align: bottom;
-    }
     #Customer-Service .info-group {
         flex-direction: column;
         align-items: center;

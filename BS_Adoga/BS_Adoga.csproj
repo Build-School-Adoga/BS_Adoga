@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CloudinaryDotNet, Version=1.15.2.0, Culture=neutral, PublicKeyToken=c8234dc617ae7841, processorArchitecture=MSIL">
+      <HintPath>..\packages\CloudinaryDotNet.1.15.2\lib\net452\CloudinaryDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="ECPay.Payment.Integration">
       <HintPath>..\..\ECPayAIO_Net-1.191231\ECPay.Payment.Integration.dll</HintPath>
     </Reference>
@@ -90,6 +93,9 @@
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Html.Abstractions, Version=1.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Html.Abstractions.1.0.3\lib\netstandard1.0\Microsoft.AspNetCore.Html.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Http, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Http.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
@@ -155,6 +161,9 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.WebEncoders, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.WebEncoders.1.0.0\lib\netstandard1.0\Microsoft.Extensions.WebEncoders.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.11.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.11.1\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
     </Reference>
@@ -208,8 +217,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
@@ -308,6 +317,9 @@
     <Compile Include="Models\DBContext\HotelImageUpload.cs" />
     <Compile Include="Models\ViewModels\Account\BookingOrderViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\TestVM.cs" />
+    <Compile Include="Models\ViewModels\HotelImagePage\HotelOption.cs" />
+    <Compile Include="Models\ViewModels\HotelImagePage\ImagesVM.cs" />
+    <Compile Include="Models\ViewModels\HotelImagePage\HotelImageVM.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\districts.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -428,6 +440,7 @@
     <Content Include="Asset\CDN\JS\vue.js" />
     <Content Include="Asset\CDN\JS\moment-with-locales.min.js" />
     <Content Include="Asset\CSS\CityCenter.css" />
+    <Content Include="Asset\CSS\Function\HotelImagePage.css" />
     <Content Include="Asset\CSS\calendar.css" />
     <Content Include="Asset\CSS\MemberAccount\BookingDetail.css" />
     <Content Include="Asset\CSS\MemberAccount\MemberBookings.css" />
@@ -446,6 +459,8 @@
     <Content Include="Asset\CSS\Reset.css" />
     <Content Include="Asset\CSS\HotelDetailShare.css" />
     <Content Include="Asset\images\adoga-logo-v2.png" />
+    <Content Include="Asset\images\Adoga_logo_color.png" />
+    <Content Include="Asset\images\Adoga_logo_white.png" />
     <Content Include="Asset\images\Booking.png" />
     <Content Include="Asset\images\Home\bg-adoga.png" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel01.jpg" />
@@ -2476,6 +2491,8 @@
     <Content Include="Views\Function\RoomDetailsIndex.cshtml" />
     <Content Include="Views\Function\RoomBedCreate.cshtml" />
     <Content Include="Views\Search\GetAllHotelInCity.cshtml" />
+    <Content Include="Views\HotelDetail\upload.cshtml" />
+    <Content Include="Views\Function\HotelImagePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

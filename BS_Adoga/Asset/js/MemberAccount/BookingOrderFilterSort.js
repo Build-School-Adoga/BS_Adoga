@@ -5,19 +5,31 @@ import BookingCard from './BookingComponent.js'
 axios.get('../Account/GetMemberBookingList', {
         params: {
             filterOption: "ComingSoon",
-            sortOption: "CheckInDate"
+            sortOption: "CheckInDate",
+            UserInputOrderId: ""
         }
     }).then(function (response) {
         console.log(response.data)
         console.log('success')
         appendBookingList(response.data);
     }).catch((error) => console.log(error))
+var mod = new Vue({
 
+    el: "#modalID",
+
+    data: {
+
+        orderID: 'XXX'
+
+    }
+
+})
 var filterBookingOrder = new Vue({
     el: "#filter-sort-wrap",
     data: {
         filterOption: 'ComingSoon',
-        sortOption: 'CheckInDate'
+        sortOption: 'CheckInDate',
+        searchOrderId:''
     },
     watch: {
         filterOption() {
@@ -34,13 +46,31 @@ var filterBookingOrder = new Vue({
             axios.get('../Account/GetMemberBookingList', {
                 params: {
                     filterOption: this.filterOption,
-                    sortOption: this.sortOption
+                    sortOption: this.sortOption,
+                    UserInputOrderId: this.searchOrderId
                 }
             }).then((response) => {
                 console.log(response.data)
                 appendBookingList(response.data)
             }).catch((error) => console.log(error))
         },
+        Search() {
+            axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+                params: {
+                    filterOption: this.filterOption,
+                    sortOption: this.sortOption,
+                    UserInputOrderId: this.searchOrderId
+
+                }
+            }).then((response) => {
+                console.log(this.searchOrderId)
+                console.log(response.data)
+                appendBookingList(response.data)
+            }).catch((error) => console.log(error))
+        },
+        ClearSearch() {
+            this.searchOrderId = '';
+        }
     }
 })
 var BookingList = new Vue({
@@ -116,6 +146,7 @@ function appendBookingList(response) {
                         window.location.href ='../Account/RePayOrder/'+item.OrderID
                     //}).catch(error => console.log(error))
                 },
+                
                 GoToDetail: function () {
                     window.location.href = '../BookingDetail/' + item.OrderID;
                 }

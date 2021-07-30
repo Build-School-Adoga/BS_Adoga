@@ -136,6 +136,10 @@ namespace BS_Adoga.Controllers
             return RedirectToAction("Index", "CheckOut");
         }
 
+        public ActionResult upload()
+        {
+            return View();
+        }
         //public ActionResult DetailAlbum()
         //{
         //    return View();
