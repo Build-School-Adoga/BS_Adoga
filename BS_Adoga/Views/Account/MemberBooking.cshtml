@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<BS_Adoga.Models.ViewModels.Account.MemberBookingViewModel>
-@{
-    Layout = "~/Views/Account/_LayoutMember.cshtml";
-}
+@{ Layout = "~/Views/Account/_LayoutMember.cshtml"; }
 
 @section topCSS{
     <link rel="stylesheet" href="~/Asset/CSS/MemberAccount/MemberBookings.css" />
@@ -9,31 +7,7 @@
 
 
 <div id="booking-page" class="ps-5 pt-4">
-    <!-- <div class="AgodaVIPBanner_Container">
-                <figure class="AgodaVipBanner_Image"></figure>
-                <div class="AgodaVipBanner_Badge">
-                    <span class="AgodaVipBadge gold">
-                        <span class="AgodaVipBadge_Text">AgodaVIP</span>
-                    </span>
-                    <div class="AgodaVipBadge_FlashLine">
-                        <div class="AgodaVipBadge_FlashLine--1"></div>
-                        <div class="AgodaVipBadge_FlashLine--2"></div>
-                        <div class="AgodaVipBadge_FlashLine--3"></div>
-                    </div>
-                </div>
-
-                <div class="AgodaVipBanner_Text">
-                    <p class="AgodaVipBanner_Text--title">子傑，想升級成為VIP會員嗎?</p>
-                    <p class="AgodaVipBanner_Text--description">再完成5筆訂單即符合VIP資格，可獲得專屬折扣和福利</p>
-                </div>
-
-                <div class="AgodaVipBanner_Button">
-                    <button class="btn">瞭解更多</button>
-                </div>
-            </div> -->
     <div id="filter-sort-wrap">
-
-
         <div id="" class="filter-sort-wrap">
             <nav class="filter-my-order">
                 <input checked v-model="filterOption" id="coming-soon" value="ComingSoon" type="radio" name="filter-order"
@@ -68,7 +42,7 @@
         </div>
     </div>
     <div id="BookingList">
-        <booking-card v-bind:order="order" v-for="order in paginatedData" ></booking-card>
+        <booking-card v-bind:order="order" v-for="order in paginatedData"></booking-card>
         <button class="btn"
                 :disabled="pageNumber === 0"
                 @@click="prevPage">
@@ -79,69 +53,67 @@
                 @@click="nextPage">
             下一頁
         </button>
-        <div v-if="group.length==0">
-            <div class="no-booking-panel">
-                <img id="no-booking_img"
-                     src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
-
+    </div>
+    <div v-if="group.length==0">
+        <div class="no-booking-panel">
+            <img id="no-booking_img"
+                 src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
+        </div>
+    </div>
     @using (Html.BeginForm("Evaluation", "Account", FormMethod.Post))
     {
-        <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">住宿評鑑</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">住宿評鑑</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="modalID" name="orderID" v-model="orderID" hidden>
+                <!--評分Bar-->
+                <div class="row form-group p-3">
+                    <span class="mb-1">評分:</span>
+                    <div>
+                        <span id="score">0</span>/<span>10</span>
                     </div>
-                    <div class="modal-body">
-                        <input type="text" id="modalID" name="orderID" v-model="orderID" hidden>
-                        <!--評分Bar-->
-                        <div class="row form-group p-3">
-                            <span class="mb-1">評分:</span>
-                            <div>
-                                <span id="score">0</span>/<span>10</span>
-                            </div>
-                            <div>
-                                <input type="range" class="w-75" min="0" max="10" step="0.1" id="scoreRange" name="ScoreRange">
-                            </div>
-                        </div>
-                        <!--標題-->
-                        <div class="form-group p-3">
-                            <label for="exampleInputEmail1" class="form-label">標題:</label>
-                            <input type="text" class="form-control" aria-describedby="title" name="Title">
-                        </div>
-                        <!--輸入空間-->
-                        <div class="form-group form-label-group p-3">
-                            <span>寫下您的評論:</span>
-                            <textarea class="form-control mt-2" id="text_txt1" rows="5" placeholder="Suggestion"
-                                      maxlength="100" , name="MessageText"></textarea>
-                            <span id="num_txt1">100 / 100</span>
-                        </div>
+                    <div>
+                        <input type="range" class="w-75" min="0" max="10" step="0.1" id="scoreRange" name="ScoreRange">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-primary ml-1">送出</button>
-                    </div>
+                </div>
+                <!--標題-->
+                <div class="form-group p-3">
+                    <label for="exampleInputEmail1" class="form-label">標題:</label>
+                    <input type="text" class="form-control" aria-describedby="title" name="Title">
+                </div>
+                <!--輸入空間-->
+                <div class="form-group form-label-group p-3">
+                    <span>寫下您的評論:</span>
+                    <textarea class="form-control mt-2" id="text_txt1" rows="5" placeholder="Suggestion"
+                              maxlength="100" , name="MessageText"></textarea>
+                    <span id="num_txt1">100 / 100</span>
                 </div>
             </div>
-        </div>
-    }
-
-                <div class="no-booking-content">
-                    <h4>搜尋不到此訂單編號</h4>
-                    <p>
-                        想要查看
-                        <a href="" id="checked_out">已退房</a>
-                        或
-                        <a href="" id="cancelled">已取消</a>
-                        的訂單嗎?
-                        <h5><strong>請重新搜尋</strong></h5>
-                    </p>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary ml-1">送出</button>
             </div>
         </div>
     </div>
-</div>
+</div>}
+
+    <div class="no-booking-content">
+        <h4>搜尋不到此訂單編號</h4>
+        <p>
+            想要查看
+            <a href="" id="checked_out">已退房</a>
+            或
+            <a href="" id="cancelled">已取消</a>
+            的訂單嗎?
+            <h5><strong>請重新搜尋</strong></h5>
+        </p>
+    </div>
+
 
     @*@foreach (var item in Model)
         {
@@ -155,7 +127,7 @@
     {
         <div class="no-booking-panel mt-5">
             <img id="no-booking_img" src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
-
+        
             <div class="no-booking-content">
                 <p class="big-text">您目前沒有即將到來的預訂。</p>
                 <p>
@@ -166,10 +138,8 @@
                     的訂單嗎?
                 </p>
             </div>
-        </div>
-    }
+        </div>}
 </div>
-
 @section endJS{
     <!-- axios 的引用 -->
     <script src="~/Scripts/axios.min.js"></script>
