@@ -413,13 +413,12 @@
                                            for="EmailRegisterCheck">我想要收到Adoga的獨家促銷情報，同時根據隱私權政策，我保留隨時取消訂閱的權利</label>
                                 </div>
                                 <div class="robot">
-
-                                    <div class="g-recaptcha"
-                                         data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
+                                    <div class="g-recaptcha" data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"
+                                         data-callback="enableBtn"></div>
                                 </div>
                                 <div class="checkcodeline">
                                     <div class="d-grid gap-2">
-                                        <button type="submit" class="btn btn-primary py-2" name="register">加入會員</button>
+                                        <button type="submit" class="btn btn-primary py-2" name="register" id="submit_details" disabled>加入會員</button>
                                     </div>
                                 </div>
                                 <div class="otherlogin">
@@ -566,10 +565,10 @@
                     </div>
                     <div class="robot">
                         <div class="g-recaptcha"
-                             data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
+                             data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"data-callback="enableBtn"></div>
                     </div>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary" type="submit" name="ResetPassword">
+                        <button class="btn btn-primary" type="submit" name="ResetPassword"id="submit_detailsinreset" disabled>
                             變更密碼
                         </button>
                     </div>
@@ -654,6 +653,13 @@
                 $('#VerifyEmail').modal('show');
             }
         });
+    </script>
+    <script>
+        //機器人認證
+        function enableBtn() {
+            document.getElementById("submit_details").disabled = false;
+            document.getElementById("submit_detailsinreset").disabled = false;
+        }
     </script>
     <!--電子郵件登入到忘記密碼 -->
     <!--<script>
