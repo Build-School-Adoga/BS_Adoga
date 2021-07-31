@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
+using BS_Adoga.Models.ViewModels.HotelImagePage;
 using BS_Adoga.Models.ViewModels.Search;
 using System.ComponentModel.DataAnnotations;
 
@@ -121,6 +122,19 @@ namespace BS_Adoga.Repository
             //    int min = x.MinRoom;
             //    decimal dis = x.Discount;
             //}
+        }
+
+        public IEnumerable<ImagesVM> GetHotelImagesById(string hotelId)
+        {
+            var images = from himg in _context.HotelImageUploads
+                         where himg.HotelID == hotelId
+                         orderby himg.ImageID
+                         select new ImagesVM
+                         {
+                             ImageID = himg.ImageID,
+                             ImageURL = himg.ImageURL
+                         };
+            return images;
         }
 
 

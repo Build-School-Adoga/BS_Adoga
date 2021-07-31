@@ -31,6 +31,8 @@ namespace BS_Adoga.Models.DBContext
         [StringLength(50)]
         public string MD5HashPassword { get; set; }
 
+        public bool? VerifyEmail { get; set; }
+
         [StringLength(50)]
         public string PhoneNumber { get; set; }
 

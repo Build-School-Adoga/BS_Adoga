@@ -1,29 +1,18 @@
-﻿
-import BookingCard from './BookingComponent.js'
-
+﻿import BookingCard from './BookingComponent.js'
+ 
 //一開始載入頁面時要帶入order的資料，未入住的。
-axios.get('../Account/GetMemberBookingList', {
-        params: {
-            filterOption: "ComingSoon",
-            sortOption: "CheckInDate",
-            UserInputOrderId: ""
-        }
-    }).then(function (response) {
-        console.log(response.data)
-        console.log('success')
-        appendBookingList(response.data);
-    }).catch((error) => console.log(error))
-var mod = new Vue({
+//axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+//        params: {
+//            filterOption: "ComingSoon",
+//            sortOption: "CheckInDate",
+//            UserInputOrderId: ""
+//        }
+//    }).then(function (response) {
+//        console.log(response.data)
+//        console.log('success')
+//        appendBookingList(response.data);
+//    }).catch((error) => console.log(error))
 
-    el: "#modalID",
-
-    data: {
-
-        orderID: 'XXX'
-
-    }
-
-})
 var filterBookingOrder = new Vue({
     el: "#filter-sort-wrap",
     data: {
@@ -34,6 +23,9 @@ var filterBookingOrder = new Vue({
     watch: {
         filterOption() {
             console.log(`filter:${this.filterOption}`)
+            //console.log(BookingCard)
+            //console.log(BookingCard.pageNumber)
+            //BookingCard.startPage;
             this.filter_sort();
         },
         sortOption() {
@@ -53,6 +45,7 @@ var filterBookingOrder = new Vue({
                 console.log(response.data)
                 appendBookingList(response.data)
             }).catch((error) => console.log(error))
+           
         },
         Search() {
             axios.get('https://localhost:44352/Account/GetMemberBookingList', {
@@ -73,13 +66,75 @@ var filterBookingOrder = new Vue({
         }
     }
 })
+
 var BookingList = new Vue({
     el: '#BookingList',
     data: {
-        group: []
+        group: [],
+        //paginatedDataX: [],
+        //pageCountX:1,
+        pageNumber: 0,
+        size:3
+    },
+    methods: {
+        nextPage() {
+            this.pageNumber++;
+        },
+        prevPage() {
+            this.pageNumber--;
+        }
+    },
+    watch: {
+        group() {
+            console.log(this.pageNumber);
+            this.pageNumber = 0;
+        }
+    },
+    computed: {
+        pageCount() {
+            let l = this.group.length,
+                s = this.size;
+            return Math.floor(l / s);
+        },
+        paginatedData() {
+            const start = this.pageNumber * this.size,
+                end = start + this.size;
+            return this.group.slice(start, end);
+        }
+    },
+    created: function () {
+        axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+            params: {
+                filterOption: "ComingSoon",
+                sortOption: "CheckInDate",
+                UserInputOrderId: ""
+            }
+        }).then(function (response) {
+            console.log(response.data)
+            console.log('success')
+            appendBookingList(response.data);
+            //let l = this.group.length,
+            //    s = this.size;
+            //this.pageCountX = Math.floor(l / s);
+            //console.log(this.pageCountX)
+
+            //const start = this.pageNumber * this.size,
+            //    end = start + this.size;
+            //this.paginatedDataX = this.group.slice(start, end);
+            //console.log(this.paginatedDataX)
+        }).catch((error) => console.log(error))
+
+       
     },
     components: {
         'booking-card': BookingCard
+    }
+})
+
+var modalID = new Vue({
+    el: '#modalID',
+    data: {
+        orderID: 'test'
     }
 })
 
@@ -99,7 +154,7 @@ function appendBookingList(response) {
             else
                 bedTypeStr += bed.Name + "x" + bed.Amount
         })
-        console.log(item.OrderID)
+        //console.log(item.OrderID)
 
         
         //開始給BookingList（Vue物件）的group塞資料&設定裡面的屬性
@@ -146,7 +201,11 @@ function appendBookingList(response) {
                         window.location.href ='../Account/RePayOrder/'+item.OrderID
                     //}).catch(error => console.log(error))
                 },
-                
+                Evaluation: function () {
+                    console.log(modalID.orderID);
+                    console.log(item.orderID);
+                    modalID.orderID = item.OrderID
+                },
                 GoToDetail: function () {
                     window.location.href = '../BookingDetail/' + item.OrderID;
                 }

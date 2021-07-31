@@ -60,20 +60,28 @@
             <div class="email-component component-wrap">
                 <div class="email-component-display-email">
                     <h4 class="gray-bold-text">電子郵件</h4>
-                    <div class="email-not-verify-component">
+                    <div class="email-not-verify-component d-none">
                         <i class="fas fa-exclamation-triangle"></i>
                         <span>你的電子信箱尚未完成驗證。</span>
                         <span id="verify-email">點此驗證電子信箱</span>
                     </div>
                     <p class="display-email-value">
-                        @Model.Email
-                        <span class="email-verify-badge">已通過驗證</span>
+
                     </p>
+                    @Model.Email
+                    @if (Model.VerifyEmail == false)
+                    {
+                        <span class="email-verify-badge">未通過驗證</span>
+                    }
+                    else
+                    {
+                        <span class="email-verify-badge">已通過驗證</span>
+                    }
                 </div>
             </div>
             <!-- <div class="email-component-verify">
-              <span class="badge bg-info text-dark">已通過驗證</span>
-            </div> -->
+      <span class="badge bg-info text-dark">已通過驗證</span>
+    </div> -->
             <div class="verify-email-component component-wrap">
                 <div class="robot-error mb-4">
                     <p class="mb-0"> 請完成「我不是機器人」驗證程序</p>
