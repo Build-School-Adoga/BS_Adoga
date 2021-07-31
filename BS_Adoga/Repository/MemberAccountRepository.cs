@@ -151,5 +151,21 @@ namespace BS_Adoga.Repository
 
             return SearchResultByOrderID;
         }
+
+        public CommentViewModel GetComment(string orderID, string customerID)
+        {
+            var table = (from o in _context.Orders
+                         join r in _context.Rooms on o.RoomID equals r.RoomID
+                         join h in _context.Hotels on r.HotelID equals h.HotelID
+                         where o.CustomerID == customerID && o.OrderID == orderID
+                         orderby o.OrderID descending
+                         select new CommentViewModel
+                         {
+                             HotelID = h.HotelID,
+                             HotelName = h.HotelName,
+                             OrderID = o.OrderID
+                         }).FirstOrDefault();
+            return table;
+        }
     }
 }

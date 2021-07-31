@@ -28,7 +28,7 @@ namespace BS_Adoga.Controllers
         }
 
         [AcceptVerbs("GET")]
-        public ActionResult GetMemberBookingList(string filterOption, string sortOption,string UserInputOrderId)
+        public ActionResult GetMemberBookingList(string filterOption, string sortOption, string UserInputOrderId)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
@@ -84,7 +84,7 @@ namespace BS_Adoga.Controllers
             cust.Email = Email;
             cust.MD5HashPassword = HashService.MD5Hash(NewPassword);
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(Email = Email);
+            var data = db.Customers.Find(Email);
             if (data.MD5HashPassword != HashService.MD5Hash(CheckPassword))
             {
                 Content("修改失敗");
@@ -151,36 +151,65 @@ namespace BS_Adoga.Controllers
             }
             return View();
         }
-        
+
         public ActionResult MemberProfileName(string InputFirstName, string InputLastName, string Email)
         {
             Customer cust = new Customer();
             cust.Email = Email;
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(Email = Email);
+            var data = db.Customers.Find(Email);
 
             data.FirstName = InputFirstName;
             data.LastName = InputLastName;
             db.SaveChanges();
 
-           
+
 
 
             return RedirectToAction("MemberProfile", "Account");
         }
-        
-            public ActionResult MemberProfilePhone(string PhoneNumber, string Email)
+
+        public ActionResult MemberProfilePhone(string PhoneNumber, string Email)
         {
 
             Customer cust = new Customer();
             cust.Email = Email;
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(Email = Email);
+            var data = db.Customers.Find( Email);
             data.PhoneNumber = PhoneNumber;
             db.SaveChanges();
 
             return RedirectToAction("MemberProfile", "Account");
         }
+
+        [HttpPost]
+        public ActionResult Evaluation(string orderid, decimal ScoreRange, string Title, string MessageText)
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+
+
+            var getId = _memberacoountrepository.GetComment(orderid, user_id);
+
+
+            AdogaContext db = new AdogaContext();
+            MessageBoard message = new MessageBoard()
+            {
+                OrderID = orderid,
+                HotelID = getId.HotelID,
+                CustomerID = user_id,
+                Title = Title,
+                MessageDate = DateTime.Now,
+                MessageText = MessageText,
+                Score = ScoreRange
+            };
+
+            db.MessageBoards.Add(message);
+            db.SaveChanges();
+
+            return RedirectToAction("MemberBooking");
+        }
     }
-    
 }

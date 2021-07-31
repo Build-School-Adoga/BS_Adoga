@@ -1,9 +1,51 @@
-﻿export default {
-    props: {
-        order: ['order']
-    },
-    template:
-        `<div class="booking-item" >
+﻿var BookingCard = Vue.component('booking-card',
+    {
+        //props: ['title'],
+        //template: '<h3>{{ title }}</h3>'
+
+        //export default {
+        data() {
+            return {
+                pageNumber: 0,
+            };
+        },
+        props: {
+           
+            tttttt: {
+                type: Array,
+                required: true,
+            },
+            size: {
+                type: Number,
+                required: false,
+                default: 5,
+            },
+        },
+        methods: {
+            startPage() {
+                this.pageNumber = 0;
+                console.log('yes:' + pageNumber)
+            },
+            nextPage() {
+                this.pageNumber++;
+            },
+            prevPage() {
+                this.pageNumber--;
+            }
+        },
+        computed: {
+            pageCount() {
+                let l = this.tttttt.length,
+                    s = this.size;
+                return Math.ceil(l / s);
+            },
+            paginatedData() {
+                const start = this.pageNumber * this.size,
+                    end = start + this.size;
+                return this.tttttt.slice(start, end);
+            },
+        },
+        template: `<div><div class="booking-item" v-for="order in paginatedData" >
             <div class="side-info">
                 <div class="time-place-item">
                     <span class="time me-2"><i class="far fa-circle me-2"></i>{{order.FewDaysAgo}}天前</span>
@@ -60,13 +102,28 @@
                     </div>
                     <div class="footer">
                         <div class="link-group">
-                            <a v-if="order.PayStatus && order.CheckCheckOut < 1" data-bs-toggle="modal" data-bs-target="#large" @click="order.Evaluation">留下住宿評鑑</a>
+                            <a href="">留下住宿評鑑</a>
                             <a href="">訂別間</a>
                             <a v-if="order.PayStatus==false && order.In24Hours" @click="order.ContinuePay">立即付款</a>
                         </div>
                         <a @click="order.GoToDetail"  type="button" class="detail-btn">查看更多細節</a>
                     </div>
                 </div>
+
             </div>
-        </div> `
-}
+        </div>      <div class="d-flex">
+                    <button class="btn"
+                        :disabled="pageNumber === 0" 
+                        @click="prevPage">
+                        上一頁
+                    </button>
+                    <button class="btn"
+                        :disabled="pageNumber >= pageCount -1" 
+                        @click="nextPage">
+                        下一頁
+                    </button>
+                </div>
+    </div> `
+
+    })
+//}
