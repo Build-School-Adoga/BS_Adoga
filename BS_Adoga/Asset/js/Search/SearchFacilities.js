@@ -76,7 +76,9 @@ function HotelList(response) {
                 this.pageNumber--;
             },
             emitEvent: function (name) {
-                window.location.href = '/HotelDetail/' + name + '-(' + this.fnav.start + ')-(' + this.fnav.end + ')-' + this.fnav.room + '-' + this.fnav.adult + '-' + this.fnav.kid;
+                var url = '/HotelDetail/' + name + '-(' + DateFormat(filternav.startDate) + ')-(' + DateFormat(filternav.endDate) + ')-' + filternav.room + '-' + filternav.adult + '-' + filternav.kids;
+                //debugger;
+                window.location.href = url;
             }
         },
         computed: {
@@ -88,9 +90,11 @@ function HotelList(response) {
             },
             //單頁所需要的所有資料
             paginatedData() {
-                const start = this.pageNumber * this.size,
-                    end = start + this.size;
-                return this.listData.slice(start, end);
+                debugger;
+                const startData = this.pageNumber * this.size,
+                    endData = startData + this.size;
+                debugger;
+                return this.listData.slice(startData, endData);
             }
 
         },
