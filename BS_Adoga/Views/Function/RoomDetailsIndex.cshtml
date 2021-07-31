@@ -401,8 +401,10 @@
 
         //判斷上下月份
         function checkPreNext(yyyy, mm, dd, d) {
-            let nextMon = new Date(d);
-            let preMon = new Date(d);
+            let thisMon = new Date(d);
+            thisMon.setDate(15);
+            let nextMon = new Date(thisMon);
+            let preMon = new Date(thisMon);
             nextMon.setMonth(nextMon.getMonth() + 1);
             preMon.setMonth(preMon.getMonth() - 1);
 

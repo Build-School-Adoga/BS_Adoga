@@ -123,6 +123,11 @@ namespace BS_Adoga.Repository
             return table;
         }
 
+        /// <summary>
+        /// 取得當月所有的RoomDetail資料
+        /// </summary>
+        /// <param name="roomid"></param>
+        /// <returns></returns>
         public IEnumerable<RoomsDetail> GetAllRoomDetailThisMonth(string roomid)
         {
             string YearMonth = DateTime.Now.ToString("yyyy/M");
