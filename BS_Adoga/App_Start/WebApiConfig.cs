@@ -56,6 +56,12 @@ namespace BS_Adoga
             );
 
             config.Routes.MapHttpRoute(
+                name: "GetImageByID",
+                routeTemplate: "api/Function/GetImageByID",
+                defaults: new { controller = "FunctionApi", action = "GetImageByID", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "GetRoomDetailMonth",
                 routeTemplate: "api/Function/RoomDetailMonth",
                 defaults: new { controller = "FunctionApi", action = "GetRoomDetailMonth", id = RouteParameter.Optional }

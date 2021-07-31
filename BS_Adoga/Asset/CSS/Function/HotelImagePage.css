@@ -229,7 +229,22 @@
 .hotel-video .img-wrap {
     position: relative;
     vertical-align: middle;
-    background-color: rgb(58 58 58);
+}
+
+.hotel-video .img-wrap {
+    background-color: rgb(230 230 230);
+}
+
+.medium-pic .img-wrap {
+    background-color: rgb(197 193 193);
+}
+
+.two-pic .img-wrap:first-child {
+    background-color: rgb(171 171 171);
+}
+
+.two-pic .img-wrap:last-child {
+    background-color: rgb(202 202 202);
 }
 
 .img-wrap .show-shadow {

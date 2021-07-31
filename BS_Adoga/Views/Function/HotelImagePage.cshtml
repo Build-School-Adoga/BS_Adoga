@@ -5,8 +5,18 @@
 
     string user_id = Model.HotelEmployeeID;
     string hotel_id = Model.HotelID;
-
-    
+    //string[] imagesURL = new string[4];
+    //if (Model.Images.Count() != 0)
+    //{
+    //    for (int i = 0; i < Model.Images.Count(); i++)
+    //    {
+    //        imagesURL[i] = Model.Images.Where((x, index) => index == i).First().ImageURL;
+    //    }
+    //    for(int i = 3; i > Model.Images.Count()-1 ; i++)
+    //    {
+    //        imagesURL[i] = "";
+    //    }
+    //}
 }
 
 @section topCSS{
@@ -123,27 +133,79 @@
 
     <!--mine-->
     <script>
+        //上傳的input和按鈕，飯店選項
+        var maxFileLength = 4; //最多上傳4張
         var uploadImg = document.getElementById('upload-img');
         var uploadImgBtn = document.getElementById('upload-img-btn');
         var hotelSelect = document.getElementById('hotelOptionSelect');
+        //預覽圖片row
+        var previewContainer = document.querySelector('.preview-img');
+        var imgBox = document.getElementById('img-box');
+
+        //記錄單張重新上傳圖片的index
         var reUpload_Index;
+
          //傳給api的，裡面會存圖片的base64和檔名，真正要上傳去cloudinary時會用到
         var formData;
 
+        GetImageFromDB("@hotel_id");
+        //當沒有任何一張圖片上傳，且換了飯店選項，就從資料庫撈圖片出來顯示
+        hotelSelect.addEventListener('change', function () {
+            if (uploadImg.files.length <= 0) {
+                previewContainer.innerHTML = '';
+                GetImageFromDB(hotelSelect.value);
+            }
+            //呼叫順序：GetImageFromDB --> appendDBimage --> CreateDOM_AppendSrc
+        }) 
+        function appendDBimage(imgURL) {
+            if (imgURL.length > 0) {
+                for (var index = 0; index < maxFileLength; index++) {
+                    var showImg = document.getElementById('show-img-' + index);
+                    showImg.style.display = 'none';
+                    if (index < imgURL.length) {
+                        showImg.src = imgURL[index];
+                        showImg.style.display = "block";
+                    }
+                };
+            }
+            else {
+                for (var index = 0; index < maxFileLength; index++) {
+                    var showImg = document.getElementById('show-img-' + index);
+                    showImg.style.display = 'none';                    
+                };
+            }
+        }
+        function GetImageFromDB(HotelID) {
+            axios({
+                method: 'GET',
+                url: "../api/Function/GetImageByID",
+                params: {
+                    hotelID: HotelID
+                },
+            }).then((response) => {
+                console.log(response.data)
+                appendDBimage(response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+        
+
+
+        //上傳4張的input被change
         uploadImg.addEventListener('change', function () {
             console.log(uploadImg.files);
             readImg(uploadImg);
         })
         uploadImgBtn.addEventListener('click', CloudinaryUpload);
 
-        var previewContainer = document.querySelector('.preview-img');
-        var imgBox = document.getElementById('img-box');
+        
 
         function readImg(img) {
             //console.log(img.files.length);
             if (img.files && img.files.length > 0) {
-                if (img.files.length > 4) {
-                    alert("飯店圖片最多上傳4張喔")
+                if (img.files.length > maxFileLength) {
+                    alert("飯店圖片最多上傳"+maxFileLength +"張喔")
                     return;
                 }
                 //每次進來都清空formData
@@ -242,13 +304,15 @@
 
             //更新FileList
             var newFileList = new DataTransfer();
-            for (i = 0; i < uploadImg.files.length; i++) {
+            for (i = 0; i < maxFileLength; i++) {
                 if (i == index) {
+
                     newFileList.items.add(img.files[0])
                 }
-                else {
+                else if (uploadImg.files[i]!=null) {
                     newFileList.items.add(uploadImg.files[i])
                 }
+                debugger;
             }
             uploadImg.files = newFileList.files;
             readImg(uploadImg);
@@ -256,7 +320,7 @@
 
         function DeleteFile(deleteIndex) {
             var newFileList = new DataTransfer();
-            for (i = 0; i < 4; i++) {
+            for (i = 0; i < maxFileLength; i++) {
                 if (i != deleteIndex && i < uploadImg.files.length) {
                     newFileList.items.add(uploadImg.files[i])
                 }
@@ -269,6 +333,9 @@
         }
 
         function CloudinaryUpload() {
+            if (formData.values() == null) {
+                return;
+            }
             var shadowCover = document.querySelector(".shadow-cover");
             var uploadSpinner = document.querySelector(".uploading-box");
             var finishCheck = document.querySelector(".finish-box");

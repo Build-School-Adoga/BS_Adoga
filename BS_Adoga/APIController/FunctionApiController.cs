@@ -72,6 +72,13 @@ namespace BS_Adoga.APIController
             return Json("成功上傳圖片！");
         }
 
+        [AcceptVerbs("GET")]
+        public IHttpActionResult GetImageByID(string hotelID){
+
+            var images = _context.HotelImageUploads.Where(x => x.HotelID == hotelID).OrderBy(x => x.ImageID).Select(x=>x.ImageURL).AsEnumerable();
+            return Json(images);
+        }
+
         [AcceptVerbs("GET", "POST")]
         public IHttpActionResult EditRoomDetail(string RDID, decimal RoomDiscount, bool OpenRoom ,string username)
         {
