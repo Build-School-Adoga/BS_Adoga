@@ -446,7 +446,7 @@ namespace BS_Adoga.Controllers
         #endregion
 
         #region LineLogin
-        string redirect_uri = "https://localhost:44352/MemberLogin/callback";
+        string redirect_uri = "https://adoga.azurewebsites.net/MemberLogin/callback";
         string client_id = "1656167198";
         string client_secret = "ef98822259547db7297ecb9606b357b1";
 
@@ -456,7 +456,7 @@ namespace BS_Adoga.Controllers
             TempData["state"] = state;//利用TempData被取出資料後即消失的特性，來防禦CSRF攻擊
             string response_type = "code";
             string client_id = "1656167198";
-            string redirect_uri = HttpUtility.UrlEncode("https://localhost:44352/MemberLogin/callback");
+            string redirect_uri = HttpUtility.UrlEncode("https://adoga.azurewebsites.net/MemberLogin/callback");
             string LineLoginUrl = string.Format("https://access.line.me/oauth2/v2.1/authorize?response_type={0}&client_id={1}&redirect_uri={2}&state={3}&scope=profile%20openid%20email",
                 response_type,
                 client_id,
