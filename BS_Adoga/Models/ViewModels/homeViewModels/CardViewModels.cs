@@ -11,7 +11,8 @@ namespace BS_Adoga.Models.ViewModels.homeViewModels
         public string HotelID { get; set; }
         public string HotelName { get; set; }
         public string HotelCity { get; set; }
-
+        public string HotelAddress  { get; set; }
+        public string HotelEngName { get; set; }
         public int Star { get; set; }
         public virtual IEnumerable<Hotel> Hotels { get; set; }
         public virtual IEnumerable<Card> Cards { get; set; }

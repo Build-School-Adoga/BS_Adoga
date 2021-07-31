@@ -75,24 +75,39 @@ namespace BS_Adoga.Controllers
 
             if (ModelState.IsValid)
             {
-                //1.View Model(memberregisterviewmodel) --> Data Model (customer)
                 string firstname = HttpUtility.HtmlEncode(registerVM.MemberRegisterViewModel.FirstName);
                 string lastname = HttpUtility.HtmlEncode(registerVM.MemberRegisterViewModel.LastName);
                 string email = HttpUtility.HtmlEncode(registerVM.MemberRegisterViewModel.Email);
                 string password = HttpUtility.HtmlEncode(registerVM.MemberRegisterViewModel.Password);
+
+                var lnkHref = "<a href='" + Url.Action("MemberLogin", "MemberLogin", new { verify = email}, "https") + "'>Verify Your Account</a>";
+                Content("ok");
+                string subject = "Adoga Login - Verify Your Account";
+                string body = "Hi" + "<br/><br/>這是你的確認信" +
+                "<br/>" + lnkHref;
+
+
+                WebMail.Send(email, subject, body, null, null, null, true, null, null, null, null, null, null);
+                ViewBag.msg = "email ok";
+                //1.View Model(memberregisterviewmodel) --> Data Model (customer)
+
                 Customer cust = new Customer()
                 {
                     CustomerID = email,
                     FirstName = firstname,
                     LastName = lastname,
                     Email = email,
+                    VerifyEmail = false,
                     MD5HashPassword = HashService.MD5Hash(password),
                     Logging = "建立" + "," + firstname + lastname + "," + DateTime.Now.ToString(),
                     RegisterDatetime = DateTime.Now
+
                 };
                 //EF
                 try
                 {
+                    
+
                     _context.Customers.Add(cust);
                     _context.SaveChanges();
                     return Content("新增帳號成功");
@@ -129,6 +144,8 @@ namespace BS_Adoga.Controllers
 
             Customer user = _context.Customers.Where(x => x.Email == email && x.MD5HashPassword == password).FirstOrDefault();
 
+            
+
             //找不到則彈回Login頁
             if (user == null)
             {
@@ -136,7 +153,12 @@ namespace BS_Adoga.Controllers
 
                 return View(loginVM);
             }
+            if (user.VerifyEmail == false || user.VerifyEmail==null)
+            {
+                ModelState.AddModelError("NotFound", "未通過認證,請至電子信箱確認郵件");
 
+                return View(loginVM);
+            }
 
             //四.FormsAuthentication Class -- https://docs.microsoft.com/zh-tw/dotnet/api/system.web.security.formsauthentication?view=netframework-4.8
 
@@ -690,5 +712,31 @@ namespace BS_Adoga.Controllers
 
         }
         #endregion
+        public ActionResult VerifyEmail()
+        {
+            return View();
+        }
+        [HttpPost]
+        [MultiButton("Verify")]
+        [ValidateAntiForgeryToken]
+        public ActionResult VerifyEmail(string VerifyEmailValue, string abc)
+        {
+
+
+            Customer cust = new Customer();
+            cust.Email = VerifyEmailValue;
+          
+            AdogaContext db = new AdogaContext();
+
+            var data = db.Customers.Find(VerifyEmailValue);
+
+            data.VerifyEmail = true;
+
+            db.SaveChanges();
+
+
+            return RedirectToAction("HomePage", "Home");
+
+        }
     }
 }

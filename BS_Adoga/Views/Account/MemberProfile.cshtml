@@ -31,44 +31,57 @@
             </div>
 
             <div class="name-edit-component component-wrap">
+                @using (Html.BeginForm("MemberProfileName", "Account"))
+                {
                 <div class="mb-3">
+                    <input type="hidden" name="Email" value="@Model.Email" />
                     <label for="passport-english-first_name" class="form-label">護照英文名</label>
                     <input type="text" class="form-control" id="passport-english-first_name" placeholder="FirstName"
-                           value="@Model.FirstName" />
+                           value="@Model.FirstName" name="InputFirstName" />
                 </div>
-                <div class="mb-3">
-                    <label for="passport-english-last_name" class="form-label">護照英文姓</label>
-                    <input type="text" class="form-control" id="passport-english-last_name" placeholder="LastName"
-                           value="@Model.LastName" />
+                    <div class="mb-3">
+                        <label for="passport-english-last_name" class="form-label">護照英文姓</label>
+                        <input type="text" class="form-control" id="passport-english-last_name" placeholder="LastName"
+                               value="@Model.LastName" name="InputLastName" />
+                    </div>
+
+                    <div>
+                        <button id="cancel-name-edit-btn" type="button" class="btn cancel-edit-btn" data-bs-dismiss="modal">
+                            取消
+                        </button>
+                        <button id="save-name-edit-btn" type="submit" class="btn save-edit-btn">
+                            儲存
+                        </button>
+                    </div>
+                }
                 </div>
-                <div>
-                    <button id="cancel-name-edit-btn" type="button" class="btn cancel-edit-btn" data-bs-dismiss="modal">
-                        取消
-                    </button>
-                    <button id="save-name-edit-btn" type="submit" class="btn save-edit-btn">
-                        儲存
-                    </button>
-                </div>
-            </div>
         </section>
         <section class="email-component m-3">
             <div class="email-component component-wrap">
                 <div class="email-component-display-email">
                     <h4 class="gray-bold-text">電子郵件</h4>
-                    <div class="email-not-verify-component">
+                    <div class="email-not-verify-component d-none">
                         <i class="fas fa-exclamation-triangle"></i>
                         <span>你的電子信箱尚未完成驗證。</span>
                         <span id="verify-email">點此驗證電子信箱</span>
                     </div>
                     <p class="display-email-value">
-                        @Model.Email
-                        <span class="email-verify-badge">已通過驗證</span>
+
                     </p>
+                    @Model.Email
+                    @if (Model.VerifyEmail == false)
+                    {
+                        <span class="email-verify-badge">未通過驗證</span>
+                    }
+                    else
+                    {
+                        <span class="email-verify-badge">已通過驗證</span>
+                    }
                 </div>
             </div>
             <!-- <div class="email-component-verify">
-              <span class="badge bg-info text-dark">已通過驗證</span>
-            </div> -->
+      <span class="badge bg-info text-dark">已通過驗證</span>
+    </div> -->
             <div class="verify-email-component component-wrap">
                 <div class="robot-error mb-4">
                     <p class="mb-0"> 請完成「我不是機器人」驗證程序</p>
@@ -103,9 +116,12 @@
             </div>
 
             <div class="phone-edit-component component-wrap">
+                @using (Html.BeginForm("MemberProfilePhone", "Account"))
+                {
                 <div class="mb-3">
-                    <label for="phone-number-by-country" class="form-label">國家/地區代碼</label>
-                    <select id="phone-number-by-country" class="form-select" aria-label="country-number-select">
+                    <input type="hidden" name="Email" value="@Model.Email" />
+                    @*<label for="phone-number-by-country" class="form-label">國家/地區代碼</label>*@
+                    @*<select id="phone-number-by-country" class="form-select" aria-label="country-number-select">
                         <option selected>請選擇國家/地區電話代碼（例如：台灣+886)</option>
                         <option value="975">不丹 (+975)</option>
                         <option value="86">中國 (+86)</option>
@@ -352,22 +368,23 @@
                         <option value="692">馬紹爾群島 (+692)</option>
                         <option value="261">馬達加斯加 (+261)</option>
                         <option value="961">黎巴嫩 (+961)</option>
-                    </select>
+                    </select>*@
                 </div>
-                <div class="mb-3">
-                    <label for="telphonenumber" class="form-label">電話號碼</label>
-                    <input type="tel" class="form-control" id="telphonenumber" placeholder="電話號碼" value="@Model.PhoneNumber" />
-                </div>
+                    <div class="mb-3">
+                        <label for="telphonenumber" class="form-label">電話號碼</label>
+                        <input type="tel" class="form-control" id="telphonenumber" placeholder="電話號碼" value="@Model.PhoneNumber"name="PhoneNumber" />
+                    </div>
 
-                <div>
-                    <button id="cancel-phone-btn" type="button" class="btn cancel-edit-btn" data-bs-dismiss="modal">
-                        取消
-                    </button>
-                    <button id="save-phone-btn" type="submit" class="btn save-edit-btn">
-                        儲存
-                    </button>
+                    <div>
+                        <button id="cancel-phone-btn" type="button" class="btn cancel-edit-btn" data-bs-dismiss="modal">
+                            取消
+                        </button>
+                        <button id="save-phone-btn" type="submit" class="btn save-edit-btn">
+                            儲存
+                        </button>
+                    </div>
+                }
                 </div>
-            </div>
         </section>
 
         <section class="password-component m-3 ">

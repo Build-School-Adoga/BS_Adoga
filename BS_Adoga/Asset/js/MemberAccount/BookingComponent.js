@@ -1,9 +1,9 @@
 ﻿export default {
     props: {
-        order: ['order'],
+        order: ['order']
     },
     template:
-        `<div class="booking-item">
+        `<div class="booking-item" >
             <div class="side-info">
                 <div class="time-place-item">
                     <span class="time me-2"><i class="far fa-circle me-2"></i>{{order.FewDaysAgo}}天前</span>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="footer">
                         <div class="link-group">
-                            <a href="">留下住宿評鑑</a>
+                            <a v-if="order.PayStatus && order.CheckCheckOut < 1" data-bs-toggle="modal" data-bs-target="#large" @click="order.Evaluation">留下住宿評鑑</a>
                             <a href="">訂別間</a>
                             <a v-if="order.PayStatus==false && order.In24Hours" @click="order.ContinuePay">立即付款</a>
                         </div>
