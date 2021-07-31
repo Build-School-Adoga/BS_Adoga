@@ -480,6 +480,9 @@
     <Content Include="Asset\images\img5.png" />
     <Content Include="Asset\images\img6.png" />
     <Content Include="Asset\images\KAYAK.png" />
+    <Content Include="Asset\images\MemberLogin\btn_base.png" />
+    <Content Include="Asset\images\MemberLogin\f_logo_RGB-Blue_58.png" />
+    <Content Include="Asset\images\MemberLogin\google_PNG19635.png" />
     <Content Include="Asset\images\OpenTable.png" />
     <Content Include="Asset\images\priceline.png" />
     <Content Include="Asset\images\Rentalcars.png" />
@@ -2501,7 +2504,6 @@
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />
-    <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Views\DetailApi\" />
   </ItemGroup>
