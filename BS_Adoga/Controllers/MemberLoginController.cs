@@ -81,7 +81,6 @@ namespace BS_Adoga.Controllers
                 string password = HttpUtility.HtmlEncode(registerVM.MemberRegisterViewModel.Password);
 
                 var lnkHref = "<a href='" + Url.Action("MemberLogin", "MemberLogin", new { verify = email}, "https") + "'>Verify Your Account</a>";
-                Content("ok");
                 string subject = "Adoga Login - Verify Your Account";
                 string body = "Hi" + "<br/><br/>這是你的確認信" +
                 "<br/>" + lnkHref;
@@ -110,11 +109,14 @@ namespace BS_Adoga.Controllers
 
                     _context.Customers.Add(cust);
                     _context.SaveChanges();
-                    return Content("新增帳號成功");
+                    TempData["NewAccount"] = "帳號新增成功,請至信箱收取驗證信以完成驗證";
+                    return RedirectToAction("MemberLogin", "MemberLogin");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    return Content("新增帳號失敗:" + ex.ToString());
+                    TempData["Account"] = "此帳號已經有人使用,請重新輸入新的帳號";
+                    return RedirectToAction("MemberLogin", "MemberLogin");
+                    
                 }
             }
 
@@ -295,7 +297,7 @@ namespace BS_Adoga.Controllers
                         Response.Cookies.Add(cookie);
                         transaction.Commit();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //result.IsSuccessful = false;
                         //result.Exception = ex;
@@ -404,7 +406,7 @@ namespace BS_Adoga.Controllers
                             Response.Cookies.Add(cookie);
                             transaction.Commit();
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             //result.IsSuccessful = false;
                             //result.Exception = ex;
@@ -617,7 +619,7 @@ namespace BS_Adoga.Controllers
                             Response.Cookies.Add(cookie);
                             transaction.Commit();
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             //result.IsSuccessful = false;
                             //result.Exception = ex;
@@ -705,7 +707,7 @@ namespace BS_Adoga.Controllers
             cust.Email = email;
             cust.MD5HashPassword = HashService.MD5Hash(FirstPassword);
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(email = email);
+            var data = db.Customers.Find(email);
             data.MD5HashPassword = HashService.MD5Hash(FirstPassword);
             db.SaveChanges();
             return RedirectToAction("HomePage", "Home");
