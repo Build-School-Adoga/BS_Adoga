@@ -6,6 +6,21 @@
 
     HotelVM hotel = Model.hotelVM;
     IEnumerable<RoomTypeVM> rooms = Model.roomTypeVM;
+    string[] imagesURL = new string[4];
+    if (Model.HotelImages.Count() != 0)
+    {
+        for (int i = 0; i < Model.HotelImages.Count(); i++)
+        {
+            imagesURL[i] = Model.HotelImages.Where((x, index) => index == i).First().ImageURL;
+        }
+    }
+    else
+    {
+        imagesURL[0] = "~/Asset/images/HotelDetail/Hotel/hotel01.jpg";
+        imagesURL[1] = "~/Asset/images/HotelDetail/Room/room01.jpg";
+        imagesURL[2] = "~/Asset/images/HotelDetail/Hotel/hotel02.jpg";
+        imagesURL[3] = "~/Asset/images/HotelDetail/Room/room02.jpg";
+    }
 }
 
 @section topCSS{
@@ -26,10 +41,10 @@
                 <div class="search-bar">
                     <div class="nav-item" id="choose-city">
                         @*<i class="fas fa-search"></i>
-                        <div class="choose-info city-info">
-                            <p id="city-name">台南市</p>
-                            <p id="place-left">794間住宿還有空房</p>
-                        </div>*@
+                            <div class="choose-info city-info">
+                                <p id="city-name">台南市</p>
+                                <p id="place-left">794間住宿還有空房</p>
+                            </div>*@
 
                         <el-select style="color: #666;" id="inputGroupSelect" v-model="Value"
                                    placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable name="search">
@@ -165,26 +180,26 @@
         <div class="media-group row d-flex ">
             <div class="hotel-video col-7 gx-2">
                 <div class="img-wrap">
-                    <img alt="" src="~/Asset/images/HotelDetail/Hotel/hotel01.jpg">
+                    <img alt="" src=@imagesURL[0]>
                     <div class="show-shadow"></div>
                 </div>
                 <!-- <img src="https://picsum.photos/505/366/?random=1" alt=""> -->
             </div>
             <div class="pic-group col-5 gx-0">
                 <div class="img-wrap">
-                    <img class="medium-pic" src="~/Asset/images/HotelDetail/Room/room01.jpg">
+                    <img class="medium-pic" src=@imagesURL[1]>
                     <div class="show-shadow"></div>
                     <a class="add-fav-button"><i class="fas fa-heart"></i></a>
                 </div>
                 <!-- <img class="medium-pic" src="https://picsum.photos/360/226/?random=2"> -->
                 <div class="two-pic d-flex mt-1">
                     <div class="img-wrap me-1">
-                        <img class="" src="~/Asset/images/HotelDetail/Hotel/hotel02.jpg">
+                        <img class="" src=@imagesURL[2]>
                         <div class="show-shadow"></div>
                     </div>
                     <!-- <img class="me-1" src="https://picsum.photos/180/131/?random=3"> -->
                     <div class="img-wrap">
-                        <img class="" src="~/Asset/images/HotelDetail/Room/room02.jpg">
+                        <img class="" src=@imagesURL[3]>
                         <div class="show-shadow">
                             @*@Html.ActionLink("【完整相簿】共12張", "DetailAlbum", null,new { @class= "album-link fz-14" })*@
                             <a href="#" class="album-link fz-14">【完整相簿】共12張</a>
@@ -301,7 +316,7 @@
             <p>我們現有 @Model.roomTypeVM.Count() 種房型@*，共26個訂房專案*@：</p>
             <span>價格未包含稅金和附加費用</span>
         </div>
-        <div id="room-group" class="wrap-1100">            
+        <div id="room-group" class="wrap-1100">
             <room-type v-for="room in group" v-bind:room="room"></room-type>
             <div v-if="group.length==0" class="no-room-type mb-4">
                 <i class="fas fa-home"></i>
