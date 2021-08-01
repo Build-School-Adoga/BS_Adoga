@@ -195,30 +195,36 @@ namespace BS_Adoga.Controllers
 
 
             AdogaContext db = new AdogaContext();
-            MessageBoard message = new MessageBoard()
-            {
-                OrderID = orderid,
-                HotelID = getId.HotelID,
-                CustomerID = user_id,
-                Title = Title,
-                MessageDate = DateTime.Now,
-                MessageText = MessageText,
-                Score = ScoreRange
-            };
+            var selOrderId = db.MessageBoards.Any(x => x.OrderID == orderid);
 
-            db.MessageBoards.Add(message);
-            db.SaveChanges();
+            if (selOrderId)
+            {
+                TempData["message"] = "已經評論過";
+                return RedirectToAction("MemberBooking");
+            }
+            else
+            {
+                MessageBoard message = new MessageBoard()
+                {
+                    OrderID = orderid,
+                    HotelID = getId.HotelID,
+                    CustomerID = user_id,
+                    Title = Title,
+                    MessageDate = DateTime.Now,
+                    MessageText = MessageText,
+                    Score = ScoreRange
+                };
+
+                db.MessageBoards.Add(message);
+                db.SaveChanges();
+            }
 
             return RedirectToAction("MemberBooking");
         }
-        public ActionResult BookingReview()
-        {
-            ViewBag.MemberCurrentPage = "bookingReview";
-            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
-            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
-            string user_id = UserCookie.Id;
 
-            return View(_memberacoountrepository.GetBookingDESC(user_id));
+        public ActionResult EvaluationPage()
+        {
+            return View();
         }
     }
 }

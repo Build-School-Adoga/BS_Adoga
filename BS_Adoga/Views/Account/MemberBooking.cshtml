@@ -68,50 +68,57 @@
             </div>
         </div>
     </div>
-    @using (Html.BeginForm("Evaluation", "Account", FormMethod.Post))
+
+    @using (Html.BeginForm("Evaluation", "Account", FormMethod.Post, htmlAttributes: new { Id = "myform" }))
     {
-<div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">住宿評鑑</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <input type="text" id="modalID" name="orderID" v-model="orderID" hidden>
-                <!--評分Bar-->
-                <div class="row form-group p-3">
-                    <span class="mb-1">評分:</span>
-                    <div>
-                        <span id="score">0</span>/<span>10</span>
+        <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">住宿評鑑</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div>
-                        <input type="range" class="w-75" min="0" max="10" step="0.1" id="scoreRange" name="ScoreRange">
+                    <div class="modal-body">
+                        <input type="text" id="modalID" name="orderID" v-model="orderID" hidden>
+                        <!--評分Bar-->
+                        <div class="row form-group p-3">
+                            <span class="mb-1">評分:</span>
+                            <div>
+                                <span id="score">0</span>/<span>10</span>
+                            </div>
+                            <div>
+                                <input type="range" class="w-75" min="0" max="10" step="0.1" id="scoreRange" name="ScoreRange">
+                            </div>
+                        </div>
+                        <!--標題-->
+                        <div class="form-group p-3">
+                            <label for="exampleInputEmail1" class="form-label">標題:</label>
+                            <input type="text" class="form-control" aria-describedby="title" name="Title">
+                        </div>
+                        <!--輸入空間-->
+                        <div class="form-group form-label-group p-3">
+                            <span>寫下您的評論:</span>
+                            <textarea class="form-control mt-2" id="text_txt1" rows="7" placeholder="Suggestion"
+                                      maxlength="100" , name="MessageText"></textarea>
+                            <span id="num_txt1" class="d-flex justify-content-end"><br />100 / 100</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary ml-1">送出</button>
                     </div>
                 </div>
-                <!--標題-->
-                <div class="form-group p-3">
-                    <label for="exampleInputEmail1" class="form-label">標題:</label>
-                    <input type="text" class="form-control" aria-describedby="title" name="Title">
-                </div>
-                <!--輸入空間-->
-                <div class="form-group form-label-group p-3">
-                    <span>寫下您的評論:</span>
-                    <textarea class="form-control mt-2" id="text_txt1" rows="5" placeholder="Suggestion"
-                              maxlength="100" , name="MessageText"></textarea>
-                    <span id="num_txt1">100 / 100</span>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="submit" class="btn btn-primary ml-1">送出</button>
             </div>
         </div>
-    </div>
-</div>}
-
-
-
+    }
+    @if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode(TempData["message"]));
+        alert(message);
+        </script>
+    }
 
     @*@foreach (var item in Model)
         {
@@ -121,13 +128,37 @@
 
     @*@Html.Partial("~/Views/Account/_BookingPartial.cshtml")*@
 
+    @if (Model.Count() == 0)
+    {
+        <div class="no-booking-panel mt-5">
+            <img id="no-booking_img" src="https://cdn6.agoda.net/images/MMB-3149/illustration-empty.png">
 
-
+            <div class="no-booking-content">
+                <p class="big-text">您目前沒有即將到來的預訂。</p>
+                <p>
+                    想要查看
+                    <a href="" id="checked_out">已完成</a>
+                    或
+                    <a href="" id="cancelled">已取消</a>
+                    的訂單嗎?
+                </p>
+            </div>
+        </div>
+    }
 </div>
+
+
+<style>
+    .errors {
+        color: red
+    }
+</style>
+
 @section endJS{
     <!-- axios 的引用 -->
     <script src="~/Scripts/axios.min.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
     <!--Vue在Layout已有引用-->
     <!--評價留言-->
     <script>
@@ -153,6 +184,28 @@
                     $('#num_txt1').html('0 / 100');
                     $('#text_txt1').val($('#text_txt1').val().substring(0,
                         100)); //這裡意思是當裡面的文字小於等於0的時候，那麼字數不能再增加，只能是600個字
+                }
+            });
+        })
+
+        $(document).ready(function () {
+            $('#myform').validate({
+                errorClass: 'errors',
+                rules: {
+                    Title: {
+                        required: true
+                    },
+                    MessageText: {
+                        required: true
+                    }
+                },
+                messages: {
+                    Title: {
+                        required: "請輸入標題"
+                    },
+                    MessageText: {
+                        required: "請輸入評論"
+                    }
                 }
             });
         })
