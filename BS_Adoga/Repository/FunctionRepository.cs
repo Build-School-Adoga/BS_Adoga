@@ -222,11 +222,11 @@ namespace BS_Adoga.Repository
 
 
         /// <summary>
-        /// 顯示該飯店有的所有訂單
+        /// 顯示所有飯店未入住訂單 BY 員工編號
         /// </summary>
-        /// <param name="hotelid"></param>
+        /// <param name="EmpID"></param>
         /// <returns></returns>
-        public IEnumerable<OrderViewModel> GetOrderNotCheckIn(string hotelid)
+        public IEnumerable<OrderViewModel> GetOrderNotCheckIn(string EmpID)
         {
             string Today = DateTime.Now.ToString("yyyy/MM/dd");
             DateTime TodayObject = Convert.ToDateTime(Today);
@@ -234,7 +234,83 @@ namespace BS_Adoga.Repository
             var table = from o in _context.Orders
                         join r in _context.Rooms on o.RoomID equals r.RoomID
                         join h in _context.Hotels on r.HotelID equals h.HotelID
-                        where r.HotelID == hotelid && o.CheckInDate >= TodayObject
+                        join EmpMapHotel in _context.HotelEmpMappingHotels on h.HotelID equals EmpMapHotel.HotelID
+                        where EmpMapHotel.HotelEmployeeID == EmpID && o.CheckInDate >= TodayObject
+                        orderby o.RoomID ascending, o.CheckInDate ascending
+                        select new OrderViewModel
+                        {
+                            OrderID = o.OrderID,
+                            CustomerID = o.CustomerID,
+                            RoomID = o.RoomID,
+                            RoomName = r.RoomName,
+                            OrderDate = o.OrderDate,
+                            CheckInDate = o.CheckInDate,
+                            CheckOutDate = o.CheckOutDate,
+                            RoomCount = o.RoomCount,
+                            RoomPriceTotal = o.RoomPriceTotal,
+                            FirstName = o.FirstName,
+                            LastName = o.LastName,
+                            Email = o.Email,
+                            PhoneNumber = o.PhoneNumber,
+                            Country = o.Country,
+                            SmokingPreference = o.SmokingPreference,
+                            BedPreference = o.BedPreference,
+                            ArrivingTime = o.ArrivingTime,
+                            PaymentStatus = o.PaymentStatus
+                        };
+            return table;
+        }
+
+        /// <summary>
+        /// 顯示所有飯店已入住訂單 BY 員工編號
+        /// </summary>
+        /// <param name="EmpID"></param>
+        /// <returns></returns>
+        public IEnumerable<OrderViewModel> GetOrderCheckIn(string EmpID)
+        {
+            string Today = DateTime.Now.ToString("yyyy/MM/dd");
+            DateTime TodayObject = Convert.ToDateTime(Today);
+
+            var table = from o in _context.Orders
+                        join r in _context.Rooms on o.RoomID equals r.RoomID
+                        join h in _context.Hotels on r.HotelID equals h.HotelID
+                        join EmpMapHotel in _context.HotelEmpMappingHotels on h.HotelID equals EmpMapHotel.HotelID
+                        where EmpMapHotel.HotelEmployeeID == EmpID && o.CheckInDate < TodayObject
+                        orderby o.RoomID ascending, o.CheckInDate ascending
+                        select new OrderViewModel
+                        {
+                            OrderID = o.OrderID,
+                            CustomerID = o.CustomerID,
+                            RoomID = o.RoomID,
+                            RoomName = r.RoomName,
+                            OrderDate = o.OrderDate,
+                            CheckInDate = o.CheckInDate,
+                            CheckOutDate = o.CheckOutDate,
+                            RoomCount = o.RoomCount,
+                            RoomPriceTotal = o.RoomPriceTotal,
+                            FirstName = o.FirstName,
+                            LastName = o.LastName,
+                            Email = o.Email,
+                            PhoneNumber = o.PhoneNumber,
+                            Country = o.Country,
+                            SmokingPreference = o.SmokingPreference,
+                            BedPreference = o.BedPreference,
+                            ArrivingTime = o.ArrivingTime,
+                            PaymentStatus = o.PaymentStatus
+                        };
+            return table;
+        }
+
+        public IEnumerable<OrderViewModel> GetOrderNotPay(string EmpID)
+        {
+            string Today = DateTime.Now.ToString("yyyy/MM/dd");
+            DateTime TodayObject = Convert.ToDateTime(Today);
+
+            var table = from o in _context.Orders
+                        join r in _context.Rooms on o.RoomID equals r.RoomID
+                        join h in _context.Hotels on r.HotelID equals h.HotelID
+                        join EmpMapHotel in _context.HotelEmpMappingHotels on h.HotelID equals EmpMapHotel.HotelID
+                        where EmpMapHotel.HotelEmployeeID == EmpID && o.CheckInDate >= TodayObject && o.PaymentStatus == false
                         orderby o.RoomID ascending, o.CheckInDate ascending
                         select new OrderViewModel
                         {

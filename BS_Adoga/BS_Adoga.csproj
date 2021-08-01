@@ -486,6 +486,7 @@
     <Content Include="Asset\images\Rentalcars.png" />
     <Content Include="Asset\images\tw.svg.png" />
     <Content Include="Asset\JS\formStep.js" />
+    <Content Include="Asset\JS\Function\CardOrderComponent.js" />
     <Content Include="Asset\JS\helpers.js" />
     <Content Include="Asset\JS\home.js" />
     <Content Include="Asset\JS\HotelDetail\HotelFacility.js" />
