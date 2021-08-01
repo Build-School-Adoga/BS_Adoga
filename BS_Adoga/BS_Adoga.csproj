@@ -17,8 +17,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>
-    </Use64BitIISExpress>
+    <Use64BitIISExpress>true</Use64BitIISExpress>
     <IISExpressSSLPort>44352</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -2495,6 +2494,7 @@
     <Content Include="Views\Search\GetAllHotelInCity.cshtml" />
     <Content Include="Views\HotelDetail\upload.cshtml" />
     <Content Include="Views\Function\HotelImagePage.cshtml" />
+    <Content Include="Views\Account\BookingReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

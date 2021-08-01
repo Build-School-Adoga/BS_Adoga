@@ -211,5 +211,14 @@ namespace BS_Adoga.Controllers
 
             return RedirectToAction("MemberBooking");
         }
+        public ActionResult BookingReview()
+        {
+            ViewBag.MemberCurrentPage = "bookingReview";
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            return View(_memberacoountrepository.GetBookingDESC(user_id));
+        }
     }
 }
