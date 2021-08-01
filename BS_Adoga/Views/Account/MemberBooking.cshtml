@@ -70,9 +70,10 @@
         <booking-card v-for="order in group" v-bind:order="order"></booking-card>
     </div>
 
-    @using (Html.BeginForm("Evaluation", "Account", FormMethod.Post))
+    @using (Html.BeginForm("Evaluation", "Account", FormMethod.Post, htmlAttributes: new { Id = "myform" }))
     {
-        <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -99,9 +100,9 @@
                         <!--輸入空間-->
                         <div class="form-group form-label-group p-3">
                             <span>寫下您的評論:</span>
-                            <textarea class="form-control mt-2" id="text_txt1" rows="5" placeholder="Suggestion"
+                            <textarea class="form-control mt-2" id="text_txt1" rows="7" placeholder="Suggestion"
                                       maxlength="100" , name="MessageText"></textarea>
-                            <span id="num_txt1">100 / 100</span>
+                            <span id="num_txt1" class="d-flex justify-content-end"><br />100 / 100</span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -111,6 +112,13 @@
                 </div>
             </div>
         </div>
+    }
+    @if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode(TempData["message"]));
+        alert(message);
+        </script>
     }
 
     @*@foreach (var item in Model)
@@ -140,10 +148,18 @@
     }
 </div>
 
+
+<style>
+    .errors {
+        color: red
+    }
+</style>
+
 @section endJS{
     <!-- axios 的引用 -->
     <script src="~/Scripts/axios.min.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
     <!--Vue在Layout已有引用-->
     <!--評價留言-->
     <script>
@@ -169,6 +185,28 @@
                     $('#num_txt1').html('0 / 100');
                     $('#text_txt1').val($('#text_txt1').val().substring(0,
                         100)); //這裡意思是當裡面的文字小於等於0的時候，那麼字數不能再增加，只能是600個字
+                }
+            });
+        })
+
+        $(document).ready(function () {
+            $('#myform').validate({
+                errorClass: 'errors',
+                rules: {
+                    Title: {
+                        required: true
+                    },
+                    MessageText: {
+                        required: true
+                    }
+                },
+                messages: {
+                    Title: {
+                        required: "請輸入標題"
+                    },
+                    MessageText: {
+                        required: "請輸入評論"
+                    }
                 }
             });
         })

@@ -2494,6 +2494,7 @@
     <Content Include="Views\Search\GetAllHotelInCity.cshtml" />
     <Content Include="Views\HotelDetail\upload.cshtml" />
     <Content Include="Views\Function\HotelImagePage.cshtml" />
+    <Content Include="Views\Account\EvaluationPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
