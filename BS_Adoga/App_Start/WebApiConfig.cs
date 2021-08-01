@@ -68,6 +68,12 @@ namespace BS_Adoga
             );
 
             config.Routes.MapHttpRoute(
+                name: "GetOrderAllData",
+                routeTemplate: "api/Function/OrderAllData",
+                defaults: new { controller = "FunctionApi", action = "OrderAllDataBYEmpID", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

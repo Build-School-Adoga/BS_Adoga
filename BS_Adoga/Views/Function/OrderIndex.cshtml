@@ -1,0 +1,169 @@
+﻿@{
+    ViewBag.Title = "OrderIndex";
+    Layout = "~/Views/Shared/_FunctionPage.cshtml";
+
+    string userID = ViewBag.userID;
+}
+
+@section topCSS
+{
+    <link href="~/Asset/StartbootstrapAdminPages/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+}
+
+@section endJS
+{
+    <!-- Page level plugins -->
+    <script src="~/Asset/StartbootstrapAdminPages/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Asset/StartbootstrapAdminPages/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Asset/StartbootstrapAdminPages/js/demo/datatables-demo.js"></script>
+
+    <script>
+        let Orderjson = @Html.Raw(@ViewBag.OrderJSON);
+        //let Orderjson = "";
+        let userid = "@Html.Raw(userID)";
+
+        function OrderData() {
+            vm = new Vue(
+                {
+                    el: "#OrderVue",
+                    data: { items: Orderjson },
+                    methods: {
+
+                    }
+                }
+            );
+        }
+
+        function LoadOrderAllData() {
+            axios.get('../api/Function/OrderAllData', {
+                //URL参數放在params屬性裏面
+                params: {
+                    empid: userid
+                }
+            })
+                .then(function (response) {
+                    console.log(response.data);
+                    if (response.request.readyState === 4 && response.status === 200) {
+                        Orderjson = response.data;
+                        console.log(response.data);
+
+                        OrderData();
+                    }
+                    else { console.log("error"); }
+                }).catch((error) => console.log(error))
+        }
+
+        //document.getElementById('OrderAllData').addEventListener("click", function () {
+        //    LoadOrderAllData();
+        //});
+
+        //$(document).ready(function () {
+        //    //資料繫結
+        //    LoadOrderAllData();
+
+        //});
+
+        OrderData();
+    </script>
+
+}
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800"> 訂單清單</h1>
+            <p class="mb-4">
+                訂單
+            </p>
+            @*<button id="OrderAllData" class="btn btn-primary">所有訂單</button> | <button class="btn btn-info">未入住訂單</button> | <button class="btn btn-success">已入住訂單</button> | <button class="btn btn-danger">未付款訂單</button>*@
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <td>訂單編號</td>
+                                    <td>顧客編號</td>
+                                    <td>房型編號</td>
+                                    <td>房型名稱</td>
+                                    <td>訂單日期</td>
+                                    <td>入住日期</td>
+                                    <td>退房日期</td>
+                                    <td>訂房數</td>
+                                    <td>房間總價</td>
+                                    <td>名</td>
+                                    <td>姓</td>
+                                    <td>Email</td>
+                                    <td>手機號碼</td>
+                                    <td>國家</td>
+                                    <td>付款狀態</td>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <td>訂單編號</td>
+                                    <td>顧客編號</td>
+                                    <td>房型編號</td>
+                                    <td>房型名稱</td>
+                                    <td>訂單日期</td>
+                                    <td>入住日期</td>
+                                    <td>退房日期</td>
+                                    <td>訂房數</td>
+                                    <td>房間總價</td>
+                                    <td>名</td>
+                                    <td>姓</td>
+                                    <td>Email</td>
+                                    <td>手機號碼</td>
+                                    <td>國家</td>
+                                    <td>付款狀態</td>
+                                </tr>
+                            </tfoot>
+                            <tbody id="OrderVue">
+                                <tr v-for="item in items" v-cloak>
+                                    <td>{{item.OrderID}}</td>
+                                    <td>{{item.CustomerID}}</td>
+                                    <td>{{item.RoomID}}</td>
+                                    <td>{{item.RoomName}}</td>
+                                    <td>{{item.OrderDate}}</td>
+                                    <td>{{item.CheckInDate}}</td>
+                                    <td>{{item.CheckOutDate}}</td>
+                                    <td>{{item.RoomCount}}</td>
+                                    <td>{{item.RoomPriceTotal}}</td>
+                                    <td>{{item.FirstName}}</td>
+                                    <td>{{item.LastName}}</td>
+                                    <td>{{item.Email}}</td>
+                                    <td>{{item.PhoneNumber}}</td>
+                                    <td>{{item.Country}}</td>
+                                    <td v-if="item.PaymentStatus == true" class="text-success">已付款</td>
+                                    <td v-else class="text-danger">未付款</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+</div>
+<!-- End of Content Wrapper -->

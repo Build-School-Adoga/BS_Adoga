@@ -398,6 +398,7 @@ namespace BS_Adoga.Controllers
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
 
+            ViewBag.URL = $"/Hotel/Room/{_repository.GetHotelRoomCountByEmpID(user_id).FirstOrDefault().HotelID}";
             return View(_repository.GetHotelRoomCountByEmpID(user_id));
 
             //顯示所有Hotel跟房型數量
@@ -676,6 +677,53 @@ namespace BS_Adoga.Controllers
             var result = _service.GetHotelImageDataByUserId(user_id);
             return View(result);
         }
+
+        //顯示所有訂單 BY UserID
+        public ActionResult OrderIndex()
+        {
+
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            ViewBag.URL = $"";
+
+            List<OrderViewModel> OrderData = _repository.GetAllOrderByEmpID(user_id).ToList();
+            ViewBag.OrderJSON = JsonConvert.SerializeObject(OrderData);
+
+            ViewBag.userID = user_id;
+            return View();
+
+
+        }
+
+        //顯示Order頁面所有的飯店
+        public ActionResult OrderNotCheckInIndex()
+        {
+
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            ViewBag.URL = $"";
+
+            ViewBag.userID = user_id;
+            return View("HotelRoomIndex",_repository.GetHotelRoomCountByEmpID(user_id));
+
+
+        }
+
+        //顯示所有Hotel未入住的訂單
+        public ActionResult OrderNotCheckInData(string hotelid)
+        {
+            //ViewBag.URL = $"/Hotel/Room/{_repository.GetHotelRoomCountByEmpID(user_id).FirstOrDefault().HotelID}";
+            return View("HotelRoomIndex", _repository.GetOrderNotCheckIn(hotelid));
+
+            //顯示所有Hotel跟房型數量
+            //return View(_repository.GetHotelRoomCount());
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {
