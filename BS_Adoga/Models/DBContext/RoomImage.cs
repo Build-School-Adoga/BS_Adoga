@@ -22,7 +22,6 @@ namespace BS_Adoga.Models.DBContext
         public string RoomID { get; set; }
 
         [Required]
-        [StringLength(50)]
         public string ImageURL { get; set; }
 
         public virtual Room Room { get; set; }

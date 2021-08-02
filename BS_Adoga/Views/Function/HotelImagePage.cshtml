@@ -63,7 +63,7 @@
     <!--選擇圖片要上傳給哪個飯店-->
     <div class="input-group mb-3">
         <select class="custom-select" id="hotelOptionSelect">
-            <option selected>Choose Hotel</option>
+            <option value="none" selected>Choose Hotel</option>
             @foreach (var hotel in Model.HotelOptions)
             {
                 <option value="@hotel.HotelID">@hotel.HotelName</option>
@@ -145,8 +145,8 @@
         //記錄單張重新上傳圖片的index
         var reUpload_Index;
 
-         //傳給api的，裡面會存圖片的base64和檔名，真正要上傳去cloudinary時會用到
-        var formData;
+        //傳給api的，裡面會存圖片的base64和檔名，真正要上傳去cloudinary時會用到
+        var formData = new FormData();
 
         GetImageFromDB("@hotel_id");
         //當沒有任何一張圖片上傳，且換了飯店選項，就從資料庫撈圖片出來顯示
@@ -200,14 +200,13 @@
         uploadImgBtn.addEventListener('click', CloudinaryUpload);
 
         
-
         function readImg(img) {
-            //console.log(img.files.length);
+            if (img.files.length > maxFileLength) {
+                alert("飯店圖片最多上傳" + maxFileLength + "張喔")
+                return;
+            }
             if (img.files && img.files.length > 0) {
-                if (img.files.length > maxFileLength) {
-                    alert("飯店圖片最多上傳"+maxFileLength +"張喔")
-                    return;
-                }
+                
                 //每次進來都清空formData
                 formData = new FormData();
 
@@ -220,67 +219,71 @@
                 var uploadImgLabel = document.querySelector('.upload-img-label');
                 uploadImgLabel.innerText = img.files.length + '個檔案'
 
-                for (var index = 0; index < img.files.length; index++) {
-                    //console.log(img.files[index].name);
+                let promises = [];
+                for (let file of img.files) {
+                    //因為需要圖片按FileList的順序顯示在網頁，所以用Promise
+                    let filePromise = new Promise(resolve => {
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = () => resolve(reader.result);
+                        //額外提醒：reader.onload並不是跟for處於同一個迴圈，
+                        //它自己會跑另一個迴圈，假如我外層傳了5次檔案
+                        //它就會等外面傳完5次，然後onload跑5次
+                    });
+                    promises.push(filePromise);
+                }
+                Promise.all(promises).then(fileContents => {
+                    for (index = 0; index < fileContents.length; index++) {
+                        var fileName = img.files[index].name;
+                        var fileSize = img.files[index].size / 1024;
+                        var fileSizeStr = Math.round(fileSize * 100) / 100 + ' kb';
+                        if (fileSize >= 2000) {
+                            alert("圖片的檔案大小不可超過 2 MB ！");
+                        }
+                        else if (fileSize >= 1000) {
+                            fileSize = Math.round((fileSize / 1024) * 100,) / 100;
+                            fileSizeStr = fileSize + ' mb';
+                        }
 
-                    var fileName = img.files[index].name;
-                    var fileSize = img.files[index].size / 1024;
-                    var fileSizeStr = Math.round(fileSize * 100) / 100 + ' kb';
-                    if (fileSize >= 2000) {
-                        alert("圖片的檔案大小不可超過 2 MB ！");
-                    }
-                    else if (fileSize >= 1000) {
-                        fileSize = Math.round((fileSize / 1024) * 100,) / 100;
-                        fileSizeStr = fileSize + ' mb';
-                    }
+                        //#region 建立子物件
+                        var clone_imgBox = imgBox.content.cloneNode(true);
+                        var previewImgName = clone_imgBox.querySelector('.img-name');
+                        var previewImgSize = clone_imgBox.querySelector('.img-size');
+                        var cancelBtn = clone_imgBox.querySelector('.upload-cancel-btn');
+                        var reUpload_ImgBtn = clone_imgBox.querySelector('.re-upload-btn');
+                        var reUpload_Img = clone_imgBox.querySelector('.re-upload-input');
 
-                    //#region 建立子物件
-                    var clone_imgBox = imgBox.content.cloneNode(true);
-                    var previewImgName = clone_imgBox.querySelector('.img-name');
-                    var previewImgSize = clone_imgBox.querySelector('.img-size');
-                    var cancelBtn = clone_imgBox.querySelector('.upload-cancel-btn');
-                    var reUpload_ImgBtn = clone_imgBox.querySelector('.re-upload-btn');
-                    var reUpload_Img = clone_imgBox.querySelector('.re-upload-input');
+                        previewImgSize.innerText = "檔案大小： " + fileSizeStr;
+                        cancelBtn.setAttribute('data-index', index);
+                        cancelBtn.addEventListener('click', function (e) {
+                            DeleteFile(this.getAttribute('data-index'))
+                        })
+                        reUpload_ImgBtn.setAttribute('data-index', index);
+                        reUpload_ImgBtn.addEventListener('click', function (e) {
+                            reUpload_Index = this.getAttribute('data-index');
+                            reUpload_Img.click();
+                        })
+                        reUpload_Img.addEventListener('change', function () {
+                            ReUploadFile(reUpload_Index, reUpload_Img)
+                        })
 
-                    previewImgSize.innerText = "檔案大小： " + fileSizeStr;
-                    cancelBtn.setAttribute('data-index', index);
-                    cancelBtn.addEventListener('click', function (e) {
-                        DeleteFile(this.getAttribute('data-index'))
-                    })
-                    reUpload_ImgBtn.setAttribute('data-index', index);
-                    reUpload_ImgBtn.addEventListener('click', function (e) {
-                        reUpload_Index = this.getAttribute('data-index');
-                        reUpload_Img.click();
-                    })
-                    reUpload_Img.addEventListener('change', function () {
-                        ReUploadFile(reUpload_Index, reUpload_Img)
-                    })
-                    //#endregion
-                    previewContainer.appendChild(clone_imgBox);
+                        var showImg = document.getElementById('show-img-' + index);
+                        var previewImg = clone_imgBox.querySelector(".img-figure .img-wrap img");
 
-                    //publicId放這邊，不放在reader.onload裡面，因為reader.onload並不是跟for處於同一個迴圈，它自己會跑三次，
-                    //如果放reader.onload裡面，每個publicId會 = 最後截取出來的publicId，會變成每個都一樣的檔名。
-                    // var public_id = fileName.substring(0, fileName.lastIndexOf('.'));
-                    var public_id = hotelSelect.value + '_img' + (index + 1).toString().padStart(2, '0');
-                    formData.set(`${'PublicId' + index}`, public_id.toString());
-
-                    var i = 0;
-                    var reader = new FileReader();
-                    reader.readAsDataURL(img.files[index]);
-                    reader.onload = function (e) {
-                        // reader.onload並不跟for處於同一個迴圈，外層的for迴圈跑完，它自己才開始跑迴圈。
-
-                        var showImg = document.getElementById('show-img-' + i);
-                        var previewImg = document.querySelectorAll(".img-figure .img-wrap img")[i];
-
-                        previewImg.src = this.result;
-                        showImg.src = this.result;
+                        previewImg.src = fileContents[index];
+                        showImg.src = fileContents[index];
                         showImg.style.display = "block";
+                        //#endregion
 
-                        formData.set(`${'File' + i}`, this.result.toString());
-                        i++;
+                        //append物件在頁面上
+                        previewContainer.appendChild(clone_imgBox);
+
+                        //設定form-data（檔名和base64）
+                        var public_id = hotelSelect.value + '_img' + (index + 1).toString().padStart(2, '0');
+                        formData.set(`${'PublicId' + index}`, public_id.toString());
+                        formData.set(`${'File' + index}`, fileContents[index].toString());
                     }
-                };
+                });
             }
             else {
                 var uploadImgLabel = document.querySelector('.upload-img-label');
@@ -333,7 +336,12 @@
         }
 
         function CloudinaryUpload() {
-            if (formData.values() == null) {
+            if (formData.get('File0') == null) {
+                alert("目前沒有可上傳的圖片")
+                return;
+            }
+            if (hotelSelect.value == "none") {
+                alert("飯店選項不得為空，請重新選擇飯店。（該選項代表您要上傳的圖片是屬於哪個飯店）")
                 return;
             }
             var shadowCover = document.querySelector(".shadow-cover");
@@ -347,8 +355,12 @@
                 method: 'POST',
                 url: "../api/Function/UploadImage",
                 params: {
+                    type:"hotel",
+                    folderPath: "/Adoga/Hotel/" + hotelSelect.value,
                     userID: '@user_id',
-                    hotelID: hotelSelect.value
+                    hotelID: hotelSelect.value,
+                    roomID:""
+
                 },
                 data: formData,
                 headers: { 'Content-Type': 'multipart/form-data' },

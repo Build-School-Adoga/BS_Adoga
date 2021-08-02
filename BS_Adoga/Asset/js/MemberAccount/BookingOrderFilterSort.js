@@ -23,9 +23,6 @@ var filterBookingOrder = new Vue({
     watch: {
         filterOption() {
             console.log(`filter:${this.filterOption}`)
-            //console.log(BookingCard)
-            //console.log(BookingCard.pageNumber)
-            //BookingCard.startPage;
             this.filter_sort();
         },
         sortOption() {
@@ -71,8 +68,6 @@ var BookingList = new Vue({
     el: '#BookingList',
     data: {
         group: [],
-        //paginatedDataX: [],
-        //pageCountX:1,
         pageNumber: 0,
         size:3
     },
@@ -113,18 +108,7 @@ var BookingList = new Vue({
             console.log(response.data)
             console.log('success')
             appendBookingList(response.data);
-            //let l = this.group.length,
-            //    s = this.size;
-            //this.pageCountX = Math.floor(l / s);
-            //console.log(this.pageCountX)
-
-            //const start = this.pageNumber * this.size,
-            //    end = start + this.size;
-            //this.paginatedDataX = this.group.slice(start, end);
-            //console.log(this.paginatedDataX)
-        }).catch((error) => console.log(error))
-
-       
+        }).catch((error) => console.log(error))       
     },
     components: {
         'booking-card': BookingCard
@@ -155,7 +139,6 @@ function appendBookingList(response) {
                 bedTypeStr += bed.Name + "x" + bed.Amount
         })
         //console.log(item.OrderID)
-
         
         //開始給BookingList（Vue物件）的group塞資料&設定裡面的屬性
         BookingList.$set(BookingList.group, index,
@@ -192,14 +175,7 @@ function appendBookingList(response) {
 
                 ContinuePay: function () {
                     console.log(item.OrderID)
-                    //axios.get('https://localhost:44352/Account/RePayOrder', {
-                    //    params: {
-                    //        orderid: item.OrderID
-                    //    }
-                    //}).then(response => {
-                    //    console.log(response);
-                        window.location.href ='../Account/RePayOrder/'+item.OrderID
-                    //}).catch(error => console.log(error))
+                    window.location.href ='../Account/RePayOrder/'+item.OrderID
                 },
                 Evaluation: function () {
                     console.log(modalID.orderID);
