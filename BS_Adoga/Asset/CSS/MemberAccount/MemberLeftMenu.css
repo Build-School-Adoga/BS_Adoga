@@ -75,35 +75,61 @@ aside{
     .left-menu-component .profile-list i {
         font-size: 14px;
     }
-@media screen and (max-width:1400px) {
+
+/*BEAR:08/03新增 部分rwd*/
+
+@media screen and (max-width:900px ) {
+    /* 左側menu大區塊 */
     .left-menu-component {
-        padding-left: 3vw;
+        width: 100px;
+        padding-left: 0px;
+    }
+
+        .left-menu-component a {
+            width: 100px;
+            font-size: 0px;
+            padding: 12px 0px 12px 30px;
+        }
+}
+
+@media screen and (min-width:901px ) and (max-width:1200px ) {
+    /* 左側menu大區塊 */
+    .left-menu-component {
+        width: 200px;
+        padding-left: 0px;
+    }
+
+        .left-menu-component a {
+            width: 200px;
+            font-size: 16px;
+            padding: 12px 0px 12px 20px;
+        }
+}
+
+@media screen and (min-width:1201px ) and (max-width:1350px ) {
+    /* 左側menu大區塊 */
+    .left-menu-component {
+        width: 300px;
+        padding-left: 50px;
     }
 
         .left-menu-component a {
             width: 250px;
+            font-size: 16px;
+            padding: 12px 0px 12px 10px;
         }
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (min-width:1351px ) {
+    /* 左側menu大區塊 */
     .left-menu-component {
-        padding-left: 0vw;
+        width: 380px;
+        padding-left: 100px;
     }
 
         .left-menu-component a {
-            width:210px;
-            padding: 12px 20px 12px 10px;
+            width: 280px;
+            font-size: 16px;
+            padding: 12px 0px 12px 10px;
         }
 }
-
-@media screen and (max-width:1150px) {
-    .left-menu-component {
-        padding-left: 0vw;
-    }
-
-        .left-menu-component a {
-            width:unset;
-            padding: 12px 10px 12px 0px;
-        }
-}
-

@@ -24,7 +24,7 @@
             <h2>
                 Agoda-Navbar
                 <a href="http://adoga.azurewebsites.net/">
-                    <img src="~/Asset/images/adoga-logo-v2.png" alt="Adoga-Logo" title="Adoga-Logo-Homepage">
+                    <img src="~/Asset/images/Adoga_logo_color.png" alt="Adoga-Logo" title="Adoga-Logo-Homepage">
                 </a>
             </h2>
         </div>
@@ -61,9 +61,9 @@
                             <i class="far fa-calendar-check me-2"></i>
                             @Html.ActionLink("管理訂單", "MemberBooking", "Account", null, new { @class = "member-menu-link" })
                         </li>
-                        <li><i class="fas fa-inbox me-2"></i> 收件匣</li>
+                        @*<li><i class="fas fa-inbox me-2"></i> 收件匣</li>*@
                         <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
-                        @*<li><i class="far fa-star me-2"></i> 住宿評鑒</li>*@
+                        <li><i class="far fa-star me-2"></i> 住宿評鑒</li>
                         <li>
                             <i class="far fa-user me-2"></i>
                             @Html.ActionLink("個人資料", "MemberProfile", "Account", null, new { @class = "member-menu-link" })
@@ -100,11 +100,13 @@
         <aside class="left-menu-component pt-4">
             <ul>
                 <li>
-
                     <a id="booking" href="/Account/MemberBooking" class="booking "><i class="far fa-calendar-check"></i>管理訂單</a>
                 </li>
-                <li>
+                @*<li>
                     <a href="" class="inbox"><i class="fas fa-inbox"></i>收件匣</a>
+                </li>*@
+                <li>
+                    <a href="" class="inbox"><i class="fas fa-heart"></i>口袋清單</a>
                 </li>
                 <li>
                     <a href="" class="reviews"><i class="far fa-star"></i>住宿評鑑</a>
@@ -173,7 +175,7 @@
             Adoga.com隸屬於Build School 2021 春季班 第三組。
         </p>
         <div class="footer-logo py-4">
-            <img src="~/Asset/images/adoga-logo-v2.png" alt="adoga-logo-image">
+            <img src="~/Asset/images/Adoga_logo_white.png" alt="adoga-logo-image">
         </div>
         <span>&copy; 2021 BuildSchoolTeam3.All Right Reserved.</span>
     </footer>
