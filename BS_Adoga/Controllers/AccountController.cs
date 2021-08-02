@@ -224,7 +224,16 @@ namespace BS_Adoga.Controllers
 
         public ActionResult EvaluationPage()
         {
-            return View();
+            AdogaContext db = new AdogaContext();
+
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var test = _memberacoountrepository.GetEvaluationPage(user_id);
+            
+
+            return Json(test, JsonRequestBehavior.AllowGet);
         }
     }
 }

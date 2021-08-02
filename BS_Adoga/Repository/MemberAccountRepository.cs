@@ -167,5 +167,26 @@ namespace BS_Adoga.Repository
                          }).FirstOrDefault();
             return table;
         }
+
+        public IEnumerable<EvaluationPageViewModel> GetEvaluationPage(string customerID)
+        {
+
+            var table = (from m in _context.MessageBoards.AsEnumerable()
+                         where m.CustomerID == customerID
+                         select new EvaluationPageViewModel
+                         {
+                             OrderID = m.OrderID,
+                             HotelID = m.HotelID,
+                             CustomerID = m.CustomerID,
+                             Title = m.Title,
+                             MessageText = m.MessageText,
+                             MessageDate = m.MessageDate.ToString("yyyy年MM月dd日"),
+                             Score = m.Score
+
+                         });
+
+            return table;
+        }
+
     }
 }
