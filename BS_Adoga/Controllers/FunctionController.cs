@@ -677,6 +677,22 @@ namespace BS_Adoga.Controllers
             return View(result);
         }
 
+        [HttpGet]
+        public ActionResult RoomImagePage()
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var result = new RoomImageVM()
+            {
+                HotelEmployeeID = user_id,
+                HotelOptions = _service.GetHotelOptionByUserID(user_id)
+            };
+
+            return View(result);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

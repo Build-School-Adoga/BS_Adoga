@@ -34,7 +34,7 @@ namespace BS_Adoga.APIController
         }
 
         [AcceptVerbs("POST")]
-        public IHttpActionResult UploadImage(string userID,string hotelID)//string File,string PublicId
+        public IHttpActionResult UploadImage(string type, string folderPath,string userID,string hotelID,string roomID="")//string File,string PublicId
         {
             var req = HttpContext.Current.Request;
             if (req.HttpMethod == "OPTIONS")
@@ -59,18 +59,53 @@ namespace BS_Adoga.APIController
                 {
                     File = new FileDescription(file),
                     PublicId = publicId,
-                    Folder = "/Adoga/Hotel/"+hotelID,
+                    Folder = folderPath,//"/Adoga/Hotel/"+hotelID,
                     Overwrite = true,
                 };
                 var uploadResult = cloudinary.Upload(uploadParams);
                 //result[i] = uploadResult;
 
-                string imageID = hotelID + "_img" + (i+1).ToString().PadLeft(2, '0');
                 string imageURL = uploadResult.SecureUrl.ToString();
-                _service.HotelImageUpload_UpdataOrAdd(hotelID,imageID,imageURL);
+                if (type == "hotel")
+                {
+                    string imageID = hotelID + "_img" + (i + 1).ToString().PadLeft(2, '0');
+                    _service.HotelImageUpload_UpdateOrAdd(hotelID, imageID, imageURL);
+                }
+                else if(type == "room" && roomID != "")
+                {
+                    string imageID = roomID + "_img" + (i + 1).ToString().PadLeft(2, '0');
+                    _service.RoomImageUpload_UpdateOrAdd(hotelID, roomID,imageID, imageURL);
+                }
+                
             }
             return Json("成功上傳圖片！");
         }
+
+        [AcceptVerbs("GET")]
+        public IHttpActionResult GetImageByID(string hotelID)
+        {
+            var images = _context.HotelImageUploads.Where(x => x.HotelID == hotelID)
+                .OrderBy(x => x.ImageID)
+                .Select(x=>x.ImageURL)
+                .AsEnumerable();
+
+            return Json(images);
+        }
+
+        [AcceptVerbs("GET")]
+        public IHttpActionResult GetRoomOptionByID(string hotelID)
+        {
+            var rooms = _context.Rooms.Where(x => x.HotelID == hotelID)
+                .OrderBy(x => x.RoomID)
+                .Select(x => new {
+                    RoomID= x.RoomID , 
+                    RoomName = x.RoomName })
+                .AsEnumerable();
+
+            return Json(rooms);
+        }
+
+        
 
         [AcceptVerbs("GET", "POST")]
         public IHttpActionResult EditRoomDetail(string RDID, decimal RoomDiscount, bool OpenRoom ,string username)

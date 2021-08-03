@@ -54,6 +54,18 @@ namespace BS_Adoga
                 routeTemplate: "api/Function/UploadImage",
                 defaults: new { controller = "FunctionApi", action = "UploadImage", id = RouteParameter.Optional }
             );
+            
+            config.Routes.MapHttpRoute(
+                name: "GetImageByID",
+                routeTemplate: "api/Function/GetImageByID",
+                defaults: new { controller = "FunctionApi", action = "GetImageByID", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "GetRoomOptionByID",
+                routeTemplate: "api/Function/GetRoomOptionByID",
+                defaults: new { controller = "FunctionApi", action = "GetRoomOptionByID", id = RouteParameter.Optional }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "GetRoomDetailMonth",
