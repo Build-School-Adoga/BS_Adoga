@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "HotelRoomIndex";
     Layout = "~/Views/Shared/_FunctionPage.cshtml";
-    string URL = ViewBag.URL;
 }
 
 @section topCSS
@@ -49,10 +48,7 @@
                                     <th>@Html.DisplayNameFor(model => model.HotelID)</th>
                                     <th>@Html.DisplayNameFor(model => model.HotelName)</th>
                                     <th>@Html.DisplayNameFor(model => model.RoomCount)</th>
-                                    @if (URL.Contains(@"/Hotel/Room/"))
-                                    {
-                                        <th>建立房型</th>
-                                    }
+                                    <th>建立房型</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -60,16 +56,13 @@
                                     <th>@Html.DisplayNameFor(model => model.HotelID)</th>
                                     <th>@Html.DisplayNameFor(model => model.HotelName)</th>
                                     <th>@Html.DisplayNameFor(model => model.RoomCount)</th>
-                                    @if (URL.Contains(@"/Hotel/Room/"))
-                                    {
-                                        <th>建立房型</th>
-                                    }
+                                    <th>建立房型</th>
                                 </tr>
                             </tfoot>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr onclick="location.href = '@Html.Raw(URL)'">
+                                    <tr onclick="location.href = '/Hotel/Room/@item.HotelID'">
                                         <td>
                                             @Html.DisplayFor(modelItem => item.HotelID)
                                         </td>
@@ -85,19 +78,16 @@
                                                 @Html.ActionLink("詳細資料", "HotelLDetails", new { hotelid = item.HotelID }, htmlAttributes: new { @class = "btn btn-info" }) |
                                                 @Html.ActionLink("刪除", "Delete", new { hotelid = item.HotelID }, htmlAttributes: new { @class = "btn btn-danger" })
                                             </td>*@
-                                        @if (URL.Contains(@"/Hotel/Room/"))
-                                        {
-                                            <td>
-                                                @if (item.RoomCount == 0)
-                                                {
-                                                    @Html.ActionLink("新增房型", "HotelRoomCreate", new { hotelids = item.HotelID }, htmlAttributes: new { @class = "btn btn-danger" })
-                                                }
-                                                else
-                                                {
-                                                    @Html.ActionLink("新增房型", "HotelRoomCreate", new { hotelids = item.HotelID }, htmlAttributes: new { @class = "btn btn-primary" })
-                                                }
-                                            </td>
-                                        }
+                                        <td>
+                                            @if (item.RoomCount == 0)
+                                            {
+                                                @Html.ActionLink("新增房型", "HotelRoomCreate", new { hotelids = item.HotelID }, htmlAttributes: new { @class = "btn btn-danger" })
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("新增房型", "HotelRoomCreate", new { hotelids = item.HotelID }, htmlAttributes: new { @class = "btn btn-primary" })
+                                            }
+                                        </td>
                                     </tr>
                                 }
                             </tbody>

@@ -398,7 +398,7 @@ namespace BS_Adoga.Controllers
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
 
-            ViewBag.URL = $"/Hotel/Room/{_repository.GetHotelRoomCountByEmpID(user_id).FirstOrDefault().HotelID}";
+            //ViewBag.URL = $"/Hotel/Room/{_repository.GetHotelRoomCountByEmpID(user_id).FirstOrDefault().HotelID}";
             return View(_repository.GetHotelRoomCountByEmpID(user_id));
 
             //顯示所有Hotel跟房型數量
