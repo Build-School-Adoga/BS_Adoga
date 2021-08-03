@@ -6,6 +6,21 @@
 
     HotelVM hotel = Model.hotelVM;
     IEnumerable<RoomTypeVM> rooms = Model.roomTypeVM;
+    string[] imagesURL = new string[4];
+    if (Model.HotelImages.Count() != 0)
+    {
+        for (int i = 0; i < Model.HotelImages.Count(); i++)
+        {
+            imagesURL[i] = Model.HotelImages.Where((x, index) => index == i).First().ImageURL;
+        }
+    }
+    else
+    {
+        imagesURL[0] = "~/Asset/images/HotelDetail/Hotel/hotel01.jpg";
+        imagesURL[1] = "~/Asset/images/HotelDetail/Room/room01.jpg";
+        imagesURL[2] = "~/Asset/images/HotelDetail/Hotel/hotel02.jpg";
+        imagesURL[3] = "~/Asset/images/HotelDetail/Room/room02.jpg";
+    }
 }
 
 @section topCSS{
@@ -26,10 +41,10 @@
                 <div class="search-bar">
                     <div class="nav-item" id="choose-city">
                         @*<i class="fas fa-search"></i>
-                        <div class="choose-info city-info">
-                            <p id="city-name">台南市</p>
-                            <p id="place-left">794間住宿還有空房</p>
-                        </div>*@
+                            <div class="choose-info city-info">
+                                <p id="city-name">台南市</p>
+                                <p id="place-left">794間住宿還有空房</p>
+                            </div>*@
 
                         <el-select style="color: #666;" id="inputGroupSelect" v-model="Value"
                                    placeholder="&#xf002; 輸入城市、區域、景點或住宿名稱" filterable name="search">
@@ -165,26 +180,26 @@
         <div class="media-group row d-flex ">
             <div class="hotel-video col-7 gx-2">
                 <div class="img-wrap">
-                    <img alt="" src="~/Asset/images/HotelDetail/Hotel/hotel01.jpg">
+                    <img alt="" src=@imagesURL[0]>
                     <div class="show-shadow"></div>
                 </div>
                 <!-- <img src="https://picsum.photos/505/366/?random=1" alt=""> -->
             </div>
             <div class="pic-group col-5 gx-0">
                 <div class="img-wrap">
-                    <img class="medium-pic" src="~/Asset/images/HotelDetail/Room/room01.jpg">
+                    <img class="medium-pic" src=@imagesURL[1]>
                     <div class="show-shadow"></div>
                     <a class="add-fav-button"><i class="fas fa-heart"></i></a>
                 </div>
                 <!-- <img class="medium-pic" src="https://picsum.photos/360/226/?random=2"> -->
                 <div class="two-pic d-flex mt-1">
                     <div class="img-wrap me-1">
-                        <img class="" src="~/Asset/images/HotelDetail/Hotel/hotel02.jpg">
+                        <img class="" src=@imagesURL[2]>
                         <div class="show-shadow"></div>
                     </div>
                     <!-- <img class="me-1" src="https://picsum.photos/180/131/?random=3"> -->
                     <div class="img-wrap">
-                        <img class="" src="~/Asset/images/HotelDetail/Room/room02.jpg">
+                        <img class="" src=@imagesURL[3]>
                         <div class="show-shadow">
                             @*@Html.ActionLink("【完整相簿】共12張", "DetailAlbum", null,new { @class= "album-link fz-14" })*@
                             <a href="#" class="album-link fz-14">【完整相簿】共12張</a>
@@ -198,7 +213,7 @@
             <div class="card-body">
                 <span>免費Wi-Fi</span>
                 <h2>
-                    @hotel.HotelName ( @hotel.HotelEngName )@*<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>*@
+                    @hotel.HotelName @hotel.HotelEngName @*<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>*@
                     @for (int i = 1; i <= hotel.Star; i++)
                     {
                         <i class="fas fa-star"></i>
@@ -249,7 +264,7 @@
             <span>本站價格保證！</span>
         </div>
     </div>
-    <div class="popular-area row wrap-1100 mb-4">
+    @*<div class="popular-area row wrap-1100 mb-4">
         <div class="popular-service col-9 gx-0">
             <h4>人氣設施與服務</h4>
             <div class="d-flex">
@@ -268,7 +283,7 @@
             </div>
         </div>
 
-    </div>
+    </div>*@
     <div id="filter-room" class="filter-room mb-4">
         <div class="small-title d-flex justify-content-between mb-3">
             <h4><i class="fas fa-sliders-h me-2"></i>顯示特定房型</h4>
@@ -301,11 +316,12 @@
             <p>我們現有 @Model.roomTypeVM.Count() 種房型@*，共26個訂房專案*@：</p>
             <span>價格未包含稅金和附加費用</span>
         </div>
-        <div id="room-group" class="wrap-1100">            
+        <div id="room-group" class="wrap-1100">
             <room-type v-for="room in group" v-bind:room="room"></room-type>
             <div v-if="group.length==0" class="no-room-type mb-4">
                 <i class="fas fa-home"></i>
-                <p>沒有符合您篩選條件的房型，試試看其他篩選條件？</p>
+                <p v-if="isFiltered">沒有符合您條件的房型，試試看改變您的篩選條件？</p>
+                <p v-else>沒有符合您搜尋條件的房型 <br />（您可以試看更換入住、退房日期，或者更換入住人數）</p>
             </div>
         </div>
     </div>
@@ -322,7 +338,6 @@
         </div>
         <p class="col-5 mt-2">
             @hotel.HotelAbout
-
         </p>
     </div>
 </section>
@@ -331,8 +346,8 @@
         <div class="col-3 border-t-gray ">
             <h3 class="fz-20 color-dark-gray mt-3">服務設施</h3>
         </div>
-        <div class="col-9 border-t-gray gx-0">
-            <div class="serv-group d-flex my-4">
+        <div class="col-9 border-t-gray gx-0" id="facility-collapse">
+            @*<div class="serv-group d-flex my-4">
                 <i class="far fa-thumbs-up fz-big-icon color-dark-gray border-e-light-gray me-4"></i>
                 <div class="serv-row">
                     <h4 class="fz-16 fw-bold color-dark-gray">人氣設施與服務</h4>
@@ -344,13 +359,13 @@
 
                 </div>
             </div>
-            <div class="collapse" id="facility-collapse">
+            <div class="collapse" id="facility-collapse">*@
                 <facility-icon v-for="cat in categories" v-bind:cat="cat" :fac="cat.facilities"></facility-icon>
-            </div>
+            @*</div>
             <a class="collapse-control d-block fz-14 mt-4" data-bs-toggle="collapse" href="#facility-collapse"
                role="button" aria-expanded="false" aria-controls="facility-collapse">
                 <i class="fas fa-caret-up fz-16"></i>
-            </a>
+            </a>*@
         </div>
     </div>
     <div class="stay-rule wrap-1100 row pb-4">
@@ -491,7 +506,7 @@
     <div class="comment-group">
         <div class="comment-item wrap-1100 row pt-3 pb-5">
             <div class="rate-item col-3 fz-14 pt-3">
-                <!-- <span class="rate-num color-blue">10.0</span> -->
+                 <span class="rate-num color-blue">10.0</span> 
                 <div class="mb-1">
                     <i class="far fa-flag"></i><span class="fw-bold">Lin</span> <span>(來自台灣)</span>
                 </div>
@@ -513,7 +528,7 @@
         </div>
         <div class="comment-item wrap-1100 row pt-3 pb-5">
             <div class="rate-item col-3 fz-14 pt-3">
-                <!-- <span class="rate-num color-blue">9.6</span> -->
+                 <span class="rate-num color-blue">9.6</span> 
                 <div class="mb-1">
                     <i class="far fa-flag"></i><span class="fw-bold">Chen</span> <span>(來自台灣)</span>
                 </div>

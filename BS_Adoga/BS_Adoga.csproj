@@ -319,6 +319,8 @@
     <Compile Include="Models\ViewModels\Account\CommentViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\TestVM.cs" />
     <Compile Include="Models\ViewModels\HotelImagePage\HotelOption.cs" />
+    <Compile Include="Models\ViewModels\HotelImagePage\RoomImageVM.cs" />
+    <Compile Include="Models\ViewModels\HotelImagePage\RoomOption.cs" />
     <Compile Include="Models\ViewModels\HotelImagePage\ImagesVM.cs" />
     <Compile Include="Models\ViewModels\HotelImagePage\HotelImageVM.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\districts.cs" />
@@ -481,6 +483,9 @@
     <Content Include="Asset\images\img5.png" />
     <Content Include="Asset\images\img6.png" />
     <Content Include="Asset\images\KAYAK.png" />
+    <Content Include="Asset\images\MemberLogin\btn_base.png" />
+    <Content Include="Asset\images\MemberLogin\f_logo_RGB-Blue_58.png" />
+    <Content Include="Asset\images\MemberLogin\google_PNG19635.png" />
     <Content Include="Asset\images\OpenTable.png" />
     <Content Include="Asset\images\priceline.png" />
     <Content Include="Asset\images\Rentalcars.png" />
@@ -499,6 +504,7 @@
     <Content Include="Asset\JS\GoogleLogin.js" />
     <Content Include="Asset\JS\navbar.js" />
     <Content Include="Asset\JS\HotelDetail\RoomFilter.js" />
+    <Content Include="Asset\JS\RoomImagePage\RoomImagePage.js" />
     <Content Include="Asset\JS\Search\Search.js" />
     <Content Include="Asset\JS\Search\SearchFacilities.js" />
     <Content Include="Asset\JS\Search\SearchDataComponent.js" />
@@ -2498,13 +2504,13 @@
     <Content Include="Views\HotelDetail\upload.cshtml" />
     <Content Include="Views\Function\HotelImagePage.cshtml" />
     <Content Include="Views\Function\OrderIndex.cshtml" />
+    <Content Include="Views\Function\RoomImagePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />
-    <Folder Include="Asset\images\MemberLogin\" />
     <Folder Include="Asset\images\Search\" />
     <Folder Include="Views\DetailApi\" />
   </ItemGroup>

@@ -81,7 +81,6 @@ namespace BS_Adoga.Controllers
                 string password = HttpUtility.HtmlEncode(registerVM.MemberRegisterViewModel.Password);
 
                 var lnkHref = "<a href='" + Url.Action("MemberLogin", "MemberLogin", new { verify = email}, "https") + "'>Verify Your Account</a>";
-                Content("ok");
                 string subject = "Adoga Login - Verify Your Account";
                 string body = "Hi" + "<br/><br/>這是你的確認信" +
                 "<br/>" + lnkHref;
@@ -110,11 +109,14 @@ namespace BS_Adoga.Controllers
 
                     _context.Customers.Add(cust);
                     _context.SaveChanges();
-                    return Content("新增帳號成功");
+                    TempData["NewAccount"] = "帳號新增成功,請至信箱收取驗證信以完成驗證";
+                    return RedirectToAction("MemberLogin", "MemberLogin");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    return Content("新增帳號失敗:" + ex.ToString());
+                    TempData["Account"] = "此帳號已經有人使用,請重新輸入新的帳號";
+                    return RedirectToAction("MemberLogin", "MemberLogin");
+                    
                 }
             }
 
@@ -295,7 +297,7 @@ namespace BS_Adoga.Controllers
                         Response.Cookies.Add(cookie);
                         transaction.Commit();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //result.IsSuccessful = false;
                         //result.Exception = ex;
@@ -404,7 +406,7 @@ namespace BS_Adoga.Controllers
                             Response.Cookies.Add(cookie);
                             transaction.Commit();
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             //result.IsSuccessful = false;
                             //result.Exception = ex;
@@ -444,7 +446,7 @@ namespace BS_Adoga.Controllers
         #endregion
 
         #region LineLogin
-        string redirect_uri = "https://localhost:44352/MemberLogin/callback";
+        string redirect_uri = "https://adoga.azurewebsites.net/MemberLogin/callback";
         string client_id = "1656167198";
         string client_secret = "ef98822259547db7297ecb9606b357b1";
 
@@ -454,7 +456,7 @@ namespace BS_Adoga.Controllers
             TempData["state"] = state;//利用TempData被取出資料後即消失的特性，來防禦CSRF攻擊
             string response_type = "code";
             string client_id = "1656167198";
-            string redirect_uri = HttpUtility.UrlEncode("https://localhost:44352/MemberLogin/callback");
+            string redirect_uri = HttpUtility.UrlEncode("https://adoga.azurewebsites.net/MemberLogin/callback");
             string LineLoginUrl = string.Format("https://access.line.me/oauth2/v2.1/authorize?response_type={0}&client_id={1}&redirect_uri={2}&state={3}&scope=profile%20openid%20email",
                 response_type,
                 client_id,
@@ -617,7 +619,7 @@ namespace BS_Adoga.Controllers
                             Response.Cookies.Add(cookie);
                             transaction.Commit();
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             //result.IsSuccessful = false;
                             //result.Exception = ex;
@@ -705,7 +707,7 @@ namespace BS_Adoga.Controllers
             cust.Email = email;
             cust.MD5HashPassword = HashService.MD5Hash(FirstPassword);
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(email = email);
+            var data = db.Customers.Find(email);
             data.MD5HashPassword = HashService.MD5Hash(FirstPassword);
             db.SaveChanges();
             return RedirectToAction("HomePage", "Home");

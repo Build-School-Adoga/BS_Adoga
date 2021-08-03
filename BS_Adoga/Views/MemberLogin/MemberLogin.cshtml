@@ -19,6 +19,7 @@
             <p id="emailHelp-card" class="form-text fw-normal fz-16">
                 為了保障你的個資安全，請先登入才能查看個人資訊
             </p>
+
         </div>
 
         <!-- modal內部控制 -->
@@ -412,13 +413,12 @@
                                            for="EmailRegisterCheck">我想要收到Adoga的獨家促銷情報，同時根據隱私權政策，我保留隨時取消訂閱的權利</label>
                                 </div>
                                 <div class="robot">
-
-                                    <div class="g-recaptcha"
-                                         data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
+                                    <div class="g-recaptcha" data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"
+                                         data-callback="enableBtn"></div>
                                 </div>
                                 <div class="checkcodeline">
                                     <div class="d-grid gap-2">
-                                        <button type="submit" class="btn btn-primary py-2" name="register">加入會員</button>
+                                        <button type="submit" class="btn btn-primary py-2" name="register" id="submit_details" disabled>加入會員</button>
                                     </div>
                                 </div>
                                 <div class="otherlogin">
@@ -565,10 +565,10 @@
                     </div>
                     <div class="robot">
                         <div class="g-recaptcha"
-                             data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"></div>
+                             data-sitekey="6LfoWhYbAAAAAI1Uq4RYT2eeVwdT_6QQKE0EcaSV"data-callback="enableBtn"></div>
                     </div>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary" type="submit" name="ResetPassword">
+                        <button class="btn btn-primary" type="submit" name="ResetPassword"id="submit_detailsinreset" disabled>
                             變更密碼
                         </button>
                     </div>
@@ -593,7 +593,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">您的帳號已經通過驗證,請點選確認以完成驗證</h5>
             </div>
             <div class="modal-body">
-              
+
                 @using (Html.BeginForm("VerifyEmail", "MemberLogin"))
 
                 {
@@ -601,16 +601,16 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
-                <div class="d-grid gap-2">
-                   
-                    <div>
-                        <input type="hidden" name="VerifyEmailValue" value=@Request.Params["verify"] />
-                    </div>
-                    <button class="btn btn-primary" type="submit" name="Verify">
-                        確認
-                    </button>
+                    <div class="d-grid gap-2">
 
-                </div>
+                        <div>
+                            <input type="hidden" name="VerifyEmailValue" value=@Request.Params["verify"] />
+                        </div>
+                        <button class="btn btn-primary" type="submit" name="Verify">
+                            確認
+                        </button>
+
+                    </div>
                 }
             </div>
 
@@ -621,6 +621,22 @@
 </div>
 
 @section endJS{
+    @*如果帳號已被使用*@
+    @if (TempData["Account"] != null)
+    {
+        <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode(TempData["Account"]));
+        alert(message);
+        </script>
+    }
+    @if (TempData["NewAccount"] != null)
+    {
+        <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode(TempData["NewAccount"]));
+        alert(message);
+        </script>
+    }
+
     <script>
         //程式碼區域
     </script>
@@ -637,6 +653,13 @@
                 $('#VerifyEmail').modal('show');
             }
         });
+    </script>
+    <script>
+        //機器人認證
+        function enableBtn() {
+            document.getElementById("submit_details").disabled = false;
+            document.getElementById("submit_detailsinreset").disabled = false;
+        }
     </script>
     <!--電子郵件登入到忘記密碼 -->
     <!--<script>

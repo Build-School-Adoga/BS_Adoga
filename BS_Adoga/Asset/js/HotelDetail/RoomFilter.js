@@ -38,20 +38,28 @@ $().ready(function () {
         },
         watch: {
             FreeBreakfast() {
-                console.log(`brkf:${this.FreeBreakfast}`)
+                //console.log(`brkf:${this.FreeBreakfast}`)
                 this.filter();
             },
             NoSmoking() {
-                console.log(`nosmoking:${this.NoSmoking}`)
+                //console.log(`nosmoking:${this.NoSmoking}`)
                 this.filter();
             },
             FamilyRoom() {
-                console.log(`family:${this.FamilyRoom}`)
+                //console.log(`family:${this.FamilyRoom}`)
                 this.filter();
             }
         },
         methods: {
             filter() {
+                if (this.FreeBreakfast || this.NoSmoking || this.FamilyRoom) {
+                    console.log((this.FreeBreakfast || this.NoSmoking || this.FamilyRoom))
+                    roomGroup.isFiltered = true;
+                }
+                if (!this.FreeBreakfast && !this.NoSmoking && !this.FamilyRoom) {
+                    console.log((!this.FreeBreakfast && !this.NoSmoking && !this.FamilyRoom))
+                    roomGroup.isFiltered = false;
+                }
                 axios.get('../api/HotelDetail/GetSpecificRoom', {
                     params: {
                         hotelName: filternav.Value,
@@ -80,7 +88,8 @@ $().ready(function () {
     var roomGroup = new Vue({
         el: '#room-group',
         data: {
-            group: []
+            group: [],
+            isFiltered:false
         },
         components: {
             'room-type': RoomType

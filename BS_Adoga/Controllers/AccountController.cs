@@ -84,7 +84,7 @@ namespace BS_Adoga.Controllers
             cust.Email = Email;
             cust.MD5HashPassword = HashService.MD5Hash(NewPassword);
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(Email = Email);
+            var data = db.Customers.Find(Email);
             if (data.MD5HashPassword != HashService.MD5Hash(CheckPassword))
             {
                 Content("修改失敗");
@@ -157,7 +157,7 @@ namespace BS_Adoga.Controllers
             Customer cust = new Customer();
             cust.Email = Email;
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(Email = Email);
+            var data = db.Customers.Find(Email);
 
             data.FirstName = InputFirstName;
             data.LastName = InputLastName;
@@ -175,7 +175,7 @@ namespace BS_Adoga.Controllers
             Customer cust = new Customer();
             cust.Email = Email;
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(Email = Email);
+            var data = db.Customers.Find( Email);
             data.PhoneNumber = PhoneNumber;
             db.SaveChanges();
 

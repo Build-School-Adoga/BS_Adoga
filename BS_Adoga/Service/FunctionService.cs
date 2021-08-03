@@ -138,14 +138,7 @@ namespace BS_Adoga.Service
                          orderby img.ImageID
                          select new ImagesVM { ImageID = img.ImageID, ImageURL = img.ImageURL };
 
-            var options = from empMapHotel in _context.HotelEmpMappingHotels
-                          join h in _context.Hotels on empMapHotel.HotelID equals h.HotelID
-                          where empMapHotel.HotelEmployeeID == user_id
-                          select new HotelOption
-                          {
-                              HotelID = h.HotelID,
-                              HotelName = h.HotelName
-                          };
+            var options = GetHotelOptionByUserID(user_id);
 
             var data = new HotelImageVM
             {
@@ -158,8 +151,8 @@ namespace BS_Adoga.Service
             return data;
         }
 
-        //儲存圖片URL
-        public OperationResult HotelImageUpload_UpdataOrAdd(string hotelID,string imageID,string imageURL)
+        //儲存圖片URL 飯店
+        public OperationResult HotelImageUpload_UpdateOrAdd(string hotelID,string imageID,string imageURL)
         {
             var result = new OperationResult();
             try
@@ -195,6 +188,59 @@ namespace BS_Adoga.Service
             return result;
         }
 
+        //儲存圖片URL 房間
+        public OperationResult RoomImageUpload_UpdateOrAdd(string hotelID, string roomID, string imageID, string imageURL) 
+        {
+            var result = new OperationResult();
+            try
+            {
+                var repository = new DBRepository(new AdogaContext());
+                RoomImage basic = repository.GetAll<RoomImage>().Where(x => x.ImageID == imageID && x.RoomID == roomID).FirstOrDefault();
+
+                if (basic != null)
+                {
+                    basic.ImageURL = imageURL;
+                    repository.Update(basic);
+                    repository.SaveChanges();
+                }
+                else
+                {
+                    var img = new RoomImage()
+                    {
+                        HotelID = hotelID,
+                        RoomID = roomID,
+                        ImageID = imageID,
+                        ImageURL = imageURL
+                    };
+
+                    AdogaContext _context = new AdogaContext();
+                    _context.RoomImages.Add(img);
+                    _context.SaveChanges();
+                }
+                result.IsSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessful = false;
+                result.Exception = ex;
+            }
+            return result;
+        }
+
+        public IEnumerable<HotelOption> GetHotelOptionByUserID(string user_id)
+        {
+            var hotelOption = from hemp in _context.HotelEmpMappingHotels
+                           join h in _context.Hotels on hemp.HotelID equals h.HotelID
+                           where hemp.HotelEmployeeID == user_id
+                           orderby h.HotelID
+                           select new HotelOption
+                           {
+                               HotelID = hemp.HotelID,
+                               HotelName = h.HotelName
+                           };
+
+            return hotelOption;
+        }
         /// <summary>
         /// 前端修改折扣跟開關房
         /// </summary>

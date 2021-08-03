@@ -23,7 +23,8 @@ namespace BS_Adoga.Service
             {
                 hotelVM = GetHotelById(hotelId),
                 roomTypeVM = GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult, child),
-                hotelOptionVM = new SearchCardRepository().GetHotelOption()
+                hotelOptionVM = new SearchCardRepository().GetHotelOption(),
+                HotelImages = _repository.GetHotelImagesById(hotelId)
             };
             return hotelDetail;
         }
@@ -112,6 +113,7 @@ namespace BS_Adoga.Service
 
             return data;
         }
+        //搜尋出符合user輸入的條件的房型。
         public IEnumerable<RoomTypeVM> GetRoomTypeByFilter(string hotelId, string startDate, string endDate, int orderRoom, int adult, int child)
         {
             //設定好傳給repository的引數。
@@ -128,7 +130,7 @@ namespace BS_Adoga.Service
 
             return result;
         }
-
+        //篩選特定房型（禁煙，免費早餐，家庭房）
         public IEnumerable<RoomTypeVM> GetSpecificRoomType(string hotelId, string startDate, string endDate, int orderRoom, int adult, int child, bool breakfast, bool noSmoking, bool family)
         {
             //這隻service要做的事情跟別的service有重複到，就直接讓那個service處理先
