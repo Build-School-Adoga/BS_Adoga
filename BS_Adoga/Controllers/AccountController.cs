@@ -222,7 +222,7 @@ namespace BS_Adoga.Controllers
             return RedirectToAction("MemberBooking");
         }
 
-        public ActionResult EvaluationPage()
+        public ActionResult GetEvaluationPage()
         {
             AdogaContext db = new AdogaContext();
 
@@ -234,6 +234,20 @@ namespace BS_Adoga.Controllers
             
 
             return Json(test, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EvaluationPage()
+        {
+            AdogaContext db = new AdogaContext();
+
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var test = _memberacoountrepository.GetEvaluationPage(user_id);
+
+
+            return View();
         }
     }
 }

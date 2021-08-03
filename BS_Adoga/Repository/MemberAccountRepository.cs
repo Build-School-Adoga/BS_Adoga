@@ -172,17 +172,23 @@ namespace BS_Adoga.Repository
         {
 
             var table = (from m in _context.MessageBoards.AsEnumerable()
-                         where m.CustomerID == customerID
+                         join h in _context.Hotels on m.HotelID equals h.HotelID
+                         join o in _context.Orders on m.OrderID equals o.OrderID
+                         join r in _context.Rooms on o.RoomID equals r.RoomID
+                         where m.CustomerID == customerID && m.OrderID == o.OrderID
                          select new EvaluationPageViewModel
                          {
                              OrderID = m.OrderID,
                              HotelID = m.HotelID,
                              CustomerID = m.CustomerID,
                              Title = m.Title,
-                             MessageText = m.MessageText,
-                             MessageDate = m.MessageDate.ToString("yyyy年MM月dd日"),
-                             Score = m.Score
-
+                             MessageText = m.MessageText.ToString(),
+                             MessageDate = m.MessageDate.ToString("yyyy年MM月dd日") + m.MessageDate.ToString(" dddd"),
+                             Score = ((decimal)m.Score).ToString("#0.0"),
+                             CustomerName = ($"{o.FirstName} {o.LastName}"), 
+                             HotelName = h.HotelName,
+                             RoomName = r.RoomName,
+                             Stay = o.CheckOutDate.Subtract(o.CheckInDate).ToString("%d")
                          });
 
             return table;
