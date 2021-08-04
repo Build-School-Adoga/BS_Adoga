@@ -221,11 +221,11 @@
     </style>
 }
 <div id="app">
-    <div v-for="item in info" id="comment-area" class="comment-area wrap-1100 mt-3">
+    <div v-for="item in paginatedData" id="comment-area" class="comment-area wrap-1100 mt-3">
         <div class="comment-group">
             <div class="border-b-gray wrap-1100 row pt-3 pb-5">
                 <div class="rate-item col-3 fz-14 pt-3">
-                    <span class="rate-num">{{item.Score}}</span> 
+                    <span class="rate-num">{{item.Score}}</span>
                     <div class="mb-1 mt-3">
                         <i class="far fa-flag"></i><span class="fw-bold">{{ item.CustomerName }}</span>
                     </div>
@@ -234,41 +234,53 @@
                     <div class="mb-1"><i class="far fa-calendar"></i><span>入住{{ item.Stay }}晚</span></div>
                 </div>
                 <div class="comment-content col-9 ">
-                    <q  class="d-block fz-20 fw-bold mb-4-5">{{ item.Title }}</q>
-                    <p  class="content fz-14 color-gray ps-2 mb-4-5">
+                    <q class="d-block fz-20 fw-bold mb-4-5">{{ item.Title }}</q>
+                    <p class="content fz-14 color-gray ps-2 mb-4-5">
                         @*房間寬敞，設備高級。 床、衛浴、馬桶皆乾淨舒適舒服。 雖不是特地為親子設計的房間，
-                        但是房間內大部分的設計皆是安全的，不會邊邊角角一堆或危險物品很多需要擔心，一歲多的孩子在大房間裡面跑來跑去玩得超開心的！ 床跟沙發都又大又舒服，睡覺放空都很美好！
-                        電視竟然有上網看YouTube
-                        的功能，真是令人驚喜！ 早餐種類多，菜色豐富且美味！ 服務人員積極且細心~~ 停車方便，地點也極佳。 好到不能再好了👍 一定一定會再來，
-                        是台中住宿首選，也是目前住過不需要萬元就能住到最舒服的飯店！*@
+                            但是房間內大部分的設計皆是安全的，不會邊邊角角一堆或危險物品很多需要擔心，一歲多的孩子在大房間裡面跑來跑去玩得超開心的！ 床跟沙發都又大又舒服，睡覺放空都很美好！
+                            電視竟然有上網看YouTube
+                            的功能，真是令人驚喜！ 早餐種類多，菜色豐富且美味！ 服務人員積極且細心~~ 停車方便，地點也極佳。 好到不能再好了👍 一定一定會再來，
+                            是台中住宿首選，也是目前住過不需要萬元就能住到最舒服的飯店！*@
                         {{ item.MessageText }}
                     </p>
                     <p class="fz-14 color-gray ps-2">評鑑日期：<span>{{ item.MessageDate }}</span></p>
                 </div>
             </div>
             @*<div class="border-b-gray comment-item wrap-1100 row pt-3 pb-5">
-                <div class="rate-item col-3 fz-14 pt-3">
-                    <div class="mb-1">
-                        <i class="far fa-flag"></i><span class="fw-bold">Chen</span> <span>(來自台灣)</span>
+                    <div class="rate-item col-3 fz-14 pt-3">
+                        <div class="mb-1">
+                            <i class="far fa-flag"></i><span class="fw-bold">Chen</span> <span>(來自台灣)</span>
+                        </div>
+                        <div class="mb-1"><i class="fas fa-luggage-cart"></i><span>家庭 (未成年兒童隨行)</span></div>
+                        <div class="mb-1"><i class="fas fa-bed"></i><span>豪華四人房</span></div>
+                        <div class="mb-1"><i class="far fa-calendar"></i><span>入住1晚</span> <span>（2019年4月）</span></div>
                     </div>
-                    <div class="mb-1"><i class="fas fa-luggage-cart"></i><span>家庭 (未成年兒童隨行)</span></div>
-                    <div class="mb-1"><i class="fas fa-bed"></i><span>豪華四人房</span></div>
-                    <div class="mb-1"><i class="far fa-calendar"></i><span>入住1晚</span> <span>（2019年4月）</span></div>
-                </div>
-                <div class="comment-content col-9 ">
-                    <q class="d-block fz-20 fw-bold mb-4-5">CP值高</q>
-                    <p class="content fz-14 color-gray ps-2 mb-4-5">
-                        乾淨清潔
-                    </p>
-                    <p class="fz-14 color-gray ps-2">評鑑日期：<span>2019年4月9日 星期二</span></p>
-                </div>
-            </div>*@
+                    <div class="comment-content col-9 ">
+                        <q class="d-block fz-20 fw-bold mb-4-5">CP值高</q>
+                        <p class="content fz-14 color-gray ps-2 mb-4-5">
+                            乾淨清潔
+                        </p>
+                        <p class="fz-14 color-gray ps-2">評鑑日期：<span>2019年4月9日 星期二</span></p>
+                    </div>
+                </div>*@
         </div>
+    </div>
+    <div class="d-flex">
+        <button class="btn"
+                :disabled="pageNumber === 0"
+                @@click="prevPage">
+            上一頁
+        </button>
+        <button class="btn"
+                :disabled="pageNumber >= pageCount -1"
+                @@click="nextPage">
+            下一頁
+        </button>
     </div>
 </div>
 
 
-
+<script src="~/Asset/CDN/JS/vue.js"></script>
 
 @section endJS{
     <!-- axios 的引用 -->
@@ -277,8 +289,43 @@
         var vm = new Vue({
             // options
             el: '#app',
-            data: {
-                info: null
+            data() {
+                return {
+                    pageNumber: 0,
+                    info:[],
+                };
+            },
+            props: {
+
+                pagelist: {
+                    type: Array,
+                    required: true,
+                },
+                size: {
+                    type: Number,
+                    required: false,
+                    default: 5,
+                },
+            },
+            methods: {
+                nextPage() {
+                    this.pageNumber++;
+                },
+                prevPage() {
+                    this.pageNumber--;
+                }
+            },
+            computed: {
+                pageCount() {
+                    let l = this.info.length,
+                        s = this.size;
+                    return Math.ceil(l / s);
+                },
+                paginatedData() {
+                    const start = this.pageNumber * this.size,
+                        end = start + this.size;
+                    return this.info.slice(start, end);
+                },
             },
             mounted() {
                 axios
