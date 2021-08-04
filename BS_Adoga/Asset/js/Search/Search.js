@@ -180,17 +180,11 @@ function checkData(arraylist, num) {
         for (var i = 0; i < arraylist.length; i++) {
             if (arraylist[i] == num) {
                 arraylist.splice(i, 1);
-                debugger;
-                //if (arraylist.length == 0) {
-                //    //初始資料量為0，直接用for會出bug
-                //    return true;
-                //}
-                //else {
-                    return false;
-                //}
+                //debugger;
+                return false;
             }
         }
-        debugger;
+        //debugger;
         return true;
     }
     
@@ -231,14 +225,16 @@ function dropright() {
 
 }
 
-//var dropdownItem = document.querySelectorAll('.dropdown-item');
-//dropdownItem.forEach(item => item.getElementsByClassName("fas fa-minus").addEventListener('click', function () {
-//    debugger;
-//    alert("Minus");
-//}))
-//dropdownItem.forEach(item => item.addEventListener('click', function (e) {
-//    // e.stopPropagation();
+var btnStar = document.getElementById("filter-star");
+var ulStar = document.getElementById("dropdown-star");
 
-//}))
-
+btnStar.addEventListener('click', function () {
+    if (ulStar.style.display == "none") {
+        ulStar.style.display = "block";
+    }
+    else {
+        ulStar.style.display = "none";
+    }
+})
+//debugger;
 

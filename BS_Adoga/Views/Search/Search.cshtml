@@ -284,19 +284,9 @@
                 <button type="button" id="filter-star" class="btn array-item">
                     星級評等
                 </button>
-                @*<ul id="dropdown-star">
-                    <li>星级</li>
-                    <li class="dropdown-item" v-for="item in starList">
-                        <input class="form-check-input" type="checkbox" :id="item.name" :value="item.num" v-model="select">
-                        <label class="form-check-label" :for="item.name">
-                            <p v-if="item.num==0">尚未標示</p>
-                            <i v-else v-for="s in item" class="fas fa-star"></i>
-                        </label>
-                    </li>
-                </ul>*@
                 <filterstar :star-list="star"></filterstar>
             </div>
-                <div class="array-item">
+            <div class="array-item">
                     <button type="button" id="openFilter" class="btn array-item">
                         <label for="filter-equipment">设施、房型和服务</label>
                     </button>

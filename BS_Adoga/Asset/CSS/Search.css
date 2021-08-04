@@ -194,7 +194,7 @@ li.dropdown-item.input-request ul {
     position: relative;
 }
     .filter-container .array-item ul#dropdown-star {
-        /*display: block;*/
+        display: none;
         z-index: 3;
         position: absolute;
         background-color: white;

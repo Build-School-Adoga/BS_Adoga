@@ -7,41 +7,12 @@ var btnOrderStar = document.getElementById("orderStar");
 
 btnOrderPrice.addEventListener("click", function () {
     orderItem = "price";
-    //console.log(orderItem);
 })
 
 btnOrderStar.addEventListener("click", function () {
-    //console.log(orderItem);
     orderItem = "Star";
-    //console.log(orderItem);
 })
 
-//let demand = {
-//    data: {
-//        //undefined
-//        star: [],
-//        facility:[]
-//    },
-//    created: function () {
-//        debugger;
-//        $bus.$on("onStar", this.addStar);
-//    },
-//    watch: {
-//        star()
-//    },
-//    methods: {
-//        addStar(...arg) {
-//            debugger;
-//            console.log(...arg)
-//            //this.star = e;
-//            debugger;
-//            console.log(this.star);
-//        }
-//    },
-//    beforeDestroy() {
-//        $bus.$off("onStar", this.addStar)
-//    }
-//}
 
 //axios去get資料先
 axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
@@ -66,7 +37,6 @@ function HotelList(response) {
             return {
                 //預設目前的頁面為第幾頁
                 pageNumber: 0,
-                //orderItem: this.orderKey
             }
         },
         props: {
@@ -81,11 +51,6 @@ function HotelList(response) {
                 required: false,
                 default: 2
             },
-            //starRequied: {
-            //    type: Array,
-            //    required: false,
-            //    default: [5,4,3,2,1,0]
-            //}
         },
         filters: {
             //設定價錢的格式
@@ -127,10 +92,6 @@ function HotelList(response) {
                 debugger;
                 return this.listData.slice(startData, endData);
             },
-            //starArrange(...arg) {
-            //    console.log(...arg);
-            //    debugger;
-            //}
         },
         template: `<div>
                 <div v-for="hotel in paginatedData">
