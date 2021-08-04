@@ -14,10 +14,14 @@ namespace BS_Adoga.Models.ViewModels.homeViewModels
         public string HotelAddress  { get; set; }
         public string HotelEngName { get; set; }
         public int Star { get; set; }
+        public string ImageID { get; set; }
+     
         public virtual IEnumerable<Hotel> Hotels { get; set; }
         public virtual IEnumerable<Card> Cards { get; set; }
 
         public MyHoteiImages My_HotelImages { get; set; }
+        public string ImageURL { get; set; }
+        
         public MyRoom My_Rooms { get; set; }
         public MyRoomsDetails My_RoomsDetails { get; set; }
     }

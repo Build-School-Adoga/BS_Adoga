@@ -9,6 +9,7 @@ namespace BS_Adoga.Models.ViewModels.homeViewModels
     {
        
             public string name { get; set; }
+            public string ImageURL { get; set; }
             public string area { get; set; }
             public int Evaluation { get; set; }
             public string picture { get; set; }

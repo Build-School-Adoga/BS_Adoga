@@ -306,6 +306,7 @@
     <Compile Include="Models\DBContext\HotelEmpMappingHotel.cs" />
     <Compile Include="Models\DBContext\HotelImageUpload.cs" />
     <Compile Include="Models\ViewModels\Account\BookingOrderViewModel.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\MyHotelImageUploads.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\TestVM.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\districts.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
@@ -447,6 +448,14 @@
     <Content Include="Asset\images\adoga-logo-v2.png" />
     <Content Include="Asset\images\Booking.png" />
     <Content Include="Asset\images\Home\bg-adoga.png" />
+    <Content Include="Asset\images\Home\台中市.png" />
+    <Content Include="Asset\images\Home\台南市.png" />
+    <Content Include="Asset\images\Home\台東縣.png" />
+    <Content Include="Asset\images\Home\新北市.png" />
+    <Content Include="Asset\images\Home\新竹縣.png" />
+    <Content Include="Asset\images\Home\臺南市.PNG" />
+    <Content Include="Asset\images\Home\花蓮縣.png" />
+    <Content Include="Asset\images\Home\高雄市.png" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel01.jpg" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel02.jpg" />
     <Content Include="Asset\images\HotelDetail\Room\room01.jpg" />
@@ -2476,7 +2485,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Asset\CDN\CSS\" />
     <Folder Include="Asset\images\Account\" />
     <Folder Include="Asset\images\CheckOut\" />
     <Folder Include="Asset\images\HotelLogin\" />
