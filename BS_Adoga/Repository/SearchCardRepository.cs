@@ -20,16 +20,6 @@ namespace BS_Adoga.Repository
             _context = new AdogaContext();
         }
 
-        //public IQueryable<string> GetHotels(string city)
-        //{
-        //    //原本給劉的
-        //    var hotel = from H in _context.Hotels
-        //                    where H.HotelCity.Contains(city)
-        //                    select H.HotelName;
-
-        //    return hotel;
-        //}
-
         public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(SearchDataViewModel info)
         {
             var countNight = (DateTime.Parse(info.CheckOutDate) - DateTime.Parse(info.CheckInDate)).TotalDays;
@@ -46,7 +36,7 @@ namespace BS_Adoga.Repository
             DateTime end = DateTime.Parse(endDate);
 
             var allhotel = (from H in _context.Hotels
-                            where (H.HotelCity.Contains(CityName) || H.HotelName.Contains(CityName))
+                            where (H.HotelCity.Contains(CityName) || H.HotelName.Contains(CityName)) 
                             group H by H.HotelID into hid
                             select hid.Key).ToArray();
 

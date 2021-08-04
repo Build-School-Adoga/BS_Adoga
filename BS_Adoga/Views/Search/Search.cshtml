@@ -20,8 +20,8 @@
 }
 
 @section endJS{
-    @*<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>*@
-    @*<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>*@
+    @*<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>*@
 
     <!-- axios 的引用 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
@@ -130,7 +130,7 @@
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
 
 
-    <script src="~/Asset/js/Search/Search.js"></script>
+    <script src="~/Asset/js/Search/Search.js" type="module"></script>
     <script src="~/Asset/js/Search/_SearchFilterPartial.js"></script>
     <script src="~/Asset/js/Search/SearchFacilities.js" type="module"></script>
     @*<script src="~/Asset/js/Search/SearchPriceFormat.js" type="module"></script>*@
@@ -257,93 +257,56 @@
         <div class="filter-container">
             <div class="array-list">
                 <p>篩選條件</p>
+                @*<div class="array-item">
+                <button type="button" id="filter-price" class="btn array-item">
+                    價格
+                </button>
+                <ul class="dropdown-menu" >
+                    <li id="price-range">
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <p>付款方式</p>
+                    <li class="dropdown-item">
+                        <input class="form-check-input" type="checkbox" value="" id="center">
+                        <label class="form-check-label" for="center">
+                            <p>到店付款</p>
+                        </label>
+                    </li>
+                    <li class="dropdown-item">
+                        <input class="form-check-input" type="checkbox" value="" id="center">
+                        <label class="form-check-label" for="center">
+                            <p>免信用卡訂房</p>
+                        </label>
+                    </li>
+                </ul>
+            </div>*@
+            <div class="array-item">
+                <button type="button" id="filter-star" class="btn array-item">
+                    星級評等
+                </button>
+                @*<ul id="dropdown-star">
+                    <li>星级</li>
+                    <li class="dropdown-item" v-for="item in starList">
+                        <input class="form-check-input" type="checkbox" :id="item.name" :value="item.num" v-model="select">
+                        <label class="form-check-label" :for="item.name">
+                            <p v-if="item.num==0">尚未標示</p>
+                            <i v-else v-for="s in item" class="fas fa-star"></i>
+                        </label>
+                    </li>
+                </ul>*@
+                <filterstar :star-list="star"></filterstar>
+            </div>
                 <div class="array-item">
-                    <button type="button" id="filter-price" class="btn dropdown-toggle array-item" data-bs-toggle="dropdown" aria-expanded="true">
-                        價格
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="filter-price">
-                        <li id="price-range">
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <p>付款方式</p>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>到店付款</p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>免信用卡訂房</p>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="array-item">
-                    <button type="button" id="filter-star" class="btn dropdown-toggle array-item" data-bs-toggle="dropdown" aria-expanded="true">
-                        星級評等
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="filter-star">
-                        <p>星级</p>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>
-                                    <i v-for="item in 5" class="fas fa-star"></i>
-                                </p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>
-                                    <i v-for="item in 4" class="fas fa-star"></i>
-                                </p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>
-                                    <i v-for="item in 3" class="fas fa-star"></i>
-                                </p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>
-                                    <i v-for="item in 2" class="fas fa-star"></i>
-                                </p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>
-                                    <i class="fas fa-star"></i>
-                                </p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="more-10km" checked>
-                            <label class="form-check-label" for="more-10km">
-                                <p>尚未標示</p>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="array-item">
-                    <button type="button" id="openFilter" class="btn dropdown-toggle array-item">
+                    <button type="button" id="openFilter" class="btn array-item">
                         <label for="filter-equipment">设施、房型和服务</label>
                     </button>
                 </div>
             </div>
             @*<form>
-                    <button><i class="fas fa-search"></i></button>
-                    <input type="search" placeholder="想搜什麼就搜什麼">
-                </form>*@
+        
+                            <button><i class="fas fa-search"></i></button>
+                            <input type="search" placeholder="想搜什麼就搜什麼">
+                        </form>*@
         </div>
     </div>
 </div>

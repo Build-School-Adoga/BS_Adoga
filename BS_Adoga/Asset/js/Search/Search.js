@@ -1,6 +1,52 @@
-﻿
-var filterEquip = new Vue({
-    el: '#filter-equipment',
+﻿import $bus from './SearchDataComponent.js';
+
+Vue.component('filterstar', {
+    data() {
+        return {
+            select:[]
+        }
+    },
+    props: {
+        starList: {
+            type: Array,
+            required: true
+        }
+    },
+    methods: {
+        AddStar: function (num) {
+            if (checkData(this.select, num)) {
+                this.select.push(num);
+            }
+        },
+    },
+    //mounted() {
+    //    debugger;
+    //    console.log(this.select);
+    //    $bus.$emit("onStar", this.select);
+    //},
+    watch: {
+        select: function(){
+            console.log(this.select);
+            debugger;
+            $bus.$emit('onStar', this.select);
+        }
+    },
+    template: `<ul id="dropdown-star">
+                    <li>星级</li>
+                    <li class="dropdown-item" v-for="item in starList">
+                        <input class="form-check-input" type="checkbox" :id="item.name" @click="AddStar(item.num)">
+                        <label class="form-check-label" :for="item.name">
+                            <p v-if="item.num==0">尚未標示</p>
+                            <i v-else v-for="s in item.num" class="fas fa-star"></i>
+                        </label>
+                    </li>
+                </ul>`
+})
+
+////var starList;
+new Vue({
+    //el: '#filter-equipment',
+    el: '#filter',
     data: {
         FacilityList: [
             {
@@ -92,14 +138,63 @@ var filterEquip = new Vue({
                 ]
             }
         ],
-        StarList: [5, 4, 3, 2, 1, 0],
-        //priceRange: [ ]
+        star: [
+            {
+                num: 5,
+                name: "five"
+            },
+            {
+                num: 4,
+                name: "four"
+            },
+            {
+                num: 3,
+                name: "three"
+            },
+            {
+                num: 2,
+                name: "two"
+            },
+            {
+                num: 1,
+                name: "one"
+            },
+            {
+                num: 0,
+                name: "zero"
+            }],
+        //select: []
     },
-    method: {
-        
-    }
+    method: {    }
 })
 
+function checkData(arraylist, num) {
+    console.log(arraylist);
+    debugger;
+    if (arraylist.length == 0) {
+        //初始資料量為0，直接用for會出bug
+        return true;
+    }
+    else {
+        //如果判斷發現有重複的就直接移除
+        for (var i = 0; i < arraylist.length; i++) {
+            if (arraylist[i] == num) {
+                arraylist.splice(i, 1);
+                debugger;
+                //if (arraylist.length == 0) {
+                //    //初始資料量為0，直接用for會出bug
+                //    return true;
+                //}
+                //else {
+                    return false;
+                //}
+            }
+        }
+        debugger;
+        return true;
+    }
+    
+}
 
 // JS
 var openFilter = document.getElementById("openFilter");
