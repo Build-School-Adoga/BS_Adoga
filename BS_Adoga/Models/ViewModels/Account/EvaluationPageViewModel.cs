@@ -20,6 +20,14 @@ namespace BS_Adoga.Models.ViewModels.Account
 
         public string MessageText { get; set; }
 
-        public decimal? Score { get; set; }
+        public string Score { get; set; }
+
+        public string CustomerName { get; set; }
+
+        public string HotelName { get; set; }
+
+        public string RoomName { get; set; }
+
+        public string Stay { get; set; }
     }
 }
