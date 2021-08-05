@@ -229,7 +229,7 @@
 }
 <div id="app" class="ps-4 pt-4">
     <h3 class="gray-header ms-5 lead">住宿評鑑</h3>
-    <div v-for="item in info" id="comment-area" class="comment-area wrap-1100 mt-3">
+    <div v-for="item in paginatedData" id="comment-area" class="comment-area wrap-1100 mt-3">
         <div class="comment-group">
             <div class="wrap-1100 row pt-3 pb-5 ms-5">
                 <div class="rate-item col-2 fz-14 pt-3">
@@ -304,7 +304,6 @@
                 };
             },
             props: {
-
                 pagelist: {
                     type: Array,
                     required: true,
