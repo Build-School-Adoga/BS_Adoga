@@ -83,10 +83,10 @@ namespace BS_Adoga.Controllers
                     CustomerID = customer,
                     RoomID = orderData.roomCheckOutViewModel.RoomID,
                     OrderDate = DateTime.Now,
-                    CheckInDate = DateTime.Parse(orderData.roomCheckOutViewModel.CheckInDate),
-                    CheckOutDate = DateTime.Parse(orderData.roomCheckOutViewModel.CheckOutDate),
+                    CheckInDate = DateTime.Parse(orderData.roomCheckOutViewModel.CheckInDate + " 15:00:00"),
+                    CheckOutDate = DateTime.Parse(orderData.roomCheckOutViewModel.CheckOutDate + " 11:00:00"),
                     RoomCount = orderData.roomCheckOutViewModel.RoomOrder,
-                    RoomPriceTotal = Math.Ceiling(orderData.roomCheckOutViewModel.TotalPrice),
+                    RoomPriceTotal = Math.Ceiling(orderData.roomCheckOutViewModel.TotalPrice * orderData.roomCheckOutViewModel.RoomOrder),
                     FirstName = firstname,
                     LastName = lastname,
                     Email = email,
@@ -374,6 +374,29 @@ namespace BS_Adoga.Controllers
         {
             //var hotelName = _context.Orders.Where(x => x.OrderID == model.OrderId).First();
             model = (ECPayResultsViewModel)TempData.Peek("PayResult");
+
+            #region 當付款成功時roomdetail要增加order幾間
+            var order = _context.Orders.Where(x => x.OrderID == model.OrderId).FirstOrDefault();
+            var roomdetail = _context.RoomsDetails.Where(x => x.RoomID == order.RoomID && x.CheckInDate == order.CheckInDate).FirstOrDefault();
+            roomdetail.RoomOrder += order.RoomCount;
+
+
+            using (var tran = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    _context.Entry(roomdetail).State = EntityState.Modified;
+                    _context.SaveChanges();
+                    tran.Commit();
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    return Content("付款成功但是房間數roomdetail增加失敗:" + ex.ToString());
+                }
+            }
+            #endregion
+
             return View(model);
         }
     }
