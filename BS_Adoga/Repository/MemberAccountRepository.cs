@@ -80,6 +80,8 @@ namespace BS_Adoga.Repository
                              OrderDate = o.OrderDate,
                              CheckInDate = o.CheckInDate,
                              CheckOutDate = o.CheckOutDate,
+                             RoomName = r.RoomName,
+                             RoomCount = o.RoomCount,
                              Email = o.Email,
                              Name = o.FirstName + " " +o.LastName,
                              PhoneNumber = o.PhoneNumber,
