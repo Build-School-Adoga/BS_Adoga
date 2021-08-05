@@ -13,6 +13,8 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
 
         public string Address { get; set; }
 
+        public int Star { get; set; }        
+
         public string RoomID { get; set; }
 
         public string RoomName { get; set; }
@@ -40,5 +42,6 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
         public decimal Discount { get; set; }
 
         public decimal TotalPrice { get; set; }
+
     }
 }

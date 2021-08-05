@@ -12,6 +12,7 @@ namespace BS_Adoga.Models.ViewModels.Account
         public string HotelID { get; set; }
         public string HotelName { get; set; }
         public string HotelEngName { get; set; }
+        public string HotelImageURL { get; set; }
         public IQueryable<RoomBedVM> RoomBed { get; set; }
         public decimal RoomPriceTotal { get; set; }
         public DateTime OrderDate { get; set; }
