@@ -150,6 +150,7 @@ namespace BS_Adoga.Service
                              HotelID = item.HotelID,
                              HotelName = item.HotelName,
                              HotelEngName = item.HotelEngName,
+                             HotelImageURL = item.HotelImageURL,
                              RoomBed = item.RoomBed,
                              RoomPriceTotal = item.RoomPriceTotal,
 

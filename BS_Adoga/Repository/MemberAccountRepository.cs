@@ -40,6 +40,10 @@ namespace BS_Adoga.Repository
                               HotelID = h.HotelID,
                               HotelName = h.HotelName,
                               HotelEngName = h.HotelEngName,
+                              HotelImageURL = (from m in _context.HotelImageUploads
+                                               where h.HotelID == m.HotelID
+                                               orderby m.ImageURL
+                                               select m.ImageURL).FirstOrDefault(), 
                               RoomBed = ((from rb in _context.RoomBeds
                                           join bt in _context.BedTypes on rb.TypesOfBedsID equals bt.TypesOfBedsID
                                           where rb.RoomID == o.RoomID
@@ -72,6 +76,10 @@ namespace BS_Adoga.Repository
                              HotelID = h.HotelID,
                              HotelName = h.HotelName,
                              HotelEngName = h.HotelEngName,
+                             HotelImageURL = (from m in _context.HotelImageUploads
+                                              where h.HotelID == m.HotelID
+                                              orderby m.ImageURL
+                                              select m.ImageURL).FirstOrDefault(),
                              Star = h.Star,
                              HotelCity = h.HotelCity,
                              HotelDistrict = h.HotelDistrict,

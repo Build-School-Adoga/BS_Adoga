@@ -165,6 +165,7 @@ function appendBookingList(response) {
                 HotelID: item.HotelID,
                 HotelName: item.HotelName,
                 HotelEngName: item.HotelEngName,
+                HotelImageURL: item.HotelImageURL,
                 BedStr: bedTypeStr,
                 RoomPriceTotal: Math.ceil(item.RoomPriceTotal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
 
