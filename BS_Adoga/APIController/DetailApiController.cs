@@ -59,11 +59,18 @@ namespace BS_Adoga.APIController.HotelDetail
         }
 
         [System.Web.Http.AcceptVerbs("GET")]
-        public IHttpActionResult GetRoomImages(string hotelID = "hotel04",string roomID="room02")
+        public IHttpActionResult GetRoomImages(string hotelID,string roomID)
         {
             var data = _service.GetRoomImagesById(hotelID, roomID);
             return Json(data);
             //return Ok(JsonConvert.SerializeObject(a));
+        }
+
+        [System.Web.Http.AcceptVerbs("GET")]
+        public IHttpActionResult GetHotelMessage(string hotelID = "hotel04")
+        {
+            var data = _service.GetHotelMessageById(hotelID);
+            return Json(data);
         }
 
 

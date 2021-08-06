@@ -5,6 +5,7 @@ using System.Web;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
 using BS_Adoga.Models.ViewModels.HotelImagePage;
+using BS_Adoga.Models.ViewModels.Account;
 using BS_Adoga.Repository;
 
 namespace BS_Adoga.Service
@@ -231,5 +232,27 @@ namespace BS_Adoga.Service
 
             return data;
         }
+
+        public IEnumerable<EvaluationPageViewModel> GetHotelMessageById(string hotelId)
+        {
+            var source = _DBrepository.GetAll<MessageBoard>().Where(x => x.HotelID == hotelId);
+
+            int allCount = source.Count();
+            int goodCount = source.Where(x => x.Score >= 7).Count();
+            decimal avg = decimal.Round(source.Average(x => (decimal)x.Score), 1, MidpointRounding.AwayFromZero);
+            double a = ((double)goodCount / (double)allCount);
+            int percent = (int)Math.Round(a * 100, 0, MidpointRounding.AwayFromZero);
+
+            var data = new ScoreVM()
+            {
+                AllMessageCount = allCount,
+                HighScoreMessageCount = goodCount,
+                HighScorePercent = percent,
+                ScoreAvg = avg
+            };
+
+            return data;
+        }
+
     }
 }
