@@ -49,7 +49,7 @@ namespace BS_Adoga.APIController.HotelDetail
             //return Ok(JsonConvert.SerializeObject(a));
         }
 
-        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [System.Web.Http.AcceptVerbs("GET")]
         public IHttpActionResult GetHotelFacilities(string hotelName = "台中商旅")
         {
             string hotelId = _repository.GetHotelIdByName(hotelName);
@@ -58,7 +58,15 @@ namespace BS_Adoga.APIController.HotelDetail
             //return Ok(JsonConvert.SerializeObject(a));
         }
 
-        
-        
+        [System.Web.Http.AcceptVerbs("GET")]
+        public IHttpActionResult GetRoomImages(string hotelID = "hotel04",string roomID="room02")
+        {
+            var data = _service.GetRoomImagesById(hotelID, roomID);
+            return Json(data);
+            //return Ok(JsonConvert.SerializeObject(a));
+        }
+
+
+
     }
 }

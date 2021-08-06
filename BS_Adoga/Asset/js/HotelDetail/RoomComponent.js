@@ -2,7 +2,7 @@
     props: {
         room:['room']
     },
-    template: ` <div v-bind:key="room.RoomID" class="room-type mb-4">
+    template: ` <div v-bind:key="room.RoomID" v-bind:id="room.RoomID" class="room-type mb-4">
                     <div class="room-type-title">
                         <h5>{{room.RoomName}}</h5>
                     </div>
@@ -10,8 +10,8 @@
                         <div class="row">
                             <div class="col-3 d-flex flex-column">
                                 <p>房型摘要</p>
-                                <img src="https://pix6.agoda.net/hotelImages/234/234438/234438_16042712590041850273.jpg?s=208x117&ar=16x9">
-                                <a href="" class="fz-14 mt-1">查看房間照片&設施</a>
+                                <img v-bind:src="room.RoomImgURL">
+                                <a v-on:click="clickAlbum" class="fz-14 mt-1">查看房間照片&設施</a>
                                 <div class="service-group mt-4">
                                     <div v-if="room.WiFi" class="d-flex align-items-center mb-2 color-green">
                                         <i class="fas fa-wifi me-3"></i>
@@ -63,17 +63,12 @@
                                         <p class="fz-12 fw-bold mb-2">優惠專案</p>
                                         <p v-if="room.Breakfast" class="fz-14 mb-2">
                                             <i class="fas fa-check color-green fz-14 me-2"></i>
-                                            2人份早餐 -
-                                            <span class="red-del-line fw-bold fz-14">NT$ 950</span>
+                                            免費早餐 - 1份
                                             <span class="fw-bold color-green"> 包含</span>
                                         </p>
                                         <p v-if="room.WiFi" class="fz-14 mb-2">
                                             <i class="fas fa-check color-green fz-14 me-2"></i>
                                             免費Wi-Fi
-                                        </p>
-                                        <p class="fz-14 mb-2">
-                                            <i class="fas fa-check color-green fz-14 me-2"></i>
-                                            【促銷價】點此查看取消條款
                                         </p>
                                     </div>
                                     <div class="col-2 pt-2 color-gray text-center">
@@ -118,5 +113,12 @@
                             </div>
                         </div>
                     </div>
-                </div>`
+                </div>`,
+    methods: {
+        clickAlbum() {
+            console.log('觸發組件的方法了')
+            console.log(this.room)
+            this.$emit('album', this.room);
+        }
+    }
 }

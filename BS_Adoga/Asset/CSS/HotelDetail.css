@@ -112,27 +112,63 @@ nav[aria-label='breadcrumb'] {
     width: 100%;
 }
 
+.hotel-video .img-wrap {
+    width: 460px;
+    height: 355px;
+    overflow: hidden;
+    background-color:#000;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
 .hotel-video img {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
-.pic-group > .img-wrap img {
+.medium-pic .img-wrap {
+    width: 333px;
+    height: 220px;
+    overflow: hidden;
     border-top-right-radius: 5px;
+}
+
+.hotel-video img,
+.medium-pic img {
+    height: 100%;
+    width: 100%;
+    /*max-height: 100%;
+    max-width: 100%;*/
+    margin: auto;
+    display: block;
+}
+
+
+.medium-pic img {
+    border-top-right-radius: 5px;
+}
+
+.two-pic{
+    margin-top:3px;
+}
+
+.two-pic .img-wrap:first-child{
+    margin-right:3px;
 }
 
 .two-pic img {
     width: 165px;
-    height: 128px;
+    height: 132px;
 }
 
-.two-pic .img-wrap:last-child img {
-    border-bottom-right-radius: 5px;
+.two-pic .img-wrap:last-child {
+     border-bottom-right-radius: 5px;
 }
 
 .pic-group .img-wrap,
 .hotel-video .img-wrap {
     position: relative;
+    overflow:hidden;
 }
 
 .img-wrap .show-shadow {
@@ -147,7 +183,7 @@ nav[aria-label='breadcrumb'] {
 .two-pic .img-wrap:last-child .show-shadow {
     text-align: center;
     line-height: 128px;
-    background-color: rgba(0, 0, 0, 0.356);
+    /*background-color: rgba(0, 0, 0, 0.356);*/
 }
 
 .img-wrap .show-shadow:hover,
@@ -258,7 +294,9 @@ nav[aria-label='breadcrumb'] {
         height: 0.5px;
         color: rgb(128, 128, 128);
     }
-
+    .rate-box .rate-num {
+        font-family: system-ui;
+    }
 .rate-num {
     margin: 3px 10px 10px 0;
     padding: 7px 12px;
@@ -266,6 +304,7 @@ nav[aria-label='breadcrumb'] {
     background-color: rgb(53, 129, 243);
     font-size: 30px;
     font-weight: bold;
+    font-family: Montserrat, serif;
     border-radius: 5px;
 }
 
@@ -985,14 +1024,15 @@ p.room-case-price {
 
 /* <!-- 單個評鑑的模板 --> */
 
-.comment-item .rate-num {
+/*rate-num在288行左右已有樣式，所以註解掉這個了，comment-item的rate-num直接採用208行的那個就好*/
+/*.comment-item .rate-num {
     margin: 0;
     padding: 0;
     font-size: 34px;
     font-family: Montserrat, serif;
     background-color: #fff;
     border-radius: 0;
-}
+}*/
 
 .rate-item i {
     width: 28px;
@@ -1030,7 +1070,7 @@ p.room-case-price {
             top: 0;
             left: 100%;
             z-index: 2; */
-    width: 90%;
+    width: 80%;
 }
 
     .album.container .col-9 {
@@ -1041,22 +1081,39 @@ p.room-case-price {
         background-color: rgb(0, 0, 0);
     }
 
-        .album.container .col-3 .wrap {
-            height: 350px;
-            overflow: auto;
-        }
+    .album.container .side-info-wrap {
+        height: 350px;
+        overflow: auto;
+    }
 
-/* ::-webkit-scrollbar-track {
-            box-shadow: rgb(226, 43, 43);
-        }
+.side-info-wrap::-webkit-scrollbar {
+    width: 6px;
+    /*設定 y軸scrollbar的寬度*/
+    height: 6px;
+    /*設定 x軸scrollbar的高度*/
+    /*background-color: rgb(255, 255, 255);*/
+    /*設定scrollbar的背景色（刀鞘？）*/
+}
 
-        ::-webkit-scrollbar-thumb {
-            background-color: rgb(214, 5, 5);
-            border: 1px solid red;
-        } */
+.side-info-wrap::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #808080;
+    /*設定scrollbar本身的填滿顏色（刀片本身）*/
+}
 
-#close-icon {
-    font-size: 50px;
+    .side-info-wrap::-webkit-scrollbar-thumb:hover {
+        background-color: #548dd8;
+    }
+
+.img-figure .img-wrap::-webkit-scrollbar-track {
+    padding: 3px 0;
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+    /*background-color: #ffffff;*/
+}
+
+
+#close-icon,#room-album-close-icon {
+    font-size: 30px;
     color: #fff;
 }
 
@@ -1141,7 +1198,8 @@ p.room-case-price {
 /*-------相簿的Carousel的部分-------------*/
 
 .carousel-inner {
-    width: 80%;
+    /* width: 650px; */
+    width: 70%;
     margin: auto;
 }
 
@@ -1156,25 +1214,43 @@ p.room-case-price {
 .carousel-indicators {
     position: unset;
     margin-bottom: 0;
+    justify-content: start;
 }
 
-    .carousel-indicators [data-bs-target] {
-        width: 90px;
-        height: 60px;
-    }
+.carousel-indicators [data-bs-target] {
+    margin: 10px 3px;
+    width: 92px;
+    height: 60px;
+}
 
-.carousel-item {
+.carousel-indicators [data-bs-target]:hover {
+    border: 2px solid white;
+}
+
+/*.carousel-item {
     max-width: 100%;
     max-height: 474px;
     overflow: hidden;
+}*/
+
+.carousel-item {
+    position: relative;
+    margin-top: 40px;
+    max-width: 100%;
+    /* max-height: 500px; */
+    height: 400px;
+    overflow: hidden;
 }
 
-    .carousel-item img {
-        width: 100%;
-        height: 100%;
-    }
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: auto;
+}
 
 .carousel-caption {
+    position: absolute;
     right: 0;
     left: 0;
     bottom: 0;
@@ -1187,7 +1263,7 @@ p.room-case-price {
     }
 
 /* 方便測試用 不會正式放進專題 */
-.extend {
+/*.extend {
     height: 1000px;
-}
+}*/
     

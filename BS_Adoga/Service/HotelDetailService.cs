@@ -4,17 +4,22 @@ using System.Linq;
 using System.Web;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelDetail;
+using BS_Adoga.Models.ViewModels.HotelImagePage;
 using BS_Adoga.Repository;
 
 namespace BS_Adoga.Service
 {
     public class HotelDetailService
     {
-        private HotelDetailRepository _repository;
+        private readonly AdogaContext _context;
+        private readonly HotelDetailRepository _repository;
+        private readonly DBRepository _DBrepository;
 
         public HotelDetailService()
         {
+            _context = new AdogaContext();
             _repository = new HotelDetailRepository();
+            _DBrepository = new DBRepository(_context);
         }
 
         public DetailVM GetDetailVM(string hotelId, string startDate, string endDate, int orderRoom, int adult, int child)
@@ -24,7 +29,8 @@ namespace BS_Adoga.Service
                 hotelVM = GetHotelById(hotelId),
                 roomTypeVM = GetRoomTypeByFilter(hotelId, startDate, endDate, orderRoom, adult, child),
                 hotelOptionVM = new SearchCardRepository().GetHotelOption(),
-                HotelImages = _repository.GetHotelImagesById(hotelId)
+                HotelImages = GetHotelImagesById(hotelId),
+                HotelScoreVM = GetScoreById(hotelId)
             };
             return hotelDetail;
         }
@@ -46,33 +52,6 @@ namespace BS_Adoga.Service
                 Longitude = s.Longitude,
                 Latitude = s.Latitude,
                 Star = s.Star
-            }).First();
-
-            return result;
-        }
-
-        public object GetHotelFacilityById(string hotelId)
-        {
-            var source = _repository.GetHotelFacilityById(hotelId);
-
-            var result = source.Select(x => new
-            {
-                x.AirportTransfer,
-                x.BusinessFacilities,
-                x.CarPark,
-                x.FacilitiesFordisabledGuests,
-                x.FamilyChildFriendly,
-                x.FrontDesk,
-                x.GolfCourse,
-                x.Gym,
-                x.Internet,
-                x.Nightclub,
-                x.NoSmoking,
-                x.PetsAllowed,
-                x.Restaurants,
-                x.SmokingArea,
-                x.SpaSauna,
-                x.SwimmingPool
             }).First();
 
             return result;
@@ -102,6 +81,10 @@ namespace BS_Adoga.Service
 
                         case "上下舖":
                             x.Adult = x.Adult + (2 * bed.Amount);
+                            x.Child = x.Child + 0;
+                            break;
+                        case "單人床":
+                            x.Adult = x.Adult + (1 * bed.Amount);
                             x.Child = x.Child + 0;
                             break;
 
@@ -161,5 +144,92 @@ namespace BS_Adoga.Service
             return result;
         }
 
+        public object GetHotelFacilityById(string hotelId)
+        {
+            var source = _repository.GetHotelFacilityById(hotelId);
+
+            var result = source.Select(x => new
+            {
+                x.AirportTransfer,
+                x.BusinessFacilities,
+                x.CarPark,
+                x.FacilitiesFordisabledGuests,
+                x.FamilyChildFriendly,
+                x.FrontDesk,
+                x.GolfCourse,
+                x.Gym,
+                x.Internet,
+                x.Nightclub,
+                x.NoSmoking,
+                x.PetsAllowed,
+                x.Restaurants,
+                x.SmokingArea,
+                x.SpaSauna,
+                x.SwimmingPool
+            }).First();
+
+            return result;
+        }
+
+        public string[] GetHotelImagesById(string hotelId)
+        {
+            var HotelImages = _repository.GetHotelImagesById(hotelId);
+            int imgMaxLength = 4;
+            string[] hotelImgURL = new string[imgMaxLength];
+
+            for (int i = 0; i < imgMaxLength; i++)
+            {
+                if (i < HotelImages.Count())
+                {
+                    hotelImgURL[i] = HotelImages.Where((x, index) => index == i).First().ImageURL;
+                }
+                else
+                {
+                    hotelImgURL[i] = "/Asset/images/no_image.jpg";
+                }
+            }
+
+            return hotelImgURL;
+        }
+
+        public IEnumerable<ImagesVM> GetRoomImagesById(string hotelId,string roomId)
+        {
+            var roomImages = (from rimg in _context.RoomImages
+                                          where rimg.HotelID == hotelId && rimg.RoomID == roomId
+                                          orderby rimg.ImageID
+                                          select new ImagesVM
+                                          {
+                                              ImageID = rimg.ImageID,
+                                              ImageURL = rimg.ImageURL
+                                          }).AsEnumerable();
+            
+            if(roomImages.Count() == 0)
+            {
+                var data = new ImagesVM[]{ new ImagesVM() { ImageID = "none", ImageURL = "/Asset/images/no_image.jpg" }};
+                return data;
+            }
+            return roomImages;
+        }
+
+        public ScoreVM GetScoreById(string hotelId)
+        {
+            var source = _DBrepository.GetAll<MessageBoard>().Where(x => x.HotelID == hotelId);
+
+            int allCount = source.Count();
+            int goodCount = source.Where(x => x.Score >= 7).Count();
+            decimal avg = decimal.Round(source.Average(x => (decimal)x.Score), 1, MidpointRounding.AwayFromZero);
+            double a = ((double)goodCount / (double)allCount);
+            int percent = (int)Math.Round(a*100, 0, MidpointRounding.AwayFromZero);
+
+            var data = new ScoreVM()
+            {
+                AllMessageCount = allCount,
+                HighScoreMessageCount = goodCount,
+                HighScorePercent = percent,
+                ScoreAvg = avg               
+            };
+
+            return data;
+        }
     }
 }

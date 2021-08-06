@@ -40,6 +40,7 @@ namespace BS_Adoga.Repository
                               HotelID = h.HotelID,
                               HotelName = h.HotelName,
                               HotelEngName = h.HotelEngName,
+                              HotelImageURL = "",
                               RoomBed = ((from rb in _context.RoomBeds
                                           join bt in _context.BedTypes on rb.TypesOfBedsID equals bt.TypesOfBedsID
                                           where rb.RoomID == o.RoomID
