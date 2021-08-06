@@ -21,9 +21,9 @@ namespace BS_Adoga
             );
 
             //routes.MapRoute(
-            //    name: "Hotel",
-            //    url: "Taiwan/Hotel/{id}",
-            //    defaults: new { controller = "HotelDetail", action = "Detail", id = UrlParameter.Optional }
+            //    name: "SearchGetTempData",
+            //    url: "Search/{search}",
+            //    defaults: new { controller = "Search", action = "Search", city = UrlParameter.Optional }
             //);
 
             routes.MapRoute(

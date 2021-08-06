@@ -10,7 +10,7 @@
 }
 
 /* 灰色上框線 border-top */
-.comment-item,
+/*.comment-item,*/
 .border-t-gray {
     border-top: 1px solid rgb(216, 216, 216);
 }
@@ -752,6 +752,10 @@ nav[aria-label='breadcrumb'] {
     position: relative;
 }
 
+.room-type a.link{
+    cursor:pointer;
+}
+
 .row.room-case.one-case.pe-3.mb-3 {
     position: absolute;
     left: 1.5rem;
@@ -1113,7 +1117,7 @@ p.room-case-price {
 
 
 #close-icon,#room-album-close-icon {
-    font-size: 30px;
+    font-size: 40px;
     color: #fff;
 }
 
@@ -1263,7 +1267,7 @@ p.room-case-price {
     }
 
 /* 方便測試用 不會正式放進專題 */
-/*.extend {
-    height: 1000px;
-}*/
+.extend {
+    height: 100px;
+}
     

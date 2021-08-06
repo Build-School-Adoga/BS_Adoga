@@ -11,7 +11,7 @@
                             <div class="col-3 d-flex flex-column">
                                 <p>房型摘要</p>
                                 <img v-bind:src="room.RoomImgURL">
-                                <a v-on:click="clickAlbum" class="fz-14 mt-1">查看房間照片&設施</a>
+                                <a v-on:click="clickAlbum" class="link fz-14 mt-1">查看房間照片&設施</a>
                                 <div class="service-group mt-4">
                                     <div v-if="room.WiFi" class="d-flex align-items-center mb-2 color-green">
                                         <i class="fas fa-wifi me-3"></i>

@@ -34,6 +34,12 @@ namespace BS_Adoga
                 routeTemplate: "api/HotelDetail/GetRoomImages",
                 defaults: new { controller = "DetailApi", action = "GetRoomImages", id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "GetHotelMessage",
+                routeTemplate: "api/HotelDetail/GetHotelMessage",
+                defaults: new { controller = "DetailApi", action = "GetHotelMessage", id = RouteParameter.Optional }
+            );
             //config.Routes.MapHttpRoute(
             //    name: "GetEachHotelOneRoom",
             //    routeTemplate: "api/HotelDetail/GetEachHotelOneRoom",

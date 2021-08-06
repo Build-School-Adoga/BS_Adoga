@@ -235,23 +235,27 @@ namespace BS_Adoga.Service
 
         public IEnumerable<EvaluationPageViewModel> GetHotelMessageById(string hotelId)
         {
-            var source = _DBrepository.GetAll<MessageBoard>().Where(x => x.HotelID == hotelId);
+            var table = (from m in _context.MessageBoards.AsEnumerable()
+                         join h in _context.Hotels on m.HotelID equals h.HotelID
+                         join o in _context.Orders on m.OrderID equals o.OrderID
+                         join r in _context.Rooms on o.RoomID equals r.RoomID
+                         where m.HotelID == hotelId
+                         select new EvaluationPageViewModel
+                         {
+                             OrderID = m.OrderID,
+                             HotelID = m.HotelID,
+                             CustomerID = m.CustomerID,
+                             Title = m.Title,
+                             MessageText = m.MessageText.ToString(),
+                             MessageDate = m.MessageDate.ToString("yyyy年MM月dd日") + m.MessageDate.ToString(" dddd"),
+                             Score = ((decimal)m.Score).ToString("#0.0"),
+                             CustomerName = ($"{o.FirstName} {o.LastName}"),
+                             HotelName = h.HotelName,
+                             RoomName = r.RoomName,
+                             Stay = o.CheckOutDate.Subtract(o.CheckInDate).ToString("%d")
+                         });
 
-            int allCount = source.Count();
-            int goodCount = source.Where(x => x.Score >= 7).Count();
-            decimal avg = decimal.Round(source.Average(x => (decimal)x.Score), 1, MidpointRounding.AwayFromZero);
-            double a = ((double)goodCount / (double)allCount);
-            int percent = (int)Math.Round(a * 100, 0, MidpointRounding.AwayFromZero);
-
-            var data = new ScoreVM()
-            {
-                AllMessageCount = allCount,
-                HighScoreMessageCount = goodCount,
-                HighScorePercent = percent,
-                ScoreAvg = avg
-            };
-
-            return data;
+            return table;
         }
 
     }
