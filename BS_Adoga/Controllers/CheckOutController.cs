@@ -29,6 +29,7 @@ namespace BS_Adoga.Controllers
         public ActionResult Index()
         {
             OrderVM orderData = (OrderVM)TempData.Peek("orderData");
+
             //OrderVM orderData = (OrderVM)TempData["orderData"];
 
             //List<SelectListItem> selectCountry = new List<SelectListItem>() {
@@ -86,7 +87,7 @@ namespace BS_Adoga.Controllers
                     CheckInDate = DateTime.Parse(orderData.roomCheckOutViewModel.CheckInDate + " 15:00:00"),
                     CheckOutDate = DateTime.Parse(orderData.roomCheckOutViewModel.CheckOutDate + " 11:00:00"),
                     RoomCount = orderData.roomCheckOutViewModel.RoomOrder,
-                    RoomPriceTotal = Math.Ceiling(orderData.roomCheckOutViewModel.TotalPrice * orderData.roomCheckOutViewModel.RoomOrder),
+                    RoomPriceTotal = Math.Ceiling(orderData.roomCheckOutViewModel.TotalPrice),
                     FirstName = firstname,
                     LastName = lastname,
                     Email = email,
@@ -376,25 +377,44 @@ namespace BS_Adoga.Controllers
             model = (ECPayResultsViewModel)TempData.Peek("PayResult");
 
             #region 當付款成功時roomdetail要增加order幾間
-            var order = _context.Orders.Where(x => x.OrderID == model.OrderId).FirstOrDefault();
-            var roomdetail = _context.RoomsDetails.Where(x => x.RoomID == order.RoomID && x.CheckInDate == order.CheckInDate).FirstOrDefault();
-            roomdetail.RoomOrder += order.RoomCount;
-
-
-            using (var tran = _context.Database.BeginTransaction())
+            var OrderIdLength = model.OrderId.Length;
+            Order order = null;
+            if(OrderIdLength == 19)
+            { 
+               order = _context.Orders.Where(x => x.OrderID == model.OrderId).FirstOrDefault();
+            }
+            else
             {
-                try
+                string orderid = model.OrderId.Substring(0, 19);
+                order = _context.Orders.Where(x => x.OrderID == orderid).FirstOrDefault();
+            }
+
+            if (order != null)
+            {
+                //住幾天
+                var night = new TimeSpan(order.CheckOutDate.Ticks - order.CheckInDate.Ticks).Days + 1;
+                for (int i = 0; i < night; i++)
                 {
-                    _context.Entry(roomdetail).State = EntityState.Modified;
-                    _context.SaveChanges();
-                    tran.Commit();
-                }
-                catch (Exception ex)
-                {
-                    tran.Rollback();
-                    return Content("付款成功但是房間數roomdetail增加失敗:" + ex.ToString());
+                    var CheckInDate = order.CheckInDate.AddDays(i); //如果住一晚則是加0(當天日期) 以此類推
+                    var roomdetail = _context.RoomsDetails.Where(x => x.RoomID == order.RoomID && x.CheckInDate == CheckInDate).FirstOrDefault();
+                    roomdetail.RoomOrder += order.RoomCount;
+                    using (var tran = _context.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            _context.Entry(roomdetail).State = EntityState.Modified;
+                            _context.SaveChanges();
+                            tran.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            tran.Rollback();
+                            return Content("付款成功但是房間數roomdetail增加失敗:" + ex.ToString());
+                        }
+                    }
                 }
             }
+            
             #endregion
 
             return View(model);
