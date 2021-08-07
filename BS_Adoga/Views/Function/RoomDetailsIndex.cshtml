@@ -8,7 +8,23 @@
 @section topCSS{
 
     <link href="~/Asset/CSS/calendar.css" rel="stylesheet" />
-
+    <style>
+        #calendar {
+            margin: 0 50px;
+        }
+        .weekDay {
+            background-color: #4a4a4a;
+            color: #ffffff;
+        }
+        .purple-td {
+            background-color: #be97ee;
+            color: #fff;
+        }
+        .green-td {
+            background-color: #4bc05f;
+            color: #fff;
+        }
+    </style>
 }
 
 @section endJS{
@@ -158,6 +174,7 @@
             let tr = $c('tr');
             for (let j = 1; j <= 7; j++) {
                 let th = document.createElement('th');
+                th.classList.add('weekDay')
                 if (j == 1) {
                     th.bgColor = "yellow";
                     th.innerText = "一";
@@ -230,6 +247,7 @@
                     //判斷如果有資料存在 並且是關防狀態 顯示成bg(紫色)
                     else if (roomdetailJSON.length != 0 && roomdetailJSON[dd - 1].OpenRoom == false) {
                         td.setAttribute("bgcolor", "#B800B8");
+                        td.classList.add("purple-td")
                         //設定button Modal
                         RoomDetail(yyyy, mm, dd, td);
                         tr.append(td);
@@ -239,6 +257,7 @@
                         //td.setAttribute("class", "button");
                         //設定button Modal
                         td.bgColor = "green";
+                        td.classList.add("green-td")
                         tr.append(td);
                     }
                 }
