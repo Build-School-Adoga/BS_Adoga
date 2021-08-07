@@ -279,7 +279,7 @@
                         previewContainer.appendChild(clone_imgBox);
 
                         //設定form-data（檔名和base64）
-                        var public_id = hotelSelect.value + '_img' + (index + 1).toString().padStart(2, '0');
+                        var public_id = hotelSelect.value.replace(/ /g, "") + '_img' + (index + 1).toString().padStart(2, '0');
                         formData.set(`${'PublicId' + index}`, public_id.toString());
                         formData.set(`${'File' + index}`, fileContents[index].toString());
                     }
@@ -356,7 +356,7 @@
                 url: "../api/Function/UploadImage",
                 params: {
                     type:"hotel",
-                    folderPath: "/Adoga/Hotel/" + hotelSelect.value,
+                    folderPath: "/Adoga/Hotel/" + hotelSelect.value.replace(/ /g, ""),
                     userID: '@user_id',
                     hotelID: hotelSelect.value,
                     roomID:""
