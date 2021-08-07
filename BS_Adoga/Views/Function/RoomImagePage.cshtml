@@ -254,9 +254,9 @@
             }
             Promise.all(promises).then(fileContents => {
                 for (index = 0; index < fileContents.length; index++) {
-                    var public_id = roomSelect.value + '_img' + (index + 1).toString().padStart(2, '0');
+                    var public_id = roomSelect.value.replace(/ /g, "") + '_img' + (index + 1).toString().padStart(2, '0');
                     formData.set(`${'PublicId' + index}`, public_id.toString());
-
+                    
                     var fileSize = files[index].size / 1024;
                     var fileSizeStr = Math.round(fileSize * 100) / 100 + ' kb';
                     if (fileSize >= 2000) {
@@ -308,7 +308,7 @@
                 url: "../api/Function/UploadImage",
                 params: {
                     type: "room",
-                    folderPath: "/Adoga/Hotel/" + hotelSelect.value + "/"+roomSelect.value,
+                    folderPath: "/Adoga/Hotel/" + hotelSelect.value.replace(/ /g, "") + "/" + roomSelect.value.replace(/ /g, ""),
                     userID: '@user_id',
                     hotelID: hotelSelect.value,
                     roomID: roomSelect.value
