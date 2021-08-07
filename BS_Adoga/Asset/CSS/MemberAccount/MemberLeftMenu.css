@@ -18,11 +18,11 @@ aside{
 }
 
 .left-menu-component {
-    min-width: 200px;
+    width: 370px;
     box-sizing: border-box;
     background-color: #fff;
     background-image: linear-gradient(300deg,#fff,rgba(245, 245, 245, 0.856));
-    padding-left: 10vw;
+    padding-left: 7vw;
     box-shadow: 5px 3px 6px rgba(66, 66, 66, 0.137);
 }
 
@@ -32,7 +32,7 @@ aside{
 
 .left-menu-component a {
     display: block;
-    width:250px;
+    /*width:250px;*/
     padding: 12px 0px 12px 10px;
     font-weight: bold;
     text-decoration: none;
@@ -68,14 +68,16 @@ aside{
             color: #fff;
         }
 
-    .left-menu-component .profile-list a {
-        padding-left: 25px;
-    }
+    
 
     .left-menu-component .profile-list i {
         font-size: 14px;
     }
 
+.member-menu li a {
+    display: block;
+    padding: 10px 10px;
+}
 /*BEAR:08/03新增 部分rwd*/
 
 @media screen and (max-width:900px ) {
@@ -104,6 +106,10 @@ aside{
             font-size: 16px;
             padding: 12px 0px 12px 20px;
         }
+
+        .left-menu-component .profile-list a {
+            padding-left: 25px;
+        }
 }
 
 @media screen and (min-width:1201px ) and (max-width:1350px ) {
@@ -118,18 +124,26 @@ aside{
             font-size: 16px;
             padding: 12px 0px 12px 10px;
         }
+
+        .left-menu-component .profile-list a {
+            padding-left: 25px;
+        }
 }
 
 @media screen and (min-width:1351px ) {
     /* 左側menu大區塊 */
     .left-menu-component {
-        width: 380px;
+        width: 350px;
         padding-left: 100px;
     }
 
         .left-menu-component a {
-            width: 280px;
+            width: 250px;
             font-size: 16px;
             padding: 12px 0px 12px 10px;
+        }
+
+        .left-menu-component .profile-list a {
+            padding-left: 35px;
         }
 }

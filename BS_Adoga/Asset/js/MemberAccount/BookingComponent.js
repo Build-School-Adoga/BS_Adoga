@@ -14,8 +14,10 @@
             <div class="booking-info-wrap py-5 ps-4">
                 <div class="booking-info">
                     <div class="main d-flex">
-                        <img src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768"
-                            alt="">
+                        <div class="img-wrap">
+                            <img src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768"
+                                alt="">
+                        </div>
                         <div class="hotel-status mt-3 mx-4 ">
                             <h4>{{order.HotelName}} {{order.HotelEngName}}</h4>
                             <p class="order-title mb-1">訂單編號：{{order.OrderID}}</p>
@@ -61,7 +63,7 @@
                     <div class="footer">
                         <div class="link-group">
                             <a v-if="order.PayStatus && order.CheckCheckOut < 1" data-bs-toggle="modal" data-bs-target="#large" @click="order.Evaluation">留下住宿評鑑</a>
-                            <a href="">訂別間</a>
+                            <a href="/">訂別間</a>
                             <a v-if="order.PayStatus==false && order.In24Hours" @click="order.ContinuePay">立即付款</a>
                         </div>
                         <a @click="order.GoToDetail"  type="button" class="detail-btn">查看更多細節</a>

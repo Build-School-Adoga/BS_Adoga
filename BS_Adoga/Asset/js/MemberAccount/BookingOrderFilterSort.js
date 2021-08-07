@@ -115,12 +115,6 @@ var BookingList = new Vue({
     }
 })
 
-var modalID = new Vue({
-    el: '#modalID',
-    data: {
-        orderID: 'test'
-    }
-})
 
 function appendBookingList(response) {
 
@@ -148,6 +142,7 @@ function appendBookingList(response) {
                 HotelID: item.HotelID,
                 HotelName: item.HotelName,
                 HotelEngName: item.HotelEngName,
+                HotelImageURL: item.HotelImageURL,
                 BedStr: bedTypeStr,
                 RoomPriceTotal: Math.ceil(item.RoomPriceTotal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
 

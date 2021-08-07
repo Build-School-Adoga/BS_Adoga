@@ -109,21 +109,21 @@ $(document).click(function (e) {
         close_filter();
     }
 
-    var Smoke = document.getElementById("Smoke");
-    var nSmoke = document.getElementById("nSmoke");
-    if (Smoke.checked) {
-        nSmoke.style.display = "none";
-        Smoke.style.display = "inline-block";
-    }
-    else if (nSmoke.checked) {
-        Smoke.style.display = "none";
-        nSmoke.style.display = "inline-block";
-    }
-    else {
-        nSmoke.style.display = "inline-block";
-        Smoke.style.display = "inline-block";
+    //var Smoke = document.getElementById("Smoke");
+    //var nSmoke = document.getElementById("nSmoke");
+    //if (Smoke.checked) {
+    //    nSmoke.style.display = "none";
+    //    Smoke.style.display = "inline-block";
+    //}
+    //else if (nSmoke.checked) {
+    //    Smoke.style.display = "none";
+    //    nSmoke.style.display = "inline-block";
+    //}
+    //else {
+    //    nSmoke.style.display = "inline-block";
+    //    Smoke.style.display = "inline-block";
 
-    }
+    //}
 })
 
 

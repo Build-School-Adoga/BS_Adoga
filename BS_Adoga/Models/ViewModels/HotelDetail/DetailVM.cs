@@ -16,6 +16,8 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
 
         public IEnumerable<HotelOptionViewModel> hotelOptionVM { get; set; }
 
-        public IEnumerable<ImagesVM> HotelImages { get; set; }
+        public string[] HotelImages { get; set; }
+
+        public ScoreVM HotelScoreVM { get; set; }
     }
 }

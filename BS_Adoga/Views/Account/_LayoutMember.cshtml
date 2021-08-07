@@ -58,15 +58,17 @@
                     <h6>我的帳戶</h6>
                     <ul>
                         <li>
-                            <i class="far fa-calendar-check me-2"></i>
-                            @Html.ActionLink("管理訂單", "MemberBooking", "Account", null, new { @class = "member-menu-link" })
+                            <a href="/Account/MemberBooking" class="member-menu-link"><i class="far fa-calendar-check me-2"></i>管理訂單</a>
+                            @*@Html.ActionLink("管理訂單", "MemberBooking", "Account", null, new { @class = "member-menu-link" })*@
                         </li>
                         @*<li><i class="fas fa-inbox me-2"></i> 收件匣</li>*@
-                        <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
-                        <li><i class="far fa-star me-2"></i> 住宿評鑒</li>
+                        @*<li><i class="fas fa-heart me-2"></i> 口袋清單</li>*@
                         <li>
-                            <i class="far fa-user me-2"></i>
-                            @Html.ActionLink("個人資料", "MemberProfile", "Account", null, new { @class = "member-menu-link" })
+                            <a href="/Account/MemberProfile" class="member-menu-link"><i class="far fa-star me-2"></i>住宿評鑒</a>
+                        </li>
+                        <li>
+                            <a href="/Account/MemberProfile" class="member-menu-link"><i class="far fa-user me-2"></i>個人資料</a>
+                            @*@Html.ActionLink("個人資料", "MemberProfile", "Account", null, new { @class = "member-menu-link" })*@
                         </li>
                         @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2", onclick = "FacebookLogout()", @id = "btnDisconnect" })
                     </ul>
@@ -105,21 +107,21 @@
                 @*<li>
                     <a href="" class="inbox"><i class="fas fa-inbox"></i>收件匣</a>
                 </li>*@
-                <li>
+                @*<li>
                     <a href="" class="inbox"><i class="fas fa-heart"></i>口袋清單</a>
-                </li>
+                </li>*@
                 <li>
-                    <a href="" class="reviews"><i class="far fa-star"></i>住宿評鑑</a>
+                    <a id="evaluation" href="#" class="reviews"><i class="far fa-star"></i>住宿評鑑</a>
                 </li>
                 <li>
                     <a id="profile" href="/Account/MemberProfile" class="profile">
                         <i class="far fa-user"></i>個人資料
-                        @if (ViewBag.MemberCurrentPage == "profile")
+                        @*@if (ViewBag.MemberCurrentPage == "profile")
                         {
                             <i class="fas fa-sort-down"></i>
-                        }
+                        }*@
                     </a>
-                    @if (ViewBag.MemberCurrentPage == "profile")
+                    @*@if (ViewBag.MemberCurrentPage == "profile")
                     {
                         <ul class="profile-list">
                             <li class="">
@@ -135,7 +137,7 @@
                                 <a href="#email_subscriptions-link"><i class="fas fa-envelope-open-text"></i>訂閱電子郵件</a>
                             </li>
                         </ul>
-                    }
+                    }*@
                 </li>
             </ul>
         </aside>
