@@ -10,6 +10,7 @@ using System.Web.Http;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using System.Web;
+using BS_Adoga.Models.ViewModels.HotelLogin;
 
 namespace BS_Adoga.APIController
 {
@@ -114,6 +115,14 @@ namespace BS_Adoga.APIController
 
             if (check.IsSuccessful == true) { return Ok("OK"); }
             else { return Ok("NOTOK"); }
+        }
+
+        [AcceptVerbs("GET", "POST")]
+        public IHttpActionResult OrderAllDataBYEmpID(string empid)
+        {
+            List<OrderViewModel> orderViewModels = _repository.GetAllOrderByEmpID(empid).ToList();
+
+            return Json(orderViewModels);
         }
     }
 }

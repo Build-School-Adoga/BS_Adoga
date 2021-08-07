@@ -19,6 +19,8 @@ namespace BS_Adoga.Models.ViewModels.Account
         public DateTime OrderDate { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
+        public string RoomName { get; set; }
+        public int RoomCount { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Name { get; set; }

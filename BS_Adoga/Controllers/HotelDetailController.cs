@@ -131,6 +131,7 @@ namespace BS_Adoga.Controllers
                 }
             };
 
+            orderData.roomCheckOutViewModel.TotalPrice = orderData.roomCheckOutViewModel.RoomPrice * orderData.roomCheckOutViewModel.CountNight * orderData.roomCheckOutViewModel.RoomOrder;
             TempData["orderData"] = orderData;
 
             return RedirectToAction("Index", "CheckOut");

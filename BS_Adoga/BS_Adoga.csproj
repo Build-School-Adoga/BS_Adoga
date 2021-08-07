@@ -365,6 +365,7 @@
     <Compile Include="Models\ViewModels\homeViewModels\Card.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\HotelRoomCreateViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\HotelRoomViewModel.cs" />
+    <Compile Include="Models\ViewModels\HotelLogin\OrderViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelLogin\RoomViewModel.cs" />
     <Compile Include="Models\ViewModels\MemberLogin\ForgetPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\HotelDetail\SearchByMemberVM.cs" />
@@ -493,6 +494,7 @@
     <Content Include="Asset\images\Rentalcars.png" />
     <Content Include="Asset\images\tw.svg.png" />
     <Content Include="Asset\JS\formStep.js" />
+    <Content Include="Asset\JS\Function\CardOrderComponent.js" />
     <Content Include="Asset\JS\helpers.js" />
     <Content Include="Asset\JS\home.js" />
     <Content Include="Asset\JS\HotelDetail\HotelFacility.js" />
@@ -2504,6 +2506,7 @@
     <Content Include="Views\Search\GetAllHotelInCity.cshtml" />
     <Content Include="Views\HotelDetail\upload.cshtml" />
     <Content Include="Views\Function\HotelImagePage.cshtml" />
+    <Content Include="Views\Function\OrderIndex.cshtml" />
     <Content Include="Views\Function\RoomImagePage.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -212,7 +212,7 @@ namespace BS_Adoga.Controllers
             Response.Cookies.Add(service.cookie(loginVM, user));
 
             //5.Response.Redirect
-            return RedirectToAction("Index", "Function");
+            return RedirectToAction("HotelIndex", "Function");
             
             #endregion
         }
