@@ -177,7 +177,7 @@
                     <div class="img-wrap">
                         <img src=@imagesURL[1]>
                         <div class="show-shadow"></div>
-                        <a class="add-fav-button"><i class="fas fa-heart"></i></a>
+                        @*<a class="add-fav-button"><i class="fas fa-heart"></i></a>*@
                     </div>
                 </div>
                 <!-- <img class="medium-pic" src="https://picsum.photos/360/226/?random=2"> -->
@@ -219,12 +219,12 @@
                 <div class="wrap d-flex flex-wrap">
                     <p class="rate-num">@score.ScoreAvg</p>
                     <div class="rate-content">
-                        <p class="rate-category">很讚</p>
+                        <p class="rate-category">@score.ScoreLevel</p>
                         <p class="month-rate-change">@*<i class="fas fa-caret-up"></i> 本月8.6%*@</p>
                         <!-- <i class="fas fa-caret-down"></i> -->
                         <a href="#comment-area" class="comment-count">(@score.AllMessageCount.ToString("N0") 篇評鑒)</a>
                     </div>
-                    <p><i class="fas fa-user-friends me-1"></i>@score.HighScorePercent %的住客都給予好評</p>
+                    <p><i class="fas fa-user-friends me-1"></i>@score.HighScorePercent %的住客給予好評</p>
                 </div>
             </div>
         </div>

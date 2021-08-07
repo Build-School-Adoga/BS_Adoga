@@ -9,7 +9,7 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
     {
         public decimal ScoreAvg { get; set; }
 
-        //public string ScoreLevel { get; set; }
+        public string ScoreLevel { get; set; }
 
         public int AllMessageCount { get; set; }
 

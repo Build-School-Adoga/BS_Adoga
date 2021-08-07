@@ -218,16 +218,35 @@ namespace BS_Adoga.Service
 
             int allCount = source.Count();
             int goodCount = source.Where(x => x.Score >= 7).Count();
-            decimal avg = decimal.Round(source.Average(x => (decimal)x.Score), 1, MidpointRounding.AwayFromZero);
-            double a = ((double)goodCount / (double)allCount);
-            int percent = (int)Math.Round(a*100, 0, MidpointRounding.AwayFromZero);
+            decimal avg = 0.0m;
+            int percent = 0;
+            string level = "暫無評分";
+            if (source.Count() != 0)
+            {
+                avg = decimal.Round(source.Average(x => (decimal)x.Score), 1, MidpointRounding.AwayFromZero);
+                double a = ((double)goodCount / (double)allCount);
+                percent = (int)Math.Round(a * 100, 0, MidpointRounding.AwayFromZero);
+                if (avg <= 3)
+                    level = "很差";
+                else if(avg >3 && avg <= 5)
+                    level = "不好";
+                else if (avg > 5 && avg <= 7)
+                    level = "還行";
+                else if (avg > 7 && avg <= 8)
+                    level = "還不錯";
+                else if (avg > 8 && avg <= 9.5m)
+                    level = "很讚";
+                else if (avg > 9.5m)
+                    level = "超讚";
+            }
 
             var data = new ScoreVM()
             {
                 AllMessageCount = allCount,
                 HighScoreMessageCount = goodCount,
                 HighScorePercent = percent,
-                ScoreAvg = avg               
+                ScoreAvg = avg,
+                ScoreLevel = level
             };
 
             return data;

@@ -63,7 +63,7 @@
                     <div class="footer">
                         <div class="link-group">
                             <a v-if="order.PayStatus && order.CheckCheckOut < 1" data-bs-toggle="modal" data-bs-target="#large" @click="order.Evaluation">留下住宿評鑑</a>
-                            <a href="">訂別間</a>
+                            <a href="/">訂別間</a>
                             <a v-if="order.PayStatus==false && order.In24Hours" @click="order.ContinuePay">立即付款</a>
                         </div>
                         <a @click="order.GoToDetail"  type="button" class="detail-btn">查看更多細節</a>
