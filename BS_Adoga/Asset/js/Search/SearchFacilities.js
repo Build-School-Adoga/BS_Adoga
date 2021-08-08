@@ -1,4 +1,5 @@
-﻿import $bus from './SearchDataComponent.js';
+﻿////import { forEach } from '../../StartbootstrapAdminPages/vendor/fontawesome-free/js/v4-shims.js';
+import $bus from './SearchDataComponent.js';
 
 var allHotel = '';
 var list;
@@ -39,6 +40,9 @@ function HotelList(response) {
                 pageNumber: 0,
             }
         },
+        //data: {
+        //    pageNumber: 0
+        //},
         props: {
             listData: {
                 //收集這頁所需要的所有資料
@@ -49,7 +53,7 @@ function HotelList(response) {
                 //這頁所需要的資料數量
                 type: Number,
                 required: false,
-                default: 2
+                default: 1
             },
         },
         filters: {
@@ -88,8 +92,7 @@ function HotelList(response) {
             paginatedData() {
                 const startData = this.pageNumber * this.size,
                     endData = startData + this.size;
-                //console.log("New:" + this.listData);
-                debugger;
+                //debugger;
                 return this.listData.slice(startData, endData);
             },
         },
@@ -160,11 +163,15 @@ function HotelList(response) {
         data: {
             card: DataList,
             orderKey: "price",     
-            star: []
+            star: [],
+            hotel: [],
+            room: []
         },
         created: function () {
             //debugger;
             $bus.$on('onStar', this.starArrange);
+            $bus.$on('hotelFacility', this.hotelArrange);
+            $bus.$on('roomFacility', this.roomArrange);
         },
         methods: {
             orderPrice() {
@@ -176,17 +183,32 @@ function HotelList(response) {
                 this.card = sortByKey(this.card, this.orderKey);
             },
             starArrange(arrayStar) {
-                if (arrayStar.length != 0) {
-                    debugger;
-                    this.card = RearrangeByStar(DataList, arrayStar);
-                }
-                else {
-                    debugger;
-                    this.card = DataList;
-                    debugger;
-                }
+                //debugger;
+                this.star = arrayStar;
+                this.card = Arrangement(DataList, this.star, this.hotel, this.room);
+            },
+            hotelArrange(arrayData) {
+                //debugger;
+                this.hotel = arrayData;
+                this.card = Arrangement(DataList, this.star, this.hotel, this.room);
+            },
+            roomArrange(arrayData) {
+                //debugger;
+                this.room = arrayData;
+                this.card = Arrangement(DataList, this.star, this.hotel, this.room);
             }
-        }
+        },
+        //computed: {
+        //    arrange: function () {
+        //        debugger;
+        //        let c = Arrangement(this.card, this.star, this.facility);
+        //        console.log("c的：" + c);
+        //        debugger;
+
+        //        this.card = c;
+        //        //return c;
+        //    }
+        //}
     })
 }
 
@@ -215,21 +237,77 @@ function sortByKey(array, key) {
     })
 }
 
-function RearrangeByStar(listdata, star) {
-    //console.log(star);
-    //console.log("Here:"+listdata[1].Star);
-    debugger;
-
+function Arrangement(listdata, star, fac, room) {
+    //debugger;
     let list = [];
     for (var i = 0; i < listdata.length; i++) {
-        debugger;
-    /*if (star.Contains(listdata[i].Star)) {*/
-        if (star.includes(listdata[i].Star)) {
+        if (star.length == 0 && fac.length == 0 &&room.length==0) {
             debugger;
             list.push(listdata[i]);
         }
+        else {
+            var alltrue;
+            if (star.length == 0)  alltrue = true; 
+            else  alltrue = star.includes(listdata[i].Star);
+            for (var l = 0; l < fac.length; l++) {
+                if (fac[l].haveFacility == true) {
+                    var name = fac[l].facility;
+                    var now = listdata[i]["I_FacilityVM"][name];
+                    //debugger;
+                    if (now == false) {
+                        alltrue = false;
+                    }
+                }
+            }
+            if (alltrue == true) {
+                debugger;
+                list.push(listdata[i]);
+            }
+        }
     }
-    console.log(list);
     debugger;
     return list;
 }
+
+//function RearrangeByStar(listdata, star) {
+//    let list = [];
+//    for (var i = 0; i < listdata.length; i++) {
+//        if (star.length == 0) {
+//            debugger;
+//            list.push(listdata[i]);
+//        }
+//        else {
+//            if (star.includes(listdata[i].Star)) {
+//                debugger;
+//                list.push(listdata[i]);
+//            }
+//        }
+//    }
+//    return list;
+//}
+
+//function IncludeFalicity(listdata, facility) {
+//    let list = [];
+//    //debugger;
+//    for (var i = 0; i < listdata.length; i++) {
+//        console.log(listdata[i]);
+//        var alltrue = true;
+//        debugger;
+//        for (var l = 0; l < facility.length; l++) {
+//            if (facility[l].haveFacility == true) {
+//                var name = facility[l].facility;
+//                console.log(name);
+//                var now = listdata[i]["I_FacilityVM"][name];
+//                console.log(now);
+//                debugger;
+//                if (now == false) {
+//                    alltrue = false;
+//                }
+//            }
+//        }
+//        if (alltrue == true) {
+//            list.push(listdata[i]);
+//        }
+//    }
+//    return list;
+//}

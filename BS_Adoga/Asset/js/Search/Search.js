@@ -19,15 +19,10 @@ Vue.component('filterstar', {
             }
         },
     },
-    //mounted() {
-    //    debugger;
-    //    console.log(this.select);
-    //    $bus.$emit("onStar", this.select);
-    //},
     watch: {
         select: function(){
-            console.log(this.select);
-            debugger;
+            //console.log(this.select);
+            //debugger;
             $bus.$emit('onStar', this.select);
         }
     },
@@ -43,101 +38,9 @@ Vue.component('filterstar', {
                 </ul>`
 })
 
-////var starList;
 new Vue({
-    //el: '#filter-equipment',
     el: '#filter',
     data: {
-        FacilityList: [
-            {
-                hotelFacilities: [
-                    {
-                        facility: "swim",
-                        facilityName: "游泳池",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "airport",
-                        facilityName: "機場接送",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "familyFriendly",
-                        facilityName: "親子友善住宿",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "restaurant",
-                        facilityName: "餐廳",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "club",
-                        facilityName: "夜店",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "golf",
-                        facilityName: "附設高爾夫球場",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "gym",
-                        facilityName: "健身房",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "nSmoke",
-                        facilityName: "禁菸區",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "Smoke",
-                        facilityName: "吸菸區",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "FFG",
-                        facilityName: "無障礙友善設施",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "carPark",
-                        facilityName: "停車場",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "frontDesk",
-                        facilityName: "24小時櫃台服務",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "Spa",
-                        facilityName: "Spa桑拿",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "business",
-                        facilityName: "商務設備",
-                        haveFacility: false
-                    }
-                ]
-            },
-            {
-                roomFacilities: [
-                    {
-                        facility: "internet",
-                        facilityName: "網路",
-                        haveFacility: false
-                    },
-                    {
-                        facility: "petAllow",
-                        facilityName: "可帶寵物",
-                        haveFacility: false
-                    }
-                ]
-            }
-        ],
         star: [
             {
                 num: 5,
@@ -162,15 +65,124 @@ new Vue({
             {
                 num: 0,
                 name: "zero"
-            }],
-        //select: []
-    },
-    method: {    }
+            }]
+    }
 })
 
+
+new Vue({
+    el: '#filter-equipment',
+    data: {
+        required:[],
+        hotelFacilities: [
+            {
+                facility: "SwimmingPool",
+                facilityName: "游泳池",
+                haveFacility: false
+            },
+            {
+                facility: "AirportTransfer",
+                 facilityName: "機場接送",
+                 haveFacility: false
+             },
+            {
+                facility: "FamilyChildFriendly",
+                 facilityName: "親子友善住宿",
+                 haveFacility: false
+             },
+            {
+                facility: "Restaurants",
+                 facilityName: "餐廳",
+                 haveFacility: false
+             },
+            {
+                facility: "Nightclub",
+                 facilityName: "夜店",
+                 haveFacility: false
+             },
+            {
+                facility: "GolfCourse",
+                 facilityName: "附設高爾夫球場",
+                 haveFacility: false
+             },
+            {
+                 facility: "Gym",
+                 facilityName: "健身房",
+                 haveFacility: false
+             },
+            {
+                facility: "NoSmoking",
+                 facilityName: "禁菸區",
+                 haveFacility: false
+             },
+            {
+                facility: "SmokingArea",
+                 facilityName: "吸菸區",
+                 haveFacility: false
+             },
+            {
+                facility: "FacilitiesFordisabledGuests",
+                 facilityName: "無障礙友善設施",
+                 haveFacility: false
+             },
+            {
+                facility: "CarPark",
+                 facilityName: "停車場",
+                 haveFacility: false
+             },
+            {
+                facility: "FrontDesk",
+                 facilityName: "24小時櫃台服務",
+                 haveFacility: false
+             },
+            {
+                facility: "SpaSauna",
+                 facilityName: "Spa桑拿",
+                 haveFacility: false
+             },
+            {
+                facility: "BusinessFacilities",
+                 facilityName: "商務設備",
+                 haveFacility: false
+             }
+        ],
+        roomFacilities: [
+            {
+                facility: "Internet",
+                facilityName: "網路",
+                haveFacility: false
+            },
+            {
+                facility: "PetsAllowed",
+                facilityName: "可帶寵物",
+                haveFacility: false
+            }
+        ]
+    },
+    watch: {
+        hotelFacilities: {
+            handler: function (e) {
+                //debugger;
+                $bus.$emit('hotelFacility', e);
+            },
+            deep:true
+        },
+        roomFacilities: {
+            handler: function (e) {
+                //console.log(e);
+                //debugger;
+                $bus.$emit('roomFacility', e);
+            },
+            deep: true
+        }
+    },
+    
+})
+
+
 function checkData(arraylist, num) {
-    console.log(arraylist);
-    debugger;
+    //console.log(arraylist);
+    //debugger;
     if (arraylist.length == 0) {
         //初始資料量為0，直接用for會出bug
         return true;
@@ -198,10 +210,11 @@ var filter = document.getElementById("filter-equipment");
 openFilter.addEventListener('click', function () {
     if (filter.style.visibility == "visible") {
         filter.style.visibility = "hidden";
+        //fixed_cancel();
     }
     else {
         filter.style.visibility = "visible";
-        //document.getElementsByTagName("body").preventDefault();
+        //fixed();
     }
 })
 
@@ -236,5 +249,28 @@ btnStar.addEventListener('click', function () {
         ulStar.style.display = "none";
     }
 })
-//debugger;
 
+//$(document).click(function (e) {
+//    if (e.target == btnStar||) {
+//        ulStar.style.display = "block";
+//    }
+//    else    ulStar.style.display = "none";
+//})
+
+//觸發彈窗底部頁面禁止滑動
+//function fixed() {
+//    var scrollTop = document.body.scrollTop;//設定背景元素的位置
+//    $('#filter').attr('data-top', scrollTop);
+//    var contentStyle = document.getElementById("filter").style;//content是可以滾動的背景元素id名稱
+//    contentStyle.position = 'fixed'; //contentStyle是第二步的變數，設定背景元素的position屬性為‘fixed’
+//    contentStyle.top = "-" + scrollTop + "px";
+//}
+
+////關閉彈窗底部頁面恢復滑動
+//function fixed_cancel() {
+//    var contentStyle = document.getElementById("filter").style;
+//    var scrollTop = $('#filter').attr('data-top');//設定背景元素的位置
+//    contentStyle.top = '0px';//恢復背景元素的初始位置
+//    contentStyle.position = "static";//恢復背景元素的position屬性（初始值為absolute，就恢復為absolute，以此類推）
+//    $(document).scrollTop(scrollTop);//scrollTop,設定滾動條的位置
+//}
