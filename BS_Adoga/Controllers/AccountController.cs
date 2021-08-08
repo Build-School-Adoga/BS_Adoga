@@ -113,6 +113,8 @@ namespace BS_Adoga.Controllers
 
         public ActionResult BookingDetail(string orderid)
         {
+            ViewBag.MemberCurrentPage = "booking";
+
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
@@ -185,10 +187,11 @@ namespace BS_Adoga.Controllers
         [HttpPost]
         public ActionResult Evaluation(string orderid, decimal ScoreRange, string Title, string MessageText)
         {
+            ViewBag.MemberCurrentPage = "evaluation";
+
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
-
 
 
             var getId = _memberacoountrepository.GetComment(orderid, user_id);

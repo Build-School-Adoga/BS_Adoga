@@ -23,7 +23,7 @@ namespace BS_Adoga.APIController
         [AcceptVerbs("GET", "POST")]
         public IHttpActionResult GetHotelByCity(string CityName, string startDate, string endDate, int adult, int kid, int room)
         {
-            var allHotel = _s.GetHotelAfterSearchByCity(CityName, startDate, endDate, adult,kid,room);
+            var allHotel = _s.GetHotelAfterSearchByCity(CityName, startDate, endDate, adult, kid, room);
             return Json(allHotel);
         }
 

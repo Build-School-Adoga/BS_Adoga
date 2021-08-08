@@ -29,6 +29,17 @@ namespace BS_Adoga
                 defaults: new { controller = "DetailApi", action = "GetHotelFacilities", id = RouteParameter.Optional }
             );
 
+            config.Routes.MapHttpRoute(
+                name: "GetRoomImages",
+                routeTemplate: "api/HotelDetail/GetRoomImages",
+                defaults: new { controller = "DetailApi", action = "GetRoomImages", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "GetHotelMessage",
+                routeTemplate: "api/HotelDetail/GetHotelMessage",
+                defaults: new { controller = "DetailApi", action = "GetHotelMessage", id = RouteParameter.Optional }
+            );
             //config.Routes.MapHttpRoute(
             //    name: "GetEachHotelOneRoom",
             //    routeTemplate: "api/HotelDetail/GetEachHotelOneRoom",
@@ -36,11 +47,11 @@ namespace BS_Adoga
             //);
 
             //Irene
-           // config.Routes.MapHttpRoute(
-           //    name: "GetHotelFromCity",
-           //    routeTemplate: "api/Search/GetHotelFromCity",
-           //    defaults: new { controller = "Search", action = "GetHotelFromCity", id = RouteParameter.Optional }
-           //);
+            // config.Routes.MapHttpRoute(
+            //    name: "GetHotelFromCity",
+            //    routeTemplate: "api/Search/GetHotelFromCity",
+            //    defaults: new { controller = "Search", action = "GetHotelFromCity", id = RouteParameter.Optional }
+            //);
 
             config.Routes.MapHttpRoute(
                name: "GetHotelByCity",
@@ -54,6 +65,18 @@ namespace BS_Adoga
                 routeTemplate: "api/Function/UploadImage",
                 defaults: new { controller = "FunctionApi", action = "UploadImage", id = RouteParameter.Optional }
             );
+            
+            config.Routes.MapHttpRoute(
+                name: "GetImageByID",
+                routeTemplate: "api/Function/GetImageByID",
+                defaults: new { controller = "FunctionApi", action = "GetImageByID", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "GetRoomOptionByID",
+                routeTemplate: "api/Function/GetRoomOptionByID",
+                defaults: new { controller = "FunctionApi", action = "GetRoomOptionByID", id = RouteParameter.Optional }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "GetRoomDetailMonth",
@@ -65,6 +88,12 @@ namespace BS_Adoga
                 name: "EditRoomDetail",
                 routeTemplate: "api/Function/EditRoomDetail",
                 defaults: new { controller = "FunctionApi", action = "EditRoomDetail", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "GetOrderAllData",
+                routeTemplate: "api/Function/OrderAllData",
+                defaults: new { controller = "FunctionApi", action = "OrderAllDataBYEmpID", id = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(

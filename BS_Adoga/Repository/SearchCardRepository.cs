@@ -20,16 +20,6 @@ namespace BS_Adoga.Repository
             _context = new AdogaContext();
         }
 
-        //public IQueryable<string> GetHotels(string city)
-        //{
-        //    //原本給劉的
-        //    var hotel = from H in _context.Hotels
-        //                    where H.HotelCity.Contains(city)
-        //                    select H.HotelName;
-
-        //    return hotel;
-        //}
-
         public IEnumerable<HotelSearchViewModel> GetHotelAfterSearchByCityOrName(SearchDataViewModel info)
         {
             var countNight = (DateTime.Parse(info.CheckOutDate) - DateTime.Parse(info.CheckInDate)).TotalDays;
@@ -46,7 +36,7 @@ namespace BS_Adoga.Repository
             DateTime end = DateTime.Parse(endDate);
 
             var allhotel = (from H in _context.Hotels
-                            where (H.HotelCity.Contains(CityName) || H.HotelName.Contains(CityName))
+                            where (H.HotelCity.Contains(CityName) || H.HotelName.Contains(CityName)) 
                             group H by H.HotelID into hid
                             select hid.Key).ToArray();
 
@@ -54,6 +44,7 @@ namespace BS_Adoga.Repository
             var table = (from H in _context.Hotels
                          join R in _context.Rooms on H.HotelID equals R.HotelID
                          join D in _context.RoomsDetails on R.RoomID equals D.RoomID
+                         join F in _context.Facilities on H.HotelID equals F.HotelID
                          where allhotel.Contains(H.HotelID)
                          && R.NumberOfPeople * orderRoom >= people
                          && D.CheckInDate >= start
@@ -86,6 +77,26 @@ namespace BS_Adoga.Repository
                                  RoomCount = D.RoomCount,
                                  RoomOrder = D.RoomOrder,
                                  RoomDiscount = D.RoomDiscount
+                             },
+                             I_FacilityVM = new FacilityViewModel
+                             {
+                                 FacilitieID = F.FacilitieID,
+                                 HotelID = F.HotelID,
+                                 SwimmingPool = F.SwimmingPool,
+                                 AirportTransfer = F.AirportTransfer,
+                                 FamilyChildFriendly = F.FamilyChildFriendly,
+                                 Restaurants = F.Restaurants,
+                                 Nightclub = F.Nightclub,
+                                 GolfCourse = F.GolfCourse,
+                                 Gym = F.Gym,
+                                 NoSmoking = F.NoSmoking,
+                                 SmokingArea = F.SmokingArea,
+                                 FacilitiesFordisabledGuests = F.FacilitiesFordisabledGuests,
+                                 CarPark = F.CarPark,
+                                 SpaSauna = F.SpaSauna,
+                                 BusinessFacilities = F.BusinessFacilities,
+                                 Internet = F.Internet,
+                                 PetsAllowed = F.PetsAllowed
                              }
                          }).AsEnumerable();
 
@@ -127,6 +138,26 @@ namespace BS_Adoga.Repository
                                    RoomCount = t.I_RoomDetailVM.RoomCount,
                                    RoomOrder = t.I_RoomDetailVM.RoomOrder,
                                    RoomDiscount = t2.Discount
+                               },
+                               I_FacilityVM = new FacilityViewModel
+                               {
+                                   FacilitieID = t.I_FacilityVM.FacilitieID,
+                                   HotelID = t.I_FacilityVM.HotelID,
+                                   SwimmingPool = t.I_FacilityVM.SwimmingPool,
+                                   AirportTransfer = t.I_FacilityVM.AirportTransfer,
+                                   FamilyChildFriendly = t.I_FacilityVM.FamilyChildFriendly,
+                                   Restaurants = t.I_FacilityVM.Restaurants,
+                                   Nightclub = t.I_FacilityVM.Nightclub,
+                                   GolfCourse = t.I_FacilityVM.GolfCourse,
+                                   Gym = t.I_FacilityVM.Gym,
+                                   NoSmoking = t.I_FacilityVM.NoSmoking,
+                                   SmokingArea = t.I_FacilityVM.SmokingArea,
+                                   FacilitiesFordisabledGuests = t.I_FacilityVM.FacilitiesFordisabledGuests,
+                                   CarPark = t.I_FacilityVM.CarPark,
+                                   SpaSauna = t.I_FacilityVM.SpaSauna,
+                                   BusinessFacilities = t.I_FacilityVM.BusinessFacilities,
+                                   Internet = t.I_FacilityVM.Internet,
+                                   PetsAllowed = t.I_FacilityVM.PetsAllowed
                                }
                            }).GroupBy(x => x.HotelID, (key, g) => g.OrderBy(x => x.I_RoomVM.RoomPrice * (1 - x.I_RoomDetailVM.RoomDiscount)).First());
 
@@ -135,8 +166,8 @@ namespace BS_Adoga.Repository
                 var aa = a;
                 decimal total = a.I_RoomVM.RoomPrice * (1 - a.I_RoomDetailVM.RoomDiscount);
             }
+            
             return table_3;
-
         }
 
         public IEnumerable<HotelOptionViewModel> GetHotelOption()
@@ -153,32 +184,32 @@ namespace BS_Adoga.Repository
             return optionData.ToList();
         }
 
-        public IEnumerable<FacilityViewModel> GetFacilitiId(string hotelId)
-        {
-            var data = from F in _context.Facilities
-                       where hotelId.Contains(F.HotelID)
-                       select new FacilityViewModel
-                       {
-                           FacilitieID = F.FacilitieID,
-                           HotelID = F.HotelID,
-                           SwimmingPool = F.SwimmingPool,
-                           AirportTransfer = F.AirportTransfer,
-                           FamilyChildFriendly = F.FamilyChildFriendly,
-                           Restaurants = F.Restaurants,
-                           Nightclub = F.Nightclub,
-                           GolfCourse = F.GolfCourse,
-                           Gym = F.Gym,
-                           NoSmoking = F.NoSmoking,
-                           SmokingArea = F.SmokingArea,
-                           FacilitiesFordisabledGuests = F.FacilitiesFordisabledGuests,
-                           CarPark = F.CarPark,
-                           SpaSauna = F.SpaSauna,
-                           BusinessFacilities = F.BusinessFacilities,
-                           Internet = F.Internet,
-                           PetsAllowed = F.PetsAllowed
-                       };
-            return data.ToList();
-        }
+        //public IEnumerable<FacilityViewModel> GetFacilitiId(string hotelId)
+        //{
+        //    var data = from F in _context.Facilities
+        //               where hotelId.Contains(F.HotelID)
+        //               select new FacilityViewModel
+        //               {
+        //                   FacilitieID = F.FacilitieID,
+        //                   HotelID = F.HotelID,
+        //                   SwimmingPool = F.SwimmingPool,
+        //                   AirportTransfer = F.AirportTransfer,
+        //                   FamilyChildFriendly = F.FamilyChildFriendly,
+        //                   Restaurants = F.Restaurants,
+        //                   Nightclub = F.Nightclub,
+        //                   GolfCourse = F.GolfCourse,
+        //                   Gym = F.Gym,
+        //                   NoSmoking = F.NoSmoking,
+        //                   SmokingArea = F.SmokingArea,
+        //                   FacilitiesFordisabledGuests = F.FacilitiesFordisabledGuests,
+        //                   CarPark = F.CarPark,
+        //                   SpaSauna = F.SpaSauna,
+        //                   BusinessFacilities = F.BusinessFacilities,
+        //                   Internet = F.Internet,
+        //                   PetsAllowed = F.PetsAllowed
+        //               };
+        //    return data.ToList();
+        //}
 
         //API
     }

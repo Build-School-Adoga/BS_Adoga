@@ -26,7 +26,6 @@ namespace BS_Adoga.Service
             {
                 HotelSearchVM = _r.GetHotelAfterSearchByCityOrName(info),
                 HotelOptionVM = _r.GetHotelOption(),
-                //FacilityVM =_r.GetEquipmentList()
             };
             return data;
         }

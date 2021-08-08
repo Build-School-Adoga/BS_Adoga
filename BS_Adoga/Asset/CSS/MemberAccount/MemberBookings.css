@@ -251,10 +251,19 @@ div.booking-item {
     background-color: #fff;
 }
 
-    .booking-info img {
-        width: 200px;
-        height: 250px;
-    }
+.booking-info .img-wrap {
+    width:200px;
+    height:230px;
+    overflow:hidden;
+}
+
+.booking-info .img-wrap img {
+    display:block;
+    margin:auto;
+    height:100%;
+    /*width: 200px;*/
+    /*height: 250px;*/
+}
 
 /* 飯店相關區塊 */
 .hotel-status {
