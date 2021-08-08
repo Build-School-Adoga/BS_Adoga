@@ -40,6 +40,7 @@ namespace BS_Adoga.Repository
                               HotelID = h.HotelID,
                               HotelName = h.HotelName,
                               HotelEngName = h.HotelEngName,
+                              HotelImageURL = "",
                               RoomBed = ((from rb in _context.RoomBeds
                                           join bt in _context.BedTypes on rb.TypesOfBedsID equals bt.TypesOfBedsID
                                           where rb.RoomID == o.RoomID
@@ -80,6 +81,8 @@ namespace BS_Adoga.Repository
                              OrderDate = o.OrderDate,
                              CheckInDate = o.CheckInDate,
                              CheckOutDate = o.CheckOutDate,
+                             RoomName = r.RoomName,
+                             RoomCount = o.RoomCount,
                              Email = o.Email,
                              Name = o.FirstName + " " +o.LastName,
                              PhoneNumber = o.PhoneNumber,
@@ -113,6 +116,57 @@ namespace BS_Adoga.Repository
                              RoomQuantity = o.RoomCount,
                              RoomPriceTotal = o.RoomPriceTotal,
                              PayStatus = o.PaymentStatus
+                         }).FirstOrDefault();
+            return table;
+        }
+        public IEnumerable<MemberBookingViewModel> GetBookingOrderByID(string UserInputOrderId)
+        {
+            //var OrderIdSearchResult = _context.Orders.Where(x => x.OrderID.Contains(UserInputOrderId.ToString()));
+
+            var SearchResultByOrderID = (from o in _context.Orders
+                                         join r in _context.Rooms on o.RoomID equals r.RoomID
+                                         join h in _context.Hotels on r.HotelID equals h.HotelID
+                                         where o.OrderID.Contains(UserInputOrderId.ToString())
+                                         select new MemberBookingViewModel
+                                         {
+                                             OrderID = o.OrderID,
+                                             HotelID = h.HotelID,
+                                             HotelName = h.HotelName,
+                                             HotelEngName = h.HotelEngName,
+                                             RoomBed = ((from rb in _context.RoomBeds
+                                                         join bt in _context.BedTypes on rb.TypesOfBedsID equals bt.TypesOfBedsID
+                                                         where rb.RoomID == o.RoomID
+                                                         select new RoomBedVM
+                                                         {
+                                                             Name = bt.Name,
+                                                             Amount = rb.Amount
+                                                         })),
+                                             RoomPriceTotal = o.RoomPriceTotal,
+                                             OrderDate = o.OrderDate,
+                                             CheckInDate = o.CheckInDate,
+                                             CheckOutDate = o.CheckOutDate,
+                                             Breakfast = r.Breakfast,
+                                             City = h.HotelCity,
+                                             PayStatus = o.PaymentStatus
+                                         }
+                    );
+    
+
+            return SearchResultByOrderID;
+        }
+
+        public CommentViewModel GetComment(string orderID, string customerID)
+        {
+            var table = (from o in _context.Orders
+                         join r in _context.Rooms on o.RoomID equals r.RoomID
+                         join h in _context.Hotels on r.HotelID equals h.HotelID
+                         where o.CustomerID == customerID && o.OrderID == orderID
+                         orderby o.OrderID descending
+                         select new CommentViewModel
+                         {
+                             HotelID = h.HotelID,
+                             HotelName = h.HotelName,
+                             OrderID = o.OrderID
                          }).FirstOrDefault();
             return table;
         }

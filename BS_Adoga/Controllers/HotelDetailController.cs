@@ -79,8 +79,8 @@ namespace BS_Adoga.Controllers
             string[] roomSplit = room.Split('間');
 
             string[] date = date_range.Split('-');
-            string start = date[0];
-            string end = date[1];
+            string start = DateTime.Parse(date[0]).ToString("yyyy-MM-dd");
+            string end = DateTime.Parse(date[1]).ToString("yyyy-MM-dd");
 
             return RedirectToAction("HotelDetail", new
             {
@@ -131,11 +131,16 @@ namespace BS_Adoga.Controllers
                 }
             };
 
+            orderData.roomCheckOutViewModel.TotalPrice = orderData.roomCheckOutViewModel.RoomPrice * orderData.roomCheckOutViewModel.CountNight * orderData.roomCheckOutViewModel.RoomOrder;
             TempData["orderData"] = orderData;
 
             return RedirectToAction("Index", "CheckOut");
         }
 
+        public ActionResult upload()
+        {
+            return View();
+        }
         //public ActionResult DetailAlbum()
         //{
         //    return View();

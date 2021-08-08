@@ -75,31 +75,48 @@ namespace BS_Adoga.Controllers
 
             if (ModelState.IsValid)
             {
-                //1.View Model(memberregisterviewmodel) --> Data Model (customer)
                 string firstname = HttpUtility.HtmlEncode(registerVM.MemberRegisterViewModel.FirstName);
                 string lastname = HttpUtility.HtmlEncode(registerVM.MemberRegisterViewModel.LastName);
                 string email = HttpUtility.HtmlEncode(registerVM.MemberRegisterViewModel.Email);
                 string password = HttpUtility.HtmlEncode(registerVM.MemberRegisterViewModel.Password);
+
+                var lnkHref = "<a href='" + Url.Action("MemberLogin", "MemberLogin", new { verify = email}, "https") + "'>Verify Your Account</a>";
+                string subject = "Adoga Login - Verify Your Account";
+                string body = "Hi" + "<br/><br/>這是你的確認信" +
+                "<br/>" + lnkHref;
+
+
+                WebMail.Send(email, subject, body, null, null, null, true, null, null, null, null, null, null);
+                ViewBag.msg = "email ok";
+                //1.View Model(memberregisterviewmodel) --> Data Model (customer)
+
                 Customer cust = new Customer()
                 {
                     CustomerID = email,
                     FirstName = firstname,
                     LastName = lastname,
                     Email = email,
+                    VerifyEmail = false,
                     MD5HashPassword = HashService.MD5Hash(password),
                     Logging = "建立" + "," + firstname + lastname + "," + DateTime.Now.ToString(),
                     RegisterDatetime = DateTime.Now
+
                 };
                 //EF
                 try
                 {
+                    
+
                     _context.Customers.Add(cust);
                     _context.SaveChanges();
-                    return Content("新增帳號成功");
+                    TempData["NewAccount"] = "帳號新增成功,請至信箱收取驗證信以完成驗證";
+                    return RedirectToAction("MemberLogin", "MemberLogin");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    return Content("新增帳號失敗:" + ex.ToString());
+                    TempData["Account"] = "此帳號已經有人使用,請重新輸入新的帳號";
+                    return RedirectToAction("MemberLogin", "MemberLogin");
+                    
                 }
             }
 
@@ -129,6 +146,8 @@ namespace BS_Adoga.Controllers
 
             Customer user = _context.Customers.Where(x => x.Email == email && x.MD5HashPassword == password).FirstOrDefault();
 
+            
+
             //找不到則彈回Login頁
             if (user == null)
             {
@@ -136,7 +155,12 @@ namespace BS_Adoga.Controllers
 
                 return View(loginVM);
             }
+            if (user.VerifyEmail == false || user.VerifyEmail==null)
+            {
+                ModelState.AddModelError("NotFound", "未通過認證,請至電子信箱確認郵件");
 
+                return View(loginVM);
+            }
 
             //四.FormsAuthentication Class -- https://docs.microsoft.com/zh-tw/dotnet/api/system.web.security.formsauthentication?view=netframework-4.8
 
@@ -273,7 +297,7 @@ namespace BS_Adoga.Controllers
                         Response.Cookies.Add(cookie);
                         transaction.Commit();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //result.IsSuccessful = false;
                         //result.Exception = ex;
@@ -312,14 +336,14 @@ namespace BS_Adoga.Controllers
         {
             string msg = "ok";
             GoogleJsonWebSignature.Payload payload = null;
-
             try
             {
                 payload = await GoogleJsonWebSignature.ValidateAsync(id_token, new GoogleJsonWebSignature.ValidationSettings()
                 {
-                    Audience = new List<string>() { "373077817054-5hahnkio91en8pnqqqpaginugjt0f85v.apps.googleusercontent.com" }//要驗證的client id，把自己申請的Client ID填進去
+                    //要驗證的client id，把自己申請的Client ID填進去
+                    Audience = new List<string>() 
+                    { "373077817054-5hahnkio91en8pnqqqpaginugjt0f85v.apps.googleusercontent.com" }
                 });
-                //測試
             }
             catch (Google.Apis.Auth.InvalidJwtException ex)
             {
@@ -382,7 +406,7 @@ namespace BS_Adoga.Controllers
                             Response.Cookies.Add(cookie);
                             transaction.Commit();
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             //result.IsSuccessful = false;
                             //result.Exception = ex;
@@ -422,7 +446,7 @@ namespace BS_Adoga.Controllers
         #endregion
 
         #region LineLogin
-        string redirect_uri = "https://localhost:44352/MemberLogin/callback";
+        string redirect_uri = "https://adoga.azurewebsites.net/MemberLogin/callback";
         string client_id = "1656167198";
         string client_secret = "ef98822259547db7297ecb9606b357b1";
 
@@ -432,7 +456,7 @@ namespace BS_Adoga.Controllers
             TempData["state"] = state;//利用TempData被取出資料後即消失的特性，來防禦CSRF攻擊
             string response_type = "code";
             string client_id = "1656167198";
-            string redirect_uri = HttpUtility.UrlEncode("https://localhost:44352/MemberLogin/callback");
+            string redirect_uri = HttpUtility.UrlEncode("https://adoga.azurewebsites.net/MemberLogin/callback");
             string LineLoginUrl = string.Format("https://access.line.me/oauth2/v2.1/authorize?response_type={0}&client_id={1}&redirect_uri={2}&state={3}&scope=profile%20openid%20email",
                 response_type,
                 client_id,
@@ -595,7 +619,7 @@ namespace BS_Adoga.Controllers
                             Response.Cookies.Add(cookie);
                             transaction.Commit();
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             //result.IsSuccessful = false;
                             //result.Exception = ex;
@@ -683,12 +707,38 @@ namespace BS_Adoga.Controllers
             cust.Email = email;
             cust.MD5HashPassword = HashService.MD5Hash(FirstPassword);
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(email = email);
+            var data = db.Customers.Find(email);
             data.MD5HashPassword = HashService.MD5Hash(FirstPassword);
             db.SaveChanges();
             return RedirectToAction("HomePage", "Home");
 
         }
         #endregion
+        public ActionResult VerifyEmail()
+        {
+            return View();
+        }
+        [HttpPost]
+        [MultiButton("Verify")]
+        [ValidateAntiForgeryToken]
+        public ActionResult VerifyEmail(string VerifyEmailValue, string abc)
+        {
+
+
+            Customer cust = new Customer();
+            cust.Email = VerifyEmailValue;
+          
+            AdogaContext db = new AdogaContext();
+
+            var data = db.Customers.Find(VerifyEmailValue);
+
+            data.VerifyEmail = true;
+
+            db.SaveChanges();
+
+
+            return RedirectToAction("HomePage", "Home");
+
+        }
     }
 }

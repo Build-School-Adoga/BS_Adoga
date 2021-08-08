@@ -40,7 +40,7 @@
                     <p class="contact me-2"><i class="fas fa-phone-volume me-2"></i>無</p>
                     <address><i class="fas fa-map-marker-alt me-2"></i>@Model.HotelCity @Model.HotelDistrict @Model.HotelAddress</address>
                 </div>
-                <a href="#" class="stay-rule"><i class="fas fa-file-alt me-2"></i>查看住宿規定</a>
+                @*<a href="#" class="stay-rule"><i class="fas fa-file-alt me-2"></i>查看住宿規定</a>*@
                 <a href="mailto:hotel@gmail.com" class="mail-to-hotel">
                     <i class="fas fa-envelope me-2"></i>寄電子郵件給住宿
                 </a>
@@ -48,11 +48,11 @@
                 <!-- <button class="btn btn-primary">索取入住憑證</button> -->
             </div>
             <div class="main row my-5 mx-5">
-                <div class="col-3 gx-0">
+                <div class="col-4 gx-0">
                     <img src="http://pix6.agoda.net/hotelImages/234/234438/234438_16042615400041817947.jpg?s=1024x768"
                          alt="">
                 </div>
-                <div class="col-9 gx-5">
+                <div class="col-8 gx-5">
                     <table>
                         <tr class="border-b-gray">
                             <th class="col-4" scope="row">訂單編號</th>
@@ -103,7 +103,8 @@
                         <tr class="border-b-gray">
                             <th class="col-4" scope="row">預訂房型和房數</th>
                             <td class="col-8" colspan="2">
-                                <p>@BedNameString</p>
+                                @*<p>@BedNameString</p>*@
+                                <p>@Model.RoomName ,房間數:@Model.RoomCount 間</p>
                             </td>
                         </tr>
                         @*<tr class="border-b-gray">

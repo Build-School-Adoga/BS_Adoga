@@ -1,5 +1,4 @@
-﻿////import { forEach } from '../../StartbootstrapAdminPages/vendor/fontawesome-free/js/v4-shims.js';
-import $bus from './SearchDataComponent.js';
+﻿import $bus from './SearchDataComponent.js';
 
 var allHotel = '';
 var list;
@@ -13,7 +12,6 @@ btnOrderPrice.addEventListener("click", function () {
 btnOrderStar.addEventListener("click", function () {
     orderItem = "Star";
 })
-
 
 //axios去get資料先
 axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
@@ -40,9 +38,6 @@ function HotelList(response) {
                 pageNumber: 0,
             }
         },
-        //data: {
-        //    pageNumber: 0
-        //},
         props: {
             listData: {
                 //收集這頁所需要的所有資料
@@ -197,18 +192,7 @@ function HotelList(response) {
                 this.room = arrayData;
                 this.card = Arrangement(DataList, this.star, this.hotel, this.room);
             }
-        },
-        //computed: {
-        //    arrange: function () {
-        //        debugger;
-        //        let c = Arrangement(this.card, this.star, this.facility);
-        //        console.log("c的：" + c);
-        //        debugger;
-
-        //        this.card = c;
-        //        //return c;
-        //    }
-        //}
+        }
     })
 }
 

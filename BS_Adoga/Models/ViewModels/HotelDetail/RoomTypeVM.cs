@@ -13,6 +13,8 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
 
         public string RoomName { get; set; }
 
+        public string RoomImgURL { get; set; }
+
         public bool NoSmoking { get; set; }
 
         public bool Breakfast { get; set; }
