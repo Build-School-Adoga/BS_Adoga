@@ -201,7 +201,7 @@ namespace BS_Adoga.Controllers
             if (selOrderId)
             {
                 TempData["message"] = "已經評論過";
-                return RedirectToAction("MemberBooking");
+                return RedirectToAction("EvaluationPage");
             }
             else
             {
