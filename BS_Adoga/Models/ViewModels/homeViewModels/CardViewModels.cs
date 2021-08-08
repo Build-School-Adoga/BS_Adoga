@@ -24,5 +24,8 @@ namespace BS_Adoga.Models.ViewModels.homeViewModels
         
         public MyRoom My_Rooms { get; set; }
         public MyRoomsDetails My_RoomsDetails { get; set; }
+        public MyMessageBoard<Decimal> My_MessageBoard { get; set; }
+        public decimal ddd { get; set; }
+
     }
 }

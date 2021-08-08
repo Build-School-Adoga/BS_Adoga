@@ -96,6 +96,16 @@ namespace BS_Adoga.Repository
                                             RoomID = z.RoomID,
                                             RoomDiscount = z.RoomDiscount
                                         }).FirstOrDefault();
+                item.ddd = 5.0m;
+               var ddd =(from m in _context.MessageBoards
+                           where m.HotelID ==item.HotelID
+                                      select m.Score
+                                     );
+                if (ddd.Count() != 0)
+                {
+                    item.ddd = decimal.Round(ddd.Average(),1,MidpointRounding.AwayFromZero);
+                    int x = 0;
+                }
             }
 
             return images.ToList();
@@ -169,7 +179,17 @@ namespace BS_Adoga.Repository
                                             {
                                                 RoomID = z.RoomID,
                                                 RoomDiscount = z.RoomDiscount
-                                            }).FirstOrDefault();
+                                           }).FirstOrDefault();
+                    item.ddd = 5.0m;
+                    var ddd = (from m in _context.MessageBoards
+                               where m.HotelID == item.HotelID
+                               select m.Score
+                                          );
+                    if (ddd.Count() != 0)
+                    {
+                        item.ddd = decimal.Round(ddd.Average(), 1, MidpointRounding.AwayFromZero);
+                        int i = 0;
+                    }
                 }
 
                 return images.ToList();
@@ -209,6 +229,16 @@ namespace BS_Adoga.Repository
                                                 RoomID = z.RoomID,
                                                 RoomDiscount = z.RoomDiscount
                                             }).FirstOrDefault();
+                    item.ddd = 5.0m;
+                    var ddd = (from m in _context.MessageBoards
+                               where m.HotelID == item.HotelID
+                               select m.Score
+                                          );
+                    if (ddd.Count() != 0)
+                    {
+                        item.ddd = decimal.Round(ddd.Average(), 1, MidpointRounding.AwayFromZero);
+                        int i = 0;
+                    }
                 }
 
                 return images.ToList();
@@ -249,6 +279,16 @@ namespace BS_Adoga.Repository
                                                 RoomID = z.RoomID,
                                                 RoomDiscount = z.RoomDiscount
                                             }).FirstOrDefault();
+                    item.ddd = 5.0m;
+                    var ddd = (from m in _context.MessageBoards
+                               where m.HotelID == item.HotelID
+                               select m.Score
+                                          );
+                    if (ddd.Count() != 0)
+                    {
+                        item.ddd = decimal.Round(ddd.Average(), 1, MidpointRounding.AwayFromZero);
+                        int i = 0;
+                    }
                 }
 
                 return images.ToList();
@@ -288,6 +328,16 @@ namespace BS_Adoga.Repository
                                                 RoomID = z.RoomID,
                                                 RoomDiscount = z.RoomDiscount
                                             }).FirstOrDefault();
+                    item.ddd = 5.0m;
+                    var ddd = (from m in _context.MessageBoards
+                               where m.HotelID == item.HotelID
+                               select m.Score
+                                          );
+                    if (ddd.Count() != 0)
+                    {
+                        item.ddd = decimal.Round(ddd.Average(), 1, MidpointRounding.AwayFromZero);
+                        int i = 0;
+                    }
                 }
 
                 return images.ToList();
