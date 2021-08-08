@@ -21,9 +21,12 @@ function GoogleLogin() {
     let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
     auth2.signIn().then(function (GoogleUser) {
         console.log("Google登入成功");
-        let user_id = GoogleUser.getId();//取得user id，不過要發送至Server端的話，請使用↓id_token
-        let AuthResponse = GoogleUser.getAuthResponse(true);//true會回傳access token ，false則不會，自行決定。如果只需要Google登入功能應該不會使用到access token
-        let id_token = AuthResponse.id_token;//取得id_token
+        //取得user id，不過要發送至Server端的話，請使用↓id_token
+        let user_id = GoogleUser.getId();
+        //true會回傳access token ，false則不會，自行決定。如果只需要Google登入功能應該不會使用到access token
+        let AuthResponse = GoogleUser.getAuthResponse(true);
+        //取得id_token
+        let id_token = AuthResponse.id_token;
         $.ajax({
             url: id_token_to_userIDUrl,
             method: "post",
@@ -33,13 +36,11 @@ function GoogleLogin() {
                 document.location.href ="https://adoga.azurewebsites.net/";
             }
         });//end $.ajax
-
     },
         function (error) {
             console.log("Google登入失敗");
             console.log(error);
         });
-
 }//end function GoogleLogin
 
 
