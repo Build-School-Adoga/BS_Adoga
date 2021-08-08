@@ -25,7 +25,7 @@ namespace BS_Adoga.Repository
             new Card { name = "新北市",ImageURL="../Asset/images/Home/新北市.png" },
             new Card { name = "新竹縣",ImageURL="../Asset/images/Home/新竹縣.png" },
             new Card { name = "台東縣",ImageURL="../Asset/images/Home/台東縣.png" },
-            new Card { name = "臺南市",ImageURL="../Asset/images/Home/臺南市.PNG" },
+           
         };
         public IQueryable<CardViewModels> GetCardModels3()
         {
@@ -103,7 +103,7 @@ namespace BS_Adoga.Repository
                                      );
                 if (ddd.Count() != 0)
                 {
-                    item.ddd = decimal.Round(ddd.Average(),1,MidpointRounding.AwayFromZero);
+                    item.ddd = decimal.Round((decimal)ddd.Average(),1,MidpointRounding.AwayFromZero);
                     int x = 0;
                 }
             }
@@ -187,7 +187,7 @@ namespace BS_Adoga.Repository
                                           );
                     if (ddd.Count() != 0)
                     {
-                        item.ddd = decimal.Round(ddd.Average(), 1, MidpointRounding.AwayFromZero);
+                        item.ddd = decimal.Round((decimal)ddd.Average(), 1, MidpointRounding.AwayFromZero);
                         int i = 0;
                     }
                 }
@@ -236,7 +236,7 @@ namespace BS_Adoga.Repository
                                           );
                     if (ddd.Count() != 0)
                     {
-                        item.ddd = decimal.Round(ddd.Average(), 1, MidpointRounding.AwayFromZero);
+                        item.ddd = decimal.Round((decimal)ddd.Average(), 1, MidpointRounding.AwayFromZero);
                         int i = 0;
                     }
                 }
@@ -286,7 +286,7 @@ namespace BS_Adoga.Repository
                                           );
                     if (ddd.Count() != 0)
                     {
-                        item.ddd = decimal.Round(ddd.Average(), 1, MidpointRounding.AwayFromZero);
+                        item.ddd = decimal.Round((decimal)ddd.Average(), 1, MidpointRounding.AwayFromZero);
                         int i = 0;
                     }
                 }
@@ -335,7 +335,7 @@ namespace BS_Adoga.Repository
                                           );
                     if (ddd.Count() != 0)
                     {
-                        item.ddd = decimal.Round(ddd.Average(), 1, MidpointRounding.AwayFromZero);
+                        item.ddd = decimal.Round((decimal)ddd.Average(), 1, MidpointRounding.AwayFromZero);
                         int i = 0;
                     }
                 }

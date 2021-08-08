@@ -30,9 +30,6 @@ namespace BS_Adoga.Models.DBContext
         [Required]
         public string MessageText { get; set; }
       
-        public decimal Score { get; set; }
-
-
         public decimal? Score { get; set; }
 
         public virtual Order Order { get; set; }
