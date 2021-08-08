@@ -48,9 +48,9 @@ aside{
     }
 
     .left-menu-component a.currentPage {
-        color: rgb(85, 85, 85);
+        color: rgb(85, 85, 85);*/
         /*background-color: rgb(248, 248, 248);*/
-        background-color: rgba(241, 241, 241, 0.479);
+        /*background-color: rgba(241, 241, 241, 0.479);
         border-right: 4px rgb(103, 149, 233) solid;
     }
 
@@ -120,30 +120,8 @@ aside{
     }
 
         .left-menu-component a {
-            width: 250px;
-            font-size: 16px;
-            padding: 12px 0px 12px 10px;
-        }
-
-        .left-menu-component .profile-list a {
-            padding-left: 25px;
+            width:unset;
+            padding: 12px 10px 12px 0px;
         }
 }
 
-@media screen and (min-width:1351px ) {
-    /* 左側menu大區塊 */
-    .left-menu-component {
-        width: 350px;
-        padding-left: 100px;
-    }
-
-        .left-menu-component a {
-            width: 250px;
-            font-size: 16px;
-            padding: 12px 0px 12px 10px;
-        }
-
-        .left-menu-component .profile-list a {
-            padding-left: 35px;
-        }
-}
