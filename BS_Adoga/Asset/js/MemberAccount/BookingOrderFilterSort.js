@@ -1,23 +1,24 @@
-﻿
-import BookingCard from './BookingComponent.js'
-
+﻿import BookingCard from './BookingComponent.js'
+ 
 //一開始載入頁面時要帶入order的資料，未入住的。
-axios.get('../Account/GetMemberBookingList', {
-        params: {
-            filterOption: "ComingSoon",
-            sortOption: "CheckInDate"
-        }
-    }).then(function (response) {
-        console.log(response.data)
-        console.log('success')
-        appendBookingList(response.data);
-    }).catch((error) => console.log(error))
+//axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+//        params: {
+//            filterOption: "ComingSoon",
+//            sortOption: "CheckInDate",
+//            UserInputOrderId: ""
+//        }
+//    }).then(function (response) {
+//        console.log(response.data)
+//        console.log('success')
+//        appendBookingList(response.data);
+//    }).catch((error) => console.log(error))
 
 var filterBookingOrder = new Vue({
     el: "#filter-sort-wrap",
     data: {
         filterOption: 'ComingSoon',
-        sortOption: 'CheckInDate'
+        sortOption: 'CheckInDate',
+        searchOrderId:''
     },
     watch: {
         filterOption() {
@@ -34,24 +35,86 @@ var filterBookingOrder = new Vue({
             axios.get('../Account/GetMemberBookingList', {
                 params: {
                     filterOption: this.filterOption,
-                    sortOption: this.sortOption
+                    sortOption: this.sortOption,
+                    UserInputOrderId: this.searchOrderId
                 }
             }).then((response) => {
                 console.log(response.data)
                 appendBookingList(response.data)
             }).catch((error) => console.log(error))
+           
         },
+        Search() {
+            axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+                params: {
+                    filterOption: this.filterOption,
+                    sortOption: this.sortOption,
+                    UserInputOrderId: this.searchOrderId
+
+                }
+            }).then((response) => {
+                console.log(this.searchOrderId)
+                console.log(response.data)
+                appendBookingList(response.data)
+            }).catch((error) => console.log(error))
+        },
+        ClearSearch() {
+            this.searchOrderId = '';
+        }
     }
 })
+
 var BookingList = new Vue({
     el: '#BookingList',
     data: {
-        group: []
+        group: [],
+        pageNumber: 0,
+        size:3
+    },
+    methods: {
+        nextPage() {
+            this.pageNumber++;
+        },
+        prevPage() {
+            this.pageNumber--;
+        }
+    },
+    watch: {
+        group() {
+            console.log(this.pageNumber);
+            this.pageNumber = 0;
+        }
+    },
+    computed: {
+        pageCount() {
+            let l = this.group.length,
+                s = this.size;
+            return Math.floor(l / s);
+        },
+        paginatedData() {
+            const start = this.pageNumber * this.size,
+                end = start + this.size;
+            return this.group.slice(start, end);
+        }
+    },
+    created: function () {
+        axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+            params: {
+                filterOption: "ComingSoon",
+                sortOption: "CheckInDate",
+                UserInputOrderId: ""
+            }
+        }).then(function (response) {
+            console.log(response.data)
+            console.log('success')
+            appendBookingList(response.data);
+        }).catch((error) => console.log(error))       
     },
     components: {
         'booking-card': BookingCard
     }
 })
+
 
 function appendBookingList(response) {
 
@@ -69,8 +132,7 @@ function appendBookingList(response) {
             else
                 bedTypeStr += bed.Name + "x" + bed.Amount
         })
-        console.log(item.OrderID)
-
+        //console.log(item.OrderID)
         
         //開始給BookingList（Vue物件）的group塞資料&設定裡面的屬性
         BookingList.$set(BookingList.group, index,
@@ -80,6 +142,7 @@ function appendBookingList(response) {
                 HotelID: item.HotelID,
                 HotelName: item.HotelName,
                 HotelEngName: item.HotelEngName,
+                HotelImageURL: item.HotelImageURL,
                 BedStr: bedTypeStr,
                 RoomPriceTotal: Math.ceil(item.RoomPriceTotal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
 
@@ -107,14 +170,12 @@ function appendBookingList(response) {
 
                 ContinuePay: function () {
                     console.log(item.OrderID)
-                    //axios.get('https://localhost:44352/Account/RePayOrder', {
-                    //    params: {
-                    //        orderid: item.OrderID
-                    //    }
-                    //}).then(response => {
-                    //    console.log(response);
-                        window.location.href ='../Account/RePayOrder/'+item.OrderID
-                    //}).catch(error => console.log(error))
+                    window.location.href ='../Account/RePayOrder/'+item.OrderID
+                },
+                Evaluation: function () {
+                    console.log(modalID.orderID);
+                    console.log(item.orderID);
+                    modalID.orderID = item.OrderID
                 },
                 GoToDetail: function () {
                     window.location.href = '../BookingDetail/' + item.OrderID;

@@ -3,6 +3,7 @@
 
 /* <!-- 最頂端的Agoda nav --> */
 
+
 .head-nav {
     padding: 0px 20px;
     border-bottom: 1px solid rgb(228, 228, 228);
@@ -14,12 +15,11 @@
         font-size: 0;
     }
 
-        /*.head-nav-wrap h2 img {
-            width: 89px;
-            height: 37px;
+        .head-nav-wrap h2 img {
+           /* width: 89px;
+            height: 37px;*/
             vertical-align: bottom;
-        }*/
-
+        }
 .head-nav-item {
     display: inline-block;
     /*margin-left: 30px;*/
@@ -162,29 +162,42 @@
     border-bottom: 10px solid rgb(241, 241, 241);
 }
 
-.member-menu h6 {
-    padding: 15px 30px;
-    font-size: 12px;
-    color: rgb(73, 73, 73);
-    background-color: rgb(245, 245, 245);
-}
+    .member-menu h6 {
+        padding: 15px 30px;
+        font-size: 12px;
+        color: rgb(73, 73, 73);
+        background-color: rgb(245, 245, 245);
+        margin-bottom: 0;
+    }
 
 .member-menu ul {
     padding: 10px 20px;
+    margin-bottom:0;
 }
 
 .member-menu li {
     list-style: none;
-    padding: 10px;
+    /*padding: 10px;*/
     font-size: 14px;
 }
+
+    .member-menu li a {
+        display:block;
+        padding: 12px 10px;
+    }
+
+    .member-menu li a i{
+        display: inline-block;
+        width:20px;
+        text-align:center;
+    }
 
 .member-menu li:hover {
     background-color: rgb(248, 248, 248);
     color: rgb(99, 155, 238);
 }
 
-.member-menu li:hover>.member-menu-link {
+.member-menu li:hover > .member-menu-link, .member-menu li:hover i {
     color: rgb(99, 155, 238);
 }
 
@@ -278,11 +291,7 @@
 
 /*電腦*/
 @media screen and (min-width:769px) {
-    .head-nav-wrap h2 img {
-        width: 89px;
-        height: 37px;
-        vertical-align: bottom;
-    }
+    
 
     .login-menu {
         display: flex;
@@ -318,12 +327,6 @@
 
 /* 手機或小平板 */
 @media screen and (max-width:768px) {
-
-    .head-nav-wrap h2 img {
-        width: 89px;
-        height: 37px;
-        vertical-align: bottom;
-    }
 
     #login-menu-chkbox:checked + .login-menu {
         display: block;
@@ -435,11 +438,6 @@
 
 /*更小的手機 比如iphone 5*/
 @media screen and (max-width:570px) {
-    .head-nav-wrap h2 img {
-        width: 72px;
-        height: 30px;
-        vertical-align: bottom;
-    }
     #Customer-Service .info-group {
         flex-direction: column;
         align-items: center;

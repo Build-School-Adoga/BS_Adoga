@@ -57,9 +57,12 @@
     .search-bar .nav-item {
         border-radius: 5px;
         background-color: #fff;
-        width: 30%;
+        width: 25%;
         position: relative;
     }
+    .search-bar .nav-item:nth-child(2) {
+            width: 40%;
+        }
 
 .search-filter-nav .nav-item:nth-child(2) div.line {
     width: 1px;

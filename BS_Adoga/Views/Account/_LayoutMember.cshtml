@@ -24,7 +24,7 @@
             <h2>
                 Agoda-Navbar
                 <a href="http://adoga.azurewebsites.net/">
-                    <img src="~/Asset/images/adoga-logo-v2.png" alt="Adoga-Logo" title="Adoga-Logo-Homepage">
+                    <img src="~/Asset/images/Adoga_logo_color.png" alt="Adoga-Logo" title="Adoga-Logo-Homepage">
                 </a>
             </h2>
         </div>
@@ -58,15 +58,17 @@
                     <h6>我的帳戶</h6>
                     <ul>
                         <li>
-                            <i class="far fa-calendar-check me-2"></i>
-                            @Html.ActionLink("管理訂單", "MemberBooking", "Account", null, new { @class = "member-menu-link" })
+                            <a href="/Account/MemberBooking" class="member-menu-link"><i class="far fa-calendar-check me-2"></i>管理訂單</a>
+                            @*@Html.ActionLink("管理訂單", "MemberBooking", "Account", null, new { @class = "member-menu-link" })*@
                         </li>
-                        <li><i class="fas fa-inbox me-2"></i> 收件匣</li>
-                        <li><i class="fas fa-heart me-2"></i> 口袋清單</li>
-                        @*<li><i class="far fa-star me-2"></i> 住宿評鑒</li>*@
+                        @*<li><i class="fas fa-inbox me-2"></i> 收件匣</li>*@
+                        @*<li><i class="fas fa-heart me-2"></i> 口袋清單</li>*@
                         <li>
-                            <i class="far fa-user me-2"></i>
-                            @Html.ActionLink("個人資料", "MemberProfile", "Account", null, new { @class = "member-menu-link" })
+                            <a href="/Account/MemberProfile" class="member-menu-link"><i class="far fa-star me-2"></i>住宿評鑒</a>
+                        </li>
+                        <li>
+                            <a href="/Account/MemberProfile" class="member-menu-link"><i class="far fa-user me-2"></i>個人資料</a>
+                            @*@Html.ActionLink("個人資料", "MemberProfile", "Account", null, new { @class = "member-menu-link" })*@
                         </li>
                         @Html.ActionLink("登出", "SignOut", "MemberLogin", null, new { @class = "logout-btn btn py-2", onclick = "FacebookLogout()", @id = "btnDisconnect" })
                     </ul>
@@ -104,36 +106,12 @@
                     <a id="booking" href="/Account/MemberBooking" class="booking "><i class="far fa-calendar-check"></i>管理訂單</a>
                 </li>
                 <li>
-                    <a href="" class="inbox"><i class="fas fa-inbox"></i>收件匣</a>
-                </li>
-                <li>
-                    <a href="" class="reviews"><i class="far fa-star"></i>住宿評鑑</a>
+                    <a href="/Account/EvaluationPage" class="reviews"><i class="far fa-star"></i>住宿評鑑</a>
                 </li>
                 <li>
                     <a id="profile" href="/Account/MemberProfile" class="profile">
                         <i class="far fa-user"></i>個人資料
-                        @if (ViewBag.MemberCurrentPage == "profile")
-                        {
-                            <i class="fas fa-sort-down"></i>
-                        }
                     </a>
-                    @if (ViewBag.MemberCurrentPage == "profile")
-                    {
-                        <ul class="profile-list">
-                            <li class="">
-                                <a href="#user_details"><i class="fas fa-info-circle"></i>用戶詳細資料</a>
-                            </li>
-                            <li class="">
-                                <a href="#social_networks-link"><i class="fab fa-facebook"></i>社群網路連結</a>
-                            </li>
-                            <li class="">
-                                <a href="#payment-methods"><i class="far fa-credit-card"></i>付款方式</a>
-                            </li>
-                            <li class="">
-                                <a href="#email_subscriptions-link"><i class="fas fa-envelope-open-text"></i>訂閱電子郵件</a>
-                            </li>
-                        </ul>
-                    }
                 </li>
             </ul>
         </aside>
@@ -237,10 +215,10 @@
     <script src="~/Asset/js/GoogleLogin.js"></script>
     <!--Google引用內容結束   Google登入使用的引用JS -->
     <!-- mine -->
-    <script>
+    @*<script>
         let linkCurrent = document.getElementById(`@ViewBag.MemberCurrentPage`)//不知道為什麼，明明viewBag裡面我只放字串，可是linkCurrent就是抓到id=字串的物件。
         linkCurrent.classList.add("currentPage");
-    </script>
+    </script>*@
     @RenderSection("endJS", false)
 
 </body>

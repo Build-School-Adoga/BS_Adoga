@@ -1,93 +1,38 @@
 ﻿import RoomType from './RoomComponent.js'
 
-var hoverEquimServ = new Vue({
-    el: '#hover-equim-serv',
-    data: {
-        hover: false,
-    },
-})
-
 $().ready(function () {
 
-    //一開始載入頁面時要帶入Room的全部資料
-    axios.get('../api/HotelDetail/GetAllRoom', {
-        params: {
-            hotelName: filternav.Value,
-            startDate: filternav.startDate,
-            endDate: filternav.endDate,
-            orderRoom: filternav.room,
-            adult: filternav.adult,
-            child: filternav.kids,
+    function SetRoomAlbumData(resData, roomData) {
+        //console.log('開始設定albumdata，看下roomData')
+        roomAlbum.$set(roomAlbum, 'RoomInfo',
+            {
+                RoomID: roomData.RoomID,
+                RoomName: roomData.RoomName,
+                FreeWiFi: roomData.WiFi,
+                NoSmoking: roomData.NoSmoking,
+                Bathroom: roomData.BathroomName,
+                Bed: roomData.RoomBed,
+                RoomDiscount: roomData.RoomDiscount,
+                RoomNowPrice: roomData.RoomNowPrice,
+                RoomLeft: roomData.RoomLeft
+            });
+        //console.log("看看setroominfo後的全部data")
+        //console.log(roomAlbum.RoomInfo)
+        for (i = 0; i < resData.length; i++) {
+            roomAlbum.$set(roomAlbum.ImgGroup, i,
+                {
+                    ImgID: resData[i].ImageID,
+                    ImgURL: resData[i].ImageURL,
+                    Index: i,
+                    IsActive: false
+                });
         }
-    }).then(function (response) {
-            appendRoomType(response.data);
-        }).catch((error) => console.log(error))
+        roomAlbum.ImgGroup[0].IsActive = true;
+        //console.log("看看setimgGroup後的全部data")
+        //console.log(roomAlbum)
+    }
 
-
-    //Vue.component('room-type', {
-    //    props: { room: ['room'] },
-    //    template: '#roomTypeTemplate',
-    //})
-
-    var filterRoom = new Vue({
-        el: '#filter-room',
-        data: {
-            FreeBreakfast: false,
-            NoSmoking: false,
-            FamilyRoom: false
-        },
-        watch: {
-            FreeBreakfast() {
-                console.log(`brkf:${this.FreeBreakfast}`)
-                this.filter();
-            },
-            NoSmoking() {
-                console.log(`nosmoking:${this.NoSmoking}`)
-                this.filter();
-            },
-            FamilyRoom() {
-                console.log(`family:${this.FamilyRoom}`)
-                this.filter();
-            }
-        },
-        methods: {
-            filter() {
-                axios.get('../api/HotelDetail/GetSpecificRoom', {
-                    params: {
-                        hotelName: filternav.Value,
-                        startDate: filternav.startDate,
-                        endDate: filternav.endDate,
-                        orderRoom: filternav.room,
-                        adult: filternav.adult,
-                        child: filternav.kids,
-                        freeBreakfast: this.FreeBreakfast,
-                        noSmoking: this.NoSmoking,
-                        family: this.FamilyRoom,
-                    }
-                }).then(function (response) {
-                    appendRoomType(response.data)
-                }).catch((error) => console.log(error))
-            },
-            clearFilter() {
-                this.FreeBreakfast = false;
-                this.NoSmoking = false;
-                this.FamilyRoom = false;
-                $.post('../api/HotelDetail/GetAllRoom', appendRoomType)
-            }
-        }
-    })
-
-    var roomGroup = new Vue({
-        el: '#room-group',
-        data: {
-            group: []
-        },
-        components: {
-            'room-type': RoomType
-        }
-    })
-
-    function appendRoomType(response) {
+    function SetRoomTypeData(response) {
         //這邊response進來好像就轉成js了，可以直接用，所以不需要用JSON.parse轉格式喔
         roomGroup.group = [];
         var data = response;
@@ -114,6 +59,7 @@ $().ready(function () {
                     HotelID: item.HotelID,
                     RoomID: item.RoomID,
                     RoomName: item.RoomName,
+                    RoomImgURL: item.RoomImgURL,
                     WiFi: item.WiFi,
                     Breakfast: item.Breakfast,
                     NoSmoking: item.NoSmoking,
@@ -157,4 +103,141 @@ $().ready(function () {
             // }
         })
     }
+
+
+    //var hoverEquimServ = new Vue({
+    //    el: '#hover-equim-serv',
+    //    data: {
+    //        hover: false,
+    //    },
+    //})
+
+    //一開始載入頁面時要帶入Room的全部資料
+    axios.get('../api/HotelDetail/GetAllRoom', {
+        params: {
+            hotelName: filternav.Value,
+            startDate: filternav.startDate,
+            endDate: filternav.endDate,
+            orderRoom: filternav.room,
+            adult: filternav.adult,
+            child: filternav.kids,
+        }
+    }).then(function (response) {
+        SetRoomTypeData(response.data);
+    }).catch((error) => console.log(error))
+
+    var filterRoom = new Vue({
+        el: '#filter-room',
+        data: {
+            FreeBreakfast: false,
+            NoSmoking: false,
+            FamilyRoom: false
+        },
+        watch: {
+            FreeBreakfast() {
+                //console.log(`brkf:${this.FreeBreakfast}`)
+                this.filter();
+            },
+            NoSmoking() {
+                //console.log(`nosmoking:${this.NoSmoking}`)
+                this.filter();
+            },
+            FamilyRoom() {
+                //console.log(`family:${this.FamilyRoom}`)
+                this.filter();
+            }
+        },
+        methods: {
+            filter() {
+                if (this.FreeBreakfast || this.NoSmoking || this.FamilyRoom) {
+                    console.log((this.FreeBreakfast || this.NoSmoking || this.FamilyRoom))
+                    roomGroup.isFiltered = true;
+                }
+                if (!this.FreeBreakfast && !this.NoSmoking && !this.FamilyRoom) {
+                    console.log((!this.FreeBreakfast && !this.NoSmoking && !this.FamilyRoom))
+                    roomGroup.isFiltered = false;
+                }
+                axios.get('../api/HotelDetail/GetSpecificRoom', {
+                    params: {
+                        hotelName: filternav.Value,
+                        startDate: filternav.startDate,
+                        endDate: filternav.endDate,
+                        orderRoom: filternav.room,
+                        adult: filternav.adult,
+                        child: filternav.kids,
+                        freeBreakfast: this.FreeBreakfast,
+                        noSmoking: this.NoSmoking,
+                        family: this.FamilyRoom,
+                    }
+                }).then(function (response) {
+                    SetRoomTypeData(response.data)
+                }).catch((error) => console.log(error))
+            },
+            clearFilter() {
+                this.FreeBreakfast = false;
+                this.NoSmoking = false;
+                this.FamilyRoom = false;
+                $.post('../api/HotelDetail/GetAllRoom', SetRoomTypeData)
+            }
+        }
+    })
+
+    var roomGroup = new Vue({
+        el: '#room-group',
+        data: {
+            group: [],
+            isFiltered: false
+        },
+        methods: {
+            OpenAlbum(data) {
+                //console.log('成功觸發父層event')
+                //console.log(data);
+                axios.get('https://localhost:44352/api/HotelDetail/GetRoomImages', {
+                    params: {
+                        hotelID: data.HotelID,
+                        roomID: data.RoomID
+                    }
+                }).then(function (response) {
+                    //console.log(response.data);
+                    SetRoomAlbumData(response.data, data);
+                    //console.log("axios內層")
+                    //console.log(roomAlbum.RoomInfo)
+                    let roomAlbumDom = document.getElementById('room-album');
+                    roomAlbumDom.style.display = 'block';
+                }).catch((error) => console.log(error))
+                //console.log("axios外層")
+                //console.log(roomAlbum.RoomInfo) 
+            }
+        },
+        components: {
+            'room-type': RoomType
+        }
+    })
+
+    var roomAlbum = new Vue({
+        el: '#room-album',
+        data: {
+            RoomInfo: {},
+            ImgGroup: []
+        },
+        methods: {
+            ImgChange(index) {
+                this.ImgGroup[index].IsActive = true;
+                for (i = 0; i < this.ImgGroup.length; i++) {
+                    if (i != index) {
+                        this.ImgGroup[i].IsActive = false;
+                    }
+                }
+            },
+            closeAlbum() {
+                let roomAlbumDom = document.getElementById('room-album');
+
+                let closeRoomAlbum = document.getElementById('room-album-close-icon');
+                closeRoomAlbum.addEventListener('click', function () {
+                    console.log('close');
+                    roomAlbumDom.style.display = 'none';
+                })
+            }
+        }
+    })
 })

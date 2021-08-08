@@ -30,17 +30,53 @@ namespace BS_Adoga
             );
 
             config.Routes.MapHttpRoute(
-                name: "GetEachHotelOneRoom",
-                routeTemplate: "api/HotelDetail/GetEachHotelOneRoom",
-                defaults: new { controller = "DetailApi", action = "GetEachHotelOneRoom", id = RouteParameter.Optional }
+                name: "GetRoomImages",
+                routeTemplate: "api/HotelDetail/GetRoomImages",
+                defaults: new { controller = "DetailApi", action = "GetRoomImages", id = RouteParameter.Optional }
             );
 
-            //Irene
             config.Routes.MapHttpRoute(
-               name: "GetAllSearchFicilities",
-               routeTemplate: "api/Search/GetAllSearchFicilities",
-               defaults: new { controller = "Search", action = "GetAllSearchFicilities", id = RouteParameter.Optional }
+                name: "GetHotelMessage",
+                routeTemplate: "api/HotelDetail/GetHotelMessage",
+                defaults: new { controller = "DetailApi", action = "GetHotelMessage", id = RouteParameter.Optional }
+            );
+            //config.Routes.MapHttpRoute(
+            //    name: "GetEachHotelOneRoom",
+            //    routeTemplate: "api/HotelDetail/GetEachHotelOneRoom",
+            //    defaults: new { controller = "DetailApi", action = "GetEachHotelOneRoom", id = RouteParameter.Optional }
+            //);
+
+            //Irene
+            // config.Routes.MapHttpRoute(
+            //    name: "GetHotelFromCity",
+            //    routeTemplate: "api/Search/GetHotelFromCity",
+            //    defaults: new { controller = "Search", action = "GetHotelFromCity", id = RouteParameter.Optional }
+            //);
+
+            config.Routes.MapHttpRoute(
+               name: "GetHotelByCity",
+               routeTemplate: "api/Search/GetHotelByCity",
+               defaults: new { controller = "SearchApi", action = "GetHotelByCity", id = RouteParameter.Optional }
            );
+
+
+            config.Routes.MapHttpRoute(
+                name: "UploadImage",
+                routeTemplate: "api/Function/UploadImage",
+                defaults: new { controller = "FunctionApi", action = "UploadImage", id = RouteParameter.Optional }
+            );
+            
+            config.Routes.MapHttpRoute(
+                name: "GetImageByID",
+                routeTemplate: "api/Function/GetImageByID",
+                defaults: new { controller = "FunctionApi", action = "GetImageByID", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "GetRoomOptionByID",
+                routeTemplate: "api/Function/GetRoomOptionByID",
+                defaults: new { controller = "FunctionApi", action = "GetRoomOptionByID", id = RouteParameter.Optional }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "GetRoomDetailMonth",
@@ -52,6 +88,12 @@ namespace BS_Adoga
                 name: "EditRoomDetail",
                 routeTemplate: "api/Function/EditRoomDetail",
                 defaults: new { controller = "FunctionApi", action = "EditRoomDetail", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "GetOrderAllData",
+                routeTemplate: "api/Function/OrderAllData",
+                defaults: new { controller = "FunctionApi", action = "OrderAllDataBYEmpID", id = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(

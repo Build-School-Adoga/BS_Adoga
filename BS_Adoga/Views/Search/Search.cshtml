@@ -20,8 +20,11 @@
 }
 
 @section endJS{
-    @*<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>*@
-    @*<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>*@
+    @*<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>*@
+
+    <!-- axios 的引用 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
@@ -30,6 +33,8 @@
     @*<script src="~/Asset/CDN/JS/daterangepicker.js"></script>
         <script src="~/Asset/CDN/JS/moment.min.js"></script>
         <script src="~/Asset/CDN/JS/package.js"></script>*@
+
+   
 
     <script>
         //var td = ViewData["con"];
@@ -75,18 +80,6 @@
                         ]
                     }
                 ]
-            },
-            computed: {
-                //Value() {
-                //    let vd = ViewData["con"];
-                //    debugger;
-                //    if (vd!=null) {
-                //        return vd;
-                //    }
-                //    else {
-                //        return "";
-                //    }
-                //}
             },
             methods: {
                 minus: function (e) {
@@ -137,9 +130,10 @@
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/bootstrap-daterangepicker/3.1/daterangepicker.min.js"></script>
 
 
-    <script src="~/Asset/js/Search.js"></script>
+    <script src="~/Asset/js/Search/Search.js" type="module"></script>
     <script src="~/Asset/js/Search/_SearchFilterPartial.js"></script>
-    <script src="~/Asset/js/Search/SearchFacilities.js"></script>
+    <script src="~/Asset/js/Search/SearchFacilities.js" type="module"></script>
+    @*<script src="~/Asset/js/Search/SearchPriceFormat.js" type="module"></script>*@
 
 }
 
@@ -263,93 +257,46 @@
         <div class="filter-container">
             <div class="array-list">
                 <p>篩選條件</p>
-                <div class="array-item">
-                    <button type="button" id="filter-price" class="btn dropdown-toggle array-item" data-bs-toggle="dropdown" aria-expanded="true">
-                        價格
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="filter-price">
-                        <li id="price-range">
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <p>付款方式</p>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>到店付款</p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>免信用卡訂房</p>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="array-item">
-                    <button type="button" id="filter-star" class="btn dropdown-toggle array-item" data-bs-toggle="dropdown" aria-expanded="true">
-                        星級評等
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="filter-star">
-                        <p>星级</p>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>
-                                    <i v-for="item in 5" class="fas fa-star"></i>
-                                </p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>
-                                    <i v-for="item in 4" class="fas fa-star"></i>
-                                </p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>
-                                    <i v-for="item in 3" class="fas fa-star"></i>
-                                </p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>
-                                    <i v-for="item in 2" class="fas fa-star"></i>
-                                </p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="center">
-                            <label class="form-check-label" for="center">
-                                <p>
-                                    <i class="fas fa-star"></i>
-                                </p>
-                            </label>
-                        </li>
-                        <li class="dropdown-item">
-                            <input class="form-check-input" type="checkbox" value="" id="more-10km" checked>
-                            <label class="form-check-label" for="more-10km">
-                                <p>尚未標示</p>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="array-item">
-                    <button type="button" id="openFilter" class="btn dropdown-toggle array-item">
-                        <label for="filter-equipment">设施、房型和服务</label>
+                @*<div class="array-item">
+                <button type="button" id="filter-price" class="btn array-item">
+                    價格
+                </button>
+                <ul class="dropdown-menu" >
+                    <li id="price-range">
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <p>付款方式</p>
+                    <li class="dropdown-item">
+                        <input class="form-check-input" type="checkbox" value="" id="center">
+                        <label class="form-check-label" for="center">
+                            <p>到店付款</p>
+                        </label>
+                    </li>
+                    <li class="dropdown-item">
+                        <input class="form-check-input" type="checkbox" value="" id="center">
+                        <label class="form-check-label" for="center">
+                            <p>免信用卡訂房</p>
+                        </label>
+                    </li>
+                </ul>
+            </div>*@
+            <div class="array-item">
+                <button type="button" id="filter-star" class="btn array-item">
+                    星級評等
+                </button>
+                <filterstar :star-list="star"></filterstar>
+            </div>
+            <div class="array-item">
+                    <button type="button" id="openFilter" class="btn array-item">
+                        <label for="filter-equipment">设施與服务</label>
                     </button>
                 </div>
             </div>
             @*<form>
-                    <button><i class="fas fa-search"></i></button>
-                    <input type="search" placeholder="想搜什麼就搜什麼">
-                </form>*@
+        
+                            <button><i class="fas fa-search"></i></button>
+                            <input type="search" placeholder="想搜什麼就搜什麼">
+                        </form>*@
         </div>
     </div>
 </div>
@@ -360,141 +307,21 @@
         <div class="filter-body">
             <div class="facilities row">
                 <p>住宿設施&服務</p>
-                @*<div class="form-list col-4" v-for="(value, name) in HotelEquipName">
-                    <input class="form-check-input" type="checkbox" value="" id={{name}}>
-                    <label class="form-check-label" for={{name}}>
-                        {{value}}
+                <div class="form-list col-4" v-for="fac in hotelFacilities">
+                    <input class="form-check-input" type="checkbox" :id="fac.facility" v-model="fac.haveFacility"> 
+                    <label class="form-check-label" :for="fac.facility">
+                        {{fac.facilityName}}
                     </label>
-                </div>*@
+                </div>
 
             </div>
             <hr class="dropdown-divider">
             <div class="room row">
                 <p>客房設施/服務</p>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-            </div>
-            <hr class="dropdown-divider">
-            <div class="bed row">
-                <p>床型</p>
-                @*@foreach (var bed in Model)*@
-                @* {*@
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                @* } *@
-
-            </div>
-            <hr class="dropdown-divider">
-            <div class="roomOffer row">
-                <p>房型優惠</p>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
-                    </label>
-                </div>
-                <div class="form-list col-4">
-                    <input class="form-check-input" type="checkbox" value="" id="swim">
-                    <label class="form-check-label" for="swim">
-                        <p>游泳池(123)</p>
+                <div class="form-list col-4" v-for="room in roomFacilities">
+                    <input class="form-check-input" type="checkbox" value="" :id="room.facility" v-model="room.haveFacility">
+                    <label class="form-check-label" :for="room.facility">
+                        {{room.facilityName}}
                     </label>
                 </div>
             </div>
@@ -510,12 +337,12 @@
     <div class="closeFilter" onclick="closeFilter()"></div>
 </div>
 
-<div class="main-body">
-    <div class="side-menu">
+<div id="main-body">
+    <!--<div class="side-menu">
         <div class="map">
-            <img src="https://cdn6.agoda.net/images/MAPS-1213/default/bkg-map-entry.svg" alt="地图">
+            <img src="https://cdn6.agoda.net/images/MAPS-1213/default/bkg-map-entry.svg" alt="地图">-->
             <!-- <img src="https://cdn6.agoda.net/images/MAPS-1213/default/img-map-pin-red.svg" alt="地标"> -->
-            <div class="map-icon">
+            <!--<div class="map-icon">
                 <i class="fas fa-map-marker-alt"></i>
                 <p>地圖找房</p>
             </div>
@@ -619,42 +446,38 @@
                 顯示另外<span>22</span>個 ▼
             </a>
         </div>
-    </div>
+    </div>-->
 
-    <div class="infomation">
+    <div id="infomation" class="infomation">
         <nav class="navbar ">
             <div class="container-fluid">
                 <span class="navbar-brand mb-0 h1 navbar-light bg-light">排序</span>
-                <button>
-                    @Html.ActionLink("最低價優先", "Search", new { sortOrder = ViewBag.PriceSortParm })
+                <button id="orderPrice" v-on:click="orderPrice">
+                    最低價優先
+                    @*@Html.ActionLink("最低價優先", "Search", new { sortOrder = ViewBag.PriceSortParm })*@
                 </button>
-                <button>
-                    @Html.ActionLink("星級優先", "Search", new { sortOrder = ViewBag.StarSortParm })
+                <button id="orderStar" v-on:click="orderStar">
+                    星級優先
+                    @*@Html.ActionLink("星級優先", "Search", new { sortOrder = ViewBag.StarSortParm })*@
                 </button>
             </div>
         </nav>
-        @{
-            if (Model.HotelSearchVM.Count() == 0)
-            {
-                <div id="emptyCard">
-                    <p>
-                        查無資料<i class="fas fa-frown-open"></i>
-                    </p>
-                </div>
-            }
-            else
-            {
-                foreach (var card in Model.PageOfHotelSearchVM)
+        <div id="new_card">
+            @{
+                if (Model.HotelSearchVM.Count() == 0)
                 {
-                    @Html.Partial("_SearchCardPartial", card);
+                    <div id="emptyCard">
+                        <p>
+                            查無資料<i class="fas fa-frown-open"></i>
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <hotel-card :list-data="card"></hotel-card>
                 }
             }
-        }
-        <br />
-        @*Page @(Model.HotelSearchVM)*@
-
-        @Html.PagedListPager(Model.PageOfHotelSearchVM, page => Url.Action("Search",
-            new { sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, page }))
+        </div>
     </div>
 </div>
 

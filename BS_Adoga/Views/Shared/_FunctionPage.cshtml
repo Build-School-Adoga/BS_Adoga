@@ -72,7 +72,7 @@
                         <h6 class="collapse-header">飯店基本資料項目:</h6>
                         <a class="collapse-item" href="~/Function/HotelIndex">飯店清單</a>
                         <a class="collapse-item" href="~/Function/HotelFacilityIndex">飯店設施</a>
-                        <a class="collapse-item" href="~/Function/HotelIndex">飯店圖片</a>
+                        <a class="collapse-item" href="~/Function/HotelImagePage">飯店圖片</a>
                     </div>
                 </div>
             </li>
@@ -96,12 +96,38 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">房間基本資料項目:</h6>
                         <a class="collapse-item" href="~/Function/HotelRoomIndex">房間清單</a>
-                        <a class="collapse-item" href="~/Function/HotelRoomIndex">房間日期展開</a>
-                        <a class="collapse-item" href="~/Function/forgot-password">房間圖片</a>
+                        @*<a class="collapse-item" href="~/Function/HotelRoomIndex">房間日期展開</a>*@
+                        <a class="collapse-item" href="~/Function/RoomImagePage">房間圖片</a>
                         @*<div class="collapse-divider"></div>
                             <h6 class="collapse-header">Other Pages:</h6>
                             <a class="collapse-item" href="404.html">404 Page</a>
                             <a class="collapse-item" href="blank.html">Blank Page</a>*@
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                訂單
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#OrdercollapsePages"
+                   aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>訂單相關資料</span>
+                </a>
+                <div id="OrdercollapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">訂單相關資料項目:</h6>
+                        <a class="collapse-item" href="~/Function/OrderAllData">所有訂單</a>
+                        <a class="collapse-item" href="~/Function/OrderNotCheckIn">未入住訂單</a>
+                        <a class="collapse-item" href="~/Function/OrderCheckIn">已入住訂單</a>
+                        <a class="collapse-item" href="~/Function/OrderNotPay">未付款訂單</a>
                     </div>
                 </div>
             </li>
@@ -132,16 +158,16 @@
 
                     <!-- Topbar Search 搜尋框沒用到拿掉 -->
                     @*<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                   aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                       aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>*@
+                        </form>*@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -263,6 +289,12 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/Asset/StartbootstrapAdminPages/js/sb-admin-2.min.js"></script>
+
+    <!-- vueJS 開發developer版 引用 -->
+    <script src="~/Scripts/vue.min.js"></script>
+
+    <!-- axios 的引用 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     @RenderSection("endCSS", false)
     @RenderSection("endJS", false)

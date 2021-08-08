@@ -18,7 +18,6 @@
         public string HotelID { get; set; }
 
         [Required]
-        [StringLength(50)]
         public string ImageURL { get; set; }
 
         public virtual Hotel Hotel { get; set; }

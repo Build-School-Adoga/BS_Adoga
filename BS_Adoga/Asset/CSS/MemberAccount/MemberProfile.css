@@ -336,3 +336,8 @@ div.promotions-component, div.reminders-component, div.save-credit-component {
 div.button_on {
     margin-right: 30px;
 }
+
+.phone-edit-component.component-wrap,
+div#Check{
+    background-color:#fff;
+}

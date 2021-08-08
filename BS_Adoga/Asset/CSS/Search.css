@@ -24,7 +24,7 @@ img {
 }
 
 nav .search-bar,
-.main-body,
+#main-body,
 .nav-item,
 .filter-container {
     /* 控制整体维持60vw在中间 */
@@ -33,41 +33,44 @@ nav .search-bar,
 }
 
 nav .search-bar,
-.main-body,
+#main-body,
 .nav-item,
 .search-bar button {
     margin: 10px auto;
 }
 
     nav .search-bar,
-    .main-body,
+    #main-body,
     .nav-item,
     .nav-item .search-date,
     .filter-container,
     .filter-container .array-list,
     .filter-container .array-list .array-item,
-    .main-body .infomation .card {
+    #main-body .infomation .card {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
     }
 
         .nav-item .choose-info,
         .nav-item .search-date,
-        .main-body .infomation {
+        #main-body .infomation {
             flex-grow: 1;
         }
 
-.search-bar .nav-item {
+/*.search-bar .nav-item {
     border-radius: 5px;
     background-color: #fff;
-    /*width: 30%;haoxiangguandiao jiuhuizhenchang le */
+    width: 25%;
 }
-
+.search-bar .nav-item:nth-child(2) {
+    width: 40%;
+}
 nav .nav-item:nth-child(2) div.line {
     width: 1px;
     height: 100%;
     background-color: grey;
-}
+}*/
 
 div#person-info {
     width: 100%;
@@ -186,12 +189,19 @@ li.dropdown-item.input-request ul {
                 background-color: #425FF9;
             }
 
-            .filter-container .array-list button:focus {
-                /* outline: 0; */
-                /* 没有作用 */
-            }
-
     /* Dropdown里面的详细css */
+.filter-container .array-item{
+    position: relative;
+}
+    .filter-container .array-item ul#dropdown-star {
+        display: none;
+        z-index: 3;
+        position: absolute;
+        background-color: white;
+        padding-left: 0;
+        top: 50px;
+        box-shadow: 0px 5px 10px -5px rgb(218, 218, 218);
+    }
     .filter-container .array-item ul li ~ p,
     .filter-container .array-item ul > p {
         padding: 0 1rem;
@@ -202,6 +212,7 @@ i.fas.fa-star {
     margin: 0;
     color: #FFA726;
 }
+
 
 .filter-container form {
     margin: 15px 2px;
@@ -428,21 +439,21 @@ i.fas.fa-star {
 
 
 /* --- 主体 --- */
-.main-body #orderCard{
+#main-body #orderCard{
     margin: 5px auto;
     padding: 10px 15px;
 }
-.main-body #orderCard p,
+#main-body #orderCard p,
 #orderCard a {
     font-size: 20px;
     color: black;
 }
 
-
-.main-body .infomation .card {
+#main-body .infomation .card {
     display: flex;
     flex-direction: row;
     max-height: 250px;
+    margin-bottom: 10px;
 }
 
 /* 卡片照片*/
@@ -476,11 +487,14 @@ i.fas.fa-star {
             right: 0;
             color: white;
             text-align: center;
-            font-size: 16px;
+            font-size: 12px;
+            display:flex;
+            justify-content:center;
+            align-content: center;
         }
 
             .infomation .card .img .small-img .see-more p {
-                padding: 17px 0;
+                /*padding: 17px 0;*/
             }
 
 /* 卡片(右边) 价钱栏 */
@@ -489,13 +503,13 @@ i.fas.fa-star {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-right: 10px;
 }
 
     .infomation .card .rank .offer p {
         background-color: #E12D2D;
         color: white;
-        /*width: max-content;*/
-        width: fit-content();
+        width: max-content;
         padding: 3px 6px;
         margin-top: 3px;
     }
@@ -527,13 +541,23 @@ i.fas.fa-star {
         margin-right: 0;
     }
 
-    .infomation .card .rank button {
-        padding: 10px 0;
+    .infomation .card .rank a.moreInfo {
+        color: white;
+        padding: 10px 20px;
+        background-color: #639BEE;
+        border: none;
+        border-radius: 5px;
+        width: max-content;
+        align-self: flex-end;
     }
+    .infomation .card .rank a.moreInfo:hover {
+        background-color: #0D6EFD;
+    }
+
 
 /* 卡片详细内容 */
 .infomation .card .detail {
-    width: 60%;
+    width: 50%;
     padding: 5px 10px 10px;
 }
 

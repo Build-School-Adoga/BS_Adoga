@@ -10,6 +10,7 @@ using System.Web.Security;
 using BS_Adoga.Models.DBContext;
 using BS_Adoga.Models.ViewModels.HotelLogin;
 using BS_Adoga.Models.ViewModels.MemberLogin;
+using BS_Adoga.Models.ViewModels.HotelImagePage;
 using BS_Adoga.Repository;
 using BS_Adoga.Service;
 using Newtonsoft.Json;
@@ -61,7 +62,7 @@ namespace BS_Adoga.Controllers
             List<Facility> facilities = _context.Facilities.ToList();
             ViewBag.Facilities = facilities;
 
-            
+
             return View(_repository.GetHotelListByEmpID(user_id));
 
             #region 顯示所有飯店清單_舊版本
@@ -397,6 +398,7 @@ namespace BS_Adoga.Controllers
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
 
+            //ViewBag.URL = $"/Hotel/Room/{_repository.GetHotelRoomCountByEmpID(user_id).FirstOrDefault().HotelID}";
             return View(_repository.GetHotelRoomCountByEmpID(user_id));
 
             //顯示所有Hotel跟房型數量
@@ -605,7 +607,7 @@ namespace BS_Adoga.Controllers
                     string CurrentDate = $"{year}/{month}/30 14:00:00";
                     DateTime DateObject = Convert.ToDateTime(CurrentDate);
 
-                    OperationResult CreatResult = _service.CreateRoomDetailExpansion(year , month , roomid, username);
+                    OperationResult CreatResult = _service.CreateRoomDetailExpansion(year, month, roomid, username);
 
                     return Redirect($"~/Function/RoomDetailsIndex?roomid={roomid}");
                 }
@@ -651,7 +653,7 @@ namespace BS_Adoga.Controllers
         public ActionResult RoomBedDelete(string roomid)
         {
             var roomBeds = _context.RoomBeds.Where(x => x.RoomID == roomid).ToList();
-            
+
             if (roomBeds != null)
             {
                 foreach (var item in roomBeds)
@@ -665,8 +667,90 @@ namespace BS_Adoga.Controllers
             return Redirect($"~/Hotel/Room/{hotelid.HotelID}");
         }
 
+        [HttpGet]
+        public ActionResult HotelImagePage()
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var result = _service.GetHotelImageDataByUserId(user_id);
+            return View(result);
+        }
+
+        //顯示所有訂單 BY UserID
+        public ActionResult OrderAllData()
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            List<OrderViewModel> OrderData = _repository.GetAllOrderByEmpID(user_id).ToList();
+            ViewBag.OrderJSON = JsonConvert.SerializeObject(OrderData);
+
+            ViewBag.userID = user_id;
+            return View("OrderIndex", null);
+        }
+
+        //顯示所有Hotel未入住的訂單
+        public ActionResult OrderNotCheckIn()
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            List<OrderViewModel> OrderData = _repository.GetOrderNotCheckIn(user_id).ToList();
+            ViewBag.OrderJSON = JsonConvert.SerializeObject(OrderData);
+
+            ViewBag.userID = user_id;
+            return View("OrderIndex", null);
+        }
+
+        //顯示所有Hotel已入住的訂單
+        public ActionResult OrderCheckIn()
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            List<OrderViewModel> OrderData = _repository.GetOrderCheckIn(user_id).ToList();
+            ViewBag.OrderJSON = JsonConvert.SerializeObject(OrderData);
+
+            ViewBag.userID = user_id;
+            return View("OrderIndex", null);
+        }
+
+        //顯示所有Hotel未付款的訂單
+        public ActionResult OrderNotPay()
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            List<OrderViewModel> OrderData = _repository.GetOrderNotPay(user_id).ToList();
+            ViewBag.OrderJSON = JsonConvert.SerializeObject(OrderData);
+
+            ViewBag.userID = user_id;
+            return View("OrderIndex", null);
+        }
 
 
+
+        [HttpGet]
+        public ActionResult RoomImagePage()
+        {
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var result = new RoomImageVM()
+            {
+                HotelEmployeeID = user_id,
+                HotelOptions = _service.GetHotelOptionByUserID(user_id)
+            };
+
+            return View(result);
+        }
 
         protected override void Dispose(bool disposing)
         {

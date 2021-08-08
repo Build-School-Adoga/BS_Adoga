@@ -16,23 +16,25 @@ namespace BS_Adoga.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private AdogaContext _context;
         private MemberAccountService _service;
         private MemberAccountRepository _memberacoountrepository;
 
         public AccountController()
         {
+            _context = new AdogaContext();
             _service = new MemberAccountService();
             _memberacoountrepository = new MemberAccountRepository();
         }
 
         [AcceptVerbs("GET")]
-        public ActionResult GetMemberBookingList(string filterOption,string sortOption)
+        public ActionResult GetMemberBookingList(string filterOption, string sortOption, string UserInputOrderId)
         {
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
 
-            var data = _service.GetBookingOrder_FilterSort(user_id, filterOption, sortOption);
+            var data = _service.GetBookingOrder_FilterSort(user_id, filterOption, sortOption, UserInputOrderId);
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
@@ -73,44 +75,46 @@ namespace BS_Adoga.Controllers
             //return View();
         }
         [HttpPost]
-        public ActionResult MemberProfilePassword(string CheckPassword, string NewPassword, string ConfirmPassword,string Email)
+        public ActionResult MemberProfilePassword(string CheckPassword, string NewPassword, string ConfirmPassword, string Email)
         {
-            string FirstPassword = HttpUtility.HtmlEncode(CheckPassword);
-            string SecendPassword = HttpUtility.HtmlEncode(NewPassword);
-            string ThirdPassword = HttpUtility.HtmlEncode(ConfirmPassword);
+            //string FirstPassword = HttpUtility.HtmlEncode(CheckPassword);
+            //string SecendPassword = HttpUtility.HtmlEncode(NewPassword);
+            //string ThirdPassword = HttpUtility.HtmlEncode(ConfirmPassword);
             Customer cust = new Customer();
             cust.Email = Email;
             cust.MD5HashPassword = HashService.MD5Hash(NewPassword);
             AdogaContext db = new AdogaContext();
-            var data = db.Customers.Find(Email = Email);
-            if(data.MD5HashPassword!= HashService.MD5Hash(CheckPassword))
+            var data = db.Customers.Find(Email);
+            if (data.MD5HashPassword != HashService.MD5Hash(CheckPassword))
             {
                 Content("修改失敗");
                 TempData["Error"] = "原密碼輸入錯誤,請重新輸入";
             }
             else
             {
-                if(NewPassword!=ConfirmPassword)
+                if (NewPassword != ConfirmPassword)
                 {
-                   
+
                     Content("修改失敗");
                     TempData["Error"] = "輸入密碼與再次輸入密碼不相等請重新輸入請重新輸入";
                 }
-               else
+                else
                 {
                     data.MD5HashPassword = HashService.MD5Hash(NewPassword);
                     TempData["Success"] = "密碼修改成功";
                     db.SaveChanges();
-                  
+
                 }
             }
 
-            return RedirectToAction("MemberProfile","Account");
+            return RedirectToAction("MemberProfile", "Account");
         }
-            
 
-            public ActionResult BookingDetail(string orderid)
+
+        public ActionResult BookingDetail(string orderid)
         {
+            ViewBag.MemberCurrentPage = "booking";
+
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
@@ -147,6 +151,105 @@ namespace BS_Adoga.Controllers
                     return Content("訂單建立失敗:" + ex.ToString());
                 }
             }
+            return View();
+        }
+
+        public ActionResult MemberProfileName(string InputFirstName, string InputLastName, string Email)
+        {
+            Customer cust = new Customer();
+            cust.Email = Email;
+            AdogaContext db = new AdogaContext();
+            var data = db.Customers.Find(Email);
+
+            data.FirstName = InputFirstName;
+            data.LastName = InputLastName;
+            db.SaveChanges();
+
+
+
+
+            return RedirectToAction("MemberProfile", "Account");
+        }
+
+        public ActionResult MemberProfilePhone(string PhoneNumber, string Email)
+        {
+
+            Customer cust = new Customer();
+            cust.Email = Email;
+            AdogaContext db = new AdogaContext();
+            var data = db.Customers.Find( Email);
+            data.PhoneNumber = PhoneNumber;
+            db.SaveChanges();
+
+            return RedirectToAction("MemberProfile", "Account");
+        }
+
+        [HttpPost]
+        public ActionResult Evaluation(string orderid, decimal ScoreRange, string Title, string MessageText)
+        {
+            ViewBag.MemberCurrentPage = "evaluation";
+
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+
+            var getId = _memberacoountrepository.GetComment(orderid, user_id);
+
+
+            AdogaContext db = new AdogaContext();
+            var selOrderId = db.MessageBoards.Any(x => x.OrderID == orderid);
+
+            if (selOrderId)
+            {
+                TempData["message"] = "已經評論過";
+                return RedirectToAction("MemberBooking");
+            }
+            else
+            {
+                MessageBoard message = new MessageBoard()
+                {
+                    OrderID = orderid,
+                    HotelID = getId.HotelID,
+                    CustomerID = user_id,
+                    Title = Title,
+                    MessageDate = DateTime.Now,
+                    MessageText = MessageText,
+                    Score = ScoreRange
+                };
+
+                db.MessageBoards.Add(message);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("MemberBooking");
+        }
+
+        public ActionResult GetEvaluationPage()
+        {
+            AdogaContext db = new AdogaContext();
+
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var test = _memberacoountrepository.GetEvaluationPage(user_id);
+            
+
+            return Json(test, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EvaluationPage()
+        {
+            AdogaContext db = new AdogaContext();
+
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var test = _memberacoountrepository.GetEvaluationPage(user_id);
+
+
             return View();
         }
     }

@@ -33,6 +33,7 @@ namespace BS_Adoga.Controllers
                 return Content("請在搜尋框選好全部欄位的資料，才可幫您進行飯店查詢喔。");
             }
 
+            //var a = DateTime.Parse(startDate);
             DateTime checkInDate = DateTime.Parse(startDate);
             DateTime checkOutDate = DateTime.Parse(endDate);
             SearchByMemberVM searchData = new SearchByMemberVM()
@@ -78,8 +79,8 @@ namespace BS_Adoga.Controllers
             string[] roomSplit = room.Split('間');
 
             string[] date = date_range.Split('-');
-            string start = date[0];
-            string end = date[1];
+            string start = DateTime.Parse(date[0]).ToString("yyyy-MM-dd");
+            string end = DateTime.Parse(date[1]).ToString("yyyy-MM-dd");
 
             return RedirectToAction("HotelDetail", new
             {
@@ -113,6 +114,7 @@ namespace BS_Adoga.Controllers
                     HotelID = hotel.HotelID,
                     HotelFullName = hotel.HotelName + " (" + hotel.HotelEngName + ")",
                     Address = hotel.HotelAddress,
+                    Star = hotel.Star,
                     RoomID = roomId,
                     RoomName = roomName,
                     NoSmoking = noSmoking,
@@ -130,11 +132,16 @@ namespace BS_Adoga.Controllers
                 }
             };
 
+            orderData.roomCheckOutViewModel.TotalPrice = orderData.roomCheckOutViewModel.RoomPrice * orderData.roomCheckOutViewModel.CountNight * orderData.roomCheckOutViewModel.RoomOrder;
             TempData["orderData"] = orderData;
 
             return RedirectToAction("Index", "CheckOut");
         }
 
+        public ActionResult upload()
+        {
+            return View();
+        }
         //public ActionResult DetailAlbum()
         //{
         //    return View();

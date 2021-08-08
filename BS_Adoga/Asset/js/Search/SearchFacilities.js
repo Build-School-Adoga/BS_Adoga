@@ -1,35 +1,297 @@
-﻿import component from './SearchFacilitiesComponent.js'
+﻿import $bus from './SearchDataComponent.js';
+
+var allHotel = '';
+var list;
+var btnOrderPrice = document.getElementById("orderPrice");
+var btnOrderStar = document.getElementById("orderStar");
+
+btnOrderPrice.addEventListener("click", function () {
+    orderItem = "price";
+})
+
+btnOrderStar.addEventListener("click", function () {
+    orderItem = "Star";
+})
 
 //axios去get資料先
+axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
+    //一開始用params裡面的資料去跑Api抓資料；成功抓完資料就會跑response
+    params: {
+        CityName: filternav.Value,
+        startDate: filternav.startDate,
+        endDate: filternav.endDate,
+        adult: filternav.adult,
+        kid: filternav.kids,
+        room: filternav.room,
+    }
+}).then(function (response) {
+    HotelList(response.data);
+}).catch((error) => console.log(error))
 
-//var filterEquip = new Vue({
-//    el: '#filter-equipment',
-//    data: {
-//        HotelEquipName: {
-//            swim: '游泳池',
-//            airport: '機場接送',
-//            familyFriendly: '親子友善住宿',
-//            restaurant: '餐廳',
-//            club: '夜店',
-//            golf: '附設高爾夫球場',
-//            gym: '健身房',
-//            nSmoke: '禁菸',
-//            Smoke: '吸菸區',
-//            FFG: '無障礙友善設施',
-//            carPark: '停車場',
-//            frontDesk: '24小時櫃台服務',
-//            Spa: 'Spa桑拿',
-//            business: '商務設備'
-//        },
-//        RoomEquipName: {
-//            internet: '網路',
-//            petAllow: '可帶寵物'
+function HotelList(response) {
+    var DataList = response;
+
+    Vue.component('hotel-card', {
+        data() {
+            return {
+                //預設目前的頁面為第幾頁
+                pageNumber: 0,
+            }
+        },
+        props: {
+            listData: {
+                //收集這頁所需要的所有資料
+                type: Array,
+                required: true
+            },
+            size: {
+                //這頁所需要的資料數量
+                type: Number,
+                required: false,
+                default: 1
+            },
+        },
+        filters: {
+            //設定價錢的格式
+            PriceFormat: function (price) {
+                if (!price) return '0'
+                // 获取整数部分
+                const intPart = Math.trunc(price)
+                // 整数部分处理，增加,
+                const intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
+
+                return intPartFormat
+            }
+        },
+        methods: {
+            nextPage() {
+                this.pageNumber++;
+            },
+            prevPage() {
+                this.pageNumber--;
+            },
+            emitEvent: function (name) {
+                var url = '/HotelDetail/' + name + '-(' + DateFormat(filternav.startDate) + ')-(' + DateFormat(filternav.endDate) + ')-' + filternav.room + '-' + filternav.adult + '-' + filternav.kids;
+                //debugger;
+                window.location.href = url;
+            }
+        },
+        computed: {
+            //計算出最後一頁在第幾頁
+            pageCount() {
+                let l = this.listData.length,
+                    s = this.size;
+                return Math.ceil(l / s);
+            },
+            //單頁所需要的所有資料
+            paginatedData() {
+                const startData = this.pageNumber * this.size,
+                    endData = startData + this.size;
+                //debugger;
+                return this.listData.slice(startData, endData);
+            },
+        },
+        template: `<div>
+                <div v-for="hotel in paginatedData">
+                    <div class="card">
+                        <div class="img">
+                            <img src="//pix6.agoda.net/hotelImages/1158270/-1/e11b2751b3be0ee28417b1b61904cf22.jpg?s=450x450" alt="">
+                            <div class="small-img">
+                                <img src="https://picsum.photos/id/685/50/33" alt="">
+                                <img src="https://picsum.photos/id/685/50/33" alt="">
+                                <img src="https://picsum.photos/id/685/50/33" alt="">
+                                <img src="https://picsum.photos/id/685/50/33" alt="">
+                                <div class="see-more">
+                                    <p>查看更多</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <a href="#">{{ hotel.HotelName }}</a>
+                            <div class="small-rank">
+                                <div class="star">
+                                    <i class="fas fa-star" v-for="item in hotel.Star"></i>
+                                </div>
+                                <div class="address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>{{hotel.HotelAddress}}</p>
+                                </div>
+                            </div>
+                            <div class="include-list">
+                                <p class="Breakfast" v-if="hotel.I_RoomVM.Breakfast">早餐</p>
+                                <p class="NoSomking" v-if="hotel.I_RoomVM.NoSmoking">禁煙</p>
+                                <p class="wifi" v-if="hotel.I_RoomVM.WiFi">WiFi</p>
+                            </div>
+                        </div>
+                        <div class="rank">
+                            <div class="offer" v-if="hotel.I_RoomDetailVM.RoomDiscount!=0">
+                                <p>只剩<span>{{(hotel.I_RoomDetailVM.RoomCount - hotel.I_RoomDetailVM.RoomOrder)}}</span>間房可享<span>{{hotel.I_RoomDetailVM.RoomDiscount * 100}}</span>％優惠</p>
+                            </div>
+                            <div class="price">
+                                <p>每晚含稅價</p>
+                                <del v-if="hotel.I_RoomDetailVM.RoomCount!=0">{{hotel.I_RoomVM.RoomPrice | PriceFormat}}</del>
+                                <ins>NT$<span>{{parseInt(hotel.I_RoomVM.RoomPrice*(1-hotel.I_RoomDetailVM.RoomDiscount)) | PriceFormat}}</span></ins>
+                            </div>
+                            <a @click="emitEvent(hotel.HotelName)" class="moreInfo btn">查看空房情況</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button class="btn"
+                        :disabled="pageNumber === 0" 
+                        @click="prevPage">
+                        上一頁
+                    </button>
+                    <button class="btn"
+                        :disabled="pageNumber >= pageCount -1" 
+                        @click="nextPage">
+                        下一頁
+                    </button>
+                </div>
+            </div>`
+    })
+
+    
+
+    new Vue({
+        el: "#infomation",
+        data: {
+            card: DataList,
+            orderKey: "price",     
+            star: [],
+            hotel: [],
+            room: []
+        },
+        created: function () {
+            //debugger;
+            $bus.$on('onStar', this.starArrange);
+            $bus.$on('hotelFacility', this.hotelArrange);
+            $bus.$on('roomFacility', this.roomArrange);
+        },
+        methods: {
+            orderPrice() {
+                this.orderKey = "price";
+                this.card = sortByKey(this.card, this.orderKey);
+            },
+            orderStar() {
+                this.orderKey = "Star";
+                this.card = sortByKey(this.card, this.orderKey);
+            },
+            starArrange(arrayStar) {
+                //debugger;
+                this.star = arrayStar;
+                this.card = Arrangement(DataList, this.star, this.hotel, this.room);
+            },
+            hotelArrange(arrayData) {
+                //debugger;
+                this.hotel = arrayData;
+                this.card = Arrangement(DataList, this.star, this.hotel, this.room);
+            },
+            roomArrange(arrayData) {
+                //debugger;
+                this.room = arrayData;
+                this.card = Arrangement(DataList, this.star, this.hotel, this.room);
+            }
+        }
+    })
+}
+
+function DateFormat(date) {
+    var date = new Date(date);
+    return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
+}
+
+function sortByKey(array, key) {
+    return array.sort(function (a, b) {
+        var x;
+        var y;
+
+        //Price順序
+        if (key == "price") {
+            x = a.I_RoomVM.RoomPrice * (1 - a.I_RoomDetailVM.RoomDiscount);
+            y = b.I_RoomVM.RoomPrice * (1 - b.I_RoomDetailVM.RoomDiscount);
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+        //Star逆序
+        else {
+            x = a[key];
+            y = b[key];
+            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+    })
+}
+
+function Arrangement(listdata, star, fac, room) {
+    //debugger;
+    let list = [];
+    for (var i = 0; i < listdata.length; i++) {
+        if (star.length == 0 && fac.length == 0 &&room.length==0) {
+            debugger;
+            list.push(listdata[i]);
+        }
+        else {
+            var alltrue;
+            if (star.length == 0)  alltrue = true; 
+            else  alltrue = star.includes(listdata[i].Star);
+            for (var l = 0; l < fac.length; l++) {
+                if (fac[l].haveFacility == true) {
+                    var name = fac[l].facility;
+                    var now = listdata[i]["I_FacilityVM"][name];
+                    //debugger;
+                    if (now == false) {
+                        alltrue = false;
+                    }
+                }
+            }
+            if (alltrue == true) {
+                debugger;
+                list.push(listdata[i]);
+            }
+        }
+    }
+    debugger;
+    return list;
+}
+
+//function RearrangeByStar(listdata, star) {
+//    let list = [];
+//    for (var i = 0; i < listdata.length; i++) {
+//        if (star.length == 0) {
+//            debugger;
+//            list.push(listdata[i]);
 //        }
-//    },
-//    component: {
-        
-//    },
-//    method: {
-
+//        else {
+//            if (star.includes(listdata[i].Star)) {
+//                debugger;
+//                list.push(listdata[i]);
+//            }
+//        }
 //    }
-//})
+//    return list;
+//}
+
+//function IncludeFalicity(listdata, facility) {
+//    let list = [];
+//    //debugger;
+//    for (var i = 0; i < listdata.length; i++) {
+//        console.log(listdata[i]);
+//        var alltrue = true;
+//        debugger;
+//        for (var l = 0; l < facility.length; l++) {
+//            if (facility[l].haveFacility == true) {
+//                var name = facility[l].facility;
+//                console.log(name);
+//                var now = listdata[i]["I_FacilityVM"][name];
+//                console.log(now);
+//                debugger;
+//                if (now == false) {
+//                    alltrue = false;
+//                }
+//            }
+//        }
+//        if (alltrue == true) {
+//            list.push(listdata[i]);
+//        }
+//    }
+//    return list;
+//}
