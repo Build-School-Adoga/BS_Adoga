@@ -14,7 +14,9 @@
             <div class="booking-info-wrap py-5 ps-4">
                 <div class="booking-info">
                     <div class="main d-flex">
+<div class="img-wrap">
                         <img :src="order.HotelImageURL" alt="">
+</div>
                         <div class="hotel-status mt-3 mx-4 ">
                             <h4>{{order.HotelName}} {{order.HotelEngName}}</h4>
                             <p class="order-title mb-1">訂單編號：{{order.OrderID}}</p>
