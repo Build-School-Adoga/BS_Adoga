@@ -187,8 +187,6 @@ namespace BS_Adoga.Controllers
         [HttpPost]
         public ActionResult Evaluation(string orderid, decimal ScoreRange, string Title, string MessageText)
         {
-            ViewBag.MemberCurrentPage = "evaluation";
-
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
@@ -241,6 +239,7 @@ namespace BS_Adoga.Controllers
 
         public ActionResult EvaluationPage()
         {
+            ViewBag.MemberCurrentPage = "evaluation";
             AdogaContext db = new AdogaContext();
 
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
