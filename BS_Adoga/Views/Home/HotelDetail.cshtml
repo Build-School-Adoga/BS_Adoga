@@ -262,8 +262,8 @@
 }
 
 
-<div id="filter">
-    <div class="filter-bar">
+@*<div id="filter">*@
+    <!--<div class="filter-bar">
         <div class="filter-container">
             <div class="array-list">
                 <p>篩選條件</p>
@@ -349,14 +349,14 @@
                         <label for="filter-equipment">设施、房型和服务</label>
                     </button>
                 </div>
-            </div>
+            </div>-->
             @*<form>
                     <button><i class="fas fa-search"></i></button>
                     <input type="search" placeholder="想搜什麼就搜什麼">
                 </form>*@
-        </div>
-    </div>
-</div>
+        <!--</div>
+    </div>-->
+@*</div>*@
 
 <!-- 点击Filter出现的侧边栏 -->
 <div id="filter-equipment">
@@ -515,11 +515,11 @@
 </div>
 
 <div class="main-body">
-    <div class="side-menu">
+    <!--<div class="side-menu">
         <div class="map">
-            <img src="https://cdn6.agoda.net/images/MAPS-1213/default/bkg-map-entry.svg" alt="地图">
+            <img src="https://cdn6.agoda.net/images/MAPS-1213/default/bkg-map-entry.svg" alt="地图">-->
             <!-- <img src="https://cdn6.agoda.net/images/MAPS-1213/default/img-map-pin-red.svg" alt="地标"> -->
-            <div class="map-icon">
+            <!--<div class="map-icon">
                 <i class="fas fa-map-marker-alt"></i>
                 <p>地圖找房</p>
             </div>
@@ -623,11 +623,11 @@
                 顯示另外<span>22</span>個 ▼
             </a>
         </div>
-    </div>
+    </div>-->
 
     <div class="infomation">
         <nav class="navbar ">
-            <div class="container-fluid">
+            @*<div class="container-fluid">
                 <span class="navbar-brand mb-0 h1 navbar-light bg-light">排序</span>
                 <button>
                     @Html.ActionLink("最低價優先", "Search", new { sortOrder = ViewBag.PriceSortParm })
@@ -635,7 +635,7 @@
                 <button>
                     @Html.ActionLink("星級優先", "Search", new { sortOrder = ViewBag.StarSortParm })
                 </button>
-            </div>
+            </div>*@
         </nav>
         @foreach(var man in Model.PageOfHotelSearchVM)
         {

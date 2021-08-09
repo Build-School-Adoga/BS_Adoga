@@ -40,7 +40,8 @@ namespace BS_Adoga.Service
                 My_CardViewModels = _homeRepository.GetCardModels2(),
                 My_CardViewModels2 = _homeRepository.GetCardModels3(),
                 My_MyCitys = _homeRepository.GetCityModels(),
-                My_Mys = _homeRepository.GetModels()
+                My_Mys = _homeRepository.GetModels(),
+                Cards = _homeRepository.Getcards()
             };
 
             return productss;

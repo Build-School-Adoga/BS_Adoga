@@ -17,8 +17,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>
-    </Use64BitIISExpress>
+    <Use64BitIISExpress>true</Use64BitIISExpress>
     <IISExpressSSLPort>44352</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -325,6 +324,9 @@
     <Compile Include="Models\ViewModels\HotelImagePage\RoomOption.cs" />
     <Compile Include="Models\ViewModels\HotelImagePage\ImagesVM.cs" />
     <Compile Include="Models\ViewModels\HotelImagePage\HotelImageVM.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\MyMessageBoard.cs" />
+    <Compile Include="Models\ViewModels\homeViewModels\MyHotelImageUploads.cs" />
+    
     <Compile Include="Models\ViewModels\HotelLogin\districts.cs" />
     <Compile Include="Controllers\FunctionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -469,6 +471,14 @@
     <Content Include="Asset\images\Adoga_logo_white.png" />
     <Content Include="Asset\images\Booking.png" />
     <Content Include="Asset\images\Home\bg-adoga.png" />
+    <Content Include="Asset\images\Home\台中市.png" />
+    <Content Include="Asset\images\Home\台南市.png" />
+    <Content Include="Asset\images\Home\台東縣.png" />
+    <Content Include="Asset\images\Home\新北市.png" />
+    <Content Include="Asset\images\Home\新竹縣.png" />
+    <Content Include="Asset\images\Home\臺南市.PNG" />
+    <Content Include="Asset\images\Home\花蓮縣.png" />
+    <Content Include="Asset\images\Home\高雄市.png" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel01.jpg" />
     <Content Include="Asset\images\HotelDetail\Hotel\hotel02.jpg" />
     <Content Include="Asset\images\HotelDetail\Room\room01.jpg" />
@@ -2508,6 +2518,7 @@
     <Content Include="Views\Function\HotelImagePage.cshtml" />
     <Content Include="Views\Function\OrderIndex.cshtml" />
     <Content Include="Views\Function\RoomImagePage.cshtml" />
+    <Content Include="Views\Account\EvaluationPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

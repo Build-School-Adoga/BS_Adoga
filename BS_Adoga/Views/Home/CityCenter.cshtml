@@ -41,12 +41,12 @@
 
 
                 <div class="zdinx2">
-                    @foreach (var man in Model.My_CardViewModels2)
+                    @foreach (var man in Model.Cards)
                     {
 
 
-                        var items = man.My_HotelImages;
-                        <div class="img" id="img" style="background-image: url(@items.ImageURL);">
+                       
+                        <div class="img" id="img" style="background-image: url(@man.ImageURL);">
                         </div>
 
                     }
@@ -60,7 +60,7 @@
                             <input class="nnn" type="text"/>
                        
                             <div class="textbox" id="textbox">
-                                <h1 class="text">@man.Star 間住宿選項</h1>
+                                <h1 class="text">@man.Star 間飯店選項</h1>
                             </div>
                         
                         
