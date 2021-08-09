@@ -48,7 +48,7 @@ function HotelList(response) {
                 //這頁所需要的資料數量
                 type: Number,
                 required: false,
-                default: 1
+                default: 3
             },
         },
         filters: {
@@ -71,7 +71,12 @@ function HotelList(response) {
                 this.pageNumber--;
             },
             emitEvent: function (name) {
-                var url = '/HotelDetail/' + name + '-(' + DateFormat(filternav.startDate) + ')-(' + DateFormat(filternav.endDate) + ')-' + filternav.room + '-' + filternav.adult + '-' + filternav.kids;
+                var url = '/HotelDetail/' + name + '-('
+                    + DateFormat(filternav.startDate) + ')-('
+                    + DateFormat(filternav.endDate) + ')-'
+                    + filternav.room + '-'
+                    + filternav.adult + '-' 
+                    + filternav.kids;
                 //debugger;
                 window.location.href = url;
             }
@@ -225,24 +230,39 @@ function Arrangement(listdata, star, fac, room) {
     //debugger;
     let list = [];
     for (var i = 0; i < listdata.length; i++) {
-        if (star.length == 0 && fac.length == 0 &&room.length==0) {
+        if (star.length == 0 && fac.length == 0 && room.length==0) {
             debugger;
             list.push(listdata[i]);
         }
         else {
             var alltrue;
-            if (star.length == 0)  alltrue = true; 
-            else  alltrue = star.includes(listdata[i].Star);
-            for (var l = 0; l < fac.length; l++) {
-                if (fac[l].haveFacility == true) {
-                    var name = fac[l].facility;
-                    var now = listdata[i]["I_FacilityVM"][name];
-                    //debugger;
-                    if (now == false) {
-                        alltrue = false;
+            if (star.length == 0) { alltrue = true; }
+            else { alltrue = star.includes(listdata[i].Star); }
+
+            if (fac.length != 0) {
+                for (var l = 0; l < fac.length; l++) {
+                    if (fac[l].haveFacility == true) {
+                        var name = fac[l].facility;
+                        var now = listdata[i]["I_FacilityVM"][name];
+                        //debugger;
+                        if (now == false) {
+                            alltrue = false;
+                        }
                     }
                 }
             }
+            if (room.length != 0) {
+                for (var l = 0; l < fac.length; l++) {
+                    if (room[l].haveFacility == true) {
+                        var name = room[l].facility;
+                        var now = listdata[i]["I_FacilityVM"][name];
+                        if (now == false) {
+                            alltrue = false;
+                        }
+                    }
+                }
+            }
+            
             if (alltrue == true) {
                 debugger;
                 list.push(listdata[i]);
