@@ -23,7 +23,7 @@
         <div class="head-nav-wrap d-flex align-items-center">
             <h2>
                 Agoda-Navbar
-                <a href="http://adoga.azurewebsites.net/">
+                <a href="/">
                     <img src="~/Asset/images/Adoga_logo_color.png" alt="Adoga-Logo" title="Adoga-Logo-Homepage">
                 </a>
             </h2>
@@ -106,7 +106,7 @@
                     <a id="booking" href="/Account/MemberBooking" class="booking "><i class="far fa-calendar-check"></i>管理訂單</a>
                 </li>
                 <li>
-                    <a href="/Account/EvaluationPage" class="reviews"><i class="far fa-star"></i>住宿評鑑</a>
+                    <a id="evaluation" href="/Account/EvaluationPage" class="reviews"><i class="far fa-star"></i>住宿評鑑</a>
                 </li>
                 <li>
                     <a id="profile" href="/Account/MemberProfile" class="profile">
@@ -215,10 +215,10 @@
     <script src="~/Asset/js/GoogleLogin.js"></script>
     <!--Google引用內容結束   Google登入使用的引用JS -->
     <!-- mine -->
-    @*<script>
+    <script>
         let linkCurrent = document.getElementById(`@ViewBag.MemberCurrentPage`)//不知道為什麼，明明viewBag裡面我只放字串，可是linkCurrent就是抓到id=字串的物件。
         linkCurrent.classList.add("currentPage");
-    </script>*@
+    </script>
     @RenderSection("endJS", false)
 
 </body>

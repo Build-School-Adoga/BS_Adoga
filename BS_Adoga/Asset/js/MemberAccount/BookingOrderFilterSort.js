@@ -64,6 +64,14 @@ var filterBookingOrder = new Vue({
     }
 })
 
+//評價抓取orderID
+var modalID = new Vue({
+    el: '#modalID',
+    data: {
+        orderID: ''
+    }
+})
+
 var BookingList = new Vue({
     el: '#BookingList',
     data: {
