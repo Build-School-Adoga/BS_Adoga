@@ -20,7 +20,7 @@ namespace BS_Adoga.Models.ViewModels.homeViewModels
       
 
         //public virtual IEnumerable<HotelImage> HotelImages { get; set; }
-        //public virtual IEnumerable<Card> Cards { get; set; }
+        public virtual IEnumerable<Card> Cards { get; set; }
         //public virtual IEnumerable<Room> Rooms { get; set; }
         //public virtual IEnumerable<RoomsDetail> RoomsDetails { get; set; }
     }

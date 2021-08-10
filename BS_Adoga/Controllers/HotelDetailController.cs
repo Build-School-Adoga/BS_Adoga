@@ -114,6 +114,7 @@ namespace BS_Adoga.Controllers
                     HotelID = hotel.HotelID,
                     HotelFullName = hotel.HotelName + " (" + hotel.HotelEngName + ")",
                     Address = hotel.HotelAddress,
+                    Star = hotel.Star,
                     RoomID = roomId,
                     RoomName = roomName,
                     NoSmoking = noSmoking,

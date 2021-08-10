@@ -16,5 +16,6 @@ namespace BS_Adoga.Models.ViewModels.Search
         public int Star { get; set; }
         public RoomViewModel I_RoomVM { get; set; }
         public RoomDetailViewModel I_RoomDetailVM { get; set; }
+        public FacilityViewModel I_FacilityVM { get; set; }
     }
 }

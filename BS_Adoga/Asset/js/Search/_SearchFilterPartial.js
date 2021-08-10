@@ -80,9 +80,6 @@ $(document).click(function (e) {
 
     //及時更新上方Filter的數量
     var active = document.getElementsByClassName('travel onUse');
-    //var r = document.getElementById('room-num').getElementsByTagName('span');
-    //var a = document.getElementById('adult-num').getElementsByTagName('span');
-    //var k = document.getElementById('kids-num').getElementsByTagName('span');
 
     if (active.length != 0) {
         if (active[0].classList.contains("single")) {

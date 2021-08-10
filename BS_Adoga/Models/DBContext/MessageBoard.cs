@@ -24,11 +24,12 @@ namespace BS_Adoga.Models.DBContext
         [StringLength(40)]
         public string Title { get; set; }
 
+        [Column(TypeName = "datetime2")]
         public DateTime MessageDate { get; set; }
 
         [Required]
         public string MessageText { get; set; }
-
+      
         public decimal? Score { get; set; }
 
         public virtual Order Order { get; set; }

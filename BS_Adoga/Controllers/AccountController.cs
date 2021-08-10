@@ -187,8 +187,6 @@ namespace BS_Adoga.Controllers
         [HttpPost]
         public ActionResult Evaluation(string orderid, decimal ScoreRange, string Title, string MessageText)
         {
-            ViewBag.MemberCurrentPage = "evaluation";
-
             string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
             UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
             string user_id = UserCookie.Id;
@@ -198,21 +196,60 @@ namespace BS_Adoga.Controllers
 
 
             AdogaContext db = new AdogaContext();
-            MessageBoard message = new MessageBoard()
-            {
-                OrderID = orderid,
-                HotelID = getId.HotelID,
-                CustomerID = user_id,
-                Title = Title,
-                MessageDate = DateTime.Now,
-                MessageText = MessageText,
-                Score = ScoreRange
-            };
+            var selOrderId = db.MessageBoards.Any(x => x.OrderID == orderid);
 
-            db.MessageBoards.Add(message);
-            db.SaveChanges();
+            if (selOrderId)
+            {
+                TempData["message"] = "已經評論過";
+                return RedirectToAction("EvaluationPage");
+            }
+            else
+            {
+                MessageBoard message = new MessageBoard()
+                {
+                    OrderID = orderid,
+                    HotelID = getId.HotelID,
+                    CustomerID = user_id,
+                    Title = Title,
+                    MessageDate = DateTime.Now,
+                    MessageText = MessageText,
+                    Score = ScoreRange
+                };
+
+                db.MessageBoards.Add(message);
+                db.SaveChanges();
+            }
 
             return RedirectToAction("MemberBooking");
+        }
+
+        public ActionResult GetEvaluationPage()
+        {
+            AdogaContext db = new AdogaContext();
+
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var test = _memberacoountrepository.GetEvaluationPage(user_id);
+            
+
+            return Json(test, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EvaluationPage()
+        {
+            ViewBag.MemberCurrentPage = "evaluation";
+            AdogaContext db = new AdogaContext();
+
+            string UserCookiedataJS = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            UserCookieViewModel UserCookie = JsonConvert.DeserializeObject<UserCookieViewModel>(UserCookiedataJS);
+            string user_id = UserCookie.Id;
+
+            var test = _memberacoountrepository.GetEvaluationPage(user_id);
+
+
+            return View();
         }
     }
 }

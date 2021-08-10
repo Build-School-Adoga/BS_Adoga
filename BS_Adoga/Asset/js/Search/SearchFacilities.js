@@ -1,18 +1,16 @@
-﻿var allHotel = '';
+﻿import $bus from './SearchDataComponent.js';
+
+var allHotel = '';
 var list;
 var btnOrderPrice = document.getElementById("orderPrice");
 var btnOrderStar = document.getElementById("orderStar");
 
 btnOrderPrice.addEventListener("click", function () {
-    console.log(orderItem);
     orderItem = "price";
-    console.log(orderItem);
 })
 
 btnOrderStar.addEventListener("click", function () {
-    console.log(orderItem);
     orderItem = "Star";
-    console.log(orderItem);
 })
 
 //axios去get資料先
@@ -32,14 +30,12 @@ axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
 
 function HotelList(response) {
     var DataList = response;
-    //console.log(DataList);
 
     Vue.component('hotel-card', {
         data() {
             return {
                 //預設目前的頁面為第幾頁
                 pageNumber: 0,
-                //orderItem: this.orderKey
             }
         },
         props: {
@@ -52,9 +48,8 @@ function HotelList(response) {
                 //這頁所需要的資料數量
                 type: Number,
                 required: false,
-                default: 1
+                default: 3
             },
-            /*orderKey: ["orderKey"]*/
         },
         filters: {
             //設定價錢的格式
@@ -76,7 +71,14 @@ function HotelList(response) {
                 this.pageNumber--;
             },
             emitEvent: function (name) {
-                window.location.href = '/HotelDetail/' + name + '-(' + this.fnav.start + ')-(' + this.fnav.end + ')-' + this.fnav.room + '-' + this.fnav.adult + '-' + this.fnav.kid;
+                var url = '/HotelDetail/' + name + '-('
+                    + DateFormat(filternav.startDate) + ')-('
+                    + DateFormat(filternav.endDate) + ')-'
+                    + filternav.room + '-'
+                    + filternav.adult + '-' 
+                    + filternav.kids;
+                //debugger;
+                window.location.href = url;
             }
         },
         computed: {
@@ -88,11 +90,11 @@ function HotelList(response) {
             },
             //單頁所需要的所有資料
             paginatedData() {
-                const start = this.pageNumber * this.size,
-                    end = start + this.size;
-                return this.listData.slice(start, end);
-            }
-
+                const startData = this.pageNumber * this.size,
+                    endData = startData + this.size;
+                //debugger;
+                return this.listData.slice(startData, endData);
+            },
         },
         template: `<div>
                 <div v-for="hotel in paginatedData">
@@ -154,24 +156,49 @@ function HotelList(response) {
             </div>`
     })
 
-    var mainBody= new Vue({
+    
+
+    new Vue({
         el: "#infomation",
         data: {
             card: DataList,
-            orderKey: "price"
+            orderKey: "price",     
+            star: [],
+            hotel: [],
+            room: []
+        },
+        created: function () {
+            //debugger;
+            $bus.$on('onStar', this.starArrange);
+            $bus.$on('hotelFacility', this.hotelArrange);
+            $bus.$on('roomFacility', this.roomArrange);
         },
         methods: {
             orderPrice() {
                 this.orderKey = "price";
-                this.card =sortByKey(this.card, this.orderKey);
+                this.card = sortByKey(this.card, this.orderKey);
             },
             orderStar() {
                 this.orderKey = "Star";
-                this.card=sortByKey(this.card, this.orderKey);
+                this.card = sortByKey(this.card, this.orderKey);
+            },
+            starArrange(arrayStar) {
+                //debugger;
+                this.star = arrayStar;
+                this.card = Arrangement(DataList, this.star, this.hotel, this.room);
+            },
+            hotelArrange(arrayData) {
+                //debugger;
+                this.hotel = arrayData;
+                this.card = Arrangement(DataList, this.star, this.hotel, this.room);
+            },
+            roomArrange(arrayData) {
+                //debugger;
+                this.room = arrayData;
+                this.card = Arrangement(DataList, this.star, this.hotel, this.room);
             }
         }
     })
-    //debugger;
 }
 
 function DateFormat(date) {
@@ -183,6 +210,7 @@ function sortByKey(array, key) {
     return array.sort(function (a, b) {
         var x;
         var y;
+
         //Price順序
         if (key == "price") {
             x = a.I_RoomVM.RoomPrice * (1 - a.I_RoomDetailVM.RoomDiscount);
@@ -197,3 +225,93 @@ function sortByKey(array, key) {
         }
     })
 }
+
+function Arrangement(listdata, star, fac, room) {
+    //debugger;
+    let list = [];
+    for (var i = 0; i < listdata.length; i++) {
+        if (star.length == 0 && fac.length == 0 && room.length==0) {
+            debugger;
+            list.push(listdata[i]);
+        }
+        else {
+            var alltrue;
+            if (star.length == 0) { alltrue = true; }
+            else { alltrue = star.includes(listdata[i].Star); }
+
+            if (fac.length != 0) {
+                for (var l = 0; l < fac.length; l++) {
+                    if (fac[l].haveFacility == true) {
+                        var name = fac[l].facility;
+                        var now = listdata[i]["I_FacilityVM"][name];
+                        //debugger;
+                        if (now == false) {
+                            alltrue = false;
+                        }
+                    }
+                }
+            }
+            if (room.length != 0) {
+                for (var l = 0; l < fac.length; l++) {
+                    if (room[l].haveFacility == true) {
+                        var name = room[l].facility;
+                        var now = listdata[i]["I_FacilityVM"][name];
+                        if (now == false) {
+                            alltrue = false;
+                        }
+                    }
+                }
+            }
+            
+            if (alltrue == true) {
+                debugger;
+                list.push(listdata[i]);
+            }
+        }
+    }
+    debugger;
+    return list;
+}
+
+//function RearrangeByStar(listdata, star) {
+//    let list = [];
+//    for (var i = 0; i < listdata.length; i++) {
+//        if (star.length == 0) {
+//            debugger;
+//            list.push(listdata[i]);
+//        }
+//        else {
+//            if (star.includes(listdata[i].Star)) {
+//                debugger;
+//                list.push(listdata[i]);
+//            }
+//        }
+//    }
+//    return list;
+//}
+
+//function IncludeFalicity(listdata, facility) {
+//    let list = [];
+//    //debugger;
+//    for (var i = 0; i < listdata.length; i++) {
+//        console.log(listdata[i]);
+//        var alltrue = true;
+//        debugger;
+//        for (var l = 0; l < facility.length; l++) {
+//            if (facility[l].haveFacility == true) {
+//                var name = facility[l].facility;
+//                console.log(name);
+//                var now = listdata[i]["I_FacilityVM"][name];
+//                console.log(now);
+//                debugger;
+//                if (now == false) {
+//                    alltrue = false;
+//                }
+//            }
+//        }
+//        if (alltrue == true) {
+//            list.push(listdata[i]);
+//        }
+//    }
+//    return list;
+//}

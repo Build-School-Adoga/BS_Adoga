@@ -40,7 +40,10 @@ namespace BS_Adoga.Repository
                               HotelID = h.HotelID,
                               HotelName = h.HotelName,
                               HotelEngName = h.HotelEngName,
-                              HotelImageURL = "",
+                              HotelImageURL = (from m in _context.HotelImageUploads
+                                               where h.HotelID == m.HotelID
+                                               orderby m.ImageURL
+                                               select m.ImageURL).FirstOrDefault(), 
                               RoomBed = ((from rb in _context.RoomBeds
                                           join bt in _context.BedTypes on rb.TypesOfBedsID equals bt.TypesOfBedsID
                                           where rb.RoomID == o.RoomID
@@ -73,6 +76,10 @@ namespace BS_Adoga.Repository
                              HotelID = h.HotelID,
                              HotelName = h.HotelName,
                              HotelEngName = h.HotelEngName,
+                             HotelImageURL = (from m in _context.HotelImageUploads
+                                              where h.HotelID == m.HotelID
+                                              orderby m.ImageURL
+                                              select m.ImageURL).FirstOrDefault(),
                              Star = h.Star,
                              HotelCity = h.HotelCity,
                              HotelDistrict = h.HotelDistrict,
@@ -170,5 +177,32 @@ namespace BS_Adoga.Repository
                          }).FirstOrDefault();
             return table;
         }
+
+        public IEnumerable<EvaluationPageViewModel> GetEvaluationPage(string customerID)
+        {
+
+            var table = (from m in _context.MessageBoards.AsEnumerable()
+                         join h in _context.Hotels on m.HotelID equals h.HotelID
+                         join o in _context.Orders on m.OrderID equals o.OrderID
+                         join r in _context.Rooms on o.RoomID equals r.RoomID
+                         where m.CustomerID == customerID && m.OrderID == o.OrderID
+                         select new EvaluationPageViewModel
+                         {
+                             OrderID = m.OrderID,
+                             HotelID = m.HotelID,
+                             CustomerID = m.CustomerID,
+                             Title = m.Title,
+                             MessageText = m.MessageText.ToString(),
+                             MessageDate = m.MessageDate.ToString("yyyy年MM月dd日") + m.MessageDate.ToString(" dddd"),
+                             Score = ((decimal)m.Score).ToString("#0.0"),
+                             CustomerName = ($"{o.FirstName} {o.LastName}"), 
+                             HotelName = h.HotelName,
+                             RoomName = r.RoomName,
+                             Stay = o.CheckOutDate.Subtract(o.CheckInDate).ToString("%d")
+                         });
+
+            return table;
+        }
+
     }
 }
