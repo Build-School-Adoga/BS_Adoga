@@ -441,7 +441,7 @@
 
         <nav class="mb-4" aria-label="...">
             <ul class="pagination">
-                <li :class="[pageNumber >= pageCount -1 ? 'page-item disabled' : 'page-item']">
+                <li :class="[pageNumber === 0 ? 'page-item disabled' : 'page-item']">
                     <button class="page-link circle-border" :disabled="pageNumber === 0" @@click="prevPage">
                         <i class="fas fa-chevron-left"></i>
                     </button>
@@ -449,7 +449,7 @@
                 <li class="page-item active" aria-current="page">
                     <a class="page-link" v-cloak >第{{pageNumber + 1}}頁</a>
                 </li>
-                <li  :class="[pageNumber >= pageCount -1 ? 'page-item disabled' : 'page-item']">
+                <li  :class="[pageNumber >= (pageCount -1) ? 'page-item disabled' : 'page-item']">
                     <button class="page-link circle-border" :disabled="pageNumber >= pageCount -1" @@click="nextPage"><i class="fas fa-chevron-right"></i></button>
                 </li>
             </ul>
@@ -533,9 +533,6 @@
     <!-- axios 的引用 -->
     <script src="~/Scripts/axios.min.js"></script>
     <!-- 搜尋欄的JS和Vue -->
-    @*<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>*@
-    @*<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>*@
-    @*<script src="https://unpkg.com/vue/dist/vue.js"></script>*@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
@@ -660,11 +657,11 @@
             if (html.scrollTop > 60) {
                 // scrollNav.classList[1] == 'fix-nav'
                 scrollNav.classList.add('fix-nav');
-                hotelNav.style.display = 'block'
+                //hotelNav.style.display = 'block'
             }
             else {
                 scrollNav.classList.remove('fix-nav');
-                hotelNav.style.display = 'none'
+                //hotelNav.style.display = 'none'
             }
             //console.log(html.scrollTop);//61=滑掉了最頂端的nav
         })
@@ -709,11 +706,15 @@
                 pageCount() {
                     let l = this.group.length,
                         s = this.size;
-                    return Math.floor(l / s);
+                    console.log(Math.floor(l / s));
+                    return Math.ceil(l / s);
                 },
                 paginatedData() {
                     const start = this.pageNumber * this.size,
                         end = start + this.size;
+                    console.log("看往後的分頁")
+                    console.log(this.pageNumber)
+                    console.log(this.pageNumber >= this.pageCount - 1);
                     return this.group.slice(start, end);
                 }
             },
