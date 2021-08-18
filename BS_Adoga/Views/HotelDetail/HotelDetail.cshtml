@@ -154,16 +154,16 @@
         <li class="breadcrumb-item active" aria-current="page">預定 @hotel.HotelName @hotel.HotelEngName </li>
     </ol>
 </nav>
-<div class="wrap-1100 row mb-3">
-    <div class="main-content col-9">
-        <div class="media-group row d-flex ">
-            <div class="hotel-video col-7 gx-2">
+<div class="wrap-1100 mb-3"> @* row *@
+    <div class="main-content">@* col-9 *@
+        <div class="media-group d-flex justify-content-center"><!--row-->
+            <div class="hotel-video "><!--col-7 gx-2-->
                 <div class="img-wrap">
                     <img alt="" src=@imagesURL[0]>
                     <div class="show-shadow"></div>
                 </div>
             </div>
-            <div class="pic-group col-5 gx-0">
+            <div class="pic-group"><!--col-5 gx-0-->
                 <div class="medium-pic">
                     <div class="img-wrap">
                         <img src=@imagesURL[1]>
@@ -186,7 +186,10 @@
                 </div>
             </div>
         </div>
-        <div class="hotel-title mb-3 card">
+        
+    </div>
+    <div class="row mb-5">
+        <div class="hotel-title col-9 card">
             <div class="card-body">
                 <span>免費Wi-Fi</span>
                 <h2>
@@ -200,36 +203,36 @@
             </div>
         </div>
 
-    </div>
-    <div class="right-side-bar col-3">
-        <div class="rate-box card mb-3">
-            <div class="card-body">
-                <div class="wrap d-flex flex-wrap">
-                    <p class="rate-num">@score.ScoreAvg</p>
-                    <div class="rate-content">
-                        <p class="rate-category">@score.ScoreLevel</p>
-                        <p class="month-rate-change">@*<i class="fas fa-caret-up"></i> 本月8.6%*@</p>
-                        <!-- <i class="fas fa-caret-down"></i> -->
-                        <a href="#comment-area" class="comment-count">(@score.AllMessageCount.ToString("N0") 篇評鑒)</a>
+        <div class="right-side-bar col-3">
+            <div class="rate-box card">
+                <div class="card-body">
+                    <div class="wrap d-flex flex-wrap">
+                        <p class="rate-num">@score.ScoreAvg</p>
+                        <div class="rate-content">
+                            <p class="rate-category">@score.ScoreLevel</p>
+                            <p class="month-rate-change">@*<i class="fas fa-caret-up"></i> 本月8.6%*@</p>
+                            <!-- <i class="fas fa-caret-down"></i> -->
+                            <a href="#comment-area" class="comment-count">(@score.AllMessageCount.ToString("N0") 篇評鑒)</a>
+                        </div>
+                        <p><i class="fas fa-user-friends me-1"></i>@score.HighScorePercent %的住客給予好評</p>
                     </div>
-                    <p><i class="fas fa-user-friends me-1"></i>@score.HighScorePercent %的住客給予好評</p>
                 </div>
             </div>
-        </div>
-        <div class="map-box card mb-3">
-            <div class="map-wrap">
-                <div class="map-img-wrap">
-                    <img src="https://cdn6.agoda.net/images/MAPS-1214/default/property-map-entry-1.svg" alt="">
+            @*<div class="map-box card mb-3">
+                <div class="map-wrap">
+                    <div class="map-img-wrap">
+                        <img src="https://cdn6.agoda.net/images/MAPS-1214/default/property-map-entry-1.svg" alt="">
+                    </div>
+                    <span>查看地圖位置</span>
                 </div>
-                <span>查看地圖位置</span>
-            </div>
-            <div class="card-body">
+                <div class="card-body">
 
-                <div class="car-park-service d-flex justify-content-between">
-                    <p><i class="fas fa-parking me-2"></i>停車服務</p>
-                    <p>有提供</p>
+                    <div class="car-park-service d-flex justify-content-between">
+                        <p><i class="fas fa-parking me-2"></i>停車服務</p>
+                        <p>有提供</p>
+                    </div>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
 </div>
