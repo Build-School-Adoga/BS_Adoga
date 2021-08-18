@@ -31,21 +31,21 @@ namespace BS_Adoga.Service
 
             return productss;
         }
-        public demoshopViewModels ALLImages2()
-        {
-
-            var productss = new demoshopViewModels()
+            public demoshopViewModels ALLImages2()
             {
-                My_MyHotels = _homeRepository.GetHotelModels(),
-                My_CardViewModels = _homeRepository.GetCardModels2(),
-                My_CardViewModels2 = _homeRepository.GetCardModels3(),
-                My_MyCitys = _homeRepository.GetCityModels(),
-                My_Mys = _homeRepository.GetModels(),
-                Cards = _homeRepository.Getcards()
-            };
 
-            return productss;
-        }
+                var productss = new demoshopViewModels()
+                {
+                    My_MyHotels = _homeRepository.GetHotelModels(),
+                    My_CardViewModels = _homeRepository.GetCardModels2(),
+                    My_CardViewModels2 = _homeRepository.GetCardModels3(),
+                    My_MyCitys = _homeRepository.GetCityModels(),
+                    My_Mys = _homeRepository.GetModels(),
+                    Cards = _homeRepository.Getcards()
+                };
+
+                return productss;
+            }
 
     }
 }

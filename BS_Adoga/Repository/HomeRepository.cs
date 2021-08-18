@@ -358,32 +358,21 @@ namespace BS_Adoga.Repository
         }
         public IEnumerable<MyHotels> GetCityModels()
         {
-            var hotel = (from p in _context.Hotels
-                      
+            var hotel = (from p in _context.Hotels                   
                          select new MyHotels
-                        {
-                        
+                        {                        
                             HotelCity = p.HotelCity
-                      
-
-
-                         }).Distinct().Take(8);
-           
+                         }).Distinct().Take(8);    
             return hotel;
         }
         public IEnumerable<MyHotels> GetModels()
         {
             var hotel = (from p in _context.Hotels
-                         group p by p.HotelCity into g                       
-                      
+                         group p by p.HotelCity into g                                          
                          select new MyHotels
-                         {
-                                
+                         {                                
                              HotelCity = g.Key.ToString(),
                              Star = g.Count()
-
-
-
                          }).Take(8);
             return hotel;
         }
