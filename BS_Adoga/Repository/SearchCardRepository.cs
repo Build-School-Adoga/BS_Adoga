@@ -40,11 +40,11 @@ namespace BS_Adoga.Repository
                             group H by H.HotelID into hid
                             select hid.Key).ToArray();
 
-
             var table = (from H in _context.Hotels
                          join R in _context.Rooms on H.HotelID equals R.HotelID
                          join D in _context.RoomsDetails on R.RoomID equals D.RoomID
                          join F in _context.Facilities on H.HotelID equals F.HotelID
+                         join i in _context.HotelImageUploads on H.HotelID equals i.HotelID
                          where allhotel.Contains(H.HotelID)
                          && R.NumberOfPeople * orderRoom >= people
                          && D.CheckInDate >= start
@@ -60,6 +60,7 @@ namespace BS_Adoga.Repository
                              Star = H.Star,
                              HotelCity = H.HotelCity,
                              HotelDistrict = H.HotelDistrict,
+                             imgUrl = i.ImageURL,
                              I_RoomVM = new RoomViewModel
                              {
                                  HotelID = H.HotelID,
@@ -97,7 +98,7 @@ namespace BS_Adoga.Repository
                                  BusinessFacilities = F.BusinessFacilities,
                                  Internet = F.Internet,
                                  PetsAllowed = F.PetsAllowed
-                             }
+                             },
                          }).AsEnumerable();
 
             var table_2 = from t in table
@@ -109,8 +110,16 @@ namespace BS_Adoga.Repository
                               Discount = Group.Sum(r => r.t.I_RoomDetailVM.RoomDiscount) / countNight,
                           };
 
+            //var getHotelImg = (from F in _context.HotelImageUploads
+            //         join T in table on F.HotelID equals T.HotelID
+            //         select new HotelImgViewModel
+            //         {
+            //             imgUrl = F.ImageID
+            //         });
+
             var table_3 = (from t in table
                            join t2 in table_2 on t.HotelID equals t2.HotelID
+                           join i in _context.HotelImageUploads on t.HotelID equals i.HotelID
                            where t.I_RoomVM.RoomID == t2.RoomID
                            select new HotelSearchViewModel
                            {
@@ -121,6 +130,7 @@ namespace BS_Adoga.Repository
                                Star = t.Star,
                                HotelCity = t.HotelCity,
                                HotelDistrict = t.HotelDistrict,
+                               imgUrl = i.ImageURL,
                                I_RoomVM = new RoomViewModel
                                {
                                    HotelID = t.HotelID,
@@ -166,7 +176,9 @@ namespace BS_Adoga.Repository
                 var aa = a;
                 decimal total = a.I_RoomVM.RoomPrice * (1 - a.I_RoomDetailVM.RoomDiscount);
             }
+
             
+
             return table_3;
         }
 
@@ -183,34 +195,5 @@ namespace BS_Adoga.Repository
 
             return optionData.ToList();
         }
-
-        //public IEnumerable<FacilityViewModel> GetFacilitiId(string hotelId)
-        //{
-        //    var data = from F in _context.Facilities
-        //               where hotelId.Contains(F.HotelID)
-        //               select new FacilityViewModel
-        //               {
-        //                   FacilitieID = F.FacilitieID,
-        //                   HotelID = F.HotelID,
-        //                   SwimmingPool = F.SwimmingPool,
-        //                   AirportTransfer = F.AirportTransfer,
-        //                   FamilyChildFriendly = F.FamilyChildFriendly,
-        //                   Restaurants = F.Restaurants,
-        //                   Nightclub = F.Nightclub,
-        //                   GolfCourse = F.GolfCourse,
-        //                   Gym = F.Gym,
-        //                   NoSmoking = F.NoSmoking,
-        //                   SmokingArea = F.SmokingArea,
-        //                   FacilitiesFordisabledGuests = F.FacilitiesFordisabledGuests,
-        //                   CarPark = F.CarPark,
-        //                   SpaSauna = F.SpaSauna,
-        //                   BusinessFacilities = F.BusinessFacilities,
-        //                   Internet = F.Internet,
-        //                   PetsAllowed = F.PetsAllowed
-        //               };
-        //    return data.ToList();
-        //}
-
-        //API
     }
 }

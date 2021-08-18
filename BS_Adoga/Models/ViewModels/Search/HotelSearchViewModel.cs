@@ -14,6 +14,7 @@ namespace BS_Adoga.Models.ViewModels.Search
         public string HotelCity { get; set; }
         public string HotelDistrict { get; set; }
         public int Star { get; set; }
+        public string imgUrl { get; set; }
         public RoomViewModel I_RoomVM { get; set; }
         public RoomDetailViewModel I_RoomDetailVM { get; set; }
         public FacilityViewModel I_FacilityVM { get; set; }

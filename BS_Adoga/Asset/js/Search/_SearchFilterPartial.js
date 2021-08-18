@@ -139,6 +139,16 @@ function close_filter() {
 
 }
 
+//var filter = document.getElementById("filter-equipment");
+//// var closeFilter = document.getElementsByClassName("closeFilter");
+function closeFilter() {
+    debugger;
+    if (filter.style.visibility == "visible") {
+        filter.style.visibility = "hidden";
+    }
+}
+
+
 //日曆
 moment().format();//中文化
 

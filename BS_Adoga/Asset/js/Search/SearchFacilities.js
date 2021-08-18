@@ -100,15 +100,9 @@ function HotelList(response) {
                 <div v-for="hotel in paginatedData">
                     <div class="card">
                         <div class="img">
-                            <img src="//pix6.agoda.net/hotelImages/1158270/-1/e11b2751b3be0ee28417b1b61904cf22.jpg?s=450x450" alt="">
+                            <img :src="hotel.imgUrl" alt="">
                             <div class="small-img">
-                                <img src="https://picsum.photos/id/685/50/33" alt="">
-                                <img src="https://picsum.photos/id/685/50/33" alt="">
-                                <img src="https://picsum.photos/id/685/50/33" alt="">
-                                <img src="https://picsum.photos/id/685/50/33" alt="">
-                                <div class="see-more">
-                                    <p>查看更多</p>
-                                </div>
+                                <img  v-for="i in 3" src="https://res.cloudinary.com/dodoko/image/upload/v1628084775/Adoga/Hotel/CosmosHotelTaipei/CosmosHotelTaipei_img04.webp" alt="">
                             </div>
                         </div>
                         <div class="detail">
@@ -134,7 +128,7 @@ function HotelList(response) {
                             </div>
                             <div class="price">
                                 <p>每晚含稅價</p>
-                                <del v-if="hotel.I_RoomDetailVM.RoomCount!=0">{{hotel.I_RoomVM.RoomPrice | PriceFormat}}</del>
+                                <del v-if="hotel.I_RoomDetailVM.RoomDiscount!=0">{{hotel.I_RoomVM.RoomPrice | PriceFormat}}</del>
                                 <ins>NT$<span>{{parseInt(hotel.I_RoomVM.RoomPrice*(1-hotel.I_RoomDetailVM.RoomDiscount)) | PriceFormat}}</span></ins>
                             </div>
                             <a @click="emitEvent(hotel.HotelName)" class="moreInfo btn">查看空房情況</a>
@@ -272,46 +266,3 @@ function Arrangement(listdata, star, fac, room) {
     debugger;
     return list;
 }
-
-//function RearrangeByStar(listdata, star) {
-//    let list = [];
-//    for (var i = 0; i < listdata.length; i++) {
-//        if (star.length == 0) {
-//            debugger;
-//            list.push(listdata[i]);
-//        }
-//        else {
-//            if (star.includes(listdata[i].Star)) {
-//                debugger;
-//                list.push(listdata[i]);
-//            }
-//        }
-//    }
-//    return list;
-//}
-
-//function IncludeFalicity(listdata, facility) {
-//    let list = [];
-//    //debugger;
-//    for (var i = 0; i < listdata.length; i++) {
-//        console.log(listdata[i]);
-//        var alltrue = true;
-//        debugger;
-//        for (var l = 0; l < facility.length; l++) {
-//            if (facility[l].haveFacility == true) {
-//                var name = facility[l].facility;
-//                console.log(name);
-//                var now = listdata[i]["I_FacilityVM"][name];
-//                console.log(now);
-//                debugger;
-//                if (now == false) {
-//                    alltrue = false;
-//                }
-//            }
-//        }
-//        if (alltrue == true) {
-//            list.push(listdata[i]);
-//        }
-//    }
-//    return list;
-//}

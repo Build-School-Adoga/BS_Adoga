@@ -1,4 +1,5 @@
-﻿import $bus from './SearchDataComponent.js';
+﻿//import { forEach } from '../../StartbootstrapAdminPages/vendor/fontawesome-free/js/v4-shims.js';
+import $bus from './SearchDataComponent.js';
 
 Vue.component('filterstar', {
     data() {
@@ -68,7 +69,6 @@ new Vue({
             }]
     }
 })
-
 
 new Vue({
     el: '#filter-equipment',
@@ -181,8 +181,6 @@ new Vue({
 
 
 function checkData(arraylist, num) {
-    //console.log(arraylist);
-    //debugger;
     if (arraylist.length == 0) {
         //初始資料量為0，直接用for會出bug
         return true;
@@ -192,11 +190,9 @@ function checkData(arraylist, num) {
         for (var i = 0; i < arraylist.length; i++) {
             if (arraylist[i] == num) {
                 arraylist.splice(i, 1);
-                //debugger;
                 return false;
             }
         }
-        //debugger;
         return true;
     }
     
@@ -205,22 +201,20 @@ function checkData(arraylist, num) {
 // JS
 var openFilter = document.getElementById("openFilter");
 var filter = document.getElementById("filter-equipment");
-// var closeFilter = document.getElementsByClassName("closeFilter");
+var clearCheckboxs = document.getElementById("clear-filter");
+ var closeFilter = document.getElementsByClassName("closeFilter");
 
-openFilter.addEventListener('click', function () {
+openFilter.addEventListener('click', openClose);
+clearCheckboxs.addEventListener('click', openClose);
+
+
+function openClose() {
+    debugger;
     if (filter.style.visibility == "visible") {
         filter.style.visibility = "hidden";
-        //fixed_cancel();
     }
     else {
         filter.style.visibility = "visible";
-        //fixed();
-    }
-})
-
-function closeFilter() {
-    if (filter.style.visibility == "visible") {
-        filter.style.visibility = "hidden";
     }
 }
 
@@ -238,17 +232,17 @@ function dropright() {
 
 }
 
-var btnStar = document.getElementById("filter-star");
-var ulStar = document.getElementById("dropdown-star");
+//var btnStar = document.getElementById("filter-star");
+//var ulStar = document.getElementById("dropdown-star");
 
-btnStar.addEventListener('click', function () {
-    if (ulStar.style.display == "none") {
-        ulStar.style.display = "block";
-    }
-    else {
-        ulStar.style.display = "none";
-    }
-})
+//btnStar.addEventListener('click', function () {
+//    if (ulStar.style.display == "none") {
+//        ulStar.style.display = "block";
+//    }
+//    else {
+//        ulStar.style.display = "none";
+//    }
+//})
 
 //$(document).click(function (e) {
 //    if (e.target == btnStar||) {

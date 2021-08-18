@@ -452,33 +452,37 @@ i.fas.fa-star {
 #main-body .infomation .card {
     display: flex;
     flex-direction: row;
-    max-height: 250px;
-    margin-bottom: 10px;
+    height: 230px;
+    margin-bottom: 15px;
 }
 
 /* 卡片照片*/
 .infomation .card .img {
     width: 40%;
     font-size: 0; /*图片之间的空隙*/
+    height: 100%;
+    display: flex;
 }
 
     .infomation .card .img > img {
-        max-height: 150px;
+        height: 100%;
         width: 100%;
     }
 
     .infomation .card .img .small-img {
         position: relative;
+        /*display:flex;*/
+        /*height: 20%*/
+        display:none;
     }
 
-        .infomation .card .img .small-img img,
-        .infomation .card .img .small-img .see-more {
-            width: 25%;
+        .infomation .card .img .small-img img {
+            width: 33.3333333333%;
             margin: 0;
-            height: 60px;
+            height: 100%;
         }
 
-        .infomation .card .img .small-img .see-more {
+        /*.infomation .card .img .small-img .see-more {
             position: absolute;
             background: #000;
             opacity: .7;
@@ -493,9 +497,9 @@ i.fas.fa-star {
             align-content: center;
         }
 
-            .infomation .card .img .small-img .see-more p {
+            .infomation .card .img .small-img .see-more p {*/
                 /*padding: 17px 0;*/
-            }
+            /*}*/
 
 /* 卡片(右边) 价钱栏 */
 .infomation .card .rank {
