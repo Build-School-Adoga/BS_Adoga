@@ -118,7 +118,7 @@ namespace BS_Adoga.Controllers
             var hotel = _service.GetHotelById(hotelId);
             var searchData = (SearchByMemberVM)TempData["SearchData"];
             TempData.Keep("SearchData");
-            
+
             //DateTime checkInDate = DateTime.Parse(searchData.CheckInDate);
             //DateTime checkOutDate = DateTime.Parse(searchData.CheckOutDate);
             //int adult = searchData.Adult;
@@ -130,6 +130,7 @@ namespace BS_Adoga.Controllers
                 {
                     HotelID = hotel.HotelID,
                     HotelFullName = hotel.HotelName + " (" + hotel.HotelEngName + ")",
+                    HotelImageUrl = _repository.GetFirstHotelImageById(hotelId),
                     Address = hotel.HotelAddress,
                     Star = hotel.Star,
                     RoomID = roomId,
@@ -155,10 +156,6 @@ namespace BS_Adoga.Controllers
             return RedirectToAction("Index", "CheckOut");
         }
 
-        public ActionResult upload()
-        {
-            return View();
-        }
         //public ActionResult DetailAlbum()
         //{
         //    return View();

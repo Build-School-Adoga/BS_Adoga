@@ -157,6 +157,18 @@ namespace BS_Adoga.Repository
             return images;
         }
 
+        public string GetFirstHotelImageById(string hotelId)
+        {
+            var url = (from himg in _context.HotelImageUploads
+                       where himg.HotelID == hotelId
+                       orderby himg.ImageID
+                       select himg.ImageURL).FirstOrDefault();
+
+            if (url == null)
+                url = "/Asset/images/no_image.jpg";
+
+            return url;
+        }
         public string GetFirstRoomImagesById(string hotelId,string roomId)
         {
             var url = (from rimg in _context.RoomImages
@@ -169,6 +181,5 @@ namespace BS_Adoga.Repository
 
             return url;
         }
-
     }
 }

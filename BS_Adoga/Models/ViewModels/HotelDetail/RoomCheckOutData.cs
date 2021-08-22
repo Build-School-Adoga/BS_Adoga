@@ -11,6 +11,8 @@ namespace BS_Adoga.Models.ViewModels.HotelDetail
 
         public string HotelFullName { get; set; }
 
+        public string HotelImageUrl { get; set; }
+
         public string Address { get; set; }
 
         public int Star { get; set; }        
