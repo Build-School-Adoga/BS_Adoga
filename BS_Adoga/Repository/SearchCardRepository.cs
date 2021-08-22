@@ -107,7 +107,7 @@ namespace BS_Adoga.Repository
                           {
                               HotelID = Group.Key.HotelID,
                               RoomID = Group.Key.RoomID,
-                              Discount = Group.Sum(r => r.t.I_RoomDetailVM.RoomDiscount) / countNight,
+                              Discount = Group.Average(r => r.t.I_RoomDetailVM.RoomDiscount),
                           };
 
             //var getHotelImg = (from F in _context.HotelImageUploads
@@ -178,7 +178,7 @@ namespace BS_Adoga.Repository
             }
 
             
-
+            
             return table_3;
         }
 
