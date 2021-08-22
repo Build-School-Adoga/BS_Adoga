@@ -668,15 +668,12 @@
                 pageCount() {
                     let l = this.group.length,
                         s = this.size;
-                    console.log(Math.floor(l / s));
+                    //console.log(Math.floor(l / s));
                     return Math.ceil(l / s);
                 },
                 paginatedData() {
                     const start = this.pageNumber * this.size,
                         end = start + this.size;
-                    console.log("看往後的分頁")
-                    console.log(this.pageNumber)
-                    console.log(this.pageNumber >= this.pageCount - 1);
                     return this.group.slice(start, end);
                 }
             },
@@ -686,11 +683,11 @@
                         hotelID:'@hotel.HotelID'
                     }
                 }).then(function (response) {
-                    console.log(response.data)
-                    console.log('success')
+                    //console.log(response.data)
+                    //console.log('success')
                     SetMessageGroupData(response.data)
                     //MessageList.$set(MessageList, 'group', response.data);
-                    console.log(MessageList.group);
+                    //console.log(MessageList.group);
                 }).catch((error) => console.log(error))
             },
             components: {

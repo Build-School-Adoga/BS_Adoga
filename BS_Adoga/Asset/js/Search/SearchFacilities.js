@@ -14,7 +14,7 @@ btnOrderStar.addEventListener("click", function () {
 })
 
 //axios去get資料先
-axios.get('https://localhost:44352/api/Search/GetHotelByCity', {
+axios.get('../api/Search/GetHotelByCity', {
     //一開始用params裡面的資料去跑Api抓資料；成功抓完資料就會跑response
     params: {
         CityName: filternav.Value,

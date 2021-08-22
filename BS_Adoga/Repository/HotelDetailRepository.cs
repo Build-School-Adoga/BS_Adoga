@@ -33,12 +33,18 @@ namespace BS_Adoga.Repository
 
         public string GetHotelIdByName(string hotelName)
         {
-            var hotelId = (from h in _context.Hotels
-                           where h.HotelName.Contains(hotelName)
-                           select h.HotelID).First();
-
-            return hotelId;
-
+            string hotelId = null;
+            try
+            {
+               hotelId = (from h in _context.Hotels
+                          where h.HotelName.Contains(hotelName)
+                          select h.HotelID).First();
+            }
+            catch(Exception e)
+            {
+                var a = e;
+            }
+            return hotelId;            
         }
 
         public IQueryable<Facility> GetHotelFacilityById(string hotelId)
