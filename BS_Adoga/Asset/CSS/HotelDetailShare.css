@@ -150,3 +150,8 @@
         color: rgba(0, 0, 0, 0);
     }
 }
+
+/* 方便給footer前面隔開大塊的空間*/
+.extend {
+    height: 100px;
+}
