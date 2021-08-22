@@ -1,5 +1,4 @@
-﻿//import { forEach } from '../../StartbootstrapAdminPages/vendor/fontawesome-free/js/v4-shims.js';
-import $bus from './SearchDataComponent.js';
+﻿import $bus from './SearchDataComponent.js';
 
 Vue.component('filterstar', {
     data() {
@@ -70,7 +69,7 @@ new Vue({
     }
 })
 
-new Vue({
+var equipment = new Vue({
     el: '#filter-equipment',
     data: {
         required:[],
@@ -176,7 +175,6 @@ new Vue({
             deep: true
         }
     },
-    
 })
 
 
@@ -199,24 +197,47 @@ function checkData(arraylist, num) {
 }
 
 // JS
+var btnStar = document.getElementById("filter-star");
+var ulStar = document.getElementById("dropdown-star");
+
+btnStar.addEventListener('click', function () {
+    if (ulStar.style.display == "none") {
+        ulStar.style.display = "block";
+    }
+    else {
+        ulStar.style.display = "none";
+    }
+})
+
 var openFilter = document.getElementById("openFilter");
 var filter = document.getElementById("filter-equipment");
-var clearCheckboxs = document.getElementById("clear-filter");
- var closeFilter = document.getElementsByClassName("closeFilter");
+
+document.getElementById("closeFilter").addEventListener('click', Closefilter);
+document.getElementById("blank").addEventListener('click', Closefilter);
+
+document.getElementById("clear-filter").addEventListener('click', function () {
+    for (i = 0; i < equipment.hotelFacilities.length; i++) {
+        equipment.hotelFacilities[i].haveFacility = false;
+    }
+})
+
 
 openFilter.addEventListener('click', openClose);
-clearCheckboxs.addEventListener('click', openClose);
-
 
 function openClose() {
     debugger;
     if (filter.style.visibility == "visible") {
-        filter.style.visibility = "hidden";
+        Closefilter();
     }
     else {
         filter.style.visibility = "visible";
     }
 }
+
+function Closefilter() {
+    filter.style.visibility = "hidden";
+}
+
 
 function dropright() {
     var droprightBox = document.getElementsByClassName("dropdown-menu");
@@ -232,24 +253,6 @@ function dropright() {
 
 }
 
-//var btnStar = document.getElementById("filter-star");
-//var ulStar = document.getElementById("dropdown-star");
-
-//btnStar.addEventListener('click', function () {
-//    if (ulStar.style.display == "none") {
-//        ulStar.style.display = "block";
-//    }
-//    else {
-//        ulStar.style.display = "none";
-//    }
-//})
-
-//$(document).click(function (e) {
-//    if (e.target == btnStar||) {
-//        ulStar.style.display = "block";
-//    }
-//    else    ulStar.style.display = "none";
-//})
 
 //觸發彈窗底部頁面禁止滑動
 //function fixed() {
