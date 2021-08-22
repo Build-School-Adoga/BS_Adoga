@@ -103,6 +103,7 @@ namespace BS_Adoga.Repository
 
             var table_2 = from t in table
                           group new { t } by new { t.HotelID, t.I_RoomVM.RoomID } into Group
+                          where Group.Count()/4 >= countNight
                           select new
                           {
                               HotelID = Group.Key.HotelID,

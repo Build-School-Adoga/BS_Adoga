@@ -54,7 +54,6 @@ function HotelList(response) {
         filters: {
             //設定價錢的格式
             PriceFormat: function (price) {
-                debugger;
                 if (!price) return '0'
                 // 获取整数部分
                 const intPart = Math.trunc(price)
@@ -130,7 +129,7 @@ function HotelList(response) {
                             <div class="price">
                                 <p>每晚含稅價</p>
                                 <del v-if="hotel.I_RoomDetailVM.RoomDiscount!=0">{{hotel.I_RoomVM.RoomPrice | PriceFormat}}</del>
-                                <ins>NT$<span>{{parseInt(hotel.I_RoomVM.RoomPrice*(1-hotel.I_RoomDetailVM.RoomDiscount)) | PriceFormat}}</span></ins>
+                                <ins>NT$<span>{{Math.ceil(hotel.I_RoomVM.RoomPrice*(1-hotel.I_RoomDetailVM.RoomDiscount)) | PriceFormat}}</span></ins>
                             </div>
                             <a @click="emitEvent(hotel.HotelName)" class="moreInfo btn">查看空房情況</a>
                         </div>
