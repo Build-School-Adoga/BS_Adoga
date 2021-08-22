@@ -287,8 +287,9 @@
         </div>
         <div id="room-group" class="wrap-1100">
             <room-type v-for="room in group" v-bind:room="room" @@album="OpenAlbum"></room-type>
-            <div v-if="group.length==0" class="no-room-type mb-4">
-                <i class="fas fa-home"></i>
+            <div v-if="group.length==0" class="no-data-box mb-4">
+                <i v-if="isFiltered" class="fas fa-home"></i>
+                <i v-else class="fas fa-search"></i>
                 <p v-if="isFiltered">沒有符合您條件的房型，試試看改變您的篩選條件？</p>
                 <p v-else>沒有符合您搜尋條件的房型 <br />（您可以改變日期和入住人數後重新搜尋）</p>
             </div>
@@ -400,7 +401,10 @@
     </div>
     <div id="messageList" class="comment-group ">
         <message-item v-for="item in paginatedData" :item="item" :key="item.OrderID"></message-item>
-
+        <div v-if="paginatedData.length==0" class="no-data-box mb-4">
+            <i class="fas fa-comment-slash"></i>
+            <p>暫無評鑒</p>
+        </div>
         <nav class="mb-4" aria-label="...">
             <ul class="pagination">
                 <li :class="[pageNumber === 0 ? 'page-item disabled' : 'page-item']">
@@ -409,9 +413,9 @@
                     </button>
                 </li>
                 <li class="page-item active" aria-current="page">
-                    <a class="page-link" v-cloak >第{{pageNumber + 1}}頁</a>
+                    <a class="page-link" v-cloak>第{{pageNumber + 1}}頁</a>
                 </li>
-                <li  :class="[pageNumber >= (pageCount -1) ? 'page-item disabled' : 'page-item']">
+                <li :class="[pageNumber >= (pageCount -1) ? 'page-item disabled' : 'page-item']">
                     <button class="page-link circle-border" :disabled="pageNumber >= pageCount -1" @@click="nextPage"><i class="fas fa-chevron-right"></i></button>
                 </li>
             </ul>

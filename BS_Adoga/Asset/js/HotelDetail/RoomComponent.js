@@ -100,7 +100,7 @@
                                         <p class="color-gray fz-12">每晚低至</p>
                                     </div>
                                     <div class="col-1 pt-2 text-center">
-                                        <select name="" id="">
+                                        <select disabled>
                                             <option :value="room.RoomOrder" selected>{{room.RoomOrder}}</option>
                                         </select>
                                     </div>

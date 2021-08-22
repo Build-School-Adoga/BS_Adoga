@@ -146,7 +146,12 @@ namespace BS_Adoga.Controllers
             return View(images);
 
         }
-   
+
+        public ActionResult TeamMember()
+        {
+            return View();
+        }
+
         public ActionResult HotelDetail(string search, string sortOrder, string currentFilter, string currentOrder, int? page)
         {
             if (search == null)

@@ -96,3 +96,19 @@
 .nnn {
     display: none;
 }
+
+/*0823 bear新增*/
+.zdinx3{
+    z-index:3;
+}
+.d-block {
+    background-color: #00000069;
+    width: 100%;
+}
+input.title {
+    color: #ffffff;
+}
+
+.text {
+    color: #ffffff;
+}

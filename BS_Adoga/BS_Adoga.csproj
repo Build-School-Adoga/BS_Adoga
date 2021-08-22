@@ -502,6 +502,7 @@
     <Content Include="Asset\images\OpenTable.png" />
     <Content Include="Asset\images\priceline.png" />
     <Content Include="Asset\images\Rentalcars.png" />
+    <Content Include="Asset\images\team3.PNG" />
     <Content Include="Asset\images\tw.svg.png" />
     <Content Include="Asset\JS\formStep.js" />
     <Content Include="Asset\JS\Function\CardOrderComponent.js" />
@@ -2519,6 +2520,7 @@
     <Content Include="Views\Function\OrderIndex.cshtml" />
     <Content Include="Views\Function\RoomImagePage.cshtml" />
     <Content Include="Views\Account\EvaluationPage.cshtml" />
+    <Content Include="Views\Home\TeamMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -96,3 +96,57 @@
 .border-e-light-gray {
     border-right: 2px solid rgb(238, 237, 237);
 }
+
+/*沒有資料時顯示一個box*/
+.no-data-box {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid rgb(211, 211, 211);
+    /* background-color: rgb(70, 70, 70); */
+    border-radius: 5px;
+}
+
+    .no-data-box p {
+        text-align: center;
+        font-size: 30px;
+        color: rgb(194, 193, 193);
+    }
+
+    .no-data-box i.fa-home, .no-data-box i.fa-comment-slash, .no-data-box i.fa-search {
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 60px;
+        color: rgb(194, 193, 193);
+    }
+.no-data-box i.fa-home{
+    animation-name: shake-icon;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+}
+
+@keyframes shake-icon {
+    0% {
+        transform: rotate(10deg);
+    }
+
+    25% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    75% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+        color: rgba(0, 0, 0, 0);
+    }
+}

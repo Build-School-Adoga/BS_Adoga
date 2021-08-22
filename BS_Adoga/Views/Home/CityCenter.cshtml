@@ -1,6 +1,6 @@
 ﻿@model demoshopViewModels
 @{
-    ViewBag.Title = "Home";
+    ViewBag.Title = "台灣城市";
     Layout = "~/Views/Shared/_AdogaLayout.cshtml";
 
 }
@@ -8,11 +8,9 @@
     <link rel="stylesheet" href="~/Asset/CSS/CityCenter.css">
 }
 
-
-
     <div class="container d-flex justify-content-center">
         <div id="box">
-            <div class="col-12">
+            <div class="col-12 mt-3">
                 <h3>全台住宿:</h3>
             </div>
             <div class="col-12 Attractions d-flex align-items-end">
@@ -30,25 +28,18 @@
                                         <input class="title" id="aaa" type="text" value="@item.HotelCity" name="search" />
 
                                     </div>
-                                </div>
-
-                                
+                                </div>   
                            </button> 
                            }
                          }
-
                 </div>
 
 
                 <div class="zdinx2">
                     @foreach (var man in Model.Cards)
                     {
-
-
-                       
                         <div class="img" id="img" style="background-image: url(@man.ImageURL);">
                         </div>
-
                     }
                 </div>
 
@@ -56,31 +47,21 @@
                 <div class="zdinx3">
                     @foreach (var man in Model.My_Mys)
                     {
-                        
-                            <input class="nnn" type="text"/>
+                        <input class="nnn" type="text"/>
                        
-                            <div class="textbox" id="textbox">
-                                <h1 class="text">@man.Star 間飯店選項</h1>
-                            </div>
-                        
-                        
-
+                        <div class="textbox" id="textbox">
+                            <p class="text">@man.Star 間飯店選項</p>
+                        </div>
                     }
                 </div>
 
                 
             </div>
-
-        </div>  
-
-
+        </div>
     </div>
 
     @section endJS{
         <script>
-        
-          
-          
         @*let count = document.getElementById('count');
         var x =  @foreach(var man in Model.My_Mys)
         {
