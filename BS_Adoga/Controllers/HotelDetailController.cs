@@ -46,12 +46,11 @@ namespace BS_Adoga.Controllers
                 Adult = adult,
                 Child = child
             };
-
             TempData["SearchData"] = searchData;            
 
             DetailVM hotelDetail;
             string hotelId = _repository.GetHotelIdByName(hotelName);
-
+            
             if (hotelId != null)
                 hotelDetail = _service.GetDetailVM(hotelId, startDate, endDate, orderRoom, adult, child);
             else if (TempData["search"] != null)
@@ -82,15 +81,33 @@ namespace BS_Adoga.Controllers
             string start = DateTime.Parse(date[0]).ToString("yyyy-MM-dd");
             string end = DateTime.Parse(date[1]).ToString("yyyy-MM-dd");
 
-            return RedirectToAction("HotelDetail", new
+            string hotelId = _repository.GetHotelIdByName(search);
+            if (hotelId == null)
             {
-                hotelName = search,
-                startDate = start,
-                endDate = end,
-                orderRoom = int.Parse(roomSplit[0]),
-                adult = adult,
-                child = kid
-            });
+                //如果沒有找到id，表示是搜尋城市，跳轉至search。
+                SearchDataViewModel info = new SearchDataViewModel()
+                {
+                    HotelNameOrCity = search,
+                    CheckInDate = start,
+                    CheckOutDate = end,
+                    RoomCount = int.Parse(roomSplit[0]),
+                    AdultCount = adult,
+                    KidCount = kid
+                };
+                return RedirectToAction("Search", "Search",info);
+            }
+            else
+            {
+                return RedirectToAction("HotelDetail", new
+                {
+                    hotelName = search,
+                    startDate = start,
+                    endDate = end,
+                    orderRoom = int.Parse(roomSplit[0]),
+                    adult = adult,
+                    child = kid
+                });
+            }            
         }
 
         

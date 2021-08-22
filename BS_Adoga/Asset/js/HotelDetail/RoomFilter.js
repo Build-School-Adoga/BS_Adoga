@@ -192,7 +192,7 @@ $().ready(function () {
             OpenAlbum(data) {
                 //console.log('成功觸發父層event')
                 //console.log(data);
-                axios.get('https://localhost:44352/api/HotelDetail/GetRoomImages', {
+                axios.get('../api/HotelDetail/GetRoomImages', {
                     params: {
                         hotelID: data.HotelID,
                         roomID: data.RoomID
@@ -234,7 +234,7 @@ $().ready(function () {
 
                 let closeRoomAlbum = document.getElementById('room-album-close-icon');
                 closeRoomAlbum.addEventListener('click', function () {
-                    console.log('close');
+                    //console.log('close');
                     roomAlbumDom.style.display = 'none';
                 })
             }
