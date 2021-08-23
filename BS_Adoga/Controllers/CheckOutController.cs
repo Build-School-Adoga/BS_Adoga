@@ -163,9 +163,9 @@ namespace BS_Adoga.Controllers
                     oPayment.MerchantID = "2000214";//ECPay提供的特店編號 2000132
 
                     /* 基本參數 */
-                    oPayment.Send.ReturnURL = "https://localhost:44352/CheckOut/PayFeedback";//付款完成通知回傳的網址https://localhost:44352/CheckOut/PayFeedback
+                    oPayment.Send.ReturnURL = "https://adoga.azurewebsites.net/CheckOut/PayFeedback";//付款完成通知回傳的網址https://localhost:44352/CheckOut/PayFeedback
                     oPayment.Send.ClientBackURL = "http://adoga.azurewebsites.net/";//瀏覽器端返回的廠商網址
-                    oPayment.Send.OrderResultURL = "https://localhost:44352/CheckOut/PayFeedback";//瀏覽器端回傳付款結果網址
+                    oPayment.Send.OrderResultURL = "https://adoga.azurewebsites.net/CheckOut/PayFeedback";//瀏覽器端回傳付款結果網址
                     oPayment.Send.MerchantTradeNo = info.OrderId;//廠商的交易編號
                     oPayment.Send.MerchantTradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");//廠商的交易時間
                     oPayment.Send.TotalAmount = info.TotalPrice;//交易總金額
