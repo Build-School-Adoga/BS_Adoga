@@ -86,13 +86,11 @@
 
                     @if (roomdetails.RoomDiscount == 0)
                     {
-                        <div class="d-flex justify-content-end  flex-column  align-items-end" style="margin-top:62px;">
+                        <div class="d-flex justify-content-end  flex-column  align-items-end" style="margin-top:74px;">
                            
-                            <span style="text-decoration:line-through; color: #90949c; font-family: Comic Sans MS;font-size: 14px;line-height: 20px;font-weight: 400;">
-                                NT$ @Math.Ceiling(rooms.RoomPrice).ToString("N0")
-                            </span>
-                            <p class="text-danger"
-                               style="font-size: 12px;font-weight: 300;line-height: 20px; font-family: Comic Sans MS;">
+                         
+                            <p class="text-danger"  
+                               style="font-size: 14px;font-weight: 300;line-height: 20px; font-family: Comic Sans MS;">
                                 NT$ @newPrice.ToString("N0")
                             </p>
                         </div>
@@ -106,7 +104,7 @@
                                 NT$ @Math.Ceiling(rooms.RoomPrice).ToString("N0")
                             </span>
                             <p class="text-danger"
-                               style="font-size: 12px;font-weight: 300;line-height: 20px; font-family: Comic Sans MS;">
+                               style="font-size: 14px;font-weight: 300;line-height: 20px; font-family: Comic Sans MS;">
                                 NT$ @newPrice.ToString("N0")
                             </p>
                         </div>
