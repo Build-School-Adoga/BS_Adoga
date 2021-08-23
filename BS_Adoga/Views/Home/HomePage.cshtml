@@ -939,6 +939,13 @@
 
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
+                var name = "key";
+                var val = "";
+                console.log(val);
+                localStorage.setItem(name, val);
+                var name = "online";
+                var val = "";
+                sessionStorage.setItem(name, val);
             }
 
 
