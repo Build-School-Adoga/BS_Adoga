@@ -104,14 +104,6 @@ $().ready(function () {
         })
     }
 
-
-    //var hoverEquimServ = new Vue({
-    //    el: '#hover-equim-serv',
-    //    data: {
-    //        hover: false,
-    //    },
-    //})
-
     //一開始載入頁面時要帶入Room的全部資料
     axios.get('../api/HotelDetail/GetAllRoom', {
         params: {
@@ -177,7 +169,19 @@ $().ready(function () {
                 this.FreeBreakfast = false;
                 this.NoSmoking = false;
                 this.FamilyRoom = false;
-                $.post('../api/HotelDetail/GetAllRoom', SetRoomTypeData)
+                //$.post('../api/HotelDetail/GetAllRoom', SetRoomTypeData)
+                axios.get('../api/HotelDetail/GetAllRoom', {
+                    params: {
+                        hotelName: filternav.Value,
+                        startDate: filternav.startDate,
+                        endDate: filternav.endDate,
+                        orderRoom: filternav.room,
+                        adult: filternav.adult,
+                        child: filternav.kids,
+                    }
+                }).then(function (response) {
+                    SetRoomTypeData(response.data);
+                }).catch((error) => console.log(error))
             }
         }
     })

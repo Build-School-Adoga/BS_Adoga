@@ -1,17 +1,17 @@
 ﻿import BookingCard from './BookingComponent.js'
  
 //一開始載入頁面時要帶入order的資料，未入住的。
-//axios.get('https://localhost:44352/Account/GetMemberBookingList', {
-//        params: {
-//            filterOption: "ComingSoon",
-//            sortOption: "CheckInDate",
-//            UserInputOrderId: ""
-//        }
-//    }).then(function (response) {
-//        console.log(response.data)
-//        console.log('success')
-//        appendBookingList(response.data);
-//    }).catch((error) => console.log(error))
+axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+        params: {
+            filterOption: "ComingSoon",
+            sortOption: "CheckInDate",
+            UserInputOrderId: ""
+        }
+    }).then(function (response) {
+        console.log(response.data)
+        console.log('success')
+        appendBookingList(response.data);
+    }).catch((error) => console.log(error))
 
 var filterBookingOrder = new Vue({
     el: "#filter-sort-wrap",
@@ -22,11 +22,11 @@ var filterBookingOrder = new Vue({
     },
     watch: {
         filterOption() {
-            console.log(`filter:${this.filterOption}`)
+            //console.log(`filter:${this.filterOption}`)
             this.filter_sort();
         },
         sortOption() {
-            console.log(`sort:${this.sortOption}`)
+            //console.log(`sort:${this.sortOption}`)
             this.filter_sort();
         },
     },
@@ -39,7 +39,7 @@ var filterBookingOrder = new Vue({
                     UserInputOrderId: this.searchOrderId
                 }
             }).then((response) => {
-                console.log(response.data)
+                //console.log(response.data)
                 appendBookingList(response.data)
             }).catch((error) => console.log(error))
            
@@ -53,8 +53,8 @@ var filterBookingOrder = new Vue({
 
                 }
             }).then((response) => {
-                console.log(this.searchOrderId)
-                console.log(response.data)
+                //console.log(this.searchOrderId)
+                //console.log(response.data)
                 appendBookingList(response.data)
             }).catch((error) => console.log(error))
         },
@@ -89,7 +89,7 @@ var BookingList = new Vue({
     },
     watch: {
         group() {
-            console.log(this.pageNumber);
+            //console.log(this.pageNumber);
             this.pageNumber = 0;
         }
     },
@@ -113,8 +113,8 @@ var BookingList = new Vue({
                 UserInputOrderId: ""
             }
         }).then(function (response) {
-            console.log(response.data)
-            console.log('success')
+            //console.log(response.data)
+            //console.log('success')
             appendBookingList(response.data);
         }).catch((error) => console.log(error))       
     },
@@ -177,12 +177,12 @@ function appendBookingList(response) {
                 In24Hours: item.In24Hours,
 
                 ContinuePay: function () {
-                    console.log(item.OrderID)
+                    //console.log(item.OrderID)
                     window.location.href ='../Account/RePayOrder/'+item.OrderID
                 },
                 Evaluation: function () {
-                    console.log(modalID.orderID);
-                    console.log(item.orderID);
+                    //console.log(modalID.orderID);
+                    //console.log(item.orderID);
                     modalID.orderID = item.OrderID
                 },
                 GoToDetail: function () {
