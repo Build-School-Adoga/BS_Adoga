@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<BS_Adoga.Models.ViewModels.Account.MemberBookingViewModel>
-@{ Layout = "~/Views/Account/_LayoutMember.cshtml"; }
+@{ 
+    ViewBag.Title = "管理訂單";
+    Layout = "~/Views/Account/_LayoutMember.cshtml"; 
+    }
 
 @section topCSS{
     <link rel="stylesheet" href="~/Asset/CSS/MemberAccount/MemberBookings.css" />
