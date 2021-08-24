@@ -1,7 +1,7 @@
 ﻿import BookingCard from './BookingComponent.js'
  
 //一開始載入頁面時要帶入order的資料，未入住的。
-axios.get('https://localhost:44352/Account/GetMemberBookingList', {
+axios.get('../Account/GetMemberBookingList', {
         params: {
             filterOption: "ComingSoon",
             sortOption: "CheckInDate",
